@@ -1,0 +1,220 @@
+Capital	Latitude	Longitude,	Country
+Abu Dhabi	24.46	54.36	United Arab Emirates
+Abuja	9.16	7.18	Nigeria
+Accra	5.55	-0.25	Ghana
+Adamstown	-25.06	-130.08	Pitcairn Islands
+Al-Manamah	26.21	50.56	Bahrain
+Algiers	36.83	3	Algeria
+Alofi	-19.01	169.91	Niue
+Amman	31.95	35.93	Jordan
+Amsterdam	52.35	4.9	Netherlands
+Andorra la Vella	42.5	1.5	Andorra
+Ankara	39.92	32.83	Turkey
+Antananarivo	-18.86	47.5	Madagascar
+Apia	-13.8	-171.75	West Samoa
+Ashgabat	37.96	58.4	Turkmenistan
+Asmara	15.33	38.96	Eritrea
+Astana	51.16	71.5	Kazakhstan
+Asuncion	-25.26	-57.66	Paraguay
+Athens	38	23.73	Greece
+Avarua	-21.2	159.76	Cook Islands
+Baghdad	33.35	44.42	Iraq
+Banjul	13.46	-16.65	Gambia
+Baku	40.36	49.88	Azerbaijan
+Bamako	12.66	-7.98	Mali
+Bandar Seri Begawan	4.88	114.93	Brunei
+Bangkok	13.73	100.5	Thailand
+Bangui	4.38	18.61	Central African Republic
+Basse-Terre	16.16	-61.66	Guadeloupe
+Basseterre	17.3	-62.71	Saint Kitts and Nevis
+Beijing	39.92	116.43	China
+Beirut	33.86	35.5	Lebanon
+Belgrad	44.83	20.5	Serbia
+Belmopan	17.21	-88.8	Belize
+Berlin	52.53	13.42	Germany
+Bern	46.95	7.43	Switzerland
+Bissau	11.86	-15.65	Guiné-Bissau
+Bishkek	42.88	74.76	Kyrgyzstan
+Bogotá	4.63	-74.08	Colombia
+Brasilia	-15.78	-47.95	Brazil
+Bratislava	48.16	17.16	Slovakia
+Brazzaville	4.23	15.23	Republic of Congo
+Bridgetown	13.1	-59.61	Barbados
+Brussels	50.83	4.33	Belgium
+Bucharest	44.43	26.1	Romania
+Budapest	47.5	19.05	Hungary
+Buenos Aires	-34.67	-58.5	Argentina
+Bujumbura	-3.36	29.31	Burundi
+Cairo	30.05	31.25	Egypt
+Canberra	-35.3	149.13	Australia
+Caracas	10.5	-66.92	Venezuela
+Castries	14.01	-60.98	Saint Lucia
+Cayenne	4	-52.5	French Guiana
+Charlotte Amalie	18.36	-64.93	Virgin Islands
+Chisinau	47	28.83	Moldova
+Colombo	6.91	79.86	Sri Lanka
+Conakrey	9.51	-13.71	Guines
+Copenhagen	55.75	12.41	Denmark
+Dakar	14.63	-17.45	Senegal
+Damascus	33.5	36.3	Syria
+Dar es Salaam	-6.85	39.3	Tanzania
+Dhaka	23.71	90.41	Bangladesh
+Djibouti	11.55	43.16	Djibouti
+Doha	25.25	51.6	Quatar
+Douglas	54.15	-4.48	Isle of Man
+Dublin	53.33	-6.25	Ireland
+Dushanbe	38.63	68.85	Tajikistan
+Forte-de-France	14.6	-61.08	Martinique
+Freetown	8.5	-13.28	Sierra Leone
+Funafuti	-8.51	179.21	Tuvalu
+Gaborone	-24.75	25.91	Botswana
+Georgetown	6.76	-58.16	Guyana
+Georgetown	19.33	-81.38	Cayman Islands
+Gibraltar	36.15	-5.35	Gibraltar
+Godthåb	64.25	-51.58	Greenland
+Guatemala	14.63	-90.36	Guatemala
+Hagåtña	13.46	144.75	Guam
+Hamilton	32.3	-64.8	Bermuda
+Harare	-17.83	31.05	Zimbabwe
+Helsinki	60.13	25	Finland
+Ho Chi Minh City	10.75	106.67	Vietnam
+Honaria	-9.46	159.95	Solomon Islands
+Islamabad	33.66	73.13	Pakistan
+Jakarta	-6.13	106.75	Indonesia
+Jamestown	-15.93	-5.73	Saint Helena
+Jerusalem	31.76	35.23	Israel
+Kabul	34.5	69.33	Afghanistan
+Kampala	0.31	32.58	Uganda
+Kathmandu	27.7	85.31	Nepal
+Khartoum	15.55	32.53	Sudan
+Kiev	50.43	30.51	Ukraine
+Kigali	-1.93	30.06	Rwanda
+Kingston	17.96	-76.8	Jamaica
+Kingston	-29.06	167.95	Norfolk Islands
+Kingston	13.2	-61.23	Saint-Vinceton and the Grenadines
+Kinshasa	-4.3	15.3	Democratic Republic of Congo
+Koror	7.35	134.51	Palau Islands
+Kuala Lumpur	3.16	101.7	Malaysia
+Kuwait	29.33	48	Kuwait
+La Habana	23.11	-82.35	Cuba
+La Paz	-16.5	-68.16	Bolivia
+Libreville	0.5	9.41	Gabon
+Lilongwe	-13.96	33.81	Malawi
+Lima	-12.05	-77.05	Peru
+Lisbon	38.73	-9.13	Portugal
+Ljubljana	46.06	14.5	Slovenia
+London	51.5	-0.17	United Kingdom
+Lome	6.16	1.35	Togo
+Lusaka	-15.43	28.33	Zambia
+Luxembourg	49.61	6.13	Luxembourg
+Madrid	40.42	-3.72	Spain
+Majuro	7.08	171.13	marshall Islands
+Male	4	73.46	Maldives
+Malabo	3.75	8.8	Equatorial Guniea
+Mamoutsou	-12.78	45.23	Mayotte
+Managua	12.1	-86.3	Nicaragua
+Manila	14.62	120.97	Philippines
+Maputo	-25.96	32.58	Mozambique
+Maseru	-29.31	27.48	Lesotho
+Mata-Utut	-13.36	-176.2	Wallis and Futuna
+Mbabane	-26.33	31.13	Swaziland
+Mexico City	19.4	-99.15	Mexico
+Minsk	53.85	27.5	Belarus
+Mogadishu	2.03	45.35	Somalia
+Monaco	43.75	7.38	Monaco
+Monrovia	6.33	-10.8	Liberia
+Montevideo	-34.91	-56.16	Uruguay
+Moroni	-11.66	43.26	Comores
+Moscow	55.75	37.7	Russia
+Muscat	23.61	58.63	Uman
+Nairobi	-1.28	36.83	Kenya
+Nassau	25.05	-77.48	Bahamas
+NDjamena	12.16	14.98	Chad
+New Delhi	28.67	77.22	India
+Niamey	13.53	2.08	Niger
+Nicosia	35.16	33.36	Cyprus
+Nouakchott	18.15	-15.96	Muritaniya
+Noumea	-22.26	166.43	New Caledonia
+Nuku'Alofa	-21.15	-175.23	Tonga
+Oslo	59.91	10.75	Norway
+Ottawa	45.41	-75.71	Canada
+Pago Pago	-14.26	-170.71	American Samoa
+Palikir	6.96	158.21	Micronesia
+Panama	8.95	-79.5	Panama
+Papeete	-17.53	-149.56	French Polynasia
+Paramaribo	5.83	-55.16	Suriname
+Paris	48.87	2.33	France
+Phnom Penh	11.55	104.91	Cambodia
+Plymouth	16.73	-62.23	Montserrat
+Podgorica	42.46	19.28	Montenegro
+Port-au-Prince	18.55	-72.33	Haiti
+Port Louis	-20.16	57.5	Mauritius
+Port Moresby	-9.5	147.11	Papua New Guinea
+Porto-Novo	6.48	2.61	Benin
+Port Of Spain	10.63	-61.51	Trinidad and Tobago
+Port Vila	-17.75	168.3	Vanuatu
+Praia	14.91	-23.51	Cape Verde
+Prague	50.1	14.43	Czech Republic
+Pretoria	-25.75	28.2	South Africa
+Pyongyang	39	125.78	North Korea
+Quito	-0.23	-78.5	Ecuador
+Rabat	34.03	-6.85	Marocco
+Ragoon	16.78	96.16	Myanmar
+Reykjavík	64.15	-21.96	Iceland
+Riga	56.88	24.13	Latvia
+Riyadh	24.65	46.76	Saudi-Arabia
+Road Town	18.46	-64.65	British Virgin Island
+Rome	41.88	12.5	Italy
+Roseau	15.3	-61.38	Dominica
+Oranjestad	12.51	-70.03	Aruba
+Ouagadougou	12.33	-1.66	Burkina Faso
+Saint-Denise	-20.86	55.45	Reunion
+Saint Helier	49.2	-2.11	Jersey
+Saint George's	12.06	61.73	Grenada
+Saint Peter Port	49.45	-2.53	Guernsey
+Saint-Pierre	46.76	-56.18	Saint-Pierre and Miquelon
+San Juan	18.48	-66.13	Puerto Rico
+San José	9.93	-84.08	Costa Rica
+San Marino	43.93	12.43	San Marino
+San Salvador	13.66	-89.16	El Salvador
+Sanaa	15.4	44.23	Yemen
+Santiago	-33.45	-70.67	Chile
+Santo Domingo	18.46	-69.9	Dominican Republic
+Sao Tome	0.31	6.71	Sao Tome and Principe
+Sarajevo	43.85	18.38	Bosnia Herzegowina
+Seoul	37.53	127	South Korea
+Singapore	1.28	103.85	Singapore
+Skopje	42	21.46	Macedonia
+Stanley	-51.75	-57.93	Falnkland Islands
+Stockholm	59.33	18.08	Sweden
+Suva	-18.13	178.41	Fiji Islands
+Sofia	42.66	23.3	Bulgaria
+T'bilisi	41.71	44.81	Georgia
+Taipei	25.01	121.36	Taiwan
+Tallinn	59.43	24.71	Estonia
+Tarawa	1.5	173	Kiribati
+Tashkent	41.26	69.21	Uzbekistan
+Tegucigalpa	14.08	-87.23	Honduras
+Teheran	35.67	51.43	Iran
+Thimphu	27.53	89.71	Bhutan
+The Valley	18.21	-63.05	Anguilla
+Tórshavn	62.01	-6.76	Faroe Islands
+Tokyo	35.75	139.5	Japan
+Tripoli	32.9	13.18	Libya
+Tunis	36.83	10.21	Tunesia
+Ulaanbaatar	47.9	106.86	Mongolia
+Vaduz	47.13	9.53	Liechtenstein
+Valetta	35.9	14.53	Malta
+Victoria	-4.63	55.46	Seychelle
+Vienna	48.2	16.36	Austria
+Vientiane	17.96	102.6	Laos
+Vilnius	54.68	25.31	Lithuania
+Wellington	-41.28	174.78	New Zealand
+West Island	-12.16	96.81	Cocos Islands
+Warsaw	52.25	21	Poland
+Willemstad	12.2	-68.93	Netherland Antilles
+Windhoek	-22.56	17.1	Namibia
+Yaoundé	3.85	11.58	Cameroun
+Yamoussoukro	6.81	-5.28	Côte d'Ivoire
+Yerevan	40.16	44.51	Armenia
+Zagreb	45.8	15.96	Croatia

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+    <jar path="X:/EclipseWorkspace/OrionSystem/jars/OptimalBenchmark.jar"/>
+    <options overwrite="true" compress="true" exportErrors="false" exportWarnings="true" saveDescription="true" descriptionLocation="/OrionSystem/OptimalBenchmark.jar.jardesc" useSourceFolders="false" buildIfNeeded="true"/>
+    <manifest manifestVersion="1.0" usesManifest="true" reuseManifest="true" saveManifest="true" generateManifest="false" manifestLocation="/OrionSystem/manifest" mainClassHandleIdentifier="=OrionSystem/src&lt;org.royerloic.optimal.stdimpl.test{DoubleOptimizationBenchmark.java[DoubleOptimizationBenchmark">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="false" exportOutputFolder="true" exportJavaFiles="false">
+        <file path="/OrionSystem/.project"/>
+        <javaElement handleIdentifier="=OrionSystem/src"/>
+        <file path="/OrionSystem/.checkstyle"/>
+        <file path="/OrionSystem/.classpath"/>
+        <file path="/OrionSystem/.errLog"/>
+    </selectedElements>
+</jardesc>

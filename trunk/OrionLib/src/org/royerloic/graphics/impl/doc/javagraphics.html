@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta name="Content-Type" content="text/html; charset=ISO-2022-JP">
+<meta name="Description" content="YOV408 Tech. homepage : Hundreds of Tutorials on programming topics (C/C++,OpenGL,html,Java,Mpeg,Jpeg,fft,Huffman,TCP/IP...), All my projects, Car Pictures.">
+<meta name="Keywords" content="tutorials, programming, guide, article, tutorial, Java, true, color, graphics, buffered, buffer, double, page, flipping, fast, speed, image, full, screen">
+<meta name="Author" content="F.Patin aka YOV408">
+<meta name="Identifier-URL" content="http://www.yov408.com">
+<meta name="Date-Creation-yyyymmdd" content="20020525">
+<meta name="Reply-to" content="yov@yov408.com">
+<meta name="revisit-after" content="7 days">
+<meta name="Category" content="Programming">
+<meta name="Publisher" content="free.fr">
+<meta name="Copyright" content="YOV408 Technologies">
+<meta name="robots" content="index, follow">
+<link rel="SHORTCUT ICON" href="http://www.yov408.com/favicon.ico"> 
+<title>An introduction to Java fast true color 2D animation and games graphics</title></head>
+
+
+<body leftmargin="0" topmargin="0" style="background-attachment: fixed;" alink="#cc33cc" bgcolor="black" link="#cc33cc" marginheight="0" marginwidth="0" text="#6c7ceb" vlink="#cc33cc">
+
+
+
+<table width="100%">
+<tbody><tr><td width="50%">
+<font face="arial" size="2">
+by Fr&#65533;d&#65533;ric Patin aka yov<br>
+Friday 30th July 2004, 18:14pm<br>
+for <a href="http://www.yov408.com/">http://www.yov408.com</a><br>
+</font></td>
+<td align="right" width="50%">
+<a href="http://www.yov408.com/"><img style="display: none;" src="javagraphics_dateien/banner5.jpg"></a>
+</td>
+</tr>
+</tbody></table>
+
+
+<font color="#00bfff" face="arial" size="4"><i><b>An introduction to Java fast true color 2D animation and games graphics</b></i></font>
+
+<br><br>
+<font color="#00bfff" face="arial" size="2">
+<b><u>A quick reminder of the particularities of the Java programming language</u></b>
+<br><br>
+<font color="#6c7ceb" face="arial" size="2">
+As a final year project in my school, I was asked to program a software
+3D engine using the java programming language. As I
+had already programmed a small 3D engine in C a few years ago, and as I
+had read alot on 3D eversince, the challenge was
+not really in understanding how to implement an object oriented
+software 3D engine, but more in adapting what I had already learned to
+the Java programming language itself.
+<br><br>Java is a programming language which is based on a virtual
+machine interpretor. This means that the Java code written by the
+programmer
+is compiled for this virtual machine (i.e. virtual computer), which has
+it's own instruction set, registers, memory, and which is the same on
+any plateforme (linux,
+windows, solaris, mobile phones, mac etc...). This Java virtual machine
+interpretor is a software which translates Java instructions to actual
+platform specific instructions.
+When the program is executed the Java virtual machine, translates the
+instructions listed in the program to instructions adapted to the
+plateform it is currently running on. This means that to the point of
+view of the programmer, the code
+is written for the Java virtual machine itself. It is the job of this
+virtual machine, the 'java' interpretor to translate the instructions
+in the program to platform specific instructions. Therefore there must
+be a virtual machine installed on each platform where Java programs
+could be run. Without the Virtual machine interpretor a Java program is
+pointless because it is written using instructions
+which cannot be executed by a physical material machine but only
+interpreted by a software 'virtual' machine and translated.
+<br><br>For example a C program is always written and compiled for a
+special machine kind (intel x86, G4, motorola) and a special
+plateform (windows, unix, mac OS etc...). Once it is compiled it can be
+executed directly because the binary corresponds
+to assembly instructions that the physical computer can actually
+execute. On the other hand, a Java program is always written for the
+Java Virtual Machine.
+It is up to the Java virtual machine interpretor to translate the Java
+machine instructions of the program to plateform specific instructions.
+Therefore a Java binary (.class) contains 'Java assembly instructions'
+which can only be executed by the virtual machine
+and not by a physical electronic computer directly.
+<br><br>This has lots of advantages, for example, once you write a
+Java program, it is runnable on any plateform without the need of any
+adaptation or translation. It has also the great advantage of providing
+a 2D graphics API, and GUI API which runs on any plateform. If you
+write a Graphical User Interface in Java, it will be runnable without
+any change on from Linux to Windows going through Mac and Solaris.
+But this has also the huge disadvantage of definitively and unavoidably
+cutting short to any possible optimisations and direct memory accesses.
+This is why programming a 3D engine in Java is a real challenge!
+<br><br>
+<font color="#00bfff" face="arial" size="2">
+<b><u>The problem with 2D graphics</u></b>
+<br><br>
+<font color="#6c7ceb" face="arial" size="2">The first difficulty I
+encountered while implementing this Java 3D engine was to actually
+write pixels to the screen, in double buffering
+mode and quickly. There are several techniques to achieve this in Java
+that I have listed in this document. But in fact this was not obvious
+at all, and this is where Java can start to be annoying, there is no
+damn way to write efficiently a pixel to a back buffer. Well there are
+in fact ways to do this, but they are not really explained by Sun and
+they aren't really fast. This is why I thought that this tutorial
+could help people to actually understand how to set pixels. To
+understand this tutorial, you should be familiar with Java, the Java
+GUI components (frames, panels etc...), and traditional rendering
+techniques (double buffering, page flipping, blitting etc...).
+This tutorial is presented as a table with typical Java sources of very
+simple programs which use different ways to display fast double
+buffering graphics.
+I insist on the fact that these sources are written in the aim of
+writing raw pixel data to a back buffer and then blitting this back
+buffer to the screen.
+If you have to deal with images, shapes, pen styles etc... some sources
+might not be useful. The aim here is to learn how to set raw pixels:
+for example in a 3D engine, where the back buffer is build from
+nothing, pixel by pixel, as polygons are filled. Here are the main
+classes provided
+by the Sun Java API, which I will use in the sources :
+<br><br>
+<li><i>BufferedImage</i> : This is typically a back buffer image. You create this image, draw on it using the setRGB() function and then you
+blit this image to the current screen Graphics.</li>
+<li><i>MemoryImageSource</i> : This is basically a pixel source for an
+Image. Except that writting to this pixel source is much faster
+then setting pixels directly in Buffered Image, because this class
+doesn't perform, screen inclusion tests etc... In fact the pixel is
+written to an
+int array of which MemoryImageSource contains a reference. A little
+harder to use, but it's worth it. (look at the last source to
+understand how to use it).
+</li>
+<li><i>Graphics</i> : This is the equivalent of the Graphics Device
+Context in Windows C programming (for those who a little about C). This
+class represents a Graphical element: may it be directly a window on
+the screen or an image in memory. Therefore each window on the screen
+has it's Graphics class instance which you can retrieve by the
+getGraphics() method (member of the JComponent Class) and then use to
+draw on the screen. You can also create a BufferedImage and associate
+it with a Graphics class to draw on it. The Graphics class is provided
+with loads of useful
+drawing functions like drawCircle, fillRect, FillPoly etc.. But
+strangely it doesn't support any setPixel function!!! Weird.</li>
+<li><i>Graphics2D</i> : Same as Graphics except it has more functions and it is the official version for Swing components.</li>
+<li><i>BufferStrategy</i> : This class manages offscreen/screen buffers and page flipping when associated to a window in full screen mode.</li>
+<li><i>Frame, Panel, Window, Applet</i> : These are all Java GUI components, their contents can be drawn to by retrieving their
+associated Graphics class (most of the time using .getGraphics()).</li>
+<br><br>
+So here is a table of all the sources I gathered on the web (always in
+opensource, the authors are quoted in the sources) or made myself (I
+quote myself in the sources ;), and which provide more or less fast
+ways to implement double buffering and
+raw pixel writing in Java.
+<br><br>
+<font color="#00bfff" face="arial" size="2">
+<b><u>The different possibilities</u></b>
+<br><br>
+<font color="#6c7ceb" face="arial" size="2">
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tbody><tr>
+	<td>
+		<font color="#00bfff" face="arial" size="3"><b>
+		File/Method
+	</b></font></td>
+	<td>
+		<font color="#00bfff" face="arial" size="3"><b>
+		Description of the method
+	</b></font></td>
+	<td>
+		<font color="#00bfff" face="arial" size="3"><b>
+		When to use it
+	</b></font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/WindowedApplet.java">Java Applet in a Frame</a><br><br><font color="#00bfff" face="arial" size="1"><i>WINDOWED/APPLET
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		This method creates a new windowed Frame, then creates a new Applet,
+		and adds the Applet to the Frame's content pane. So basically we have a Java Applet, included
+		in a standard Java Frame (a window). Then a BufferedImage is created. For each loop,
+		data is drawn to this BufferedImage using setRGB(), and then the BufferedImage is blit to
+		the applets Graphics (retrieved using getGraphics()). This blit is done with the drawImage()
+		function.
+
+	</font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+This method is useful for an application that could be ported to a Java
+Applet alone, to include in a web page for example. As it is provided
+here the Applet is included in a window but in a few minutes it can be
+changed to fit as a pure Java Applet. In terms of speed, this method is
+quite slow and heavy in code, indeed we have to deal with the Applet,
+the Frame, the Frame panel, the Graphics, the BufferedImage etc... Lots
+of mess for a simple task :/ </font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/WindowedAppletAndMenu.java">Java Applet in a Frame w/ Menu and Buttons</a><br><br><font color="#00bfff" face="arial" size="1"><i>WINDOWED/APPLET
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+The principle is the same, except that, with the applet, we add a
+Button and a Menu to the Frame. This only demonstrates how you can have
+double buffering in only a part of the window and use the rest for
+buttons or menus. Watchout for the Layout Manager stuff. This is an
+automatic way that Java provides to position the elements in the
+window. It is useful when the window is changed sized so that the
+elements always position themselves correctly. In this example I don't
+use any Layout Manager, and the elements are positioned in the window
+using absolute coordinates :). </font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+No comments in particular, shows how to add buttons and menus along
+with the applet in the window. Even slower than the one before as the
+application has several tasks running at the same time (dealing with
+the buttons and menus), and more interrupts. </font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/WindowedFrameAndPanel.java">Double Buffering in a Frame and Panel</a><br><br><font color="#00bfff" face="arial" size="1"><i>WINDOWED
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		This method is completely 'applet free'! It is quite hard to find tutorials on double buffering in Java
+		without using applets, so here it is. Okay, so the program creates a Frame, Creates a new Panel in the Frame, and draws in it.
+		As usual we call a getGraphics(), for the Panel, to retrieve the Graphics where we will draw. Then we create a BufferedImage,
+		and set pixels in this image. We then blit the image to the Graphics of the Panel.
+	</font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		Fast enough. Quite simple, not too much memory blits and screen accesses. 
+		Graphics are included in a panel which enables the programmer to add other stuff in the window and still
+		have the animation running in a particular area. 
+	</font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/WindowedFrameOnly.java">Double Buffering in a Frame</a><br><br><font color="#00bfff" face="arial" size="1"><i>WINDOWED
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+The simplest I found and probably the fastest, it uses a simple
+BufferedImage and blits it to the Frame's Graphics. I'd say this is an
+exclusive mode, you can't add anything else in the window. </font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		The fastest and simplest I could do. No special classes are used except the essentials, BufferedImage and Frame.
+		For me the best method if you have to draw your animation's graphics pixel by pixel at runtime.
+	</font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/FullscreenPageFlippingGraphics.java">Hardware Double Buffering</a><br><br><font color="#00bfff" face="arial" size="1"><i>FULLSCREEN
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+This program switches to fullscreen and requests double buffering, and
+within the possibilities of the platform, page flipping. For each loop,
+we request the Graphics 'offscreen' and draw to those Graphics. Then
+the offscreen buffer is automatically blitted to the screen and so on.
+So the big problem is that we only have a Graphics class to represent
+the offscreen buffer, and therefore it's impossible to set only one
+pixel in this offscreen buffer. </font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		This method is probably the fastest in full sceen mode as long as you don't need pixel access. You can only use the
+		methods provided by the Graphics class, to draw to the offscreen buffer. I had tried a trick to draw pixels by drawing
+		one pixel long lines (there is a line function in the Graphics class) but this is tragically slow. So keep this method
+		if the Graphics functions supplied in the Graphics class are sufficient to your needs.
+	</font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/FullscreenPageFlippingImage.java">Hardware Double Buffering w/ Image Buffering</a><br><br><font color="#00bfff" face="arial" size="1"><i>FULLSCREEN
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		This program uses the same technique as before only this time pixel access is granted by the use of a BufferedImage
+		which is copied to the offscreen buffer Graphics. This is basically triple buffering.
+	</font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+ 		This solution is probably more experimental than anything else. It is quite ugly and as a matter of fact quite slow.
+	</font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/FullscreenSimpleImageBuffering.java">Image Buffering</a><br><br><font color="#00bfff" face="arial" size="1"><i>FULLSCREEN
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+This is the final solution I would suggest to make a full screen demo
+or game. It is only a full screen window (Frame) too which we blit a
+BufferedImage on each loop. This gives us double buffering, and pixel
+writing/reading. </font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		By far the simplest solution which also provides, if you have massive pixel writing, good performances.
+
+	</font></td>
+</tr>
+<tr>
+	<td valign="top">
+		<font face="arial" size="2">
+		<a href="http://www.yov408.com/javagraphics/Sources/FullscreenMemoryImageSource.java">Memory Image Source</a><br><br><font color="#00bfff" face="arial" size="1"><i>FULLSCREEN
+		
+	</i></font></font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		Oups, I hadn't tried this method before but it is indeed by far the fastest, and really by far. To set all the pixels
+		on the screen I get about 16 times faster frame rates (1024*768*32) than the previous method. So very nice method to 
+		draw lots of pixels on the screen if you have a run time generated animation or image, this is your chance :). It's a bit
+		tricky to handle sometimes because the pixel array is only a list without rows and columns, but it's really worth it.
+	</font></td>
+	<td valign="top">
+		<font color="#6c7ceb" face="arial" size="2">
+		No comment, simply de best perfomances, nice.
+
+	</font></td>
+</tr>
+</tbody></table>
+<br><br>
+<font color="#00bfff" face="arial" size="2">
+<b><u>Conclusion</u></b>
+<br><br>
+<font color="#6c7ceb" face="arial" size="2">
+Most of these methods could be largely simplified if the Graphics class
+supported a setPixel function. This would avoid having to
+create a BufferedImage in some cases. Notice also that Swing elements
+are naturally double buffered, so I think that, yes, I'm not sure, when
+you draw to a Graphics of a Swing
+Component you do not directly access the screen memory but a standard
+buffer memory. Therefore the Graphics functions called directly
+on a Java Swing Component shouldn't be too slow.
+<br><br>The two main things to keep in mind when thinking about how to
+render graphics in a game/demo are: First, it is always very very slow
+to access screen memory, this is why Buffering is useful, you draw
+everything to the memory and copy the whole bloc to the screen in a
+single
+access. Much faster :). Moreover this it also very useful to avoid
+flickering graphics, as the buffer memory is copied in one time to the
+screen, there
+aren't any flickering effects that you might observe when drawing
+shapes in several times to the screen. The second thing to remember
+when thinking of
+a method to display graphics fluidely is memory bandwidth. When
+manipulating image buffers always keep in mind that the memory
+bandwidth
+requested is huge. For example if you want to copy a 1024*768*24 image
+30 times each second to the screen you already need, 70 MegaByte/s.
+So the aim is to minimise the number of memory blits. <br><br>
+Well that's it for now, I hope this short paper will help you
+understand how to draw efficiently to the screen in Java in true color.
+There should be other methods I haven't explored yet, but these are the
+main ideas. I was nicely surprised by the possibilities
+the Java API offers, and the full screen exclusive mode is really
+efficient and runs on any platform without having to care much about
+configuration.
+However there are also some stupid left-outs, like for example no
+setPixel function in the Graphics class! Well, see you around on
+yov408.com.
+<br><br><br>
+</font></font></font></font></font></font></font></font><center><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2">***
+<br><br>
+<font color="#6c7ceb" face="arial" size="1"><i>
+</i></font></font></font></font></font></font></font></font></font><p align="right"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#00bfff" face="arial" size="2"><font color="#6c7ceb" face="arial" size="2"><font color="#6c7ceb" face="arial" size="1"><i>Wednesday 14 April 2004, 21:55 GMT.
+<br>Article by Fr&#65533;d&#65533;ric Patin aka yov (http://www.yov408.com).
+<br>Sources by Fr&#65533;d&#65533;ric Patin, Sun Tutorials, and JavaHelp.com.
+</i></font></font></font></font></font></font></font></font></font></p></center></body></html>

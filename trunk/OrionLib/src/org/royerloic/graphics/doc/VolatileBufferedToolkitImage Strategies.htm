@@ -1,0 +1,1546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<title>VolatileBufferedToolkitImage Strategies</title><meta http-equiv="content-language" content="en">
+<meta name="keywords" content="images, VolatileImage, BufferedImage, graphics performance,
+createImage, getImage, image
+loading, image creation, image performance, managed images">
+<meta name="description" content="Ever wondered what kind of image to use in your application?
+Or which of the several methods of creating images you should use to create it?
+This article tries to make this pretty huge topic just a tad clearer. ">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="archive" content="FALSE">
+<meta name="date" content="2005-02-11">
+<link rel="stylesheet" href="VolatileBufferedToolkitImage%20Strategies_dateien/default_developer.css">
+<script type="text/JavaScript" src="VolatileBufferedToolkitImage%20Strategies_dateien/popUp.js"></script><!--stopindex--></head>
+
+
+
+
+
+
+
+
+
+<body leftmargin="0" topmargin="0" rightmargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0">
+<a name="top"></a>
+<!-- BEGIN GENERIC MASTHEAD -->
+<!-- BEGIN VNV1 MASTHEAD COMPONENT, thinner variation for content pages -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td>
+<input name="charset" value="utf-8" type="hidden">
+<table class="topnav" border="0" cellpadding="0" cellspacing="0" height="25" width="100%">
+<form name="formsearch" action="/dispatcher.jsp" method="post" accept-charset="utf-8"></form>
+<tbody><tr>
+<td><a href="#mast"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt="Skip Masthead Links" border="0" height="1" width="10"></a></td>
+<td><a href="http://developers.sun.com/">developers.sun.com</a></td>
+<td width="100%">&nbsp;</td> 
+<td nowrap="nowrap"><span class="rightarrowblue">»</span>&nbsp;<a href="http://java.sun.com/dispatcher.jsp?uid=6910020">search tips</a>&nbsp;&nbsp;|&nbsp;&nbsp;<b>Search:</b>&nbsp;</td>
+<td><input name="qt" class="medium" size="7" value=""></td>
+<td>&nbsp;</td>
+<td class="selectcell"><select class="globalsearch" name="uid"><option value="6910018" selected="selected">in Developers' Site</option><option value="6910019">in Sun.com</option></select></td>
+<td>&nbsp;</td>
+<td align="left" valign="middle"><input class="buttonred" value="&nbsp;»&nbsp;" onmouseover="this.style.color='#fbe249';" onmouseout="this.style.color='#FFF';" border="0" type="submit"></td>
+<td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " height="1" width="10"></td>
+</tr>
+</tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="10"></td>
+<td class="grey3" valign="top"><a href="http://java.sun.com/"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/logo_java_grey.gif" alt=" " border="0" height="53" width="180"></a></td>
+<td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="10"></td>
+<td class="sunblue" nowrap="nowrap" valign="top"><div class="pad6"><a href="http://developers.sun.com/"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/masthead_the_source.gif" alt="The Source for Developers" border="0" height="25" width="262"></a><br>
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910022"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/masthead_sdn_site.gif" alt="A Sun Developer Network Site" border="0" height="15" width="169"></a></div></td>
+<td class="sunblue"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="10"></td>
+<td class="sunblue"><div class="pad6"><a href="http://java.sun.com/dispatcher.jsp?uid=6910023"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/masthead_prod_and_tech.gif" alt="Products and Technologies" border="0" height="15" width="158"></a><br><a href="http://java.sun.com/dispatcher.jsp?uid=6910024"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/masthead_tech_topics.gif" alt="Technical Topics" border="0" height="15" width="105"></a></div><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="196"></td>
+<td class="sunblue" align="right" valign="top" width="100%"><div class="pad10"><a href="http://www.sun.com/"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/logo_sun.gif" alt="Sun Microsystems" border="0" height="33" width="72"></a></div></td>
+<td><a name="mast"></a><a href="#skip2content"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="10"></a></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<span class="sp5">&nbsp;</span><br>
+<!-- END VNV1 MASTHEAD COMPONENT, thinner variation for content pages -->   
+<!-- END GENERIC MASTHEAD -->
+<!-- BEGIN BREADCRUMB -->
+<table class="vatop" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td>      
+<div class="breadcrumb">
+<a href="http://developers.sun.com/index.html">Developers Home</a> &gt; <a href="http://developers.sun.com/prodtech/index.html">Products &amp; Technologies</a> &gt; <a href="http://java.sun.com/index.jsp">Java Technology</a> &gt; <a href="http://java.sun.com/reference/index.html">Reference</a> &gt; <a href="http://java.sun.com/reference/techart/index.html">Technical Articles and Tips</a> &gt;
+</div>
+</td>
+<td align="right" nowrap="nowrap"><div class="breadcrumb">
+<b><a href="http://developers.sun.com/dispatcher.jsp?uid=6910021">Join a Sun Developer Network Community</a></b><br>
+<a href="http://developers.sun.com/user_registration/index.html">Profile and Registration</a> | 
+<a href="http://developers.sun.com/user_registration/whyregister.html">Why Register?</a>
+</div></td></tr>
+<tr><td colspan="2"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="770"></td></tr>
+</tbody></table>
+<span class="sp5">&nbsp;</span><br>     
+<!-- END BREADCRUMB -->
+<!-- BEGIN PAGETITLE -->
+<div class="pagetitle2">Article</div>
+<div class="pagetitle">VolatileBufferedToolkitImage Strategies</div>
+<!-- END PAGETITLE -->
+<!-- BEGIN WRAPPER TABLE, 2 COLUMN, MAIN/RIGHT -->
+<table border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td valign="top" width="100%">
+<!-- BEGIN CENTRAL COLUMN COMPONENTS -->
+<!--startindex-->
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+<a name="skip2content"></a>
+<!--  BEGIN VCD4 PFV  -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td class="smaller" valign="top"><em></em></td>
+<td width="10">&nbsp;</td>
+<td align="right" valign="bottom"><div class="sitelinks" style="padding: 0px;">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td align="right" valign="bottom">&nbsp;</td>
+<td class="smaller" nowrap="nowrap" valign="bottom"><a href="http://java.sun.com/jsp_utils/PrintPage.jsp" target="printFriendlyView" onclick="openPopup('','printFriendlyView',710,650,'no',1,1,0,0,0,0); return true;"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/ic_print.gif" alt="Print-friendly Version" border="0" height="12" hspace="4" width="14">Print-friendly Version</a><br></td>
+</tr></tbody></table></div>
+</td></tr>
+</tbody></table>
+<!--  END VCD4 PFV -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="smaller" valign="top"><em>
+By <a href="#author">Chet Haase</a>, Senior Staff Engineer, Java 2D, February 15, 2005
+</em></td>
+<td width="10">&nbsp;</td>
+<td align="right" valign="bottom">
+<div class="sitelinks" style="padding: 0px;">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<!--
+<td valign="bottom" align="right"><img src="/im/ic_email.gif" width="14" height="12" border="0" hspace="4" vspace="1" alt=" " /></td>
+<td valign="bottom" class="smaller" nowrap="nowrap"><a href="#{link placeholder}">E-mail</a></td>
+<td>&nbsp;&nbsp;</td>
+<td valign="bottom" align="right">&nbsp;</td>
+<td valign="bottom" class="smaller" nowrap="nowrap"><a href="/jsp_utils/PrintPage.jsp" target="printFriendlyView" onclick="openPopup('','printFriendlyView',710,650,'no',1,1,0,0,0,0); return true;"><img src="/im/ic_print.gif" width="14" height="12" alt="Print-friendly Version" border="0" hspace="4" />Print-friendly Version</a></td>
+<td>&nbsp;&nbsp;</td>
+<td valign="bottom" align="right"><img src="/im/ic_download_thin.gif" width="9" height="14" hspace="4" border="0" alt=" " /></td>
+<td valign="bottom" class="smaller" nowrap="nowrap"><a href="#{link placeholder}">Download</a></td>
+-->
+</tr>
+</tbody></table>
+</div>
+</td></tr>
+</tbody></table>
+<div class="contentdivider"><table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr></tbody></table></div>
+<!--  END VCD4 BYLINE AND TOOLS  -->
+<p>
+A common question seems to arise often from Java graphics developers about which
+image type or creation method to use. When exactly should you use
+<code>VolatileImage</code>? What is
+<code>BufferedImage</code> appropriate for? What about the old
+<code>Toolkit</code> images? And when is
+<code>BufferStrategy</code> more appropriate than one of these image
+types?
+</p>
+<p>
+It's a pretty big topic, and the answer (like all truly great answers)
+is probably "It depends". But there are some general guidelines
+that can come in handy.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Image Types</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+First of all, perhaps a short dictionary of image types might help:
+</p>
+<ul>
+<li>
+<b>Toolkit Image</b>:
+This is the oldest kind of image object in the Java API. These images
+are created and returned by the old 1.x APIs such as
+<code>Applet.getImage()</code> and
+<code>Toolkit.createImage()</code>. These images are created from a
+pointer to a data
+source, such as a GIF or JPG file, and return an object of type
+<code>Image</code>.
+They are useful for convenient loading and storage of image data for display,
+but
+getting at the actual pixel data or manipulating it is not as easy.
+</li>
+<li>
+<b>BufferedImage</b>: This is an image type that was created in the
+JDK 1.2 API. They were
+created for easier and more powerful manipulation of the actual pixel data in
+an image. At first, there was no way to load an image from a data source
+directly
+into a <code>BufferedImage</code>; these images were used, instead,
+to create an arbitrary buffer
+for pixel data, which you could then write to, read from, or display
+conveniently.
+The main way to get actual pixel data into a
+<code>BufferedImage</code> object at first was
+through use of rendering operations (after getting a
+<code>Graphics</code> object
+for the <code>BufferedImage</code>), or by manually setting the
+pixel data through methods
+in <code>BufferedImage</code>,
+<code>WritableRaster</code>, and
+<code>DataBuffer</code>. With the advent of the
+<code>ImageIO</code> API (see below) in JDK 1.4, it became possible
+to create a
+<code>BufferedImage</code> object directly from a data source, just
+like <code>Toolkit</code> images (only
+these <code>BufferedImage</code> objects are writable, unlike their
+<code>Toolkit</code> image cousins).
+</li>
+<li>
+<b>VolatileImage</b>: This image type was created in JDK 1.4 as a
+means of creating and
+managing accelerated image memory. One of the problems with hardware
+acceleration for
+images is that, on some platforms, accelerated memory can be deleted out from
+under
+you at any time. This is obviously not what you want for your typical image
+data.
+To work around that, the <code>VolatileImage</code> API was created
+to provide a notification
+mechanism so that you know when an image must be re-rendered due to data loss.
+<code>VolatileImage</code> objects are not loaded from image data,
+but are just created as empty
+pixel buffers (much as the initial <code>BufferedImage</code>
+objects were (see above)); to load
+image data into a <code>VolatileImage</code>, applications must load
+the image data
+through some non-Volatile means, get the <code>Graphics</code>
+object for the
+<code>VolatileImage</code>, and then copy the data into the Graphics
+object using <code>drawImage()</code>.
+</li>
+<li>
+<b>Managed Images</b>: These image objects are not specific objects
+or APIs in Java, but are
+rather a concept of how we accelerate image operations. A "managed image" is one
+that you create through any of the normal image creation/loading methods and
+which
+we try to accelerate for you internally, by creating an accelerated mirror copy
+of the
+image data. This type of image can benefit from hardware acceleration without
+falling
+prey to the "surface loss" issues mentioned above for
+<code>VolatileImage</code>. I'll talk
+more about managed images and hardware acceleration later in the article.
+</li>
+</ul>
+<p>
+That's it for the basic image types. Now let's talk about how we actually
+create and use these image objects.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Who You Gonna Call?</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+Whenever I want to give myself a fright about the complexity of our
+APIs, I simply ponder the vast array of choices that face developers
+who simply want to create an image. I'm sure I'm missing some here,
+but let's see...
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>Applet:
+	getImage(url)
+	getImage(url, name)
+
+BufferedImage:
+	new BufferedImage(colorModel, raster, premultiplied, properties)
+	new BufferedImage(width, height, type)
+	new BufferedImage(width, height, type, colorModel)
+
+BufferStrategy:
+	new BufferStrategy()
+	(Note: This method cannot be called directly)
+
+Canvas:
+	createBufferStrategy(numBuffers)
+	createBufferStrategy(numBuffers, capabilities)
+
+Component:
+	createImage(imageProducer)
+	createImage(width, height)
+	createVolatileImage(width, height)
+	createVolatileImage(width, height, capabilities)
+
+GraphicsConfiguration:
+	createCompatibleImage(width, height)
+	createCompatibleImage(width, height, transparency)
+	createCompatibleVolatileImage(width, height)
+	createCompatibleVolatileImage(width, height, capabilities)
+
+Image:
+	new Image()
+	(Note: This method cannot be called directly)
+
+ImageIO:
+	read(file)
+	read(imageInputStream)
+	read(inputStream)
+	read(url)
+
+ImageIcon:
+	new ImageIcon(imageData[]).getImage()
+	new ImageIcon(imageData[], description).getImage()
+	new ImageIcon(image).getImage()
+	new ImageIcon(image, description).getImage()
+	new ImageIcon(filename).getImage()
+	new ImageIcon(filename, description).getImage()
+	new ImageIcon(url).getImage()
+	new ImageIcon(url, description).getImage()
+
+Toolkit:
+	createImage(imageData[])
+	createImage(imageData[], offset, length)
+	createImage(producer)
+	createImage(filename)
+	createImage(url)
+	getImage(filename)
+	getImage(url)
+
+Window:
+	createBufferStrategy(numBuffers)
+	createBufferStrategy(numBuffers, capabilities)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+I am sure there are more out there, especially using approaches like the
+<code>ImageIO</code>
+package, which is all about reading and writing images, as you might guess from
+the name. But
+this list will do for now.
+</p>
+<p>
+So it's a wrap. This article's pretty much finished; just use the above API
+calls to
+create your images. Left as an exercise to the reader. Q.E.D. It's obvious,
+isn't it?
+</p>
+<p>
+Okay, so maybe it isn't obvious; there are a lot of methods above that
+all seem to need different parameters or that create different types
+of images.
+</p>
+<p>
+Here's the trick: All of the above image creation methods (and any
+others that are not on the list) can be broken down into just a few
+categories. Then the plethora of ways of creating an image in
+one of those categories can just be seen as utility methods; different
+ways of getting the same result. The convenience methods may be because
+of logic (why do I have to get the <code>GraphicsConfig</code> to
+create an image
+associated with a <code>Component</code>? Why not use the
+<code>Component</code> directly?), or
+convenience (instead of using some <code>InputStream</code>
+mechanism for all
+image readers, we provide several ways to read the image directly
+including from filenames, URLs, and streams; just call the method
+appropriate for your situation).
+</p>
+<p>
+So the real work in this article is to break down the categories of
+image types and describe which types of images and methods you may want to use
+in
+which situations. Once you get that down, the rest, as they say,
+is just implementation details.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Image Loading or Creation?</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+First of all, are you loading existing image data? Or are you creating
+an image buffer in memory? Image <i>loading</i> means that you have
+image
+data (either locally or across the network) that you want to load
+into your application, possibly to copy that image onto the screen
+or to read and operate on the data. Image <i>creation</i> means that
+you want some
+arbitrary image memory created for your application; perhaps you want to
+create a buffer for double-buffered animations, or you want a place to
+cache intermediate filtering results.
+</p>
+<a name=""></a>
+<div><b>Image Loading</b></div>
+<p>
+In the above method list, all of the methods that take filenames, URLs,
+streams, producers, and data arrays are those intended for loading existing
+images. In particular, all of the methods listed above for
+<code>Applet</code>,
+<code>ImageIO</code>, <code>ImageIcon</code>, and
+<code>Toolkit</code> are intended for image loading:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>Applet:
+	getImage(url)
+	getImage(url, name)
+
+ImageIO:
+	read(file)
+	read(imageInputStream)
+	read(inputStream)
+	read(url)
+
+ImageIcon:
+	new ImageIcon(imageData[]).getImage()
+	new ImageIcon(imageData[], description).getImage()
+	new ImageIcon(filename).getImage()
+	new ImageIcon(filename, description).getImage()
+	new ImageIcon(url).getImage()
+	new ImageIcon(url, description).getImage()
+
+Toolkit:
+	createImage(imageData[])
+	createImage(imageData[], offset, length)
+	createImage(producer)
+	createImage(filename)
+	createImage(url)
+	getImage(filename)
+	getImage(url)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+There are at least four major things that differentiate these methods:
+</p>
+<ul>
+<li>Location of the image data</li>
+<li>Format of the image data</li>
+<li>Synchronous or asynchronous behavior of each method</li>
+<li>Type of image that is created (<code>Image</code> or
+<code>BufferedImage</code>)</li>
+</ul>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Location, Location, Location</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+When I'm talking about location, I'm mainly concerned with whether the
+file is local or across a network. Also, if it is packed into some resource
+file, such as a jar file, that also comes into play here.
+</p>
+<a name=""></a>
+<div><b>Loading Across the Network</b></div>
+<p>
+If you are accessing the data across a network, it is probably easiest
+to use the URL variations:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Applet.getImage(url)
+	Applet.getImage(url, name)
+	ImageIO.read(url)
+	new ImageIcon(url).getImage()
+	new ImageIcon(url, description).getImage()
+	Toolkit.createImage(url)
+	Toolkit.getImage(url)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+For example, let's say you just <i>have</i> to have a copy of Duke
+in your
+application (barring the legal ramifications of shipping someone else's image
+in your application, of course. I'm no lawyer, but I've seen enough of them
+on TV to be very, very afraid). You could, of course, copy that image locally
+and
+read it from a file. But what if that particular Duke image is modified
+constantly, preened and pruned to use the very latest imaging technologies
+and updated to the latest clothing fashions (assuming Duke actually wore
+clothes, but since he's a California native (I suspect Santa Cruz) he is
+apparently very comfortable in the buff).
+Suppose there is always an up-to-date duke.gif file on the java.sun.com
+site. Then you could use something like the following code to load this
+image into your application:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	URL dukeURL = new URL("http://java.sun.com/duke.gif");
+	BufferedImage img = ImageIO.read(dukeURL);
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<a name=""></a>
+<div><b>Loading from the Local File System</b></div>
+<p>
+Now suppose you have another image that you have saved locally in a file;
+just use the filename variation of the above. For example, let us say
+you loved one particular instantiation of the lovable-yet-quirky duke.gif
+file above so much that you downloaded and saved it for use in your application
+(see the above note on scary lawyers). Then you could use the following code
+to load that file from the directory where the program was launched:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	BufferedImage img = ImageIO.read(new File("duke.gif"));
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<a name=""></a>
+<div><b>Loading from JAR Files</b></div>
+<p>
+It is perhaps more common to bundle up your application and media into
+JAR files. In this case, the image will be downloaded with your application,
+but will not be accessible through a simple filename. You will probably want to
+use a URL in this case also, where you create a URL from the JAR file
+resource. For example, suppose you took your downloaded version of
+duke.gif and put him in a subdirectory of your application hierarchy
+called "media". Then you could load the image with the following code:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	URL dukeURL = getClass().getResource("media/" + "duke.gif");
+	BufferedImage img = ImageIO.read(dukeURL);
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<a name=""></a>
+<div><b>Image Format</b></div>
+<p>
+Another consideration is the format of your stored image. The old
+Toolkit/Applet loaders only understand GIF, JPEG, and PNG format files.
+(Okay, they also understand XBM and XPM2, old X11 image formats, but
+those are probably not formats you are terribly concerned about).
+These loaders works well for most web applications since these image types
+are traditional web image formats. But what if you have an image
+in some other format that the Toolkit/Applet loaders
+do not understand?
+</p>
+<p>
+<code>ImageIO</code> currently has built-in readers for GIF, JPEG,
+PNG, BMP, and WBMP.
+Moreover, there will be more image readers/writers for
+<code>ImageIO</code> going
+forward, whereas there are no specific plans to support more formats for the
+old Toolkit/Applet loaders. And finally, <code>ImageIO</code> has a
+pluggable
+reader API, so if you have a custom image format, or some other
+format not yet supported by the core library, you can write
+your own loader for that format within <code>ImageIO</code>.
+</p>
+<p>
+In fact, the JAI team has made available a <a href="http://java.sun.com/products/java-media/jai/downloads/download-iio.html">package</a>
+with additional <code>ImageIO</code> readers/writers, if you have
+requirements beyond the current <code>ImageIO</code> defaults.
+</p>
+<p>
+So <code>ImageIO</code> could also be the right choice if you need
+to deal with
+formats beyond the basic web image formats.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Synchronicity</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+The Applet and Toolkit image loading methods came from the old days
+of Java 1.0, when Java was seen primarily as a networked application
+API and image data might come from any source, potentially
+one on an unreliable or slow network connection. To make networked
+applications more robust, it is reasonable to put network-dependent
+operations in separate threads to ensure that an application's
+main or GUI threads do not hang while waiting for a slow download.
+Because this was a common pattern for Java GUI applications at that time,
+the image loading operations were all created to run on a separate
+image loading thread. Thus when an application calls:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Applet.getImage(url)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+that call will return immediately. That doesn't mean that the image
+has been loaded; in fact, in most cases the image load may not have
+even started yet. Internally, <code>getImage()</code> does not load
+the image at
+all. Instead, image loading is deferred until some operation
+requires the image data, at which time a separate Thread
+processes the image loading.
+</p>
+<p>
+Note that this model of asynchronous loading does not apply solely to
+networked applications, or even to image loading specifically; any operation
+that takes a significant amount of time should not be done on the GUI
+thread, lest you run the chance of making your application appear hung
+while the operation is taking place. So, for example, if you are loading
+in a huge image from a local file, you may want that non-networked
+operation to happen in a separate worker thread to ensure that your
+GUI has no pauses during image loading.
+</p>
+<p>
+This model works well enough for applications that create their images early for
+later use. The application may simply need to check whether
+the image has been loaded whenever it is required in the application.
+</p>
+<p>
+When applications do need the data (for example, if they need image sizes in
+order to determine layout correctly, or if they need to display images in
+their final form), they may need to synchronize on the image
+loader and wait until the image loading is done. For example,
+an application may want to load local image data and be willing to
+wait for that data to load before proceeding (knowing that a local
+load will usually not take very long). In that case, the application might do
+something similar to the following:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	public Image loadImageSynchronously(Component comp, String filename) {
+	  URL url = getClass().getResource("media/" + filename);
+	  Image image = Toolkit.getDefaultToolkit().getImage(url);
+	  MediaTracker tracker = new MediaTracker(comp);
+	  int id = 0;
+	  tracker.addImage(image, id);
+	  try {
+		tracker.waitForID(id);
+	  } catch (InterruptedException e) {
+		System.out.println("INTERRUPTED while loading Image");
+	  }
+	  return image;
+	}
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+Note that you can use <code>ImageIcon</code> to load the image
+synchronously; you could rewrite
+the above method as follows:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	public Image loadImageSynchronously(String filename) {
+	  URL url = getClass().getResource("media/" + filename);
+	  Image image = new ImageIcon(url).getImage();
+	  return image;
+	}
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+<code>ImageIcon</code> is simply a wrapper around this functionality
+(in fact, I stole part
+of the above sample code directly from the <code>ImageIcon</code>
+implementation: don't
+tell the Swing team!). But if your intention is to load an image
+synchronously as quickly as possible, why cause us to go through the process
+of spawning a separate thread and then synchronizing on that thread?
+</p>
+<p>
+Meanwhile, <code>ImageIO</code> has synchronous loading methods
+that do not return until the image has been loaded and is ready to go.
+There are no extra threads spawned, no <code>MediaTracker</code> usage, no existential "it is through yet?" wonderings; just call one of the <code>ImageIO</code> loading methods and use the resulting <code>BufferedImage</code> object when it returns.
+</p>
+<p>
+Note that some applications and situations may need asynchronous
+loading behavior (for long image loads or to more efficiently
+multitask). For example, it does not take a huge amount of time to
+affect perceived GUI performance, so if an image load will take even as
+long as a tenth of a second, you may want to avoid loading that image
+synchronously on the Event Dispatch Thread (so don't load it in your <code>paint()</code> method). You can always spawn a new Thread yourself to call the <code>ImageIO</code> loading methods if necessary.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Resulting Java Image Type</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+Part of the decision over which image creation API you use is in which image
+type you want to get back from the creation method. In particular,
+do you want a Toolkit Image or a <code>BufferedImage</code>?
+</p>
+<p>
+Toolkit Images are created by the <code>Applet</code>,
+<code>Toolkit</code>, and <code>ImageIcon</code> methods
+listed above. The resulting images are easy to use for display purposes
+(just call <code>drawImage(...)</code> from this image into a
+Graphics
+destination and the image will be copied appropriately), but they lack the power of <code>BufferedImage</code> objects for manipulation of the
+data.
+</p>
+<p>
+<code>BufferedImage</code> objects are created by the
+<code>ImageIO</code> methods listed above.
+These objects offer a more powerful API, albeit with potentially more
+work involved to do some operations (such as displaying an animating
+GIF image).
+</p>
+<a name=""></a>
+<div><b>Image or BufferedImage: What's in a Name?</b></div>
+<p>
+Although both <code>Image</code> and
+<code>BufferedImage</code> have similar
+properties in terms of being displayable, <code>BufferedImage</code>
+has many
+more capabilities. For one thing, the <code>Image</code> objects
+created by the
+<code>Toolkit</code>, <code>Applet</code>, and
+<code>ImageIcon</code> load methods are read-only; you cannot
+get the <code>Graphics</code> of those
+<code>Images</code> and render to them. So if you want to
+modify the image data, you will need to do more work (such as creating
+another image that <i>is</i> modifiable and copying the loaded Image
+into that new image). <code>Image</code> has some very simple
+methods and is mostly
+intended to be a simple object that holds image data. But
+<code>BufferedImage</code>
+has many methods for modifying and extracting all kinds of data from an image;
+color models, pixel data, and more. Given a choice between the two,
+I would always opt for the one that gave me more power and flexibility.
+</p>
+<p>
+But doesn't that increased capability mean increased overhead? Not at
+all; there is no extra processing involved in
+<code>BufferedImage</code>s when these
+other powerful methods are not used. If all you do is load and image and
+display it, <code>BufferedImage</code> can do this just as easily as
+the more
+streamlined <code>Image</code> object.
+</p>
+<p>
+So go ahead and use <code>BufferedImage</code>. It is, after all,
+<a href="http://weblogs.java.net/pub/wlg/366">better than butter</a>.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Dirty Laundry</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+One good (and not entirely obvious) reason for using the
+<code>ImageIO</code> API for loading images
+is the unfortunate reality that the code is simply newer, cleaner, and more
+maintained (both now and in the future). Much of the old
+<code>Applet</code> and <code>Toolkit</code> image code
+was written years ago
+and has many assumptions and situations that it must account for and is
+therefore tricky to maintain and upgrade.
+</p>
+<p>
+Our future image reading/writing direction is with
+<code>ImageIO</code>; yours should be
+too, because that is where the focus of our efforts will be in the future.
+</p>
+<p>
+Having said all that wonderful stuff about <code>ImageIO</code>,
+there could be situations
+in which the old <code>Toolkit/Applet/ImageIcon</code> approach
+makes more sense for
+your particular application, including:
+</p>
+<ul>
+<li>Performance: Ideally, <code>ImageIO</code> would be more
+performant than the old
+code. But some code paths in <code>ImageIO</code> have not yet been
+optimized to the
+extent that the old code was, so you may find some situations (such as
+loading images in a particular format) which perform better using the old
+APIs than they do with <code>ImageIO</code>. The problems are
+(mostly) known, the bugs
+have (mostly) been filed, and these performance gaps will (definitely) be fixed.
+But if
+performance in these situations is important for your application, by
+all means use the old methods in the meantime if they work better for
+you.</li>
+<li>Ease of Use: One of the goals of <code>ImageIO</code> was
+to expose more capabilities
+to the developer. There is much information, such as metadata,
+in an image that is
+not exposed through the old image loading methods or the old
+<code>Image</code> class.
+The flipside of this approach (at least in the current API) is that it
+can be more work to do trivial tasks. A good example of this is
+loading and displaying an animated GIF.<br>
+In the old image loading APIs, if you loaded an animated GIF file, you did
+not need to worry about the details of animating that image. Instead, you
+could just load the image and display it and we would automatically
+schedule the animations of that image appropriately. You could not
+access the information about the animation (how many frames? what
+animation rate? loop? halt?), but making it animate was quite simple.<br>
+<code>ImageIO</code>, on the other hand, exposes all of that
+animation information to
+you through the API, but you must actually use that information to manage the
+image
+animation yourself; you cannot just tell us to draw the image and
+have us manage it for you. This is a known issue and we will
+do something about it Real Soon Now.<br>
+</li>
+<li>Compatibility: Sometimes applications need to be as
+backward-compatible
+as possible across most or all JDK releases. In particular, some
+applications
+need to be able to run on old JDK 1.1 or earlier releases. For example,
+applet
+games tend to need ubiquity of the runtime environment and cannot count
+on
+browsers having any later version of Java than the 1.1 APIs. In this
+case, you may need to use the older APIs simply so that they
+will run across all of these platforms.
+</li>
+</ul>
+<p>
+Certainly, if you need the kind of functionality that the old APIs
+give you, go ahead and use those APIs. That is what they're (still) there
+for...
+</p>
+<p>
+Note also that if you need to use the old APIs for some reason but
+you still want the power and flexibility of
+<code>BufferedImage</code>, it is
+easy enough to load the images in through whatever methods are
+appropriate, create a new <code>BufferedImage</code> object, and
+then simply
+copy the loaded images into the <code>BufferedImage</code>. For
+example:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Image img = new ImageIcon(filename).getImage();
+	BufferedImage bImg = new BufferedImage(img.getWidth(null), 
+	img.getHeight(null).
+	BufferedImage.TYPE_INT_RGB);
+	Graphics g = bImg.getGraphics();
+	g.drawImage(img, 0, 0, null);
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<a name=""></a>
+<div><b>Hey! What About the Other Loading Methods Above?</b></div>
+<p>
+The approaches above cover most of the loading methods I listed, but
+some are notably skipped. The <code>*Stream</code> methods of
+<code>ImageIO</code> are simply variations
+on a theme; if you happen to have your data in that format (versus a
+URL or file), go for it; it's just a convenience to use these alternatives.
+</p>
+<p>
+As for the other skipped methods (one using an
+<code>ImageProducer</code> and
+some using data arrays), I hoped you wouldn't notice....
+<br>
+These other loading approaches are somewhat dated and come from the old days
+of Java image
+processing. There are still some situations which might require the
+<code>ImageProducer/ImageConsumer</code> approach, but in general it
+should be
+easier, more straightforward, and more performant to use the newer APIs
+such as <code>ImageIO</code> and
+<code>BufferedImage</code>. The uses and misuses of the older
+<code>Consumer/Producer/PixelGrabber</code> APIs could stand a
+separate article
+all by themselves. I'll try to tackle this one in the future.
+</p>
+<p>
+As far as reading the image data from
+an array of data (see the methods above with the
+<code>imageData[]</code> parameter),
+this is really only appropriate if you have already read
+the data into the array to begin with. This could be necessary if
+you have some custom image storage mechanism, such as a database.
+But if the image
+exists in a regular file/URL/stream format, you should probably
+be using one of the other loading methods instead.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Image Creation</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+What if you do not have an existing image on the network or file system? What
+if you just want a buffer of pixel data that you can use in your application?
+This could be for creating sprites or icons with rendering calls instead
+of loaded image information (perhaps you've found this to be faster in your
+situation
+than reading image files). Or it could be a buffer that you can use for
+caching intermediate results or for providing double-buffered rendering
+for an animation.
+</p>
+<p>
+For the purposes of this discussion, I'll break down this category of
+images into three types:
+</p>
+<ul>
+<li><i>Static Images</i>: These are images that you render
+<i>to</i>
+infrequently (perhaps just once, when you create the image). The images
+are mainly used to copy <i>from</i>.</li>
+<li><i>Dynamic Images</i>: These are images that you render
+<i>to</i> often, like
+an animating sprite.</li>
+<li><i>Back Buffers</i>: These are like dynamic images, in
+that they are
+rendered <i>to</i> frequently (usually at least once per frame), but
+they are
+specifically intended to provide buffering support for the
+onscreen window, and are thus usually copied <i>from</i> often
+as well, like once per frame.</li>
+</ul>
+<a name=""></a>
+<div><b>Static Images</b></div>
+<p>
+Static images are ones that are created and rendered <i>to</i> once
+(or
+infrequently) but probably copied <i>from</i> often. Examples of
+this type of image
+include icons for a GUI or sprites for a game.
+</p>
+<p>
+The best approach for this type of image is to create an image that is in
+the same format as the image or window that the image will be copied to;
+this ensures the most straightforward copy mechanism since the underlying
+software will not have to perform a conversion on the image data while
+copying to the destination.
+</p>
+<p>
+You could, of course, create a <code>BufferedImage</code> object
+manually through one
+of its constructors; you could query the GraphicsDevice for its display
+information and then create a <code>BufferedImage</code> of the
+appropriate type:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	new BufferedImage(colorModel, raster, premultiplied, properties)
+	new BufferedImage(width, height, type)
+	new BufferedImage(width, height, type, colorModel)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+But why go to the hassle of all of that when there are convenience
+mechanisms that do all of this for you? Specifically, take a look
+at:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Component.createImage(width, height)
+	GraphicsConfiguration.createCompatibleImage(width, height)
+	GraphicsConfiguration.createCompatibleImage(width, height, transparency)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+These methods examine the display resolution for the given
+Component or <code>GraphicsConfiguration</code> and create an image of an
+appropriate type. The Component variation is specified to return an
+object of type Image, but currently it is actually a
+<code>BufferedImage</code>
+internally. If you need a <code>BufferedImage</code> object instead
+(you won't
+necessarily need one; you can get a Graphics object from an Image and
+render to it just the same as you can to a
+<code>BufferedImage</code>), then
+you can perform an <code>instanceof</code> and cast to a
+<code>BufferedImage</code> in your code,
+or simply call the <code>GraphicsConfiguration</code> variation).
+</p>
+<p>
+The best part about static images is that you can use very simple
+means to create the images and then we will try very hard internally to
+see that you get any available hardware acceleration for these images
+when they get copied around. We call these "managed images", because
+we manage the acceleration details for you. For more information on
+managed images, please see my <a href="http://weblogs.java.net/pub/wlg/385">blog on <code>BufferedImage</code> performance</a>.
+</p>
+<p>
+Note that as of JDK 5.0 we manage nearly
+all types of images and take advantage of hardware acceleration if
+it exists. So go ahead and create the type of image that is most
+convenient for you and we will try to do the right thing under the hood.
+</p>
+<a name=""></a>
+<div><b>Dynamic Images</b></div>
+<p>
+This kind of image may be rendered <i>to</i> quite often, as in an
+animating
+icon, or a sprite that is modified on a frequent basis. You could
+certainly use the same image-creation APIs listed above for static images;
+these will work fine in most situations and are certainly the easiest way
+to go in general.
+</p>
+<p>
+However, some developers interested in maximizing performance
+may want to know more about image management and how dynamic images
+can affect it.
+</p>
+<p>
+We manage images by detecting when the application is copying from an
+image to a destination (either another image or an onscreen window) that
+lives in accelerated memory. If this copy is done successively when the
+source image has not changed, then we may decide to cache a copy of that image
+in accelerated memory and perform future copies from this cached version. For an illustration
+of how managed images work under the hood, see Figure 1
+</p>
+<span class="sp10">&nbsp;</span><br> 
+<div class="padbottom10">
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><a href="http://java.sun.com/developer/technicalArticles/Media/imagestrategies/ManagedImages.gif"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/ManagedImagesHalf.gif" alt="Figure 1: Managed images" border="0"></a></td>
+</tr>
+<tr>
+<td class="grey3">
+<div class="pad6">
+<span class="dkcaption1">Figure 1: Managed images</span><br><a href="http://java.sun.com/developer/technicalArticles/Media/imagestrategies/ManagedImagesHalf.gif">Click to enlarge</a>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<p>
+In the case of a dynamic image, if that image is being updated one or more
+times for every copy to the destination, then we will never create an
+accelerated version of it, and thus the image will never benefit from
+any hardware acceleration that we could otherwise provide.
+</p>
+<p>
+(<i>Aside:</i> For the insatiably
+curious, the reason for this oddity in acceleration comes from "surface loss",
+where an accelerated version of an image may simply go away at any time due
+to operating-system or user-caused situations. To keep the original image data
+intact, we store the main image data (that which is modified by the application)
+in an unaccelerated location, and only accelerate a mirror copy of that image.
+That way, if the accelerated version gets wiped out, we still have the original
+data from which we can create a new accelerated copy. The problem here, in
+terms of performance, is that an "unaccelerated image" means that all rendering
+to and from that image is unaccelerated. And if an application is constantly
+modifying the image, all of that rendering will be unaccelerated and it is
+never appropriate for us to create and use an accelerated version of that
+image.)
+</p>
+<p>
+Developers that care about top performance for these types of
+images may want to look into using <code>VolatileImage</code>s
+instead. These images
+store the data in accelerated memory (when possible) and thus rendering to
+and from that image may be accelerated automatically. The downside
+is that these images require a bit more care and feeding, due to
+"surface loss" issues that arise with current video memory architectures
+and operating systems. Note that not all types of rendering to
+these images is accelerated, either, but simple types of rendering
+like lines and rectangular fills and copies can usually be accelerated,
+depending
+on the platform configuration.
+</p>
+<p>
+I've already written about <code>VolatileImage</code>s in past blogs
+(<a href="http://weblogs.java.net/pub/wlg/435">Part I</a> and
+<a href="http://weblogs.java.net/pub/wlg/438">Part II</a>), so I
+will not
+go into the details of their usage here; please check out those
+other articles for more information. But it is worth covering the
+APIs used to create the images, just for consistency's sake in this
+article:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Component.createVolatileImage(width, height)
+	Component.createVolatileImage(width, height, capabilities)
+	GraphicsConfiguration.createCompatibleVolatileImage(width, height)
+	GraphicsConfiguration.createCompatibleVolatileImage(width, height, capabilities)
+	GraphicsConfiguration.createCompatibleVolatileImage(width, height, transparency)
+	GraphicsConfiguration.createCompatibleVolatileImage(width, height, capabilities, transparency)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+Note that some of these methods are duplicated
+in GraphicsConfiguration and Component just for consistency with the
+pre-existing <code>createImage()</code> and
+<code>createCompatibleImage()</code> methods.
+Calling <code>Component.createVolatileImage(w,h)</code> is exactly
+like calling
+<code>Component.getGraphicsConfiguration().createCompatibleVolatileImage(w,h)</code>.
+</p>
+<p>
+The use of the <code>ImageCapabilities</code> object in these
+methods gives you the ability
+to require certain attributes (such as hardware acceleration) from any
+image created with that method. In general, you probably will not need to
+use that variation, although as we enable more hardware acceleration features
+in our platform, we may expand the <code>ImageCapabilities</code>
+API to be more powerful
+and useful. (Note, too, that <code>ImageCapabilities</code> can be
+used effectively
+as a means of inquiring what capabilities an existing image has).
+</p>
+<a name=""></a>
+<div><b>Back Buffers</b></div>
+<p>
+By "back buffer" I mean an arbitrary offscreen image that is created for use in
+a double-buffering situation. Typically, an application that wishes to have
+smooth graphics, especially animations, will draw to a back buffer and
+then copy that buffer onto the screen instead
+of drawing directly to the screen. Swing does this by default, so that
+you do not see the various GUI elements in a Swing app flash as they are
+drawn to the screen. The buffer copy in these applications typically happens
+so fast that the graphics in the application are perceptibly smoother than
+if they were drawn one-by-one directly to the screen.
+</p>
+<p>
+A developer could use any of the above static or dynamic image APIs that
+I listed for creating a back buffer. However, the following things should
+be taken into account when doing so:
+</p>
+<ul>
+<li>Use of managed images for buffers has the same performance
+implications as dynamic images; we will be unable to manage
+the images effectively, thus you will not be able to take advantage
+of any hardware acceleration either for rendering to or copying from
+the buffer. Since the copy from the back buffer to the front buffer
+involves a lot of pixels, being able to accelerate that
+operation can have a huge performance impact on your application.</li>
+<li>Use of <code>VolatileImage</code>s for buffers is a better
+way to go in
+terms of hardware acceleration potential. But why go to all the
+bother of managing your <code>VolatileImage</code>s when there is an
+easier
+route?</li>
+</ul>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>BufferStrategy: Better Buffering for Java</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+In JDK 1.4, we introduced the <code>BufferStrategy</code> API, which
+is a wrapper around
+<code>VolatileImage</code>s. This API allows you to ask for an
+accelerated back buffer
+and avoid having
+to manage the details of surface loss associated with
+<code>VolatileImage</code>s. It
+also ensures that you will get a buffer of the optimal type for your
+application.
+In particular, you will get either a <code>FlipBuffer</code> (which
+can only be used
+in fullscreen-exclusive mode on Windows) or a <code>BltBuffer</code>
+(which is used
+by default for windowed applications). A <code>FlipBuffer</code>
+performs a swap of the
+front and back buffers in video memory when you request
+<code>BufferStrategy.show()</code>.
+A <code>BltBuffer</code> copies the contents from the back buffer to
+the front (just as
+you would if you called <code>drawImage()</code> from a
+<code>VolatileImage</code> back buffer to the
+front buffer).
+</p>
+<p>
+With this API, there is little need to create and manage
+<code>VolatileImage</code>s directly; just let us manage the details
+for you inside
+the <code>BufferStrategy</code> implementation.
+</p>
+<p>
+For more information on <code>BufferStrategy</code>, check out the
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/awt/image/BufferStrategy.html">javadocs</a>;
+they're pretty clear on how the system works.
+</p>
+<p>
+The APIs you will need when creating a <code>BufferStrategy</code>
+are:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>	Canvas.createBufferStrategy(numBuffers)
+	Canvas.createBufferStrategy(numBuffers, capabilities)
+	Frame.createBufferStrategy(numBuffers)
+	Frame.createBufferStrategy(numBuffers, capabilities)
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+For the most part, you will do this on a <code>Frame</code> (or
+<code>JFrame</code>, for
+the Swing developers). I know the API says
+that the methods are in <code>Window</code>, but a <code>Window</code> is really just a pseudo-frame
+and <code>Frames</code> are more useful in general. Take my advice; use
+<code>Frame/JFrame</code>.
+</p>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>Wrap-Up</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table><br>
+</div>
+<p>
+So that's pretty much it. You have image loading methods and image (or buffer)
+creation methods. And in each category, you have various flavors depending
+on the location and type of the data, and the type of image you want
+returned to you. So even though there are a lot of methods listed at the
+top of this article, they all break down into just a few comprehensible
+categories and can be used effectively, once you understand the implications
+of each variation.
+</p>
+<p>
+Although there is certainly more complexity here than we can cover with
+a simple table, it might help to break down some of the basic attributes
+of the image types we have talked about and the reasons to consider one
+type over another when writing your application:
+</p>
+<ul>
+<li>
+<b>
+Toolkit Image:
+</b>
+<ul>
+<li>
+Creation methods: <code>Applet.getImage(...), Toolkit.createImage(...),
+Toolkit.getImage(...), ImageIcon.getImage()
+</code>
+</li>
+<li>
+Most useful for: Simple loading and display of image data, applications
+that need to use 1.x APIs, asynchronous usage models (except for
+<code>ImageIcon</code>),
+loading performance (versus
+some <code>ImageIO</code> loading operations in the current
+releases).
+</li>
+<li>
+Less useful for: Image data manipulation, reading/writing individual pixel
+data within the image, synchronous loading operations (except for
+<code>ImageIcon</code>), more varied or custom source image
+formats..
+</li>
+</ul>
+</li>
+<li>
+<b>
+BufferedImage:
+</b>
+<ul>
+<li>
+Creation methods: <code>new BufferedImage(...),
+Component.createImage(...),
+GraphicsConfiguration.createCompatibleImage(...),
+ImageIO.read(...)
+</code>
+</li>
+<li>
+Most useful for: Image data manipulation, read/write access to
+individual pixel data, synchronous loading or creation, various image
+data formats (both source data that <code>ImageIO</code> can read
+and Java formats
+(the <code>BufferedImage</code> types
+<code>TYPE_INT_RGB</code>, <code>TYPE_INT_RGBA</code>,
+and so on).
+</li>
+<li>
+Less useful for: Applications that require JDK 1.x compatibility,
+easy display of animating GIF images.
+</li>
+</ul>
+</li>
+<li>
+<b>
+VolatileImage:
+</b>
+<ul>
+<li>
+Creation methods: <code>Component.createVolatileImage(...),
+GraphicsConfiguration.createVolatileImage(...)
+</code>
+</li>
+<li>
+Most useful for: Hardware acceleration of dynamic images, more
+fine-grained control over acceleration properties.
+</li>
+<li>
+Less useful for: Simple image creation and display (applications must
+use the <code>VolatileImage</code> API to handle surface loss
+issues)
+</li>
+</ul>
+</li>
+<li>
+<b>
+BufferStrategy:
+</b>
+<ul>
+<li>
+Creation methods: <code>Canvas.createBufferStrategy(),
+Window.createBufferStrategy()
+</code>
+</li>
+<li>
+Most useful for: Easy creation and management of window buffering
+schemes
+</li>
+<li>
+Less useful for: Access to actual image data of buffer
+</li>
+</ul>
+</li>
+</ul>
+<a name=""></a>
+<div><b>Hey! You Forgot Some Methods!</b></div>
+<p>
+There are still a couple of the creation methods up top that I have not
+covered yet:
+</p>
+<!-- BEGIN CODE SAMPLE COMPONENT  -->
+<table class="grey4" border="0" cellpadding="10" cellspacing="0" width="100%">
+<tbody><tr><td><pre>BufferStrategy:
+	new BufferStrategy()
+Image:
+	new Image()
+</pre></td></tr></tbody></table>
+<span class="sp20"> </span><br>
+<!-- END CODE SAMPLE COMPONENT  -->
+<p>
+These classes are abstract base classes and you cannot create an instances
+of them directly (and couldn't do anything useful with it if you could).
+<code>BufferStrategy</code> objects must be created on the <code>Component</code>
+which they will
+buffering and <code>Image</code> objects are created from one of the
+load/create methods
+explained above.
+</p>
+<a name=""></a>
+<div><b>What About Performance?</b></div>
+<p>
+It is difficult or impossible for me to write a long block of text or code
+without thinking about performance. And since some of the users of the APIs
+above, and image operations in general, care a great deal about performance,
+I should spend a few words discussing some performance issues to be aware of.
+</p>
+<p>
+Again, check out my blogs on <code>BufferedImage</code> (
+<a href="http://weblogs.java.net/pub/wlg/366">Part I</a> and
+<a href="http://weblogs.java.net/pub/wlg/385">Part II</a>);
+I go into much more detail
+on image management there. Some important things to keep in mind with
+respect to managed images (and making sure they are benefiting from
+available acceleration):
+</p>
+<ul>
+<li>If you want copies from an image to be accelerated
+but you will be modifying the image
+frequently, think about <code>VolatileImage</code> instead (see the
+above
+discussion on Dynamic Images).</li>
+<li>Careful with that Raster, Eugene! This is a hidden gotcha in the
+current implementation. Part of the <code>BufferedImage</code> API is a
+method that
+allows you to get the Raster of the image
+(<code>getRaster()</code>). From that Raster,
+you can create a writable child raster
+(<code>WritableRaster.createWritableChild()</code>)
+or get the internal data array for the raster
+(<code>Raster.getDataBuffer()</code>).
+Both of these methods end up giving you a copy of the data that we
+have no control over. Specifically, we cannot tell when you have updated
+the contents of the image, so we cannot tell whether our cached/accelerated
+version of the image needs to be updated. So, when you call these Raster
+methods, we throw up our hands and give up on acceleration entirely.
+<br>
+If you need to access the pixel data but you still want us to accelerate
+image copies, call methods which manipulate the data for you without giving
+you a reference to the data; for example,
+<code>BufferedImage.setRGB()</code> and
+<code>WritableRaster.setPixels()</code> for setting arbitrary pixel
+values, or
+any of the <code>Graphics.draw*()</code> or
+<code>Graphics.fill*()</code> methods for setting
+blocks of pixel values.</li>
+<li>If you are transforming the image while copying it around (say,
+scaling
+it to the destination, or rotating it), we will not be able to do that
+using hardware acceleration with the current implementation. If you anticipate
+using a particular transformation of an image (like a zoomed-in view or
+several rotations of a sprite) multiple
+times, then it might be worth creating a temporary version of that
+transformed image and letting us manage (accelerate)
+that transformed version for you. This technique is covered in detail in my
+<a href="http://java.sun.com/developer/technicalArticles/Media/intimages/">Intermediate Images</a> article.</li>
+</ul>
+<!-- <span class="sp10">&nbsp;</span><br /> -->
+<a name="0"></a>
+<div><b>For More Information</b></div>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table>
+</div>
+<ul>
+<li>
+<b>Image Articles</b>: I've written a few blogs trying to come to
+grips with the various image
+types we have in Java and the performance implications of different approaches.
+If this
+interests you, you might check out some of the articles on my <a href="http://weblogs.java.net/blog/chet">blog site</a>.
+</li>
+<li>
+<b><a href="http://java.sun.com/products/java-media/2D/index.jsp">Java
+2D
+homepage</a></b>: This site has links to performance whitepapers,
+FAQs, and other
+information helpful to graphics programmers.
+</li>
+<li>
+<b><a href="http://javadesktop.org/">http://javadesktop.org</a></b>:
+This community site has forums, projects, blogs,
+and articles aimed at the Java desktop client developer.
+</li>
+</ul>
+<a name="author">
+<div><b>About the Author</b></div>
+</a>
+<div class="contentdivider">
+<table class="grey4" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="4" width="1"></td></tr>
+</tbody></table>
+</div>
+<div>Chet Haase is a member of the Java 2D team at Sun Microsystems. He
+has been involved with graphics software technologies for the past 15 years
+and currently spends his time worrying about performance and hardware
+acceleration issues for the Java graphics libraries.
+</div>
+<!-- BEGIN RATE AND REVIEW -->
+<script type="text/javascript">
+<!-- Hide script from older browsers
+// Popup window function
+function onRateSubmitHandler()
+{
+var w = window.open("","rr","width=800,height=600,status=no,toolbar=no,scrollbars=yes"); 
+w.setTimeout("window.close();", 30000 );
+return true;
+}
+// End of javascript 
+-->
+</script>
+<form name="article_rating" method="post" action="http://survey.sun.com/ViewsFlash/servlet/viewsflash" onsubmit="return onRateSubmitHandler()" target="rr">
+<input name="" value="" type="hidden">
+<table class="dkgrey" style="margin-top: 7px;" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td>
+<table class="white" border="0" cellpadding="4" cellspacing="0" width="100%">
+<tbody><tr><td class="dkgrey1"><b>Rate and Review</b></td></tr>
+<tr><td>Tell us what you think of the content of this page.</td></tr>
+<tr><td><b>
+<a name="VFquality"></a>
+<input name="quality" value="Excellent" type="radio"> Excellent&nbsp;&nbsp;
+<input name="quality" value="Good" type="radio"> Good&nbsp;&nbsp;
+<input name="quality" value="Fair" type="radio"> Fair&nbsp;&nbsp;
+<input name="quality" value="Poor" type="radio"> Poor&nbsp;&nbsp;
+</b></td></tr>
+<tr><td>
+<a name="VFcomments"></a>
+<b>Comments:</b><br><textarea name="comments" cols="60" rows="3" wrap="virtual"></textarea></td></tr>
+<tr><td>
+<a name="VFEmail"></a>
+<b>If you would like a reply to your comment, please submit your email address:</b><br>
+<input name="Email" value="" size="35" maxlength="60" type="text"> Note: We may not respond to all submitted comments.</td></tr>
+<tr><td>
+<input class="buttonblue" value="&nbsp;Submit »&nbsp;" onmouseover="this.style.color='#fbe249';" onmouseout="this.style.color='#FFF';" border="0" type="submit">
+<a name="VFURL"></a>
+<input name="URL" value="http://java.sun.com/developer/technicalArticles/Media/imagestrategies/index.html" type="hidden">
+<a name="VFArticleTitle"></a>
+<input name="ArticleTitle" value="VolatileBufferedToolkitImage Strategies" type="hidden">
+<a name="VFArticleAuthor"></a>
+<input name="ArticleAuthor" value="Chet Haase" type="hidden">
+<input name="cmd" value="tally" type="hidden">
+<input name="pollid" value="CNP!tGreene" type="hidden">
+<input name="results" value="?http://developers.sun.com/contact/thankyou.jsp?dlink=javascript:window.close();&amp;lname=article&amp;mesg=%3Ca+href%3D%22http%3A%2F%2Fdeveloper.java.sun.com%2Fsubscription%22%3ESubscribe+to+newsletter%3C%2Fa%3E" type="hidden">
+<input name="charset" value="ISO-8859-1" type="hidden">
+</td></tr></tbody></table></td></tr>
+</tbody></table></form>
+<!-- END RATE AND REVIEW -->
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+<!--stopindex-->
+<!-- END CENTRAL COLUMN COMPONENTS -->
+</td><td valign="top">
+<!-- BEGIN RIGHT COLUMN COMPONENTS -->
+<!-- END RIGHT COLUMN COMPONENTS -->
+</td></tr>
+<!-- BEGIN SPACER ROW -->
+<tr><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="560"></td><td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="170"></td></tr>
+<!-- END SPACER ROW -->
+</tbody></table>
+<!-- END WRAPPER TABLE, 2 COLUMN, MAIN/RIGHT -->
+<!-- BEGIN VNV5 FOOTER  -->
+<table border="0" cellpadding="0" cellspacing="10" width="100%">
+<tbody><tr>
+<td>
+<table class="vatop" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td colspan="4" class="grey3" valign="top"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="2" width="1"></td></tr>
+<tr>
+<td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="190"><br>
+<a href="http://www.sun.com/"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/logo_sun_small_sdn.gif" alt=" " border="0" height="29" vspace="5" width="61"></a></td>
+<td valign="top" width="100%"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="350"><br>
+<div class="footer">
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910015">Company Info</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910010">About This Site</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910011">Press</a> &nbsp;|&nbsp;
+<a href="http://developers.sun.com/contact/index.jsp">Contact Us</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910014">Employment</a><br>
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910012">How to Buy</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910009">Licensing</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910013">Terms of Use</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910016">Privacy</a> &nbsp;|&nbsp;
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910017">Trademarks</a>
+<br><span class="sp10">&nbsp;</span><br>
+<br><span class="sp10">&nbsp;</span><br>
+Copyright 1994-2005 Sun Microsystems, Inc.
+</div></td>
+<td><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="40"></td>
+<td valign="top"><div class="footer"><b><a href="http://java.sun.com/dispatcher.jsp?uid=6910010">A Sun Developer Network Site</a></b></div>
+<div class="footer">
+<img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="1" width="170"><br>
+Unless otherwise licensed, code in all technical manuals herein (including articles, FAQs, samples) is provided under this <a href="http://java.sun.com/dispatcher.jsp?uid=6910008">License</a>.
+<br><span class="sp5">&nbsp;</span><br>
+<a href="http://java.sun.com/dispatcher.jsp?uid=6910006"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/button_xml.gif" alt="XML" align="top" border="0" height="14" width="36"></a>&nbsp;<a href="http://java.sun.com/dispatcher.jsp?uid=6910007">Content Feeds</a>
+</div></td></tr>
+<tr><td colspan="4" class="grey3" valign="top"><img src="VolatileBufferedToolkitImage%20Strategies_dateien/a.gif" alt=" " border="0" height="2" width="1"></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<!-- END VNV5 FOOTER -->
+<script language="JavaScript" src="VolatileBufferedToolkitImage%20Strategies_dateien/s_code_remote.js"></script><img src="VolatileBufferedToolkitImage%20Strategies_dateien/s84535851169816.gif" name="s_i_sunglobal" alt="" border="0" height="1" width="1"></body></html>

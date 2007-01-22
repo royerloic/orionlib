@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="D:/Mes Documents/My Projects/Java/OrionSystem/bin/BlueEarth.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/OrionSystem/BlueEarth.jar.jardesc" exportErrors="true" exportWarnings="true" overwrite="true" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" mainClassHandleIdentifier="=BlueEarth/&lt;{BlueEarth.java[BlueEarth" manifestLocation="/BlueEarth/manifest" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<file path="/OrionSystem/.cvsignore"/>
+<javaElement handleIdentifier="=BlueEarth/&lt;"/>
+<file path="/OrionSystem/OptimalBenchmark.jar.jardesc"/>
+<file path="/OrionSystem/database.txt"/>
+<file path="/OrionSystem/BlueEarth.jar.jardesc"/>
+<file path="/BlueEarth/world.jpg"/>
+<file path="/OrionSystem/Optimal.2005-03-17-01-31-18.log.html"/>
+<file path="/OrionSystem/.project"/>
+<file path="/OrionSystem/manifest"/>
+<javaElement handleIdentifier="=OrionSystem/src&lt;org.royerloic.graphics"/>
+<file path="/OrionSystem/.errLog"/>
+<file path="/BlueEarth/worldtopo.jpg"/>
+<file path="/OrionSystem/.checkstyle"/>
+<file path="/OrionSystem/.classpath"/>
+<file path="/BlueEarth/LightMapOcean.jpg"/>
+</selectedElements>
+</jardesc>
