@@ -1,0 +1,183 @@
+
+importset: org/royerloic/nlp/wordlists/lists/EnglishWords.word.txt as englishwords
+
+set: badspecies
+[Mm]ouse
+[Rr]at
+[Gg]uinea pig
+[Mm]urine
+[Yy]east
+[Dd]rosophila
+[Ff]ly
+(C\. )?[Ee]legans
+[Cc]hromosomes?
+([Ee]scherichia |E\. )?[Cc]oli
+[Vv]iral
+([Ss]accharomyces |S\. )?cerevisiae
+([Cc]aenorhabditis |C\. )?elegans
+[Cc]hicken
+[Rr]abit
+[Vv]accinia
+
+set: abbreviations
+[A-Za-z0-9]{0,}[A-Z0-9][A-Za-z0-9]{0,}
+
+set: goodspecies
+[Hh]uman
+[Mm]amalian
+
+set: tpf
+[Ll]ike
+[Pp]rotein
+[Gg]ene
+[Rr]elated
+
+set: family
+[Ss]uperfamily
+[Ff]amily
+[Ss]ubfamily
+[Ss]ubtypes?
+[Ss]ubunits
+
+set: disease
+[Dd]iseases?
+[Ss]yndromes?
+[Tt]umors?
+
+set: prothead
+protein
+inhibitor
+receptor
+
+set: bases
+[Aa]denine
+[Gg]uanine
+[Tt]hymine
+[Uu]racil
+[Cc]ytosine
+
+set: aminoacids
+[Ii]soleucine
+[Aa]lanine
+[Ll]eucine
+[Aa]sparagine
+[Ll]ysine
+[Aa]spartate
+[Mm]ethionine
+[Cc]ysteine
+[Pp]henylalanine
+[Gg]lutamate
+[Tt]hreonine
+[Gg]lutamine
+[Tt]ryptophan
+[Gg]lycine
+[Vv]aline
+[Pp]roline
+[Aa]rginine
+[Ss]erine
+[Hh]istidine
+[Tt]yrosine
+[Ss]elenocysteine
+Ala
+Cys
+Asp
+Glu
+Phe
+Gly
+His
+Ile
+Lys
+Leu
+Met
+Asn
+Pro
+Gln
+Arg
+Ser
+Thr
+Sec
+Val
+Trp
+Tyr
+
+set: types
+type
+member
+
+
+negative:
+
+.* | @englishwords@ | .*
+
+@badspecies@@W@(proteins?)?@W@ | .* | .*
+@disease@@W@(homologs?@W@|an?@W@)? | .* | .*
+complex@W@called@W@ | .* | .*
+member@S@of@S@the@S@ | .* | .*
+homology to@W@ | .* | .*
+.* | @W@@aminoacids@@W@ | .*
+
+.* | @W@(basic@W@)?@aminoacids@@W@[Zz]ipper@W@ | .*
+.* | .*@W@binding@W@ | .*
+.* | @W@@aminoacids@-[Rr]ich@W@(domains?|proteins?|repeats?)@W@ | .*
+.* | @W@with no@W@@aminoacids@@W@ | .*
+.* | [A-Z][a-z]?[0-9] | \+
+.* | ([Zz]inc|RING)@W@[Ff]inger@W@[Pp]roteins? | .*
+.* | (protein|inhibitor)@W@[0-9]+ | .*
+.* | .*NA@W@export | .*
+.* | @W@@badspecies@@W@ | .*
+
+.* | @W@BLAST@W@ | @W@searches?
+SWISS@W@ | @W@PROT@W@ | .*
+.* | @W@[Pp]olymerase@W@ | @W@chain reactions?
+.* | @W@([Aa]lpha|[Bb]eta|[Gg]amma|[Dd]elta)[0-9]{1}@W@ | .*
+.* | .*@W@types?@W@ | .*
+.* | .*@W@signaling@W@ | .*
+.* | .*@W@[Dd]omains?@W@ | .*
+.* | .*@W@@ASE@s@W@ | .*
+.* | .*@W@complex(es)?@W@ | .*
+.*a@W@ | @W@PPI@W@ | @W@networks?
+.* | .*@W@cells?@W@ | @W@expressions?
+.* | .* | @W@(signalling@W@)?(or@S@@WORD@@S@)?pathways?
+
+
+.* | .* | @W@\-related
+.* | .* | @W@(related@W@)?(proteins|genes)
+.* | .* | @W@genes?@W@(clusters?|sequences?)
+.* | .* | @W@(@tpf@@W@)?@WORD@?@family@
+.* | .* | @W@@disease@
+.* | .* | @W@(@tpf@@W)?repeats?
+.* | .* | @W@(@tpf@@W@)?(sequence)?motifs?
+.* | .* | @W@(@tpf@@W@)?complex(es)?
+.* | .* | @W@(@tpf@@W@)?(homology|finger|silencing|binding|expression)?@W@domains?
+.* | .* | @W@(@tpf@@W@)?@ASE@s
+.* | .* | @W@(@tpf@@W@)?phenotypes?
+.* | .* | @W@loops?
+.* | .* | @W@phenotype?
+
+.* | .* | @W@antibod(y|ies)
+.* | .* | @W@fibroblasts?
+.* | .* | @W@(@WORD@@W@)?cells?
+.* | .* | @W@cultures?
+.* | .* | @W@is a @badspecies@
+.* | .* | @W@(@WORD@@W@)?software package
+
+.* | .* | @W@from@S@@badspecies@
+.* | .* | (\(|-@S@[0-9]|-@S@like|-@S@related)
+\) | .* | .*
+
+zinc finger@W@ | .* | @W@(gene|protein)s?
+[Aa]@S@novel@goodspecies@?@W@ | .*@W@(protein (kinase)?|receptors?|genes?|@ASE@s?)@W@ | .* 
+[Aa]n?(@W@putative|@W@novel)?@W@ | .*@W@(proteins?|receptor?|inhibitors?|genes?) | .*
+[Aa]n?(@W@putative|@W@novel)?@W@ | .* | @W@(proteins?|receptor?|inhibitors?|genes?)
+([0-9]|X|Y)@W@ | (p|q)[0-9]{1,2} | (\.[0-9]|q|p)
+[0-9](p|q)[0-9]{1,2}(\.[0-9])? | (p[0-9]{1,2}|ter) | .*
+[Ss]pecific@W@ | .* | @W@[Tt]reate?ment
+.* | @W@(GST|[Gg]lutathione@W@S-[Tt]ransferases?)@W@ | @W@(pull@W@downs?|fusion@W@proteins?)
+[Tt]he@W@@family@of@W@ | .* | @W@(proteins?|receptor?|inhibitors?)
+
+
+positive:
+
+@goodspecies@ and @badspecies@@W@ | .* | .*
+(and|or).*@W@ | .* | @W@(proteins|genes)
+.* | .* | @W@(@tpf@@W@)?@WORD@?@family@@W@@types@ 

@@ -1,0 +1,750 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="http://www.movabletype.org/">
+
+
+
+<title>Chet Haase's Blog: BufferedImage as Good as Butter, Part II</title><link rel="stylesheet" href="bufferedimage_a_1_dateien/styles-site.css" type="text/css">
+<link rel="stylesheet" href="bufferedimage_a_1_dateien/simple.css" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://weblogs.java.net/blog/chet/index.rdf">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://weblogs.java.net/blog/chet/atom.xml">
+
+<link rel="start" href="http://weblogs.java.net/blog/chet/" title="Home">
+<link rel="prev" href="http://weblogs.java.net/blog/chet/archive/2003/08/bufferedimage_a.html" title="BufferedImage as Good as Butter">
+
+<link rel="next" href="http://weblogs.java.net/blog/chet/archive/2003/09/volatileimage_n.html" title="VolatileImage: Now you See it, Now you Don't"></head>
+
+
+<body>
+
+<!--  Masthead  -->
+<div>
+<table style="background: transparent url(/images/header_new_bg.gif) repeat scroll 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;" border="0" cellpadding="0" cellspacing="0" height="25" width="100%">
+<tbody><tr>
+<td rowspan="2" width="100%"><a href="http://www.java.net/"><img src="bufferedimage_a_1_dateien/header_jnet.gif" alt="The Source for Java Technology Collaboration" border="0" height="53" width="520"></a></td>
+ <td style="vertical-align: middle;" nowrap="nowrap">
+ <div id="login">
+ 
+  <form name="loginform" id="loginform" action="https://www.dev.java.net/servlets/TLogin" method="post">
+  <input name="redir" value="http://weblogs.java.net/blog/chet/archive/2003/08/bufferedimage_a_1.html" type="hidden">
+  <div>
+  <strong>User:</strong>
+   <input name="loginID" id="loginID" value="" size="7" maxlength="32" type="text">
+   <strong>Password:</strong>
+
+   <input name="password" id="password" value="" size="7" maxlength="32" type="password">
+   <input name="Login" class="buttonred" id="Button" value="Login" type="submit"> </div>
+  <div class="small" align="right"><strong> <a href="https://www.dev.java.net/servlets/Join">Register</a>  | <a href="https://www.dev.java.net/servlets/TLogin">Login help</a>   &nbsp;&nbsp;&nbsp;</strong></div> 
+</form>
+ 
+</div>
+</td> 
+</tr>
+</tbody></table>
+<div class="space"></div>
+
+<!--  Tabs  -->
+
+
+<noindex>
+</noindex><div class="tabs" id="toptabs">
+<table border="0" cellpadding="4" cellspacing="0">
+<tbody>
+<tr>
+<td><a href="https://www.dev.java.net/servlets/StartPage">My       pages</a> </td>
+<td><a href="http://community.java.net/projects/">Projects</a></td>
+<td><a href="http://community.java.net/">Communities</a>   </td>
+<th><a href="http://www.java.net/">java.net</a></th>
+</tr></tbody></table></div>
+
+
+
+
+<table id="main" border="0" cellpadding="2" cellspacing="2" width="100%">
+  <tbody>
+  <tr valign="top">
+    <td id="leftcol" rowspan="2" width="150">
+	<img src="bufferedimage_a_1_dateien/a_002.gif" height="1" width="150"><br>
+<div id="navcolumn">
+<!--   COMMUNITY LINKS   -->
+<noindex>
+</noindex><div class="toolgroup" id="communitylinks">
+<div class="label"><strong>Get Involved</strong></div>
+<div class="body">
+<div><a href="https://java-net.dev.java.net/">java-net Project</a></div>
+<div><a href="http://www.java.net/request_project.csp">Request a Project</a></div>
+<div><a href="http://community.java.net/help_wanted/">Project&nbsp;Help&nbsp;Wanted&nbsp;Ads</a></div>
+<div><a href="http://community.java.net/projects/publicize.csp">Publicize your Project</a></div>
+<!-- <div><a href="#">Success Stories</a></div>  -->
+<div><a href="http://today.java.net/cs/user/create/bl">Submit Content</a></div>
+</div>
+</div>
+
+<div class="toolgroup" id="communitylinks">
+<div class="label"><strong>Get Informed</strong></div>
+<div class="body">
+<div><a href="http://www.java.net/about.csp">About java.net</a></div>
+<div><a href="http://today.java.net/pub/q/articles">Articles</a></div>
+<div><a href="http://weblogs.java.net/">Weblogs</a></div>
+<div><a href="http://today.java.net/today/news/">News</a></div>
+<div><a href="http://www.java.net/events">Events</a></div>
+<div><a href="http://today.java.net/today/alsotoday.csp">Also in Java Today</a></div>
+<div><a href="http://safari.java.net/">java.net Online Books</a> <em><font color="#ff0000">New!</font></em></div>
+<div><a href="http://today.java.net/today/archive/">java.net Archives</a></div>
+</div>
+</div>
+
+<div class="toolgroup" id="communitylinks">
+<div class="label"><strong>Get Connected</strong></div>
+<div class="body">
+<div><a href="http://forums.java.net/">java.net Forums</a></div>
+<div><a href="http://wiki.java.net/">Wiki</a> and <a href="http://wiki.java.net/bin/view/Javapedia/WebHome">Javapedia</a></div>
+<div><a href="http://wiki.java.net/bin/view/People/WebHome">People</a> and <a href="http://community.java.net/member_org/">Organizations</a></div>
+<div><a href="http://community.java.net/jugs/listing.csp">Java User Groups</a></div>
+<div><!--  <a href="https://java-net.dev.java.net/servlets/ProjectMailingListList">Newsletters</a> and  --><a href="http://today.java.net/pub/q/rsschannels">RSS Feeds</a></div>
+</div>
+</div>
+
+<div class="toolgroup" id="communitylinks">
+<div class="label"><b>Search</b></div>
+<div class="body">
+<form action="http://onesearch.sun.com/search/developers/index.jsp">
+<input name="col" value="javanet" type="hidden">
+<div><input name="qt" class="medium" size="14" onfocus="if( this.value==this.defaultValue ) this.value='';" value="" type="text">
+<input class="buttonred" value=" » " border="0" type="submit"></div>
+</form>
+</div>
+</div>
+
+
+</div>
+<br>
+</td>
+<td colspan="2" height="3"><img src="bufferedimage_a_1_dateien/a.htm" height="3" width="1"><br></td>
+</tr>
+<tr> 
+<td width="10"><img src="bufferedimage_a_1_dateien/a.htm" height="1" width="10"></td>
+<td valign="top" width="100%">
+
+
+
+
+<div class="link-note">
+<a href="http://weblogs.java.net/blog/chet/index.rdf"><img src="bufferedimage_a_1_dateien/rss_weblogs.gif" alt="Syndicate this blog (XML)" align="right" border="0" height="15" hspace="10" vspace="4" width="80"></a><br>
+</div>
+
+
+
+<img src="bufferedimage_a_1_dateien/chet_haase.jpg" alt="Chet Haase" align="left" border="0" height="68" hspace="6" vspace="3" width="99">
+
+
+
+
+<h2><a href="http://weblogs.java.net/blog/chet/">Chet Haase's Blog</a></h2>
+
+<div class="small" align="right">
+<a href="http://weblogs.java.net/blog/chet/archive/2003/08/bufferedimage_a.html">«BufferedImage as Good as Butter</a> |
+
+<a href="http://weblogs.java.net/blog/chet/">Main</a>
+| <a href="http://weblogs.java.net/blog/chet/archive/2003/09/volatileimage_n.html">VolatileImage: Now you See it, Now you Don't »</a>
+
+</div>
+
+<div class="grayline"></div>
+
+<h3>BufferedImage as Good as Butter, Part II</h3>
+
+<span class="ltcaption1">Posted by <b>chet</b> on August 21, 2003 at 01:36 PM | <a href="http://weblogs.java.net/blog/chet/archive/2003/08/bufferedimage_a_1.html#comments">Comments (17)</a>
+
+</span>
+
+<br><br>
+
+<i>
+Part II, in which we discuss the internal performance implications
+of said image type
+</i>
+<p>
+Let's dive briefly into some of the performance implications with
+BufferedImages (because I'm writing this and I tend to wind up in the performance
+arena no matter what I'm talking about).
+</p>
+<p>
+There is currently only one image type that we guarantee acceleration on
+(if possible on the runtime platform): VolatileImage.  When you create one
+of these images, we try to stash it in accelerated memory (such as VRAM
+on Windows, or an accelerated pixmap on Unix) and then perform rendering
+operations to and from that image using any available hardware acceleration.
+</p>
+<p>
+
+VolatileImages work well for things like back buffers (ala the Swing back buffer,
+which is now a VolatileImage), where you obviously want to render to
+them frequently and copy from them as fast as possible.  But for your average
+image, managing a VolatileImage can be tiresome (you have to make sure it's
+there before and after you use it), and you can't get all the flavors
+of images you want (currently only opaque volatiles exist).
+</p>
+<p>
+But think about your average application: there's the back buffer and
+screen that you write to often, so you want those rendering-to operations to
+go really really fast.  But then there's a bunch of other images
+like icons, sprites, whatever which you really only write <i>to</i>
+once or occasionally, but <i>from</i> which you would like to copy often.
+</p>
+<p>
+
+This is where <b>Managed Images</b> come in (our new catch-phrase which,
+roughly translated, 
+means "we will try our darnedest to accelerate this for you").  Here, you
+create an image however you need to, start working with it, and
+internally we will recognize that these copying operations can
+go much faster using an accelerated version, so we will just create that
+cached version for you.  You don't need to manage the image and you don't
+need to know how these operations are happening; you just keep calling
+your rendering operations and let us take care of the pesky details.
+</p>
+<p>
+
+Now, the fine print: as of 1.4.*, we hooked out only certain parts of
+the API to create these managed images.  Specifically, you need to
+create an image either by calling one of the create*Image methods:
+<code>
+</code></p><blockquote>
+	GraphicsConfiguration.createCompatibleImage(w, h)<br>
+	GraphicsConfiguration.createCompatibleImage(w, h, transparency)<br>
+	Component.createImage(w, h)
+</blockquote>
+
+methods or by loading the image, ala:
+<code>
+</code><blockquote>
+	Toolkit.getImage(...)<br>
+</blockquote>
+
+You can also use
+<code>
+</code><blockquote>
+	new ImageImage(...).getImage()
+</blockquote>
+
+(because ImageIcon currently uses Toolkit.getImage() under the hood, with
+the old MediaTracker functionality thrown in for free).  Images that you get from
+other key means, such as ImageIO-created images or any image created explicitly through calling new BufferedImage() are <i>not</i> managed, and thus will not benefit from under-the-hood acceleration possibilities.
+
+<p>
+So in the current implementation of Java2D, the advice posted by ajsutton in response to <a href="http://weblogs.java.net/pub/wlg/366">Part I of this BufferedImage article</a>
+is well-taken: if you want to take advantage of possible acceleration
+for your image, use a compatible image (or one of the other means
+above). Then we will attempt to accelerate this for you. Another
+benefit of using a compatible image is that you will get an image that
+is "compatible" (thus the name of the method above) with the display
+device you are rendering to, which saves pixel format conversion during
+the copy loops.
+</p>
+<p>(A further caveat is that not all image types that you get from the
+above methods are acceleratable. For example, if you create an image
+with the flag Transparency.TRANSLUCENT then we do not currently
+accelerate that image and you end up going through software rendering
+loops regardless. Look for this to change as the library evolves and we
+try to accelerate more and more standard yet nifty features of the
+API).
+</p>
+<p>Okay, so that's the state of things now: use BufferedImage for all
+of your condiment image needs, and if performance is particularly
+important to you, then use one of the variants mentioned above is the
+way to go. But what about the future?
+</p>
+<p>
+Gosh, I'm glad you asked that.  What a great question.
+</p>
+<p>You may already be wondering, in reading the above explanations and
+caveats: "Why can't they just accelerate everything? Why are only
+portions of the API managed?" In fact, this is totally correct; there
+is nothing preventing this from happening (other than the most obvious
+of reasons: time to implement and lots of other stuff that we've been
+working on in the meantime). For example, let's say you have a 16-bit
+BufferedImage you created from scratch and you want to copy it to a
+32-bit display. This means that we have to do a pixel-format
+conversion, so we can't cache the 16-bit version, right? But we <i>can</i>
+cache a new 32-bit version; we just copy the 16-bit version to our new
+32-bit cached version, and then simply use the cached version
+thereafter.
+</p>
+<p>Starting in jdk1.5 (currently in the oven, baking for a while,
+available at some unspecified (by me) date in the future), we will
+manage a much wider array of images. In fact, most of the images you
+can create or load will be managed for you. The code is in there, I've
+seen it working with my own eyes: BufferedImage objects running as fast
+as compatible images. It's pretty sweet...
+</p>
+<p>That's all for now. I've glossed over many of the details of images
+and acceleration, but hopefully I've given a taste of how accelerated
+images work today and in the future. And hopefully you will be able to
+use this information to get the fastest and tastiest BufferedImage
+applications possible.
+</p><div id="a000469more"><div id="more">
+
+</div></div>
+
+<br><br>
+<div class="grayline"></div>
+
+<a name="comments"></a>
+<h5>Comments</h5>
+<span class="small">Comments are listed in date ascending order (oldest first) | <a href="#post">Post Comment</a></span>
+<br><br>
+
+<ul>
+<li>
+<a name="641"></a>
+<div id="c641">
+<b>What a great entry</b>
+Chet,
+
+I love reading about your adventures in performance and design. Keep up the good work!
+<p class="posted"><span class="ltcaption1">Posted by: ocean  on August 21, 2003 at 03:57 PM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="642"></a>
+<div id="c642">
+<b>Excellent explanation</b>Thanks for this article. It really helps to
+explain some of the performance characteristics that I've seen in more
+detail.
+One question though, you mention that in 1.5 new BufferredImage() comes
+out as fast as .createCompatibleImage(), I would assume this is only in
+the (typical) case where you create the image once and reuse it a lot.
+My app happens to create images to be used in a JTextPane and the
+loading of content into the JTextPane (when the images are created) is
+the part we really want to optimize. The image is also recreated and
+changed quite often as the user edits things in the JTextPane.
+In such a situation, would you expect new BufferredImage() to still be
+comparable speed-wise to createCompatibleImage()?
+Not that I plan to go back and change that code anyway, but it would be
+interesting to know.
+<p class="posted"><span class="ltcaption1">Posted by: ajsutton  on August 21, 2003 at 05:13 PM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="643"></a>
+<div id="c643">
+<b>Excellent explanation</b>There are a couple of things (well, okay:
+more than a couple) that can affect the performance of a BufferedImage.
+You might be running into something like these:
+- If you ever grab a Raster from a BufferedImage, you've pretty much
+punted on any possible acceleration of that image. This is because, in
+order to accelerate that image, we need to know when the image has been
+updated (so that we can update our accelerated copy of the image). If
+you grab the Raster object, then you can get a handle to the Java array
+that holds the data of the image, and we don't have any way of finding
+out when you've touched that array. So at the point where you grab the
+Raster or DataBuffer, we throw up our collective algorithmic hands and
+just do operations to/from that image in our software rendering loops
+from then on. (Note: we may find some ways to mitigate this situation
+in future releases, but that's the situation as it stands now).
+- If you are updating an image often (even without grabbing said
+Raster), then we are constantly having to update the cached version of
+the image. In the extreme example, if you update the image once per
+time that you copy from it, then we never actually cache it because
+it's not worth the effort/time to store and use the cached version. But
+even if you're not doing it quite that often, you may see some
+performance problems if we only get to use the accelerated version some
+small number of times for every time we have to update that cache.
+- Acceleration depends on your platform. For example, if you are on
+Windows, we are probably caching the images in VRAM and using DirectX
+to accelerate the copy operations to Swing's back buffer. However,
+since DirectX images are volatile (can go away at any time), the
+original copy of the image is stored in system memory, thus all
+rendering operations TO that image happen through software routines. So
+you could be experiencing less performance than you might expect simply
+because frequent renderings to the images are unaccelerated, thus the
+overall performance of the images may be adversely affected.
+Make sense? Hopefully you can find something in here that applies to
+your situation. Or at least some food for thought.
+Chet.
+<p class="posted"><span class="ltcaption1">Posted by: chet  on August 21, 2003 at 06:56 PM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="726"></a>
+<div id="c726">
+<b>re: "managed image"</b>Chet,
+Given what you've written about "managed images", I don't see any
+reason to prefer to use VolatileImage in its place. Do you agree?
+<p class="posted"><span class="ltcaption1">Posted by: drlaszlojamf  on August 29, 2003 at 10:05 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="728"></a>
+<div id="c728">
+<b>re: "managed image"</b>Absolutely correct ... mostly.
+There are at least 3 situations in which you might want to us a
+VolatileImage versus a Managed Image:
+- you want to change the contents often (this behavior on a Managed
+Image could cause poor performance overall due to either our inability
+to accelerate this dynamic image or our having to constantly copy down
+new versions of it to the accelerated memory).
+- you want to take advantage of hw acceleration for rendering
+operations TO the image (Managed Images usually have their primary copy
+in system memory because their accelerated memory version can become
+"lost" at any time (especially on Windows). Therefore, we have to store
+the primary in a lossless area and thus use software rendering loops
+when rendering to the image).
+- you want more control over how and when the image gets accelerated
+(with Managed Images, we do as much as we can behind the scenes. This
+works out great if you don't care about the details, but if you are
+trying to manage your performance very carefully, you may want the
+acceleration details to be more explicit).
+Otherwise, if the above situations do not apply to your situation,
+Managed Images are your friends and I would agree that you probably do
+not want or need the extra management hassles of VolatileImage.
+Actually, I was wondering what I should ramble on about in my next
+blog; this sounds like a pretty good candidate...
+Chet.
+<p class="posted"><span class="ltcaption1">Posted by: chet  on August 29, 2003 at 12:47 PM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="737"></a>
+<div id="c737">
+<b>re: "managed image"</b>Thanks for a enlightening blog, Chet.
+I'm really looking forward to that "rambling", as improved control over
+what is actually taking up the accelerated memory. I'm working with
+accelerated alpha-blending using images and
+sun.java2d.translaccel=true. Works like a beauty with 60 f/s with full
+screen images. But then i introduce a smaller image and rescale to full
+screen they are obviously not accelerated (less than 10 f/s). Control
+over this type of acceleration would be really nice (to put it mildly),
+but for now I understand HW accelerated alpha blending is only
+availible with managed images...
+PerA
+<p class="posted"><span class="ltcaption1">Posted by: pera  on September 01, 2003 at 06:13 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="742"></a>
+<div id="c742">
+<b>re: "managed image"</b>PerA,
+You're probably running into the fact that transform operations with
+images are not accelerated, either with managed images or Volatile
+images. And if you're doing this with translucent images, that's going
+to require readback from VRAM (for the buffer in VRAM that you are
+copying into), which means that either that buffer will be punted in
+system memory (we detect the horrible slow-vram-readback situation and
+punt in some situations) so you suffer poorer performance on other
+operations that _could_ be hw accelerated, or the buffer is staying in
+VRAM, but you are suffering the slow readback problem on those specific
+image operations.
+(Side note: to make sure the back buffer stays in VRAM, you might try
+the -Dsun.java2d.ddforcevram=true flag for Windows).
+Think about pre-scaling to the size you need and using those images
+instead. If this size changes, you could just recreate the pre-scaled
+image whenever you need it. But as long as you use these images at
+least a few times for any given scaled size, you'll probably get way
+better performance by avoiding the transform operation during the image
+copy.
+Also, note that you can use the flush() method in Image to force a
+cached version of an image to be released. This won't release the
+actual IMage bits, but it will release the VRAM version (if one
+exists). This isn't as good as direct control over the memory in
+managed images, but it allows at least high-level management of the
+bits.
+More in future blogs...
+Chet.
+<p class="posted"><span class="ltcaption1">Posted by: chet  on September 01, 2003 at 10:55 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="747"></a>
+<div id="c747">
+<b>re: "managed image"</b>Thanks, Chet. I'll try out the flush(). The
+images are already prescaled (read-scale-copy to (hopefully)
+accelerated images) - I suspect the VRAM fills up). Looking forward to
+the next blog!
+PerA
+<p class="posted"><span class="ltcaption1">Posted by: pera  on September 01, 2003 at 11:54 PM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="748"></a>
+<div id="c748">
+<b>Great info</b>I've got some real insight from these entrys, cheers.
+In the current dev I'm working on tho there's a whole load of per pixel
+"blending" operations required, currently done by grabbing the
+databuffer from the raster . Using get and setRGB always seemed way too
+slow but it would appear that by doing this we forfeit any hw accel
+available. Am I right in thinkin that there is no simple way round
+this?
+<p class="posted"><span class="ltcaption1">Posted by: acourtenay  on September 02, 2003 at 12:32 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="771"></a>
+<div id="c771">
+<b>Great info</b>acourtenay,
+Actually, the get/set approach to pixel-twiddling should not defeat hw
+acceleration in general. The big punt in our code comes when you
+request the DataBuffer object from the Raster; this gives you access to
+the pixel array directly, so we just give up at that point. But as long
+as you stick to the get/set methods in BufferedImage and Raster, then
+the worse you should suffer is our having to update the cached version
+of the image every time you change it.
+There are probably ways that we can mitigate even this punt in the
+future, but for the current releases that's just the way it goes.
+Note, however, that if you are changing the contents frequently, then
+we probably won't even bother to cache a hw-accelerated version, or if
+we do we won't use it very often because it's simply not worth the cost
+to update the cache so often.
+<p class="posted"><span class="ltcaption1">Posted by: chet  on September 03, 2003 at 11:56 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="4074"></a>
+<div id="c4074">
+<b>re: "managed image"</b>Sad, but true; we're not accelerating
+transform operations. You would think that it would be a simple Blt
+operation, and we actually implemented that capability in the original
+DirectDraw driver (on Windows, obviously). But the problem was that you
+have no way to control the filtering on that scale operation. Some
+cards use NEAREST_NEIGHBOR, some use BILINEAR, .... This may not be a
+big deal to some apps, but it's a huge deal to others; the inability to
+control (and make consistent across all scaling operations) these
+transforms was a feature-killer.
+Direct3D, on the other hand, does provide the control we need; we just
+haven't had time to implement d3d-transforms yet; I've got my hopes on
+the next release (we're workin' on it...).
+We do have an OpenGL pipeline on all Sun platforms (Windows, Linux, and
+Solaris) in 1.5 and that _does_ support hw transforms. This pipeline is
+not enabled by default (driver and hardwae support is intermittent, so
+we cannot count on it by default). Try it out with
+-Dsun.java2d.opengl=true to see if if works for you.
+Meanwhile, if you want to work around the problem in your current code,
+you may look into using intermediate images. That is, if you draw your
+images at the same scale several times, you can create an intermediate
+image that pre-scales the image and then drawImage() from that
+intermediate image. We will manage the intermediate image and hopefully
+you will get the hw acceleration you need. The scale is still not
+accelerated, but if you only scale one per n copies, then maybe that is
+lost in the noise.
+<p class="posted"><span class="ltcaption1">Posted by: chet  on July 20, 2004 at 12:34 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="4070"></a>
+<div id="c4070">
+<b>re: "managed image"</b>Chet,
+I'm currently developing an application which uses LOTS of small images
+which OFTEN have to be drawn and rescaled, and all that has to happen
+FAST. When I read about accelerated images, I got a bit
+euphoric---could this be the solution to my performance problems?
+Well, after reading your posting above, I don't think so any more...
+"transform operations with images are not accelerated, either with
+managed images or Volatile images". That's bad... Any suggestions how I
+could still make my image rendering system faster with accelerated
+images? After all, rescaling is just a simple blt operation on graphics
+cards, so I don't get it why it should not work that way with Java
+images...
+thx, eb
+<p class="posted"><span class="ltcaption1">Posted by: el_barto  on July 20, 2004 at 04:23 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="6397"></a>
+<div id="c6397">I also care about the performance of BufferedImage
+objects. We have java code that uses JNI to read images in the MrSID
+format. The C interface for reading pixels from those MrSID images
+returns the pixel data in three sample buffers. One byte buffers stores
+all red samples, one buffer stores all green samples and one buffer
+stores the blue samples. On the java side we try to create a
+BufferedImage from those three sample buffers (using
+Raster.createBandedRaster). We obviously avoid copying the pixels
+samples into an intermediate format. The BufferedImage is thus created
+without problem, as we can save it to disk using ImageIO for example.
+When we try to render the BufferedImage to a Graphics object, we get an
+ImagingOpException. This is (I think) a duplicate of bug 4723021. Any
+idea when this bug will be fixed? It is kinda strage to have a valid
+BufferedImage object and not be able to draw it.
+<p class="posted"><span class="ltcaption1">Posted by: lerzeel  on February 17, 2005 at 05:42 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="6537"></a>
+<div id="c6537">
+<b>ICONIFIED Problem</b> chet, thank you for these very helpful
+articles. I am writting a game, i use a VolatileImage to be the
+background, every frame, i render the bg(the VolatileImage ) to the
+JPanel(my canvas) then render the spirits(they are managed images), the
+Strings(status words)... because of the VolatileImage
+<p class="posted"><span class="ltcaption1">Posted by: iiley  on February 27, 2005 at 03:13 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="6538"></a>
+<div id="c6538">because of the VolatileImage's hardware acceleration,
+it can be rendered very fast usually. but sometimes when i minimize the
+window(iconified in fact), and then revert, the bg's rendering become
+very slow. I mean it happens sometimes, not every time. When the
+original size of the window is small, it happens frequently, when the
+original size is maximized it happens hardly. But now i think i fixed
+it, i use -Dsun.java2d.ddforcevram=true known from this page to fixed
+it. I think it may be the VolatileImage released it memory from VRAM
+when the window was iconified, when the window was revert, it can't
+return to the VRAM, just return to System Memory. That's my thought, am
+i right? but why it just happens sometimes? (My PC has 128M
+VRAM,windows2000 sp4 OS with DirectX 9, while i test my game i just
+opened Eclipse 3.0.) Thanx a lot.
+<p class="posted"><span class="ltcaption1">Posted by: iiley  on February 27, 2005 at 03:15 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="6595"></a>
+<div id="c6595">
+<b>re: ImagingOpException</b>
+ <p>Some problems like this were already adressed in 6.0 beta. You may want to
+ try one of the latest builds posted on <a href="http://www.java.net/download/jdk6/binaries/">java.net</a>. Your particular case
+ is likely to be fixed. However, in some cases it is probably still possibly
+ to get ImagingOpException - we are working on get it fixed. If you still
+ experience problem like this with 6.o beta please file a new bug - 
+ we will investigate.
+</p><p>
+ If you want to use 5.0 then you may try to workaround it by drawing custom
+ image to image of one of standard types (e.g. INT_ARGB) and performing
+ transformations on that image. Note that while this workaround should work
+ smoothly performance will not be as good as with 6.0 beta. 
+</p><p>
+Andrew Brygin<br>
+(Java2D team)</p>
+<p class="posted"><span class="ltcaption1">Posted by: bae  on March 02, 2005 at 08:07 AM</span></p>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<a name="6634"></a>
+<div id="c6634">
+<b>re: re: ImagingOpException</b>
+<br>
+<blockquote><i>
+The Java2D team said: Some problems like this were already adressed in 6.0 beta.
+</i></blockquote>
+I have tried the 6.0 beta and the problem has disappeared. Thanks for the feedback!
+
+<p class="posted"><span class="ltcaption1">Posted by: lerzeel  on March 07, 2005 at 07:34 AM</span></p>
+</div>
+</li>
+</ul>
+
+
+<br><br>
+
+
+
+<form method="post" action="http://weblogs.java.net/mt/comments" name="comments_form" onsubmit="if (this.bakecookie[0].checked) rememberMe(this)">
+<input name="static" value="1" type="hidden">
+<input name="entry_id" value="469" type="hidden">
+
+<a name="post"></a>
+
+<b>Only logged in users may post comments. <a href="http://weblogs.java.net/cs/user/login?x-redirect=http://weblogs.java.net/blog/chet/archive/2003/08/bufferedimage_a_1.html">Login Here</a>.</b>
+
+<!--  TS: var-  -->
+<!--  TS: cfg-  -->
+<!--  TS: vars-  -->
+<!--  TS: test -   -->
+
+<!--  TS: cpt -   -->
+
+
+</form>
+
+
+
+
+
+
+<br>
+
+<div class="footer" align="right">This work is licensed under a
+<a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">Creative Commons License</a>.<br>
+<a href="http://creativecommons.org/licenses/by-nc-sa/2.0/"><img src="bufferedimage_a_1_dateien/somerights.gif" alt="Creative Commons License" border="0" height="31" hspace="2" vspace="2" width="88"></a>
+</div>
+
+
+<br>
+<div id="powered" align="right">
+<b>Powered by</b><br>
+<a href="http://www.movabletype.org/">Movable Type 3.01D</a><br>    
+</div>
+
+
+
+</td></tr></tbody></table>
+
+<!--  BEGIN VNV5 FOOTER   -->
+<!--  BEGIN VNV5 FOOTER   -->
+<table border="0" cellpadding="0" cellspacing="10" width="100%">
+<tbody><tr>
+<td>
+&nbsp;<a href="http://today.java.net/pub/q/java_net_rss"><img src="bufferedimage_a_1_dateien/xml.gif" alt="XML" align="middle" border="0" height="14" width="36"></a>&nbsp;<b>java.net RSS</b><br>
+<div class="grayline"></div>
+<table class="vatop" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td><img src="bufferedimage_a_1_dateien/a.gif" alt=" " border="0" height="1" width="190"><br>
+<a href="http://www.sun.com/"><img src="bufferedimage_a_1_dateien/logo_sun_small.gif" alt=" " border="0" height="29" vspace="5" width="61"></a></td>
+<td valign="top" width="60%">
+<div class="footer">
+<a href="https://java-net.dev.java.net/feedback.html">Feedback</a> &nbsp;|&nbsp;<a href="http://java.net/faq.csp">FAQ</a> &nbsp;|&nbsp;<a href="http://java.net/presscenter/">Press</a>&nbsp;|&nbsp;<a href="http://java.net/terms.csp">Terms of Participation</a><br>
+<a href="http://www.sun.com/share/text/termsofuse.html">Terms of Use</a> &nbsp;|&nbsp;
+<a href="http://www.sun.com/privacy/">Privacy</a> &nbsp;|&nbsp;
+<a href="http://www.sun.com/suntrademarks/">Trademarks</a>&nbsp;|&nbsp;<a href="https://java-net.dev.java.net/sitemap.html">Site Map</a>
+<br><span class="sp5">&nbsp;</span><br>
+Your use of this web site or any of its content or software indicates your agreement to be bound by these <a href="http://java.net/terms.csp">Terms of Participation</a>.<br>
+<span class="sp5">&nbsp;</span><br>
+Copyright © 1995-2004 Sun Microsystems, Inc.
+</div></td>
+<td align="right" valign="top" width="40%"><div class="footer">
+<a href="http://www.oreilly.com/"><img src="bufferedimage_a_1_dateien/montague_logo_oreilly.gif" alt="Oreilly Logo" border="0" height="19" width="74"></a><a href="http://www.collab.net/"><img src="bufferedimage_a_1_dateien/montague_logo_collabnet.gif" alt="Collabnet Logo" border="0" height="19" width="85"></a><br>
+Powered by Sun Microsystems, Inc.,<br> O'Reilly and CollabNet
+</div></td></tr>
+<!--  <tr><td colspan="3" valign="top" class="grey3"><img src="/im/a.gif" width="1" height="2" border="0" alt=" " /></td></tr>  -->
+</tbody></table>
+<div class="grayline"></div>
+</td></tr>
+</tbody></table>
+<!--  END VNV5 FOOTER  -->
+
+
+
+</div></body></html>

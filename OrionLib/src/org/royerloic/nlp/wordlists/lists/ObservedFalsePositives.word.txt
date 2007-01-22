@@ -1,0 +1,909 @@
+
+#RNA, DNA, ...
+messenger RNA
+RNA
+RNAs
+rna
+DNA
+DNAs
+DNA-binding
+dna
+cDNA
+mRNA
+tRNA
+
+
+#disease:
+HIV
+ATR
+CATM
+HGE
+prion
+tumor
+leukemia
+tuberculosis
+Wiskott-Aldrich syndrome
+retinitis pigmentosa
+adrenoleukodystrophy
+familial Alzheimer's disease
+leukemia associated
+breast carcinoma
+Alzheimer
+Knobloch syndrome
+Zellweger syndrome
+amyloidosis
+teratocarcinoma
+spastic paraplegia
+hydrocephalus
+adenocarcinoma
+Wiskott Aldrich syndrome
+hypercholesterolemia
+breast cancer
+myopathy
+Alzheimer disease
+prostate cancer
+RP
+HMSN
+MASA
+SPG1
+ALL
+
+#Genetics:
+autosomal recessive
+autosomal dominant
+
+#species
+human
+Homo sapiens
+rat
+E.coli
+E. coli
+HIV-1
+Drosophila
+Antifungal
+Arabidopsis
+C. elegans
+S. cerevisiae
+Xenopus laevis
+Xenopus
+
+
+#other:
+Androgen
+Holliday
+anti
+male
+hermaphrodite
+uncharacterized
+clones
+clone
+basis
+proto-oncogene
+voltage-d
+sera
+
+#Anatomy
+fetal
+fetal kidney
+fetal and adult
+hippocampal
+skeletal muscle
+adrenal gland
+and placenta
+fetal liver
+fetal brain
+sperm surface
+brain specific
+smooth muscle
+
+#cell structure:
+vacuolar
+lysosomal
+capsular
+Microtubule
+platelet
+chloroplast
+mitochondrion
+Telomere
+nucleolar
+flagellum
+chromatin
+transmembrane
+Capsid
+capsid
+cell surface
+endoplasmic reticulum
+chromosome
+chromosome 17
+peroxisomal membrane
+X chromosome
+X-chromosome
+Y chromosome
+Golgi
+apical
+nuclear matrix
+chromosome 11
+Golgi apparatus
+integral membrane
+putative transmembrane
+trans Golgi network
+cytoplasmic tail
+Chr
+
+#Cell Type:
+T-cell
+T cells
+stem cells
+endothelial cells
+hematopoietic progenitors
+natural killer cells
+granulocyte-macrophage
+germline
+Neutrophil
+HeLa
+HEK
+HCT116
+NC-37
+FS-4
+
+#Process:
+Apoptosis
+Phosphorylate
+signaling
+PCR
+Biogenesis:
+Coactivator
+DNA binding
+calcium binding
+alternative splicing
+division control
+division cycle 2
+
+#BioChemical
+autoantigen
+nuclear autoantigens
+carcinoembryonic antigen
+mannose-binding
+collagenous
+ATP binding
+
+#Chemical:
+Ca(2+)
+Ca2+
+Ca2
+Na+
+Na
+Co
+divalent
+disulfide
+pH
+ATP
+GTP
+cis
+SDS
+all-trans
+C-C
+Mg2
+Fe
+MMS
+
+#Physical
+UV
+transient receptor potential
+low affinity
+Kd
+
+
+#protein_structure:
+isoform
+beta subunit
+alpha 1 subunit
+alpha subunit
+alpha-subunit
+alpha1-subunit
+beta-subunits
+beta-subunit
+beta subunit
+gamma subunits
+subunit 1
+regulatory subunit
+long-chain
+homodimers
+ankyrin repeats
+homeodomain
+basic helix loop helix
+helix loop helix
+alpha chain
+beta chain
+HR1
+HR2
+
+#Protein_families_or_general_types:
+protein
+proteins
+Proteins
+protein kinase
+Glycoprotein
+Nef
+envelope proteins
+transporter proteins
+integral membrane protein
+GTP binding proteins
+GTP-binding
+transcription factor
+nuclear protein
+guanine nucleotide-releasing protein
+SH3-binding protein
+cytoplasmic protein
+water channel
+nucleotide-binding-protein
+G protein
+zinc finger proteins
+zinc-finger protein
+sodium channels
+core protein
+Golgi protein
+forkhead proteins
+transcriptional regulators
+cytokine
+single-stranded DNA-binding protein
+proton pump
+chloride channel
+vacuolar proton pump
+proton pump
+transmembrane protein
+inhibitor-of-apoptosis
+ribosomal proteins
+potassium channels
+retinol-binding protein
+Estrogen receptor
+GTPase-activating
+actin-binding protein
+CXC chemokine
+actin-binding protein
+kinesin-like
+tumor necrosis factor
+surface antigen
+signal peptide
+cation channel
+GAP
+JNK
+AP-1
+ATF
+histone
+Nck
+L1
+MARs
+SARs
+HLH
+GTP binding
+ras
+Eph
+SCAD
+HPVs
+CKI
+Tat
+TAF
+HSAS
+S100
+rab
+ICE
+TRAP
+EPH
+rel
+ORF
+MAD
+#IAP
+STAT
+RAS
+RAB
+GPCR
+PAX
+Pol
+
+
+#Enzymes:
+ATPase
+Transposase
+protein kinase
+cdc2-related kinases
+creatine kinase
+DNA polymerases
+DNA polymerase alpha
+ATP synthase
+Carbonic anhydrase
+carbamoyl phosphate synthetase
+tyrosine kinases
+casein
+cyclin
+alcohol dehydrogenase
+transforming protein
+calcium-binding protein
+RNA polymerase II
+mannose binding protein
+extracellular matrix protein
+cysteine protease
+glutathione S-transferase
+HMG-CoA synthase
+coenzyme A synthase
+adenylyl cyclase
+phosphodiesterase I
+serine/threonine protein kinase
+a protein-tyrosine kinase
+receptor protein tyrosine kinase
+alpha-amylase
+lysophospholipase
+serine/threonine kinase
+protein-tyrosine kinase
+protein-tyrosine-phosphatase
+dual-specificity phosphatase
+N-acetylglucosaminyltransferase
+protein-tyrosine-phosphatase
+cdc2-related kinase
+cGMP phosphodiesterase
+3-hydroxy-3-methylglutaryl coenzyme A synthase
+leukotriene B4 omega-hydroxylase
+N-acetylgalactosaminyltransferase
+serine/threonine phosphatase
+ubiquitin-activating enzyme
+ubiquitin-conjugating enzyme
+Jun kinase
+phosphatases
+
+
+
+#Domain
+kinase domain
+forkhead domain
+#Src
+Smad
+HMG
+SPT
+PR
+
+#Complex:
+MHC-I
+MHC
+ABC
+pyruvate dehydrogenase complex
+
+
+#Language:
+anti
+receptor for
+was
+expressed in many tissues
+non
+co
+a gene
+h of
+or in
+and I
+aa
+et
+Mr
+Anti
+human homolog of
+novel protein
+retina-specific
+receptors for
+family
+nonspecific
+costimulatory
+cornified
+transducing
+center
+behavior
+paroxysmal
+dual specificity
+growth factor
+high affinity
+novel nuclear
+expressed in
+anchor attachment
+of unknown function
+A gene
+signal transducing
+putative receptor
+containing 13
+low molecular weight
+putative GTP binding
+similar to
+a cluster
+tumor necrosis factor inducible
+
+
+#Amino Acids:
+Arg
+Tyr
+glycine-rich
+glycine rich
+cysteine-rich
+cysteine rich
+proline-rich
+proline rich
+serine-rich
+serine rich
+antisense
+G beta
+GCT
+
+
+#Roman Numbers, Greek Letters and "type,class.." like expressions:
+iii
+ii
+II
+III
+type I
+type II
+class I
+type 1
+
+epsilon)
+alpha 1
+alpha1
+alpha2
+beta 1
+beta 3
+beta-induced
+kappa
+alpha
+gamma
+a beta
+delta4
+h mu
+
+
+
+#Numerical Quantities:
+39-kD
+20-kD
+bp 3
+bp 5
+bp
+mM-1
+nM
+a 1
+A 1
+a 2
+A 2
+a 3
+A 3
+a 4
+a 5
+a 6
+an 11
+a 12
+a 15
+a 17
+a 19
+a 20
+a 21
+a 23
+a 27
+a 28
+a 26
+a 30
+A 26
+Kv4
+ms
+Km
+4 in
+at 2
+at 3
+is 1
+of 45
+IV in
+Mb
+
+#EC numbers:
+EC 1
+EC 3.1.1
+EC 2
+
+#Other Acronym:
+#FHC
+NF
+DM
+Sci
+Proc
+CD
+EST
+PH2
+BG
+ECD
+ER
+FDC
+GC
+Uridine 5
+NP
+Gs
+Gi
+ACD
+CC
+STS
+RH
+RI
+E1
+C3
+TF
+HHO
+mp19
+FISH
+SH
+PI
+P1
+ADH
+KM
+L1CAM
+olf
+dT
+PD-I
+PC-I
+pI
+GC
+CV
+spd
+ot
+T2
+60 S
+CP
+E3
+FISH
+B4
+ZAP
+GRAIL
+P1
+AMP
+PAR
+UTR
+G1
+G2
+
+
+#Peoples names:
+Tanci
+Zhang
+
+#Obtained from massive annotation:
+
+OF
+IN
+AT
+and 1
+CT
+CI
+Ca
+SD
+MRI
+ON
+MR
+MS
+HLA
+Non
+HPLC
+CD4
+IL
+T1
+Cl
+O2
+B cell
+trans
+AIM
+RT
+semi
+IgM
+bis
+April
+UK
+CO2
+mol
+LH
+spp
+F1
+E2
+Ag
+CSF
+LV
+CA
+CD8
+PD
+Tumor
+IgA
+SE
+B cells
+T3
+A2
+D2
+adenosine
+FOR
+RA
+ST
+NS
+cava
+Mg
+CO
+HT
+BP
+IgE
+HR
+St
+sac
+cAMP
+HCl
+MI
+PC
+ACTH
+Alzheimer s
+A1
+thymidine
+SP
+max
+AP
+AS
+CR
+LPS
+GH
+N2
+AV
+HCV
+D3
+acyl
+PA
+Ig
+C2
+SR
+GI
+MAP
+AN
+D1
+Tc
+MD
+IC
+AA
+P2
+DC
+5 HT
+San
+HDL
+Cr
+CF
+C1
+Cd
+B1
+H2
+Ki
+HD
+HBV
+serine
+IL 2
+PS
+CL
+CS
+C4
+Mn
+Pb
+N1
+SC
+S1
+FU
+RV
+Rh
+Li
+R2
+SF
+pars
+Ia
+CA1
+NE
+Hb
+tri
+B2
+La
+F2
+CDC
+NA
+CH
+NAD
+AR
+VA
+M1
+H1
+ET
+B12
+MB
+Br
+mini
+ACh
+AI
+peri
+DL
+ANOVA
+growth hormone
+alpha 2
+GP
+PE
+beta 2
+P450
+hrs
+thrombocytopenia
+NHS
+PHA
+
+
+
+MGCs
+XIV
+XVI
+IVIg
+IVIG
+IB IV
+DSBs
+IIi
+RV
+AEDs
+IIV
+5b
+ACGs
+SPFs
+FK506
+siII
+maII
+IIB III
+IVCs
+GlcA
+Br I
+Ig v
+IT
+II PI
+Ag
+IV3
+DiIII
+
+
+II PI
+OF
+IN
+and 1
+CT
+AT
+CI
+SD
+MRI
+ON
+MR
+Non
+HPLC
+MS
+HLA
+T1
+AIM
+CD4
+CO2
+UK
+O2
+Cl
+semi
+CSF
+FOR
+IgM
+cava
+ST
+LH
+bis
+T3
+NS
+IgA
+CD8
+CO
+ACTH
+IgE
+BP
+RA
+St
+Mg
+RT
+E2
+D2
+CR
+AS
+sac
+AN
+AP
+HT
+HCl
+NHS
+max
+PC
+Tc
+PSA
+cAMP
+CF
+PA
+FU
+HCV
+CA1
+A2
+IC
+B12
+H2
+SP
+C2
+Cr
+
+
+and 1
+multiple sclerosis
+Tumor
+hyperparathyroidism
+thrombocytopenia
+PD
+CA
+N2
+prostate specific antigen
+NMDA receptor
+parathyroid hormone
+CBF
+meningioma
+C18
+pars
+inflammatory bowel disease
+Mn
+CAD
+PS
+TR
+strabismus
+AF
+L2
+Rh
+Br
+N1
+L3
+PM
+CH
+SI
+HD
+R2
+IP
+tert
+Pt
+EPA
+h for
+mini
+vas
+G CSF
+NC
+H2 receptor
+SR
+CS
+SC
+Cs
+AC
+Ti
+D2 receptor
+RS
+LD
+NA
+DBP
+HCO3
+PAH
+Med
+CAP
+PCA
+MN
+PCB
+C5
+Sch
+AH
+atopy
+GP
+CHD
+Li
+C14
+soma
+At 1
+DL
+OS
+
+
+

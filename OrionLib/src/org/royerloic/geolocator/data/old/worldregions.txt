@@ -1,0 +1,12 @@
+region code 	region name
+NA	North America
+SA	South America
+EU	Europe
+AS	Asia
+ME	Middle East
+AF	Africa
+PC	Australia
+PC	Oceania
+CA	Caribbean
+IO	Indian Ocean
+AT	Antarctic
