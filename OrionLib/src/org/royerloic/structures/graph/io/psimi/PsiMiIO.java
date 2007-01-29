@@ -33,6 +33,7 @@ package org.royerloic.structures.graph.io.psimi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +44,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.royerloic.bioinformatics.ids.GoIdConversion;
 import org.royerloic.bioinformatics.ids.InterproIdConversion;
 import org.royerloic.structures.graph.UndirectedEdge;
+import org.royerloic.structures.graph.io.EdgIO;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -220,6 +222,16 @@ public class PsiMiIO
 			lFileInputStream = new FileInputStream(pFile);
 			PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel);
 
+			try
+			{
+				EdgIO.save(lGraph, new File("dump.psimi.edg"));
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return lGraph;
 		}
 		catch (FileNotFoundException e)
