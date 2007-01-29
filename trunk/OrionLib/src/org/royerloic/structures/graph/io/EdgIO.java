@@ -192,6 +192,7 @@ public class EdgIO
 
 			List<String> lGoList = new ArrayList<String>();
 			lGoList.add("ATTRIBUTE");
+			lGoList.add(lNode.toString());
 			lGoList.add("GO");
 			for (Integer lInteger : lNode.getGoIdList())
 			{
@@ -201,6 +202,7 @@ public class EdgIO
 
 			List<String> lDomainList = new ArrayList<String>();
 			lDomainList.add("ATTRIBUTE");
+			lDomainList.add(lNode.toString());
 			lDomainList.add("DOMAIN");
 			for (Integer lInteger : lNode.getInterproIdList())
 			{

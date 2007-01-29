@@ -3,34 +3,6 @@
 	<classpathentry excluding="org/royerloic/graphics/doc/|org/royerloic/graphics/impl/doc/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="JUNIT_HOME/junit.jar" sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.0.0/src/org.junit_3.8.1/junitsrc.zip"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-collections.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-lang.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/dom4j.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/informa.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom.jar"/>
-	<classpathentry kind="lib" path="lib/bsh-core-2.0b4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.0.3-bin.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-dom.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-svggen.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-awt-util.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-svg-dom.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-xml.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-bridge.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-css.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-ext.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-extension.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-gui-util.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-gvt.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-parser.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-script.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-swing.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-transcoder.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/batik-util.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pdf-transcoder.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry exported="true" kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
