@@ -142,6 +142,42 @@ public class EdgIO
 			}
 		}
 
+		for (List<String> lStringList : lMatrix)
+		{
+			String lLineType = lStringList.get(0);
+			if (lLineType.equalsIgnoreCase("STAR"))
+			{
+				String lNodeName1 = lStringList.get(1);
+				List<String> lNodesInStarList = lStringList.subList(2, lStringList.size());
+
+				for (String lString : lNodesInStarList)
+				{
+					String lNodeName2 = lString;
+					Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
+					if (lFirstNode == null)
+					{
+						lFirstNode = new Node(lNodeName1);
+						lStringIdToNodeMap.put(lNodeName1, lFirstNode);
+					}
+					
+					if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2))
+							|| !isNodeFilterDefined)
+					{
+						Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
+						if (lSecondNode == null)
+						{
+							lSecondNode = new Node(lNodeName2);
+							lStringIdToNodeMap.put(lNodeName2, lSecondNode);
+						}
+						
+						Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
+						lGraph.addEdge(lEdge);
+					}
+				}
+
+			}
+		}
+
 		return lGraph;
 	}
 
