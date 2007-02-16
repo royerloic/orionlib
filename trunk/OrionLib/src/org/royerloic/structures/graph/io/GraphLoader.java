@@ -27,16 +27,16 @@ public class GraphLoader
 	 */
 	public static Graph<Node, Edge<Node>> loadGraph(File pFile) throws FileNotFoundException, IOException
 	{
-		return loadGraph(pFile, true);
+		return loadGraph(pFile, true,null);
 	}
 
-	public static Graph<Node, Edge<Node>> loadGraph(File pFile, boolean pSpokeModel)
+	public static Graph<Node, Edge<Node>> loadGraph(File pFile, boolean pSpokeModel, String pConfidenceFilter)
 			throws FileNotFoundException, IOException
 	{
 		Graph lGraph = (Graph<Node, Edge<Node>>) new HashGraph<Node, Edge<Node>>();
 		if (isPsiMi(pFile))
 		{
-			lGraph = PsiMiIO.load(pFile, pSpokeModel);
+			lGraph = PsiMiIO.load(pFile, pSpokeModel,pConfidenceFilter);
 		}
 		else if (isEdg(pFile))
 		{
@@ -45,6 +45,12 @@ public class GraphLoader
 		EdgIO.save(lGraph, new File("dump.edg"));
 		return lGraph;
 	}
+
+//	public static Graph<Node, Edge<Node>> loadGraph(File pFile, boolean pSpokeModel)
+//			throws FileNotFoundException, IOException
+//	{
+//		return loadGraph(pFile, pSpokeModel, null);
+//	}
 
 	public static boolean isPsiMi(File pFile)
 	{
@@ -59,7 +65,8 @@ public class GraphLoader
 	public static PowerGraph<Node> loadPowerGraph(File pFile,
 																								boolean pSpokeModel,
 																								double pDensityThreshold,
-																								boolean pKeepAsInPsiMi) throws FileNotFoundException,
+																								boolean pKeepAsInPsiMi,
+																								String pConfidenceFilter) throws FileNotFoundException,
 			IOException
 	{
 		if (isPsiMi(pFile) && pKeepAsInPsiMi)
@@ -73,7 +80,7 @@ public class GraphLoader
 		else if (isEdg(pFile) || (isPsiMi(pFile) && !pKeepAsInPsiMi))
 		{
 			System.out.println("File is Edg, using standard Edg file loader...");
-			Graph<Node, Edge<Node>> lGraph = loadGraph(pFile, pSpokeModel);
+			Graph<Node, Edge<Node>> lGraph = loadGraph(pFile, pSpokeModel,pConfidenceFilter);
 			PowerGraphExtractor<Node> lPowerGraphExtractor = new PowerGraphExtractor<Node>();
 			PowerGraph<Node> lPowerGraph = lPowerGraphExtractor.extractPowerGraph(lGraph, pDensityThreshold);
 			return lPowerGraph;

@@ -36,7 +36,7 @@ public class GraphClustering<N>
 		double lSize = 0;
 		for (Map.Entry<N, Double> lEntry : pWeightedSet.entrySet())
 		{
-			lSize += 1; // lEntry.getValue();
+			lSize += 1 ;//lEntry.getValue();
 		}
 		return lSize;
 	}

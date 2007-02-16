@@ -56,18 +56,21 @@ public class PsiMiIO
 	{
 		public PsiMiGraph									mGraph;
 
+		private String										mConfidenceFilter;
 		private boolean										mSpokeModel;
 		private boolean										mIsInteractorDefinition;
 		private String										mText;
 		private String										mInteractorId;
 		private PsiMiNode									mInteractorNode;
 		private String										mRole;
+		private String										mInteractionConfidence;
 		private Map<PsiMiNode, String>		lInteractorsToRoleMap	= new HashMap<PsiMiNode, String>();
 		private Map<PsiMiNode, PsiMiNode>	lPsiMiNodeMap					= new HashMap<PsiMiNode, PsiMiNode>();
 
-		public PsiMiHandler(boolean pSpokeModel)
+		public PsiMiHandler(boolean pSpokeModel, String pConfidenceFilter)
 		{
 			super();
+			mConfidenceFilter = pConfidenceFilter;
 			mGraph = new PsiMiGraph();
 			mSpokeModel = pSpokeModel;
 		}
@@ -126,6 +129,10 @@ public class PsiMiIO
 			{
 				startInteraction();
 			}
+			else if (qName.equals("confidence"))
+			{
+				mInteractionConfidence = attrs.getValue("value");
+			}
 		}
 
 		public void characters(char buf[], int offset, int len) throws SAXException
@@ -177,50 +184,54 @@ public class PsiMiIO
 
 		private void endInteraction()
 		{
-			if (lInteractorsToRoleMap.size() == 1)
+			if (mConfidenceFilter == null || mInteractionConfidence.matches(mConfidenceFilter) )
 			{
-				PsiMiNode lNode = lInteractorsToRoleMap.keySet().iterator().next();
-				mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
-			}
-			else if (!mSpokeModel)
-			{
-				for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
-					for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
-						if (!lNode1.equals(lNode2))
-						{
-							mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
-						}
-			}
-			else if (mSpokeModel)
-				for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
-					for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
-						if (!lNode1.equals(lNode2))
-						{
-							String lRole1 = lInteractorsToRoleMap.get(lNode1);
-							String lRole2 = lInteractorsToRoleMap.get(lNode2);
-							boolean lIsInteraction = (lRole1.equals("neutral") && lRole2.equals("neutral"))
-									|| (lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
-									|| lRole2.equals("unspecified");
-
-							if (!(lRole1.equals("bait") || lRole1.equals("prey") || lRole1.equals("neutral") || lRole1
-									.equals("unspecified")))
-								System.out.println("Something strange here:" + lRole1);
-
-							if (lIsInteraction)
+				System.out.println("Interaction confidence: "+mInteractionConfidence);
+				if (lInteractorsToRoleMap.size() == 1)
+				{
+					PsiMiNode lNode = lInteractorsToRoleMap.keySet().iterator().next();
+					mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
+				}
+				else if (!mSpokeModel)
+				{
+					for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+						for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
+							if (!lNode1.equals(lNode2))
+							{
 								mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+							}
+				}
+				else if (mSpokeModel)
+					for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+						for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
+							if (!lNode1.equals(lNode2))
+							{
+								String lRole1 = lInteractorsToRoleMap.get(lNode1);
+								String lRole2 = lInteractorsToRoleMap.get(lNode2);
+								boolean lIsInteraction = /*(lRole1.equals("neutral") && lRole2.equals("neutral"))
+										||/**/ (lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
+										|| lRole2.equals("unspecified");
 
-						}
+								if (!(lRole1.equals("bait") || lRole1.equals("prey") || lRole1.equals("neutral") || lRole1
+										.equals("unspecified")))
+									System.out.println("Something strange here:" + lRole1);
 
+								if (lIsInteraction)
+									mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+
+							}
+
+			}
 		}
 	}
 
-	public static final PsiMiGraph load(File pFile, boolean pSpokeModel)
+	public static final PsiMiGraph load(File pFile, boolean pSpokeModel, String pConfidenceFilter)
 	{
 		FileInputStream lFileInputStream;
 		try
 		{
 			lFileInputStream = new FileInputStream(pFile);
-			PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel);
+			PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel,pConfidenceFilter);
 
 			try
 			{
@@ -231,7 +242,7 @@ public class PsiMiIO
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			return lGraph;
 		}
 		catch (FileNotFoundException e)
@@ -242,9 +253,14 @@ public class PsiMiIO
 		return null;
 	}
 
-	public static final PsiMiGraph load(InputStream pInputStream, boolean pSpokeModel)
+	public static final PsiMiGraph load(File pFile, boolean pSpokeModel)
 	{
-		PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel);
+		return load(pFile, pSpokeModel, null);
+	}
+
+	public static final PsiMiGraph load(InputStream pInputStream, boolean pSpokeModel, String pConfidenceFilter)
+	{
+		PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel, pConfidenceFilter);
 		DefaultHandler handler = lPsiMiHandler;
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try
@@ -260,6 +276,11 @@ public class PsiMiIO
 		}
 
 		return lPsiMiHandler.mGraph;
+	}
+
+	public static final PsiMiGraph load(InputStream pInputStream, boolean pSpokeModel)
+	{
+		return load(pInputStream, pSpokeModel, null);
 	}
 
 }
