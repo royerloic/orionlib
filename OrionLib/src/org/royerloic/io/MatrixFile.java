@@ -22,19 +22,19 @@ import org.royerloic.structures.Matrix;
 public class MatrixFile
 {
 
-	public static <O> void writeMatrixToFile(List<List<O>> pVectorList, File pFile)
+	public static <O> void writeMatrixToFile(List<List<O>> pMatrix, File pFile)
 			throws FileNotFoundException, IOException
 	{
-		writeMatrixToFile(pVectorList, pFile, "\t");
+		writeMatrixToFile(pMatrix, pFile, "\t");
 	}
 
-	public static <O> void writeMatrixToFile(List<List<O>> pVectorList, File pFile, String lSeparator)
+	public static <O> void writeMatrixToFile(List<List<O>> pMatrix, File pFile, String lSeparator)
 			throws FileNotFoundException, IOException
 	{
-		writeMatrixToStream(pVectorList, new FileOutputStream(pFile), lSeparator);
+		writeMatrixToStream(pMatrix, new FileOutputStream(pFile), lSeparator);
 	}
 
-	public static <O> void writeMatrixToStream(	List<List<O>> pVectorList,
+	public static <O> void writeMatrixToStream(	List<List<O>> pMatrix,
 																							OutputStream pOutputStream,
 																							String pSeparator) throws FileNotFoundException, IOException
 	{
@@ -49,7 +49,7 @@ public class MatrixFile
 			try
 			{
 				lWriter = getWriterFromStream(pOutputStream);
-				for (List<O> lList : pVectorList)
+				for (List<O> lList : pMatrix)
 				{
 					writeListToStream(lWriter, lList, pSeparator);
 					lWriter.append("\r\n");
