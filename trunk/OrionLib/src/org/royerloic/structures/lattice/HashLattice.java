@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.royerloic.structures.HashIntegerMap;
+import org.royerloic.structures.IntegerHashMap;
 import org.royerloic.structures.IntegerMap;
 import org.royerloic.structures.IntersectionMonitor;
 import org.royerloic.structures.Triple;
@@ -65,7 +65,7 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 
 	public IntegerMap<N> getChildren(IntegerMap<N> pMap)
 	{
-		IntegerMap<N> lChildrenMap = new HashIntegerMap<N>();
+		IntegerMap<N> lChildrenMap = new IntegerHashMap<N>();
 		for (Entry<N, Integer> lEntry : pMap.entrySet())
 		{
 			lChildrenMap.addAllWith(getPositiveNodeNeighbours(lEntry.getKey()), lEntry.getValue() + 1);
@@ -80,7 +80,7 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 
 	private IntegerMap<N> getDescendentsRecursive(N pN, int pDepth)
 	{
-		IntegerMap<N> lNodeToDepthMap = new HashIntegerMap<N>();
+		IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
 		Set<N> lChildrenSet = getChildren(pN);
 		if (!lChildrenSet.isEmpty())
 		{
@@ -110,7 +110,7 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 
 	public IntegerMap<N> getParents(IntegerMap<N> pMap)
 	{
-		IntegerMap<N> lParentMap = new HashIntegerMap<N>();
+		IntegerMap<N> lParentMap = new IntegerHashMap<N>();
 		for (Entry<N, Integer> lEntry : pMap.entrySet())
 		{
 			lParentMap.addAllWith(getNegativeNodeNeighbours(lEntry.getKey()), lEntry.getValue() - 1);
@@ -125,7 +125,7 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 
 	private IntegerMap<N> getAncestorsRecursive(N pN, int pDepth)
 	{
-		IntegerMap<N> lNodeToDepthMap = new HashIntegerMap<N>();
+		IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
 		Set<N> lParentSet = getParents(pN);
 		if (!lParentSet.isEmpty())
 		{
@@ -142,9 +142,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 	{
 		IntersectionMonitor<N> lIntersectionMonitor = new IntersectionMonitor<N>();
 
-		IntegerMap<N> lMap1 = new HashIntegerMap<N>();
+		IntegerMap<N> lMap1 = new IntegerHashMap<N>();
 		lMap1.addAllWith(Collections.singleton(pN1), 0);
-		IntegerMap<N> lMap2 = new HashIntegerMap<N>();
+		IntegerMap<N> lMap2 = new IntegerHashMap<N>();
 		lMap2.addAllWith(Collections.singleton(pN2), 0);
 
 		while (true)

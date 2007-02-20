@@ -1,5 +1,7 @@
 package org.royerloic.structures;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,6 +19,12 @@ public interface SetMap<K, V> extends Map<K, Set<V>>
 	public Set<V> put(K pKey);
 
 	public Set<V> put(K pKey, V pValue);
+	
+	public Set<V> put(K pKey, Collection<V> pVSet);
+	
+	public void putAll(Collection<K> pKSet, Collection<V> pVSet);
+	
+	public void addAll(SetMap<K, V> pSetMap);
 
 	public void clear(K pKey);
 

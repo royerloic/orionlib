@@ -10,7 +10,7 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class HashIntegerMap<K> extends HashMap<K, Integer> implements IntegerMap<K>
+public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap<K>
 {
 
 	/*
