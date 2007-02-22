@@ -18,8 +18,6 @@ import org.royerloic.structures.graph.UndirectedEdge;
 public class GraphClustering<N>
 {
 
-	private final double	mThreshold;
-
 	final double computeSetDistance(Set<N> pSet1, Set<N> pSet2)
 	{
 		Set<N> lSet = new HashSet<N>(pSet1);
@@ -36,7 +34,7 @@ public class GraphClustering<N>
 		double lSize = 0;
 		for (Map.Entry<N, Double> lEntry : pWeightedSet.entrySet())
 		{
-			lSize += 1 ;//lEntry.getValue();
+			lSize += lEntry.getValue();
 		}
 		return lSize;
 	}
@@ -190,10 +188,9 @@ public class GraphClustering<N>
 
 	};
 
-	public GraphClustering(double pThreshold)
+	public GraphClustering()
 	{
 		super();
-		mThreshold = pThreshold;
 	}
 
 	public final Set<Set<N>> clusterOld(Graph<N, Edge<N>> pGraph, double pCutOff)

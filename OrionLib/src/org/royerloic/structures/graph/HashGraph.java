@@ -24,6 +24,12 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>
 		mNodeToBackNeighboursSetMap = new HashSetMap<N, N>();
 		mNodeToEdgeSetMap = new HashSetMap<N, E>();
 	}
+	
+	public HashGraph(Graph<N,E> pGraph)
+	{
+		this();
+		addGraph(pGraph);
+	}
 
 	public void addNode(N pNode)
 	{
