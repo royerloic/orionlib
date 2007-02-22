@@ -11,6 +11,7 @@ import org.royerloic.structures.graph.Graph;
 import org.royerloic.structures.graph.HashGraph;
 import org.royerloic.structures.graph.Node;
 import org.royerloic.structures.graph.UndirectedEdge;
+import org.royerloic.utils.RandomUtils;
 
 public class GraphGenerator
 {
@@ -80,30 +81,40 @@ public class GraphGenerator
 
 	public static Graph<Node, Edge<Node>> addErdosGraphNoise(	Random pRandom,
 																														Graph<Node, Edge<Node>> pGraph,
-																														double pNoiseRate)
+																														double pFPNoiseRate,
+																														double pFNNoiseRate)
 	{
-		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
+		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>(pGraph);
 		List<Node> lNodeList = new ArrayList<Node>(pGraph.getNodeSet());
-		for (Node lNode : lNodeList)
+		
+
+		final int lNumberOfEdges = pGraph.getNumberOfEdges();
+		
+		final int lNumberOfEdgesToRemove = (int) (pGraph.getNumberOfEdges() * pFNNoiseRate);
+		final int lNumberOfEdgesToAdd = (int) (pGraph.getNumberOfEdges() * pFPNoiseRate);
+		
+		List<Edge<Node>> lEdgeList = new ArrayList<Edge<Node>>(pGraph.getEdgeSet());
+		
+		for (int i=0; i<lNumberOfEdgesToRemove; i++)
 		{
-			lGraph.addNode(lNode);
+			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
+			lGraph.removeEdge(lEdgeToRemove);
 		}
-
-		for (int i = 0; i < lNodeList.size(); i++)
-			for (int j = 0; j < i; j++)
-			{
-				Node lNode1 = lNodeList.get(i);
-				Node lNode2 = lNodeList.get(j);
-
-				boolean lChange = pRandom.nextDouble() < pNoiseRate;
-				boolean lEdge = pGraph.isEdge(lNode1, lNode2);
-				boolean lXorEdge = lChange ^ lEdge;
-				if (lXorEdge)
-				{
-					lGraph.addEdge(new UndirectedEdge<Node>(lNode1, lNode2));
-				}
-
-			}
+		
+		for (int i=0; i<lNumberOfEdgesToRemove; i++)
+		{
+			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
+			lGraph.removeEdge(lEdgeToRemove);
+		}
+		
+		for (int i=0; i<lNumberOfEdgesToAdd; i++)
+		{
+			Node lNode1 = RandomUtils.randomElement(pRandom, lNodeList);
+			Node lNode2 = RandomUtils.randomElement(pRandom, lNodeList);
+			Edge<Node> lEdgeToAdd = new UndirectedEdge<Node>(lNode1, lNode2);
+			lGraph.addEdge(lEdgeToAdd);
+		}
+		
 		return lGraph;
 	}
 

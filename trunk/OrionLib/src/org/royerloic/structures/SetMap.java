@@ -20,9 +20,9 @@ public interface SetMap<K, V> extends Map<K, Set<V>>
 
 	public Set<V> put(K pKey, V pValue);
 	
-	public Set<V> put(K pKey, Collection<V> pVSet);
+	public Set<V> putAll(K pKey, Collection<V> pVSet);
 	
-	public void putAll(Collection<K> pKSet, Collection<V> pVSet);
+	public void addAll(Collection<K> pKSet, Collection<V> pVSet);
 	
 	public void addAll(SetMap<K, V> pSetMap);
 

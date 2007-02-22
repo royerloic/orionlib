@@ -28,8 +28,12 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 
 	public Set<V> put(K pKey)
 	{
-		Set<V> lValueSet = new HashSet<V>();
-		put(pKey, lValueSet);
+		Set<V> lValueSet = get(pKey);
+		if (lValueSet == null)
+		{
+			lValueSet = new HashSet<V>();
+			super.put(pKey, lValueSet);
+		}
 		return lValueSet;
 	}
 
@@ -44,13 +48,13 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 		if (lValueSet == null)
 		{
 			lValueSet = new HashSet<V>();
-			put(pKey, lValueSet);
+			super.put(pKey, lValueSet);
 		}
 		lValueSet.add(pValue);
 		return lValueSet;
 	}
 
-	public Set<V> put(K pKey, Collection<V> pVSet)
+	public Set<V> putAll(K pKey, Collection<V> pVSet)
 	{
 		Set<V> lValueSet = get(pKey);
 		if (lValueSet == null)
@@ -63,20 +67,13 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 
 		return lValueSet;
 	}
-	
-	public void putAll(Collection<K> pKSet, Collection<V> pVSet)
+
+	public void addAll(Collection<K> pKSet, Collection<V> pVSet)
 	{
 		for (K lK : pKSet)
 		{
-			Set<V> lValueSet = get(lK);
-			if (lValueSet == null)
-			{
-				lValueSet = new HashSet<V>(pVSet);
-				super.put(lK, lValueSet);
-			}
-			else
-				lValueSet.addAll(pVSet);
-		}		
+			this.putAll(lK, pVSet);
+		}
 	}
 
 	public void addAll(SetMap<K, V> pSetMap)
@@ -84,16 +81,16 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 		for (Entry<K, Set<V>> lEntry : pSetMap.entrySet())
 		{
 			final Set<V> lSet = get(lEntry.getKey());
-			if (lSet==null)
+			if (lSet == null)
 			{
-				put(lEntry.getKey(),new HashSet<V>(lEntry.getValue()));
-			}				
+				super.put(lEntry.getKey(), new HashSet<V>(lEntry.getValue()));
+			}
 			else
 			{
 				lSet.addAll(lEntry.getValue());
 			}
 		}
-		
+
 	}
 
 	public void clear(K pKey)

@@ -32,7 +32,6 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 	public PowerGraphExtractor()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph)
@@ -50,8 +49,8 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 																								int pMaxIterations)
 	{
 		PowerGraph<N> lPowerGraph = new PowerGraph<N>();
-		GraphClustering<N> mClustering = new GraphClustering<N>(0);
-		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, 0.00, pMaxIterations);
+		GraphClustering<N> mClustering = new GraphClustering<N>();
+		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, 0, pMaxIterations);
 
 		System.out.println("Started constructing Power Graph");
 		List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);
@@ -101,7 +100,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		}
 
 		System.out.println("Adding remaining edges.");
-		if (true) // Original Graph
+		if (false) // Original Graph
 		{
 			for (Edge<N> lEdge : pGraph.getEdgeSet())
 			{
@@ -159,30 +158,24 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 				N lNode = pFirstPowerNode.iterator().next();
 				return pGraph.isEdge(lNode, lNode);
 			}
-			else
-			{
-				for (N lNode1 : pFirstPowerNode)
-					for (N lNode2 : pSecondPowerNode)
-						if (!lNode1.equals(lNode2))
-							if (!pGraph.isEdge(lNode1, lNode2))
-								return false;
-				return true;
-			}
-		}
-		else
-		{
-			for (N lNode : pFirstPowerNode)
-			{
-				if (pSecondPowerNode.contains(lNode))
-					return false;
-			}
-
 			for (N lNode1 : pFirstPowerNode)
 				for (N lNode2 : pSecondPowerNode)
-					if (!pGraph.isEdge(lNode1, lNode2))
-						return false;
+					if (!lNode1.equals(lNode2))
+						if (!pGraph.isEdge(lNode1, lNode2))
+							return false;
 			return true;
 		}
+		for (N lNode : pFirstPowerNode)
+		{
+			if (pSecondPowerNode.contains(lNode))
+				return false;
+		}
+
+		for (N lNode1 : pFirstPowerNode)
+			for (N lNode2 : pSecondPowerNode)
+				if (!pGraph.isEdge(lNode1, lNode2))
+					return false;
+		return true;
 	}
 
 	private boolean isStochasticPowerEdge(Graph<N, Edge<N>> pGraph,
