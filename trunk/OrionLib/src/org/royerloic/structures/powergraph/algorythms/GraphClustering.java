@@ -18,20 +18,20 @@ import org.royerloic.structures.graph.UndirectedEdge;
 public class GraphClustering<N>
 {
 
-	final double computeSetDistance(Set<N> pSet1, Set<N> pSet2)
+	final Double computeSetDistance(Set<N> pSet1, Set<N> pSet2)
 	{
 		Set<N> lSet = new HashSet<N>(pSet1);
 		lSet.retainAll(pSet2);
 		final double lIntersectionSize = lSet.size();
-		double lDistance = ((double) (pSet1.size() + pSet2.size() - 2 * lIntersectionSize)) / lIntersectionSize;
+		Double lDistance = ((double) (pSet1.size() + pSet2.size() - 2 * lIntersectionSize)) / lIntersectionSize;
 		if (lIntersectionSize == Double.NaN)
 			return Double.POSITIVE_INFINITY;
 		return lDistance;
 	}
 
-	final double computeWeightedSize(Map<N, Double> pWeightedSet)
+	final Double computeWeightedSize(Map<N, Double> pWeightedSet)
 	{
-		double lSize = 0;
+		Double lSize = new Double(0);
 		for (Map.Entry<N, Double> lEntry : pWeightedSet.entrySet())
 		{
 			lSize += lEntry.getValue();
@@ -39,10 +39,10 @@ public class GraphClustering<N>
 		return lSize;
 	}
 
-	final double computeWeightedSetSimilarity(Map<N, Double> pWeightedSet1, Map<N, Double> pWeightedSet2)
+	final Double computeWeightedSetSimilarity(Map<N, Double> pWeightedSet1, Map<N, Double> pWeightedSet2)
 	{
-		final double lSize1 = computeWeightedSize(pWeightedSet1);
-		final double lSize2 = computeWeightedSize(pWeightedSet2);
+		final Double lSize1 = computeWeightedSize(pWeightedSet1);
+		final Double lSize2 = computeWeightedSize(pWeightedSet2);
 
 		Map<N, Double> lWeightedSetIntersection = new HashMap<N, Double>(pWeightedSet1);
 		for (Map.Entry<N, Double> lEntry : pWeightedSet1.entrySet())
@@ -50,9 +50,9 @@ public class GraphClustering<N>
 			if (!pWeightedSet2.containsKey(lEntry.getKey()))
 				lWeightedSetIntersection.remove(lEntry.getKey());
 		}
-		final double lSizeIntersection = computeWeightedSize(lWeightedSetIntersection);
+		final Double lSizeIntersection = computeWeightedSize(lWeightedSetIntersection);
 
-		double lDistance = (lSizeIntersection) / (lSize1 + lSize2 - lSizeIntersection);
+		Double lDistance = (lSizeIntersection) / (lSize1 + lSize2 - lSizeIntersection);
 		lDistance = lDistance == Double.NaN ? Double.POSITIVE_INFINITY : lDistance;
 
 		return lDistance;
@@ -147,9 +147,9 @@ public class GraphClustering<N>
 			return mNodeSet.size();
 		}
 
-		double similarityToCluster(Cluster pCluster)
+		Double similarityToCluster(Cluster pCluster)
 		{
-			double lDistance = computeWeightedSetSimilarity(this.mNodeToConnectivityMap,
+			Double lDistance = computeWeightedSetSimilarity(this.mNodeToConnectivityMap,
 					pCluster.mNodeToConnectivityMap);
 			// if (!Double.isInfinite(lDistance)) System.out.println(lDistance);
 			return lDistance;
@@ -193,98 +193,7 @@ public class GraphClustering<N>
 		super();
 	}
 
-	public final Set<Set<N>> clusterOld(Graph<N, Edge<N>> pGraph, double pCutOff)
-	{
-		List<Cluster> lInitialClusterList = new ArrayList<Cluster>();
-
-		if (pGraph.getNodeSet().size() == 0)
-			return Collections.EMPTY_SET;
-
-		for (N lNode : pGraph.getNodeSet())
-		{
-			Cluster lCluster = new Cluster();
-			lCluster.addNode(pGraph, lNode);
-			lInitialClusterList.add(lCluster);
-		}
-
-		List<Cluster> lClusterList = new ArrayList<Cluster>(lInitialClusterList);
-		Comparator<Cluster> lClusterComparator = new ClusterComparator();
-		Set<Cluster> lFinalClusterSet = new HashSet<Cluster>();
-		for (Cluster lCluster : lClusterList)
-		{
-			lFinalClusterSet.add(lCluster.copy());
-		}
-
-		Map<UndirectedEdge<Cluster>, Double> lDistanceCache = new HashMap<UndirectedEdge<Cluster>, Double>();
-		List<Cluster> lMostCompactClusterList = new ArrayList<Cluster>();
-		Set<Cluster> lClusterDeleteSet = new HashSet<Cluster>();
-		double lMaximalSimilarity = -1;
-		while (lClusterList.size() > 1)
-		{
-			// System.out.println("lClusterList.size()=" + lClusterList.size());
-			// System.out.println("lMaximalSimilarity=" + lMaximalSimilarity);
-			System.out.print(".");
-			lClusterDeleteSet.clear();
-			lMostCompactClusterList.clear();
-			lMaximalSimilarity = -1;
-
-			for (int i = 0; i < lClusterList.size(); i++)
-			{
-				for (int j = 0; j < i; j++)
-				{
-					Cluster lCluster1 = lClusterList.get(i);
-					Cluster lCluster2 = lClusterList.get(j);
-					Double lSimilarity = lCluster1.similarityToCluster(lCluster2);
-
-					if (lSimilarity > lMaximalSimilarity)
-					{
-						lMaximalSimilarity = lSimilarity;
-						lMostCompactClusterList.clear();
-						lClusterDeleteSet.clear();
-					}
-
-					if ((lSimilarity == lMaximalSimilarity))
-					{
-						Cluster lNewCluster = new Cluster();
-						lNewCluster.mergeWith(lCluster1);
-						lNewCluster.mergeWith(lCluster2);
-						boolean lMerged = false;
-
-						Cluster lIntersectingCluster = findIntersectingCluster(lMostCompactClusterList, lNewCluster);
-						if ((lIntersectingCluster != null))
-						{
-							lIntersectingCluster.mergeWith(lNewCluster);
-							lMerged = true;
-						}
-
-						if (!lMerged)
-						{
-							lMostCompactClusterList.add(lNewCluster);
-						}
-						lClusterDeleteSet.add(lCluster1);
-						lClusterDeleteSet.add(lCluster2);
-					}
-				}
-			}
-			lClusterList.removeAll(lClusterDeleteSet);
-			lClusterList.addAll(lMostCompactClusterList);
-			for (Cluster lCluster : lMostCompactClusterList)
-			{
-				lFinalClusterSet.add(lCluster.copy());
-			}
-			if (lMaximalSimilarity < pCutOff)
-				break;
-		}
-
-		Set<Set<N>> lSetSet = new HashSet<Set<N>>();
-		for (Cluster lCluster : lFinalClusterSet)
-		{
-			lSetSet.add(lCluster.mNodeSet);
-		}
-
-		System.out.println("done.");
-		return lSetSet;
-	}
+	
 
 	public final Set<Set<N>> cluster(Graph<N, Edge<N>> pGraph, double pCutOff, int pMaxIterations)
 	{
@@ -332,7 +241,7 @@ public class GraphClustering<N>
 			// System.out.println("lClusterGraph.getNumberOfNodes()=" +
 			// lClusterGraph.getNumberOfNodes());
 			// System.out.println("lMaximalSimilarity=" + lMaximalSimilarity);
-			System.out.print(".");
+			//System.out.print(".");
 			double lMaximalSimilarity = -1;
 
 			lMaximalSimilarityClusterSet.clear();
@@ -413,29 +322,7 @@ public class GraphClustering<N>
 		return lSetSet;
 	}
 
-	private Cluster findClosestCluster(List<Cluster> pClusterList, Cluster pCluster)
-	{
-		double lMinimalDistance = Double.POSITIVE_INFINITY;
-		Cluster lCurrentClosestCluster = null;
-		for (Cluster lCluster : pClusterList)
-		{
-			double lDistance = 0;
-			lDistance = lCluster.similarityToCluster(pCluster);
-
-			if (lDistance <= lMinimalDistance)
-			{
-				lCurrentClosestCluster = lCluster;
-				lMinimalDistance = lDistance;
-			}
-		}
-
-		if ((lCurrentClosestCluster == null) && (pClusterList.size() > 0))
-		{
-			lCurrentClosestCluster = pClusterList.get(0);
-		}
-
-		return lCurrentClosestCluster;
-	}
+	
 
 	private Cluster findIntersectingCluster(List<Cluster> pClusterList, Cluster pCluster)
 	{

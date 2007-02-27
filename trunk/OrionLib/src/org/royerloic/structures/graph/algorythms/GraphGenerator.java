@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.royerloic.random.DistributionSource;
+import org.royerloic.random.RandomUtils;
 import org.royerloic.structures.graph.Edge;
 import org.royerloic.structures.graph.Graph;
 import org.royerloic.structures.graph.HashGraph;
 import org.royerloic.structures.graph.Node;
 import org.royerloic.structures.graph.UndirectedEdge;
-import org.royerloic.utils.RandomUtils;
 
 public class GraphGenerator
 {
@@ -86,33 +87,62 @@ public class GraphGenerator
 	{
 		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>(pGraph);
 		List<Node> lNodeList = new ArrayList<Node>(pGraph.getNodeSet());
-		
 
 		final int lNumberOfEdges = pGraph.getNumberOfEdges();
-		
+
 		final int lNumberOfEdgesToRemove = (int) (pGraph.getNumberOfEdges() * pFNNoiseRate);
 		final int lNumberOfEdgesToAdd = (int) (pGraph.getNumberOfEdges() * pFPNoiseRate);
-		
+
 		List<Edge<Node>> lEdgeList = new ArrayList<Edge<Node>>(pGraph.getEdgeSet());
-		
-		for (int i=0; i<lNumberOfEdgesToRemove; i++)
+
+		for (int i = 0; i < lNumberOfEdgesToRemove; i++)
 		{
 			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
-			lGraph.removeEdge(lEdgeToRemove);
+			lGraph.removeEdge(lEdgeToRemove.getFirstNode(),lEdgeToRemove.getSecondNode());
 		}
-		
-		for (int i=0; i<lNumberOfEdgesToRemove; i++)
+
+		for (int i = 0; i < lNumberOfEdgesToRemove; i++)
 		{
 			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
-			lGraph.removeEdge(lEdgeToRemove);
+			lGraph.removeEdge(lEdgeToRemove.getFirstNode(),lEdgeToRemove.getSecondNode());
+			lGraph.removeEdge(lEdgeToRemove.getSecondNode(),lEdgeToRemove.getFirstNode());
 		}
-		
-		for (int i=0; i<lNumberOfEdgesToAdd; i++)
+
+		for (int i = 0; i < lNumberOfEdgesToAdd; i++)
 		{
 			Node lNode1 = RandomUtils.randomElement(pRandom, lNodeList);
 			Node lNode2 = RandomUtils.randomElement(pRandom, lNodeList);
 			Edge<Node> lEdgeToAdd = new UndirectedEdge<Node>(lNode1, lNode2);
 			lGraph.addEdge(lEdgeToAdd);
+		}
+
+		return lGraph;
+	}
+
+	public static Graph<Node, Edge<Node>> addSpokeNoise(Random pRandom,
+																											Graph<Node, Edge<Node>> pGraph,
+																											double pBaitProportion,
+																											double pReconnectionProbability)
+	{
+		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>(pGraph);
+		List<Node> lNodeList = new ArrayList<Node>(pGraph.getNodeSet());
+		List<Node> lBaitList = RandomUtils.randomSample(pRandom, pBaitProportion, lNodeList);
+
+		for (Node lBait : lBaitList)
+		{
+			Set<Node> lNeighboursSet = lGraph.getNodeNeighbours(lBait);
+			for (Node lNeighbour : lNeighboursSet)
+			{
+				Set<Node> lNeighboursSet2 = lGraph.getNodeNeighbours(lNeighbour);
+				lNeighboursSet2.remove(lBait);
+				List<Node> lReconnectionList = RandomUtils.randomSample(pRandom, pReconnectionProbability, lNeighboursSet2);
+				for (Node lReconnectedNode : lReconnectionList)
+				{
+					lGraph.removeEdge(lReconnectedNode, lNeighbour);
+					lGraph.removeEdge(lNeighbour,lReconnectedNode);
+					lGraph.addEdge(new UndirectedEdge<Node>(lBait, lReconnectedNode));
+				}
+			}
 		}
 		
 		return lGraph;
@@ -150,8 +180,9 @@ public class GraphGenerator
 	}
 
 	public static Graph<Node, Edge<Node>> generateScaleFreePreferentialAttachement(	Random pRandom,
-																																									int pNumberOfNodes,
-																																									double pParameter)
+																																									Integer pNumberOfNodes,
+																																									Double pAverageDegree,
+																																									Double pExponent)
 	{
 		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 		int lCounter = 0;
@@ -162,17 +193,19 @@ public class GraphGenerator
 
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
 			{
-				addNodePreferentialAttachement(pRandom, lGraph, pParameter, lCounter++);
+				addNodePreferentialAttachement(pRandom, lGraph, lCounter++, pAverageDegree/2, pExponent);
 			}
 
 		}
 		return lGraph;
 	}
 
+	@SuppressWarnings("boxing")
 	static void addNodePreferentialAttachement(	Random pRandom,
 																							Graph<Node, Edge<Node>> pGraph,
-																							double pParameter,
-																							int pCounter)
+																							Integer pCounter,
+																							Double pNumberOfNewEdges,
+																							Double pExponent)
 	{
 		Node lNewNode = new Node("node" + pCounter);
 
@@ -189,15 +222,30 @@ public class GraphGenerator
 		}
 		else
 		{
+			DistributionSource<Node> lDistributionSource = new DistributionSource<Node>();
 			for (Node lNode : lNodeList)
 			{
 				double lProbability = (((double) pGraph.getNodeNeighbours(lNode).size()) / lTotal);
-				lProbability = Math.pow(lProbability, pParameter);
-				if (pRandom.nextDouble() < lProbability)
-				{
-					Edge<Node> lEdge = new UndirectedEdge<Node>(lNewNode, lNode);
-					pGraph.addEdge(lEdge);
-				}
+				lProbability = Math.pow(lProbability, pExponent);
+				lDistributionSource.addObject(lNode, lProbability);
+			}
+			try
+			{
+				lDistributionSource.prepare(Math.max(100000, lNodeList.size()), 0.01);
+			}
+			catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			long lNumberOfEdges =  RandomUtils.longGaussian(pRandom,pNumberOfNewEdges,0.5);
+			lNumberOfEdges = (long) Math.min(lNumberOfEdges,2*pNumberOfNewEdges);
+			for (int i = 0; i < lNumberOfEdges; i++)
+			{
+				Node lNode = lDistributionSource.getObject(pRandom);
+				Edge<Node> lEdge = new UndirectedEdge<Node>(lNewNode, lNode);
+				pGraph.addEdge(lEdge);
 			}
 		}
 

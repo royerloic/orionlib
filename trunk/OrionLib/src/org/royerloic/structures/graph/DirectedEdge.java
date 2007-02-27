@@ -108,9 +108,9 @@ public class DirectedEdge<N> implements Edge<N>
 		return mName;
 	}
 
-	public Edge<N> newInstance(N pFirstNode, N pSecondNode)
+	public boolean isSymetric()
 	{
-		return new DirectedEdge(pFirstNode, pSecondNode);
+		return false;
 	}
 
 }

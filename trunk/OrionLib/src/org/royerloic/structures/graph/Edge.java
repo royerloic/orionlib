@@ -19,6 +19,6 @@ public interface Edge<N>
 
 	public abstract String getName();
 
-	public abstract Edge<N> newInstance(N pFirstNode, N pSecondNode);
+	public boolean isSymetric();
 
 }
