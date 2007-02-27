@@ -14,8 +14,8 @@ public interface Graph<N, E>
 	public void removeNode(N pNode);
 
 	public void removeAllNodes(Set<N> pNodeSet);
-
-	public void removeEdge(E pEdge);
+	
+	public void removeEdge(N pFirstNode, N pSecondNode);
 
 	public int getNumberOfNodes();
 

@@ -24,8 +24,8 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>
 		mNodeToBackNeighboursSetMap = new HashSetMap<N, N>();
 		mNodeToEdgeSetMap = new HashSetMap<N, E>();
 	}
-	
-	public HashGraph(Graph<N,E> pGraph)
+
+	public HashGraph(Graph<N, E> pGraph)
 	{
 		this();
 		addGraph(pGraph);
@@ -107,17 +107,23 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>
 		}
 	}
 
-	public void removeEdge(E pEdge)
+	public void removeEdge(N pFirstNode, N pSecondNode)
 	{
-		mEdgeSet.remove(pEdge);
-		N lFirstNode = pEdge.getFirstNode();
-		N lSecondNode = pEdge.getSecondNode();
+		Set<E> lCandidateEdgeList = mNodeToEdgeSetMap.get(pFirstNode);
+		for (E lEdge : lCandidateEdgeList)
+			if (lEdge.getFirstNode().equals(pFirstNode) && lEdge.getSecondNode().equals(pSecondNode))
+			{
+				mEdgeSet.remove(lEdge);
+				N lFirstNode = lEdge.getFirstNode();
+				N lSecondNode = lEdge.getSecondNode();
 
-		mNodeToFrontNeighboursSetMap.get(lFirstNode).remove(lSecondNode);
-		mNodeToBackNeighboursSetMap.get(lSecondNode).remove(lFirstNode);
+				mNodeToFrontNeighboursSetMap.get(lFirstNode).remove(lSecondNode);
+				mNodeToBackNeighboursSetMap.get(lSecondNode).remove(lFirstNode);
 
-		mNodeToEdgeSetMap.get(lFirstNode).remove(pEdge);
-		mNodeToEdgeSetMap.get(lSecondNode).remove(pEdge);
+				mNodeToEdgeSetMap.get(lFirstNode).remove(lEdge);
+				mNodeToEdgeSetMap.get(lSecondNode).remove(lEdge);
+				break;
+			}
 
 	}
 

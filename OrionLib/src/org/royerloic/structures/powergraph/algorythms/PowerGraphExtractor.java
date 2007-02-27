@@ -52,7 +52,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		GraphClustering<N> mClustering = new GraphClustering<N>();
 		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, 0, pMaxIterations);
 
-		System.out.println("Started constructing Power Graph");
+		//System.out.println("Started constructing Power Graph");
 		List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);
 
 		Collections.sort(lNodeSetList, cNodeSetComparator);
@@ -60,7 +60,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 		List<UndirectedEdge<Set<N>>> lPowerEdgeList = new ArrayList<UndirectedEdge<Set<N>>>();
 
-		System.out.println("Adding Power Edges.");
+		//System.out.println("Adding Power Edges.");
 		if (true) // Power Edges
 		{
 			for (int i = 0; i < lNodeSetList.size(); i++)
@@ -99,7 +99,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			}
 		}
 
-		System.out.println("Adding remaining edges.");
+		//System.out.println("Adding remaining edges.");
 		if (false) // Original Graph
 		{
 			for (Edge<N> lEdge : pGraph.getEdgeSet())
@@ -111,9 +111,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 				UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
 				lPowerEdgeList.add(lPowerEdge);
-				System.out.print(",");
+				//System.out.print(",");
 			}
-			System.out.println("done,");
+			//System.out.println("done,");
 		}
 
 		if (false) // Clusters
@@ -137,7 +137,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			lPowerGraph.addPowerNode(lPowerNode);
 		}
 
-		System.out.println("Finished constructing Power Graph");
+		//System.out.println("Finished constructing Power Graph");
 
 		/***************************************************************************
 		 * File lPowerEdgeDump = new

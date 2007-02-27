@@ -109,9 +109,9 @@ public class UndirectedEdge<N> implements Edge<N>
 		return mName;
 	}
 
-	public Edge<N> newInstance(N pFirstNode, N pSecondNode)
+	public boolean isSymetric()
 	{
-		return new UndirectedEdge<N>(pFirstNode, pSecondNode);
+		return true;
 	}
 
 }
