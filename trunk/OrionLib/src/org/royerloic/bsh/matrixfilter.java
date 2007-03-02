@@ -30,7 +30,7 @@ public class matrixfilter
 			List<String> lList = lIterator.next();
 			final String lValueString = lList.get(pColumnIndex);
 			final Double lValue = Double.parseDouble(lValueString);
-			if(!(lValue>=pMin && lValue<=pMax))
+			if(!(lValue>pMin && lValue<pMax))
 			{
 				lIterator.remove();
 			}

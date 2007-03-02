@@ -53,5 +53,10 @@ public class RandomUtils
 		final long lGaussian = Math.round(pExpectedAverage+pStandardDeviation*pRandom.nextGaussian());
 		return lGaussian;
 	}
+
+	public static final double DoubleWithin(Random pRandom, double pBegin, int pEnd)
+	{
+		return pBegin+(pRandom.nextDouble()*(pEnd-pBegin));
+	}
 	
 }
