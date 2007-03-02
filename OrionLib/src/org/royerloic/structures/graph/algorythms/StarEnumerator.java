@@ -189,7 +189,7 @@ public class StarEnumerator<N>
 		return mConnectivityStatistics;
 	}
 
-	public double getAlpha()
+	public double getGamma()
 	{
 		Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
 
@@ -222,7 +222,30 @@ public class StarEnumerator<N>
 				/ ((lN * (lSigmaX2)) - (Math.pow(lSigmaX, 2)));
 		double b = ((lN * lSigmaXY) - (lSigmaX * lSigmaY)) / ((lN * lSigmaX2) - (Math.pow(lSigmaX, 2)));
 
-		return -b;
+		final double gamma = -b;
+		
+		return gamma;
+		
+//		final double gammaprime =  getNewGamma();
+//		if(Math.abs(gammaprime-gamma)>0.01)
+//			throw new RuntimeException("Disagrement while calculating gamma!!");
+//		
+//		return (gamma+gammaprime)/2;
+	}
+	
+	public double getNewGamma()
+	{
+		Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
+
+		Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
+
+		for (int lK : lConnectivity.keySet())
+		{
+			if ((lK != 0) && (lConnectivity.get(lK) != 0))
+				lLogConnectivity.put(Math.log(lK), Math.log(lConnectivity.get(lK)));
+		}
+		return 0;
+
 	}
 
 }

@@ -98,23 +98,29 @@ public class GraphGenerator
 		for (int i = 0; i < lNumberOfEdgesToRemove; i++)
 		{
 			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
-			lGraph.removeEdge(lEdgeToRemove.getFirstNode(),lEdgeToRemove.getSecondNode());
-		}
-
-		for (int i = 0; i < lNumberOfEdgesToRemove; i++)
-		{
-			Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
-			lGraph.removeEdge(lEdgeToRemove.getFirstNode(),lEdgeToRemove.getSecondNode());
-			lGraph.removeEdge(lEdgeToRemove.getSecondNode(),lEdgeToRemove.getFirstNode());
+			lEdgeList.remove(lEdgeToRemove);
+			lGraph.removeEdge(lEdgeToRemove.getFirstNode(), lEdgeToRemove.getSecondNode());
+			lGraph.removeEdge(lEdgeToRemove.getSecondNode(), lEdgeToRemove.getFirstNode());
 		}
 
 		for (int i = 0; i < lNumberOfEdgesToAdd; i++)
 		{
-			Node lNode1 = RandomUtils.randomElement(pRandom, lNodeList);
-			Node lNode2 = RandomUtils.randomElement(pRandom, lNodeList);
+			Node lNode1;
+			Node lNode2;
+			do
+			{
+				lNode1 = RandomUtils.randomElement(pRandom, lNodeList);
+				lNode2 = RandomUtils.randomElement(pRandom, lNodeList);
+			}
+			while (lGraph.isEdge(lNode1, lNode2));
+
 			Edge<Node> lEdgeToAdd = new UndirectedEdge<Node>(lNode1, lNode2);
 			lGraph.addEdge(lEdgeToAdd);
 		}
+
+		if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
+			throw new RuntimeException("Not Average Degree invariant!"
+					+ (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
 
 		return lGraph;
 	}
@@ -126,25 +132,48 @@ public class GraphGenerator
 	{
 		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>(pGraph);
 		List<Node> lNodeList = new ArrayList<Node>(pGraph.getNodeSet());
-		List<Node> lBaitList = RandomUtils.randomSample(pRandom, pBaitProportion, lNodeList);
 
-		for (Node lBait : lBaitList)
+		int lCounter = 0;
+		do
 		{
-			Set<Node> lNeighboursSet = lGraph.getNodeNeighbours(lBait);
-			for (Node lNeighbour : lNeighboursSet)
+			List<Node> lBaitList = RandomUtils.randomSample(pRandom, pBaitProportion, lNodeList);
+
+			for (Node lBait : lBaitList)
 			{
-				Set<Node> lNeighboursSet2 = lGraph.getNodeNeighbours(lNeighbour);
-				lNeighboursSet2.remove(lBait);
-				List<Node> lReconnectionList = RandomUtils.randomSample(pRandom, pReconnectionProbability, lNeighboursSet2);
-				for (Node lReconnectedNode : lReconnectionList)
+				Set<Node> lNeighboursSet = lGraph.getNodeNeighbours(lBait);
+				for (Node lNeighbour : lNeighboursSet)
 				{
-					lGraph.removeEdge(lReconnectedNode, lNeighbour);
-					lGraph.removeEdge(lNeighbour,lReconnectedNode);
-					lGraph.addEdge(new UndirectedEdge<Node>(lBait, lReconnectedNode));
+					Set<Node> lNeighboursSet2 = lGraph.getNodeNeighbours(lNeighbour);
+					lNeighboursSet2.remove(lBait);
+					lNeighboursSet2.removeAll(lNeighboursSet);
+					List<Node> lReconnectionList = RandomUtils.randomSample(pRandom, pReconnectionProbability,
+							lNeighboursSet2);
+					for (Node lReconnectedNode : lReconnectionList)
+					{
+						if (!lGraph.isEdge(lBait, lReconnectedNode))
+						{
+							lGraph.removeEdge(lReconnectedNode, lNeighbour);
+							lGraph.removeEdge(lNeighbour, lReconnectedNode);
+							lGraph.addEdge(new UndirectedEdge<Node>(lBait, lReconnectedNode));
+							// System.out.println("reconnecting");
+						}
+					}
 				}
 			}
+
+			if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
+				throw new RuntimeException("Not Average Degree invariant! :"
+						+ (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
+
+			if (lGraph.equals(pGraph))
+				System.out.println("Graph was not changed!");
+			// throw new RuntimeException("Graph was not changed!");
+			lCounter++;
+			if(lCounter>10)
+				break;
 		}
-		
+		while (lGraph.equals(pGraph));
+
 		return lGraph;
 	}
 
@@ -193,7 +222,7 @@ public class GraphGenerator
 
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
 			{
-				addNodePreferentialAttachement(pRandom, lGraph, lCounter++, pAverageDegree/2, pExponent);
+				addNodePreferentialAttachement(pRandom, lGraph, lCounter++, pAverageDegree / 2, pExponent);
 			}
 
 		}
@@ -239,8 +268,8 @@ public class GraphGenerator
 				e.printStackTrace();
 			}
 
-			long lNumberOfEdges =  RandomUtils.longGaussian(pRandom,pNumberOfNewEdges,0.5);
-			lNumberOfEdges = (long) Math.min(lNumberOfEdges,2*pNumberOfNewEdges);
+			long lNumberOfEdges = RandomUtils.longGaussian(pRandom, pNumberOfNewEdges, 0.5);
+			lNumberOfEdges = (long) Math.min(lNumberOfEdges, 2 * pNumberOfNewEdges);
 			for (int i = 0; i < lNumberOfEdges; i++)
 			{
 				Node lNode = lDistributionSource.getObject(pRandom);

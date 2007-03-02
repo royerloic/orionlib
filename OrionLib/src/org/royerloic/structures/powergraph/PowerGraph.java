@@ -400,10 +400,47 @@ public class PowerGraph<N>
 
 		return lNumberOfEdges;
 	}
+	
+	public int getMaximalPowerEdgeSize()
+	{
+		int lMaxNumberOfEdges = 0;
+		for (Edge<Set<N>> lEdge : mPowerEdgeSet)
+			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
+			{
+				lMaxNumberOfEdges = Math.max(lMaxNumberOfEdges, (lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1)) / 2);
+			}
+			else
+			{
+				lMaxNumberOfEdges = Math.max(lMaxNumberOfEdges,lEdge.getFirstNode().size() * lEdge.getSecondNode().size());
+			}
+		
+		return lMaxNumberOfEdges;		
+	}
+	
 
 	public double getEdgeReduction()
 	{
 		return 1 - ((double) (getNumberOfPowerEdges()) / (double) getNumberOfEdges());
 	}
+
+	public List<Set<N>> getAllPowerNodeContaining(final N pNode)
+	{
+		List<Set<N>>  lList = new ArrayList<Set<N>>();
+		for (Set<N> lPowerNode : mPowerNodeSet)
+			if (lPowerNode.contains(pNode))
+				lList.add(lPowerNode);
+				
+			return lList;
+	}
+	
+	
+	public boolean isPowerEdge(Set<N> pPowerNode1, Set<N> pPowerNode2)
+	{
+		Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(pPowerNode1, pPowerNode2);
+		final boolean isPowerEdge = mPowerEdgeSet.contains(lPowerEdge);
+		return isPowerEdge;		
+	}
+	
+	
 
 }
