@@ -102,13 +102,13 @@ public class MatrixFile
 
 	public static Matrix<String> readMatrixFromFile(File pFile) throws FileNotFoundException, IOException
 	{
-		return readMatrixFromFile(pFile, false, "\\t");
+		return readMatrixFromFile(pFile, false, "\\t+");
 	}
 
 	public static Matrix<String> readMatrixFromFile(File pFile, boolean pFileHasHeader)
 			throws FileNotFoundException, IOException
 	{
-		return readMatrixFromFile(pFile, pFileHasHeader, "\\t");
+		return readMatrixFromFile(pFile, pFileHasHeader, "\\t+");
 	}
 
 	public static Matrix<String> readMatrixFromFile(File pFile, String pSeparator)
@@ -132,7 +132,7 @@ public class MatrixFile
 	public static Matrix<String> readMatrixFromStream(InputStream pInputStream) throws FileNotFoundException,
 			IOException
 	{
-		return readMatrixFromStream(pInputStream, "\\t");
+		return readMatrixFromStream(pInputStream, "\\t+");
 	}
 
 	public static Matrix<String> readMatrixFromStream(InputStream pInputStream, String pSeparator)
@@ -144,7 +144,7 @@ public class MatrixFile
 	public static Matrix<String> readMatrixFromStream(InputStream pInputStream, boolean pFileHasHeader)
 			throws FileNotFoundException, IOException
 	{
-		return readMatrixFromStream(pInputStream, pFileHasHeader, "\\t");
+		return readMatrixFromStream(pInputStream, pFileHasHeader, "\\t+");
 	}
 
 	public static Matrix<String> readMatrixFromStream(InputStream pInputStream,

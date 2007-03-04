@@ -27,12 +27,19 @@ public class matrixfilter
 		Iterator<List<String>> lIterator = pMatrix.iterator();
 		for (;lIterator.hasNext();)
 		{
-			List<String> lList = lIterator.next();
-			final String lValueString = lList.get(pColumnIndex);
-			final Double lValue = Double.parseDouble(lValueString);
-			if(!(lValue>pMin && lValue<pMax))
+			try
 			{
-				lIterator.remove();
+				List<String> lList = lIterator.next();
+				final String lValueString = lList.get(pColumnIndex);
+				final Double lValue = Double.parseDouble(lValueString);
+				if(!(lValue>pMin && lValue<pMax))
+				{
+					lIterator.remove();
+				}
+			}
+			catch (Throwable e)
+			{
+				e.printStackTrace();
 			}
 		}
 	}
