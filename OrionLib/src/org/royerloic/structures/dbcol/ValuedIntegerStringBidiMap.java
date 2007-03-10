@@ -79,7 +79,7 @@ public class ValuedIntegerStringBidiMap
 		try
 		{
 			mDatabaseConnection.setAutoCommit(false);
-			mDatabaseConnection.setTransactionIsolation(mDatabaseConnection.TRANSACTION_READ_UNCOMMITTED);
+			mDatabaseConnection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 			mDatabaseConnection.commit();
 		}
 		catch (SQLException e)

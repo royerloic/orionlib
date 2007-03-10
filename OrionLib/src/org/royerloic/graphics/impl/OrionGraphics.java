@@ -249,7 +249,7 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 			}
 
 			// get component size
-			Dimension lComponentSize = size();
+			Dimension lComponentSize = getSize();
 
 			// setup data
 			mWidth = lComponentSize.width;

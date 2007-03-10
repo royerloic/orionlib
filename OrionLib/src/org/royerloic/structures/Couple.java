@@ -13,6 +13,7 @@ public class Couple<A, B>
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object pObj)
 	{

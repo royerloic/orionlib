@@ -50,6 +50,7 @@ public class Attach<O, V>
 		mV = pV;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public final boolean equals(Object pObj)
 	{

@@ -18,7 +18,7 @@ public class DualGraph
 			for (Edge<Set<N>> lPowerEdge2 : pPowerGraph.getPowerEdgeSet())
 				if (lPowerEdge1 != lPowerEdge2)
 				{
-					if (pPowerGraph.isAdjacent(lPowerEdge1, lPowerEdge2))
+					if (PowerGraph.isAdjacent(lPowerEdge1, lPowerEdge2))
 						lDualGraph.addEdge(new UndirectedEdge<Edge<Set<N>>>(lPowerEdge1, lPowerEdge2));
 				}
 		for (Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())

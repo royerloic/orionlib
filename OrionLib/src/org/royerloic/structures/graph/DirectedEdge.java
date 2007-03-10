@@ -67,13 +67,10 @@ public class DirectedEdge<N> implements Edge<N>
 		{
 			return true;
 		}
-		else
-		{
-			Edge<N> lEdge = (Edge<N>) pObject;
-			boolean lEquals = (mFirstNode.equals(lEdge.getFirstNode()))
-					&& (mSecondNode.equals(lEdge.getSecondNode()));
-			return lEquals;
-		}
+		Edge<N> lEdge = (Edge<N>) pObject;
+		boolean lEquals = (mFirstNode.equals(lEdge.getFirstNode()))
+				&& (mSecondNode.equals(lEdge.getSecondNode()));
+		return lEquals;
 	}
 
 	@Override

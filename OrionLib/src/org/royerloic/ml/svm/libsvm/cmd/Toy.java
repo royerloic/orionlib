@@ -524,6 +524,6 @@ class AppletFrame extends Frame
 		applet.start();
 		this.add(applet);
 		this.pack();
-		this.show();
+		this.setVisible(true);
 	}
 }
