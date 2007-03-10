@@ -37,5 +37,5 @@ public interface Graph<N, E>
 
 	public Graph<N, E> extractStrictSubGraph(Set<N> pNodeSet);
 
-	public Graph extractSubGraph(Set<N> pNodeSet);
+	public Graph<N, E> extractSubGraph(Set<N> pNodeSet);
 }

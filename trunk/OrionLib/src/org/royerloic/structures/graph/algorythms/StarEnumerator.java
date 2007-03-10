@@ -12,11 +12,12 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.royerloic.structures.graph.Edge;
 import org.royerloic.structures.graph.Graph;
 
 public class StarEnumerator<N>
 {
-	Graph														mGraph;
+	Graph<N,Edge<N>>														mGraph;
 
 	Set<Graph>											mStarSet;
 
@@ -54,7 +55,7 @@ public class StarEnumerator<N>
 	/**
 	 * @param pGraphInterface
 	 */
-	public StarEnumerator(Graph pGraphInterface)
+	public StarEnumerator(Graph<N,Edge<N>> pGraphInterface)
 	{
 		super();
 		mGraph = pGraphInterface;
@@ -85,11 +86,11 @@ public class StarEnumerator<N>
 
 				Set<N> lSingletonSet = new HashSet<N>(1);
 				lSingletonSet.add(lNode);
-				Graph lSubGraph = mGraph.extractSubGraph(lSingletonSet);
+				Graph<N,Edge<N>> lSubGraph = mGraph.extractSubGraph(lSingletonSet);
 
 				mStarSet.add(lSubGraph);
 
-				Star lStar = new Star();
+				Star lStar = new Star<N>();
 				lStar.mStarGraph = lSubGraph;
 				lStar.mConnectivity = lNodeConnectivity;
 				lStar.mStarNodesSet = lNeighboursSet;
@@ -101,7 +102,7 @@ public class StarEnumerator<N>
 		Collections.sort(mStarList);
 	}
 
-	public void associateGraph(Graph pGraph)
+	public void associateGraph(Graph<N,Edge<N>> pGraph)
 	{
 		mGraph = pGraph;
 	}

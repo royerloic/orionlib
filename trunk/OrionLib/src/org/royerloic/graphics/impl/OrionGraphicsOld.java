@@ -150,8 +150,6 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 		getBufferStrategy().getDrawGraphics().dispose();
 		createBufferStrategy(2);
 
-		show();
-
 		setVisible(true);
 
 		toFront();
@@ -183,8 +181,6 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 		getBufferStrategy().getDrawGraphics().dispose();
 		createBufferStrategy(2);
-
-		show();
 
 		setVisible(true);
 
@@ -220,7 +216,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 			}
 
 			// get component size
-			Dimension lComponentSize = size();
+			Dimension lComponentSize = getSize();
 
 			// setup data
 			mWidth = lComponentSize.width;
