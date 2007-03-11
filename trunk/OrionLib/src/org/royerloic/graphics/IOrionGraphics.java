@@ -7,7 +7,7 @@ import java.awt.Frame;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public interface IOrionGraphics
+public interface IOrionGraphics extends GraphicsProvider
 {
 
 	public abstract boolean startGraphics();

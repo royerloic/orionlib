@@ -16,7 +16,7 @@ public class OrionGraphicsFactory
 
 	public static final int	VECTOR				= 2;
 
-	public static final int	cLAST_DEVICE	= -1;
+	public static final int	cLAST_DEVICE	= Integer.MAX_VALUE;
 
 	public static final int	cFIRST_DEVICE	= 0;
 
