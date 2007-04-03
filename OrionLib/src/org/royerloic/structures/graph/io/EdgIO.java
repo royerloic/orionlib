@@ -53,10 +53,16 @@ public class EdgIO
 			{
 				String lFirstNodeIndexString = lStringList.get(1);
 				String lSecondNodeIndexString = lStringList.get(2);
-				String lConfidenceValueIndexString = lStringList.get(3);
 				lFirstNodeIndex = Integer.parseInt(lFirstNodeIndexString);
 				lSecondNodeIndex = Integer.parseInt(lSecondNodeIndexString);
-				lConfidenceValueIndex = Integer.parseInt(lConfidenceValueIndexString);
+				if (lStringList.size() >= 4)
+				{
+					String lConfidenceValueIndexString = lStringList.get(3).trim();
+					if (lConfidenceValueIndexString.matches("[0-9]+"))
+					{
+						lConfidenceValueIndex = Integer.parseInt(lConfidenceValueIndexString);
+					}
+				}
 				break;
 			}
 		}
@@ -73,7 +79,7 @@ public class EdgIO
 		}
 
 		boolean isNodeFilterDefined = false;
-		Set<String> lFilteredNodesSet = new HashSet<String>();
+		Set<Node> lFilteredNodesSet = new HashSet<Node>();
 		for (List<String> lStringList : lMatrix)
 		{
 			String lLineType = lStringList.get(0);
@@ -81,7 +87,8 @@ public class EdgIO
 			{
 				isNodeFilterDefined = true;
 				String lName = lStringList.get(1);
-				lFilteredNodesSet.add(lName);
+				Node lNode = new Node(lName);
+				lFilteredNodesSet.add(lNode);
 			}
 		}
 
@@ -91,9 +98,9 @@ public class EdgIO
 			if (lLineType.equalsIgnoreCase("NODE"))
 			{
 				String lName = lStringList.get(1);
-				if (lFilteredNodesSet.contains(lName) || !isNodeFilterDefined)
+				Node lNode = new Node(lName);
+				if (lFilteredNodesSet.contains(lNode) || !isNodeFilterDefined)
 				{
-					Node lNode = new Node(lName);
 					lGraph.addNode(lNode);
 					lStringIdToNodeMap.put(lName, lNode);
 				}
@@ -108,7 +115,22 @@ public class EdgIO
 				String lNodeName1 = lStringList.get(lFirstNodeIndex);
 				String lNodeName2 = lStringList.get(lSecondNodeIndex);
 
-				if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2))
+				Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
+				Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
+
+				if (lFirstNode == null)
+				{
+					lFirstNode = new Node(lNodeName1);
+					lStringIdToNodeMap.put(lNodeName1, lFirstNode);
+				}
+
+				if (lSecondNode == null)
+				{
+					lSecondNode = new Node(lNodeName2);
+					lStringIdToNodeMap.put(lNodeName2, lSecondNode);
+				}
+
+				if ((lFilteredNodesSet.contains(lFirstNode) && lFilteredNodesSet.contains(lSecondNode))
 						|| !isNodeFilterDefined)
 				{
 					double lConfidenceValue = 1;
@@ -121,20 +143,6 @@ public class EdgIO
 					if (lConfidenceValue >= lConfidenceThreshold)
 					{
 
-						Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
-						Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
-
-						if (lFirstNode == null)
-						{
-							lFirstNode = new Node(lNodeName1);
-							lStringIdToNodeMap.put(lNodeName1, lFirstNode);
-						}
-
-						if (lSecondNode == null)
-						{
-							lSecondNode = new Node(lNodeName2);
-							lStringIdToNodeMap.put(lNodeName2, lSecondNode);
-						}
 						Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
 						lGraph.addEdge(lEdge);
 					}
@@ -159,7 +167,7 @@ public class EdgIO
 						lFirstNode = new Node(lNodeName1);
 						lStringIdToNodeMap.put(lNodeName1, lFirstNode);
 					}
-					
+
 					if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2))
 							|| !isNodeFilterDefined)
 					{
@@ -169,7 +177,7 @@ public class EdgIO
 							lSecondNode = new Node(lNodeName2);
 							lStringIdToNodeMap.put(lNodeName2, lSecondNode);
 						}
-						
+
 						Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
 						lGraph.addEdge(lEdge);
 					}
@@ -177,6 +185,28 @@ public class EdgIO
 
 			}
 		}
+
+		for (List<String> lStringList : lMatrix)
+		{
+			String lLineType = lStringList.get(0);
+			if (lLineType.equalsIgnoreCase("SELECT"))
+			{
+				isNodeFilterDefined = true;
+				String lNodeName = lStringList.get(1);
+				String lDepthString = lStringList.get(2);
+				Integer lDepth = Integer.parseInt(lDepthString);
+				Node lNode = new Node(lNodeName);
+				lFilteredNodesSet.add(lNode);
+				lFilteredNodesSet.addAll(lGraph.getNodeNeighbours(lNode, lDepth));
+			}
+		}
+
+		if (isNodeFilterDefined)
+			for (Node lNode : new ArrayList<Node>(lGraph.getNodeSet()))
+				if (!lFilteredNodesSet.contains(lNode))
+				{
+					lGraph.removeNode(lNode);
+				}
 
 		return lGraph;
 	}

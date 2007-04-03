@@ -1,13 +1,16 @@
 package org.royerloic.structures.graph.algorythms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 import org.royerloic.random.DistributionSource;
 import org.royerloic.random.RandomUtils;
+import org.royerloic.structures.Couple;
 import org.royerloic.structures.graph.Edge;
 import org.royerloic.structures.graph.Graph;
 import org.royerloic.structures.graph.HashGraph;
@@ -125,10 +128,10 @@ public class GraphGenerator
 		return lGraph;
 	}
 
-	public static Graph<Node, Edge<Node>> addSpokeNoise(Random pRandom,
-																											Graph<Node, Edge<Node>> pGraph,
-																											double pBaitProportion,
-																											double pReconnectionProbability)
+	public static Couple<Graph<Node, Edge<Node>>, Double> addSpokeNoise(Random pRandom,
+																																			Graph<Node, Edge<Node>> pGraph,
+																																			double pBaitProportion,
+																																			double pReconnectionProbability)
 	{
 		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>(pGraph);
 		List<Node> lNodeList = new ArrayList<Node>(pGraph.getNodeSet());
@@ -155,6 +158,7 @@ public class GraphGenerator
 							lGraph.removeEdge(lReconnectedNode, lNeighbour);
 							lGraph.removeEdge(lNeighbour, lReconnectedNode);
 							lGraph.addEdge(new UndirectedEdge<Node>(lBait, lReconnectedNode));
+
 							// System.out.println("reconnecting");
 						}
 					}
@@ -169,12 +173,19 @@ public class GraphGenerator
 				System.out.println("Graph was not changed!");
 			// throw new RuntimeException("Graph was not changed!");
 			lCounter++;
-			if(lCounter>10)
+			if (lCounter > 10)
 				break;
 		}
 		while (lGraph.equals(pGraph));
 
-		return lGraph;
+		Set<Edge<Node>> lSet = new HashSet<Edge<Node>>();
+		lSet.addAll(pGraph.getEdgeSet());
+		lSet.retainAll(lGraph.getEdgeSet());
+
+		double lNoiseLevel = (double) (pGraph.getNumberOfEdges() - lSet.size())
+				/ (double) pGraph.getNumberOfEdges();
+
+		return new Couple<Graph<Node, Edge<Node>>, Double>(lGraph, lNoiseLevel);
 	}
 
 	public static Graph<Node, Edge<Node>> randomSampling(	Random pRandom,
@@ -418,5 +429,85 @@ public class GraphGenerator
 		}
 		return lGraph;
 	}
+
+	public static Graph<Node, Edge<Node>> generateRandomGeometric2d(Random pRandom,
+																																int pNumberOfNodes,
+																																double pDegree)
+	{
+		final double lRadius = Math.sqrt(pDegree / (Math.PI * pNumberOfNodes));
+		Random lRandom = new Random(System.currentTimeMillis());
+		
+		Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
+		Map<Integer,Node> lIndexToNodeMap = new HashMap<Integer,Node>();
+		double[][] lVectorArray = new double[pNumberOfNodes][];
+		for (int i=0; i<pNumberOfNodes; i++)
+		{
+			lVectorArray[i] = randomVector(lRandom,2);
+			Node lNode = new Node("node " + i);
+			lGraph.addNode(lNode);
+			lIndexToNodeMap.put(i, lNode);
+		}
+		
+		
+		
+		for(int i=0; i<pNumberOfNodes; i++)
+			for(int j=0; j<i; j++)
+			{
+				double[] lVector1 =  lVectorArray[i];
+				double[] lVector2 =  lVectorArray[j];
+				final double lDistance = euclideanDistance(lVector1, lVector2);
+				if (lDistance<=lRadius)
+				{
+					Node lNode1 = lIndexToNodeMap.get(i);
+					Node lNode2 = lIndexToNodeMap.get(j);
+					Edge<Node> lEdge = new UndirectedEdge<Node>(lNode1, lNode2);
+					lGraph.addEdge(lEdge);
+				}
+			}
+				
+		return lGraph;
+	}
+
+	private static double[] randomVector(Random pRandom, int pDimension)
+	{
+		double[] lVector = new double[pDimension];
+		for(int i=0;i<pDimension;i++)
+		{
+			lVector[i]=pRandom.nextDouble();
+		}			
+		return lVector;
+	}
+	
+	private static double euclideanDistance(double[] pVector1, double[] pVector2)
+	{
+		final int lLength = Math.max(pVector1.length,pVector2.length);
+		double lSum=0;
+		for(int i=0; i<lLength; i++)
+		{
+			final double lFirst = (i<pVector1.length)?pVector1[i]:0;
+			final double lSecond = (i<pVector2.length)?pVector2[i]:0;
+			lSum+= (lFirst-lSecond)*(lFirst-lSecond);
+		}
+		final double lDistance = Math.sqrt(lSum);
+		return lDistance;		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
