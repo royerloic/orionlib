@@ -42,6 +42,11 @@ public class GraphLoader
 		{
 			lGraph = EdgIO.load(pFile);
 		}
+		else if (isSif(pFile))
+		{
+			lGraph = SifIO.load(pFile);
+		}
+			
 		EdgIO.save(lGraph, new File("dump.edg"));
 		return lGraph;
 	}
@@ -62,6 +67,11 @@ public class GraphLoader
 		return pFile.getName().endsWith(".edg");
 	}
 
+	private static boolean isSif(File pFile)
+	{
+		return pFile.getName().endsWith(".sif");
+	}
+	
 	public static PowerGraph<Node> loadPowerGraph(File pFile,
 																								boolean pSpokeModel,
 																								double pDensityThreshold,

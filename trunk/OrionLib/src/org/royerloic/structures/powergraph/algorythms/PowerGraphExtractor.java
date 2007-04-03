@@ -29,28 +29,42 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 	private NodeSetComparator	cNodeSetComparator	= new NodeSetComparator();
 
+	private final double	mMinimalSimilarity;
+
+	private final int	mMaxIterations;
+
 	public PowerGraphExtractor()
 	{
 		super();
+		mMinimalSimilarity = 0;
+		mMaxIterations = Integer.MAX_VALUE;
+	}
+	
+	public PowerGraphExtractor(double pMinimalSimilarity, int pMaxIterations)
+	{
+		super();
+		mMinimalSimilarity = pMinimalSimilarity;
+		mMaxIterations = pMaxIterations;
 	}
 
 	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph)
 	{
-		return extractPowerGraph(pGraph, 1);
+		return extractPowerGraph(pGraph, 1, mMinimalSimilarity ,mMaxIterations);
 	}
 
 	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph, double pProbabilityThreshold)
 	{
-		return extractPowerGraph(pGraph, pProbabilityThreshold, Integer.MAX_VALUE);
+		return extractPowerGraph(pGraph, pProbabilityThreshold, mMinimalSimilarity, mMaxIterations);
 	}
 
 	public final PowerGraph<N> extractPowerGraph(	Graph<N, Edge<N>> pGraph,
 																								double pProbabilityThreshold,
+																								double pMinSimilarity,
 																								int pMaxIterations)
 	{
 		PowerGraph<N> lPowerGraph = new PowerGraph<N>();
 		GraphClustering<N> mClustering = new GraphClustering<N>();
-		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, 0, pMaxIterations);
+		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, pMinSimilarity, pMaxIterations);
 
 		//System.out.println("Started constructing Power Graph");
 		List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);

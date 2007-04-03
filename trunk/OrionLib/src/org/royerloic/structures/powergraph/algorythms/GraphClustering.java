@@ -110,10 +110,10 @@ public class GraphClustering<N>
 				// System.out.println(lConnectivity);
 				mNodeToConnectivityMap.put(lNode, lConnectivity);
 			}
-			for (N lNode : mNodeSet)
+			/*for (N lNode : mNodeSet)
 			{
 				mNodeToConnectivityMap.remove(lNode);
-			}
+			}/**/
 			// filter(mNodeToConnectivityMap, mThreshold);
 		}
 
@@ -221,7 +221,7 @@ public class GraphClustering<N>
 	}
 
 	public final Set<Set<N>> clusterInternal(	Graph<Cluster, Edge<Cluster>> pClusterGraph,
-																						double pCutOff,
+																						double pMinSimilarity,
 																						int pMaxIterations)
 	{
 
@@ -238,9 +238,7 @@ public class GraphClustering<N>
 		int lIterationCount = 0;
 		while (pClusterGraph.getNumberOfNodes() > 1)
 		{
-			// System.out.println("lClusterGraph.getNumberOfNodes()=" +
-			// lClusterGraph.getNumberOfNodes());
-			// System.out.println("lMaximalSimilarity=" + lMaximalSimilarity);
+			
 			//System.out.print(".");
 			double lMaximalSimilarity = -1;
 
@@ -268,6 +266,9 @@ public class GraphClustering<N>
 					lMaximalSimilarityClusterSet.add(lCluster1);
 				}
 			}
+			
+			System.out.println("lMaximalSimilarityClusterSet.size()=" + lMaximalSimilarityClusterSet.size());
+			System.out.println("lMaximalSimilarity=" + lMaximalSimilarity);
 
 			while (!lMaximalSimilarityClusterSet.isEmpty())
 			{
@@ -308,7 +309,7 @@ public class GraphClustering<N>
 			}
 			lIterationCount++;
 
-			if ((lMaximalSimilarity < pCutOff) || lIterationCount >= pMaxIterations)
+			if ((lMaximalSimilarity < pMinSimilarity) || lIterationCount >= pMaxIterations )
 				break;
 		}
 
