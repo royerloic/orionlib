@@ -29,9 +29,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 	private NodeSetComparator	cNodeSetComparator	= new NodeSetComparator();
 
-	private final double	mMinimalSimilarity;
+	private final double			mMinimalSimilarity;
 
-	private final int	mMaxIterations;
+	private final int					mMaxIterations;
 
 	public PowerGraphExtractor()
 	{
@@ -39,7 +39,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		mMinimalSimilarity = 0;
 		mMaxIterations = Integer.MAX_VALUE;
 	}
-	
+
 	public PowerGraphExtractor(double pMinimalSimilarity, int pMaxIterations)
 	{
 		super();
@@ -49,7 +49,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph)
 	{
-		return extractPowerGraph(pGraph, 1, mMinimalSimilarity ,mMaxIterations);
+		return extractPowerGraph(pGraph, 1, mMinimalSimilarity, mMaxIterations);
 	}
 
 	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph, double pProbabilityThreshold)
@@ -66,15 +66,17 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		GraphClustering<N> mClustering = new GraphClustering<N>();
 		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, pMinSimilarity, pMaxIterations);
 
-		//System.out.println("Started constructing Power Graph");
+		// System.out.println("Started constructing Power Graph");
 		List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);
 
 		Collections.sort(lNodeSetList, cNodeSetComparator);
 		// System.out.println(lClusterArray.length);
 
+		mergesimilarsets(lNodeSetList);
+
 		List<UndirectedEdge<Set<N>>> lPowerEdgeList = new ArrayList<UndirectedEdge<Set<N>>>();
 
-		//System.out.println("Adding Power Edges.");
+		// System.out.println("Adding Power Edges.");
 		if (true) // Power Edges
 		{
 			for (int i = 0; i < lNodeSetList.size(); i++)
@@ -113,7 +115,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			}
 		}
 
-		//System.out.println("Adding remaining edges.");
+		// System.out.println("Adding remaining edges.");
 		if (false) // Original Graph
 		{
 			for (Edge<N> lEdge : pGraph.getEdgeSet())
@@ -125,9 +127,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 				UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
 				lPowerEdgeList.add(lPowerEdge);
-				//System.out.print(",");
+				// System.out.print(",");
 			}
-			//System.out.println("done,");
+			// System.out.println("done,");
 		}
 
 		if (false) // Clusters
@@ -151,7 +153,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			lPowerGraph.addPowerNode(lPowerNode);
 		}
 
-		//System.out.println("Finished constructing Power Graph");
+		// System.out.println("Finished constructing Power Graph");
 
 		/***************************************************************************
 		 * File lPowerEdgeDump = new
@@ -161,6 +163,33 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		 **************************************************************************/
 
 		return lPowerGraph;
+	}
+
+	private void mergesimilarsets(List<Set<N>> pNodeSetList)
+	{
+		int i = 0;
+		while (i < pNodeSetList.size())
+		{
+			Set<N> lSet = pNodeSetList.get(i);
+			final int lSize = lSet.size();
+			boolean lThereIsSmaller = false;
+			for (Set<N> lOtherSet : pNodeSetList)
+			{
+				if (lOtherSet.size()>2 && lOtherSet.size() == lSize - 1 && lSet.containsAll(lOtherSet))
+				{
+					lThereIsSmaller = true;
+				}
+			}
+			if (lThereIsSmaller)
+			{
+				pNodeSetList.remove(lSet);
+			}
+			else
+			{
+				i++;
+			}
+		}
+
 	}
 
 	private boolean isPowerEdge(Graph<N, Edge<N>> pGraph, Set<N> pFirstPowerNode, Set<N> pSecondPowerNode)
