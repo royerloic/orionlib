@@ -286,4 +286,9 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>
 		return "NodeSet= " + mNodeSet + " EdgeSet= " + mEdgeSet;
 	}
 
+	public Double getAverageDegree()
+	{
+		return ((double)2*getNumberOfEdges())/getNumberOfNodes();
+	}
+
 }

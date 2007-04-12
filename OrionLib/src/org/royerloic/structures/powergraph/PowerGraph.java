@@ -398,7 +398,33 @@ public class PowerGraph<N>
 				}
 				else
 				{
-					lNumberOfEdges += (lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1)) / 2;
+					lNumberOfEdges += ((lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1))) / 2;
+				}
+			}
+			else
+			{
+				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge.getSecondNode().size();
+			}
+		}
+
+		return lNumberOfEdges;
+	}
+	
+	public double getNumberOfEdgesForEdgeReduction()
+	{
+		int lNumberOfEdges = 0;
+
+		for (Edge<Set<N>> lEdge : mPowerEdgeSet)
+		{
+			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
+			{
+				if (lEdge.getFirstNode().size() == 1)
+				{
+					lNumberOfEdges += 0;
+				}
+				else
+				{
+					lNumberOfEdges += (lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1))/2;
 				}
 			}
 			else
@@ -448,6 +474,16 @@ public class PowerGraph<N>
 		Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(pPowerNode1, pPowerNode2);
 		final boolean isPowerEdge = mPowerEdgeSet.contains(lPowerEdge);
 		return isPowerEdge;
+	}
+
+	public Double getAverageDegree()
+	{
+		return ((double)2*getNumberOfEdges())/getNumberOfNodes();
+	}
+	
+	public Double getScaleFreeIndex()
+	{
+		return Math.log(getEdgeReduction())+(2.0/3.0)*Math.log(getAverageDegree());
 	}
 
 }
