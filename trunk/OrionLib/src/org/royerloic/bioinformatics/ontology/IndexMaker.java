@@ -19,69 +19,65 @@ public class IndexMaker<O>
 		// TODO Auto-generated constructor stub
 	}
 
-	public IndexMaker(Lattice<O> pLattice)
+	public IndexMaker(final Lattice<O> pLattice)
 	{
 		super();
 		// TODO Auto-generated constructor stub
-		mLattice = pLattice;
+		this.mLattice = pLattice;
 	}
 
-	public final Map<O, Integer> computeMapBreathFirst(Collection<O> pRoots)
+	public final Map<O, Integer> computeMapBreathFirst(final Collection<O> pRoots)
 	{
-		mIndex = 0;
-		mIndexMap.clear();
-		for (O lO : pRoots)
-			if (!mIndexMap.containsKey(lO))
+		this.mIndex = 0;
+		this.mIndexMap.clear();
+		for (final O lO : pRoots)
+			if (!this.mIndexMap.containsKey(lO))
 			{
-				mIndexMap.put(lO, mIndex);
-				mIndex++;
+				this.mIndexMap.put(lO, this.mIndex);
+				this.mIndex++;
 			}
-		for (O lO : pRoots)
-		{
+		for (final O lO : pRoots)
 			breathFirstIndexRecursive(lO);
-		}
 
-		return mIndexMap;
+		return this.mIndexMap;
 	}
 
-	private final void breathFirstIndexRecursive(O pNode)
+	private final void breathFirstIndexRecursive(final O pNode)
 	{
-		Set<O> lChildrenSet = mLattice.getChildren(pNode);
-		for (O lO : lChildrenSet)
-			if (!mIndexMap.containsKey(lO))
+		final Set<O> lChildrenSet = this.mLattice.getChildren(pNode);
+		for (final O lO : lChildrenSet)
+			if (!this.mIndexMap.containsKey(lO))
 			{
-				mIndexMap.put(lO, mIndex);
-				mIndex++;
+				this.mIndexMap.put(lO, this.mIndex);
+				this.mIndex++;
 			}
-		for (O lO : lChildrenSet)
-		{
+		for (final O lO : lChildrenSet)
 			breathFirstIndexRecursive(lO);
-		}
 	}
 
-	public final Map<O, Integer> computeMapDepthFirst(Collection<O> pRoots)
+	public final Map<O, Integer> computeMapDepthFirst(final Collection<O> pRoots)
 	{
-		mIndex = 0;
-		mIndexMap.clear();
-		for (O lO : pRoots)
-			if (!mIndexMap.containsKey(lO))
+		this.mIndex = 0;
+		this.mIndexMap.clear();
+		for (final O lO : pRoots)
+			if (!this.mIndexMap.containsKey(lO))
 			{
-				mIndexMap.put(lO, mIndex);
-				mIndex++;
+				this.mIndexMap.put(lO, this.mIndex);
+				this.mIndex++;
 				deapthFirstIndexRecursive(lO);
 			}
 
-		return mIndexMap;
+		return this.mIndexMap;
 	}
 
-	private final void deapthFirstIndexRecursive(O pNode)
+	private final void deapthFirstIndexRecursive(final O pNode)
 	{
-		Set<O> lChildrenSet = mLattice.getChildren(pNode);
-		for (O lO : lChildrenSet)
-			if (!mIndexMap.containsKey(lO))
+		final Set<O> lChildrenSet = this.mLattice.getChildren(pNode);
+		for (final O lO : lChildrenSet)
+			if (!this.mIndexMap.containsKey(lO))
 			{
-				mIndexMap.put(lO, mIndex);
-				mIndex++;
+				this.mIndexMap.put(lO, this.mIndex);
+				this.mIndex++;
 				deapthFirstIndexRecursive(lO);
 			}
 	}

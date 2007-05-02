@@ -10,18 +10,18 @@ import java.net.URL;
 public class ConsoleFeedListener implements FeedListenerInterface<FeedItemInterface>
 {
 
-	public void onItemFound(FeedItemInterface pFeedItem)
+	public void onItemFound(final FeedItemInterface pFeedItem)
 	{
 		System.out.println("Item found: \n" + pFeedItem);
 	}
 
-	public void onError(URL pUrl, Exception pException)
+	public void onError(final URL pUrl, final Exception pException)
 	{
 		System.out.println("Error while querying feed: " + pUrl);
 		System.out.println("The exception is: " + pException);
 	}
 
-	public void onItemRemoved(FeedItemInterface pFeedItem)
+	public void onItemRemoved(final FeedItemInterface pFeedItem)
 	{
 		System.out.println("Item removed: \n" + pFeedItem);
 	}

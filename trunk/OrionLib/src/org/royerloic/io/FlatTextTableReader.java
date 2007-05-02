@@ -63,7 +63,7 @@ public class FlatTextTableReader
 	@Override
 	public String toString()
 	{
-		String lFileNameString = "Handler name= " + mHandler;
+		final String lFileNameString = "Handler name= " + this.mHandler;
 		return "(" + lFileNameString + ")";
 	}
 
@@ -72,13 +72,13 @@ public class FlatTextTableReader
 	private FlatTextTableReader()
 	{
 		super();
-		mExcludedColumns = new HashSet<Integer>();
+		this.mExcludedColumns = new HashSet<Integer>();
 	}
 
-	public FlatTextTableReader(FlatTextTableReaderHandler pHandler)
+	public FlatTextTableReader(final FlatTextTableReaderHandler pHandler)
 	{
 		this();
-		mHandler = pHandler;
+		this.mHandler = pHandler;
 	}
 
 	/**
@@ -87,17 +87,13 @@ public class FlatTextTableReader
 	 * @param pIntegerArray
 	 * @param pMaximumNumberOfColumns
 	 */
-	public void setIncludedColumns(int[] pIntegerArray, int pMaximumNumberOfColumns)
+	public void setIncludedColumns(final int[] pIntegerArray, int pMaximumNumberOfColumns)
 	{
 		pMaximumNumberOfColumns = Math.max(pMaximumNumberOfColumns, pIntegerArray.length);
 		for (int i = 1; i < pMaximumNumberOfColumns; i++)
-		{
-			mExcludedColumns.add(i);
-		}
-		for (int lI : pIntegerArray)
-		{
-			mExcludedColumns.remove(lI);
-		}
+			this.mExcludedColumns.add(i);
+		for (final int lI : pIntegerArray)
+			this.mExcludedColumns.remove(lI);
 	}
 
 	/**
@@ -114,7 +110,7 @@ public class FlatTextTableReader
 	 *           if problem while reading file.
 	 * 
 	 */
-	public void readFile(File pFile, boolean pFileHasHeader) throws IOException
+	public void readFile(final File pFile, final boolean pFileHasHeader) throws IOException
 	{
 
 		BufferedReader lBufferedReader = null;
@@ -122,13 +118,13 @@ public class FlatTextTableReader
 		{
 			// We choose the buffer to be 10% of the file, therefore, a File will be
 			// block read in about 100 steps.
-			int lBufferSize = Math.min(10000000, (int) (pFile.length() / 10));
-			FileReader lFileReader = new FileReader(pFile);
+			final int lBufferSize = Math.min(10000000, (int) (pFile.length() / 10));
+			final FileReader lFileReader = new FileReader(pFile);
 			lBufferedReader = new BufferedReader(lFileReader, lBufferSize);
 			readStream(lBufferedReader, pFileHasHeader);
 
 		}
-		catch (IOException exception)
+		catch (final IOException exception)
 		{
 			cLogger.error(exception);
 			throw exception;
@@ -136,16 +132,14 @@ public class FlatTextTableReader
 		finally
 		{
 			if (lBufferedReader != null)
-			{
 				try
 				{
 					lBufferedReader.close();
 				}
-				catch (IOException exception)
+				catch (final IOException exception)
 				{
 					cLogger.error(exception);
 				}
-			}
 		}
 	}
 
@@ -154,40 +148,36 @@ public class FlatTextTableReader
 	 * @param pFileHasHeader
 	 * @throws IOException
 	 */
-	public void readStream(BufferedReader pBufferedReader, boolean pFileHasHeader) throws IOException
+	public void readStream(final BufferedReader pBufferedReader, final boolean pFileHasHeader) throws IOException
 	{
-		Pattern lColumnSplitPattern = Pattern.compile(mColumnSplitRegex);
-		Pattern lSetSplitPattern = Pattern.compile(mSetSplitRegex);
-		Pattern lNullPattern = Pattern.compile(mNullRegex);
+		final Pattern lColumnSplitPattern = Pattern.compile(this.mColumnSplitRegex);
+		final Pattern lSetSplitPattern = Pattern.compile(this.mSetSplitRegex);
+		final Pattern lNullPattern = Pattern.compile(this.mNullRegex);
 
 		String lLineString;
 		if (pFileHasHeader)
-		{
 			lLineString = pBufferedReader.readLine();
-		}
 		int lLineCounter = 0;
 		lineloop: while ((lLineString = pBufferedReader.readLine()) != null)
 		{
 			lLineCounter++;
-			String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
+			final String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
 			int lColumnCounter = 0;
-			for (String lColumnsElementString : lColumnsStringArray)
+			for (final String lColumnsElementString : lColumnsStringArray)
 			{
-				if (!mExcludedColumns.contains(lColumnCounter))
+				if (!this.mExcludedColumns.contains(lColumnCounter))
 				{
-					String[] lSetStringArray = lSetSplitPattern.split(lColumnsElementString, -1);
+					final String[] lSetStringArray = lSetSplitPattern.split(lColumnsElementString, -1);
 					int lSetCounter = 0;
-					for (int i = 0; i < lSetStringArray.length; i++)
+					for (String element : lSetStringArray)
 					{
-						Matcher lMatcher = lNullPattern.matcher(lSetStringArray[i]);
+						final Matcher lMatcher = lNullPattern.matcher(element);
 						if (!lMatcher.matches())
 						{
-							boolean lSkipCell = !mHandler.handleCell(lLineCounter, lColumnCounter, lSetCounter,
-									lSetStringArray[i]);
+							final boolean lSkipCell = !this.mHandler.handleCell(lLineCounter, lColumnCounter, lSetCounter,
+									element);
 							if (lSkipCell)
-							{
 								continue lineloop;
-							}
 							lSetCounter++;
 						}
 					}
@@ -195,16 +185,16 @@ public class FlatTextTableReader
 				lColumnCounter++;
 			}
 
-			if (!mHandler.handleEndOfCell(lLineCounter))
+			if (!this.mHandler.handleEndOfCell(lLineCounter))
 				return;
 		}
 	}
 
-	public void readRessource(Class pClass, String pRessourceName, boolean pFileHasHeader) throws IOException
+	public void readRessource(final Class pClass, final String pRessourceName, final boolean pFileHasHeader) throws IOException
 	{
-		InputStream lStream = pClass.getClassLoader().getResourceAsStream(pRessourceName);
-		InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
-		BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
+		final InputStream lStream = pClass.getClassLoader().getResourceAsStream(pRessourceName);
+		final InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
+		final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 		readStream(lBufferedReader, pFileHasHeader);
 	}
 
@@ -213,7 +203,7 @@ public class FlatTextTableReader
 	 */
 	public String getColumnSplitRegex()
 	{
-		return mColumnSplitRegex;
+		return this.mColumnSplitRegex;
 	}
 
 	/**
@@ -222,9 +212,9 @@ public class FlatTextTableReader
 	 * @param pColumnSplitRegex
 	 *          regular expression.
 	 */
-	public void setColumnSplitRegex(String pColumnSplitRegex)
+	public void setColumnSplitRegex(final String pColumnSplitRegex)
 	{
-		mColumnSplitRegex = pColumnSplitRegex;
+		this.mColumnSplitRegex = pColumnSplitRegex;
 	}
 
 	/**
@@ -232,7 +222,7 @@ public class FlatTextTableReader
 	 */
 	public String getNullRegex()
 	{
-		return mNullRegex;
+		return this.mNullRegex;
 	}
 
 	/**
@@ -242,9 +232,9 @@ public class FlatTextTableReader
 	 * @param pNullRegex
 	 *          null element regular expression.
 	 */
-	public void setNullRegex(String pNullRegex)
+	public void setNullRegex(final String pNullRegex)
 	{
-		mNullRegex = pNullRegex;
+		this.mNullRegex = pNullRegex;
 	}
 
 	/**
@@ -252,7 +242,7 @@ public class FlatTextTableReader
 	 */
 	public String getSetSplitRegex()
 	{
-		return mSetSplitRegex;
+		return this.mSetSplitRegex;
 	}
 
 	/**
@@ -262,45 +252,8 @@ public class FlatTextTableReader
 	 * @param pSetSplitRegex
 	 *          regular expression.
 	 */
-	public void setSetSplitRegex(String pSetSplitRegex)
+	public void setSetSplitRegex(final String pSetSplitRegex)
 	{
-		mSetSplitRegex = pSetSplitRegex;
-	}
-
-	private static int countNumberOfLinesInFile(File pFile) throws IOException
-	{
-		int lCounter = 0;
-		BufferedReader lBufferedReader = null;
-		try
-		{
-			// We choose the buffer to be 10% of the file, therefore, a file will be
-			// block read in about 100 steps.
-			int lBufferSize = Math.min(10000000, (int) (pFile.length() / 10));
-			lBufferedReader = new BufferedReader(new FileReader(pFile), lBufferSize);
-
-			while (lBufferedReader.readLine() != null)
-				lCounter++;
-		}
-		catch (IOException exception)
-		{
-			cLogger.error(exception);
-			throw exception;
-		}
-		finally
-		{
-			if (lBufferedReader != null)
-			{
-				try
-				{
-					lBufferedReader.close();
-				}
-				catch (IOException exception)
-				{
-					// TODO Auto-generated catch block
-					cLogger.error(exception);
-				}
-			}
-		}
-		return lCounter;
+		this.mSetSplitRegex = pSetSplitRegex;
 	}
 }

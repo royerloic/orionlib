@@ -14,9 +14,7 @@ public class ArrayMatrixUtils
 
 		for (int i = 0; i < lDownSampledLength; i++)
 			for (int j = 0; j < lDownSampledLength; j++)
-			{
 				lDownSampledMatrix[i][j] = average(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
-			}
 
 		return lDownSampledMatrix;
 	}
@@ -36,9 +34,7 @@ public class ArrayMatrixUtils
 		int lAverage = 0;
 		for (int i = pX; i < lEndX; i++)
 			for (int j = pY; j < lEndY; j++)
-			{
 				lAverage += pMatrix[i][j];
-			}
 
 		lAverage = lAverage / (pL * pH);
 		return (byte) lAverage;
@@ -56,9 +52,7 @@ public class ArrayMatrixUtils
 
 		for (int i = 0; i < lDownSampledLength; i++)
 			for (int j = 0; j < lDownSampledLength; j++)
-			{
 				lDownSampledMatrix[i][j] = averageNonZero(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
-			}
 
 		return lDownSampledMatrix;
 	}
@@ -87,13 +81,9 @@ public class ArrayMatrixUtils
 			}
 
 		if (lCount == 0)
-		{
 			lAverage = 0;
-		}
 		else
-		{
 			lAverage = lAverage / lCount;
-		}
 
 		return (byte) lAverage;
 	}
@@ -110,9 +100,7 @@ public class ArrayMatrixUtils
 
 		for (int i = 0; i < lDownSampledLength; i++)
 			for (int j = 0; j < lDownSampledLength; j++)
-			{
 				lDownSampledMatrix[i][j] = max(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
-			}
 
 		return lDownSampledMatrix;
 	}

@@ -10,7 +10,7 @@ public class LatinLetters
 
 	private static Map<String, String> getLatinRegexMap()
 	{
-		Map<String, String> lLatinRegexMap = new HashMap<String, String>();
+		final Map<String, String> lLatinRegexMap = new HashMap<String, String>();
 		lLatinRegexMap.put("(?:A|a)l(?:ph|f)a", "alpha");
 		lLatinRegexMap.put("(?:B|b)eta", "beta");
 		lLatinRegexMap.put("(?:G|g)amma", "gamma");
@@ -44,8 +44,8 @@ public class LatinLetters
 
 	public static String getAllLatinRegex()
 	{
-		StringBuffer lStringBuffer = new StringBuffer();
-		for (String lRegex : sLatinRegexMap.keySet())
+		final StringBuffer lStringBuffer = new StringBuffer();
+		for (final String lRegex : sLatinRegexMap.keySet())
 		{
 			lStringBuffer.append("(?:");
 			lStringBuffer.append(lRegex);

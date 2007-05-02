@@ -36,18 +36,18 @@ public final class Plugin
 		Object lObject = null;
 		try
 		{
-			Class classDefinition = Class.forName(pClassName);
+			final Class classDefinition = Class.forName(pClassName);
 			lObject = classDefinition.newInstance();
 		}
-		catch (InstantiationException lInstantiationException)
+		catch (final InstantiationException lInstantiationException)
 		{
 			System.out.println(lInstantiationException);
 		}
-		catch (IllegalAccessException lIllegalAccessException)
+		catch (final IllegalAccessException lIllegalAccessException)
 		{
 			System.out.println(lIllegalAccessException);
 		}
-		catch (ClassNotFoundException lClassNotFoundException)
+		catch (final ClassNotFoundException lClassNotFoundException)
 		{
 			System.out.println(lClassNotFoundException);
 		}

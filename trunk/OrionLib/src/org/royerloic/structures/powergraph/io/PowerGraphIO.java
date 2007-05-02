@@ -26,54 +26,52 @@ public class PowerGraphIO
 		super();
 	}
 
-	public static <N> void savePowerGraph(PowerGraph<N> pPowerGraph, File pFile) throws FileNotFoundException,
+	public static <N> void savePowerGraph(final PowerGraph<N> pPowerGraph, final File pFile) throws FileNotFoundException,
 			IOException
 	{
-		List<List<String>> lBubbleFormat = new ArrayList<List<String>>();
+		final List<List<String>> lBubbleFormat = new ArrayList<List<String>>();
 
-		for (N lNode : pPowerGraph.getNodeSet())
+		for (final N lNode : pPowerGraph.getNodeSet())
 		{
-			List<String> lNodeEntry = new ArrayList<String>();
+			final List<String> lNodeEntry = new ArrayList<String>();
 			lNodeEntry.add("NODE");
 			lNodeEntry.add(lNode.toString());
 			lBubbleFormat.add(lNodeEntry);
 		}
 
-		Map<Set<N>, String> lPowerNodeToNameMap = new HashMap<Set<N>, String>();
+		final Map<Set<N>, String> lPowerNodeToNameMap = new HashMap<Set<N>, String>();
 		int lPowerNodeCounter = 0;
-		for (Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
+		for (final Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
 			if (lPowerNode.size() > 1)
 			{
-				List<String> lSetEntry = new ArrayList<String>();
+				final List<String> lSetEntry = new ArrayList<String>();
 				lSetEntry.add("SET");
-				String lPowerNodeName = "PowerNode" + lPowerNodeCounter;
+				final String lPowerNodeName = "PowerNode" + lPowerNodeCounter;
 				lPowerNodeToNameMap.put(lPowerNode, lPowerNodeName);
 				lSetEntry.add(lPowerNodeName);
 				lBubbleFormat.add(lSetEntry);
 				lPowerNodeCounter++;
 			}
 			else
-			{
 				lPowerNodeToNameMap.put(lPowerNode, lPowerNode.iterator().next().toString());
-			}
 
-		for (Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
+		for (final Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
 			if (lPowerNode.size() > 1)
-				for (N lNode : lPowerNode)
+				for (final N lNode : lPowerNode)
 				{
-					List<String> lNodeEntry = new ArrayList<String>();
+					final List<String> lNodeEntry = new ArrayList<String>();
 					lNodeEntry.add("IN");
 					lNodeEntry.add(lNode.toString());
 					lNodeEntry.add(lPowerNodeToNameMap.get(lPowerNode));
 					lBubbleFormat.add(lNodeEntry);
 				}
 
-		for (Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())
+		for (final Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())
 		{
-			List<String> lEdgeEntry = new ArrayList<String>();
+			final List<String> lEdgeEntry = new ArrayList<String>();
 			lEdgeEntry.add("EDGE");
-			Set<N> lFirstPowerNode = lPowerEdge.getFirstNode();
-			Set<N> lSecondPowerNode = lPowerEdge.getSecondNode();
+			final Set<N> lFirstPowerNode = lPowerEdge.getFirstNode();
+			final Set<N> lSecondPowerNode = lPowerEdge.getSecondNode();
 			lEdgeEntry.add(lPowerNodeToNameMap.get(lFirstPowerNode));
 			lEdgeEntry.add(lPowerNodeToNameMap.get(lSecondPowerNode));
 			lBubbleFormat.add(lEdgeEntry);
@@ -82,85 +80,71 @@ public class PowerGraphIO
 		MatrixFile.writeMatrixToFile(lBubbleFormat, pFile);
 	}
 
-	public static PowerGraph<Node> loadPowerGraph(File pFile) throws FileNotFoundException, IOException
+	public static PowerGraph<Node> loadPowerGraph(final File pFile) throws FileNotFoundException, IOException
 	{
-		PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
-		List<List<String>> lMatrix = MatrixFile.readMatrixFromFile(pFile, false);
+		final PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
+		final List<List<String>> lMatrix = MatrixFile.readMatrixFromFile(pFile, false);
 
-		Map<String, Node> lNodeNameToNodeMap = new HashMap<String, Node>();
-		SetMap<String, Node> lPowerNodeNameToSetMap = new HashSetMap<String, Node>();
+		final Map<String, Node> lNodeNameToNodeMap = new HashMap<String, Node>();
+		final SetMap<String, Node> lPowerNodeNameToSetMap = new HashSetMap<String, Node>();
 
-		for (List<String> lLine : lMatrix)
-		{
+		for (final List<String> lLine : lMatrix)
 			if (lLine.get(0).equalsIgnoreCase("NODE"))
 			{
-				String lNodeName = lLine.get(1);
-				Node lNode = new Node(lNodeName);
+				final String lNodeName = lLine.get(1);
+				final Node lNode = new Node(lNodeName);
 				lNodeNameToNodeMap.put(lNodeName, lNode);
 				lPowerGraph.addNode(lNode);
 			}
-		}
 
-		for (List<String> lLine : lMatrix)
-		{
+		for (final List<String> lLine : lMatrix)
 			if (lLine.get(0).equalsIgnoreCase("SET"))
-			{
 				lPowerNodeNameToSetMap.put(lLine.get(1));
-			}
-		}
 
-		for (List<String> lLine : lMatrix)
-		{
+		for (final List<String> lLine : lMatrix)
 			if (lLine.get(0).equalsIgnoreCase("IN"))
 			{
-				String lNodeOrSetName1 = lLine.get(1);
-				String lNodeOrSetName2 = lLine.get(2);
+				final String lNodeOrSetName1 = lLine.get(1);
+				final String lNodeOrSetName2 = lLine.get(2);
 
 				// First we check if the first name refers to a set or node
 				if (lPowerNodeNameToSetMap.get(lNodeOrSetName1) == null)
 				{
-					Node lNode = new Node(lNodeOrSetName1);
+					final Node lNode = new Node(lNodeOrSetName1);
 					lPowerNodeNameToSetMap.put(lNodeOrSetName2, lNode);
 				}
 				else
-				{
 					lPowerNodeNameToSetMap.get(lNodeOrSetName2).addAll(lPowerNodeNameToSetMap.get(lNodeOrSetName1));
-				}
 			}
-		}
 
-		for (Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
-		{
+		for (final Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
 			lPowerGraph.addCluster(lEntry.getValue());
-		}
 
-		for (List<String> lLine : lMatrix)
-		{
+		for (final List<String> lLine : lMatrix)
 			if (lLine.get(0).equalsIgnoreCase("EDGE"))
 			{
-				String lNodeOrSetName1 = lLine.get(1);
-				String lNodeOrSetName2 = lLine.get(2);
+				final String lNodeOrSetName1 = lLine.get(1);
+				final String lNodeOrSetName2 = lLine.get(2);
 				Set<Node> lPowerNode1 = lPowerNodeNameToSetMap.get(lNodeOrSetName1);
 				Set<Node> lPowerNode2 = lPowerNodeNameToSetMap.get(lNodeOrSetName2);
 
 				if (lPowerNode1 == null)
 				{
 					lPowerNode1 = new HashSet<Node>();
-					Node lNode = lNodeNameToNodeMap.get(lNodeOrSetName1);
+					final Node lNode = lNodeNameToNodeMap.get(lNodeOrSetName1);
 					lPowerNode1.add(lNode);
 				}
 
 				if (lPowerNode2 == null)
 				{
 					lPowerNode2 = new HashSet<Node>();
-					Node lNode = lNodeNameToNodeMap.get(lNodeOrSetName2);
+					final Node lNode = lNodeNameToNodeMap.get(lNodeOrSetName2);
 					lPowerNode2.add(lNode);
 				}
 
-				Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(lPowerNode1, lPowerNode2);
+				final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(lPowerNode1, lPowerNode2);
 				lPowerGraph.addPowerEdge(lPowerEdge);
 			}
-		}
 
 		return lPowerGraph;
 	}

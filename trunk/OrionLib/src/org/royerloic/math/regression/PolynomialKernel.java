@@ -43,7 +43,7 @@ public final class PolynomialKernel implements Kernel {
     /**
      * Construct a polynomial kernel with the specified degree.
      */
-    public PolynomialKernel(int degree) {
+    public PolynomialKernel(final int degree) {
         this.degree = degree;
     }
     
@@ -51,11 +51,11 @@ public final class PolynomialKernel implements Kernel {
      * Returns the degree of this polynomial kernel.
      */
     public int degree() {
-        return degree;
+        return this.degree;
     }
 
-    public double eval(GVector x1, GVector x2) {
-        return Math.pow(1 + x1.dot(x2), degree);
+    public double eval(final GVector x1, final GVector x2) {
+        return Math.pow(1 + x1.dot(x2), this.degree);
     }
 
 }

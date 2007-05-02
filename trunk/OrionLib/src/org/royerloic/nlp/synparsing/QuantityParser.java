@@ -21,7 +21,7 @@ public class QuantityParser
 																		final TextTree<O> pTextTree,
 																		final O pAnnotationObject)
 	{
-		Matcher lMatcher = pPattern.matcher(pTextTree);
+		final Matcher lMatcher = pPattern.matcher(pTextTree);
 
 		boolean wasSomethingMarked = false;
 		int lIndex = 0;

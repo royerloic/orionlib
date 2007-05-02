@@ -40,22 +40,22 @@ public class StringRewriting implements FlatTextTableReaderHandler
 	 * @return a StringRewriting object constructed by reading a rewriting rules
 	 *         file with name: "<<pString>>.rewriting.txt"
 	 */
-	public static StringRewriting getStringRewriting(String pString)
+	public static StringRewriting getStringRewriting(final String pString)
 	{
 		StringRewriting lStringRewriting = null;
 		InputStream lInputStream;
 		try
 		{
 			lStringRewriting = new StringRewriting();
-			String lPackagePrefix = StringRewriting.class.getPackage().getName();
-			String lRessourceName = lPackagePrefix.replace('.', '/') + "/" + pString + ".rewriting.txt";
+			final String lPackagePrefix = StringRewriting.class.getPackage().getName();
+			final String lRessourceName = lPackagePrefix.replace('.', '/') + "/" + pString + ".rewriting.txt";
 			lInputStream = ClassLoader.getSystemResource(lRessourceName).openStream();
-			InputStreamReader lInputStreamReader = new InputStreamReader(lInputStream);
-			BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
+			final InputStreamReader lInputStreamReader = new InputStreamReader(lInputStream);
+			final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 
 			lStringRewriting.compileRewritingRulesFromReader(lBufferedReader);
 		}
-		catch (IOException exception)
+		catch (final IOException exception)
 		{
 			cLogger.error(exception);
 		}
@@ -68,31 +68,31 @@ public class StringRewriting implements FlatTextTableReaderHandler
 	public StringRewriting() throws IOException
 	{
 		super();
-		mPatternList = new ArrayList<Pattern>();
-		mSubstitutionMap = new HashMap<Pattern, String>();
-		mFlatTextTableReader = new FlatTextTableReader(this);
-		mFlatTextTableReader.setColumnSplitRegex("[\\s]+");
-		mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
-		mFlatTextTableReader.setNullRegex("#@nonullregex@#");
-		mCurrentRegexList = new ArrayList<String>();
+		this.mPatternList = new ArrayList<Pattern>();
+		this.mSubstitutionMap = new HashMap<Pattern, String>();
+		this.mFlatTextTableReader = new FlatTextTableReader(this);
+		this.mFlatTextTableReader.setColumnSplitRegex("[\\s]+");
+		this.mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
+		this.mFlatTextTableReader.setNullRegex("#@nonullregex@#");
+		this.mCurrentRegexList = new ArrayList<String>();
 	}
 
 	/**
 	 * @param pFile
 	 * @throws IOException
 	 */
-	public void compileRewritingRulesFromFile(File pFile) throws IOException
+	public void compileRewritingRulesFromFile(final File pFile) throws IOException
 	{
-		mFlatTextTableReader.readFile(pFile, false);
+		this.mFlatTextTableReader.readFile(pFile, false);
 	}
 
 	/**
 	 * @param pBufferedReader
 	 * @throws IOException
 	 */
-	public void compileRewritingRulesFromReader(BufferedReader pBufferedReader) throws IOException
+	public void compileRewritingRulesFromReader(final BufferedReader pBufferedReader) throws IOException
 	{
-		mFlatTextTableReader.readStream(pBufferedReader, false);
+		this.mFlatTextTableReader.readStream(pBufferedReader, false);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class StringRewriting implements FlatTextTableReaderHandler
 	 *      int, int, java.lang.String)
 	 */
 	@SuppressWarnings("unused")
-	public boolean handleCell(int pLineCounter, int pColumnCounter, int pSetCounter, String pCellString)
+	public boolean handleCell(final int pLineCounter, final int pColumnCounter, final int pSetCounter, String pCellString)
 	{
 		pCellString = pCellString.trim();
 		try
@@ -112,32 +112,30 @@ public class StringRewriting implements FlatTextTableReaderHandler
 			{
 				case (0):
 					if ((pCellString.charAt(0) != '#'))
-					{
-						mCurrentRegexList.add(pCellString);
-					}
+						this.mCurrentRegexList.add(pCellString);
 					break;
 
 				case (2):
-					for (String lRegex : mCurrentRegexList)
+					for (final String lRegex : this.mCurrentRegexList)
 					{
-						mCurrentSubstitutionString = pCellString;
-						mCurrentPattern = Pattern.compile(lRegex);
-						mPatternList.add(mCurrentPattern);
-						mSubstitutionMap.put(mCurrentPattern, mCurrentSubstitutionString);
+						this.mCurrentSubstitutionString = pCellString;
+						this.mCurrentPattern = Pattern.compile(lRegex);
+						this.mPatternList.add(this.mCurrentPattern);
+						this.mSubstitutionMap.put(this.mCurrentPattern, this.mCurrentSubstitutionString);
 					}
-					mCurrentRegexList.clear();
+					this.mCurrentRegexList.clear();
 					break;
 			}
 		}
-		catch (Throwable exception)
+		catch (final Throwable exception)
 		{
 			System.out.println("Rule : '" + pCellString + "' is incorrect.");
-			mCurrentRegexList.clear();
+			this.mCurrentRegexList.clear();
 		}
 		return true;
 	}
 
-	public boolean handleEndOfCell(int pLineCounter)
+	public boolean handleEndOfCell(final int pLineCounter)
 	{
 		return true;
 	}
@@ -148,9 +146,9 @@ public class StringRewriting implements FlatTextTableReaderHandler
 	 */
 	public String applyTo(String pString)
 	{
-		for (Pattern lPattern : mPatternList)
+		for (final Pattern lPattern : this.mPatternList)
 		{
-			String lSubstitution = mSubstitutionMap.get(lPattern);
+			final String lSubstitution = this.mSubstitutionMap.get(lPattern);
 			pString = lPattern.matcher(pString).replaceAll(lSubstitution);
 		}
 		return new String(pString);

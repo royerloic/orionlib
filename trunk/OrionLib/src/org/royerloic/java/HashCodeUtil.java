@@ -36,7 +36,7 @@ public final class HashCodeUtil
 	 * @param aBoolean
 	 * @return hash of a boolean
 	 */
-	public static int hash(int aSeed, boolean aBoolean)
+	public static int hash(final int aSeed, final boolean aBoolean)
 	{
 		System.out.println("boolean...");
 		return firstTerm(aSeed) + (aBoolean ? 1 : 0);
@@ -49,10 +49,10 @@ public final class HashCodeUtil
 	 * @param aChar
 	 * @return hash of a char
 	 */
-	public static int hash(int aSeed, char aChar)
+	public static int hash(final int aSeed, final char aChar)
 	{
 		System.out.println("char...");
-		return firstTerm(aSeed) + (int) aChar;
+		return firstTerm(aSeed) + aChar;
 	}
 
 	/**
@@ -62,7 +62,7 @@ public final class HashCodeUtil
 	 * @param aInt
 	 * @return hash of an int
 	 */
-	public static int hash(int aSeed, int aInt)
+	public static int hash(final int aSeed, final int aInt)
 	{
 		/*
 		 * Implementation Note Note that byte and short are handled by this method,
@@ -79,7 +79,7 @@ public final class HashCodeUtil
 	 * @param aLong
 	 * @return hash of a long
 	 */
-	public static int hash(int aSeed, long aLong)
+	public static int hash(final int aSeed, final long aLong)
 	{
 		System.out.println("long...");
 		return firstTerm(aSeed) + (int) (aLong ^ (aLong >>> 32));
@@ -92,7 +92,7 @@ public final class HashCodeUtil
 	 * @param aFloat
 	 * @return hash of a float
 	 */
-	public static int hash(int aSeed, float aFloat)
+	public static int hash(final int aSeed, final float aFloat)
 	{
 		return hash(aSeed, Float.floatToIntBits(aFloat));
 	}
@@ -104,7 +104,7 @@ public final class HashCodeUtil
 	 * @param aDouble
 	 * @return hash of a double
 	 */
-	public static int hash(int aSeed, double aDouble)
+	public static int hash(final int aSeed, final double aDouble)
 	{
 		return hash(aSeed, Double.doubleToLongBits(aDouble));
 	}
@@ -120,23 +120,19 @@ public final class HashCodeUtil
 	 * @param aObject
 	 * @return hash of an object
 	 */
-	public static int hash(int aSeed, Object aObject)
+	public static int hash(final int aSeed, final Object aObject)
 	{
 		int result = aSeed;
 		if (aObject == null)
-		{
 			result = hash(result, 0);
-		}
 		else if (!isArray(aObject))
-		{
 			result = hash(result, aObject.hashCode());
-		}
 		else
 		{
-			int length = Array.getLength(aObject);
+			final int length = Array.getLength(aObject);
 			for (int idx = 0; idx < length; ++idx)
 			{
-				Object item = Array.get(aObject, idx);
+				final Object item = Array.get(aObject, idx);
 				// recursive call!
 				result = hash(result, item);
 			}
@@ -147,12 +143,12 @@ public final class HashCodeUtil
 	// / PRIVATE ///
 	private static final int	fODD_PRIME_NUMBER	= 37;
 
-	private static int firstTerm(int aSeed)
+	private static int firstTerm(final int aSeed)
 	{
 		return fODD_PRIME_NUMBER * aSeed;
 	}
 
-	private static boolean isArray(Object aObject)
+	private static boolean isArray(final Object aObject)
 	{
 		return aObject.getClass().isArray();
 	}

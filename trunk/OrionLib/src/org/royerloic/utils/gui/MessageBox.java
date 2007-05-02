@@ -31,7 +31,10 @@ import javax.swing.JDialog;
  */
 public class MessageBox extends JDialog implements ActionListener
 {
-	private boolean	mResultArrived	= false;
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -1959586325540923937L;
 
 	private boolean	mResult					= false;
 
@@ -39,7 +42,7 @@ public class MessageBox extends JDialog implements ActionListener
 
 	public boolean getResult()
 	{
-		return mResult;
+		return this.mResult;
 	}
 
 	/**
@@ -54,8 +57,8 @@ public class MessageBox extends JDialog implements ActionListener
 	{
 		super(pFrame, pMessage, true);
 		getContentPane().setLayout(new BorderLayout());
-		String lSpaces = "            ";
-		String lMessage = lSpaces + pMessage + lSpaces;
+		final String lSpaces = "            ";
+		final String lMessage = lSpaces + pMessage + lSpaces;
 		getContentPane().add("Center", new Label(lMessage));
 		addOKCancelPanel(pOkCancelButtons);
 		setResizable(false);
@@ -70,13 +73,11 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void addOKCancelPanel(final boolean pOkCancelButtons)
 	{
-		Panel lPanel = new Panel();
+		final Panel lPanel = new Panel();
 		lPanel.setLayout(new FlowLayout());
 		createOKButton(lPanel);
 		if (pOkCancelButtons)
-		{
 			createCancelButton(lPanel);
-		}
 		getContentPane().add("South", lPanel);
 	}
 
@@ -85,8 +86,8 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void createOKButton(final Panel pPanel)
 	{
-		pPanel.add(mButtonOk = new Button("OK"));
-		mButtonOk.addActionListener(this);
+		pPanel.add(this.mButtonOk = new Button("OK"));
+		this.mButtonOk.addActionListener(this);
 	}
 
 	/**
@@ -94,9 +95,9 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void createCancelButton(final Panel pPanel)
 	{
-		mButtonCancel = new Button("Cancel");
-		pPanel.add(mButtonCancel);
-		mButtonCancel.addActionListener(this);
+		this.mButtonCancel = new Button("Cancel");
+		pPanel.add(this.mButtonCancel);
+		this.mButtonCancel.addActionListener(this);
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void createFrame()
 	{
-		Dimension lDimension = getToolkit().getScreenSize();
+		final Dimension lDimension = getToolkit().getScreenSize();
 		setLocation(lDimension.width / 3, lDimension.height / 3);
 	}
 
@@ -113,16 +114,14 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	public void actionPerformed(final ActionEvent pActionEvent)
 	{
-		if (pActionEvent.getSource() == mButtonOk)
+		if (pActionEvent.getSource() == this.mButtonOk)
 		{
-			mResult = true;
-			mResultArrived = true;
+			this.mResult = true;
 			setVisible(false);
 		}
-		else if (pActionEvent.getSource() == mButtonCancel)
+		else if (pActionEvent.getSource() == this.mButtonCancel)
 		{
-			mResult = false;
-			mResultArrived = true;
+			this.mResult = false;
 			setVisible(false);
 		}
 	}

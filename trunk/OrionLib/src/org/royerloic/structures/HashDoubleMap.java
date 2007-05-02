@@ -11,13 +11,18 @@ import java.util.HashMap;
 public class HashDoubleMap<K> extends HashMap<K, Double> implements DoubleMap<K>
 {
 
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -4035713289800645393L;
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#add(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Double add(K pKey, Double pValue)
+	public Double add(final K pKey, final Double pValue)
 	{
 		Double lValue = get(pKey);
 		if (lValue == null)
@@ -34,7 +39,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements DoubleMap<K>
 	 * @see org.royerloic.collections.DoubleMap#sub(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Double sub(K pKey, Double pValue)
+	public Double sub(final K pKey, Double pValue)
 	{
 		return add(pKey, -pValue);
 	}
@@ -45,7 +50,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements DoubleMap<K>
 	 * @see org.royerloic.collections.DoubleMap#mult(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Double mult(K pKey, Double pValue)
+	public Double mult(final K pKey, final Double pValue)
 	{
 		Double lValue = get(pKey);
 		if (lValue == null)
@@ -62,36 +67,28 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements DoubleMap<K>
 	 * @see org.royerloic.collections.DoubleMap#div(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Double div(K pKey, Double pValue)
+	public Double div(final K pKey, final Double pValue)
 	{
 		return mult(pKey, 1 / pValue);
 	}
 
-	public Double min(K pKey, Double pNewValue)
+	public Double min(final K pKey, final Double pNewValue)
 	{
-		Double lOldValue = get(pKey);
+		final Double lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue > pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 
-	public Double max(K pKey, Double pNewValue)
+	public Double max(final K pKey, final Double pNewValue)
 	{
-		Double lOldValue = get(pKey);
+		final Double lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue < pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 

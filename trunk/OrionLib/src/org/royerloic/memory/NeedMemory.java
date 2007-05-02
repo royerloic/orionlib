@@ -47,7 +47,7 @@ public final class NeedMemory
 	 * @throws Exception
 	 *           for excess needs or recursive launches (a bug?).
 	 */
-	public void needMemory(int needed, String[] programCommandLine) throws Exception
+	public void needMemory(int needed, final String[] programCommandLine) throws Exception
 	{
 		long available; // What we've got.
 		String javaPath; // The path to java or java.exe
@@ -62,21 +62,15 @@ public final class NeedMemory
 		if ((available = toMegaBytes(Runtime.getRuntime().maxMemory())) < needed)
 		{
 			if (needed > 1500)
-			{
 				throw new Exception("IMPOSSIBLE TO MEET REQUEST FOR " + needed + " Mb MEMORY.");
-			}
 			if (System.getProperty(launchToken) != null)
-			{
 				throw new Exception("FATAL RECURSION IN RE-LAUNCH");
-			}
 
 			// Where did I come from ?
 
 			u = getClass().getResource("NeedMemory.class");
 			if (u == null)
-			{
 				throw new Exception("CAN'T FIND MY OWN CLASS FILE.");
-			}
 
 			// Determine the path to a class-file or to a jar-file from the
 			// classloader URL:
@@ -85,19 +79,13 @@ public final class NeedMemory
 			if (s.startsWith("file:/")) // It's a jar-file.
 			{
 				isJarFile = true;
-				if (File.separatorChar == '/') // UNIX|LINUX
-				{
+				if (File.separatorChar == '/')
 					s = s.substring(5); // Leaves a / alone.
-				}
 				else
-				{
 					s = s.substring(6); // Strips the / away.
-				}
 
 				if ((i = s.indexOf("!/")) > 0)
-				{
 					s = s.substring(0, i); // Deletes the internal jar path.
-				}
 				commandVector = new String[6 + programCommandLine.length];
 			}
 			else
@@ -105,33 +93,23 @@ public final class NeedMemory
 			{
 				isJarFile = false;
 				if (s.startsWith("/"))
-				{
 					s = s.substring(1); // Waste the /.
-				}
 				if ((i = s.indexOf(".class")) > 0)
-				{
 					s = s.substring(0, i); // Drop the extension.
-				}
 				commandVector = new String[5 + programCommandLine.length];
 			}
 
-			if (s.indexOf("%20") >= 0) // Incase the URL contained them.
-			{
+			if (s.indexOf("%20") >= 0)
 				s = s.replaceAll("%20", " ");
-			}
 			programPath = s;
 
 			// Where to find java[w] :
 
 			javaPath = System.getProperty("java.home");
-			if (File.separatorChar == '/') // UNIX|LINUX
-			{
+			if (File.separatorChar == '/')
 				javaPath += "/bin/java";
-			}
 			else
-			{
 				javaPath += "\\bin\\javaw.exe";
-			}
 
 			// Prepare new commandline :
 
@@ -158,23 +136,15 @@ public final class NeedMemory
 			directory = directory.getParentFile();
 
 			for (int j = 0; j < programCommandLine.length; ++j, ++i)
-			{
 				commandVector[i] = programCommandLine[j];
-			}
 
 			// Log the action :
 
 			for (i = 0; i < commandVector.length; ++i)
-			{
 				if (i == 0)
-				{
 					s = commandVector[0];
-				}
 				else
-				{
 					s += " " + commandVector[i];
-				}
-			}
 			System.out.println("+++ Re-launch, heap=" + available + "Mb, requested=" + needed
 					+ "Mb, from directory " + directory.getAbsolutePath() + ", commandline=");
 			System.out.println(s);
@@ -183,13 +153,9 @@ public final class NeedMemory
 
 			i = launch(commandVector, directory);
 			if (i < 0)
-			{
 				System.out.println("*** RE-LAUNCH ATTEMPT FAILED.");
-			}
 			else
-			{
 				System.out.println("### End of re-launch.");
-			}
 			System.exit(i);
 		}
 	}
@@ -211,22 +177,20 @@ public final class NeedMemory
 	 *          directory in which the process runs.
 	 * @return Exit status from the command.
 	 */
-	public int launch(String[] commandVector, File dir)
+	public int launch(final String[] commandVector, final File dir)
 	{
 		Process p;
 		int exitValue = -1;
 
 		if ((p = execute(commandVector, dir)) != null)
-		{
 			try
 			{
 				exitValue = p.waitFor();
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 				exitValue = -1;
 			}
-		}
 		return (exitValue);
 	}
 
@@ -240,7 +204,7 @@ public final class NeedMemory
 	 *          directory in which the process runs.
 	 * @return Process object for the child process.
 	 */
-	public static Process execute(String[] commandVector, File dir)
+	public static Process execute(final String[] commandVector, final File dir)
 	{
 		Process p;
 
@@ -248,7 +212,7 @@ public final class NeedMemory
 		{
 			p = Runtime.getRuntime().exec(commandVector, null, dir);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			p = null;
 		}
@@ -262,7 +226,7 @@ public final class NeedMemory
 	 *          of bytes
 	 * @return the # of Mb.
 	 */
-	public static long toMegaBytes(long m)
+	public static long toMegaBytes(final long m)
 	{
 		return ((m / 1024 + 512) / 1024);
 	}

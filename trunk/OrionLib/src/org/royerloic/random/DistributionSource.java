@@ -20,41 +20,39 @@ public class DistributionSource<O>
 		super();
 	}
 
-	public final void addObject(final O pObject, Double pProbability)
+	public final void addObject(final O pObject, final Double pProbability)
 	{
-		mObjectToProbabilityMap.put(pObject, pProbability);
+		this.mObjectToProbabilityMap.put(pObject, pProbability);
 	}
 
 	public final double prepare(final int pResolution, final double pDistorsionMax) throws Exception
 	{
-		if (mObjectToProbabilityMap.isEmpty())
+		if (this.mObjectToProbabilityMap.isEmpty())
 			throw new RuntimeException("Must add object with probability in source");
 
 		normalize();
 
-		mHitList = new ArrayList<O>();
+		this.mHitList = new ArrayList<O>();
 
-		for (Entry<O, Double> lEntry : mObjectToProbabilityMap.entrySet())
+		for (final Entry<O, Double> lEntry : this.mObjectToProbabilityMap.entrySet())
 		{
-			double lRegionSizeDouble = lEntry.getValue() * pResolution;
+			final double lRegionSizeDouble = lEntry.getValue() * pResolution;
 			int lRegionSize = (int) Math.round(lRegionSizeDouble);
 
 			if (lRegionSize == 0)
-			{
 				lRegionSize = 1;
-			}
 
 			final O lValue = lEntry.getKey();
 
 			for (int i = 0; i < lRegionSize; i++)
-				mHitList.add(lValue);
+				this.mHitList.add(lValue);
 		}
 
 		double lMaxProbabilityDistorsion = Double.POSITIVE_INFINITY;
 		if (pDistorsionMax < Double.POSITIVE_INFINITY)
 		{
-			Map<O, Double> lNewMap = computeMapFromList(mHitList);
-			lMaxProbabilityDistorsion = computeMaxDistorion(mObjectToProbabilityMap, lNewMap);
+			final Map<O, Double> lNewMap = computeMapFromList(this.mHitList);
+			lMaxProbabilityDistorsion = computeMaxDistorion(this.mObjectToProbabilityMap, lNewMap);
 			// System.out.println("lMaxProbabilityDistorsion =
 			// "+lMaxProbabilityDistorsion);
 			if (lMaxProbabilityDistorsion >= pDistorsionMax)
@@ -62,16 +60,16 @@ public class DistributionSource<O>
 						+ lMaxProbabilityDistorsion + " >= " + pDistorsionMax);
 		}
 
-		mIsPrepared = true;
+		this.mIsPrepared = true;
 		return lMaxProbabilityDistorsion;
 	}
 
 	public O getObject(final Random pRandom)
 	{
-		if (!mIsPrepared)
+		if (!this.mIsPrepared)
 			throw new RuntimeException("Distribution not prepared!! you must call prepare() !");
 
-		O lObject = RandomUtils.randomElement(pRandom, mHitList);
+		final O lObject = RandomUtils.randomElement(pRandom, this.mHitList);
 
 		return lObject;
 	}
@@ -80,35 +78,30 @@ public class DistributionSource<O>
 	private void normalize()
 	{
 		double lTotal = 0;
-		for (double lProbability : mObjectToProbabilityMap.values())
-		{
+		for (final double lProbability : this.mObjectToProbabilityMap.values())
 			lTotal += lProbability;
-		}
 
 		final Map<O, Double> mNewObjectToProbabilityMap = new HashMap<O, Double>();
-		for (Entry<O, Double> lEntry : mObjectToProbabilityMap.entrySet())
+		for (final Entry<O, Double> lEntry : this.mObjectToProbabilityMap.entrySet())
 		{
 			final double lValue = lEntry.getValue() / lTotal;
 			final O lKey = lEntry.getKey();
 			mNewObjectToProbabilityMap.put(lKey, lValue);
 		}
-		mObjectToProbabilityMap.clear();
-		mObjectToProbabilityMap = mNewObjectToProbabilityMap;
+		this.mObjectToProbabilityMap.clear();
+		this.mObjectToProbabilityMap = mNewObjectToProbabilityMap;
 
 	}
 
-	private Map<O, Double> computeMapFromList(List<O> pHitList)
+	private Map<O, Double> computeMapFromList(final List<O> pHitList)
 	{
 		final Map<O, Double> mNewProbabilityToObjectMap = new HashMap<O, Double>();
 
 		int lCount = 0;
 		O lCurrentObject = pHitList.get(0);
-		for (O lO : pHitList)
-		{
+		for (final O lO : pHitList)
 			if (lCurrentObject == lO)
-			{
 				lCount++;
-			}
 			else
 			{
 				final Double lProbability = (double) lCount / (double) pHitList.size();
@@ -116,22 +109,21 @@ public class DistributionSource<O>
 				lCount = 0;
 				lCurrentObject = lO;
 			}
-		}
 		final Double lProbability = (double) lCount / (double) pHitList.size();
 		mNewProbabilityToObjectMap.put(lCurrentObject, lProbability);
 
 		return mNewProbabilityToObjectMap;
 	}
 
-	private double computeMaxDistorion(Map<O, Double> pMap1, Map<O, Double> pMap2)
+	private double computeMaxDistorion(final Map<O, Double> pMap1, final Map<O, Double> pMap2)
 	{
 		double lMaxDistorsion = 0;
 
-		Set<O> lAllObjectSet = new HashSet<O>();
+		final Set<O> lAllObjectSet = new HashSet<O>();
 		lAllObjectSet.addAll(pMap1.keySet());
 		lAllObjectSet.addAll(pMap2.keySet());
 
-		for (O lObject : lAllObjectSet)
+		for (final O lObject : lAllObjectSet)
 		{
 			final double lProbability1 = pMap1.get(lObject);
 			final double lProbability2 = pMap2.get(lObject);

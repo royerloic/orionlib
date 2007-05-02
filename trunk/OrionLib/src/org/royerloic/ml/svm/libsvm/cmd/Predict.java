@@ -15,39 +15,36 @@ import org.royerloic.ml.svm.libsvm.SVM;
 
 class Predict
 {
-	private static double atof(String s)
+	private static double atof(final String s)
 	{
 		return Double.valueOf(s).doubleValue();
 	}
 
-	private static int atoi(String s)
+	private static int atoi(final String s)
 	{
 		return Integer.parseInt(s);
 	}
 
-	private static void predict(BufferedReader input,
-															DataOutputStream output,
-															Model model,
-															int predict_probability) throws IOException
+	private static void predict(final BufferedReader input,
+															final DataOutputStream output,
+															final Model model,
+															final int predict_probability) throws IOException
 	{
 		int correct = 0;
 		int total = 0;
 		double error = 0;
 		double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
 
-		int svm_type = SVM.svmGetSvmType(model);
-		int nr_class = SVM.svmGetNumberOfClasses(model);
-		int[] labels = new int[nr_class];
+		final int svm_type = SVM.svmGetSvmType(model);
+		final int nr_class = SVM.svmGetNumberOfClasses(model);
+		final int[] labels = new int[nr_class];
 		double[] prob_estimates = null;
 
 		if (predict_probability == 1)
-		{
-			if (svm_type == Parameter.EPSILON_SVR || svm_type == Parameter.NU_SVR)
-			{
+			if ((svm_type == Parameter.EPSILON_SVR) || (svm_type == Parameter.NU_SVR))
 				System.out
 						.print("Prob. model for test data: target mValue = predicted mValue + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma="
 								+ SVM.svmGetSvrProbability(model) + "\n");
-			}
 			else
 			{
 				SVM.svmGetLabels(model, labels);
@@ -57,18 +54,17 @@ class Predict
 					output.writeBytes(" " + labels[j]);
 				output.writeBytes("\n");
 			}
-		}
 		while (true)
 		{
-			String line = input.readLine();
+			final String line = input.readLine();
 			if (line == null)
 				break;
 
-			StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
+			final StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
 
-			double target = atof(st.nextToken());
-			int m = st.countTokens() / 2;
-			Node[] x = new Node[m];
+			final double target = atof(st.nextToken());
+			final int m = st.countTokens() / 2;
+			final Node[] x = new Node[m];
 			for (int j = 0; j < m; j++)
 			{
 				x[j] = new Node();
@@ -77,7 +73,7 @@ class Predict
 			}
 
 			double v;
-			if (predict_probability == 1 && (svm_type == Parameter.C_SVC || svm_type == Parameter.NU_SVC))
+			if ((predict_probability == 1) && ((svm_type == Parameter.C_SVC) || (svm_type == Parameter.NU_SVC)))
 			{
 				v = SVM.svmPredictProbability(model, x, prob_estimates);
 				output.writeBytes(v + " ");
@@ -118,7 +114,7 @@ class Predict
 		System.exit(1);
 	}
 
-	public static void main(String argv[]) throws IOException
+	public static void main(final String argv[]) throws IOException
 	{
 		int i, predict_probability = 0;
 
@@ -142,16 +138,16 @@ class Predict
 			exit_with_help();
 		try
 		{
-			BufferedReader input = new BufferedReader(new FileReader(argv[i]));
-			DataOutputStream output = new DataOutputStream(new FileOutputStream(argv[i + 2]));
-			Model model = SVM.svmLoadModel(argv[i + 1]);
+			final BufferedReader input = new BufferedReader(new FileReader(argv[i]));
+			final DataOutputStream output = new DataOutputStream(new FileOutputStream(argv[i + 2]));
+			final Model model = SVM.svmLoadModel(argv[i + 1]);
 			predict(input, output, model, predict_probability);
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			exit_with_help();
 		}
-		catch (ArrayIndexOutOfBoundsException e)
+		catch (final ArrayIndexOutOfBoundsException e)
 		{
 			exit_with_help();
 		}

@@ -26,7 +26,7 @@ public class PubMedAccess
 		{
 			Class.forName(DatabaseConstants.dbAccessDriver);
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class PubMedAccess
 			connection = DriverManager.getConnection(dbAccessUrl, DatabaseConstants.dbAccessUser,
 					DatabaseConstants.dbAccessPass);
 		}
-		catch (SQLException e)
+		catch (final SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,12 +51,12 @@ public class PubMedAccess
 	static PreparedStatement		statement;
 	static
 	{
-		String table = dbTable;
+		final String table = dbTable;
 		try
 		{
 			statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE pmid=?");
 		}
-		catch (SQLException e)
+		catch (final SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class PubMedAccess
 	 * @param pubmedID
 	 * @return
 	 */
-	public static String getAbstractForPubMedID(Integer pubmedID)
+	public static String getAbstractForPubMedID(final Integer pubmedID)
 	{
 		String res = "";
 
@@ -80,29 +80,27 @@ public class PubMedAccess
 			statement.setInt(1, pubmedID);
 			resultset = statement.executeQuery();
 			resultset.first();
-			String title = resultset.getString("article_title");
-			String text = resultset.getString("abstract_text");
+			final String title = resultset.getString("article_title");
+			final String text = resultset.getString("abstract_text");
 
 			if (title != null)
 				res = title.trim();
 
 			// add the text to the full citation
 			if (text != null)
-			{
 				if (res.endsWith(".") || res.endsWith("?") || res.endsWith("!"))
 					res += " " + text;
 				else
 					res += ". " + text;
-			}
 
 		}
-		catch (java.sql.SQLException sqle)
+		catch (final java.sql.SQLException sqle)
 		{
 			// System.err.println("No citation found for " + pubmedID);
 			// sqle.printStackTrace();
 			return null;
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 			return "";
@@ -114,7 +112,7 @@ public class PubMedAccess
 				if (resultset != null)
 					resultset.close();
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 			}
 		}
@@ -137,13 +135,11 @@ public class PubMedAccess
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 
 		for (int i = 0; i < 1000; i++)
-		{
 			System.out.println(getRandomAbstract());
-		}
 	}
 
 }

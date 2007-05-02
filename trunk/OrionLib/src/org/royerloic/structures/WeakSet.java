@@ -13,86 +13,80 @@ public class WeakSet<K> implements Set<K>
 
 	public int size()
 	{
-		return mWeakHashMap.size();
+		return this.mWeakHashMap.size();
 	}
 
 	public boolean isEmpty()
 	{
-		return mWeakHashMap.isEmpty();
+		return this.mWeakHashMap.isEmpty();
 	}
 
-	public boolean contains(Object o)
+	public boolean contains(final Object o)
 	{
-		return mWeakHashMap.containsKey(o);
+		return this.mWeakHashMap.containsKey(o);
 	}
 
 	public Iterator iterator()
 	{
-		return mWeakHashMap.keySet().iterator();
+		return this.mWeakHashMap.keySet().iterator();
 	}
 
-	public boolean add(K o)
+	public boolean add(final K o)
 	{
-		mWeakHashMap.put(o, null);
+		this.mWeakHashMap.put(o, null);
 		return true;
 	}
 
 	public Object[] toArray()
 	{
-		return mWeakHashMap.keySet().toArray();
+		return this.mWeakHashMap.keySet().toArray();
 	}
 
-	public <T> T[] toArray(T[] a)
+	public <T> T[] toArray(final T[] a)
 	{
-		return mWeakHashMap.keySet().toArray(a);
+		return this.mWeakHashMap.keySet().toArray(a);
 	}
 
-	public boolean remove(Object o)
+	public boolean remove(final Object o)
 	{
-		mWeakHashMap.remove(o);
+		this.mWeakHashMap.remove(o);
 		return true;
 	}
 
-	public boolean containsAll(Collection<?> c)
+	public boolean containsAll(final Collection<?> c)
 	{
-		mWeakHashMap.keySet().containsAll(c);
+		this.mWeakHashMap.keySet().containsAll(c);
 		return true;
 	}
 
-	public boolean addAll(Collection<? extends K> c)
+	public boolean addAll(final Collection<? extends K> c)
 	{
-		for (K k : c)
+		for (final K k : c)
+			this.mWeakHashMap.put(k, null);
+		return true;
+	}
+
+	public boolean retainAll(final Collection<?> c)
+	{
+		for (final Entry<K, Object> lEntry : this.mWeakHashMap.entrySet())
 		{
-			mWeakHashMap.put(k, null);
-		}
-		return true;
-	}
-
-	public boolean retainAll(Collection<?> c)
-	{
-		for (Entry<K, Object> lEntry : mWeakHashMap.entrySet())
-		{
-			K lK = lEntry.getKey();
+			final K lK = lEntry.getKey();
 			if (!c.contains(lK))
-			{
 				remove(lK);
-			}
 		}
 		return true;
 	}
 
-	public boolean removeAll(Collection<?> c)
+	public boolean removeAll(final Collection<?> c)
 	{
-		for (Object k : c)
-		{
-			mWeakHashMap.remove(k);
-		}
+		for (final Object k : c)
+			this.mWeakHashMap.remove(k);
 		return true;
 	}
 
 	public void clear()
 	{
-		mWeakHashMap.clear();
+		this.mWeakHashMap.clear();
 	}
 
 }

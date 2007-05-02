@@ -50,17 +50,17 @@ public class ExperimentDatabase implements IExperimentDatabase
 	public ExperimentDatabase()
 	{
 		super();
-		mExperimentList = Collections.synchronizedList(new ArrayList());
-		mBestExperimentList = new ArrayList();
-		mBestExperimentValuesList = new ArrayList();
+		this.mExperimentList = Collections.synchronizedList(new ArrayList());
+		this.mBestExperimentList = new ArrayList();
+		this.mBestExperimentValuesList = new ArrayList();
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentDatabase#setObjectiveFunction(org.royerloic.optimal.interf.IObjectiveFunction)
 	 */
-	public void setObjectiveFunction(IObjectiveFunction pObjectiveFunction)
+	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		mObjectiveFunction = pObjectiveFunction;
+		this.mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public int getNumberOfExperiments()
 	{
-		return mExperimentList.size();
+		return this.mExperimentList.size();
 	}
 
 	/**
@@ -76,32 +76,30 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public boolean addExperiment(final IExperiment pExperiment)
 	{
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
 			if (!this.contains(pExperiment))
 			{
-				mExperimentList.add(pExperiment);
+				this.mExperimentList.add(pExperiment);
 				calculateMinMaxValues();
 			}
 
-			double lNewValue = mObjectiveFunction.evaluate(pExperiment.getOutput());
+			final double lNewValue = this.mObjectiveFunction.evaluate(pExperiment.getOutput());
 			boolean lBetter = true;
 
 			for (int i = 0; i < getNumberOfExperiments(); i++)
 			{
-				IExperiment lExperiment = getExperiment(i);
-				double lValue = mObjectiveFunction.evaluate(lExperiment.getOutput());
+				final IExperiment lExperiment = getExperiment(i);
+				final double lValue = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
 				lBetter = lBetter && (lNewValue >= lValue);
 			}
 
-			if (lBetter || (mBestExperimentList.size() == 0))
-			{
-				mBestExperimentList.add(pExperiment);
-			}
+			if (lBetter || (this.mBestExperimentList.size() == 0))
+				this.mBestExperimentList.add(pExperiment);
 			else
 			{
-				IExperiment lExperiment = (IExperiment) mBestExperimentList.get(mBestExperimentList.size() - 1);
-				mBestExperimentList.add(lExperiment);
+				final IExperiment lExperiment = (IExperiment) this.mBestExperimentList.get(this.mBestExperimentList.size() - 1);
+				this.mBestExperimentList.add(lExperiment);
 			}
 
 			return lBetter;
@@ -114,7 +112,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public boolean contains(final IExperiment pExperiment)
 	{
-		return mExperimentList.contains(pExperiment);
+		return this.mExperimentList.contains(pExperiment);
 	}
 
 	/**
@@ -122,7 +120,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public int findExperiment(final IExperiment pExperiment)
 	{
-		return mExperimentList.indexOf(pExperiment);
+		return this.mExperimentList.indexOf(pExperiment);
 	}
 
 	/**
@@ -130,7 +128,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public IExperiment getExperiment(final int pIndex)
 	{
-		return (IExperiment) mExperimentList.get(pIndex);
+		return (IExperiment) this.mExperimentList.get(pIndex);
 	}
 
 	/**
@@ -148,12 +146,12 @@ public class ExperimentDatabase implements IExperimentDatabase
 		IExperiment lResult = null;
 		double lMinDistance = Double.POSITIVE_INFINITY;
 
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
 			for (int i = 0; i < getNumberOfExperiments(); i++)
 			{
-				IExperiment lExperiment = getExperiment(i);
-				double lCurrentDistance = pVector.euclideanDistanceTo(lExperiment.getInput());
+				final IExperiment lExperiment = getExperiment(i);
+				final double lCurrentDistance = pVector.euclideanDistanceTo(lExperiment.getInput());
 				if (lCurrentDistance < lMinDistance)
 				{
 					lResult = lExperiment;
@@ -170,16 +168,14 @@ public class ExperimentDatabase implements IExperimentDatabase
 	public boolean containsInputVector(final INumericalVector pVector)
 	{
 		boolean lResult = false;
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
 			for (int i = 0; i < getNumberOfExperiments(); i++)
-			{
 				if (getExperiment(i).getInput().equals(pVector))
 				{
 					lResult = true;
 					break;
 				}
-			}
 		}
 		return lResult;
 	}
@@ -187,36 +183,37 @@ public class ExperimentDatabase implements IExperimentDatabase
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
-		ExperimentDatabase lExperimentDatabase = new ExperimentDatabase();
-		lExperimentDatabase.mExperimentList = mExperimentList;
+		final ExperimentDatabase lExperimentDatabase = new ExperimentDatabase();
+		lExperimentDatabase.mExperimentList = this.mExperimentList;
 		return lExperimentDatabase;
 	}
 
 	/**
 	 * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
 	 */
-	public void copyFrom(Object pObject)
+	public void copyFrom(final Object pObject)
 	{
 		if (pObject instanceof ExperimentDatabase)
 		{
-			ExperimentDatabase lExperimentDatabase = (ExperimentDatabase) pObject;
-			mExperimentList = lExperimentDatabase.mExperimentList;
+			final ExperimentDatabase lExperimentDatabase = (ExperimentDatabase) pObject;
+			this.mExperimentList = lExperimentDatabase.mExperimentList;
 		}
 	}
 
 	private void calculateMinMaxValues()
 	{
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
-			int lNumberOfExperiments = getNumberOfExperiments();
+			final int lNumberOfExperiments = getNumberOfExperiments();
 			if (lNumberOfExperiments != 0)
 			{
-				int lDimension = getExperiment(0).getOutput().getDimension();
+				final int lDimension = getExperiment(0).getOutput().getDimension();
 
-				double[] lMin = new double[lDimension];
-				double[] lMax = new double[lDimension];
+				final double[] lMin = new double[lDimension];
+				final double[] lMax = new double[lDimension];
 
 				for (int i = 0; i < lDimension; i++)
 				{
@@ -225,15 +222,15 @@ public class ExperimentDatabase implements IExperimentDatabase
 
 					for (int j = 0; j < lNumberOfExperiments; j++)
 					{
-						double lValue = getExperiment(j).getOutput().get(i);
+						final double lValue = getExperiment(j).getOutput().get(i);
 						lMin[i] = Math.min(lMin[i], lValue);
 						lMax[i] = Math.max(lMax[i], lValue);
 					}
 
 				}
 
-				mMinimumValuesVector = new NumericalVector(lMin);
-				mMaximumValuesVector = new NumericalVector(lMax);
+				this.mMinimumValuesVector = new NumericalVector(lMin);
+				this.mMaximumValuesVector = new NumericalVector(lMax);
 			}
 		}
 	}
@@ -260,9 +257,9 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public INumericalVector getMinimumOutputValuesVector()
 	{
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
-			return mMinimumValuesVector;
+			return this.mMinimumValuesVector;
 		}
 	}
 
@@ -271,9 +268,9 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public INumericalVector getMaximumOutputValuesVector()
 	{
-		synchronized (mExperimentList)
+		synchronized (this.mExperimentList)
 		{
-			return mMaximumValuesVector;
+			return this.mMaximumValuesVector;
 		}
 	}
 
@@ -282,7 +279,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public IExperiment getBestExperiment()
 	{
-		return (IExperiment) mBestExperimentList.get(getNumberOfExperiments() - 1);
+		return (IExperiment) this.mBestExperimentList.get(getNumberOfExperiments() - 1);
 	}
 
 	/**
@@ -290,7 +287,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public List getListOfBestExperiments()
 	{
-		return mBestExperimentList;
+		return this.mBestExperimentList;
 	}
 
 	/**
@@ -298,17 +295,17 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public List getListOfBestExperimentValues()
 	{
-		synchronized (mBestExperimentList)
+		synchronized (this.mBestExperimentList)
 		{
-			mBestExperimentValuesList.clear();
-			for (int i = 0; i < mBestExperimentList.size(); i++)
+			this.mBestExperimentValuesList.clear();
+			for (int i = 0; i < this.mBestExperimentList.size(); i++)
 			{
-				IExperiment lExperiment = (IExperiment) mBestExperimentList.get(i);
-				double lValue = mObjectiveFunction.evaluate(lExperiment.getOutput());
-				mBestExperimentValuesList.add(new Double(lValue));
+				final IExperiment lExperiment = (IExperiment) this.mBestExperimentList.get(i);
+				final double lValue = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
+				this.mBestExperimentValuesList.add(new Double(lValue));
 			}
 		}
-		return mBestExperimentValuesList;
+		return this.mBestExperimentValuesList;
 	}
 
 	/**
@@ -325,39 +322,31 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public final boolean stagnating(final int pStart, final int pTime)
 	{
-		synchronized (mBestExperimentList)
+		synchronized (this.mBestExperimentList)
 		{
 			int lTime = pTime;
-			List lList = getListOfBestExperimentValues();
+			final List lList = getListOfBestExperimentValues();
 
 			/**
 			 * If we dont have enough points we cannot say that the database is
 			 * stagnating
 			 */
 			if ((getNumberOfExperiments() - pStart) < lTime)
-			{
 				return false;
-			}
 
 			/** There is no point in asking for a too short stagnation window. */
 			if (lTime < 2)
-			{
 				lTime = 2;
-			}
 
 			boolean lStagnating = true;
 			int lStart = getNumberOfExperiments() - lTime;
-			int lEnd = getNumberOfExperiments() - 1;
+			final int lEnd = getNumberOfExperiments() - 1;
 
 			if (lStart < 0)
-			{
 				lStart = 0;
-			}
 
 			for (int i = lStart; i < lEnd; i++)
-			{
 				lStagnating &= ((((Double) lList.get(i + 1)).doubleValue() - ((Double) lList.get(i)).doubleValue()) == 0);
-			}
 
 			return lStagnating;
 		}

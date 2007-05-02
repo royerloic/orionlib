@@ -11,22 +11,22 @@ import org.royerloic.structures.ListMap;
 
 public class UniProt2Go
 {
-	private ListMap<Integer, Integer>	mUniProt2GoListMap	= new ArrayListMap<Integer, Integer>();
+	private final ListMap<Integer, Integer>	mUniProt2GoListMap	= new ArrayListMap<Integer, Integer>();
 
-	public UniProt2Go(File pUniprot2GoFile) throws FileNotFoundException, IOException
+	public UniProt2Go(final File pUniprot2GoFile) throws FileNotFoundException, IOException
 	{
 		super();
 
 		{
-			List<List<String>> lUniprot2GoMatrix = MatrixFile.readMatrixFromFile(pUniprot2GoFile, false);
+			final List<List<String>> lUniprot2GoMatrix = MatrixFile.readMatrixFromFile(pUniprot2GoFile, false);
 
-			for (List<String> lList : lUniprot2GoMatrix)
+			for (final List<String> lList : lUniprot2GoMatrix)
 			{
-				String lUniProtId = lList.get(0);
-				Integer lUniProtIdInteger = UniProtIdConverter.convertUniProtIdToInteger(lUniProtId);
-				String lGoIdString = lList.get(1);
-				Integer lGoIdInteger = Integer.parseInt(lGoIdString);
-				mUniProt2GoListMap.put(lUniProtIdInteger, lGoIdInteger);
+				final String lUniProtId = lList.get(0);
+				final Integer lUniProtIdInteger = UniProtIdConverter.convertUniProtIdToInteger(lUniProtId);
+				final String lGoIdString = lList.get(1);
+				final Integer lGoIdInteger = Integer.parseInt(lGoIdString);
+				this.mUniProt2GoListMap.put(lUniProtIdInteger, lGoIdInteger);
 			}
 		}
 	}

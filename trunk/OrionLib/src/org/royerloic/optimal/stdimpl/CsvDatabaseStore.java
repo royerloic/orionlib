@@ -32,27 +32,27 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	/**
 	 * 
 	 */
-	public CsvDatabaseStore(File pCsvFile)
+	public CsvDatabaseStore(final File pCsvFile)
 	{
 		super();
-		mCsvFile = pCsvFile;
+		this.mCsvFile = pCsvFile;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentDatabaseStore#setExperimentDatabase(org.royerloic.optimal.interf.IExperimentDatabase)
 	 */
-	public void setExperimentDatabase(IExperimentDatabase pExperimentDatabase)
+	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		mExperimentDatabase = pExperimentDatabase;
+		this.mExperimentDatabase = pExperimentDatabase;
 
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentDatabaseStore#setObjectiveFunction(org.royerloic.optimal.interf.IObjectiveFunction)
 	 */
-	public void setObjectiveFunction(IObjectiveFunction pObjectiveFunction)
+	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		mObjectiveFunction = pObjectiveFunction;
+		this.mObjectiveFunction = pObjectiveFunction;
 
 	}
 
@@ -61,8 +61,8 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	 */
 	public void load()
 	{
-		MatrixFile lMatrixFile = new MatrixFile(mCsvFile);
-		INumericalVector lHeaderVector = lMatrixFile.getVector(0);
+		final MatrixFile lMatrixFile = new MatrixFile(this.mCsvFile);
+		final INumericalVector lHeaderVector = lMatrixFile.getVector(0);
 
 		final int lNumberOfExperiments = (int) lHeaderVector.get(0);
 		final int lInputDimension = (int) lHeaderVector.get(1);
@@ -70,28 +70,28 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 
 		for (int i = 1; i <= lNumberOfExperiments; i++)
 		{
-			INumericalVector lLine = lMatrixFile.getVector(i);
-			INumericalVector lInput = new NumericalVector(lInputDimension);
+			final INumericalVector lLine = lMatrixFile.getVector(i);
+			final INumericalVector lInput = new NumericalVector(lInputDimension);
 			int j;
 			for (j = 0; j < lInputDimension; j++)
 			{
-				double lValue = lLine.get(j);
+				final double lValue = lLine.get(j);
 				lInput.set(j, lValue);
 			}
 
-			INumericalVector lOutput = new NumericalVector(lOutputDimension);
+			final INumericalVector lOutput = new NumericalVector(lOutputDimension);
 			for (j = 0; j < lOutputDimension; j++)
 			{
-				double lValue = lLine.get(lInputDimension + j);
+				final double lValue = lLine.get(lInputDimension + j);
 				lOutput.set(j, lValue);
 			}
 
-			IExperiment lExperiment = new Experiment();
+			final IExperiment lExperiment = new Experiment();
 			lExperiment.begin();
 			lExperiment.end();
 
 			lExperiment.set(lInput, lOutput);
-			mExperimentDatabase.addExperiment(lExperiment);
+			this.mExperimentDatabase.addExperiment(lExperiment);
 		}
 
 	}
@@ -103,13 +103,13 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	{
 		try
 		{
-			File lOutputFile = mCsvFile;
+			final File lOutputFile = this.mCsvFile;
 
 			try
 			{
 				lOutputFile.createNewFile();
 			}
-			catch (IOException e4)
+			catch (final IOException e4)
 			{
 				// TODO Auto-generated catch block
 				e4.printStackTrace(System.out);
@@ -122,7 +122,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 				lFileWriter = new FileWriter(lOutputFile);
 				lBufferedWriter = new BufferedWriter(lFileWriter);
 			}
-			catch (IOException e1)
+			catch (final IOException e1)
 			{
 				System.out.println("Output File: " + lOutputFile + " not found.");
 				return;
@@ -130,17 +130,14 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 
 			try
 			{
-				final IExperimentDatabase lDatabase = mExperimentDatabase;
+				final IExperimentDatabase lDatabase = this.mExperimentDatabase;
 				final int lSize = lDatabase.getNumberOfExperiments();
 
 				String lValueString = Integer.toString(lSize);
 				lBufferedWriter.write(lValueString + "\t");
 
 				if (lSize == 0)
-				{
-
 					return;
-				}
 
 				IExperiment lExperiment = lDatabase.getExperiment(0);
 				INumericalVector lInputVector = lExperiment.getInput();
@@ -174,7 +171,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 						lBufferedWriter.write(lValueString + "\t");
 					}
 
-					final double lObjectiveValue = mObjectiveFunction.evaluate(lOutputVector);
+					final double lObjectiveValue = this.mObjectiveFunction.evaluate(lOutputVector);
 
 					final String lObjectiveValueString = Double.toString(lObjectiveValue);
 					lBufferedWriter.write(lObjectiveValueString + "\t");
@@ -183,7 +180,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 
 				lBufferedWriter.flush();
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while writing: " + e2.getCause());
 			}
@@ -192,7 +189,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 				lFileWriter.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 		}

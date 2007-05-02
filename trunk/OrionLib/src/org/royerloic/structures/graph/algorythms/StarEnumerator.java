@@ -39,15 +39,15 @@ public class StarEnumerator<N>
 
 		public int		mConnectivity;
 
-		public int compareTo(Star pO)
+		public int compareTo(final Star pO)
 		{
-			return ((Star) pO).mConnectivity - mConnectivity;
+			return (pO).mConnectivity - this.mConnectivity;
 		}
 
 		@Override
 		public String toString()
 		{
-			return "Star(" + mStarNode + ", " + mStarGraph.getNodeSet() + ")";
+			return "Star(" + this.mStarNode + ", " + this.mStarGraph.getNodeSet() + ")";
 		}
 
 	}
@@ -55,126 +55,124 @@ public class StarEnumerator<N>
 	/**
 	 * @param pGraphInterface
 	 */
-	public StarEnumerator(Graph<N,Edge<N>> pGraphInterface)
+	public StarEnumerator(final Graph<N,Edge<N>> pGraphInterface)
 	{
 		super();
-		mGraph = pGraphInterface;
-		mStarSet = new HashSet<Graph>(pGraphInterface.getNumberOfNodes());
-		mConnectivityStatistics = new TreeMap<Integer, Integer>();
-		mStarList = new ArrayList<Star<N>>(pGraphInterface.getNumberOfNodes());
+		this.mGraph = pGraphInterface;
+		this.mStarSet = new HashSet<Graph>(pGraphInterface.getNumberOfNodes());
+		this.mConnectivityStatistics = new TreeMap<Integer, Integer>();
+		this.mStarList = new ArrayList<Star<N>>(pGraphInterface.getNumberOfNodes());
 		doEnumerateStars();
 	}
 
 	private void doEnumerateStars()
 	{
-		Set<N> lNodeSet = mGraph.getNodeSet();
-		for (N lNode : lNodeSet)
+		final Set<N> lNodeSet = this.mGraph.getNodeSet();
+		for (final N lNode : lNodeSet)
 		{
 
-			Set<N> lNeighboursSet = mGraph.getNodeNeighbours(lNode);
-			int lNodeConnectivity = lNeighboursSet.size();
+			final Set<N> lNeighboursSet = this.mGraph.getNodeNeighbours(lNode);
+			final int lNodeConnectivity = lNeighboursSet.size();
 
 			if (lNodeConnectivity > 1)
 			{
 
-				Integer lNumberOfNodesForConnectivity = mConnectivityStatistics.get(lNodeConnectivity);
+				Integer lNumberOfNodesForConnectivity = this.mConnectivityStatistics.get(lNodeConnectivity);
 				if (lNumberOfNodesForConnectivity == null)
-				{
 					lNumberOfNodesForConnectivity = 0;
-				}
-				mConnectivityStatistics.put(lNodeConnectivity, lNumberOfNodesForConnectivity + 1);
+				this.mConnectivityStatistics.put(lNodeConnectivity, lNumberOfNodesForConnectivity + 1);
 
-				Set<N> lSingletonSet = new HashSet<N>(1);
+				final Set<N> lSingletonSet = new HashSet<N>(1);
 				lSingletonSet.add(lNode);
-				Graph<N,Edge<N>> lSubGraph = mGraph.extractSubGraph(lSingletonSet);
+				final Graph<N,Edge<N>> lSubGraph = this.mGraph.extractSubGraph(lSingletonSet);
 
-				mStarSet.add(lSubGraph);
+				this.mStarSet.add(lSubGraph);
 
-				Star lStar = new Star<N>();
+				final Star lStar = new Star<N>();
 				lStar.mStarGraph = lSubGraph;
 				lStar.mConnectivity = lNodeConnectivity;
 				lStar.mStarNodesSet = lNeighboursSet;
 				lStar.mStarNode = lNode;
-				mStarList.add(lStar);
+				this.mStarList.add(lStar);
 			}
 		}
 
-		Collections.sort(mStarList);
+		Collections.sort(this.mStarList);
 	}
 
-	public void associateGraph(Graph<N,Edge<N>> pGraph)
+	public void associateGraph(final Graph<N,Edge<N>> pGraph)
 	{
-		mGraph = pGraph;
+		this.mGraph = pGraph;
 	}
 
 	public Graph getAssociatedGraph()
 	{
-		return mGraph;
+		return this.mGraph;
 	}
 
 	public int size()
 	{
-		return mStarSet.size();
+		return this.mStarSet.size();
 	}
 
 	public boolean isEmpty()
 	{
-		return mStarSet.isEmpty();
+		return this.mStarSet.isEmpty();
 	}
 
-	public boolean contains(Object pO)
+	public boolean contains(final Object pO)
 	{
-		return mStarSet.contains(pO);
+		return this.mStarSet.contains(pO);
 	}
 
 	public Iterator<Graph> iterator()
 	{
-		return mStarSet.iterator();
+		return this.mStarSet.iterator();
 	}
 
 	public Object[] toArray()
 	{
-		return mStarSet.toArray();
+		return this.mStarSet.toArray();
 	}
 
-	public <T> T[] toArray(T[] pA)
+	public <T> T[] toArray(final T[] pA)
 	{
-		return mStarSet.<T> toArray(pA);
+		return this.mStarSet.<T> toArray(pA);
 	}
 
-	public boolean add(Graph pO)
+	public boolean add(final Graph pO)
 	{
-		return mStarSet.add(pO);
+		return this.mStarSet.add(pO);
 	}
 
-	public boolean remove(Object pO)
+	public boolean remove(final Object pO)
 	{
-		return mStarSet.remove(pO);
+		return this.mStarSet.remove(pO);
 	}
 
-	public boolean containsAll(Collection<?> pC)
+	public boolean containsAll(final Collection<?> pC)
 	{
-		return mStarSet.removeAll(pC);
+		return this.mStarSet.removeAll(pC);
 	}
 
-	public boolean addAll(Collection<? extends Graph> pC)
+	public boolean addAll(final Collection<? extends Graph> pC)
 	{
-		return mStarSet.removeAll(pC);
+		return this.mStarSet.removeAll(pC);
 	}
 
-	public boolean retainAll(Collection<?> pC)
+	public boolean retainAll(final Collection<?> pC)
 	{
-		return mStarSet.retainAll(pC);
+		return this.mStarSet.retainAll(pC);
 	}
 
-	public boolean removeAll(Collection<?> pC)
+	public boolean removeAll(final Collection<?> pC)
 	{
-		return mStarSet.removeAll(pC);
+		return this.mStarSet.removeAll(pC);
 	}
 
 	public void clear()
 	{
-		mStarSet.clear();
+		this.mStarSet.clear();
 
 	}
 
@@ -182,36 +180,34 @@ public class StarEnumerator<N>
 	public String toString()
 	{
 		// TODO Auto-generated method stub
-		return mStarSet.toString();
+		return this.mStarSet.toString();
 	}
 
 	public Map<Integer, Integer> getConnectivityStatistics()
 	{
-		return mConnectivityStatistics;
+		return this.mConnectivityStatistics;
 	}
 
 	public double getGamma()
 	{
-		Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
+		final Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
 
-		Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
+		final Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
 
-		for (int lK : lConnectivity.keySet())
-		{
+		for (final int lK : lConnectivity.keySet())
 			if ((lK != 0) && (lConnectivity.get(lK) != 0))
 				lLogConnectivity.put(Math.log(lK), Math.log(lConnectivity.get(lK)));
-		}
 
 		double lSigmaX = 0;
 		double lSigmaY = 0;
 		double lSigmaX2 = 0;
 		double lSigmaY2 = 0;
 		double lSigmaXY = 0;
-		double lN = lLogConnectivity.size();
+		final double lN = lLogConnectivity.size();
 
-		for (double lLogK : lLogConnectivity.keySet())
+		for (final double lLogK : lLogConnectivity.keySet())
 		{
-			double lLogNK = lLogConnectivity.get(lLogK);
+			final double lLogNK = lLogConnectivity.get(lLogK);
 			lSigmaX += lLogK;
 			lSigmaY += lLogNK;
 			lSigmaX2 += lLogK * lLogK;
@@ -219,7 +215,7 @@ public class StarEnumerator<N>
 			lSigmaXY += lLogK * lLogNK;
 		}
 
-		double a = (((lSigmaY) * (lSigmaX2)) - ((lSigmaX) * (lSigmaXY)))
+		final double a = (((lSigmaY) * (lSigmaX2)) - ((lSigmaX) * (lSigmaXY)))
 				/ ((lN * (lSigmaX2)) - (Math.pow(lSigmaX, 2)));
 		double b = ((lN * lSigmaXY) - (lSigmaX * lSigmaY)) / ((lN * lSigmaX2) - (Math.pow(lSigmaX, 2)));
 
@@ -236,15 +232,13 @@ public class StarEnumerator<N>
 	
 	public double getNewGamma()
 	{
-		Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
+		final Map<Integer, Integer> lConnectivity = getConnectivityStatistics();
 
-		Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
+		final Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
 
-		for (int lK : lConnectivity.keySet())
-		{
+		for (final int lK : lConnectivity.keySet())
 			if ((lK != 0) && (lConnectivity.get(lK) != 0))
 				lLogConnectivity.put(Math.log(lK), Math.log(lConnectivity.get(lK)));
-		}
 		return 0;
 
 	}

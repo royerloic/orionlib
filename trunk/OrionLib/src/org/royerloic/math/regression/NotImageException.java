@@ -30,7 +30,12 @@ import java.io.IOException;
  */
 public final class NotImageException extends IOException {
 
-	public NotImageException(Image image) {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -5137370763477649238L;
+
+	public NotImageException(final Image image) {
         super(image.toString());
     }
     
@@ -38,7 +43,7 @@ public final class NotImageException extends IOException {
         super();
     }
 
-    public NotImageException(String msg) {
+    public NotImageException(final String msg) {
         super(msg);
     }
 

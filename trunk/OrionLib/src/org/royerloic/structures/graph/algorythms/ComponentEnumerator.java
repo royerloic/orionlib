@@ -12,37 +12,35 @@ public class ComponentEnumerator<N>
 
 	Set<Graph<N, Edge<N>>>	mComponentSet;
 
-	public ComponentEnumerator(Graph pGraphInterface)
+	public ComponentEnumerator(final Graph pGraphInterface)
 	{
 		super();
-		mGraph = pGraphInterface;
-		mComponentSet = new HashSet<Graph<N, Edge<N>>>();
+		this.mGraph = pGraphInterface;
+		this.mComponentSet = new HashSet<Graph<N, Edge<N>>>();
 		doEnumerateComponents();
 	}
 
 	private void doEnumerateComponents()
 	{
-		Set<N> lNodeSet = new HashSet<N>();
-		lNodeSet.addAll(mGraph.getNodeSet());
+		final Set<N> lNodeSet = new HashSet<N>();
+		lNodeSet.addAll(this.mGraph.getNodeSet());
 
 		int lNodeCounter = 0;
 		while (!lNodeSet.isEmpty())
 		{
-			N lFirstNode = lNodeSet.iterator().next();
+			final N lFirstNode = lNodeSet.iterator().next();
 
-			Set<N> lReachedSet = new HashSet<N>();
-			Set<N> lFrontierSet = new HashSet<N>();
-			Set<N> lNewFrontierSet = new HashSet<N>();
+			final Set<N> lReachedSet = new HashSet<N>();
+			final Set<N> lFrontierSet = new HashSet<N>();
+			final Set<N> lNewFrontierSet = new HashSet<N>();
 
 			lReachedSet.add(lFirstNode);
-			lFrontierSet.addAll(mGraph.getNodeNeighbours(lFirstNode));
+			lFrontierSet.addAll(this.mGraph.getNodeNeighbours(lFirstNode));
 
 			while (!lFrontierSet.isEmpty())
 			{
-				for (N lFrontierNode : lFrontierSet)
-				{
-					lNewFrontierSet.addAll(mGraph.getNodeNeighbours(lFrontierNode));
-				}
+				for (final N lFrontierNode : lFrontierSet)
+					lNewFrontierSet.addAll(this.mGraph.getNodeNeighbours(lFrontierNode));
 				lNewFrontierSet.removeAll(lReachedSet);
 				lReachedSet.addAll(lFrontierSet);
 				lFrontierSet.clear();
@@ -53,22 +51,22 @@ public class ComponentEnumerator<N>
 			// System.out.println("lReachedSet size:"+lReachedSet.size());
 			lNodeCounter += lReachedSet.size();
 
-			Graph<N, Edge<N>> lComponent = mGraph.extractStrictSubGraph(lReachedSet);
-			mComponentSet.add(lComponent);
+			final Graph<N, Edge<N>> lComponent = this.mGraph.extractStrictSubGraph(lReachedSet);
+			this.mComponentSet.add(lComponent);
 		}
 		// System.out.println("lNodeCounter="+lNodeCounter);
 	}
 
 	public Set<Graph<N, Edge<N>>> getComponentsSet()
 	{
-		return mComponentSet;
+		return this.mComponentSet;
 	}
 
 	@Override
 	public String toString()
 	{
 		// TODO Auto-generated method stub
-		return mComponentSet.toString();
+		return this.mComponentSet.toString();
 	}
 
 }

@@ -27,74 +27,66 @@ public class PowerGraphToConfidence<N>
 	public PowerGraphToConfidence(final PowerGraph<N> pPowerGraph)
 	{
 		super();
-		mPowerGraph = pPowerGraph;
-		mTotalNumberOfEdges = pPowerGraph.getNumberOfEdges();
-		mMaximalPowerEdgeSize = pPowerGraph.getMaximalPowerEdgeSize();
+		this.mPowerGraph = pPowerGraph;
+		this.mTotalNumberOfEdges = pPowerGraph.getNumberOfEdges();
+		this.mMaximalPowerEdgeSize = pPowerGraph.getMaximalPowerEdgeSize();
 	}
 
 	public final double getConfidenceOld(final N pFirstNode, final N pSecondNode)
 	{
-		List<Set<N>> lSetList1 = mPowerGraph.getAllPowerNodeContaining(pFirstNode);
-		List<Set<N>> lSetList2 = mPowerGraph.getAllPowerNodeContaining(pSecondNode);
+		final List<Set<N>> lSetList1 = this.mPowerGraph.getAllPowerNodeContaining(pFirstNode);
+		final List<Set<N>> lSetList2 = this.mPowerGraph.getAllPowerNodeContaining(pSecondNode);
 
 		double lSize = 0;
-		for (Set<N> lSet1 : lSetList1)
-			for (Set<N> lSet2 : lSetList2)
+		for (final Set<N> lSet1 : lSetList1)
+			for (final Set<N> lSet2 : lSetList2)
 			{
-				final boolean isPowerEdge = mPowerGraph.isPowerEdge(lSet1, lSet2);
+				final boolean isPowerEdge = this.mPowerGraph.isPowerEdge(lSet1, lSet2);
 				if (isPowerEdge)
-				{
 					if (lSet1.equals(lSet2))
-					{
 						lSize += lSet1.size() * (lSet1.size() - 1) / 2;
-					}
 					else
-					{
 						lSize += lSet1.size() * lSet2.size();
-					}
-				}
 			}
 
-		final double lConfidence = lSize / mMaximalPowerEdgeSize;
+		final double lConfidence = lSize / this.mMaximalPowerEdgeSize;
 
 		return lConfidence;
 	}
 	
 	public final double getConfidence(final N pFirstNode, final N pSecondNode)
 	{
-		List<Set<N>> lSetList1 = mPowerGraph.getAllPowerNodeContaining(pFirstNode);
-		List<Set<N>> lSetList2 = mPowerGraph.getAllPowerNodeContaining(pSecondNode);
+		final List<Set<N>> lSetList1 = this.mPowerGraph.getAllPowerNodeContaining(pFirstNode);
+		final List<Set<N>> lSetList2 = this.mPowerGraph.getAllPowerNodeContaining(pSecondNode);
 
-		double lSize = 0;
-		for (Set<N> lSet1 : lSetList1)
+		final double lSize = 0;
+		for (final Set<N> lSet1 : lSetList1)
 		{
 			
 		}
 
-		final double lConfidence = lSize / mMaximalPowerEdgeSize;
+		final double lConfidence = lSize / this.mMaximalPowerEdgeSize;
 
 		return lConfidence;
 	}
 
 	public final void dumpEdgeConfidenceToFile(final File pFile) throws FileNotFoundException, IOException
 	{
-		Matrix<String> lMatrix = new ArrayMatrix<String>();
+		final Matrix<String> lMatrix = new ArrayMatrix<String>();
 
-		for (Edge<Set<N>> lPowerEdge : mPowerGraph.getPowerEdgeSet())
-		{
-			for (N lNode1 : lPowerEdge.getFirstNode())
-				for (N lNode2 : lPowerEdge.getSecondNode())
+		for (final Edge<Set<N>> lPowerEdge : this.mPowerGraph.getPowerEdgeSet())
+			for (final N lNode1 : lPowerEdge.getFirstNode())
+				for (final N lNode2 : lPowerEdge.getSecondNode())
 					if (!lNode1.equals(lNode2))
 					{
 						final Double lConfidence = getConfidence(lNode1, lNode2);
-						List<String> lList = new ArrayList<String>();
+						final List<String> lList = new ArrayList<String>();
 						lList.add("EDGE");
 						lList.add(lNode1.toString());
 						lList.add(lNode2.toString());
 						lList.add(lConfidence.toString());
 						lMatrix.add(lList);
 					}
-		}
 
 		MatrixFile.writeMatrixToFile(lMatrix, pFile);
 	}
@@ -105,14 +97,13 @@ public class PowerGraphToConfidence<N>
 																				final int[] pIndices2,
 																				final File pResultFile) throws FileNotFoundException, IOException
 	{
-		Matrix<String> lMatrix1 = MatrixFile.readMatrixFromFile(pFile1, "\\s+");
-		Matrix<String> lMatrix2 = MatrixFile.readMatrixFromFile(pFile2, "\\s+");
+		final Matrix<String> lMatrix1 = MatrixFile.readMatrixFromFile(pFile1, "\\s+");
+		final Matrix<String> lMatrix2 = MatrixFile.readMatrixFromFile(pFile2, "\\s+");
 
-		Map<Edge<String>, Double> lMap1 = new HashMap<Edge<String>, Double>();
-		Map<Edge<String>, Double> lMap2 = new HashMap<Edge<String>, Double>();
+		final Map<Edge<String>, Double> lMap1 = new HashMap<Edge<String>, Double>();
+		final Map<Edge<String>, Double> lMap2 = new HashMap<Edge<String>, Double>();
 
-		for (List<String> lList : lMatrix1)
-		{
+		for (final List<String> lList : lMatrix1)
 			try
 			{
 				final String lNode1 = lList.get(pIndices1[0]);
@@ -121,14 +112,12 @@ public class PowerGraphToConfidence<N>
 				final Edge<String> lEdge = new UndirectedEdge<String>(lNode1, lNode2);
 				lMap1.put(lEdge, lConfidence);
 			}
-			catch (Throwable lThrowable)
+			catch (final Throwable lThrowable)
 			{
 				lThrowable.printStackTrace();
 			}
-		}
 
-		for (List<String> lList : lMatrix2)
-		{
+		for (final List<String> lList : lMatrix2)
 			try
 			{
 				final String lNode1 = lList.get(pIndices2[0]);
@@ -137,22 +126,21 @@ public class PowerGraphToConfidence<N>
 				final Edge<String> lEdge = new UndirectedEdge<String>(lNode1, lNode2);
 				lMap2.put(lEdge, lConfidence);
 			}
-			catch (Throwable lThrowable)
+			catch (final Throwable lThrowable)
 			{
 				lThrowable.printStackTrace();
 			}
-		}
 
-		Matrix<String> lResultMatrix = new ArrayMatrix<String>();
+		final Matrix<String> lResultMatrix = new ArrayMatrix<String>();
 
-		for (Entry<Edge<String>, Double> lEntry : lMap1.entrySet())
+		for (final Entry<Edge<String>, Double> lEntry : lMap1.entrySet())
 		{
 			final Edge<String> lEdge = lEntry.getKey();
 			final Double lConfidence1 = lEntry.getValue();
 			final Double lConfidence2 = lMap2.get(lEdge);
 			if (lConfidence2 != null)
 			{
-				List<String> lList = new ArrayList<String>();
+				final List<String> lList = new ArrayList<String>();
 				lList.add("EDGE");
 				lList.add(lEdge.getFirstNode());
 				lList.add(lEdge.getSecondNode());

@@ -23,6 +23,10 @@ import javax.swing.JFrame;
  */
 public class IwuJFrame extends JFrame
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 6366703561353850978L;
 	private Image	mWindowIcon;
 
 	/**
@@ -35,15 +39,15 @@ public class IwuJFrame extends JFrame
 			// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
 		}
-		catch (Exception lException)
+		catch (final Exception lException)
 		{
 			lException.printStackTrace(System.out);
 		} /**/
 
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		URL lUrl = ClassLoader.getSystemResource("org/royerloic/utils/gui/images/IWU.gif");
-		mWindowIcon = kit.getImage(lUrl);
-		setIconImage(mWindowIcon); /**/
+		final Toolkit kit = Toolkit.getDefaultToolkit();
+		final URL lUrl = ClassLoader.getSystemResource("org/royerloic/utils/gui/images/IWU.gif");
+		this.mWindowIcon = kit.getImage(lUrl);
+		setIconImage(this.mWindowIcon); /**/
 
 	}
 

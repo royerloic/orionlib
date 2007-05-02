@@ -33,72 +33,70 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Graph<Node, Edge<Node>> load(File pFile) throws FileNotFoundException, IOException
+	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException, IOException
 	{
-		HashGraph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
+		final HashGraph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 
-		Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
+		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(pFile, false, "\\s+");
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(pFile, false, "\\s+");
 
 		int lFirstNodeIndex = 1;
 		int lSecondNodeIndex = 2;
 		int lConfidenceValueIndex = 0;
 		double lConfidenceThreshold = Double.NEGATIVE_INFINITY;
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("EDGEFORMAT"))
 			{
-				String lFirstNodeIndexString = lStringList.get(1);
-				String lSecondNodeIndexString = lStringList.get(2);
+				final String lFirstNodeIndexString = lStringList.get(1);
+				final String lSecondNodeIndexString = lStringList.get(2);
 				lFirstNodeIndex = Integer.parseInt(lFirstNodeIndexString);
 				lSecondNodeIndex = Integer.parseInt(lSecondNodeIndexString);
 				if (lStringList.size() >= 4)
 				{
-					String lConfidenceValueIndexString = lStringList.get(3).trim();
+					final String lConfidenceValueIndexString = lStringList.get(3).trim();
 					if (lConfidenceValueIndexString.matches("[0-9]+"))
-					{
 						lConfidenceValueIndex = Integer.parseInt(lConfidenceValueIndexString);
-					}
 				}
 				break;
 			}
 		}
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("CONFIDENCEVALUETHRESHOLD"))
 			{
-				String lThresholdString = lStringList.get(1);
+				final String lThresholdString = lStringList.get(1);
 				lConfidenceThreshold = Double.parseDouble(lThresholdString);
 				break;
 			}
 		}
 
 		boolean isNodeFilterDefined = false;
-		Set<Node> lFilteredNodesSet = new HashSet<Node>();
-		for (List<String> lStringList : lMatrix)
+		final Set<Node> lFilteredNodesSet = new HashSet<Node>();
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("NODEFILTER"))
 			{
 				isNodeFilterDefined = true;
-				String lName = lStringList.get(1);
-				Node lNode = new Node(lName);
+				final String lName = lStringList.get(1);
+				final Node lNode = new Node(lName);
 				lFilteredNodesSet.add(lNode);
 			}
 		}
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("NODE"))
 			{
-				String lName = lStringList.get(1);
-				Node lNode = new Node(lName);
+				final String lName = lStringList.get(1);
+				final Node lNode = new Node(lName);
 				if (lFilteredNodesSet.contains(lNode) || !isNodeFilterDefined)
 				{
 					lGraph.addNode(lNode);
@@ -107,13 +105,13 @@ public class EdgIO
 			}
 		}
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("EDGE"))
 			{
-				String lNodeName1 = lStringList.get(lFirstNodeIndex);
-				String lNodeName2 = lStringList.get(lSecondNodeIndex);
+				final String lNodeName1 = lStringList.get(lFirstNodeIndex);
+				final String lNodeName2 = lStringList.get(lSecondNodeIndex);
 
 				Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
 				Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
@@ -136,31 +134,34 @@ public class EdgIO
 					double lConfidenceValue = 1;
 					if (lConfidenceValueIndex != 0)
 					{
-						String lConfidenceValueString = lStringList.get(lConfidenceValueIndex);
+						final String lConfidenceValueString = lStringList.get(lConfidenceValueIndex);
 						lConfidenceValue = Double.parseDouble(lConfidenceValueString);
 					}
 
 					if (lConfidenceValue >= lConfidenceThreshold)
 					{
-
-						Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
+						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
 						lGraph.addEdge(lEdge);
+						
+						for (final String lString : lStringList)
+							System.out.print(lString+"\t");
+						System.out.print("\n");
 					}
 				}
 			}
 		}
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("STAR"))
 			{
-				String lNodeName1 = lStringList.get(1);
-				List<String> lNodesInStarList = lStringList.subList(2, lStringList.size());
+				final String lNodeName1 = lStringList.get(1);
+				final List<String> lNodesInStarList = lStringList.subList(2, lStringList.size());
 
-				for (String lString : lNodesInStarList)
+				for (final String lString : lNodesInStarList)
 				{
-					String lNodeName2 = lString;
+					final String lNodeName2 = lString;
 					Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
 					if (lFirstNode == null)
 					{
@@ -178,7 +179,7 @@ public class EdgIO
 							lStringIdToNodeMap.put(lNodeName2, lSecondNode);
 						}
 
-						Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
+						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
 						lGraph.addEdge(lEdge);
 					}
 				}
@@ -186,27 +187,27 @@ public class EdgIO
 			}
 		}
 
-		for (List<String> lStringList : lMatrix)
+		for (final List<String> lStringList : lMatrix)
 		{
-			String lLineType = lStringList.get(0);
+			final String lLineType = lStringList.get(0);
 			if (lLineType.equalsIgnoreCase("SELECT"))
 			{
 				isNodeFilterDefined = true;
-				String lNodeName = lStringList.get(1);
-				String lDepthString = lStringList.get(2);
-				Integer lDepth = Integer.parseInt(lDepthString);
-				Node lNode = new Node(lNodeName);
+				final String lNodeName = lStringList.get(1);
+				final String lDepthString = lStringList.get(2);
+				final Integer lDepth = Integer.parseInt(lDepthString);
+				final Node lNode = new Node(lNodeName);
 				lFilteredNodesSet.add(lNode);
 				lFilteredNodesSet.addAll(lGraph.getNodeNeighbours(lNode, lDepth));
 			}
 		}
 
 		if (isNodeFilterDefined)
-			for (Node lNode : new ArrayList<Node>(lGraph.getNodeSet()))
+			for (final Node lNode : new ArrayList<Node>(lGraph.getNodeSet()))
 				if (!lFilteredNodesSet.contains(lNode))
-				{
 					lGraph.removeNode(lNode);
-				}
+		
+
 
 		return lGraph;
 	}
@@ -218,19 +219,19 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static <N> void save(Graph<N, Edge<N>> pGraph, File pFile) throws FileNotFoundException, IOException
+	public static <N> void save(final Graph<N, Edge<N>> pGraph, final File pFile) throws FileNotFoundException, IOException
 	{
-		List<List<String>> lStringListList = new ArrayList<List<String>>();
-		for (N lNode : pGraph.getNodeSet())
+		final List<List<String>> lStringListList = new ArrayList<List<String>>();
+		for (final N lNode : pGraph.getNodeSet())
 		{
-			List<String> lEdgeList = new ArrayList<String>();
+			final List<String> lEdgeList = new ArrayList<String>();
 			lEdgeList.add("NODE");
 			lEdgeList.add(lNode.toString());
 			lStringListList.add(lEdgeList);
 		}
-		for (Edge<N> lEdge : pGraph.getEdgeSet())
+		for (final Edge<N> lEdge : pGraph.getEdgeSet())
 		{
-			List<String> lEdgeList = new ArrayList<String>();
+			final List<String> lEdgeList = new ArrayList<String>();
 			lEdgeList.add("EDGE");
 			lEdgeList.add(lEdge.getFirstNode().toString());
 			lEdgeList.add(lEdge.getSecondNode().toString());
@@ -246,40 +247,36 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void save(PsiMiGraph pGraph, File pFile) throws FileNotFoundException, IOException
+	public static void save(final PsiMiGraph pGraph, final File pFile) throws FileNotFoundException, IOException
 	{
-		List<List<String>> lStringListList = new ArrayList<List<String>>();
-		for (PsiMiNode lNode : pGraph.getNodeSet())
+		final List<List<String>> lStringListList = new ArrayList<List<String>>();
+		for (final PsiMiNode lNode : pGraph.getNodeSet())
 		{
-			List<String> lNodeList = new ArrayList<String>();
+			final List<String> lNodeList = new ArrayList<String>();
 			lNodeList.add("NODE");
 			lNodeList.add(lNode.toString());
 			lStringListList.add(lNodeList);
 
-			List<String> lGoList = new ArrayList<String>();
+			final List<String> lGoList = new ArrayList<String>();
 			lGoList.add("ATTRIBUTE");
 			lGoList.add(lNode.toString());
 			lGoList.add("GO");
-			for (Integer lInteger : lNode.getGoIdList())
-			{
+			for (final Integer lInteger : lNode.getGoIdList())
 				lGoList.add(lInteger.toString());
-			}
 			lStringListList.add(lGoList);
 
-			List<String> lDomainList = new ArrayList<String>();
+			final List<String> lDomainList = new ArrayList<String>();
 			lDomainList.add("ATTRIBUTE");
 			lDomainList.add(lNode.toString());
 			lDomainList.add("DOMAIN");
-			for (Integer lInteger : lNode.getInterproIdList())
-			{
+			for (final Integer lInteger : lNode.getInterproIdList())
 				lDomainList.add(lInteger.toString());
-			}
 			lStringListList.add(lDomainList);
 
 		}
-		for (Edge<PsiMiNode> lEdge : pGraph.getEdgeSet())
+		for (final Edge<PsiMiNode> lEdge : pGraph.getEdgeSet())
 		{
-			List<String> lEdgeList = new ArrayList<String>();
+			final List<String> lEdgeList = new ArrayList<String>();
 			lEdgeList.add("EDGE");
 			lEdgeList.add(lEdge.getFirstNode().toString());
 			lEdgeList.add(lEdge.getSecondNode().toString());

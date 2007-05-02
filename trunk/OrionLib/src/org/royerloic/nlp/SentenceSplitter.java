@@ -24,7 +24,7 @@ public class SentenceSplitter
 	 */
 	public static String[] naivSplit(String text)
 	{
-		String[] list = text.split("[\r\n]+");
+		final String[] list = text.split("[\r\n]+");
 		String content = list[0];
 		for (int i = 1; i < list.length; i++)
 			content += " " + list[i];
@@ -41,7 +41,7 @@ public class SentenceSplitter
 	public static String[] split(String text)
 	{
 		// transform multi-line texts into single line texts
-		String[] list = text.split("[\r\n]+");
+		final String[] list = text.split("[\r\n]+");
 		String content = list[0];
 		for (int i = 1; i < list.length; i++)
 			content += " " + list[i];
@@ -55,10 +55,10 @@ public class SentenceSplitter
 		// check for and remove foreign language title markup (Medline specific!):
 		// enclosed in square brackets "[text text text]"
 		boolean foreignLanguageTitle = false;
-		if (text == null || text.length() == 0)
+		if ((text == null) || (text.length() == 0))
 			return new String[]
 			{ "" };
-		if (text.charAt(0) == '[' && text.charAt(text.length() - 1) == ']')
+		if ((text.charAt(0) == '[') && (text.charAt(text.length() - 1) == ']'))
 		{
 			foreignLanguageTitle = true;
 			text = text.substring(1, text.length() - 1);

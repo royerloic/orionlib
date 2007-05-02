@@ -2,6 +2,11 @@ package org.royerloic.ml.svm.libsvm;
 
 public class Parameter implements Cloneable, java.io.Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 6866557124232802249L;
+
 	/* svm_type */
 	public static final int	C_SVC				= 0;
 
@@ -53,13 +58,14 @@ public class Parameter implements Cloneable, java.io.Serializable
 
 	public int							probability;			// do probability estimates
 
+	@Override
 	public Object clone()
 	{
 		try
 		{
 			return super.clone();
 		}
-		catch (CloneNotSupportedException e)
+		catch (final CloneNotSupportedException e)
 		{
 			return null;
 		}

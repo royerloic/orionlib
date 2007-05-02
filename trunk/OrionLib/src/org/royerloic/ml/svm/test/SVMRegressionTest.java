@@ -27,39 +27,40 @@ public class SVMRegressionTest extends TestCase
 	{
 		super();
 
-		mSVMRegression = new SVMRegression(0.001, 10000, 0.5);
+		this.mSVMRegression = new SVMRegression(0.001, 10000, 0.5);
 
-		ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
+		final ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
 
-		IVectorArray lVector1 = new NumericalVector(new double[]
+		final IVectorArray lVector1 = new NumericalVector(new double[]
 		{ 0 });
-		IVectorArray lVector2 = new NumericalVector(new double[]
+		final IVectorArray lVector2 = new NumericalVector(new double[]
 		{ 0.5 });
-		IVectorArray lVector3 = new NumericalVector(new double[]
+		final IVectorArray lVector3 = new NumericalVector(new double[]
 		{ 1 });
-		IVectorArray lVector4 = new NumericalVector(new double[]
+		final IVectorArray lVector4 = new NumericalVector(new double[]
 		{ 0.15 });
 
 		lLabelledVectorSet.addVector(lVector1, 0);
 		lLabelledVectorSet.addVector(lVector2, 0.5);
 		lLabelledVectorSet.addVector(lVector3, 1);
 
-		mSVMRegression.train(lLabelledVectorSet);
+		this.mSVMRegression.train(lLabelledVectorSet);
 
-		double lResult = mSVMRegression.predict(lVector4);
+		final double lResult = this.mSVMRegression.predict(lVector4);
 
 		System.out.println("Result: " + lResult);
 
 	}
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
-		SVMRegressionTest lSVMRegressionTest = new SVMRegressionTest();
+		final SVMRegressionTest lSVMRegressionTest = new SVMRegressionTest();
 	}
 
 	/*
 	 * @see TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -69,6 +70,7 @@ public class SVMRegressionTest extends TestCase
 	/*
 	 * @see TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();

@@ -24,123 +24,107 @@ import org.royerloic.structures.utils.CollectionUtils;
 public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lattice<N>
 {
 
-	public Double getDepth(N pN)
+	public Double getDepth(final N pN)
 	{
-		Set<N> lNodeSet = getParents(pN);
-		List<Double> lDepthList = new ArrayList<Double>();
-		for (N lN : lNodeSet)
-		{
+		final Set<N> lNodeSet = getParents(pN);
+		final List<Double> lDepthList = new ArrayList<Double>();
+		for (final N lN : lNodeSet)
 			lDepthList.add(getDepth(lN));
-		}
-		Double lDepth = CollectionUtils.max(lDepthList) + 1;
+		final Double lDepth = CollectionUtils.max(lDepthList) + 1;
 		return lDepth;
 	}
 
-	public Double getHeight(N pN)
+	public Double getHeight(final N pN)
 	{
-		Set<N> lNodeSet = getChildren(pN);
-		List<Double> lDepthList = new ArrayList<Double>();
-		for (N lN : lNodeSet)
-		{
+		final Set<N> lNodeSet = getChildren(pN);
+		final List<Double> lDepthList = new ArrayList<Double>();
+		for (final N lN : lNodeSet)
 			lDepthList.add(getHeight(lN));
-		}
-		Double lHeight = CollectionUtils.max(lDepthList) + 1;
+		final Double lHeight = CollectionUtils.max(lDepthList) + 1;
 		return lHeight;
 	}
 
-	public Set<N> getChildren(N pN)
+	public Set<N> getChildren(final N pN)
 	{
 		return getPositiveNodeNeighbours(pN);
 	}
 
-	public Set<N> getChildren(Collection<N> pNCollection)
+	public Set<N> getChildren(final Collection<N> pNCollection)
 	{
-		Set<N> lChildrenSet = new HashSet<N>();
-		for (N lN : pNCollection)
-		{
+		final Set<N> lChildrenSet = new HashSet<N>();
+		for (final N lN : pNCollection)
 			lChildrenSet.addAll(getPositiveNodeNeighbours(lN));
-		}
 		return lChildrenSet;
 	}
 
-	public IntegerMap<N> getChildren(IntegerMap<N> pMap)
+	public IntegerMap<N> getChildren(final IntegerMap<N> pMap)
 	{
-		IntegerMap<N> lChildrenMap = new IntegerHashMap<N>();
-		for (Entry<N, Integer> lEntry : pMap.entrySet())
-		{
+		final IntegerMap<N> lChildrenMap = new IntegerHashMap<N>();
+		for (final Entry<N, Integer> lEntry : pMap.entrySet())
 			lChildrenMap.addAllWith(getPositiveNodeNeighbours(lEntry.getKey()), lEntry.getValue() + 1);
-		}
 		return lChildrenMap;
 	}
 
-	public IntegerMap<N> getDescendents(N pN)
+	public IntegerMap<N> getDescendents(final N pN)
 	{
 		return getDescendentsRecursive(pN, 1);
 	}
 
-	private IntegerMap<N> getDescendentsRecursive(N pN, int pDepth)
+	private IntegerMap<N> getDescendentsRecursive(final N pN, final int pDepth)
 	{
-		IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
-		Set<N> lChildrenSet = getChildren(pN);
+		final IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
+		final Set<N> lChildrenSet = getChildren(pN);
 		if (!lChildrenSet.isEmpty())
 		{
 			lNodeToDepthMap.addAllWith(lChildrenSet, pDepth);
-			for (N lNode : lChildrenSet)
-			{
+			for (final N lNode : lChildrenSet)
 				lNodeToDepthMap.minAll(getDescendentsRecursive(lNode, pDepth + 1));
-			}
 		}
 		return lNodeToDepthMap;
 	}
 
-	public Set<N> getParents(N pN)
+	public Set<N> getParents(final N pN)
 	{
 		return getNegativeNodeNeighbours(pN);
 	}
 
-	public Set<N> getParents(Collection<N> pNCollection)
+	public Set<N> getParents(final Collection<N> pNCollection)
 	{
-		Set<N> lParentSet = new HashSet<N>();
-		for (N lN : pNCollection)
-		{
+		final Set<N> lParentSet = new HashSet<N>();
+		for (final N lN : pNCollection)
 			lParentSet.addAll(getNegativeNodeNeighbours(lN));
-		}
 		return lParentSet;
 	}
 
-	public IntegerMap<N> getParents(IntegerMap<N> pMap)
+	public IntegerMap<N> getParents(final IntegerMap<N> pMap)
 	{
-		IntegerMap<N> lParentMap = new IntegerHashMap<N>();
-		for (Entry<N, Integer> lEntry : pMap.entrySet())
-		{
+		final IntegerMap<N> lParentMap = new IntegerHashMap<N>();
+		for (final Entry<N, Integer> lEntry : pMap.entrySet())
 			lParentMap.addAllWith(getNegativeNodeNeighbours(lEntry.getKey()), lEntry.getValue() - 1);
-		}
 		return lParentMap;
 	}
 
-	public IntegerMap<N> getAncestors(N pN)
+	public IntegerMap<N> getAncestors(final N pN)
 	{
 		return getAncestorsRecursive(pN, -1);
 	}
 
-	private IntegerMap<N> getAncestorsRecursive(N pN, int pDepth)
+	private IntegerMap<N> getAncestorsRecursive(final N pN, final int pDepth)
 	{
-		IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
-		Set<N> lParentSet = getParents(pN);
+		final IntegerMap<N> lNodeToDepthMap = new IntegerHashMap<N>();
+		final Set<N> lParentSet = getParents(pN);
 		if (!lParentSet.isEmpty())
 		{
 			lNodeToDepthMap.addAllWith(lParentSet, pDepth);
-			for (N lNode : lParentSet)
-			{
+			for (final N lNode : lParentSet)
 				lNodeToDepthMap.maxAll(getAncestorsRecursive(lNode, pDepth - 1));
-			}
 		}
 		return lNodeToDepthMap;
 	}
 
-	private Triple<Set<N>, Integer, Integer> getLowerCommonAncestorsInternal(N pN1, N pN2)
+	private Triple<Set<N>, Integer, Integer> getLowerCommonAncestorsInternal(final N pN1, final N pN2)
 	{
-		IntersectionMonitor<N> lIntersectionMonitor = new IntersectionMonitor<N>();
+		final IntersectionMonitor<N> lIntersectionMonitor = new IntersectionMonitor<N>();
 
 		IntegerMap<N> lMap1 = new IntegerHashMap<N>();
 		lMap1.addAllWith(Collections.singleton(pN1), 0);
@@ -164,34 +148,32 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 		}
 
 		final Set<N> lIntersectionSet = lIntersectionMonitor.getIntersection();
-		N lNode = lIntersectionSet.iterator().next();
+		final N lNode = lIntersectionSet.iterator().next();
 
 		return new Triple<Set<N>, Integer, Integer>(lIntersectionSet, lMap1.get(lNode), lMap2.get(lNode));
 	}
 
-	public Set<N> getLowerCommonAncestors(N pN1, N pN2)
+	public Set<N> getLowerCommonAncestors(final N pN1, final N pN2)
 	{
-		Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
 		return lTriple.mA;
 	}
 
-	public double getLowerCommonAncestorDistance(N pN1, N pN2)
+	public double getLowerCommonAncestorDistance(final N pN1, final N pN2)
 	{
-		Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
 		return lTriple.mB + lTriple.mC;
 	}
 
-	public double getSimilarity(N pN1, N pN2)
+	public double getSimilarity(final N pN1, final N pN2)
 	{
-		Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
 
-		Set<N> lLowerCommonAncestorsSet = lTriple.mA;
+		final Set<N> lLowerCommonAncestorsSet = lTriple.mA;
 
-		List<Double> lDepthList = new ArrayList<Double>();
-		for (N lN : lLowerCommonAncestorsSet)
-		{
+		final List<Double> lDepthList = new ArrayList<Double>();
+		for (final N lN : lLowerCommonAncestorsSet)
 			lDepthList.add(getDepth(lN));
-		}
 
 		final double lDepth = CollectionUtils.average(lDepthList);
 		final double l1 = lTriple.mB;
@@ -201,7 +183,7 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 		return lSimilarity;
 	}
 
-	public Set<N> getHigherCommonDescendents(N pN1, N pN2)
+	public Set<N> getHigherCommonDescendents(final N pN1, final N pN2)
 	{
 		return null;
 		// TODO: fill this once the getLowerCommonAncestors is proved to work...

@@ -13,13 +13,18 @@ import java.util.Map;
 public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap<K>
 {
 
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 5619054777054023067L;
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#add(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Integer add(K pKey, Integer pValue)
+	public Integer add(final K pKey, final Integer pValue)
 	{
 		Integer lValue = get(pKey);
 		if (lValue == null)
@@ -30,12 +35,10 @@ public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap
 		return put(pKey, lValue);
 	}
 
-	public IntegerMap<K> addAllWith(Collection<K> pCollection, Integer pValue)
+	public IntegerMap<K> addAllWith(final Collection<K> pCollection, final Integer pValue)
 	{
-		for (K lK : pCollection)
-		{
+		for (final K lK : pCollection)
 			add(lK, pValue);
-		}
 		return this;
 	}
 
@@ -45,7 +48,7 @@ public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap
 	 * @see org.royerloic.collections.DoubleMap#sub(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Integer sub(K pKey, Integer pValue)
+	public Integer sub(final K pKey, Integer pValue)
 	{
 		return add(pKey, -pValue);
 	}
@@ -56,7 +59,7 @@ public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap
 	 * @see org.royerloic.collections.DoubleMap#mult(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Integer mult(K pKey, Integer pValue)
+	public Integer mult(final K pKey, final Integer pValue)
 	{
 		Integer lValue = get(pKey);
 		if (lValue == null)
@@ -73,54 +76,42 @@ public class IntegerHashMap<K> extends HashMap<K, Integer> implements IntegerMap
 	 * @see org.royerloic.collections.DoubleMap#div(java.lang.Object,
 	 *      java.lang.Double)
 	 */
-	public Integer div(K pKey, Integer pValue)
+	public Integer div(final K pKey, final Integer pValue)
 	{
 		return mult(pKey, 1 / pValue);
 	}
 
-	public Integer min(K pKey, Integer pNewValue)
+	public Integer min(final K pKey, final Integer pNewValue)
 	{
-		Integer lOldValue = get(pKey);
+		final Integer lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue > pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 
-	public Integer max(K pKey, Integer pNewValue)
+	public Integer max(final K pKey, final Integer pNewValue)
 	{
-		Integer lOldValue = get(pKey);
+		final Integer lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue < pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 
-	public IntegerMap<K> minAll(Map<K, Integer> pMap)
+	public IntegerMap<K> minAll(final Map<K, Integer> pMap)
 	{
-		for (Map.Entry<K, Integer> lEntry : pMap.entrySet())
-		{
+		for (final Map.Entry<K, Integer> lEntry : pMap.entrySet())
 			min(lEntry.getKey(), lEntry.getValue());
-		}
 		return this;
 	}
 
-	public IntegerMap<K> maxAll(Map<K, Integer> pMap)
+	public IntegerMap<K> maxAll(final Map<K, Integer> pMap)
 	{
-		for (Map.Entry<K, Integer> lEntry : pMap.entrySet())
-		{
+		for (final Map.Entry<K, Integer> lEntry : pMap.entrySet())
 			max(lEntry.getKey(), lEntry.getValue());
-		}
 		return this;
 	}
 

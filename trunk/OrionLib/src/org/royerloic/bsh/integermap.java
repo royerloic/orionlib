@@ -12,11 +12,11 @@ import bsh.Interpreter;
 public class integermap
 {
 	
-	public static IntegerMap<String> invoke(Interpreter env, CallStack callstack, Matrix<String> pMatrix, int pColumnIndex)
+	public static IntegerMap<String> invoke(final Interpreter env, final CallStack callstack, final Matrix<String> pMatrix, final int pColumnIndex)
 	{
-		IntegerMap<String> lIntegerMap = new IntegerHashMap<String>();
+		final IntegerMap<String> lIntegerMap = new IntegerHashMap<String>();
 		
-		for (List<String> lList : pMatrix)
+		for (final List<String> lList : pMatrix)
 		{
 			final String pValue  = lList.get(pColumnIndex);
 			lIntegerMap.add(pValue, 1);

@@ -9,22 +9,22 @@ import java.util.List;
 public class FileUtils
 {
 
-	public static File[] listFilesAsArray(File directory, FilenameFilter filter, boolean recurse)
+	public static File[] listFilesAsArray(final File directory, final FilenameFilter filter, final boolean recurse)
 	{
-		Collection<File> files = listFiles(directory, filter, recurse);
+		final Collection<File> files = listFiles(directory, filter, recurse);
 
-		File[] arr = new File[files.size()];
+		final File[] arr = new File[files.size()];
 		return files.toArray(arr);
 	}
 
-	public static List<File> listFilesRecursive(File pDirectory)
+	public static List<File> listFilesRecursive(final File pDirectory)
 	{
 		return listFiles(pDirectory, true);
 	}
 
-	public static List<File> listFiles(File directory, boolean recurse)
+	public static List<File> listFiles(final File directory, final boolean recurse)
 	{
-		List<File> files = listFiles(directory, new FilenameFilter()
+		final List<File> files = listFiles(directory, new FilenameFilter()
 		{
 			public boolean accept(File pDir, String pName)
 			{
@@ -35,31 +35,27 @@ public class FileUtils
 		return files;
 	}
 
-	public static List<File> listFiles(File directory, FilenameFilter filter, boolean recurse)
+	public static List<File> listFiles(final File directory, final FilenameFilter filter, final boolean recurse)
 	{
 		// List of files / directories
-		List<File> files = new ArrayList<File>();
+		final List<File> files = new ArrayList<File>();
 		// Java4: Vector files = new Vector();
 
 		// Get files / directories in the directory
-		File[] entries = directory.listFiles();
+		final File[] entries = directory.listFiles();
 
 		// Go over entries
-		for (File entry : entries)
+		for (final File entry : entries)
 		{
 			// If there is no filter or the filter accepts the
 			// file / directory, add it to the list
-			if (filter == null || filter.accept(directory, entry.getName()))
-			{
+			if ((filter == null) || filter.accept(directory, entry.getName()))
 				files.add(entry);
-			}
 
 			// If the file is a directory and the recurse flag
 			// is set, recurse into the directory
 			if (recurse && entry.isDirectory())
-			{
 				files.addAll(listFiles(entry, filter, recurse));
-			}
 		}
 
 		// Return collection of files

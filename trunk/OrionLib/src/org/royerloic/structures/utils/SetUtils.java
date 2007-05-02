@@ -8,10 +8,10 @@ import java.util.Set;
 
 public class SetUtils<E>
 {
-	public List<Set<E>> hierarchicalDecomposition(Collection<Set<E>> pSetCollection)
+	public List<Set<E>> hierarchicalDecomposition(final Collection<Set<E>> pSetCollection)
 	{
-		Set<Set<E>> lSetSet = new HashSet<Set<E>>(pSetCollection);
-		List<Set<E>> lResultSetList = new ArrayList<Set<E>>(lSetSet);
+		final Set<Set<E>> lSetSet = new HashSet<Set<E>>(pSetCollection);
+		final List<Set<E>> lResultSetList = new ArrayList<Set<E>>(lSetSet);
 
 		// Map<Edge<Set<E>>, Boolean> lCutCacheMap = new HashMap<Edge<Set<E>>,
 		// Boolean>();

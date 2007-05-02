@@ -34,13 +34,13 @@ public class OrionGraphicsFactory
 		{
 			return getFullScreenOrionGraphics(pDevice, pDisplayMode, pType);
 		}
-		catch (Throwable eFailedFullScreen)
+		catch (final Throwable eFailedFullScreen)
 		{
 			try
 			{
 				return getWindowedOrionGraphics(pDevice, pDisplayMode, pType);
 			}
-			catch (Throwable eFailedWindowed)
+			catch (final Throwable eFailedWindowed)
 			{
 				System.err.print("The factory could not return a Full Screen or a Windowed OrionGraphics. ");
 				eFailedWindowed.printStackTrace();
@@ -78,19 +78,17 @@ public class OrionGraphicsFactory
 
 	public static DisplayMode getCurrentDisplayModeOnDevice(final int pDevice)
 	{
-		GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-		GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
+		final GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
-		{
 			lDevice = lAllGraphicsDevices.length - 1;
-		}
 
-		GraphicsDevice lGraphicsDevice = lAllGraphicsDevices[lDevice];
+		final GraphicsDevice lGraphicsDevice = lAllGraphicsDevices[lDevice];
 
-		DisplayMode lDisplayMode = lGraphicsDevice.getDisplayMode();
+		final DisplayMode lDisplayMode = lGraphicsDevice.getDisplayMode();
 
 		return lDisplayMode;
 	}

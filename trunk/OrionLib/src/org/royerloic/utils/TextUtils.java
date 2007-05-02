@@ -3,40 +3,32 @@ package org.royerloic.utils;
 public class TextUtils
 {
 
-	public static String filterMarkupTags(String pString)
+	public static String filterMarkupTags(final String pString)
 	{
 		return pString.replaceAll("<[\\p{Alpha}]*[^>]*>", " ");
 	}
 
-	public static String getFirstSentence(String pString, int pMinimalSentenceSize, int pMaxSentenceSize)
+	public static String getFirstSentence(final String pString, final int pMinimalSentenceSize, final int pMaxSentenceSize)
 	{
 		String lFirstSentence = pString;
-		int lFirstPoint = pString.indexOf('.');
+		final int lFirstPoint = pString.indexOf('.');
 		if (lFirstPoint > pMinimalSentenceSize)
-		{
 			lFirstSentence = pString.substring(0, lFirstPoint + 1);
-		}
 		else
 		{
-			int lFirstSemiColon = pString.indexOf(';');
+			final int lFirstSemiColon = pString.indexOf(';');
 			if (lFirstSemiColon > pMinimalSentenceSize)
-			{
 				lFirstSentence = pString.substring(0, lFirstSemiColon + 1);
-			}
 			else
 			{
-				int lFirstComa = pString.indexOf(',');
+				final int lFirstComa = pString.indexOf(',');
 				if (lFirstComa > pMinimalSentenceSize)
-				{
 					lFirstSentence = pString.substring(0, lFirstComa + 1);
-				}
 				else
 				{
-					int lFirstNewLine = pString.indexOf('\n');
+					final int lFirstNewLine = pString.indexOf('\n');
 					if (lFirstNewLine > pMinimalSentenceSize)
-					{
 						lFirstSentence = pString.substring(0, lFirstNewLine + 1);
-					}
 				}
 			}
 		}
@@ -51,14 +43,14 @@ public class TextUtils
 	}
 
 	// lower quality extraction of sentences...
-	public static String getFirstSentences(String pString, int pNumberOfSentences)
+	public static String getFirstSentences(final String pString, final int pNumberOfSentences)
 	{
 		String lFirstSentences = "";
 
-		String[] lStringArray = pString.split("[.;]");
+		final String[] lStringArray = pString.split("[.;]");
 
 		int lSentenceCounter = 0;
-		for (String lSentence : lStringArray)
+		for (final String lSentence : lStringArray)
 		{
 			lSentenceCounter++;
 			lFirstSentences += lSentence + ".";

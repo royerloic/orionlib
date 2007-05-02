@@ -39,15 +39,15 @@ public final class Append
 														final String pAccumulatorFile,
 														final String pAppendFile)
 	{
-		File lInputFile = new File(pAppendFile);
-		File lOutputFile = new File(pAccumulatorFile);
+		final File lInputFile = new File(pAppendFile);
+		final File lOutputFile = new File(pAccumulatorFile);
 
 		FileReader lFileReader;
 		try
 		{
 			lFileReader = new FileReader(lInputFile);
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			System.out.println("File: " + lInputFile + " not found.");
 			return;
@@ -58,7 +58,7 @@ public final class Append
 		{
 			lFileWriter = new FileWriter(lOutputFile, true);
 		}
-		catch (IOException e1)
+		catch (final IOException e1)
 		{
 			System.out.println("File: " + lOutputFile + " not found.");
 			return;
@@ -68,11 +68,9 @@ public final class Append
 		try
 		{
 			while ((lFileReaderResult = lFileReader.read()) != -1)
-			{
 				lFileWriter.write(lFileReaderResult);
-			}
 		}
-		catch (IOException e2)
+		catch (final IOException e2)
 		{
 			System.out.println("Error while appending: " + e2.getCause());
 
@@ -84,7 +82,7 @@ public final class Append
 			{
 				lFileReader.close();
 			}
-			catch (IOException e3)
+			catch (final IOException e3)
 			{
 				// TODO Auto-generated catch block
 				e3.printStackTrace(System.out);
@@ -94,7 +92,7 @@ public final class Append
 			{
 				lFileWriter.close();
 			}
-			catch (IOException e4)
+			catch (final IOException e4)
 			{
 				// TODO Auto-generated catch block
 				e4.printStackTrace(System.out);

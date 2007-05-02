@@ -8,7 +8,7 @@ public class RegexCompilerTest extends TestCase
 {
 	public void testRealNumber() throws IOException
 	{
-		RegexCompiler lRegexCompiler = new RegexCompiler("test.regex.txt");
+		final RegexCompiler lRegexCompiler = new RegexCompiler("test.regex.txt");
 
 		assertTrue(lRegexCompiler.getRegex("regex1").equals("(?:[0-9]+)"));
 		assertTrue(lRegexCompiler.getRegex("regex2").equals("(?:A(?:[0-9]+)B)"));

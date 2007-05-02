@@ -50,24 +50,23 @@ public final class Regression {
      * </blockquote>
      */
     public static Representer solve(
-            GMatrix data, GVector values, Kernel kernel, double lambda) {
+            final GMatrix data, final GVector values, final Kernel kernel, final double lambda) {
         
-        int numPoints = data.getNumCol();
-        if (numPoints != values.getSize()) {
-            throw new MismatchedSizeException();
-        }
+        final int numPoints = data.getNumCol();
+        if (numPoints != values.getSize())
+					throw new MismatchedSizeException();
         
         // calculate the coefficients c
-        GMatrix k = kernelMatrix(data, kernel);
+        final GMatrix k = kernelMatrix(data, kernel);
 
         // subtract lambda * I from k
         for (int i = 0; i < numPoints; i++) {
-        	double kElem = k.getElement(i, i);
+        	final double kElem = k.getElement(i, i);
             k.setElement(i, i, kElem - lambda);
         }
         
         k.invert();
-        GVector c = new GVector(numPoints);
+        final GVector c = new GVector(numPoints);
         c.mul(k, values);
         
         return new Representer(kernel, data, c);
@@ -79,11 +78,11 @@ public final class Regression {
      * The element (i, j) in the returned matrix is the kernel
      * evaluated for the data points in columns i and j in the data.
      */
-    public static GMatrix kernelMatrix(GMatrix data, Kernel kernel) {
-        int rows = data.getNumRow(), cols = data.getNumCol();
-        GMatrix k = new GMatrix(cols, cols);
-        GVector x1 = new GVector(rows);
-        GVector x2 = new GVector(rows);
+    public static GMatrix kernelMatrix(final GMatrix data, final Kernel kernel) {
+        final int rows = data.getNumRow(), cols = data.getNumCol();
+        final GMatrix k = new GMatrix(cols, cols);
+        final GVector x1 = new GVector(rows);
+        final GVector x2 = new GVector(rows);
         
         // kernels are symmetric, so we only need calculate
         // every {i, j} combination, not permutation.
@@ -94,7 +93,7 @@ public final class Regression {
             
             for(int j = i + 1; j < cols; j++) {
                 data.getColumn(j, x2);
-                double val = kernel.eval(x1, x2);
+                final double val = kernel.eval(x1, x2);
                 k.setElement(i, j, val);
                 k.setElement(j, i, val);
             }

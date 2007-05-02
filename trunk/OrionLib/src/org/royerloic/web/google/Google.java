@@ -36,110 +36,104 @@ public class Google
 	private Google()
 	{
 		super();
-		mGoogleServer = cGOOGLE_MAIN_SERVER;
-		mLocalCode = "en";
-		mFileType = "";
+		this.mGoogleServer = cGOOGLE_MAIN_SERVER;
+		this.mLocalCode = "en";
+		this.mFileType = "";
 	}
 
-	private Google(String pSearchString)
+	private Google(final String pSearchString)
 	{
 		this();
-		mSearchString = pSearchString;
+		this.mSearchString = pSearchString;
 	}
 
-	private Google(String pSearchString, String pFileType)
+	private Google(final String pSearchString, final String pFileType)
 	{
 		this();
-		mSearchString = pSearchString;
-		mFileType = pFileType;
+		this.mSearchString = pSearchString;
+		this.mFileType = pFileType;
 	}
 
 	public void doQuery() throws IOException
 	{
-		String lQuery = buildGoogleQueryURL(mGoogleServer, mLocalCode, mSearchString, mFileType);
+		final String lQuery = buildGoogleQueryURL(this.mGoogleServer, this.mLocalCode, this.mSearchString, this.mFileType);
 		System.out.println("Query:" + lQuery);
-		mWebPageFetcher = new WebPageFetcher(lQuery);
-		mWebPageFetcher.setReferer(mGoogleServer);
-		mHeader = mWebPageFetcher.getPageHeader();
-		System.out.println(mHeader);
-		mContent = mWebPageFetcher.getPageContent();
-		mMatcher = mPattern.matcher(mContent);
+		this.mWebPageFetcher = new WebPageFetcher(lQuery);
+		this.mWebPageFetcher.setReferer(this.mGoogleServer);
+		this.mHeader = this.mWebPageFetcher.getPageHeader();
+		System.out.println(this.mHeader);
+		this.mContent = this.mWebPageFetcher.getPageContent();
+		this.mMatcher = this.mPattern.matcher(this.mContent);
 	}
 
-	private String buildGoogleQueryURL(	String pGoogleServer,
-																			String pLocalCode,
-																			String pSearchString,
-																			String pFileType)
+	private String buildGoogleQueryURL(	final String pGoogleServer,
+																			final String pLocalCode,
+																			final String pSearchString,
+																			final String pFileType)
 	{
 		String lTypeString = "";
 
 		if (!pFileType.equals(""))
-		{
 			lTypeString = "+filetype%3A" + pFileType;
-		}
 
-		String lSearchString = pSearchString.trim().replaceAll("\\s+", "+");
-		String lQueryUrl = "http://" + mGoogleServer + "/search?hl=" + pLocalCode + "&q=" + lSearchString
+		final String lSearchString = pSearchString.trim().replaceAll("\\s+", "+");
+		final String lQueryUrl = "http://" + this.mGoogleServer + "/search?hl=" + pLocalCode + "&q=" + lSearchString
 				+ lTypeString + "&btnG=Search";
 
 		return lQueryUrl;
 	}
 
-	public void grabUrlFromFileType(String pFileType)
+	public void grabUrlFromFileType(final String pFileType)
 	{
-		mPattern = Pattern.compile("http://[^<>]+\\." + pFileType);
+		this.mPattern = Pattern.compile("http://[^<>]+\\." + pFileType);
 	}
 
 	public String nextMatch()
 	{
-		if (mMatcher.find())
-		{
-			return mMatcher.group();
-		}
+		if (this.mMatcher.find())
+			return this.mMatcher.group();
 		else
-		{
 			return null;
-		}
 	}
 
 	public String getFileType()
 	{
-		return mFileType;
+		return this.mFileType;
 	}
 
-	public void setFileType(String pFileType)
+	public void setFileType(final String pFileType)
 	{
-		mFileType = pFileType;
+		this.mFileType = pFileType;
 	}
 
 	public String getGoogleServer()
 	{
-		return mGoogleServer;
+		return this.mGoogleServer;
 	}
 
-	public void setGoogleServer(String pGoogleServer)
+	public void setGoogleServer(final String pGoogleServer)
 	{
-		mGoogleServer = pGoogleServer;
+		this.mGoogleServer = pGoogleServer;
 	}
 
 	public String getLocalCode()
 	{
-		return mLocalCode;
+		return this.mLocalCode;
 	}
 
-	public void setLocalCode(String pLocalCode)
+	public void setLocalCode(final String pLocalCode)
 	{
-		mLocalCode = pLocalCode;
+		this.mLocalCode = pLocalCode;
 	}
 
 	public String getContent()
 	{
-		return mContent;
+		return this.mContent;
 	}
 
 	public String getHeader()
 	{
-		return mHeader;
+		return this.mHeader;
 	}
 
 	/**
@@ -149,20 +143,18 @@ public class Google
 	 * 
 	 * @throws IOException
 	 */
-	public static void main(String[] aArguments) throws IOException
+	public static void main(final String[] aArguments) throws IOException
 	{
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String lQuery = in.readLine();
-		Google mGoogle = new Google(lQuery, "rss");
+		final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		final String lQuery = in.readLine();
+		final Google mGoogle = new Google(lQuery, "rss");
 		mGoogle.grabUrlFromFileType("rss");
 		mGoogle.doQuery();
 
 		String lLink = null;
 		System.out.println(mGoogle.getContent());
 		while ((lLink = mGoogle.nextMatch()) != null)
-		{
 			System.out.println(lLink);
-		}
 	}
 
 }

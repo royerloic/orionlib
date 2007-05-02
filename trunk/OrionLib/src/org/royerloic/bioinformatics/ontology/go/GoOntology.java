@@ -22,12 +22,12 @@ public class GoOntology extends OboOntology
 		return sGoOntology;
 	}
 
-	public GoOntology(InputStream pInputStream) throws FileNotFoundException, IOException
+	public GoOntology(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
 		super(pInputStream);
 	}
 
-	public IntegerMap<Integer> getAncestors(Integer pGoId)
+	public IntegerMap<Integer> getAncestors(final Integer pGoId)
 	{
 		return null;
 	}

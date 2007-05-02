@@ -38,40 +38,36 @@ public final class EvalTags
 		// TODO Auto-generated constructor stub
 	}
 
-	private static Pattern	sPattern	= Pattern.compile("##([^#]+)##");
+	private static final Pattern	sPattern	= Pattern.compile("##([^#]+)##");
 
 	private static String evalTagsInLine(	final Interpreter pInterpreter,
 																				final Pattern pPattern,
 																				final String pLine)
 	{
-		Matcher lMatcher = pPattern.matcher(pLine);
-		StringBuffer lStringBuffer = new StringBuffer();
+		final Matcher lMatcher = pPattern.matcher(pLine);
+		final StringBuffer lStringBuffer = new StringBuffer();
 
 		while (lMatcher.find())
 		{
-			String lExpression = lMatcher.group(1);
+			final String lExpression = lMatcher.group(1);
 
 			Object lObject = null;
 			String lEvaluatedExpresssion = new String("");
 			try
 			{
-				pInterpreter.set("tagValue", (Object) lEvaluatedExpresssion);
+				pInterpreter.set("tagValue", lEvaluatedExpresssion);
 				lObject = pInterpreter.eval(lExpression);
 				lEvaluatedExpresssion = (String) pInterpreter.get("tagValue");
 			}
-			catch (EvalError e)
+			catch (final EvalError e)
 			{
 				lEvaluatedExpresssion += "<Evaluation Error: " + e.getErrorText() + ">";
 			}
 
 			if (lObject == null)
-			{
 				lEvaluatedExpresssion += "";
-			}
 			else
-			{
 				lEvaluatedExpresssion += lObject.toString();
-			}
 
 			lMatcher.appendReplacement(lStringBuffer, lEvaluatedExpresssion);
 		}
@@ -89,14 +85,14 @@ public final class EvalTags
 		try
 		{
 
-			File lInputFile = new File(pMasterFile);
-			File lOutputFile = new File(pResultFile);
+			final File lInputFile = new File(pMasterFile);
+			final File lOutputFile = new File(pResultFile);
 
 			try
 			{
 				lOutputFile.createNewFile();
 			}
-			catch (IOException e4)
+			catch (final IOException e4)
 			{
 				// TODO Auto-generated catch block
 				e4.printStackTrace(System.out);
@@ -109,7 +105,7 @@ public final class EvalTags
 				lFileReader = new FileReader(lInputFile);
 				lBufferedReader = new BufferedReader(lFileReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + lInputFile + " not found.");
 				return;
@@ -122,7 +118,7 @@ public final class EvalTags
 				lFileWriter = new FileWriter(lOutputFile);
 				lBufferedWriter = new BufferedWriter(lFileWriter);
 			}
-			catch (IOException e1)
+			catch (final IOException e1)
 			{
 				System.out.println("Output File: " + lOutputFile + " not found.");
 				return;
@@ -140,7 +136,7 @@ public final class EvalTags
 				}
 				lBufferedWriter.flush();
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while writing: " + e2.getCause());
 
@@ -151,7 +147,7 @@ public final class EvalTags
 				lFileWriter.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 		}

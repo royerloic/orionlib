@@ -48,8 +48,6 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 	private MemoryImageSource						mMemoryImageSource;
 
-	private Image												mOffscreenImage;
-
 	private BufferStrategy							mStrategy;
 
 	private Image												mPixelOffscreen;
@@ -67,8 +65,6 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 	private boolean											mDisplayFramerate;
 
 	private int													mNumberOfBuffers;
-
-	private double											mTotalElapsedTime;
 
 	private double											mFrameRate;
 
@@ -104,47 +100,47 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 		public int getMouseX()
 		{
-			return mMouseX;
+			return this.mMouseX;
 		}
 
 		public int getMouseY()
 		{
-			return mMouseY;
+			return this.mMouseY;
 		}
 
 		public int getMouseDeltaZ()
 		{
-			return mMouseDeltaZ;
+			return this.mMouseDeltaZ;
 		}
 
 		public boolean getMouseLeft()
 		{
-			return mMouseLeft;
+			return this.mMouseLeft;
 		}
 
 		public boolean getMouseMiddle()
 		{
-			return mMouseMiddle;
+			return this.mMouseMiddle;
 		}
 
 		public boolean getMouseRight()
 		{
-			return mMouseRight;
+			return this.mMouseRight;
 		}
 
 		public boolean getShift()
 		{
-			return mShift;
+			return this.mShift;
 		}
 
 		public boolean getCtrl()
 		{
-			return mCtrl;
+			return this.mCtrl;
 		}
 
 		public boolean getAlt()
 		{
-			return mAlt;
+			return this.mAlt;
 		}
 
 	};
@@ -158,10 +154,10 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 	public FullScreenPixelAndVector(final int pDevice, final DisplayMode pDisplayMode)
 	{
 		super();
-		mIconFileName = null;
-		mDisplayFramerate = false;
-		mMaxFramesForFrameRate = 512;
-		mNumberOfBuffers = 3;
+		this.mIconFileName = null;
+		this.mDisplayFramerate = false;
+		this.mMaxFramesForFrameRate = 512;
+		this.mNumberOfBuffers = 3;
 		System.setProperty("sun.java2d.translaccel", "true");
 		// System.setProperty("sun.java2d.accthreshold", "0");
 		System.setProperty("sun.java2d.ddscale", "true");
@@ -170,20 +166,18 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 		mGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-		GraphicsDevice[] lAllGraphicsDevices = mGraphicsEnvironment.getScreenDevices();
+		final GraphicsDevice[] lAllGraphicsDevices = mGraphicsEnvironment.getScreenDevices();
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
-		{
 			lDevice = lAllGraphicsDevices.length - 1;
-		}
 
 		mGraphicsDevice = lAllGraphicsDevices[lDevice];
 
-		mDisplayMode = pDisplayMode;
+		this.mDisplayMode = pDisplayMode;
 
-		mWidth = mDisplayMode.getWidth();
-		mHeight = mDisplayMode.getHeight();
+		this.mWidth = this.mDisplayMode.getWidth();
+		this.mHeight = this.mDisplayMode.getHeight();
 
 	}
 
@@ -209,16 +203,16 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 			mFrame.setVisible(true);
 			try
 			{
-				mGraphicsDevice.setDisplayMode(mDisplayMode);
+				mGraphicsDevice.setDisplayMode(this.mDisplayMode);
 			}
-			catch (RuntimeException e1)
+			catch (final RuntimeException e1)
 			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
-			mWidth = mGraphicsDevice.getDisplayMode().getWidth();
-			mHeight = mGraphicsDevice.getDisplayMode().getHeight();
+			this.mWidth = mGraphicsDevice.getDisplayMode().getWidth();
+			this.mHeight = mGraphicsDevice.getDisplayMode().getHeight();
 
 			// mFrame.setBounds(0, 0, mWidth, mHeight);
 
@@ -226,16 +220,16 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 			{
 				Thread.sleep(0);
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 			}
 
-			mFrame.createBufferStrategy(mNumberOfBuffers);
+			mFrame.createBufferStrategy(this.mNumberOfBuffers);
 			// mFrame.validate();
 
-			mStrategy = mFrame.getBufferStrategy();
+			this.mStrategy = mFrame.getBufferStrategy();
 
-			BufferCapabilities lBufferCapablities = mStrategy.getCapabilities();
+			final BufferCapabilities lBufferCapablities = this.mStrategy.getCapabilities();
 			System.out.println("isFullScreenRequired: " + lBufferCapablities.isFullScreenRequired());
 			System.out.println("isMultiBufferAvailable: " + lBufferCapablities.isMultiBufferAvailable());
 			System.out.println("isPageFlipping: " + lBufferCapablities.isPageFlipping());
@@ -244,7 +238,7 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 					+ mGraphicsDevice.getAvailableAcceleratedMemory() / (1024 * 1024) + " MB");
 
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			e.printStackTrace();
 			return false;
@@ -252,8 +246,8 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 		startMouseEventListeners();
 
-		mMouseInfo.mMouseX = mFrame.getWidth() / 2;
-		mMouseInfo.mMouseY = mFrame.getHeight() / 2;
+		this.mMouseInfo.mMouseX = mFrame.getWidth() / 2;
+		this.mMouseInfo.mMouseY = mFrame.getHeight() / 2;
 
 		return true;
 	}
@@ -265,79 +259,74 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		mFrame.dispose();
 	}
 
-	public void setPixelArray(int[] pPixelArray, final int pOffset, final int pScan)
+	public void setPixelArray(final int[] pPixelArray, final int pOffset, final int pScan)
 	{
-		int lScreenWidth = mFrame.getWidth();
-		int lScreenHeight = mFrame.getHeight();
+		final int lScreenWidth = mFrame.getWidth();
+		final int lScreenHeight = mFrame.getHeight();
 
 		if (lScreenWidth * lScreenHeight != pPixelArray.length)
-		{
 			throw new IllegalArgumentException("Wrong dimension for the Pixel Array.");
-		}
-		DirectColorModel lColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
-		mMemoryImageSource = new MemoryImageSource(lScreenWidth, lScreenHeight, lColorModel, pPixelArray,
+		final DirectColorModel lColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+		this.mMemoryImageSource = new MemoryImageSource(lScreenWidth, lScreenHeight, lColorModel, pPixelArray,
 				pOffset, pScan);
 
-		mMemoryImageSource.setAnimated(true);
+		this.mMemoryImageSource.setAnimated(true);
 
-		mPixelOffscreen = Toolkit.getDefaultToolkit().createImage(mMemoryImageSource);
+		this.mPixelOffscreen = Toolkit.getDefaultToolkit().createImage(this.mMemoryImageSource);
 	}
 
 	public void updateAllPixels()
 	{
-		mMemoryImageSource.newPixels();
+		this.mMemoryImageSource.newPixels();
 	}
 
-	public void updatePixelArea(int pX, int pY, int pW, int pH)
+	public void updatePixelArea(final int pX, final int pY, final int pW, final int pH)
 	{
-		mMemoryImageSource.newPixels(pX, pY, pW, pH);
+		this.mMemoryImageSource.newPixels(pX, pY, pW, pH);
 	}
 
 	public void paintPixels()
 	{
-		getDrawGraphics().drawImage(mPixelOffscreen, 0, 0, null);
+		getDrawGraphics().drawImage(this.mPixelOffscreen, 0, 0, null);
 	}
 
 	public Graphics2D getDrawGraphics()
 	{
-		return (Graphics2D) mStrategy.getDrawGraphics();
+		return (Graphics2D) this.mStrategy.getDrawGraphics();
 	}
 
 	public void show()
 	{
-		if (mDisplayFramerate)
-		{
+		if (this.mDisplayFramerate)
 			displayFrameRate();
-		}
-		mStrategy.show();
+		this.mStrategy.show();
 	}
 
 	private void displayFrameRate()
 	{
-		if ((!mTimerStarted) || (mFrameCounter > mMaxFramesForFrameRate))
+		if ((!this.mTimerStarted) || (this.mFrameCounter > this.mMaxFramesForFrameRate))
 		{
-			mTimerStarted = true;
-			mInitialTime = System.currentTimeMillis();
-			mFrameCounter = 1;
+			this.mTimerStarted = true;
+			this.mInitialTime = System.currentTimeMillis();
+			this.mFrameCounter = 1;
 		}
 		else
 		{
-			mFrameCounter++;
-			long lCurrentTime = System.currentTimeMillis();
-			long lDifference = lCurrentTime - mInitialTime;
-			long lDeltaInSeconds = lDifference / 1000;
+			this.mFrameCounter++;
+			final long lCurrentTime = System.currentTimeMillis();
+			final long lDifference = lCurrentTime - this.mInitialTime;
+			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				mTotalElapsedTime = lDeltaInSeconds;
-				mFrameRate = (mFrameCounter) / (lDeltaInSeconds);
+				this.mFrameRate = (this.mFrameCounter) / (lDeltaInSeconds);
 
-				if (mDisplayFramerate)
+				if (this.mDisplayFramerate)
 				{
-					Graphics2D lGraphics = getDrawGraphics();
+					final Graphics2D lGraphics = getDrawGraphics();
 					lGraphics.setColor(Color.BLACK);
 					lGraphics.fillRect(0, 0, 150, 15);
 					lGraphics.setColor(Color.WHITE);
-					lGraphics.drawString("Images per second: " + mFrameRate, 10, 10);
+					lGraphics.drawString("Images per second: " + this.mFrameRate, 10, 10);
 					lGraphics.dispose();
 				}
 			}
@@ -346,219 +335,208 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 	public double getFrameRate()
 	{
-		return mFrameRate;
+		return this.mFrameRate;
 	}
 
 	public double getInterFrameTime()
 	{
 		double lInterFrameTime = -1;
-		if (mFrameRate != 0)
-		{
-			lInterFrameTime = 1 / mFrameRate;
-		}
+		if (this.mFrameRate != 0)
+			lInterFrameTime = 1 / this.mFrameRate;
 		return lInterFrameTime;
 	}
 
 	public boolean isDisplayFramerate()
 	{
-		return mDisplayFramerate;
+		return this.mDisplayFramerate;
 	}
 
-	public void setDisplayFramerate(boolean pDisplayFramerate)
+	public void setDisplayFramerate(final boolean pDisplayFramerate)
 	{
-		mDisplayFramerate = pDisplayFramerate;
+		this.mDisplayFramerate = pDisplayFramerate;
 	}
 
 	public void startMouseEventListeners()
 	{
-		mMouseInfo = new MyMouseInfo();
+		this.mMouseInfo = new MyMouseInfo();
 
-		mMouseListenerAdapter = new MouseAdapter()
+		this.mMouseListenerAdapter = new MouseAdapter()
 		{
 
-			public void mousePressed(MouseEvent pMouseEvent)
+			@Override
+			public void mousePressed(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mCtrl = pMouseEvent.isControlDown();
-				mMouseInfo.mAlt = pMouseEvent.isAltDown();
-				mMouseInfo.mShift = pMouseEvent.isShiftDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseEvent.isControlDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseEvent.isAltDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
-				mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-				mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-				mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
-				if (mOrionGraphicsMouseListener != null)
-					if (mMouseInfo.mMouseLeft)
-					{
-						mOrionGraphicsMouseListener.onLeftPress(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseRight)
-					{
-						mOrionGraphicsMouseListener.onRightPress(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseMiddle)
-					{
-						mOrionGraphicsMouseListener.onMiddlePress(mMouseInfo);
-					}
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					if (FullScreenPixelAndVector.this.mMouseInfo.mMouseLeft)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onLeftPress(FullScreenPixelAndVector.this.mMouseInfo);
+					else if (FullScreenPixelAndVector.this.mMouseInfo.mMouseRight)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onRightPress(FullScreenPixelAndVector.this.mMouseInfo);
+					else if (FullScreenPixelAndVector.this.mMouseInfo.mMouseMiddle)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onMiddlePress(FullScreenPixelAndVector.this.mMouseInfo);
 
 			}
 
-			public void mouseReleased(MouseEvent pMouseEvent)
+			@Override
+			public void mouseReleased(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mCtrl = pMouseEvent.isControlDown();
-				mMouseInfo.mAlt = pMouseEvent.isAltDown();
-				mMouseInfo.mShift = pMouseEvent.isShiftDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseEvent.isControlDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseEvent.isAltDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
 				if (SwingUtilities.isLeftMouseButton(pMouseEvent))
-					mMouseInfo.mMouseLeft = false;
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseLeft = false;
 				if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
-					mMouseInfo.mMouseMiddle = false;
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseMiddle = false;
 				if (SwingUtilities.isRightMouseButton(pMouseEvent))
-					mMouseInfo.mMouseRight = false;
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseRight = false;
 			}
 
-			public void mouseClicked(MouseEvent pMouseEvent)
+			@Override
+			public void mouseClicked(final MouseEvent pMouseEvent)
 			{
-				if (mOrionGraphicsMouseListener != null)
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
 				{
-					mMouseInfo.mCtrl = pMouseEvent.isControlDown();
-					mMouseInfo.mAlt = pMouseEvent.isAltDown();
-					mMouseInfo.mShift = pMouseEvent.isShiftDown();
+					FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseEvent.isControlDown();
+					FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseEvent.isAltDown();
+					FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
-					mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-					mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-					mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
-					if (mMouseInfo.mMouseLeft)
-					{
-						mOrionGraphicsMouseListener.onLeftClick(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseRight)
-					{
-						mOrionGraphicsMouseListener.onRightClick(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseMiddle)
-					{
-						mOrionGraphicsMouseListener.onMiddleClick(mMouseInfo);
-					}
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+					FullScreenPixelAndVector.this.mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
+					if (FullScreenPixelAndVector.this.mMouseInfo.mMouseLeft)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onLeftClick(FullScreenPixelAndVector.this.mMouseInfo);
+					else if (FullScreenPixelAndVector.this.mMouseInfo.mMouseRight)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onRightClick(FullScreenPixelAndVector.this.mMouseInfo);
+					else if (FullScreenPixelAndVector.this.mMouseInfo.mMouseMiddle)
+						FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onMiddleClick(FullScreenPixelAndVector.this.mMouseInfo);
 				}
 			}
 
 		};
-		mFrame.addMouseListener(mMouseListenerAdapter);
+		mFrame.addMouseListener(this.mMouseListenerAdapter);
 
-		mMouseMotionListenerAdapter = new MouseMotionAdapter()
+		this.mMouseMotionListenerAdapter = new MouseMotionAdapter()
 		{
 
-			public void mouseDragged(MouseEvent pMouseEvent)
+			@Override
+			public void mouseDragged(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mCtrl = pMouseEvent.isControlDown();
-				mMouseInfo.mAlt = pMouseEvent.isAltDown();
-				mMouseInfo.mShift = pMouseEvent.isShiftDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseEvent.isControlDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseEvent.isAltDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
-				mMouseInfo.mMouseX = pMouseEvent.getX();
-				mMouseInfo.mMouseY = pMouseEvent.getY();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseX = pMouseEvent.getX();
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseY = pMouseEvent.getY();
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onMove(FullScreenPixelAndVector.this.mMouseInfo);
 			}
 
-			public void mouseMoved(MouseEvent pMouseEvent)
+			@Override
+			public void mouseMoved(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mCtrl = pMouseEvent.isControlDown();
-				mMouseInfo.mAlt = pMouseEvent.isAltDown();
-				mMouseInfo.mShift = pMouseEvent.isShiftDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseEvent.isControlDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseEvent.isAltDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
-				mMouseInfo.mMouseX = pMouseEvent.getX();
-				mMouseInfo.mMouseY = pMouseEvent.getY();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onMove(mMouseInfo);
-			}
-		};
-		mFrame.addMouseMotionListener(mMouseMotionListenerAdapter);
-
-		mMouseWheelListenerAdapter = new MouseWheelListener()
-		{
-			public void mouseWheelMoved(MouseWheelEvent pMouseWheelEvent)
-			{
-				mMouseInfo.mCtrl = pMouseWheelEvent.isControlDown();
-				mMouseInfo.mAlt = pMouseWheelEvent.isAltDown();
-				mMouseInfo.mShift = pMouseWheelEvent.isShiftDown();
-
-				mMouseInfo.mMouseDeltaZ = pMouseWheelEvent.getWheelRotation();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onWheel(mMouseInfo);
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseX = pMouseEvent.getX();
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseY = pMouseEvent.getY();
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onMove(FullScreenPixelAndVector.this.mMouseInfo);
 			}
 		};
+		mFrame.addMouseMotionListener(this.mMouseMotionListenerAdapter);
 
-		mFrame.addMouseWheelListener(mMouseWheelListenerAdapter);
-
-		mKeyListenerAdapter = new KeyAdapter()
+		this.mMouseWheelListenerAdapter = new MouseWheelListener()
 		{
-			public void keyTyped(KeyEvent pE)
+			public void mouseWheelMoved(final MouseWheelEvent pMouseWheelEvent)
+			{
+				FullScreenPixelAndVector.this.mMouseInfo.mCtrl = pMouseWheelEvent.isControlDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mAlt = pMouseWheelEvent.isAltDown();
+				FullScreenPixelAndVector.this.mMouseInfo.mShift = pMouseWheelEvent.isShiftDown();
+
+				FullScreenPixelAndVector.this.mMouseInfo.mMouseDeltaZ = pMouseWheelEvent.getWheelRotation();
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onWheel(FullScreenPixelAndVector.this.mMouseInfo);
+			}
+		};
+
+		mFrame.addMouseWheelListener(this.mMouseWheelListenerAdapter);
+
+		this.mKeyListenerAdapter = new KeyAdapter()
+		{
+			@Override
+			public void keyTyped(final KeyEvent pE)
 			{
 				super.keyTyped(pE);
-				if (mOrionGraphicsMouseListener != null)
-				{
-					mOrionGraphicsMouseListener.onKeyTyped(pE);
-				}
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onKeyTyped(pE);
 			}
 
-			public void keyPressed(KeyEvent pE)
+			@Override
+			public void keyPressed(final KeyEvent pE)
 			{
 				super.keyPressed(pE);
-				if (mOrionGraphicsMouseListener != null)
-				{
-					mOrionGraphicsMouseListener.onKeyPressed(pE);
-				}
+				if (FullScreenPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					FullScreenPixelAndVector.this.mOrionGraphicsMouseListener.onKeyPressed(pE);
 			}
 		};
-		mFrame.addKeyListener(mKeyListenerAdapter);
+		mFrame.addKeyListener(this.mKeyListenerAdapter);
 	}
 
 	public void stopMouseEventListeners()
 	{
-		mFrame.removeMouseListener(mMouseListenerAdapter);
-		mFrame.removeMouseMotionListener(mMouseMotionListenerAdapter);
-		mFrame.removeMouseWheelListener(mMouseWheelListenerAdapter);
-		mFrame.removeKeyListener(mKeyListenerAdapter);
+		mFrame.removeMouseListener(this.mMouseListenerAdapter);
+		mFrame.removeMouseMotionListener(this.mMouseMotionListenerAdapter);
+		mFrame.removeMouseWheelListener(this.mMouseWheelListenerAdapter);
+		mFrame.removeKeyListener(this.mKeyListenerAdapter);
 	}
 
-	public void setMouseListener(IOrionGraphicsMouseListener pOrionGraphicsMouseListener)
+	public void setMouseListener(final IOrionGraphicsMouseListener pOrionGraphicsMouseListener)
 	{
-		mOrionGraphicsMouseListener = pOrionGraphicsMouseListener;
+		this.mOrionGraphicsMouseListener = pOrionGraphicsMouseListener;
 
 	}
 
 	public IMouseInfo getMouseInfo()
 	{
-		return mMouseInfo;
+		return this.mMouseInfo;
 	}
 
 	public int getNumberOfBuffers()
 	{
-		return mNumberOfBuffers;
+		return this.mNumberOfBuffers;
 	}
 
-	public void setNumberOfBuffers(int pNumberOfBuffers)
+	public void setNumberOfBuffers(final int pNumberOfBuffers)
 	{
-		mNumberOfBuffers = pNumberOfBuffers;
+		this.mNumberOfBuffers = pNumberOfBuffers;
 	}
 
 	public int getHeight()
 	{
-		return mHeight;
+		return this.mHeight;
 	}
 
 	public int getWidth()
 	{
-		return mWidth;
+		return this.mWidth;
 	}
 
 	public int getMaxFramesForFrameRate()
 	{
-		return mMaxFramesForFrameRate;
+		return this.mMaxFramesForFrameRate;
 	}
 
-	public void setMaxFramesForFrameRate(int pMaxFramesForFrameRate)
+	public void setMaxFramesForFrameRate(final int pMaxFramesForFrameRate)
 	{
-		mMaxFramesForFrameRate = pMaxFramesForFrameRate;
+		this.mMaxFramesForFrameRate = pMaxFramesForFrameRate;
 	}
 
 	public void minimize()
@@ -573,17 +551,17 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		mFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
 
-	public void setIconImage(String pIconFileName)
+	public void setIconImage(final String pIconFileName)
 	{
-		mIconFileName = pIconFileName;
+		this.mIconFileName = pIconFileName;
 	}
 
 	public void doSetIconImage()
 	{
-		if (mIconFileName != null)
+		if (this.mIconFileName != null)
 		{
-			Toolkit lToolkit = Toolkit.getDefaultToolkit();
-			URL lURL = this.getClass().getClassLoader().getResource(mIconFileName);
+			final Toolkit lToolkit = Toolkit.getDefaultToolkit();
+			final URL lURL = this.getClass().getClassLoader().getResource(this.mIconFileName);
 			if (lURL == null)
 				throw new NullPointerException("lURL == null");
 			new File(lURL.toString());
@@ -591,7 +569,7 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		}
 	}
 
-	public void setFrameName(String pName)
+	public void setFrameName(final String pName)
 	{
 		mFrame.setTitle(pName);
 	}
@@ -601,10 +579,15 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		return mFrame;
 	}
 
-	public boolean isImageAccelerated(BufferedImage pImage)
+	public boolean isImageAccelerated(final BufferedImage pImage)
 	{
-		ImageCapabilities lImageCapabilities = pImage.getCapabilities(mGraphicsDevice.getDefaultConfiguration());
+		final ImageCapabilities lImageCapabilities = pImage.getCapabilities(mGraphicsDevice.getDefaultConfiguration());
 		return lImageCapabilities.isAccelerated();
+	}
+
+	public void showGraphics()
+	{
+		show();
 	}
 
 	/*****************************************************************************

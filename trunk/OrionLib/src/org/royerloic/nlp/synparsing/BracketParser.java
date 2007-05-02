@@ -25,7 +25,7 @@ public class BracketParser
 																		final TextTree<O> pTextTree,
 																		final O pAnnotationObject)
 	{
-		TextTree<O> lWorkingTextTree = pTextTree.clone();
+		final TextTree<O> lWorkingTextTree = pTextTree.clone();
 
 		markRecursive(lWorkingTextTree, pPattern, pTextTree, pAnnotationObject);
 	}
@@ -36,7 +36,7 @@ public class BracketParser
 																							final O pAnnotationObject)
 	{
 
-		Matcher lMatcher = pPattern.matcher(pWorkingTextTree);
+		final Matcher lMatcher = pPattern.matcher(pWorkingTextTree);
 
 		boolean wasSomethingMarked = false;
 		int lIndex = -1;
@@ -53,9 +53,7 @@ public class BracketParser
 		}
 
 		if (wasSomethingMarked)
-		{
 			markRecursive(pWorkingTextTree, pPattern, pTextTree, pAnnotationObject);
-		}
 
 	}
 

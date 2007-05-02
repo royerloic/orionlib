@@ -24,28 +24,28 @@ public class AnnotationContextFilter
 
 	private static class FilterRule
 	{
-		public FilterRule(String pPreRegex, String pMatchRegex, String pPostRegex)
+		public FilterRule(final String pPreRegex, final String pMatchRegex, final String pPostRegex)
 		{
-			mPreRegex = pPreRegex;
-			mMatchRegex = pMatchRegex;
-			mPostRegex = pPostRegex;
+			this.mPreRegex = pPreRegex;
+			this.mMatchRegex = pMatchRegex;
+			this.mPostRegex = pPostRegex;
 		}
 		public String	mPreRegex;
 		public String	mMatchRegex;
 		public String	mPostRegex;
 	}
 
-	private SetMap<String, String>	mSetNameToNameSetMap		= new HashSetMap<String, String>();
+	private final SetMap<String, String>	mSetNameToNameSetMap		= new HashSetMap<String, String>();
 	{
-		mSetNameToNameSetMap.put("S", Collections.singleton("\\s*"));
-		mSetNameToNameSetMap.put("W", Collections.singleton("\\W*"));
-		mSetNameToNameSetMap.put("P", Collections.singleton("\\p{Punct}*"));
-		mSetNameToNameSetMap.put("WORD", Collections.singleton("(?:[a-zA-z][a-z]+)"));
-		mSetNameToNameSetMap.put("ASE", Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
+		this.mSetNameToNameSetMap.put("S", Collections.singleton("\\s*"));
+		this.mSetNameToNameSetMap.put("W", Collections.singleton("\\W*"));
+		this.mSetNameToNameSetMap.put("P", Collections.singleton("\\p{Punct}*"));
+		this.mSetNameToNameSetMap.put("WORD", Collections.singleton("(?:[a-zA-z][a-z]+)"));
+		this.mSetNameToNameSetMap.put("ASE", Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
 	}
 
-	private List<FilterRule>				mPositiveFilterRuleList	= new ArrayList<FilterRule>();
-	private List<FilterRule>				mNegativeFilterRuleList	= new ArrayList<FilterRule>();
+	private final List<FilterRule>				mPositiveFilterRuleList	= new ArrayList<FilterRule>();
+	private final List<FilterRule>				mNegativeFilterRuleList	= new ArrayList<FilterRule>();
 	private FilterRule							mResponsibleFilterRule;
 
 	private AnnotationContextFilter() throws IOException
@@ -69,32 +69,30 @@ public class AnnotationContextFilter
 
 	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
-		List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
+		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
 
 		boolean lIsPositive = false;
 		boolean lIsNegative = false;
 		boolean lIsSet = false;
 		String lSetName = null;
 
-		for (List<String> lList : lMatrix)
+		for (final List<String> lList : lMatrix)
 		{
-			String lFirstString = lList.get(0).trim();
+			final String lFirstString = lList.get(0).trim();
 			if (lFirstString.equals(""))
-			{
 				continue;
-			}
 			else if (lFirstString.startsWith("importset:"))
 			{
-				String[] lStringArray = StringUtils.split(lFirstString, ":|\\s+as\\s+", 0);
-				String lImportSetFileName = lStringArray[1].trim().toLowerCase();
-				String lImportedSetName = lStringArray[2].trim().toLowerCase();
+				final String[] lStringArray = StringUtils.split(lFirstString, ":|\\s+as\\s+", 0);
+				final String lImportSetFileName = lStringArray[1].trim().toLowerCase();
+				final String lImportedSetName = lStringArray[2].trim().toLowerCase();
 				importRegexFile(lImportedSetName, lImportSetFileName);
 				continue;
 			}
 			else if (lFirstString.startsWith("importrules:"))
 			{
-				String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
-				String lImportRulesFileName = lStringArray[1].trim().toLowerCase();
+				final String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
+				final String lImportRulesFileName = lStringArray[1].trim().toLowerCase();
 				readRules(lImportRulesFileName);
 				continue;
 			}
@@ -103,9 +101,9 @@ public class AnnotationContextFilter
 				lIsSet = true;
 				lIsPositive = false;
 				lIsNegative = false;
-				String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
+				final String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
 				lSetName = lStringArray[1].trim().toLowerCase();
-				mSetNameToNameSetMap.put(lSetName);
+				this.mSetNameToNameSetMap.put(lSetName);
 				continue;
 			}
 			else if (lFirstString.equalsIgnoreCase("positive:"))
@@ -122,35 +120,29 @@ public class AnnotationContextFilter
 				lIsNegative = true;
 				continue;
 			}
-			else
+			else if (lIsPositive || lIsNegative)
 			{
+				String lPreFixRegex = (lList.get(0).startsWith(".*") ? "" : ".*@W@") + lList.get(0);
+				String lMatchRegex = lList.get(1);
+				String lPostFixRegex = lList.get(2) + (lList.get(2).endsWith(".*") ? "" : "@W@.*");
 
-				if (lIsPositive || lIsNegative)
+				for (final Map.Entry<String, Set<String>> lEntry : this.mSetNameToNameSetMap.entrySet())
 				{
-					String lPreFixRegex = (lList.get(0).startsWith(".*") ? "" : ".*@W@") + lList.get(0);
-					String lMatchRegex = lList.get(1);
-					String lPostFixRegex = lList.get(2) + (lList.get(2).endsWith(".*") ? "" : "@W@.*");
-
-					for (Map.Entry<String, Set<String>> lEntry : mSetNameToNameSetMap.entrySet())
-					{
-						String lSetNameUse = "@" + lEntry.getKey() + "@";
-						String lSetReplacement = mergeRegexSetToRegex(lEntry.getValue());
-						lPreFixRegex = lPreFixRegex.replace(lSetNameUse, lSetReplacement);
-						lMatchRegex = lMatchRegex.replace(lSetNameUse, lSetReplacement);
-						lPostFixRegex = lPostFixRegex.replace(lSetNameUse, lSetReplacement);
-					}
-
-					FilterRule lFilterRule = new FilterRule(lPreFixRegex, lMatchRegex, lPostFixRegex);
-					if (lIsPositive)
-						mPositiveFilterRuleList.add(lFilterRule);
-					else if (lIsNegative)
-						mNegativeFilterRuleList.add(lFilterRule);
+					final String lSetNameUse = "@" + lEntry.getKey() + "@";
+					final String lSetReplacement = mergeRegexSetToRegex(lEntry.getValue());
+					lPreFixRegex = lPreFixRegex.replace(lSetNameUse, lSetReplacement);
+					lMatchRegex = lMatchRegex.replace(lSetNameUse, lSetReplacement);
+					lPostFixRegex = lPostFixRegex.replace(lSetNameUse, lSetReplacement);
 				}
-				else if (lIsSet)
-				{
-					mSetNameToNameSetMap.put(lSetName, lFirstString);
-				}
+
+				final FilterRule lFilterRule = new FilterRule(lPreFixRegex, lMatchRegex, lPostFixRegex);
+				if (lIsPositive)
+					this.mPositiveFilterRuleList.add(lFilterRule);
+				else if (lIsNegative)
+					this.mNegativeFilterRuleList.add(lFilterRule);
 			}
+			else if (lIsSet)
+				this.mSetNameToNameSetMap.put(lSetName, lFirstString);
 
 		}
 	}
@@ -158,12 +150,12 @@ public class AnnotationContextFilter
 	private void importRegexFile(final String pImportedSetName, final String pImportRegexFileName)
 			throws FileNotFoundException, IOException
 	{
-		File lFile = RessourceLocator.getFileFromName(pImportRegexFileName);
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile, false);
-		for (List<String> lList : lMatrix)
+		final File lFile = RessourceLocator.getFileFromName(pImportRegexFileName);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile, false);
+		for (final List<String> lList : lMatrix)
 		{
-			String lEntry = lList.get(0).trim();
-			mSetNameToNameSetMap.put(pImportedSetName, lEntry);
+			final String lEntry = lList.get(0).trim();
+			this.mSetNameToNameSetMap.put(pImportedSetName, lEntry);
 		}
 	}
 
@@ -171,12 +163,10 @@ public class AnnotationContextFilter
 	{
 		if (!pSet.isEmpty())
 		{
-			StringBuffer lStringBuffer = new StringBuffer();
+			final StringBuffer lStringBuffer = new StringBuffer();
 			lStringBuffer.append("(?:");
-			for (String lString : pSet)
-			{
+			for (final String lString : pSet)
 				lStringBuffer.append(lString + "|");
-			}
 			lStringBuffer.deleteCharAt(lStringBuffer.length() - 1);
 			lStringBuffer.append(")");
 			return lStringBuffer.toString();
@@ -186,29 +176,29 @@ public class AnnotationContextFilter
 
 	public void filter(final Set<Annotation> pAnnotationSetForAbstract, final int pSentenceOffset)
 	{
-		List<Annotation> lAnnotationList = new ArrayList<Annotation>(pAnnotationSetForAbstract);
-		for (Annotation lAnnotation : lAnnotationList)
+		final List<Annotation> lAnnotationList = new ArrayList<Annotation>(pAnnotationSetForAbstract);
+		for (final Annotation lAnnotation : lAnnotationList)
 		{
 			final String lText = lAnnotation.mText;
 
-			String lMatch = lAnnotation.mAnnotatedFragment;
+			final String lMatch = lAnnotation.mAnnotatedFragment;
 
 			int lEnd = lText.length();
 			int lStart = lAnnotation.mStart + lAnnotation.getLength() - pSentenceOffset;
 			lStart = Math.min(lStart, lEnd);
-			String lPostFix = lText.substring(lStart, lEnd);
+			final String lPostFix = lText.substring(lStart, lEnd);
 
 			lStart = 0;
 			lEnd = lAnnotation.mStart - 1 - pSentenceOffset;
 			lEnd = Math.max(lStart, lEnd);
 
-			String lPreFix = lText.substring(lStart, lEnd);
+			final String lPreFix = lText.substring(lStart, lEnd);
 
 			final boolean lFiltered = filter(lPreFix, lMatch, lPostFix);
 
 			if (lFiltered)
 			{
-				System.out.println("REMOVING: " + lAnnotation + "\n because of: " + mResponsibleFilterRule);
+				System.out.println("REMOVING: " + lAnnotation + "\n because of: " + this.mResponsibleFilterRule);
 				pAnnotationSetForAbstract.remove(lAnnotation);
 			}
 
@@ -221,7 +211,7 @@ public class AnnotationContextFilter
 	{
 
 		boolean isPositiveMatched = false;
-		for (FilterRule lFilterRule : mPositiveFilterRuleList)
+		for (final FilterRule lFilterRule : this.mPositiveFilterRuleList)
 			if (StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
 				if (StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
 					if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
@@ -232,12 +222,12 @@ public class AnnotationContextFilter
 
 		boolean isNegativeMatched = false;
 		if (!isPositiveMatched)
-			for (FilterRule lFilterRule : mNegativeFilterRuleList)
+			for (final FilterRule lFilterRule : this.mNegativeFilterRuleList)
 				if (StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
 					if (StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
 						if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
 						{
-							mResponsibleFilterRule = lFilterRule;
+							this.mResponsibleFilterRule = lFilterRule;
 							isNegativeMatched = true;
 							break;
 						}

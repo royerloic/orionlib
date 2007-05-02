@@ -34,111 +34,104 @@ public abstract class EnhancedThread extends Thread
 
 	private boolean	mStopped					= false;
 
-	private Object	mLock							= new Object();
+	private final Object	mLock							= new Object();
 
 	public void joinWhenStarted(final int pWaitTime)
 	{
 		while (isStarted() == false)
-		{
 			try
 			{
 				sleep(pWaitTime);
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace(System.out);
 			}
-		}
 	}
 
 	public boolean isStarted()
 	{
-		synchronized (mLock)
+		synchronized (this.mLock)
 		{
-			return mStarted;
+			return this.mStarted;
 		}
 	}
 
 	public boolean isStopped()
 	{
-		synchronized (mLock)
+		synchronized (this.mLock)
 		{
-			return mStopped;
+			return this.mStopped;
 		}
 	}
 
 	public boolean isPaused()
 	{
-		synchronized (mLock)
+		synchronized (this.mLock)
 		{
-			return mSuspendRequested;
+			return this.mSuspendRequested;
 		}
 	}
 
-	public void setSuspendRequest(boolean pSuspendRequested)
+	public void setSuspendRequest(final boolean pSuspendRequested)
 	{
-		synchronized (mLock)
+		synchronized (this.mLock)
 		{
-			mSuspendRequested = pSuspendRequested;
-			mLock.notifyAll();
+			this.mSuspendRequested = pSuspendRequested;
+			this.mLock.notifyAll();
 		}
 	}
 
-	public void setStopRequest(boolean pStopRequested)
+	public void setStopRequest(final boolean pStopRequested)
 	{
-		synchronized (mLock)
+		synchronized (this.mLock)
 		{
-			mStopRequested = pStopRequested;
-			mLock.notifyAll();
+			this.mStopRequested = pStopRequested;
+			this.mLock.notifyAll();
 		}
 	}
 
+	@Override
 	public void run()
 	{
 		try
 		{
-			synchronized (mLock)
+			synchronized (this.mLock)
 			{
-				mStopped = false;
+				this.mStopped = false;
 			}
 
 			if (initiate())
 			{
-				synchronized (mLock)
+				synchronized (this.mLock)
 				{
-					mStarted = true;
+					this.mStarted = true;
 				}
 
 				while (execute())
-				{
-					synchronized (mLock)
+					synchronized (this.mLock)
 					{
 						// if suspended, then wait:
-						while (mSuspendRequested && !mStopRequested)
-						{
-							mLock.wait();
-						}
+						while (this.mSuspendRequested && !this.mStopRequested)
+							this.mLock.wait();
 
 						// id stopped, then get out...
-						if (mStopRequested)
-						{
+						if (this.mStopRequested)
 							break;
-						}
 
 					}
-				}
 				terminate();
 			}
 		}
-		catch (InterruptedException e)
+		catch (final InterruptedException e)
 		{
 		}
 		finally
 		{
-			synchronized (mLock)
+			synchronized (this.mLock)
 			{
-				mStopped = true;
+				this.mStopped = true;
 			}
 		}
 	}

@@ -8,15 +8,15 @@ public class UndirectedEdge<N> implements Edge<N>
 
 	private String	mName;
 
-	public UndirectedEdge(N pFirstNode, N pSecondNode, String pName)
+	public UndirectedEdge(final N pFirstNode, final N pSecondNode, final String pName)
 	{
 		super();
-		mFirstNode = pFirstNode;
-		mSecondNode = pSecondNode;
-		mName = pName;
+		this.mFirstNode = pFirstNode;
+		this.mSecondNode = pSecondNode;
+		this.mName = pName;
 	}
 
-	public UndirectedEdge(N pFirstNode, N pSecondNode)
+	public UndirectedEdge(final N pFirstNode, final N pSecondNode)
 	{
 		this(pFirstNode, pSecondNode, pFirstNode.toString() + "-" + pSecondNode.toString());
 	}
@@ -26,9 +26,9 @@ public class UndirectedEdge<N> implements Edge<N>
 	 * 
 	 * @see org.royerloic.structures.graph.Edge#setFirstNode(N)
 	 */
-	public void setFirstNode(N pFirstNode)
+	public void setFirstNode(final N pFirstNode)
 	{
-		mFirstNode = pFirstNode;
+		this.mFirstNode = pFirstNode;
 	}
 
 	/*
@@ -36,9 +36,9 @@ public class UndirectedEdge<N> implements Edge<N>
 	 * 
 	 * @see org.royerloic.structures.graph.Edge#setSecondNode(N)
 	 */
-	public void setSecondNode(N pSecondNode)
+	public void setSecondNode(final N pSecondNode)
 	{
-		mSecondNode = pSecondNode;
+		this.mSecondNode = pSecondNode;
 	}
 
 	/*
@@ -48,7 +48,7 @@ public class UndirectedEdge<N> implements Edge<N>
 	 */
 	public N getFirstNode()
 	{
-		return mFirstNode;
+		return this.mFirstNode;
 	}
 
 	/*
@@ -58,21 +58,20 @@ public class UndirectedEdge<N> implements Edge<N>
 	 */
 	public N getSecondNode()
 	{
-		return mSecondNode;
+		return this.mSecondNode;
 	}
 
-	public boolean equals(Object pObject)
+	@Override
+	public boolean equals(final Object pObject)
 	{
 		if (pObject == this)
-		{
 			return true;
-		}
 		else
 		{
-			Edge<N> lEdge = (Edge<N>) pObject;
-			boolean lEquals = ((mFirstNode.equals(lEdge.getFirstNode())) && (mSecondNode.equals(lEdge
+			final Edge<N> lEdge = (Edge<N>) pObject;
+			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge
 					.getSecondNode())))
-					|| ((mFirstNode.equals(lEdge.getSecondNode())) && (mSecondNode.equals(lEdge.getFirstNode())));
+					|| ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
 			return lEquals;
 		}
 	}
@@ -80,33 +79,33 @@ public class UndirectedEdge<N> implements Edge<N>
 	@Override
 	public int hashCode()
 	{
-		return mFirstNode.hashCode() ^ mSecondNode.hashCode();
+		return this.mFirstNode.hashCode() ^ this.mSecondNode.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return mName + "(" + mFirstNode + "," + mSecondNode + ")";
+		return this.mName + "(" + this.mFirstNode + "," + this.mSecondNode + ")";
 	}
 
-	public boolean symetricTo(Edge<N> pEdge)
+	public boolean symetricTo(final Edge<N> pEdge)
 	{
-		return (mFirstNode.equals(pEdge.getSecondNode())) && (mSecondNode.equals(pEdge.getFirstNode()));
+		return (this.mFirstNode.equals(pEdge.getSecondNode())) && (this.mSecondNode.equals(pEdge.getFirstNode()));
 	}
 
-	public boolean contains(N pNode)
+	public boolean contains(final N pNode)
 	{
-		return mFirstNode.equals(pNode) || mSecondNode.equals(pNode);
+		return this.mFirstNode.equals(pNode) || this.mSecondNode.equals(pNode);
 	}
 
 	public Edge<N> createSymetricEdge()
 	{
-		return new UndirectedEdge(mSecondNode, mFirstNode, mName);
+		return new UndirectedEdge(this.mSecondNode, this.mFirstNode, this.mName);
 	}
 
 	public String getName()
 	{
-		return mName;
+		return this.mName;
 	}
 
 	public boolean isSymetric()

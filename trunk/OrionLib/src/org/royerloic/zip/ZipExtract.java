@@ -17,28 +17,28 @@ public class ZipExtract
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException
+	public static void main(final String[] args) throws IOException
 	{
 		doExtract(args[0], args[1]);
 	}
 
-	public static void doExtract(String pZipFileName, String pEntryFileName) throws IOException
+	public static void doExtract(final String pZipFileName, final String pEntryFileName) throws IOException
 	{
 		// Get the zip name and the entry name.
 
-		String zipName = pZipFileName;
-		String entryName = pEntryFileName;
+		final String zipName = pZipFileName;
+		final String entryName = pEntryFileName;
 
 		// Open the zip.
 
-		ZipFile zip = new ZipFile(zipName);
+		final ZipFile zip = new ZipFile(zipName);
 		System.out.println(zipName + " opened.");
 
 		try
 		{
 			// Get the entry and its input stream.
 
-			ZipEntry entry = zip.getEntry(entryName);
+			final ZipEntry entry = zip.getEntry(entryName);
 
 			// If the entry is not null, extract it. Otherwise, print a
 			// message.
@@ -47,27 +47,25 @@ public class ZipExtract
 			{
 				// Get an input stream for the entry.
 
-				InputStream entryStream = zip.getInputStream(entry);
+				final InputStream entryStream = zip.getInputStream(entry);
 
 				try
 				{
 					// Create the output file (clobbering the file if it exists).
 
-					FileOutputStream file = new FileOutputStream(entry.getName());
+					final FileOutputStream file = new FileOutputStream(entry.getName());
 
 					try
 					{
 						// Allocate a buffer for reading the entry data.
 
-						byte[] buffer = new byte[1024];
+						final byte[] buffer = new byte[1024];
 						int bytesRead;
 
 						// Read the entry data and write it to the output file.
 
 						while ((bytesRead = entryStream.read(buffer)) != -1)
-						{
 							file.write(buffer, 0, bytesRead);
-						}
 
 						System.out.println(entry.getName() + " extracted.");
 					}
@@ -82,9 +80,7 @@ public class ZipExtract
 				}
 			}
 			else
-			{
 				System.out.println(entryName + " not found.");
-			} // end if
 		}
 		finally
 		{

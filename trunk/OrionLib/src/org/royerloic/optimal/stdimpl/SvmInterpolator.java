@@ -43,11 +43,11 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	{
 		super();
 
-		mParameterSearch = false;
+		this.mParameterSearch = false;
 
-		mGamma = pGamma;
-		mCost = pCost;
-		mNu = pNu;
+		this.mGamma = pGamma;
+		this.mCost = pCost;
+		this.mNu = pNu;
 
 	}
 
@@ -58,23 +58,23 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	{
 		super();
 
-		mParameterSearch = true;
+		this.mParameterSearch = true;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#setObjectiveFunction(org.royerloic.optimal.interf.IObjectiveFunction)
 	 */
-	public void setObjectiveFunction(IObjectiveFunction pObjectiveFunction)
+	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		mObjectiveFunction = pObjectiveFunction;
+		this.mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#setExperimentDatabase(org.royerloic.optimal.interf.IExperimentDatabase)
 	 */
-	public void setExperimentDatabase(IExperimentDatabase pExperimentDatabase)
+	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		mExperimentDatabase = pExperimentDatabase;
+		this.mExperimentDatabase = pExperimentDatabase;
 
 	}
 
@@ -82,43 +82,41 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			if (mParameterSearch)
-			{
+			if (this.mParameterSearch)
 				doParameterSearch();
-			}
 
-			train(mGamma, mCost, mNu);
+			train(this.mGamma, this.mCost, this.mNu);
 		}
 	}
 
 	private void doParameterSearch()
 	{
-		ILabelledVectorSet lLabelledVectorSet = getLabbeledVectorSet();
+		final ILabelledVectorSet lLabelledVectorSet = getLabbeledVectorSet();
 
 		double lBestGamma = 1;
 		double lBestCost = 1;
 		double lLeastError = Double.POSITIVE_INFINITY;
 
-		mNu = 0.5;
+		this.mNu = 0.5;
 
 		mainloop: for (int gammaexp = 0; gammaexp <= 10; gammaexp++)
 			for (int Cexp = -5; Cexp <= 5; Cexp++)
 
 			{
-				mGamma = Math.pow(2, gammaexp);
-				mCost = Math.pow(2, Cexp);
+				this.mGamma = Math.pow(2, gammaexp);
+				this.mCost = Math.pow(2, Cexp);
 
-				mSVMRegression = new SVMRegression(mGamma, mCost, mNu);
+				this.mSVMRegression = new SVMRegression(this.mGamma, this.mCost, this.mNu);
 
-				double lError = mSVMRegression.checkExactness(lLabelledVectorSet);
+				final double lError = this.mSVMRegression.checkExactness(lLabelledVectorSet);
 
 				// System.out.println("Tried: gamma="+mGamma+" cost="+mCost+"
 				// error="+lError);
 
 				if (lError < lLeastError)
 				{
-					lBestGamma = mGamma;
-					lBestCost = mCost;
+					lBestGamma = this.mGamma;
+					lBestCost = this.mCost;
 					lLeastError = lError;
 
 					// System.out.println("Best: gamma="+lBestGamma+" cost="+lBestCost+"
@@ -126,14 +124,12 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 				}
 
 				if (lError < 0.001)
-				{
 					break mainloop;
-				}
 
 			}
 
-		mGamma = lBestGamma;
-		mCost = lBestCost;
+		this.mGamma = lBestGamma;
+		this.mCost = lBestCost;
 		/***************************************************************************
 		 * System.out.println("Best: gamma=" + lBestGamma + " cost=" + lBestCost + "
 		 * error=" + lLeastError);/
@@ -143,13 +139,13 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 
 	private void train(final double pGamma, final double pCost, final double pNu)
 	{
-		mSVMRegression = new SVMRegression(pGamma, pCost, pNu);
+		this.mSVMRegression = new SVMRegression(pGamma, pCost, pNu);
 
-		int lNumberOfExperiments = mExperimentDatabase.getNumberOfExperiments();
+		final int lNumberOfExperiments = this.mExperimentDatabase.getNumberOfExperiments();
 		if (lNumberOfExperiments >= 1)
 		{
-			ILabelledVectorSet lLabelledVectorSet = getLabbeledVectorSet();
-			mSVMRegression.train(lLabelledVectorSet);
+			final ILabelledVectorSet lLabelledVectorSet = getLabbeledVectorSet();
+			this.mSVMRegression.train(lLabelledVectorSet);
 		}
 
 	}
@@ -159,19 +155,19 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 		synchronized (this)
 		{
 
-			int lNumberOfExperiments = mExperimentDatabase.getNumberOfExperiments();
+			final int lNumberOfExperiments = this.mExperimentDatabase.getNumberOfExperiments();
 
-			ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
+			final ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
 
-			mInputDimension = mExperimentDatabase.getExperiment(0).getInput().getDimension();
+			this.mInputDimension = this.mExperimentDatabase.getExperiment(0).getInput().getDimension();
 
 			for (int i = 0; i < lNumberOfExperiments; i++)
 			{
-				INumericalVector lInputVector = mExperimentDatabase.getExperiment(i).getInput();
-				INumericalVector lOutputVector = mExperimentDatabase.getExperiment(i).getOutput();
+				final INumericalVector lInputVector = this.mExperimentDatabase.getExperiment(i).getInput();
+				final INumericalVector lOutputVector = this.mExperimentDatabase.getExperiment(i).getOutput();
 
-				double lValue = mObjectiveFunction.evaluate(lOutputVector);
-				lLabelledVectorSet.addVector((IVectorArray) lInputVector, lValue);
+				final double lValue = this.mObjectiveFunction.evaluate(lOutputVector);
+				lLabelledVectorSet.addVector(lInputVector, lValue);
 			}
 
 			return lLabelledVectorSet;
@@ -182,17 +178,18 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#evaluate(org.royerloic.math.INumericalVector)
 	 */
-	public double evaluate(INumericalVector pVector)
+	public double evaluate(final INumericalVector pVector)
 	{
 		synchronized (this)
 		{
-			return mSVMRegression.predict(pVector);
+			return this.mSVMRegression.predict(pVector);
 		}
 	}
 
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
 		synchronized (this)
@@ -202,14 +199,14 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 			{
 				lSvmInterpolator = (SvmInterpolator) super.clone();
 
-				lSvmInterpolator.mObjectiveFunction = mObjectiveFunction;
-				lSvmInterpolator.mExperimentDatabase = mExperimentDatabase;
-				lSvmInterpolator.mSVMRegression = (SVMRegression) mSVMRegression.clone();
-				lSvmInterpolator.mInputDimension = mInputDimension;
+				lSvmInterpolator.mObjectiveFunction = this.mObjectiveFunction;
+				lSvmInterpolator.mExperimentDatabase = this.mExperimentDatabase;
+				lSvmInterpolator.mSVMRegression = (SVMRegression) this.mSVMRegression.clone();
+				lSvmInterpolator.mInputDimension = this.mInputDimension;
 
 				return lSvmInterpolator;
 			}
-			catch (CloneNotSupportedException e)
+			catch (final CloneNotSupportedException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -221,7 +218,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
 	 */
-	public void copyFrom(Object pObject)
+	public void copyFrom(final Object pObject)
 	{
 		throw new UnsupportedOperationException("copyFrom not implememented in SvmInterpolator");
 	}
@@ -231,7 +228,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	 */
 	public int getInputDimension()
 	{
-		return mInputDimension;
+		return this.mInputDimension;
 	}
 
 	/**
@@ -250,18 +247,16 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			int lSize = mExperimentDatabase.getNumberOfExperiments();
-			double[][] lPoints = new double[lSize][mInputDimension + 1];
+			final int lSize = this.mExperimentDatabase.getNumberOfExperiments();
+			final double[][] lPoints = new double[lSize][this.mInputDimension + 1];
 
 			for (int i = 0; i < lSize; i++)
 			{
-				IExperiment lExperiment = (IExperiment) mExperimentDatabase.getExperiment(i);
+				final IExperiment lExperiment = this.mExperimentDatabase.getExperiment(i);
 				for (int k = 0; k < getInputDimension(); k++)
-				{
 					lPoints[i][k] = lExperiment.getInput().get(k);
-				}
 
-				lPoints[i][getInputDimension()] = mObjectiveFunction.evaluate(lExperiment.getOutput());
+				lPoints[i][getInputDimension()] = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
 			}
 
 			return lPoints;
@@ -272,25 +267,21 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IScalarFunction#computePoints(int)
 	 */
-	public double[][] computePoints(int pResolution)
+	public double[][] computePoints(final int pResolution)
 	{
 		synchronized (this)
 		{
-			ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
-			double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
-			double[][] lDatabasePoints = computeDatabasePoints(0);
+			final ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
+			final double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
+			final double[][] lDatabasePoints = computeDatabasePoints(0);
 
-			double[][] lPoints = new double[lGridPoints.length + lDatabasePoints.length][getInputDimension() + 1];
+			final double[][] lPoints = new double[lGridPoints.length + lDatabasePoints.length][getInputDimension() + 1];
 
 			for (int i = 0; i < lGridPoints.length; i++)
-			{
 				lPoints[i] = lGridPoints[i];
-			}
 
 			for (int i = 0; i < lDatabasePoints.length; i++)
-			{
 				lPoints[lGridPoints.length + i] = lDatabasePoints[i];
-			}
 			return lPoints;
 		}
 	}
@@ -306,7 +297,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputMin(int)
 	 */
-	public double getInputMin(int pIndex)
+	public double getInputMin(final int pIndex)
 	{
 		return 0;
 	}
@@ -314,7 +305,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputMax(int)
 	 */
-	public double getInputMax(int pIndex)
+	public double getInputMax(final int pIndex)
 	{
 		return 1;
 	}
@@ -322,7 +313,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputDelta(int)
 	 */
-	public double getInputDelta(int pIndex)
+	public double getInputDelta(final int pIndex)
 	{
 		// TODO Auto-generated method stub
 		return 0.00001;
@@ -331,7 +322,7 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#normalizeInputVector(org.royerloic.math.INumericalVector)
 	 */
-	public void normalizeInputVector(INumericalVector pVector)
+	public void normalizeInputVector(final INumericalVector pVector)
 	{
 
 	}

@@ -14,10 +14,10 @@ public class RessourceLocator
 {
 	static public File getFileFromName(final String pString)
 	{
-		ClassLoader lClassLoader = ClassLoader.getSystemClassLoader();
-		URL lURL = lClassLoader.getResource(pString);
-		String lFileName = lURL.getFile();
-		File lFile = new File(lFileName);
+		final ClassLoader lClassLoader = ClassLoader.getSystemClassLoader();
+		final URL lURL = lClassLoader.getResource(pString);
+		final String lFileName = lURL.getFile();
+		final File lFile = new File(lFileName);
 		return lFile;
 	}
 }

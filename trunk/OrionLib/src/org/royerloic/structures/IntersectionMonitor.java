@@ -12,20 +12,20 @@ import java.util.Set;
  */
 public class IntersectionMonitor<E>
 {
-	private HashSet<E>	mSetA						= new HashSet<E>();
-	private HashSet<E>	mSetB						= new HashSet<E>();
+	private final HashSet<E>	mSetA						= new HashSet<E>();
+	private final HashSet<E>	mSetB						= new HashSet<E>();
 	private boolean			mIsIntersecting	= false;
 
 	/**
 	 * @param pCollection
 	 * @return
 	 */
-	public boolean addToA(Collection<E> pCollection)
+	public boolean addToA(final Collection<E> pCollection)
 	{
-		mSetA.addAll(pCollection);
+		this.mSetA.addAll(pCollection);
 
-		if (!Collections.disjoint(pCollection, mSetB))
-			mIsIntersecting = true;
+		if (!Collections.disjoint(pCollection, this.mSetB))
+			this.mIsIntersecting = true;
 
 		return isIntersecting();
 	}
@@ -34,12 +34,12 @@ public class IntersectionMonitor<E>
 	 * @param pCollection
 	 * @return
 	 */
-	public boolean addToB(Collection<E> pCollection)
+	public boolean addToB(final Collection<E> pCollection)
 	{
-		mSetB.addAll(pCollection);
+		this.mSetB.addAll(pCollection);
 
-		if (!Collections.disjoint(pCollection, mSetA))
-			mIsIntersecting = true;
+		if (!Collections.disjoint(pCollection, this.mSetA))
+			this.mIsIntersecting = true;
 
 		return isIntersecting();
 	}
@@ -49,7 +49,7 @@ public class IntersectionMonitor<E>
 	 */
 	public boolean isIntersecting()
 	{
-		return mIsIntersecting;
+		return this.mIsIntersecting;
 	}
 
 	/**
@@ -57,11 +57,11 @@ public class IntersectionMonitor<E>
 	 */
 	public Set<E> getIntersection()
 	{
-		Set<E> lIntersectionSet = new HashSet<E>();
-		if (mIsIntersecting)
+		final Set<E> lIntersectionSet = new HashSet<E>();
+		if (this.mIsIntersecting)
 		{
-			lIntersectionSet.addAll(mSetA);
-			lIntersectionSet.retainAll(mSetB);
+			lIntersectionSet.addAll(this.mSetA);
+			lIntersectionSet.retainAll(this.mSetB);
 		}
 		return lIntersectionSet;
 	}

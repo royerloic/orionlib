@@ -32,8 +32,8 @@ public class RInterpolator implements IScalarFunction
 	{
 		public Point(final INumericalVector pVector, final double pValue)
 		{
-			mVector = pVector;
-			mValue = pValue;
+			this.mVector = pVector;
+			this.mValue = pValue;
 		}
 		public INumericalVector mVector;
 		public double mValue;
@@ -45,47 +45,37 @@ public class RInterpolator implements IScalarFunction
 
 	public void setPointList(final Vector pPointList)
 	{
-		mPointList = pPointList;
+		this.mPointList = pPointList;
 	}
 
 	private final int getNumberOfPoints()
 	{
-		return mPointList.size();
+		return this.mPointList.size();
 	}
 
 	private final Point getPoint(final int pIndex)
 	{
-		return ((Point) mPointList.elementAt(pIndex));
+		return ((Point) this.mPointList.elementAt(pIndex));
 	}
 
 	private final INumericalVector getVector(final int pIndex)
 	{
-		return ((Point) mPointList.elementAt(pIndex)).mVector;
+		return ((Point) this.mPointList.elementAt(pIndex)).mVector;
 	}
 
 	private final double getValue(final int pIndex)
 	{
-		return ((Point) mPointList.elementAt(pIndex)).mValue;
+		return ((Point) this.mPointList.elementAt(pIndex)).mValue;
 	}
 
 	private final INumericalVector getGradient(final int pIndex)
 	{
-		return ((Point) mPointList.elementAt(pIndex)).mGradient;
-	}
-
-	private final void setVector(final int pIndex, final INumericalVector pVector)
-	{
-		((Point) mPointList.elementAt(pIndex)).mVector = pVector;
-	}
-
-	private final void setValue(final int pIndex, final double pValue)
-	{
-		((Point) mPointList.elementAt(pIndex)).mValue = pValue;
+		return ((Point) this.mPointList.elementAt(pIndex)).mGradient;
 	}
 
 	private final void setGradient(final int pIndex, final INumericalVector pGradient)
 	{
-		((Point) mPointList.elementAt(pIndex)).mGradient = pGradient;
+		((Point) this.mPointList.elementAt(pIndex)).mGradient = pGradient;
 	}
 
 	/**
@@ -95,8 +85,8 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public RInterpolator(final int pInputDimension)
 	{
-		mPointList = new Vector();
-		mInputDimension = pInputDimension;
+		this.mPointList = new Vector();
+		this.mInputDimension = pInputDimension;
 	}
 
 	/**
@@ -108,8 +98,8 @@ public class RInterpolator implements IScalarFunction
 		final INumericalVector pVector,
 		final double pValue)
 	{
-		Point lPoint = new Point(pVector, pValue);
-		mPointList.addElement(lPoint);
+		final Point lPoint = new Point(pVector, pValue);
+		this.mPointList.addElement(lPoint);
 	}
 
 	/**
@@ -119,8 +109,8 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public final void addPoint(final INumericalVector pVector, final double pValue)
 	{
-		Point lPoint = new Point(pVector, pValue);
-		mPointList.addElement(lPoint);
+		final Point lPoint = new Point(pVector, pValue);
+		this.mPointList.addElement(lPoint);
 		update();
 	}
 
@@ -139,9 +129,7 @@ public class RInterpolator implements IScalarFunction
 	private final void updateGradients()
 	{
 		for (int i = 0; i < getNumberOfPoints(); i++)
-		{
 			setGradient(i, computeGradientOf(i));
-		}
 	}
 
 	/**
@@ -151,27 +139,27 @@ public class RInterpolator implements IScalarFunction
 	 */
 	private final INumericalVector computeGradientOf(final int pIndex)
 	{
-		INumericalVector lVector = getVector(pIndex);
-		INumericalVector lGradientVector = new NumericalVector(lVector.getDimension());
+		final INumericalVector lVector = getVector(pIndex);
+		final INumericalVector lGradientVector = new NumericalVector(lVector.getDimension());
 
-		double lLowestDistance = lVector.euclideanDistanceTo(getClosestPointExcludingMyself(lVector).mVector);
+		final double lLowestDistance = lVector.euclideanDistanceTo(getClosestPointExcludingMyself(lVector).mVector);
 
 		double lSumCoeficients = 0;
 		for (int i = 0; i < getNumberOfPoints(); i++)
 		{
-			INumericalVector lCurrentVector = getVector(i);
-			double lDistance = lCurrentVector.euclideanDistanceTo(lVector);
+			final INumericalVector lCurrentVector = getVector(i);
+			final double lDistance = lCurrentVector.euclideanDistanceTo(lVector);
 			if (lDistance != 0)
 			{
-				double lNormalizedDistance = lDistance / lLowestDistance;
+				final double lNormalizedDistance = lDistance / lLowestDistance;
 				if (lNormalizedDistance < cCUT_OFF_DISTANCE)
 				{
-					double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
+					final double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
 					lSumCoeficients += lCoeficient;
-					double lAlpha =
+					final double lAlpha =
 						(lCoeficient * (getValue(i) - getValue(pIndex)))
 							/ (lDistance * lDistance);
-					INumericalVector lGradientContribution = lCurrentVector.minus(lVector);
+					final INumericalVector lGradientContribution = lCurrentVector.minus(lVector);
 					lGradientContribution.timesEquals(lAlpha);
 
 					lGradientVector.plusEquals(lGradientContribution);
@@ -204,7 +192,7 @@ public class RInterpolator implements IScalarFunction
 		double lLowestDistance = Double.POSITIVE_INFINITY;
 		for (int i = 0; i < getNumberOfPoints(); i++)
 		{
-			double lDistance = pVector.euclideanDistanceTo(getVector(i));
+			final double lDistance = pVector.euclideanDistanceTo(getVector(i));
 			if (lDistance < lLowestDistance)
 			{
 				lLowestDistance = lDistance;
@@ -226,7 +214,7 @@ public class RInterpolator implements IScalarFunction
 		double lLowestDistance = Double.POSITIVE_INFINITY;
 		for (int i = 0; i < getNumberOfPoints(); i++)
 		{
-			double lDistance = pVector.euclideanDistanceTo(getVector(i));
+			final double lDistance = pVector.euclideanDistanceTo(getVector(i));
 			if ((lDistance < lLowestDistance) && (lDistance != 0))
 			{
 				lLowestDistance = lDistance;
@@ -243,17 +231,13 @@ public class RInterpolator implements IScalarFunction
 	public double evaluate(final INumericalVector pVector)
 	{
 		if (getNumberOfPoints() == 0)
-		{
 			return 0;
-		}
 
-		double lLowestDistance = getDistanceToClosestPoint(pVector);
-		Point lClosestPoint = getClosestPoint(pVector);
+		final double lLowestDistance = getDistanceToClosestPoint(pVector);
+		final Point lClosestPoint = getClosestPoint(pVector);
 
 		if (lLowestDistance == 0)
-		{
 			return lClosestPoint.mValue;
-		}
 		else
 		{
 			double lValue = 0;
@@ -262,15 +246,15 @@ public class RInterpolator implements IScalarFunction
 
 			for (int i = 0; i < getNumberOfPoints(); i++)
 			{
-				INumericalVector lCurrentVector = getVector(i);
-				double lDistance = lCurrentVector.euclideanDistanceTo(pVector);
-				double lNormalizedDistance = lDistance / lLowestDistance;
+				final INumericalVector lCurrentVector = getVector(i);
+				final double lDistance = lCurrentVector.euclideanDistanceTo(pVector);
+				final double lNormalizedDistance = lDistance / lLowestDistance;
 
 				if (lNormalizedDistance < cCUT_OFF_DISTANCE)
 				{
-					double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
+					final double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
 					lSumCoeficients += lCoeficient;
-					INumericalVector lPointVector = pVector.minus(lCurrentVector);
+					final INumericalVector lPointVector = pVector.minus(lCurrentVector);
 					double lValueContribution =	getValue(i) + lPointVector.times(getGradient(i));
 					lValueContribution *= lCoeficient;
 					lValue += lValueContribution;
@@ -298,7 +282,7 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public int getInputDimension()
 	{
-		return mInputDimension;
+		return this.mInputDimension;
 	}
 
 	/**
@@ -344,10 +328,11 @@ public class RInterpolator implements IScalarFunction
 	/** 
 	 * @see java.lang.Object#clone()
 	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
-		RInterpolator lClonedInterpolator = new RInterpolator(mInputDimension);
-		Vector lClonedPointList = (Vector) mPointList.clone();
+		final RInterpolator lClonedInterpolator = new RInterpolator(this.mInputDimension);
+		final Vector lClonedPointList = (Vector) this.mPointList.clone();
 		lClonedInterpolator.setPointList(lClonedPointList);
 		lClonedInterpolator.update();
 		return lClonedInterpolator;
@@ -356,6 +341,7 @@ public class RInterpolator implements IScalarFunction
 	/** 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(final Object pInterpolator)
 	{
 		return super.equals(pInterpolator);
@@ -364,6 +350,7 @@ public class RInterpolator implements IScalarFunction
 	/** 
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		// TODO Auto-generated method stub
@@ -373,6 +360,7 @@ public class RInterpolator implements IScalarFunction
 	/** 
 	 * @see java.lang.Object#hashCode()
 	 */
+	@Override
 	public int hashCode()
 	{
 		// TODO Auto-generated method stub

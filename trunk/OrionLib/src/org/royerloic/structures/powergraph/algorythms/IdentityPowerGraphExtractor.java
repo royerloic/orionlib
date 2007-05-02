@@ -16,38 +16,38 @@ public class IdentityPowerGraphExtractor<N> implements PowerGraphExtractorInterf
 		// TODO Auto-generated constructor stub
 	}
 
-	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph)
+	public final PowerGraph<N> extractPowerGraph(final Graph<N, Edge<N>> pGraph)
 	{
-		PowerGraph lPowerGraph = new PowerGraph();
+		final PowerGraph lPowerGraph = new PowerGraph();
 
-		for (N lNode : pGraph.getNodeSet())
+		for (final N lNode : pGraph.getNodeSet())
 		{
-			Set<N> lPowerNode = new HashSet<N>();
+			final Set<N> lPowerNode = new HashSet<N>();
 			lPowerNode.add(lNode);
 			lPowerGraph.addPowerNode(lPowerNode);
 		}
 
-		for (Edge<N> lEdge : pGraph.getEdgeSet())
+		for (final Edge<N> lEdge : pGraph.getEdgeSet())
 		{
-			Set<N> lFirstPowerNode = new HashSet<N>();
+			final Set<N> lFirstPowerNode = new HashSet<N>();
 			lFirstPowerNode.add(lEdge.getFirstNode());
-			Set<N> lSecondPowerNode = new HashSet<N>();
+			final Set<N> lSecondPowerNode = new HashSet<N>();
 			lSecondPowerNode.add(lEdge.getSecondNode());
 
-			Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
+			final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
 			lPowerGraph.addPowerEdge(lPowerEdge);
 		}
 		return lPowerGraph;
 	}
 
-	public PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph, double pProbabilityThresold)
+	public PowerGraph<N> extractPowerGraph(final Graph<N, Edge<N>> pGraph, final double pProbabilityThresold)
 	{
 		return extractPowerGraph(pGraph);
 	}
 
-	public PowerGraph<N> extractPowerGraph(	Graph<N, Edge<N>> pGraph,
-																					double pProbabilityThresold,
-																					int pMaxIterations)
+	public PowerGraph<N> extractPowerGraph(	final Graph<N, Edge<N>> pGraph,
+																					final double pProbabilityThresold,
+																					final int pMaxIterations)
 	{
 		return extractPowerGraph(pGraph);
 	}

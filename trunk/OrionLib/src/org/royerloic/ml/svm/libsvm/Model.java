@@ -5,6 +5,11 @@ package org.royerloic.ml.svm.libsvm;
 //
 public class Model implements java.io.Serializable, Cloneable
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 2711592896037300561L;
+
 	Parameter		mParameter;											// parameter
 
 	int					mNumberOfClasses;								// number of classes, = 2 in
@@ -48,24 +53,23 @@ public class Model implements java.io.Serializable, Cloneable
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
 		try
 		{
-			Model lModel = (Model) super.clone();
+			final Model lModel = (Model) super.clone();
 
-			for (int i = 0; i < mNumberOfSupportVectors; i++)
+			for (int i = 0; i < this.mNumberOfSupportVectors; i++)
 			{
-				for (int j = 0; j < mSupportVectorsTable[i].length; j++)
-				{
-					lModel.mSupportVectorsTable[i][j] = (Node) mSupportVectorsTable[i][j].clone();
-				}
-				lModel.mSupportVectorCoeficientsTable[i] = (double[]) mSupportVectorCoeficientsTable[i].clone();
+				for (int j = 0; j < this.mSupportVectorsTable[i].length; j++)
+					lModel.mSupportVectorsTable[i][j] = (Node) this.mSupportVectorsTable[i][j].clone();
+				lModel.mSupportVectorCoeficientsTable[i] = this.mSupportVectorCoeficientsTable[i].clone();
 			}
 
 			return lModel;
 		}
-		catch (CloneNotSupportedException e)
+		catch (final CloneNotSupportedException e)
 		{
 			return null;
 		}

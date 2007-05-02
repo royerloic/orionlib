@@ -53,52 +53,52 @@ public class FeedChannelsMonitor
 	public FeedChannelsMonitor(final FeedListenerInterface<FeedItemInterface> pFeedListener)
 	{
 		super();
-		mFeedListener = pFeedListener;
-		mNumberOfThreads = 5;
-		mMonitoringInterval = 60; // 1 minute.
-		mChannelMap = new HashMap<ChannelIF, FeedChannelInterface>();
-		mFeedAnalysers = new HashMap<ChannelIF, FeedAnalyserInterface>();
-		mThreadPriority = Thread.MIN_PRIORITY;
+		this.mFeedListener = pFeedListener;
+		this.mNumberOfThreads = 5;
+		this.mMonitoringInterval = 60; // 1 minute.
+		this.mChannelMap = new HashMap<ChannelIF, FeedChannelInterface>();
+		this.mFeedAnalysers = new HashMap<ChannelIF, FeedAnalyserInterface>();
+		this.mThreadPriority = Thread.MIN_PRIORITY;
 	}
 
 	public void setNumberOfThreads(final int lNumberOfThreads)
 	{
-		mNumberOfThreads = lNumberOfThreads;
+		this.mNumberOfThreads = lNumberOfThreads;
 	}
 
 	public void startMonitoring()
 	{
-		mPoller = new Poller();
-		mPoller.setWorkerThreads(mNumberOfThreads);
+		this.mPoller = new Poller();
+		this.mPoller.setWorkerThreads(this.mNumberOfThreads);
 
-		mApprover = new PollerApproverIF()
+		this.mApprover = new PollerApproverIF()
 		{
-			public boolean canAddItem(ItemIF pArg0, ChannelIF pArg1)
+			public boolean canAddItem(final ItemIF pArg0, final ChannelIF pArg1)
 			{
 				return true;
 			}
 
 		};
 
-		mPoller.addApprover(mApprover);
+		this.mPoller.addApprover(this.mApprover);
 
 		// Create and register observer
-		mObserver = new PollerObserverIF()
+		this.mObserver = new PollerObserverIF()
 		{
 
-			public void itemFound(ItemIF pItemIF, ChannelIF pChannelIF)
+			public void itemFound(final ItemIF pItemIF, final ChannelIF pChannelIF)
 			{
 				try
 				{
-					Thread.currentThread().setPriority(mThreadPriority);
+					Thread.currentThread().setPriority(FeedChannelsMonitor.this.mThreadPriority);
 					pChannelIF.addItem(pItemIF);
 
-					FeedAnalyserInterface lFeedAnalyser = (FeedAnalyserInterface) mFeedAnalysers.get(pChannelIF);
+					final FeedAnalyserInterface lFeedAnalyser = FeedChannelsMonitor.this.mFeedAnalysers.get(pChannelIF);
 
-					FeedItemInterface lFeedItem = lFeedAnalyser.newFeedItem();
+					final FeedItemInterface lFeedItem = lFeedAnalyser.newFeedItem();
 					lFeedItem.setTitle(pItemIF.getTitle());
 
-					String lDescription = pItemIF.getDescription();
+					final String lDescription = pItemIF.getDescription();
 					// lDescription = lDescription.replaceAll("<[\\p{Alpha}]+>", " ");
 					// lDescription = lDescription.substring(0, mDescriptionSizeLimit);
 
@@ -107,53 +107,39 @@ public class FeedChannelsMonitor
 
 					Date lDate = pItemIF.getDate();
 					if (lDate != null)
-					{
 						lFeedItem.setDate(pItemIF.getDate());
-					}
 					else
 					{
 						try
 						{
 							lDate = new Date(Date.parse(pItemIF.getDescription()));
 						}
-						catch (Throwable e)
+						catch (final Throwable e)
 						{
 							e.printStackTrace();
 						}
 						if (lDate != null)
-						{
 							lFeedItem.setDate(lDate);
-						}
 						else
-						{
 							lFeedItem.setDate(new Date());
-						}
 					}
 
-					FeedChannelInterface lFeedChannel = mChannelMap.get(pChannelIF);
+					final FeedChannelInterface lFeedChannel = FeedChannelsMonitor.this.mChannelMap.get(pChannelIF);
 					lFeedItem.setChannel(lFeedChannel);
 
 					if (pChannelIF.getCopyright() != null)
-					{
 						lFeedItem.setSource(pChannelIF.getCopyright());
-					}
 					else if (pChannelIF.getCreator() != null)
-					{
 						lFeedItem.setSource(pChannelIF.getCreator());
-					}
 					else if (pChannelIF.getPublisher() != null)
-					{
 						lFeedItem.setSource(pChannelIF.getPublisher());
-					}
 					else if (pChannelIF.getSite() != null)
-					{
 						lFeedItem.setSource(pChannelIF.getSite().getHost());
-					}
 
 					lFeedAnalyser.analyseItem(lFeedItem);
-					mFeedListener.onItemFound(lFeedItem);
+					FeedChannelsMonitor.this.mFeedListener.onItemFound(lFeedItem);
 				}
-				catch (Throwable e)
+				catch (final Throwable e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -161,25 +147,25 @@ public class FeedChannelsMonitor
 
 			}
 
-			public void channelErrored(ChannelIF pChannelIF, Exception pException)
+			public void channelErrored(final ChannelIF pChannelIF, final Exception pException)
 			{
-				mFeedListener.onError(pChannelIF.getLocation(), pException);
+				FeedChannelsMonitor.this.mFeedListener.onError(pChannelIF.getLocation(), pException);
 			}
 
-			public void channelChanged(ChannelIF pChannelIF)
-			{
-			}
-
-			public void pollStarted(ChannelIF pChannelIF)
+			public void channelChanged(final ChannelIF pChannelIF)
 			{
 			}
 
-			public void pollFinished(ChannelIF pChannelIF)
+			public void pollStarted(final ChannelIF pChannelIF)
+			{
+			}
+
+			public void pollFinished(final ChannelIF pChannelIF)
 			{
 
 			}
 		};
-		mPoller.addObserver(mObserver);
+		this.mPoller.addObserver(this.mObserver);
 
 	}
 
@@ -187,18 +173,18 @@ public class FeedChannelsMonitor
 															final FeedAnalyserInterface pFeedAnalyser,
 															final int pFrequence) throws IOException, ParseException
 	{
-		ChannelIF lChannelIF = FeedParser.parse(new ChannelBuilder(), pFeedURL);
-		mFeedAnalysers.put(lChannelIF, pFeedAnalyser);
-		FeedChannel lFeedChannel = new FeedChannel(lChannelIF);
+		final ChannelIF lChannelIF = FeedParser.parse(new ChannelBuilder(), pFeedURL);
+		this.mFeedAnalysers.put(lChannelIF, pFeedAnalyser);
+		final FeedChannel lFeedChannel = new FeedChannel(lChannelIF);
 		lFeedChannel.setFrequence(pFrequence);
-		mChannelMap.put(lChannelIF, lFeedChannel);
+		this.mChannelMap.put(lChannelIF, lFeedChannel);
 		lChannelIF.getItems().clear();
-		mPoller.registerChannel(lChannelIF, getMonitoringInterval() * 1000);
+		this.mPoller.registerChannel(lChannelIF, getMonitoringInterval() * 1000);
 	}
 
 	public void addFeedChannelFromListInFile(	final URL pURL,
 																						final FeedAnalyserInterface pFeedAnalyser,
-																						ProgressListenerInterface pProgressListener) throws IOException
+																						final ProgressListenerInterface pProgressListener) throws IOException
 	{
 		try
 		{
@@ -210,7 +196,7 @@ public class FeedChannelsMonitor
 				lInputStreamReader = new InputStreamReader(pURL.openStream());
 				lBufferedReader = new BufferedReader(lInputStreamReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + pURL + " not found.");
 				throw e;
@@ -220,31 +206,29 @@ public class FeedChannelsMonitor
 			{
 				int lCurrentFrequence = 2; // default frequence 2 per hour.
 				String lLineString;
-				List<URL> lUrlList = new ArrayList<URL>();
+				final List<URL> lUrlList = new ArrayList<URL>();
 				while ((lLineString = lBufferedReader.readLine()) != null)
 				{
 					lLineString.trim();
 					if (lLineString.matches("http://.*") || lLineString.matches("file:/.*"))
 					{
-						URL lFeedURL = new URL(lLineString);
+						final URL lFeedURL = new URL(lLineString);
 						lUrlList.add(lFeedURL);
 					}
 					else if (lLineString.matches("CurrentMaximalFrequence=\\d*"))
-					{
 						lCurrentFrequence = Integer.parseInt(lLineString.split("=")[1]);
-					}
 				}
 
-				double lNumberOfFeeds = lUrlList.size();
+				final double lNumberOfFeeds = lUrlList.size();
 				double lCounter = 0;
-				for (URL lFeedUrl : lUrlList)
+				for (final URL lFeedUrl : lUrlList)
 				{
 					try
 					{
 						addFeedChannel(lFeedUrl, pFeedAnalyser, lCurrentFrequence);
 						System.out.println("added feed: (" + lFeedUrl);
 					}
-					catch (Throwable e)
+					catch (final Throwable e)
 					{
 						e.printStackTrace();
 					}
@@ -253,7 +237,7 @@ public class FeedChannelsMonitor
 				}
 
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while reading: " + e2.getCause());
 			}
@@ -263,7 +247,7 @@ public class FeedChannelsMonitor
 				lInputStreamReader.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 
@@ -273,57 +257,55 @@ public class FeedChannelsMonitor
 
 	public void removeFeedChannel(final URL pFeedURL)
 	{
-		for (Iterator lIterator = mChannelMap.keySet().iterator(); lIterator.hasNext();)
+		for (final Iterator lIterator = this.mChannelMap.keySet().iterator(); lIterator.hasNext();)
 		{
-			ChannelIF lChannelIF = (ChannelIF) lIterator.next();
-			URL lUrl = lChannelIF.getLocation();
+			final ChannelIF lChannelIF = (ChannelIF) lIterator.next();
+			final URL lUrl = lChannelIF.getLocation();
 			if (lUrl.equals(pFeedURL))
 			{
 				lIterator.remove();
-				mPoller.unregisterChannel(lChannelIF);
-				mFeedAnalysers.remove(lChannelIF);
+				this.mPoller.unregisterChannel(lChannelIF);
+				this.mFeedAnalysers.remove(lChannelIF);
 			}
 		}
 	}
 
 	public void stopMonitoring()
 	{
-		for (ChannelIF lChannel : mChannelMap.keySet())
-		{
-			mPoller.unregisterChannel(lChannel);
-		}
-		mPoller.removeObserver(mObserver);
-		mPoller.removeApprover(mApprover);
+		for (final ChannelIF lChannel : this.mChannelMap.keySet())
+			this.mPoller.unregisterChannel(lChannel);
+		this.mPoller.removeObserver(this.mObserver);
+		this.mPoller.removeApprover(this.mApprover);
 	}
 
 	public int getMonitoringInterval()
 	{
-		return mMonitoringInterval;
+		return this.mMonitoringInterval;
 	}
 
-	public void setMonitoringInterval(int pMonitoringInterval)
+	public void setMonitoringInterval(final int pMonitoringInterval)
 	{
-		mMonitoringInterval = pMonitoringInterval;
+		this.mMonitoringInterval = pMonitoringInterval;
 	}
 
 	public FeedListenerInterface getFeedListener()
 	{
-		return mFeedListener;
+		return this.mFeedListener;
 	}
 
-	public void setFeedListener(FeedListenerInterface<FeedItemInterface> pFeedListener)
+	public void setFeedListener(final FeedListenerInterface<FeedItemInterface> pFeedListener)
 	{
-		mFeedListener = pFeedListener;
+		this.mFeedListener = pFeedListener;
 	}
 
 	public int getThreadPriority()
 	{
-		return mThreadPriority;
+		return this.mThreadPriority;
 	}
 
-	public void setThreadPriority(int pThreadPriority)
+	public void setThreadPriority(final int pThreadPriority)
 	{
-		mThreadPriority = pThreadPriority;
+		this.mThreadPriority = pThreadPriority;
 	}
 
 }

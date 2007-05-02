@@ -17,95 +17,94 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 	private class NodeSetComparator implements Comparator<Set<N>>
 	{
-		public int compare(Set<N> pNodeSet1, Set<N> pNodeSet2)
+		public int compare(final Set<N> pNodeSet1, final Set<N> pNodeSet2)
 		{
-			int lSize1 = pNodeSet1.size();
-			int lSize2 = pNodeSet2.size();
+			final int lSize1 = pNodeSet1.size();
+			final int lSize2 = pNodeSet2.size();
 			return -(lSize1 - lSize2); // when sorting the result is in descending
 		}
 	}
 
 	private static final int	cMinimalBubleSize		= 2;
 
-	private NodeSetComparator	cNodeSetComparator	= new NodeSetComparator();
+	private final NodeSetComparator	cNodeSetComparator	= new NodeSetComparator();
 
 	private final double			mMinimalSimilarity;
 
 	private final int					mMaxIterations;
 
+	private final boolean	mCentralityWeighting;
+
 	public PowerGraphExtractor()
 	{
 		super();
-		mMinimalSimilarity = 0;
-		mMaxIterations = Integer.MAX_VALUE;
+		this.mMinimalSimilarity = 0;
+		this.mMaxIterations = Integer.MAX_VALUE;
+		this.mCentralityWeighting = true;
 	}
 
-	public PowerGraphExtractor(double pMinimalSimilarity, int pMaxIterations)
+	public PowerGraphExtractor(final double pMinimalSimilarity, final int pMaxIterations, final boolean pCentralityWeighting)
 	{
 		super();
-		mMinimalSimilarity = pMinimalSimilarity;
-		mMaxIterations = pMaxIterations;
+		this.mMinimalSimilarity = pMinimalSimilarity;
+		this.mMaxIterations = pMaxIterations;
+		this.mCentralityWeighting = pCentralityWeighting;
 	}
 
-	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph)
+	public final PowerGraph<N> extractPowerGraph(final Graph<N, Edge<N>> pGraph)
 	{
-		return extractPowerGraph(pGraph, 1, mMinimalSimilarity, mMaxIterations);
+		return extractPowerGraph(pGraph, 1, this.mMinimalSimilarity, this.mMaxIterations);
 	}
 
-	public final PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph, double pProbabilityThreshold)
+	public final PowerGraph<N> extractPowerGraph(final Graph<N, Edge<N>> pGraph, final double pProbabilityThreshold)
 	{
-		return extractPowerGraph(pGraph, pProbabilityThreshold, mMinimalSimilarity, mMaxIterations);
+		return extractPowerGraph(pGraph, pProbabilityThreshold, this.mMinimalSimilarity, this.mMaxIterations);
 	}
 
-	public final PowerGraph<N> extractPowerGraph(	Graph<N, Edge<N>> pGraph,
-																								double pProbabilityThreshold,
-																								double pMinSimilarity,
-																								int pMaxIterations)
+	public final PowerGraph<N> extractPowerGraph(	final Graph<N, Edge<N>> pGraph,
+																								final double pProbabilityThreshold,
+																								final double pMinSimilarity,
+																								final int pMaxIterations)
 	{
-		PowerGraph<N> lPowerGraph = new PowerGraph<N>();
-		GraphClustering<N> mClustering = new GraphClustering<N>();
-		Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, pMinSimilarity, pMaxIterations);
+		final PowerGraph<N> lPowerGraph = new PowerGraph<N>();
+		final GraphClustering<N> mClustering = new GraphClustering<N>(this.mCentralityWeighting);
+		final Set<Set<N>> lNodeSetSet = mClustering.cluster(pGraph, pMinSimilarity, pMaxIterations);
 
 		// System.out.println("Started constructing Power Graph");
-		List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);
+		final List<Set<N>> lNodeSetList = new ArrayList<Set<N>>(lNodeSetSet);
 
-		Collections.sort(lNodeSetList, cNodeSetComparator);
+		Collections.sort(lNodeSetList, this.cNodeSetComparator);
 		// System.out.println(lClusterArray.length);
 
 		mergesimilarsets(lNodeSetList);
 
-		List<UndirectedEdge<Set<N>>> lPowerEdgeList = new ArrayList<UndirectedEdge<Set<N>>>();
+		final List<UndirectedEdge<Set<N>>> lPowerEdgeList = new ArrayList<UndirectedEdge<Set<N>>>();
 
 		// System.out.println("Adding Power Edges.");
-		if (true) // Power Edges
-		{
+		if (true)
 			for (int i = 0; i < lNodeSetList.size(); i++)
 			{
-				Set<N> lFirstPowerNode = lNodeSetList.get(i);
+				final Set<N> lFirstPowerNode = lNodeSetList.get(i);
 
-				if (lFirstPowerNode.size() == 1 || lFirstPowerNode.size() >= cMinimalBubleSize)
+				if ((lFirstPowerNode.size() == 1) || (lFirstPowerNode.size() >= cMinimalBubleSize))
 					for (int j = 0; j <= i; j++)
 					{
-						Set<N> lSecondPowerNode = lNodeSetList.get(j);
+						final Set<N> lSecondPowerNode = lNodeSetList.get(j);
 
-						if (lSecondPowerNode.size() == 1 || lSecondPowerNode.size() >= cMinimalBubleSize)
-							if (!(lFirstPowerNode.equals(lSecondPowerNode) && lSecondPowerNode.size() == 2))
+						if ((lSecondPowerNode.size() == 1) || (lSecondPowerNode.size() >= cMinimalBubleSize))
+							if (!(lFirstPowerNode.equals(lSecondPowerNode) && (lSecondPowerNode.size() == 2)))
 							{
 								boolean isPowerEdge;
 
 								if (pProbabilityThreshold == 1)
-								{
 									isPowerEdge = isPowerEdge(pGraph, lFirstPowerNode, lSecondPowerNode);
-								}
 								else
-								{
 									isPowerEdge = isStochasticPowerEdge(pGraph, lFirstPowerNode, lSecondPowerNode,
 											pProbabilityThreshold);
-								}
 
 								if (isPowerEdge)
 								{
-									UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode,
+									final UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode,
 											lSecondPowerNode);
 
 									lPowerEdgeList.add(lPowerEdge);
@@ -113,42 +112,32 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 							}
 					}
 			}
-		}
 
 		// System.out.println("Adding remaining edges.");
-		if (false) // Original Graph
-		{
-			for (Edge<N> lEdge : pGraph.getEdgeSet())
+		if (false)
+			for (final Edge<N> lEdge : pGraph.getEdgeSet())
 			{
-				Set<N> lFirstPowerNode = new HashSet<N>();
+				final Set<N> lFirstPowerNode = new HashSet<N>();
 				lFirstPowerNode.add(lEdge.getFirstNode());
-				Set<N> lSecondPowerNode = new HashSet<N>();
+				final Set<N> lSecondPowerNode = new HashSet<N>();
 				lSecondPowerNode.add(lEdge.getSecondNode());
 
-				UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
+				final UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
 				lPowerEdgeList.add(lPowerEdge);
 				// System.out.print(",");
 			}
-			// System.out.println("done,");
-		}
 
-		if (false) // Clusters
-		{
-			for (Set<N> lNodeSet : lNodeSetList)
-			{
+		if (false)
+			for (final Set<N> lNodeSet : lNodeSetList)
 				lPowerGraph.addCluster(lNodeSet);
-			}
-		}
 
-		for (Edge<Set<N>> lPowerEdge : lPowerEdgeList)
-		{
+		for (final Edge<Set<N>> lPowerEdge : lPowerEdgeList)
 			lPowerGraph.addPowerEdgeDelayed(lPowerEdge);
-		}
 		lPowerGraph.commitDelayedEdges();
 
-		for (N lNode : pGraph.getNodeSet())
+		for (final N lNode : pGraph.getNodeSet())
 		{
-			Set<N> lPowerNode = new HashSet<N>();
+			final Set<N> lPowerNode = new HashSet<N>();
 			lPowerNode.add(lNode);
 			lPowerGraph.addPowerNode(lPowerNode);
 		}
@@ -165,96 +154,82 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		return lPowerGraph;
 	}
 
-	private void mergesimilarsets(List<Set<N>> pNodeSetList)
+	private void mergesimilarsets(final List<Set<N>> pNodeSetList)
 	{
 		int i = 0;
 		while (i < pNodeSetList.size())
 		{
-			Set<N> lSet = pNodeSetList.get(i);
+			final Set<N> lSet = pNodeSetList.get(i);
 			final int lSize = lSet.size();
 			boolean lThereIsSmaller = false;
-			for (Set<N> lOtherSet : pNodeSetList)
-			{
-				if (lOtherSet.size()>2 && lOtherSet.size() == lSize - 1 && lSet.containsAll(lOtherSet))
-				{
+			for (final Set<N> lOtherSet : pNodeSetList)
+				if ((lOtherSet.size()>2) && (lOtherSet.size() == lSize - 1) && lSet.containsAll(lOtherSet))
 					lThereIsSmaller = true;
-				}
-			}
 			if (lThereIsSmaller)
-			{
 				pNodeSetList.remove(lSet);
-			}
 			else
-			{
 				i++;
-			}
 		}
 
 	}
 
-	private boolean isPowerEdge(Graph<N, Edge<N>> pGraph, Set<N> pFirstPowerNode, Set<N> pSecondPowerNode)
+	private boolean isPowerEdge(final Graph<N, Edge<N>> pGraph, final Set<N> pFirstPowerNode, final Set<N> pSecondPowerNode)
 	{
 		if (pFirstPowerNode.equals(pSecondPowerNode))
 		{
 			if (pFirstPowerNode.size() == 1)
 			{
-				N lNode = pFirstPowerNode.iterator().next();
+				final N lNode = pFirstPowerNode.iterator().next();
 				return pGraph.isEdge(lNode, lNode);
 			}
-			for (N lNode1 : pFirstPowerNode)
-				for (N lNode2 : pSecondPowerNode)
+			for (final N lNode1 : pFirstPowerNode)
+				for (final N lNode2 : pSecondPowerNode)
 					if (!lNode1.equals(lNode2))
 						if (!pGraph.isEdge(lNode1, lNode2))
 							return false;
 			return true;
 		}
-		for (N lNode : pFirstPowerNode)
-		{
+		for (final N lNode : pFirstPowerNode)
 			if (pSecondPowerNode.contains(lNode))
 				return false;
-		}
 
-		for (N lNode1 : pFirstPowerNode)
-			for (N lNode2 : pSecondPowerNode)
+		for (final N lNode1 : pFirstPowerNode)
+			for (final N lNode2 : pSecondPowerNode)
 				if (!pGraph.isEdge(lNode1, lNode2))
 					return false;
 		return true;
 	}
 
-	private boolean isStochasticPowerEdge(Graph<N, Edge<N>> pGraph,
-																				Set<N> pFirstPowerNode,
-																				Set<N> pSecondPowerNode,
-																				double pThresholdProbability)
+	private boolean isStochasticPowerEdge(final Graph<N, Edge<N>> pGraph,
+																				final Set<N> pFirstPowerNode,
+																				final Set<N> pSecondPowerNode,
+																				final double pThresholdProbability)
 	{
 		double lProbability = 0;
 		if (pFirstPowerNode.equals(pSecondPowerNode))
 		{
 			if (pFirstPowerNode.size() == 1)
 			{
-				N lNode = pFirstPowerNode.iterator().next();
+				final N lNode = pFirstPowerNode.iterator().next();
 				if (pGraph.isEdge(lNode, lNode))
 					lProbability++;
 			}
 			else
-			{
-				for (N lNode1 : pFirstPowerNode)
-					for (N lNode2 : pSecondPowerNode)
+				for (final N lNode1 : pFirstPowerNode)
+					for (final N lNode2 : pSecondPowerNode)
 						if (!lNode1.equals(lNode2))
 							if (pGraph.isEdge(lNode1, lNode2))
 								lProbability++;
-			}
 			lProbability /= (pFirstPowerNode.size() * (pFirstPowerNode.size() - 1)) / 2;
 		}
 		else
 		{
-			for (N lNode : pFirstPowerNode)
-			{
+			for (final N lNode : pFirstPowerNode)
 				if (pSecondPowerNode.contains(lNode))
 					return false;
-			}
 
-			for (N lNode1 : pFirstPowerNode)
-				for (N lNode2 : pSecondPowerNode)
+			for (final N lNode1 : pFirstPowerNode)
+				for (final N lNode2 : pSecondPowerNode)
 					if (pGraph.isEdge(lNode1, lNode2))
 						lProbability++;
 			lProbability /= (pFirstPowerNode.size() * pSecondPowerNode.size());

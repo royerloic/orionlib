@@ -3,41 +3,41 @@ package org.royerloic.nlp;
 public class PrecisionRecall
 {
 
-	public static final double recall(double pTruePositiveCount, double pFalseNegativeCount)
+	public static final double recall(final double pTruePositiveCount, final double pFalseNegativeCount)
 	{
 		double lDenominator = pTruePositiveCount + pFalseNegativeCount;
 		lDenominator = lDenominator == 0 ? 1 : lDenominator;
 		return pTruePositiveCount / lDenominator;
 	}
 
-	public static final double precision(double pTruePositiveCount, double pFalsePositiveCount)
+	public static final double precision(final double pTruePositiveCount, final double pFalsePositiveCount)
 	{
 		double lDenominator = pTruePositiveCount + pFalsePositiveCount;
 		lDenominator = lDenominator == 0 ? 1 : lDenominator;
 		return pTruePositiveCount / lDenominator;
 	}
 
-	public static final double geometricMean(double pA, double pB)
+	public static final double geometricMean(final double pA, final double pB)
 	{
 		return (2 * pA * pB) / (pA + pB);
 	}
 
-	public static final double fmeasure(double pPrecision, double pRecall)
+	public static final double fmeasure(final double pPrecision, final double pRecall)
 	{
 		return geometricMean(pPrecision, pRecall);
 	}
 
-	public static final double fmeasure(double pPrecision, double pRecall, double pAlpha)
+	public static final double fmeasure(final double pPrecision, final double pRecall, final double pAlpha)
 	{
 		return ((1 + pAlpha) * pPrecision * pRecall) / (pAlpha * pPrecision + pRecall);
 	}
 
-	public static final double fmeasurePrecision(double pPrecision, double pRecall)
+	public static final double fmeasurePrecision(final double pPrecision, final double pRecall)
 	{
 		return fmeasure(pPrecision, pRecall, 0.5);
 	}
 
-	public static final double fmeasureRecall(double pPrecision, double pRecall)
+	public static final double fmeasureRecall(final double pPrecision, final double pRecall)
 	{
 		return fmeasure(pPrecision, pRecall, 2);
 	}

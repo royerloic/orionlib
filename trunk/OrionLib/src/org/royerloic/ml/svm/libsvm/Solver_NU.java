@@ -15,22 +15,24 @@ final class Solver_NU extends Solver
 {
 	private SolutionInfo	si;
 
-	void Solve(	int l1,
-							Kernel Q1,
-							double[] b1,
-							byte[] y1,
-							double[] alpha1,
-							double Cp1,
-							double Cn1,
-							double eps1,
-							SolutionInfo si1,
-							int shrinking)
+	@Override
+	void Solve(	final int l1,
+							final Kernel Q1,
+							final double[] b1,
+							final byte[] y1,
+							final double[] alpha1,
+							final double Cp1,
+							final double Cn1,
+							final double eps1,
+							final SolutionInfo si1,
+							final int shrinking)
 	{
 		this.si = si1;
 		super.Solve(l1, Q1, b1, y1, alpha1, Cp1, Cn1, eps1, si1, shrinking);
 	}
 
-	int select_working_set(int[] working_set)
+	@Override
+	int select_working_set(final int[] working_set)
 	{
 		// return i,j which maximize -grad(f)^T d , under constraint
 		// if alpha_i == C, d != +1
@@ -48,50 +50,40 @@ final class Solver_NU extends Solver
 		double Gmax4 = -INF; // max { -grad(f)_i * d | y_i = -1, d = -1 }
 		int Gmax4_idx = -1;
 
-		for (int i = 0; i < active_size; i++)
-		{
-			if (y[i] == +1) // mClass == +1
+		for (int i = 0; i < this.active_size; i++)
+			if (this.y[i] == +1) // mClass == +1
 			{
-				if (!is_upper_bound(i)) // d = +1
-				{
-					if (-G[i] > Gmax1)
+				if (!is_upper_bound(i))
+					if (-this.G[i] > Gmax1)
 					{
-						Gmax1 = -G[i];
+						Gmax1 = -this.G[i];
 						Gmax1_idx = i;
 					}
-				}
-				if (!is_lower_bound(i)) // d = -1
-				{
-					if (G[i] > Gmax2)
+				if (!is_lower_bound(i))
+					if (this.G[i] > Gmax2)
 					{
-						Gmax2 = G[i];
+						Gmax2 = this.G[i];
 						Gmax2_idx = i;
 					}
-				}
 			}
 			else
 			// mClass == -1
 			{
-				if (!is_upper_bound(i)) // d = +1
-				{
-					if (-G[i] > Gmax3)
+				if (!is_upper_bound(i))
+					if (-this.G[i] > Gmax3)
 					{
-						Gmax3 = -G[i];
+						Gmax3 = -this.G[i];
 						Gmax3_idx = i;
 					}
-				}
-				if (!is_lower_bound(i)) // d = -1
-				{
-					if (G[i] > Gmax4)
+				if (!is_lower_bound(i))
+					if (this.G[i] > Gmax4)
 					{
-						Gmax4 = G[i];
+						Gmax4 = this.G[i];
 						Gmax4_idx = i;
 					}
-				}
 			}
-		}
 
-		if (Math.max(Gmax1 + Gmax2, Gmax3 + Gmax4) < eps)
+		if (Math.max(Gmax1 + Gmax2, Gmax3 + Gmax4) < this.eps)
 			return 1;
 
 		if (Gmax1 + Gmax2 > Gmax3 + Gmax4)
@@ -107,6 +99,7 @@ final class Solver_NU extends Solver
 		return 0;
 	}
 
+	@Override
 	void do_shrinking()
 	{
 		double Gmax1 = -INF; // max { -grad(f)_i * d | y_i = +1, d = +1 }
@@ -115,104 +108,101 @@ final class Solver_NU extends Solver
 		double Gmax4 = -INF; // max { -grad(f)_i * d | y_i = -1, d = -1 }
 
 		int k;
-		for (k = 0; k < active_size; k++)
+		for (k = 0; k < this.active_size; k++)
 		{
 			if (!is_upper_bound(k))
-			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (-G[k] > Gmax1)
-						Gmax1 = -G[k];
+					if (-this.G[k] > Gmax1)
+						Gmax1 = -this.G[k];
 				}
-				else if (-G[k] > Gmax3)
-					Gmax3 = -G[k];
-			}
+				else if (-this.G[k] > Gmax3)
+					Gmax3 = -this.G[k];
 			if (!is_lower_bound(k))
-			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (G[k] > Gmax2)
-						Gmax2 = G[k];
+					if (this.G[k] > Gmax2)
+						Gmax2 = this.G[k];
 				}
-				else if (G[k] > Gmax4)
-					Gmax4 = G[k];
-			}
+				else if (this.G[k] > Gmax4)
+					Gmax4 = this.G[k];
 		}
 
-		double Gm1 = -Gmax2;
-		double Gm2 = -Gmax1;
-		double Gm3 = -Gmax4;
-		double Gm4 = -Gmax3;
+		final double Gm1 = -Gmax2;
+		final double Gm2 = -Gmax1;
+		final double Gm3 = -Gmax4;
+		final double Gm4 = -Gmax3;
 
-		for (k = 0; k < active_size; k++)
+		for (k = 0; k < this.active_size; k++)
 		{
 			if (is_lower_bound(k))
 			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (-G[k] >= Gm1)
+					if (-this.G[k] >= Gm1)
 						continue;
 				}
-				else if (-G[k] >= Gm3)
+				else if (-this.G[k] >= Gm3)
 					continue;
 			}
 			else if (is_upper_bound(k))
 			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (G[k] >= Gm2)
+					if (this.G[k] >= Gm2)
 						continue;
 				}
-				else if (G[k] >= Gm4)
+				else if (this.G[k] >= Gm4)
 					continue;
 			}
 			else
 				continue;
 
-			--active_size;
-			swap_index(k, active_size);
+			--this.active_size;
+			swap_index(k, this.active_size);
 			--k; // look at the newcomer
 		}
 
 		// unshrink, check all variables again before final iterations
 
-		if (unshrinked || Math.max(-(Gm1 + Gm2), -(Gm3 + Gm4)) > eps * 10)
+		if (this.unshrinked || (Math.max(-(Gm1 + Gm2), -(Gm3 + Gm4)) > this.eps * 10))
 			return;
 
-		unshrinked = true;
+		this.unshrinked = true;
 		reconstruct_gradient();
 
-		for (k = l - 1; k >= active_size; k--)
+		for (k = this.l - 1; k >= this.active_size; k--)
 		{
 			if (is_lower_bound(k))
 			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (-G[k] < Gm1)
+					if (-this.G[k] < Gm1)
 						continue;
 				}
-				else if (-G[k] < Gm3)
+				else if (-this.G[k] < Gm3)
 					continue;
 			}
 			else if (is_upper_bound(k))
 			{
-				if (y[k] == +1)
+				if (this.y[k] == +1)
 				{
-					if (G[k] < Gm2)
+					if (this.G[k] < Gm2)
 						continue;
 				}
-				else if (G[k] < Gm4)
+				else if (this.G[k] < Gm4)
 					continue;
 			}
 			else
 				continue;
 
-			swap_index(k, active_size);
-			active_size++;
+			swap_index(k, this.active_size);
+			this.active_size++;
 			++k; // look at the newcomer
 		}
 	}
 
+	@Override
 	double calculate_rho()
 	{
 		int nr_free1 = 0, nr_free2 = 0;
@@ -220,33 +210,28 @@ final class Solver_NU extends Solver
 		double lb1 = -INF, lb2 = -INF;
 		double sum_free1 = 0, sum_free2 = 0;
 
-		for (int i = 0; i < active_size; i++)
-		{
-			if (y[i] == +1)
+		for (int i = 0; i < this.active_size; i++)
+			if (this.y[i] == +1)
 			{
 				if (is_lower_bound(i))
-					ub1 = Math.min(ub1, G[i]);
+					ub1 = Math.min(ub1, this.G[i]);
 				else if (is_upper_bound(i))
-					lb1 = Math.max(lb1, G[i]);
+					lb1 = Math.max(lb1, this.G[i]);
 				else
 				{
 					++nr_free1;
-					sum_free1 += G[i];
+					sum_free1 += this.G[i];
 				}
 			}
+			else if (is_lower_bound(i))
+				ub2 = Math.min(ub2, this.G[i]);
+			else if (is_upper_bound(i))
+				lb2 = Math.max(lb2, this.G[i]);
 			else
 			{
-				if (is_lower_bound(i))
-					ub2 = Math.min(ub2, G[i]);
-				else if (is_upper_bound(i))
-					lb2 = Math.max(lb2, G[i]);
-				else
-				{
-					++nr_free2;
-					sum_free2 += G[i];
-				}
+				++nr_free2;
+				sum_free2 += this.G[i];
 			}
-		}
 
 		double r1, r2;
 		if (nr_free1 > 0)
@@ -259,7 +244,7 @@ final class Solver_NU extends Solver
 		else
 			r2 = (ub2 + lb2) / 2;
 
-		si.r = (r1 + r2) / 2;
+		this.si.r = (r1 + r2) / 2;
 		return (r1 - r2) / 2;
 	}
 }

@@ -29,26 +29,26 @@ public class UniformGrid implements IGridDefinition
 	public UniformGrid(final int pDimension)
 	{
 		super();
-		mDimension = pDimension;
-		mRounding = 0.0001;
-		mNumberOfDivisions = 2;
-		mPerturbation = 0.1;
+		this.mDimension = pDimension;
+		this.mRounding = 0.0001;
+		this.mNumberOfDivisions = 2;
+		this.mPerturbation = 0.1;
 
 	}
 
-	public void setNumberOfDivisions(int pNumberOfDivisions)
+	public void setNumberOfDivisions(final int pNumberOfDivisions)
 	{
-		mNumberOfDivisions = pNumberOfDivisions;
+		this.mNumberOfDivisions = pNumberOfDivisions;
 	}
 
-	public void setPerturbation(double pPerturbation)
+	public void setPerturbation(final double pPerturbation)
 	{
-		mPerturbation = pPerturbation;
+		this.mPerturbation = pPerturbation;
 	}
 
-	public void setRounding(double pRounding)
+	public void setRounding(final double pRounding)
 	{
-		mRounding = pRounding;
+		this.mRounding = pRounding;
 	}
 
 	/**
@@ -56,48 +56,44 @@ public class UniformGrid implements IGridDefinition
 	 */
 	public List generateGrid()
 	{
-		List lResult = new ArrayList();
+		final List lResult = new ArrayList();
 
-		double[] lDelta = new double[mDimension];
-		for (int i = 0; i < mDimension; i++)
-		{
-			lDelta[i] = 1.0 / (double) (mNumberOfDivisions - 1);
-		}
+		final double[] lDelta = new double[this.mDimension];
+		for (int i = 0; i < this.mDimension; i++)
+			lDelta[i] = 1.0 / (this.mNumberOfDivisions - 1);
 
-		int[] lIndex = new int[mDimension];
+		final int[] lIndex = new int[this.mDimension];
 		int lTotal = 1;
-		for (int i = 0; i < mDimension; i++)
+		for (int i = 0; i < this.mDimension; i++)
 		{
-			lTotal = lTotal * mNumberOfDivisions;
+			lTotal = lTotal * this.mNumberOfDivisions;
 			lIndex[i] = 0;
 		}
 
-		double[] lInputVector = new double[mDimension];
+		final double[] lInputVector = new double[this.mDimension];
 
 		for (int i = 0; i < lTotal; i++)
 		{
-			for (int k = 0; k < mDimension; k++)
-			{
-				if (lIndex[k] >= mNumberOfDivisions)
+			for (int k = 0; k < this.mDimension; k++)
+				if (lIndex[k] >= this.mNumberOfDivisions)
 				{
 					lIndex[k] = 0;
 					lIndex[k + 1]++;
 				}
-			}
 
-			for (int k = 0; k < mDimension; k++)
+			for (int k = 0; k < this.mDimension; k++)
 			{
-				double lVal = lIndex[k] * lDelta[k] + ((Math.random() * 2) - 1) * (lDelta[k] / 2) * mPerturbation;
+				double lVal = lIndex[k] * lDelta[k] + ((Math.random() * 2) - 1) * (lDelta[k] / 2) * this.mPerturbation;
 
 				lVal = (lVal < 0 ? 0 : lVal);
 				lVal = (lVal > 1 ? 1 : lVal);
 
-				double lTruncated = MathFunctions.round(lVal, mRounding);
+				final double lTruncated = MathFunctions.round(lVal, this.mRounding);
 
 				lInputVector[k] = lTruncated;
 			}
 
-			INumericalVector lInput = new NumericalVector(lInputVector);
+			final INumericalVector lInput = new NumericalVector(lInputVector);
 
 			lResult.add(lInput);
 

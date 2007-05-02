@@ -29,58 +29,10 @@ import bsh.NameSpace;
 public class Optimal extends Interpreter
 {
 
-	private class OptimalConsole implements ConsoleInterface
-	{
-
-		/**
-		 * @see bsh.ConsoleInterface#getIn()
-		 */
-		public Reader getIn()
-		{
-			return new InputStreamReader(System.in);
-		}
-
-		/**
-		 * @see bsh.ConsoleInterface#getOut()
-		 */
-		public PrintStream getOut()
-		{
-			return System.out;
-		}
-
-		/**
-		 * @see bsh.ConsoleInterface#getErr()
-		 */
-		public PrintStream getErr()
-		{
-			return System.err;
-		}
-
-		/**
-		 * @see bsh.ConsoleInterface#println(java.lang.Object)
-		 */
-		public void println(Object pArg0)
-		{
-			System.out.println(pArg0);
-		}
-
-		/**
-		 * @see bsh.ConsoleInterface#print(java.lang.Object)
-		 */
-		public void print(Object pArg0)
-		{
-			System.out.print(pArg0);
-		}
-
-		/**
-		 * @see bsh.ConsoleInterface#error(java.lang.Object)
-		 */
-		public void error(Object pArg0)
-		{
-			System.out.println(pArg0);
-		}
-
-	}
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -5334339857551841098L;
 
 	/**
 	 * @param arg0
@@ -162,7 +114,7 @@ public class Optimal extends Interpreter
 		{
 			eval("server(" + pServerPort + ")");
 		}
-		catch (EvalError e)
+		catch (final EvalError e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace(System.out);
@@ -193,7 +145,7 @@ public class Optimal extends Interpreter
 			eval("public double sq(double p){return p*p;}");
 			eval("public double boost(double p){return (1-Math.sqrt(1-p*p));}");
 		}
-		catch (EvalError e1)
+		catch (final EvalError e1)
 		{
 			e1.printStackTrace(System.out);
 		}
@@ -203,7 +155,7 @@ public class Optimal extends Interpreter
 	{
 		// setConsole(new OptimalConsole());
 
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println(getBanner());
 
@@ -215,7 +167,7 @@ public class Optimal extends Interpreter
 				System.out.print(getPrompt());
 				lString = lBufferedReader.readLine();
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -224,7 +176,7 @@ public class Optimal extends Interpreter
 			{
 				eval(lString);
 			}
-			catch (EvalError e1)
+			catch (final EvalError e1)
 			{
 				// TODO Auto-generated catch block
 				System.err.println(e1.getMessage() + "\n");
@@ -250,38 +202,34 @@ public class Optimal extends Interpreter
 
 	private String getPrompt()
 	{
-		File lLocalDir = new File(".");
+		final File lLocalDir = new File(".");
 		return "[" + lLocalDir.getAbsolutePath() + "] Optimal>";
 	}
 
 	public static void main(final String[] pArguments)
 	{
-		Optimal lOScriptInterpreter = new Optimal(1001);
+		final Optimal lOScriptInterpreter = new Optimal(1001);
 		try
 		{
-			lOScriptInterpreter.set("tmpCmdLine", (Object) pArguments);
+			lOScriptInterpreter.set("tmpCmdLine", pArguments);
 			lOScriptInterpreter.eval("String[] Arguments = (String[])tmpCmdLine");
 
 			if (!(pArguments.length == 0))
-			{
 				lOScriptInterpreter.source(pArguments[0]);
-			}
 			else
-			{
 				lOScriptInterpreter.startConsole();
-			}
 		}
-		catch (EvalError e)
+		catch (final EvalError e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

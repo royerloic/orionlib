@@ -15,39 +15,36 @@ public class CliqueEnumerator<N>
 
 	Set<Graph<N, Edge<N>>>	mCliqueSet;
 
-	public CliqueEnumerator(Graph<N, Edge<N>> pGraphInterface)
+	public CliqueEnumerator(final Graph<N, Edge<N>> pGraphInterface)
 	{
 		super();
-		mGraphInterface = pGraphInterface;
-		mCliqueSet = new HashSet<Graph<N, Edge<N>>>();
+		this.mGraphInterface = pGraphInterface;
+		this.mCliqueSet = new HashSet<Graph<N, Edge<N>>>();
 		doEnumerateCliques();
 	}
 
 	@SuppressWarnings("unchecked")
 	private void doEnumerateCliques()
 	{
-		Set<N> lInitialReachableSet = new HashSet<N>(mGraphInterface.getNumberOfNodes());
-		Set<N> lInitialPotentialSet = mGraphInterface.getNodeSet();
-		Set<N> lInitialExcludedSet = new HashSet<N>(mGraphInterface.getNumberOfNodes());
+		final Set<N> lInitialReachableSet = new HashSet<N>(this.mGraphInterface.getNumberOfNodes());
+		final Set<N> lInitialPotentialSet = this.mGraphInterface.getNodeSet();
+		final Set<N> lInitialExcludedSet = new HashSet<N>(this.mGraphInterface.getNumberOfNodes());
 
 		BronKerboschRecursive(lInitialReachableSet, lInitialPotentialSet, lInitialExcludedSet);
 	}
 
 	@SuppressWarnings("unchecked")
-	private void BronKerboschRecursive(Set<N> pReachable, Set<N> pPotential, Set<N> pExcluded)
+	private void BronKerboschRecursive(final Set<N> pReachable, final Set<N> pPotential, final Set<N> pExcluded)
 	{
 		if (pPotential.isEmpty() && pExcluded.isEmpty())
-		{
-			mCliqueSet.add(mGraphInterface.extractStrictSubGraph(pReachable));
-		}
+			this.mCliqueSet.add(this.mGraphInterface.extractStrictSubGraph(pReachable));
 		else
-		{
-			for (N lNode : pPotential)
+			for (final N lNode : pPotential)
 			{
-				Set<N> ReachableNew = new HashSet<N>(pPotential.size());
-				Set<N> PotentialNew = new HashSet<N>(pPotential.size());
-				Set<N> ExcludedNew = new HashSet<N>(pPotential.size());
-				Set lNodeNeighbours = mGraphInterface.getNodeNeighbours(lNode);
+				final Set<N> ReachableNew = new HashSet<N>(pPotential.size());
+				final Set<N> PotentialNew = new HashSet<N>(pPotential.size());
+				final Set<N> ExcludedNew = new HashSet<N>(pPotential.size());
+				final Set lNodeNeighbours = this.mGraphInterface.getNodeNeighbours(lNode);
 
 				ReachableNew.addAll(pReachable);
 				ReachableNew.add(lNode);
@@ -61,83 +58,82 @@ public class CliqueEnumerator<N>
 				BronKerboschRecursive(ReachableNew, PotentialNew, ExcludedNew);
 
 			}
-		}
 
 	}
 
-	public void associateGraph(HashGraph pGraph)
+	public void associateGraph(final HashGraph pGraph)
 	{
-		mGraphInterface = pGraph;
+		this.mGraphInterface = pGraph;
 	}
 
 	public Graph<N, Edge<N>> getAssociatedGraph()
 	{
-		return mGraphInterface;
+		return this.mGraphInterface;
 	}
 
 	public int size()
 	{
-		return mCliqueSet.size();
+		return this.mCliqueSet.size();
 	}
 
 	public boolean isEmpty()
 	{
-		return mCliqueSet.isEmpty();
+		return this.mCliqueSet.isEmpty();
 	}
 
-	public boolean contains(Object pO)
+	public boolean contains(final Object pO)
 	{
-		return mCliqueSet.contains(pO);
+		return this.mCliqueSet.contains(pO);
 	}
 
 	public Iterator<Graph<N, Edge<N>>> iterator()
 	{
-		return mCliqueSet.iterator();
+		return this.mCliqueSet.iterator();
 	}
 
 	public Object[] toArray()
 	{
-		return mCliqueSet.toArray();
+		return this.mCliqueSet.toArray();
 	}
 
-	public <T> T[] toArray(T[] pA)
+	public <T> T[] toArray(final T[] pA)
 	{
-		return mCliqueSet.<T> toArray(pA);
+		return this.mCliqueSet.<T> toArray(pA);
 	}
 
-	public boolean add(HashGraph pO)
+	public boolean add(final HashGraph pO)
 	{
-		return mCliqueSet.add(pO);
+		return this.mCliqueSet.add(pO);
 	}
 
-	public boolean remove(Object pO)
+	public boolean remove(final Object pO)
 	{
-		return mCliqueSet.remove(pO);
+		return this.mCliqueSet.remove(pO);
 	}
 
-	public boolean containsAll(Collection<?> pC)
+	public boolean containsAll(final Collection<?> pC)
 	{
-		return mCliqueSet.removeAll(pC);
+		return this.mCliqueSet.removeAll(pC);
 	}
 
-	public boolean addAll(Collection<? extends HashGraph> pC)
+	public boolean addAll(final Collection<? extends HashGraph> pC)
 	{
-		return mCliqueSet.removeAll(pC);
+		return this.mCliqueSet.removeAll(pC);
 	}
 
-	public boolean retainAll(Collection<?> pC)
+	public boolean retainAll(final Collection<?> pC)
 	{
-		return mCliqueSet.retainAll(pC);
+		return this.mCliqueSet.retainAll(pC);
 	}
 
-	public boolean removeAll(Collection<?> pC)
+	public boolean removeAll(final Collection<?> pC)
 	{
-		return mCliqueSet.removeAll(pC);
+		return this.mCliqueSet.removeAll(pC);
 	}
 
 	public void clear()
 	{
-		mCliqueSet.clear();
+		this.mCliqueSet.clear();
 
 	}
 
@@ -145,7 +141,7 @@ public class CliqueEnumerator<N>
 	public String toString()
 	{
 		// TODO Auto-generated method stub
-		return mCliqueSet.toString();
+		return this.mCliqueSet.toString();
 	}
 
 }

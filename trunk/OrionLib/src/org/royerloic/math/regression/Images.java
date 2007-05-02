@@ -37,7 +37,7 @@ import javax.vecmath.GVector;
  */
 public final class Images {
     
-    private static Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
+    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 
     private Images() {}
     
@@ -48,16 +48,15 @@ public final class Images {
      * @throws IOException if error reading from file
      * @throws NotImageException if file is not an image
      */
-    public static Image imageFromFile(String path)
+    public static Image imageFromFile(final String path)
     		throws FileNotFoundException, IOException, NotImageException {
-        File imageFile = new File(path);
-        if (!imageFile.exists()) {
-            throw new FileNotFoundException("file " + path + " does not exist");
-        } else if (!imageFile.canRead()) {
-            throw new IOException("error reading file");
-        }
+        final File imageFile = new File(path);
+        if (!imageFile.exists())
+					throw new FileNotFoundException("file " + path + " does not exist");
+				else if (!imageFile.canRead())
+					throw new IOException("error reading file");
         
-        Image image = TOOLKIT.getImage(path);
+        final Image image = TOOLKIT.getImage(path);
         ensureImage(image);
         return image;
     }
@@ -68,10 +67,10 @@ public final class Images {
      * @throws IOException if error reading from URL
      * @throws NotImageException if URL does not reference an image
      */
-    public static Image imageFromURL(URL url)
+    public static Image imageFromURL(final URL url)
     		throws IOException, NotImageException {
         url.openStream().close(); // throws IOException if url bad
-        Image image = TOOLKIT.getImage(url);
+        final Image image = TOOLKIT.getImage(url);
         ensureImage(image);
         return image;
     }
@@ -84,7 +83,7 @@ public final class Images {
      * 
      * @throws NotImageException if image is empty
      */
-    public static GVector imageData(Image image)
+    public static GVector imageData(final Image image)
     		throws NotImageException {
         ensureImage(image);
         return getData(image, 0, 0, image.getWidth(null), image.getHeight(null));
@@ -99,7 +98,7 @@ public final class Images {
      * 
      * @throws NotImageException if image is empty
      */
-    public static GVector imageData(Image image, int x, int y, int width, int height)
+    public static GVector imageData(final Image image, final int x, final int y, final int width, final int height)
     		throws NotImageException {
         ensureImage(image);
         return getData(image, x, y, width, height);
@@ -108,17 +107,17 @@ public final class Images {
     /**
      * Returns a vector of the data in the given image.
      */
-    private static GVector getData(Image image, int x, int y, int width, int height) {
-        int[] pixels = new int[width * height];
-        PixelGrabber pg = new PixelGrabber(image, x, y, width, height, pixels, 0, width);
+    private static GVector getData(final Image image, final int x, final int y, final int width, final int height) {
+        final int[] pixels = new int[width * height];
+        final PixelGrabber pg = new PixelGrabber(image, x, y, width, height, pixels, 0, width);
         try { pg.grabPixels(); }
-        catch(InterruptedException e) { throw new RuntimeException(e); }
+        catch(final InterruptedException e) { throw new RuntimeException(e); }
         
-        GVector data = new GVector(3 * pixels.length);
+        final GVector data = new GVector(3 * pixels.length);
         for(int i = 0; i < pixels.length; i++) {
-            int red   = (pixels[i] >> 16) & 0xff;
-            int green = (pixels[i] >>  8) & 0xff;
-            int blue  = (pixels[i]      ) & 0xff;
+            final int red   = (pixels[i] >> 16) & 0xff;
+            final int green = (pixels[i] >>  8) & 0xff;
+            final int blue  = (pixels[i]      ) & 0xff;
             data.setElement(3 * i    , red);
             data.setElement(3 * i + 1, green);
             data.setElement(3 * i + 2, blue);
@@ -130,7 +129,7 @@ public final class Images {
     /**
      * Ensures that the image has been loaded and that it is non-empty.
      */
-    private static void ensureImage(Image image) throws NotImageException {
+    private static void ensureImage(final Image image) throws NotImageException {
         new ImageIcon(image);
         if (image.getWidth(null) < 0) throw new NotImageException(image);
     }

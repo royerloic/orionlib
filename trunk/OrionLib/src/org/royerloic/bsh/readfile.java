@@ -13,32 +13,32 @@ import bsh.Interpreter;
 public class readfile
 {
 	
-	public static Matrix<String> invoke(Interpreter env, CallStack callstack, String pFileName) throws FileNotFoundException, IOException
+	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName) throws FileNotFoundException, IOException
 	{
-		File lFile = new File(pFileName);
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile);
+		final File lFile = new File(pFileName);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile);
 		return lMatrix;		
 	}
 	
-	public static Matrix<String> invoke(Interpreter env, CallStack callstack, String pFileName, boolean pHasHeader) throws FileNotFoundException, IOException
+	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName, final boolean pHasHeader) throws FileNotFoundException, IOException
 	{
-		File lFile = new File(pFileName);
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,pHasHeader);
+		final File lFile = new File(pFileName);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,pHasHeader);
 		return lMatrix;		
 	}
 	
-	public static Matrix<String> invoke(Interpreter env, CallStack callstack, Matrix<String> pMatrix, String pFileName, boolean pHasHeader) throws FileNotFoundException, IOException
+	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final Matrix<String> pMatrix, final String pFileName, final boolean pHasHeader) throws FileNotFoundException, IOException
 	{
-		File lFile = new File(pFileName);
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,pHasHeader);
+		final File lFile = new File(pFileName);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,pHasHeader);
 		pMatrix.addAll(lMatrix);
 		return lMatrix;		
 	}
 	
-	public static Matrix<String> invoke(Interpreter env, CallStack callstack, String pFileName, String pSeparator ) throws FileNotFoundException, IOException
+	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName, final String pSeparator ) throws FileNotFoundException, IOException
 	{
-		File lFile = new File(pFileName);
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,false,pSeparator);
+		final File lFile = new File(pFileName);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile,false,pSeparator);
 		return lMatrix;		
 	}
 	

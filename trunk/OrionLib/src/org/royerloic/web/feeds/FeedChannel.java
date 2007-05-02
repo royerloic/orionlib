@@ -5,17 +5,14 @@ import de.nava.informa.core.ChannelIF;
 public class FeedChannel implements FeedChannelInterface
 {
 
-	private int	mFrequence;
-
-	public FeedChannel(ChannelIF pChannelIF)
+	public FeedChannel(final ChannelIF pChannelIF)
 	{
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setFrequence(int pFrequence)
+	public void setFrequence(final int pFrequence)
 	{
-		mFrequence = pFrequence;
 	}
 
 }

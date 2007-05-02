@@ -21,28 +21,25 @@ public class IntersectionInformation
 
   public INumericalVector mIntersectionPoint;
 
-  public String toString()
+  @Override
+	public String toString()
   {
     String lString;
-    if (mIntersects)
+    if (this.mIntersects)
     {
-      String lWithinFirstSegment = (mWithinFirstSegment ? "within first segment,"
+      final String lWithinFirstSegment = (this.mWithinFirstSegment ? "within first segment,"
           : "");
-      String lWithinSecondSegment = (mWithinSecondSegment ? "within second segment,"
+      final String lWithinSecondSegment = (this.mWithinSecondSegment ? "within second segment,"
           : "");
 
       lString = "Intersection "
                 + lWithinFirstSegment + " " + lWithinSecondSegment + " at : "
-                + mIntersectionPoint;
+                + this.mIntersectionPoint;
     }
-    else if (mCoincident)
-    {
-      lString = "Coincident Lines ";
-    }
-    else
-    {
-      lString = "Parallel Lines ";
-    }
+    else if (this.mCoincident)
+			lString = "Coincident Lines ";
+		else
+			lString = "Parallel Lines ";
 
     return lString;
   }

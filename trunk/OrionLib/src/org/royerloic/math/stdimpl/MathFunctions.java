@@ -37,7 +37,7 @@ public class MathFunctions
 
   /** sqrt(a^2 + b^2) without under/overflow. * */
 
-  public static double hypot(double a, double b)
+  public static double hypot(final double a, final double b)
   {
     double r;
     if (Math.abs(a) > Math.abs(b))
@@ -50,16 +50,14 @@ public class MathFunctions
       r = a / b;
       r = Math.abs(b) * Math.sqrt(1 + r * r);
     }
-    else
-    {
-      r = 0.0;
-    }
+		else
+			r = 0.0;
     return r;
   }
 
   public static double round(final double pValue, final double pDelta)
   {
-    double lResult = pValue - Math.IEEEremainder(pValue, pDelta);
+    final double lResult = pValue - Math.IEEEremainder(pValue, pDelta);
 
     return lResult;
   }

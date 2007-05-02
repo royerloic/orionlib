@@ -18,34 +18,34 @@ import org.royerloic.structures.Matrix;
  */
 public class InterproToGo
 {
-	private static ListMap<Integer, Integer>	InterproToGoSetMap	= new ArrayListMap<Integer, Integer>();
+	private static final ListMap<Integer, Integer>	InterproToGoSetMap	= new ArrayListMap<Integer, Integer>();
 
 	static
 	{
 		try
 		{
-			InputStream lInputStream = MatrixFile.getInputStreamFromRessource(new InterproToGo().getClass(),
+			final InputStream lInputStream = MatrixFile.getInputStreamFromRessource(new InterproToGo().getClass(),
 					"InterproToGo.tab.txt");
 
-			Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(lInputStream);
+			final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(lInputStream);
 
-			for (List<String> lList : lMatrix)
+			for (final List<String> lList : lMatrix)
 			{
-				String lInterproIdString = lList.get(0);
-				String lGoIdString = lList.get(1);
-				Integer lInterproId = InterproIdConversion.getIdFromString(lInterproIdString);
-				Integer lGoId = GoIdConversion.getIdFromString(lGoIdString);
+				final String lInterproIdString = lList.get(0);
+				final String lGoIdString = lList.get(1);
+				final Integer lInterproId = InterproIdConversion.getIdFromString(lInterproIdString);
+				final Integer lGoId = GoIdConversion.getIdFromString(lGoIdString);
 				InterproToGoSetMap.put(lInterproId, lGoId);
 			}
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static List<Integer> getGoIdsForInterproId(Integer pInterproId)
+	public static List<Integer> getGoIdsForInterproId(final Integer pInterproId)
 	{
 		final List<Integer> lGoIdList = InterproToGoSetMap.get(pInterproId);
 		return lGoIdList == null ? Collections.<Integer> emptyList() : lGoIdList;

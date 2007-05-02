@@ -6,18 +6,18 @@ public class Triple<A, B, C>
 	public B	mB;
 	public C	mC;
 
-	public Triple(A pA, B pB, C pC)
+	public Triple(final A pA, final B pB, final C pC)
 	{
 		super();
-		mA = pA;
-		mB = pB;
-		mC = pC;
+		this.mA = pA;
+		this.mB = pB;
+		this.mC = pC;
 	}
 
 	@Override
-	public boolean equals(Object pObj)
+	public boolean equals(final Object pObj)
 	{
-		Triple<A, B, C> lTriple = (Triple<A, B, C>) pObj;
+		final Triple<A, B, C> lTriple = (Triple<A, B, C>) pObj;
 		return (this.mA.equals(lTriple.mA) && this.mB.equals(lTriple.mB) && this.mC.equals(lTriple.mC));
 
 	}
@@ -25,12 +25,12 @@ public class Triple<A, B, C>
 	@Override
 	public int hashCode()
 	{
-		return mA.hashCode() ^ mB.hashCode() ^ mC.hashCode();
+		return this.mA.hashCode() ^ this.mB.hashCode() ^ this.mC.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return "(" + mA.toString() + "," + mB.toString() + "," + mC.toString() + ")";
+		return "(" + this.mA.toString() + "," + this.mB.toString() + "," + this.mC.toString() + ")";
 	}
 }

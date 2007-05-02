@@ -87,74 +87,74 @@ public class IntActModelBuilder extends DefaultHandler
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public IntActModelBuilder(Map<String, String> pArgumentsMap) throws FileNotFoundException, IOException
+	public IntActModelBuilder(final Map<String, String> pArgumentsMap) throws FileNotFoundException, IOException
 	{
-		String lFolderPath = pArgumentsMap.get("folder");
-		mIntActFolder = new File(lFolderPath);
-		mGoOntology = GoOntology.getUniqueInstance();
+		final String lFolderPath = pArgumentsMap.get("folder");
+		this.mIntActFolder = new File(lFolderPath);
+		this.mGoOntology = GoOntology.getUniqueInstance();
 	}
 
-	private void build(boolean pNonInteracting)
+	private void build(final boolean pNonInteracting)
 	{
-		mNonInteracting = pNonInteracting;
-		List<File> lPsiMiFileList = FileUtils.listFiles(mIntActFolder, false);
+		this.mNonInteracting = pNonInteracting;
+		final List<File> lPsiMiFileList = FileUtils.listFiles(this.mIntActFolder, false);
 		System.out.println("Number Of Files = " + lPsiMiFileList.size());
-		for (File lFile : lPsiMiFileList)
+		for (final File lFile : lPsiMiFileList)
 			if (lFile.getName().endsWith(".xml"))
 				if (!lFile.getName().contains("negative"))
 				{
-					PsiMiGraph lPsiMiGraph = PsiMiIO.load(lFile, false);
+					final PsiMiGraph lPsiMiGraph = PsiMiIO.load(lFile, false);
 					if (lPsiMiGraph.getNodeSet().size() < 1300)
 					{
 						lPsiMiGraph.addGoIdsFromDomains();
-						int lNumberOfInteractingPairsExtracted = extractInteractingPairs(lPsiMiGraph);
-						if (mNonInteracting)
+						final int lNumberOfInteractingPairsExtracted = extractInteractingPairs(lPsiMiGraph);
+						if (this.mNonInteracting)
 							extractNonInteractingPairs(lPsiMiGraph, 2 * lNumberOfInteractingPairsExtracted);
-						System.out.println("I=" + mInteractingPairSet.size() + " NI=" + mNonInteractingPairSet.size());
+						System.out.println("I=" + this.mInteractingPairSet.size() + " NI=" + this.mNonInteractingPairSet.size());
 					}
 				}
-		mInteractingGoEdgeDoubleMap = getGoIdPairProbability(mInteractingPairSet);
-		if (mNonInteracting)
-			mNonInteractingGoEdgeDoubleMap = getGoIdPairProbability(mNonInteractingPairSet);
+		this.mInteractingGoEdgeDoubleMap = getGoIdPairProbability(this.mInteractingPairSet);
+		if (this.mNonInteracting)
+			this.mNonInteractingGoEdgeDoubleMap = getGoIdPairProbability(this.mNonInteractingPairSet);
 
-		System.out.println("Number of interacting     GO pairs: " + mInteractingGoEdgeDoubleMap.size());
-		if (mNonInteracting)
-			System.out.println("Number of non-interacting GO pairs: " + mNonInteractingGoEdgeDoubleMap.size());
-		System.out.println("Total number of           GO pairs: " + mGoOntology.getNumberOfNodes()
-				* mGoOntology.getNumberOfNodes() / 2);
+		System.out.println("Number of interacting     GO pairs: " + this.mInteractingGoEdgeDoubleMap.size());
+		if (this.mNonInteracting)
+			System.out.println("Number of non-interacting GO pairs: " + this.mNonInteractingGoEdgeDoubleMap.size());
+		System.out.println("Total number of           GO pairs: " + this.mGoOntology.getNumberOfNodes()
+				* this.mGoOntology.getNumberOfNodes() / 2);
 
 	}
 
-	public void saveModel(File pFile) throws IOException
+	public void saveModel(final File pFile) throws IOException
 	{
-		DecimalFormat lFormat = new DecimalFormat("##.################");
-		Writer lWriter = MatrixFile.getWriterFromFile(pFile);
+		final DecimalFormat lFormat = new DecimalFormat("##.################");
+		final Writer lWriter = MatrixFile.getWriterFromFile(pFile);
 
-		for (Map.Entry<Edge<OboTerm>, Double> lEntry : mInteractingGoEdgeDoubleMap.entrySet())
+		for (final Map.Entry<Edge<OboTerm>, Double> lEntry : this.mInteractingGoEdgeDoubleMap.entrySet())
 		{
-			Edge<OboTerm> lEdge = lEntry.getKey();
-			Double lGoPairInInteractionProbability = lEntry.getValue();
+			final Edge<OboTerm> lEdge = lEntry.getKey();
+			final Double lGoPairInInteractionProbability = lEntry.getValue();
 			Double lGoPairInNonInteractionProbability = 0.0;
-			if (mNonInteracting)
-				lGoPairInNonInteractionProbability = mNonInteractingGoEdgeDoubleMap.get(lEdge);
+			if (this.mNonInteracting)
+				lGoPairInNonInteractionProbability = this.mNonInteractingGoEdgeDoubleMap.get(lEdge);
 			if (lGoPairInNonInteractionProbability != null)
 			{
 				Double lLogLikelyHood = 0.0;
-				if (mNonInteracting)
+				if (this.mNonInteracting)
 					lLogLikelyHood = Math.log(lGoPairInInteractionProbability / lGoPairInNonInteractionProbability);
 
-				List<String> lLine = new ArrayList<String>();
-				if (mNonInteracting)
+				final List<String> lLine = new ArrayList<String>();
+				if (this.mNonInteracting)
 					lLine.add(lFormat.format(lLogLikelyHood));
 
-				Double lDepth1 = mGoOntology.getDepth(lEdge.getFirstNode());
-				Double lDepth2 = mGoOntology.getDepth(lEdge.getSecondNode());
+				final Double lDepth1 = this.mGoOntology.getDepth(lEdge.getFirstNode());
+				final Double lDepth2 = this.mGoOntology.getDepth(lEdge.getSecondNode());
 
-				Double lScore = lGoPairInInteractionProbability * Math.min(lDepth1, lDepth2);
+				final Double lScore = lGoPairInInteractionProbability * Math.min(lDepth1, lDepth2);
 
 				lLine.add(lFormat.format(lScore));
 
-				if (mNonInteracting)
+				if (this.mNonInteracting)
 					lLine.add(lGoPairInNonInteractionProbability.toString());
 				lLine.add(lEdge.getFirstNode().toString());
 				lLine.add(lEdge.getSecondNode().toString());
@@ -166,14 +166,14 @@ public class IntActModelBuilder extends DefaultHandler
 
 	}
 
-	public void buildHeatMap(File pModelFile, File pImageFile) throws NumberFormatException, IOException
+	public void buildHeatMap(final File pModelFile, final File pImageFile) throws NumberFormatException, IOException
 	{
 
 		System.out.println("Finding min and max values...");
 		double lMinValue = Double.POSITIVE_INFINITY;
 		double lMaxValue = Double.NEGATIVE_INFINITY;
 		{
-			BufferedReader lBufferedReader = MatrixFile.getBufferedReaderFromFile(pModelFile);
+			final BufferedReader lBufferedReader = MatrixFile.getBufferedReaderFromFile(pModelFile);
 			List<String> lList;
 			while ((lList = MatrixFile.readListFromStream(lBufferedReader, "\\t")) != null)
 			{
@@ -186,16 +186,16 @@ public class IntActModelBuilder extends DefaultHandler
 		}
 
 		System.out.println("Reading values...");
-		IndexMaker<OboTerm> lIndexMaker = new IndexMaker<OboTerm>(mGoOntology);
-		List<OboTerm> lRootList = new ArrayList<OboTerm>();
+		final IndexMaker<OboTerm> lIndexMaker = new IndexMaker<OboTerm>(this.mGoOntology);
+		final List<OboTerm> lRootList = new ArrayList<OboTerm>();
 		lRootList.add(new OboTerm(8150)); // BP
 		lRootList.add(new OboTerm(5575)); // CC
 		lRootList.add(new OboTerm(3674)); // MF
-		Map<OboTerm, Integer> lMap = lIndexMaker.computeMapBreathFirst(lRootList);
-		final int lNumberOfNodes = mGoOntology.getNumberOfNodes();
-		byte[][] lMatrix = new byte[lNumberOfNodes][lNumberOfNodes];
+		final Map<OboTerm, Integer> lMap = lIndexMaker.computeMapBreathFirst(lRootList);
+		final int lNumberOfNodes = this.mGoOntology.getNumberOfNodes();
+		final byte[][] lMatrix = new byte[lNumberOfNodes][lNumberOfNodes];
 		{
-			BufferedReader lBufferedReader = MatrixFile.getBufferedReaderFromFile(pModelFile);
+			final BufferedReader lBufferedReader = MatrixFile.getBufferedReaderFromFile(pModelFile);
 
 			List<String> lList;
 			while ((lList = MatrixFile.readListFromStream(lBufferedReader, "\\t")) != null)
@@ -216,7 +216,7 @@ public class IntActModelBuilder extends DefaultHandler
 				final Integer lIndex1 = lMap.get(lOboTerm1);
 				final Integer lIndex2 = lMap.get(lOboTerm2);
 
-				if (lIndex1 != null && lIndex2 != null)
+				if ((lIndex1 != null) && (lIndex2 != null))
 				{
 					lMatrix[lIndex1][lIndex2] = lByteValue;
 					lMatrix[lIndex2][lIndex1] = lByteValue;
@@ -228,17 +228,17 @@ public class IntActModelBuilder extends DefaultHandler
 
 		// System.out.println(Arrays.toString(lMatrix));
 
-		int lFactor = 20;
+		final int lFactor = 20;
 		System.out.println("Downsampling from: " + lNumberOfNodes + "*" + lNumberOfNodes + " by factor:"
 				+ lFactor + " ...");
-		byte[][] DownSampledMatrix = ArrayMatrixUtils.downSampleMax(lMatrix, lFactor);
+		final byte[][] DownSampledMatrix = ArrayMatrixUtils.downSampleMax(lMatrix, lFactor);
 
-		int lSize = DownSampledMatrix.length;
+		final int lSize = DownSampledMatrix.length;
 
 		// System.out.println(Arrays.toString(DownSampledMatrix));
 
 		System.out.println("Creating image...");
-		BufferedImage lBufferedImage = new BufferedImage(lSize, lSize, BufferedImage.TYPE_INT_RGB);
+		final BufferedImage lBufferedImage = new BufferedImage(lSize, lSize, BufferedImage.TYPE_INT_RGB);
 		for (int i = 0; i < lSize; i++)
 			for (int j = 0; j < lSize; j++)
 			{
@@ -255,24 +255,24 @@ public class IntActModelBuilder extends DefaultHandler
 		ImageIO.write(lBufferedImage, "png", pImageFile);
 	}
 
-	private int extractInteractingPairs(PsiMiGraph pPsiMiGraph)
+	private int extractInteractingPairs(final PsiMiGraph pPsiMiGraph)
 	{
 		int lCount = 0;
-		for (Edge<PsiMiNode> lEdge : pPsiMiGraph.getEdgeSet())
+		for (final Edge<PsiMiNode> lEdge : pPsiMiGraph.getEdgeSet())
 		{
-			mInteractingPairSet.add(lEdge);
-			mNonInteractingPairSet.remove(lEdge);
+			this.mInteractingPairSet.add(lEdge);
+			this.mNonInteractingPairSet.remove(lEdge);
 			lCount++;
 		}
 
 		return lCount;
 	}
 
-	private void extractNonInteractingPairs(PsiMiGraph pPsiMiGraph, int pNumberOfInteractingPairsExtracted)
+	private void extractNonInteractingPairs(final PsiMiGraph pPsiMiGraph, final int pNumberOfInteractingPairsExtracted)
 	{
-		List<PsiMiNode> lNodeList = new ArrayList<PsiMiNode>(pPsiMiGraph.getNodeSet());
+		final List<PsiMiNode> lNodeList = new ArrayList<PsiMiNode>(pPsiMiGraph.getNodeSet());
 
-		double lDensity = ((double) pPsiMiGraph.getNumberOfEdges())
+		final double lDensity = ((double) pPsiMiGraph.getNumberOfEdges())
 				/ ((pPsiMiGraph.getNumberOfNodes() * (pPsiMiGraph.getNumberOfNodes() - 1)) / 2);
 
 		if (lDensity < 1)
@@ -281,8 +281,8 @@ public class IntActModelBuilder extends DefaultHandler
 			int lCount = 0;
 			while ((lCount < pNumberOfInteractingPairsExtracted) && (lTimeOut > 0))
 			{
-				final int lIndex1 = mRandom.nextInt(lNodeList.size());
-				final int lIndex2 = mRandom.nextInt(lNodeList.size());
+				final int lIndex1 = this.mRandom.nextInt(lNodeList.size());
+				final int lIndex2 = this.mRandom.nextInt(lNodeList.size());
 
 				final PsiMiNode lNode1 = lNodeList.get(lIndex1);
 				final PsiMiNode lNode2 = lNodeList.get(lIndex2);
@@ -292,70 +292,66 @@ public class IntActModelBuilder extends DefaultHandler
 				if (!isInteraction)
 				{
 					final Edge<PsiMiNode> lEdge = new UndirectedEdge<PsiMiNode>(lNode1, lNode2);
-					final boolean isKnownInteraction = mInteractingPairSet.contains(lEdge);
+					final boolean isKnownInteraction = this.mInteractingPairSet.contains(lEdge);
 					if (!isKnownInteraction)
 					{
-						mNonInteractingPairSet.add(lEdge);
+						this.mNonInteractingPairSet.add(lEdge);
 						lCount++;
 					}
 					else
 						System.out.println("Interaction allready known:" + lEdge);
 				}
 				else
-				{
 					lTimeOut--;
-				}
 			}
 		}
 
 	}
 
-	DoubleMap<Edge<OboTerm>> getGoIdPairProbability(Set<Edge<PsiMiNode>> pEdgeSet)
+	DoubleMap<Edge<OboTerm>> getGoIdPairProbability(final Set<Edge<PsiMiNode>> pEdgeSet)
 	{
-		Timer lTimer = new Timer();
+		final Timer lTimer = new Timer();
 		double lPercent = 0;
 		lTimer.start();
-		DoubleMap<Edge<OboTerm>> lGoIdPairToProbability = new HashDoubleMap<Edge<OboTerm>>();
+		final DoubleMap<Edge<OboTerm>> lGoIdPairToProbability = new HashDoubleMap<Edge<OboTerm>>();
 		{
 			double lTotalNumberOfGoIdPairs = 0;
-			for (Edge<PsiMiNode> lEdge : pEdgeSet)
+			for (final Edge<PsiMiNode> lEdge : pEdgeSet)
 			{
-				PsiMiNode lPsiMiNode1 = lEdge.getFirstNode();
-				PsiMiNode lPsiMiNode2 = lEdge.getSecondNode();
+				final PsiMiNode lPsiMiNode1 = lEdge.getFirstNode();
+				final PsiMiNode lPsiMiNode2 = lEdge.getSecondNode();
 
-				List<Integer> lGoIdList1 = lPsiMiNode1.getGoIdList();
-				List<Integer> lGoIdList2 = lPsiMiNode2.getGoIdList();
+				final List<Integer> lGoIdList1 = lPsiMiNode1.getGoIdList();
+				final List<Integer> lGoIdList2 = lPsiMiNode2.getGoIdList();
 
-				List<OboTerm> lGoTermList1 = mGoOntology.getOboTermFromId(lGoIdList1);
-				List<OboTerm> lGoTermList2 = mGoOntology.getOboTermFromId(lGoIdList2);
+				final List<OboTerm> lGoTermList1 = this.mGoOntology.getOboTermFromId(lGoIdList1);
+				final List<OboTerm> lGoTermList2 = this.mGoOntology.getOboTermFromId(lGoIdList2);
 
-				Set<OboTerm> lGoIdListEnriched1 = addRelatedGoIds(lGoTermList1);
-				Set<OboTerm> lGoIdListEnriched2 = addRelatedGoIds(lGoTermList2);
+				final Set<OboTerm> lGoIdListEnriched1 = addRelatedGoIds(lGoTermList1);
+				final Set<OboTerm> lGoIdListEnriched2 = addRelatedGoIds(lGoTermList2);
 
 				if (!lGoIdListEnriched1.isEmpty() && !lGoIdListEnriched2.isEmpty())
-					for (OboTerm lGoId1 : lGoIdListEnriched1)
-						for (OboTerm lGoId2 : lGoIdListEnriched2)
+					for (final OboTerm lGoId1 : lGoIdListEnriched1)
+						for (final OboTerm lGoId2 : lGoIdListEnriched2)
+						// Double lDepth1 = mGoOntology.getDepth(lGoId1);
+						// Double lDepth2 = mGoOntology.getDepth(lGoId2);
+						//
+						// if (lDepth2 < lDepth1 + 2)
 						{
-							// Double lDepth1 = mGoOntology.getDepth(lGoId1);
-							// Double lDepth2 = mGoOntology.getDepth(lGoId2);
-							//
-							// if (lDepth2 < lDepth1 + 2)
-							{
-								Edge<OboTerm> lGoIdEdge = new UndirectedEdge<OboTerm>(lGoId1, lGoId2);
-								// System.out.println(lGoIdPair);
-								lGoIdPairToProbability.add(lGoIdEdge, 1.0);
+							final Edge<OboTerm> lGoIdEdge = new UndirectedEdge<OboTerm>(lGoId1, lGoId2);
+							// System.out.println(lGoIdPair);
+							lGoIdPairToProbability.add(lGoIdEdge, 1.0);
 
-								lTotalNumberOfGoIdPairs++;
-							}
+							lTotalNumberOfGoIdPairs++;
 						}
 
 				lPercent += 1 / ((double) pEdgeSet.size());
-				String lESTString = lTimer.getESTString(lPercent);
+				final String lESTString = lTimer.getESTString(lPercent);
 				System.out.println(lESTString);
 			}
-			for (Map.Entry<Edge<OboTerm>, Double> lEntry : lGoIdPairToProbability.entrySet())
+			for (final Map.Entry<Edge<OboTerm>, Double> lEntry : lGoIdPairToProbability.entrySet())
 			{
-				double lProbability = lEntry.getValue() / lTotalNumberOfGoIdPairs;
+				final double lProbability = lEntry.getValue() / lTotalNumberOfGoIdPairs;
 				lEntry.setValue(lProbability);
 			}
 
@@ -365,19 +361,19 @@ public class IntActModelBuilder extends DefaultHandler
 		return lGoIdPairToProbability;
 	}
 
-	private Set<OboTerm> addRelatedGoIds(List<OboTerm> pGoTermList)
+	private Set<OboTerm> addRelatedGoIds(final List<OboTerm> pGoTermList)
 	{
-		Set<OboTerm> lNewGoTermSet = new HashSet<OboTerm>(pGoTermList);
+		final Set<OboTerm> lNewGoTermSet = new HashSet<OboTerm>(pGoTermList);
 
-		for (OboTerm lGoTerm : pGoTermList)
+		for (final OboTerm lGoTerm : pGoTermList)
 		{
-			IntegerMap<OboTerm> lGoTermToDepthMap = mGoOntology.getAncestors(lGoTerm);
+			final IntegerMap<OboTerm> lGoTermToDepthMap = this.mGoOntology.getAncestors(lGoTerm);
 
 			if (lGoTermToDepthMap != null)
-				for (Map.Entry<OboTerm, Integer> lEntry : lGoTermToDepthMap.entrySet())
+				for (final Map.Entry<OboTerm, Integer> lEntry : lGoTermToDepthMap.entrySet())
 				{
-					OboTerm lNewGoTerm = lEntry.getKey();
-					Integer lDistance = lEntry.getValue();
+					final OboTerm lNewGoTerm = lEntry.getKey();
+					final Integer lDistance = lEntry.getValue();
 
 					lNewGoTermSet.add(lNewGoTerm);
 
@@ -391,17 +387,17 @@ public class IntActModelBuilder extends DefaultHandler
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			Map<String, String> lArgumentsMap = CmdLine.getMap(args);
-			IntActModelBuilder lIntActModelBuilder = new IntActModelBuilder(lArgumentsMap);
+			final Map<String, String> lArgumentsMap = CmdLine.getMap(args);
+			final IntActModelBuilder lIntActModelBuilder = new IntActModelBuilder(lArgumentsMap);
 			lIntActModelBuilder.build(false);
 			lIntActModelBuilder.saveModel(new File("model.tab.txt"));
 			lIntActModelBuilder.buildHeatMap(new File("model.tab.txt"), new File("heatmap.png"));
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

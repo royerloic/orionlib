@@ -34,6 +34,11 @@ import org.royerloic.ml.svm.libsvm.SVM;
 public class Toy extends Applet
 {
 
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1549842888476096352L;
+
 	static final String	DEFAULT_PARAM	= "-t 2 -c 100";
 
 	int									XLEN;
@@ -54,7 +59,7 @@ public class Toy extends Applet
 
 	class point
 	{
-		point(double x, double y, byte value)
+		point(final double x, final double y, final byte value)
 		{
 			this.x = x;
 			this.y = y;
@@ -70,23 +75,24 @@ public class Toy extends Applet
 
 	byte		current_value	= 1;
 
+	@Override
 	public void init()
 	{
-		Button button_change = new Button("Change");
-		Button button_run = new Button("Run");
-		Button button_clear = new Button("Clear");
-		Button button_save = new Button("Save");
-		Button button_load = new Button("Load");
+		final Button button_change = new Button("Change");
+		final Button button_run = new Button("Run");
+		final Button button_clear = new Button("Clear");
+		final Button button_save = new Button("Save");
+		final Button button_load = new Button("Load");
 		final TextField input_line = new TextField(DEFAULT_PARAM);
 
-		BorderLayout layout = new BorderLayout();
+		final BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 
-		Panel p = new Panel();
-		GridBagLayout gridbag = new GridBagLayout();
+		final Panel p = new Panel();
+		final GridBagLayout gridbag = new GridBagLayout();
 		p.setLayout(gridbag);
 
-		GridBagConstraints c = new GridBagConstraints();
+		final GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 1;
 		c.gridwidth = 1;
@@ -109,7 +115,7 @@ public class Toy extends Applet
 
 		button_change.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_change_clicked();
 			}
@@ -117,7 +123,7 @@ public class Toy extends Applet
 
 		button_run.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_run_clicked(input_line.getText());
 			}
@@ -125,7 +131,7 @@ public class Toy extends Applet
 
 		button_clear.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_clear_clicked();
 			}
@@ -133,7 +139,7 @@ public class Toy extends Applet
 
 		button_save.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_save_clicked();
 			}
@@ -141,7 +147,7 @@ public class Toy extends Applet
 
 		button_load.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_load_clicked();
 			}
@@ -149,7 +155,7 @@ public class Toy extends Applet
 
 		input_line.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(final ActionEvent e)
 			{
 				button_run_clicked(input_line.getText());
 			}
@@ -158,59 +164,59 @@ public class Toy extends Applet
 		this.enableEvents(AWTEvent.MOUSE_EVENT_MASK);
 	}
 
-	void draw_point(point p)
+	void draw_point(final point p)
 	{
-		Color c = colors[p.value + 3];
+		final Color c = colors[p.value + 3];
 
-		Graphics window_gc = getGraphics();
-		buffer_gc.setColor(c);
-		buffer_gc.fillRect((int) (p.x * XLEN), (int) (p.y * YLEN), 4, 4);
+		final Graphics window_gc = getGraphics();
+		this.buffer_gc.setColor(c);
+		this.buffer_gc.fillRect((int) (p.x * this.XLEN), (int) (p.y * this.YLEN), 4, 4);
 		window_gc.setColor(c);
-		window_gc.fillRect((int) (p.x * XLEN), (int) (p.y * YLEN), 4, 4);
+		window_gc.fillRect((int) (p.x * this.XLEN), (int) (p.y * this.YLEN), 4, 4);
 	}
 
 	void clear_all()
 	{
-		point_list.removeAllElements();
-		if (buffer != null)
+		this.point_list.removeAllElements();
+		if (this.buffer != null)
 		{
-			buffer_gc.setColor(colors[0]);
-			buffer_gc.fillRect(0, 0, XLEN, YLEN);
+			this.buffer_gc.setColor(colors[0]);
+			this.buffer_gc.fillRect(0, 0, this.XLEN, this.YLEN);
 		}
 		repaint();
 	}
 
 	void draw_all_points()
 	{
-		int n = point_list.size();
+		final int n = this.point_list.size();
 		for (int i = 0; i < n; i++)
-			draw_point((point) point_list.elementAt(i));
+			draw_point((point) this.point_list.elementAt(i));
 	}
 
 	void button_change_clicked()
 	{
-		++current_value;
-		if (current_value > 3)
-			current_value = 1;
+		++this.current_value;
+		if (this.current_value > 3)
+			this.current_value = 1;
 	}
 
-	private static double atof(String s)
+	private static double atof(final String s)
 	{
 		return Double.valueOf(s).doubleValue();
 	}
 
-	private static int atoi(String s)
+	private static int atoi(final String s)
 	{
 		return Integer.parseInt(s);
 	}
 
-	void button_run_clicked(String args)
+	void button_run_clicked(final String args)
 	{
 		// guard
-		if (point_list.isEmpty())
+		if (this.point_list.isEmpty())
 			return;
 
-		Parameter param = new Parameter();
+		final Parameter param = new Parameter();
 
 		// default values
 		param.svm_type = Parameter.C_SVC;
@@ -229,8 +235,8 @@ public class Toy extends Applet
 		param.weight = new double[0];
 
 		// parse options
-		StringTokenizer st = new StringTokenizer(args);
-		String[] argv = new String[st.countTokens()];
+		final StringTokenizer st = new StringTokenizer(args);
+		final String[] argv = new String[st.countTokens()];
 		for (int i = 0; i < argv.length; i++)
 			argv[i] = st.nextToken();
 
@@ -277,13 +283,13 @@ public class Toy extends Applet
 				case 'w':
 					++param.nr_weight;
 					{
-						int[] old = param.weight_label;
+						final int[] old = param.weight_label;
 						param.weight_label = new int[param.nr_weight];
 						System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
 					}
 
 					{
-						double[] old = param.weight;
+						final double[] old = param.weight;
 						param.weight = new double[param.nr_weight];
 						System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
 					}
@@ -297,18 +303,18 @@ public class Toy extends Applet
 		}
 
 		// build problem
-		Problem prob = new Problem();
-		prob.mNumberOfVectors = point_list.size();
+		final Problem prob = new Problem();
+		prob.mNumberOfVectors = this.point_list.size();
 		prob.mClass = new double[prob.mNumberOfVectors];
 
-		if (param.svm_type == Parameter.EPSILON_SVR || param.svm_type == Parameter.NU_SVR)
+		if ((param.svm_type == Parameter.EPSILON_SVR) || (param.svm_type == Parameter.NU_SVR))
 		{
 			if (param.gamma == 0)
 				param.gamma = 1;
 			prob.mVectorsTable = new Node[prob.mNumberOfVectors][1];
 			for (int i = 0; i < prob.mNumberOfVectors; i++)
 			{
-				point p = (point) point_list.elementAt(i);
+				final point p = (point) this.point_list.elementAt(i);
 				prob.mVectorsTable[i][0] = new Node();
 				prob.mVectorsTable[i][0].mIndex = 1;
 				prob.mVectorsTable[i][0].mValue = p.x;
@@ -316,47 +322,47 @@ public class Toy extends Applet
 			}
 
 			// build model & classify
-			Model model = SVM.svmTrain(prob, param);
-			Node[] x = new Node[1];
+			final Model model = SVM.svmTrain(prob, param);
+			final Node[] x = new Node[1];
 			x[0] = new Node();
 			x[0].mIndex = 1;
-			int[] j = new int[XLEN];
+			final int[] j = new int[this.XLEN];
 
-			Graphics window_gc = getGraphics();
-			for (int i = 0; i < XLEN; i++)
+			final Graphics window_gc = getGraphics();
+			for (int i = 0; i < this.XLEN; i++)
 			{
-				x[0].mValue = (double) i / XLEN;
-				j[i] = (int) (YLEN * SVM.svmPredict(model, x));
+				x[0].mValue = (double) i / this.XLEN;
+				j[i] = (int) (this.YLEN * SVM.svmPredict(model, x));
 			}
 
-			buffer_gc.setColor(colors[0]);
-			buffer_gc.drawLine(0, 0, 0, YLEN - 1);
+			this.buffer_gc.setColor(colors[0]);
+			this.buffer_gc.drawLine(0, 0, 0, this.YLEN - 1);
 			window_gc.setColor(colors[0]);
-			window_gc.drawLine(0, 0, 0, YLEN - 1);
+			window_gc.drawLine(0, 0, 0, this.YLEN - 1);
 
-			int p = (int) (param.p * YLEN);
-			for (int i = 1; i < XLEN; i++)
+			final int p = (int) (param.p * this.YLEN);
+			for (int i = 1; i < this.XLEN; i++)
 			{
-				buffer_gc.setColor(colors[0]);
-				buffer_gc.drawLine(i, 0, i, YLEN - 1);
+				this.buffer_gc.setColor(colors[0]);
+				this.buffer_gc.drawLine(i, 0, i, this.YLEN - 1);
 				window_gc.setColor(colors[0]);
-				window_gc.drawLine(i, 0, i, YLEN - 1);
+				window_gc.drawLine(i, 0, i, this.YLEN - 1);
 
-				buffer_gc.setColor(colors[5]);
+				this.buffer_gc.setColor(colors[5]);
 				window_gc.setColor(colors[5]);
-				buffer_gc.drawLine(i - 1, j[i - 1], i, j[i]);
+				this.buffer_gc.drawLine(i - 1, j[i - 1], i, j[i]);
 				window_gc.drawLine(i - 1, j[i - 1], i, j[i]);
 
 				if (param.svm_type == Parameter.EPSILON_SVR)
 				{
-					buffer_gc.setColor(colors[2]);
+					this.buffer_gc.setColor(colors[2]);
 					window_gc.setColor(colors[2]);
-					buffer_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
+					this.buffer_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
 					window_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
 
-					buffer_gc.setColor(colors[2]);
+					this.buffer_gc.setColor(colors[2]);
 					window_gc.setColor(colors[2]);
-					buffer_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
+					this.buffer_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
 					window_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
 				}
 			}
@@ -368,7 +374,7 @@ public class Toy extends Applet
 			prob.mVectorsTable = new Node[prob.mNumberOfVectors][2];
 			for (int i = 0; i < prob.mNumberOfVectors; i++)
 			{
-				point p = (point) point_list.elementAt(i);
+				final point p = (point) this.point_list.elementAt(i);
 				prob.mVectorsTable[i][0] = new Node();
 				prob.mVectorsTable[i][0].mIndex = 1;
 				prob.mVectorsTable[i][0].mValue = p.x;
@@ -379,25 +385,25 @@ public class Toy extends Applet
 			}
 
 			// build model & classify
-			Model model = SVM.svmTrain(prob, param);
-			Node[] x = new Node[2];
+			final Model model = SVM.svmTrain(prob, param);
+			final Node[] x = new Node[2];
 			x[0] = new Node();
 			x[1] = new Node();
 			x[0].mIndex = 1;
 			x[1].mIndex = 2;
 
-			Graphics window_gc = getGraphics();
-			for (int i = 0; i < XLEN; i++)
-				for (int j = 0; j < YLEN; j++)
+			final Graphics window_gc = getGraphics();
+			for (int i = 0; i < this.XLEN; i++)
+				for (int j = 0; j < this.YLEN; j++)
 				{
-					x[0].mValue = (double) i / XLEN;
-					x[1].mValue = (double) j / YLEN;
+					x[0].mValue = (double) i / this.XLEN;
+					x[1].mValue = (double) j / this.YLEN;
 					double d = SVM.svmPredict(model, x);
-					if (param.svm_type == Parameter.ONE_CLASS && d < 0)
+					if ((param.svm_type == Parameter.ONE_CLASS) && (d < 0))
 						d = 2;
-					buffer_gc.setColor(colors[(int) d]);
+					this.buffer_gc.setColor(colors[(int) d]);
 					window_gc.setColor(colors[(int) d]);
-					buffer_gc.drawLine(i, j, i, j);
+					this.buffer_gc.drawLine(i, j, i, j);
 					window_gc.drawLine(i, j, i, j);
 				}
 		}
@@ -412,23 +418,23 @@ public class Toy extends Applet
 
 	void button_save_clicked()
 	{
-		FileDialog dialog = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
+		final FileDialog dialog = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
 		dialog.setVisible(true);
-		String filename = dialog.getFile();
+		final String filename = dialog.getFile();
 		if (filename == null)
 			return;
 		try
 		{
-			DataOutputStream fp = new DataOutputStream(new FileOutputStream(filename));
-			int n = point_list.size();
+			final DataOutputStream fp = new DataOutputStream(new FileOutputStream(filename));
+			final int n = this.point_list.size();
 			for (int i = 0; i < n; i++)
 			{
-				point p = (point) point_list.elementAt(i);
+				final point p = (point) this.point_list.elementAt(i);
 				fp.writeBytes(p.value + " 1:" + p.x + " 2:" + p.y + "\n");
 			}
 			fp.close();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			System.err.print(e);
 		}
@@ -436,79 +442,84 @@ public class Toy extends Applet
 
 	void button_load_clicked()
 	{
-		FileDialog dialog = new FileDialog(new Frame(), "Load", FileDialog.LOAD);
+		final FileDialog dialog = new FileDialog(new Frame(), "Load", FileDialog.LOAD);
 		dialog.setVisible(true);
-		String filename = dialog.getFile();
+		final String filename = dialog.getFile();
 		if (filename == null)
 			return;
 		clear_all();
 		try
 		{
-			BufferedReader fp = new BufferedReader(new FileReader(filename));
+			final BufferedReader fp = new BufferedReader(new FileReader(filename));
 			String line;
 			while ((line = fp.readLine()) != null)
 			{
-				StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
-				byte value = (byte) atoi(st.nextToken());
+				final StringTokenizer st = new StringTokenizer(line, " \t\n\r\f:");
+				final byte value = (byte) atoi(st.nextToken());
 				st.nextToken();
-				double x = atof(st.nextToken());
+				final double x = atof(st.nextToken());
 				st.nextToken();
-				double y = atof(st.nextToken());
-				point_list.addElement(new point(x, y, value));
+				final double y = atof(st.nextToken());
+				this.point_list.addElement(new point(x, y, value));
 			}
 			fp.close();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			System.err.print(e);
 		}
 		draw_all_points();
 	}
 
-	protected void processMouseEvent(MouseEvent e)
+	@Override
+	protected void processMouseEvent(final MouseEvent e)
 	{
 		if (e.getID() == MouseEvent.MOUSE_PRESSED)
 		{
-			if (e.getX() >= XLEN || e.getY() >= YLEN)
+			if ((e.getX() >= this.XLEN) || (e.getY() >= this.YLEN))
 				return;
-			point p = new point((double) e.getX() / XLEN, (double) e.getY() / YLEN, current_value);
-			point_list.addElement(p);
+			final point p = new point((double) e.getX() / this.XLEN, (double) e.getY() / this.YLEN, this.current_value);
+			this.point_list.addElement(p);
 			draw_point(p);
 		}
 	}
 
-	public void paint(Graphics g)
+	@Override
+	public void paint(final Graphics g)
 	{
 		// create buffer first time
-		if (buffer == null)
+		if (this.buffer == null)
 		{
-			buffer = this.createImage(XLEN, YLEN);
-			buffer_gc = buffer.getGraphics();
-			buffer_gc.setColor(colors[0]);
-			buffer_gc.fillRect(0, 0, XLEN, YLEN);
+			this.buffer = this.createImage(this.XLEN, this.YLEN);
+			this.buffer_gc = this.buffer.getGraphics();
+			this.buffer_gc.setColor(colors[0]);
+			this.buffer_gc.fillRect(0, 0, this.XLEN, this.YLEN);
 		}
-		g.drawImage(buffer, 0, 0, this);
+		g.drawImage(this.buffer, 0, 0, this);
 	}
 
+	@Override
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(XLEN, YLEN + 50);
+		return new Dimension(this.XLEN, this.YLEN + 50);
 	}
 
-	public void resize(Dimension d)
+	@Override
+	public void resize(final Dimension d)
 	{
 		resize(d.width, d.height);
 	}
 
-	public void resize(int w, int h)
+	@Override
+	public void resize(final int w, final int h)
 	{
 		super.resize(w, h);
-		XLEN = w;
-		YLEN = h - 50;
+		this.XLEN = w;
+		this.YLEN = h - 50;
 		clear_all();
 	}
 
-	public static void main(String[] argv)
+	public static void main(final String[] argv)
 	{
 		new AppletFrame("Toy", new Toy(), 500, 500 + 50);
 	}
@@ -516,7 +527,12 @@ public class Toy extends Applet
 
 class AppletFrame extends Frame
 {
-	AppletFrame(String title, Applet applet, int width, int height)
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -5168173625514849854L;
+
+	AppletFrame(final String title, final Applet applet, final int width, final int height)
 	{
 		super(title);
 		applet.init();
