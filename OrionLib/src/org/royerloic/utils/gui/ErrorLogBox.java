@@ -18,9 +18,9 @@ import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Frame;
 
-import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 /**
  * @author MSc. Ing. Loic Royer
@@ -28,19 +28,20 @@ import javax.swing.JTextArea;
  */
 public class ErrorLogBox extends IwuJFrame
 {
-	private boolean		mResultArrived	= false;
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 7832967664116855037L;
 
-	private boolean		mResult					= false;
+	private final boolean		mResult					= false;
 
 	private String		mMessage;
-
-	private Button		mButtonOk, mButtonCancel;
 
 	private JTextArea	mJTextArea;
 
 	public boolean getResult()
 	{
-		return mResult;
+		return this.mResult;
 	}
 
 	/**
@@ -54,15 +55,15 @@ public class ErrorLogBox extends IwuJFrame
 											final boolean pOkCancelButtons)
 	{
 		super(pTitle);
-		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
-		mMessage = pMessage;
+		this.mMessage = pMessage;
 
-		mJTextArea = new JTextArea();
-		mJTextArea.setEditable(false);
-		mJTextArea.setMinimumSize(new Dimension(400, 130));
+		this.mJTextArea = new JTextArea();
+		this.mJTextArea.setEditable(false);
+		this.mJTextArea.setMinimumSize(new Dimension(400, 130));
 
-		getContentPane().add("Center", new JScrollPane(mJTextArea));
+		getContentPane().add("Center", new JScrollPane(this.mJTextArea));
 
 		setResizable(true);
 		setTitle(pTitle);
@@ -75,19 +76,10 @@ public class ErrorLogBox extends IwuJFrame
 
 	public void addErrorLog(final String pString)
 	{
-		mMessage = mMessage + "-Error-\n" + pString + "\n\n";
-		mJTextArea.setText(mMessage);
+		this.mMessage = this.mMessage + "-Error-\n" + pString + "\n\n";
+		this.mJTextArea.setText(this.mMessage);
 		if (!isVisible())
 			setVisible(true);
-	}
-
-	/**
-	 * 
-	 */
-	private void centerFrame()
-	{
-		Dimension lDimension = getToolkit().getScreenSize();
-		setLocation(lDimension.width / 3, lDimension.height / 3);
 	}
 
 }

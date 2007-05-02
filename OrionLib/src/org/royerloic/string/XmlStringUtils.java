@@ -4,14 +4,14 @@ import java.util.List;
 
 public class XmlStringUtils
 {
-	public static final List<String> getTagsContentList(String pXML, String pTag)
+	public static final List<String> getTagsContentList(final String pXML, final String pTag)
 	{
-		String lStartTag = "<" + pTag + ">";
-		String lEndTag = "</" + pTag + ">";
-		String lNoTagRegex = "[^<>]+";
-		String lTagRegex = lStartTag + "(" + lNoTagRegex + ")" + lEndTag;
+		final String lStartTag = "<" + pTag + ">";
+		final String lEndTag = "</" + pTag + ">";
+		final String lNoTagRegex = "[^<>]+";
+		final String lTagRegex = lStartTag + "(" + lNoTagRegex + ")" + lEndTag;
 
-		List<String> lTagsContentList = StringUtils.findAllmatches(pXML, lTagRegex, 1);
+		final List<String> lTagsContentList = StringUtils.findAllmatches(pXML, lTagRegex, 1);
 
 		return lTagsContentList;
 	}

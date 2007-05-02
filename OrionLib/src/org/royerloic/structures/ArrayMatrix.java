@@ -16,28 +16,26 @@ public class ArrayMatrix<O> extends ArrayList<List<O>> implements Matrix<O>
 		super();
 	}
 	
-	public ArrayMatrix(Matrix<O> pMatrix)
+	public ArrayMatrix(final Matrix<O> pMatrix)
 	{
 		super();
-		for (List<O> lList : pMatrix)
-		{
+		for (final List<O> lList : pMatrix)
 			add(new ArrayList<O>(lList));
-		}
 	}
 
-	public ArrayMatrix(Collection<? extends List<O>> pC)
+	public ArrayMatrix(final Collection<? extends List<O>> pC)
 	{
 		super(pC);
 	}
 
-	public ArrayMatrix(int pInitialCapacity)
+	public ArrayMatrix(final int pInitialCapacity)
 	{
 		super(pInitialCapacity);
 	}
 
 	public void add2Point(final O p1, final O p2)
 	{
-		List<O> lList = new ArrayList<O>();
+		final List<O> lList = new ArrayList<O>();
 		lList.add(p1);
 		lList.add(p2);
 		add(lList);

@@ -16,9 +16,8 @@ public class QuantityRegexes
 		try
 		{
 			cRegexCompiler = new RegexCompiler("nq.regex.txt");
-			int dummy = 0;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,39 +28,39 @@ public class QuantityRegexes
 	public static Pattern	cQuantityUnit	= cRegexCompiler.getPattern("QuantityUnit");
 	public static Pattern	cUnits				= cRegexCompiler.getPattern("Units");
 
-	public static final boolean isRealNumber(CharSequence pCharSequence)
+	public static final boolean isRealNumber(final CharSequence pCharSequence)
 	{
-		Matcher lMatcher = cReal.matcher(pCharSequence);
+		final Matcher lMatcher = cReal.matcher(pCharSequence);
 		return lMatcher.matches();
 	}
 
-	public static final boolean isQuantity(CharSequence pCharSequence)
+	public static final boolean isQuantity(final CharSequence pCharSequence)
 	{
 
-		Matcher lMatcher = cQuantityUnit.matcher(pCharSequence);
+		final Matcher lMatcher = cQuantityUnit.matcher(pCharSequence);
 		return lMatcher.matches();
 	}
 
-	public static final boolean isUnit(CharSequence pCharSequence)
+	public static final boolean isUnit(final CharSequence pCharSequence)
 	{
-		Matcher lMatcher = cUnits.matcher(pCharSequence);
+		final Matcher lMatcher = cUnits.matcher(pCharSequence);
 		return lMatcher.matches();
 	}
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 
 		while (true)
 		{
-			String lAbstract = PubMedAccess.getRandomAbstract();
+			final String lAbstract = PubMedAccess.getRandomAbstract();
 			if (lAbstract != null)
 			{
-				String[] lTokenArray = StringUtils.split(lAbstract, "\\s+", -1);
+				final String[] lTokenArray = StringUtils.split(lAbstract, "\\s+", -1);
 
 				for (int i = 0; i < lTokenArray.length - 1; i++)
 				{
-					String lToken = StringUtils.cleanPunctuationAround(lTokenArray[i]);
-					String lTokenAfter = StringUtils.replaceAll(lTokenArray[i + 1], "[.,;\\(\\)\\[\\]\\{\\}]+", "");
+					final String lToken = StringUtils.cleanPunctuationAround(lTokenArray[i]);
+					final String lTokenAfter = StringUtils.replaceAll(lTokenArray[i + 1], "[.,;\\(\\)\\[\\]\\{\\}]+", "");
 					if (isRealNumber(lToken) && !isUnit(lTokenAfter))
 						System.out.println(lTokenAfter);
 

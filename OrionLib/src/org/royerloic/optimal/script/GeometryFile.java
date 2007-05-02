@@ -25,11 +25,21 @@ public class GeometryFile extends Vector
 {
 
 	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 8942281402647660871L;
+
+	/**
 	 * @author MSc. Ing. Loic Royer
 	 * 
 	 */
 	public class Point extends Vector
 	{
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= -5576308834875882579L;
+
 		public final void addCoordinate(final double pCoordinate)
 		{
 			add(new Double(pCoordinate));
@@ -47,6 +57,11 @@ public class GeometryFile extends Vector
 	 */
 	public class Line extends Vector
 	{
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= -7603009795190553675L;
+
 		public final void a(final double pCoordinate)
 		{
 			add(new Double(pCoordinate));
@@ -64,6 +79,11 @@ public class GeometryFile extends Vector
 	 */
 	public class GeometryObject extends Vector
 	{
+
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= -8515498979768191062L;
 	}
 
 	/**
@@ -72,6 +92,11 @@ public class GeometryFile extends Vector
 	 */
 	public class PointList extends GeometryObject
 	{
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= 3127293181449195730L;
+
 		/**
 		 * @param pPoint
 		 */
@@ -96,7 +121,7 @@ public class GeometryFile extends Vector
 		 */
 		public final int getPointPointer()
 		{
-			return mPointPointer;
+			return this.mPointPointer;
 		}
 
 		/**
@@ -105,13 +130,11 @@ public class GeometryFile extends Vector
 		public final Point firstPoint()
 		{
 			if (size() == 0)
-			{
 				return null;
-			}
 			else
 			{
-				mPointPointer = 0;
-				return (Point) elementAt(mPointPointer);
+				this.mPointPointer = 0;
+				return (Point) elementAt(this.mPointPointer);
 			}
 		}
 
@@ -121,29 +144,21 @@ public class GeometryFile extends Vector
 		public final Point nextPoint()
 		{
 			if (size() == 0)
-			{
 				return null;
-			}
 			else
 			{
-				if (mPointPointer >= size())
-				{
-					mPointPointer = 0;
-				}
-				else if (mPointPointer < 0)
-				{
-					mPointPointer = 0;
-				}
+				if (this.mPointPointer >= size())
+					this.mPointPointer = 0;
+				else if (this.mPointPointer < 0)
+					this.mPointPointer = 0;
 				else
 				{
-					mPointPointer++;
-					if (mPointPointer >= size())
-					{
-						mPointPointer = 0;
-					}
+					this.mPointPointer++;
+					if (this.mPointPointer >= size())
+						this.mPointPointer = 0;
 				}
 
-				return (Point) elementAt(mPointPointer);
+				return (Point) elementAt(this.mPointPointer);
 			}
 		}
 
@@ -154,13 +169,9 @@ public class GeometryFile extends Vector
 		public final int indexBefore(final int pIndex)
 		{
 			if (pIndex <= 0)
-			{
 				return size() - 1;
-			}
 			else
-			{
 				return pIndex - 1;
-			}
 		}
 
 		/**
@@ -170,13 +181,9 @@ public class GeometryFile extends Vector
 		public final int indexAfter(final int pIndex)
 		{
 			if (pIndex >= (size() - 1))
-			{
 				return 0;
-			}
 			else
-			{
 				return pIndex + 1;
-			}
 		}
 
 	}
@@ -208,7 +215,7 @@ public class GeometryFile extends Vector
 		try
 		{
 
-			File lInputFile = new File(pFileName);
+			final File lInputFile = new File(pFileName);
 
 			FileReader lFileReader;
 			BufferedReader lBufferedReader;
@@ -217,7 +224,7 @@ public class GeometryFile extends Vector
 				lFileReader = new FileReader(lInputFile);
 				lBufferedReader = new BufferedReader(lFileReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + lInputFile + " not found.");
 				throw e;
@@ -227,11 +234,9 @@ public class GeometryFile extends Vector
 			try
 			{
 				while ((lGeometryObject = readGeometryObject(lBufferedReader)) != null)
-				{
 					addGeometryObject(lGeometryObject);
-				}
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while reading: " + e2.getCause());
 			}
@@ -240,7 +245,7 @@ public class GeometryFile extends Vector
 				lFileReader.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 
@@ -250,62 +255,47 @@ public class GeometryFile extends Vector
 
 	private final GeometryObject readGeometryObject(final BufferedReader pBufferedReader) throws IOException
 	{
-		String lFirstLine = pBufferedReader.readLine();
+		final String lFirstLine = pBufferedReader.readLine();
 		if (lFirstLine == null)
-		{
 			return null;
-		}
 
-		String lObjectTypeString = lFirstLine.substring(1);
-		int lObjectType = stringToInt(lObjectTypeString);
+		final String lObjectTypeString = lFirstLine.substring(1);
+		final int lObjectType = stringToInt(lObjectTypeString);
 
 		if (lObjectType == 1)
-		{
 			return readPointList(pBufferedReader);
-		}
-		/***************************************************************************
-		 * else if (lObjectType == 3) { return readLineList(pBufferedReader); }/
-		 **************************************************************************/
 		else
-		{
 			return readPointList(pBufferedReader);
-		}
 
 	}
 
 	private final GeometryObject readPointList(final BufferedReader pBufferedReader) throws IOException
 	{
-		PointList lPointList = new PointList();
-		String FirstLine = pBufferedReader.readLine();
-		Point lHeaderPoint = readPoint(FirstLine);
-		int lNumberOfPoints = (int) lHeaderPoint.getCoordinate(0);
+		final PointList lPointList = new PointList();
+		final String FirstLine = pBufferedReader.readLine();
+		final Point lHeaderPoint = readPoint(FirstLine);
+		final int lNumberOfPoints = (int) lHeaderPoint.getCoordinate(0);
 
 		String lLineString;
 
 		for (int i = 0; i < lNumberOfPoints; i++)
-		{
 			if ((lLineString = pBufferedReader.readLine()) != null)
 			{
-				Point lPoint = readPoint(lLineString);
+				final Point lPoint = readPoint(lLineString);
 				lPointList.addPoint(lPoint);
 			}
 			else
-			{
 				break;
-			}
-		}
 
 		return lPointList;
 	}
 
 	private final Point readPoint(final String pString)
 	{
-		Point lPoint = new Point();
-		StringTokenizer lStringTokenizer = new StringTokenizer(pString, " ");
+		final Point lPoint = new Point();
+		final StringTokenizer lStringTokenizer = new StringTokenizer(pString, " ");
 		while (lStringTokenizer.hasMoreTokens())
-		{
 			lPoint.addCoordinate(stringToDouble(lStringTokenizer.nextToken()));
-		}
 		return lPoint;
 	}
 
@@ -321,12 +311,12 @@ public class GeometryFile extends Vector
 
 	public static double[] getVector(final String pFileName)
 	{
-		Vector lVector = new Vector();
+		final Vector lVector = new Vector();
 
 		try
 		{
 
-			File lInputFile = new File(pFileName);
+			final File lInputFile = new File(pFileName);
 
 			FileReader lFileReader;
 			BufferedReader lBufferedReader;
@@ -335,7 +325,7 @@ public class GeometryFile extends Vector
 				lFileReader = new FileReader(lInputFile);
 				lBufferedReader = new BufferedReader(lFileReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + lInputFile + " not found.");
 				throw e;
@@ -345,11 +335,9 @@ public class GeometryFile extends Vector
 			try
 			{
 				while ((lLineString = lBufferedReader.readLine()) != null)
-				{
 					lVector.add(Double.valueOf(lLineString));
-				}
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while reading: " + e2.getCause());
 			}
@@ -358,16 +346,14 @@ public class GeometryFile extends Vector
 				lFileReader.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 		}
 
-		double[] lResult = new double[lVector.size()];
+		final double[] lResult = new double[lVector.size()];
 		for (int i = 0; i < lVector.size(); i++)
-		{
 			lResult[i] = ((Double) lVector.elementAt(i)).doubleValue();
-		}
 		return lResult;
 	}
 

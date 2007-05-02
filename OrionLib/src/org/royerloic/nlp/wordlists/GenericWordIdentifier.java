@@ -28,35 +28,35 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	public GenericWordIdentifier()
 	{
 		super();
-		mWordMap = new HashMap<String, String>();
-		mWordToCountMap = new HashMap<String, Double>();
-		mFlatTextTableReader = new FlatTextTableReader(this);
-		mFlatTextTableReader.setColumnSplitRegex("\t+");
-		mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
-		mFlatTextTableReader.setNullRegex("#@nonullregex@#");
+		this.mWordMap = new HashMap<String, String>();
+		this.mWordToCountMap = new HashMap<String, Double>();
+		this.mFlatTextTableReader = new FlatTextTableReader(this);
+		this.mFlatTextTableReader.setColumnSplitRegex("\t+");
+		this.mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
+		this.mFlatTextTableReader.setNullRegex("#@nonullregex@#");
 	}
 
 	/**
 	 * @param pFile
 	 * @throws IOException
 	 */
-	public void compileIdentificationRulesFromFile(File pFile) throws IOException
+	public void compileIdentificationRulesFromFile(final File pFile) throws IOException
 	{
-		mFlatTextTableReader.readFile(pFile, false);
+		this.mFlatTextTableReader.readFile(pFile, false);
 	}
 
 	/**
 	 * @param pBufferedReader
 	 * @throws IOException
 	 */
-	public void compileIdentificationRulesFromReader(BufferedReader pBufferedReader) throws IOException
+	public void compileIdentificationRulesFromReader(final BufferedReader pBufferedReader) throws IOException
 	{
-		mFlatTextTableReader.readStream(pBufferedReader, false);
+		this.mFlatTextTableReader.readStream(pBufferedReader, false);
 	}
 
-	public void compileIdentificationRulesFromRessource(Class pClass, String pRessourceName) throws IOException
+	public void compileIdentificationRulesFromRessource(final Class pClass, final String pRessourceName) throws IOException
 	{
-		mFlatTextTableReader.readRessource(pClass, pRessourceName, false);
+		this.mFlatTextTableReader.readRessource(pClass, pRessourceName, false);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	 * 
 	 */
 	@SuppressWarnings("unused")
-	public boolean handleCell(int pLineCounter, int pColumnCounter, int pSetCounter, String pCellString)
+	public boolean handleCell(final int pLineCounter, final int pColumnCounter, final int pSetCounter, String pCellString)
 	{
 		pCellString = pCellString.trim();
 		try
@@ -81,9 +81,9 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 					if (pCellString.length() != 0)
 						if ((pCellString.charAt(0) != '#'))
 						{
-							String lWord = normalizeString(pCellString);
-							mWordMap.put(lWord, lWord);
-							mCurrentWord = lWord;
+							final String lWord = normalizeString(pCellString);
+							this.mWordMap.put(lWord, lWord);
+							this.mCurrentWord = lWord;
 						}
 				}
 					break;
@@ -92,28 +92,28 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 				{
 					if (pCellString.length() != 0)
 					{
-						double lValue = Double.parseDouble(pCellString);
-						mWordToCountMap.put(mCurrentWord, lValue);
+						final double lValue = Double.parseDouble(pCellString);
+						this.mWordToCountMap.put(this.mCurrentWord, lValue);
 					}
 				}
 
 			}
 		}
-		catch (Throwable exception)
+		catch (final Throwable exception)
 		{
 			System.out.println("Rule : '" + pCellString + "' is incorrect.");
 		}
 		return true;
 	}
 
-	public boolean handleEndOfCell(int pLineCounter)
+	public boolean handleEndOfCell(final int pLineCounter)
 	{
 		return true;
 	}
 
-	public boolean isEntity(String pToken)
+	public boolean isEntity(final String pToken)
 	{
-		return mWordMap.containsKey(pToken);
+		return this.mWordMap.containsKey(pToken);
 	}
 
 	/**

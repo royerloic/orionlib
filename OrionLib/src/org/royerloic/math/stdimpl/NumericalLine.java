@@ -23,8 +23,8 @@ public class NumericalLine implements ILine
   public NumericalLine()
   {
     super();
-    mFirstPoint = new NumericalVector();
-    mSecondPoint = new NumericalVector();
+    this.mFirstPoint = new NumericalVector();
+    this.mSecondPoint = new NumericalVector();
   }
 
   /**
@@ -33,8 +33,8 @@ public class NumericalLine implements ILine
   public NumericalLine(final INumericalVector lVector)
   {
     super();
-    (mFirstPoint = (INumericalVector) lVector.clone()).toZero();
-    mSecondPoint = lVector;
+    (this.mFirstPoint = (INumericalVector) lVector.clone()).toZero();
+    this.mSecondPoint = lVector;
   }
 
   /**
@@ -42,7 +42,7 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getFirstPoint()
   {
-    return mFirstPoint;
+    return this.mFirstPoint;
   }
 
   /**
@@ -50,7 +50,7 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getSecondPoint()
   {
-    return mSecondPoint;
+    return this.mSecondPoint;
   }
 
   /**
@@ -58,7 +58,7 @@ public class NumericalLine implements ILine
    */
   public void setFirstPoint(final INumericalVector pPoint)
   {
-    mFirstPoint = pPoint;
+    this.mFirstPoint = pPoint;
   }
 
   /**
@@ -66,13 +66,13 @@ public class NumericalLine implements ILine
    */
   public void setSecondPoint(final INumericalVector pPoint)
   {
-    mSecondPoint = pPoint;
+    this.mSecondPoint = pPoint;
   }
 
   public IntersectionInformation intersection(final ILine pLine)
   {
-    IntersectionInformation lIntersectionInformation = new IntersectionInformation();
-    if (mFirstPoint.getDimension() == 2)
+    final IntersectionInformation lIntersectionInformation = new IntersectionInformation();
+    if (this.mFirstPoint.getDimension() == 2)
     {
       final double x1 = getFirstPoint().get(0);
       final double y1 = getFirstPoint().get(1);
@@ -108,7 +108,7 @@ public class NumericalLine implements ILine
         final double x = x1 + ua * (x2 - x1);
         final double y = y1 + ua * (y2 - y1);
 
-        double[] lArray = new double[] { x, y };
+        final double[] lArray = new double[] { x, y };
         lIntersectionInformation.mIntersectionPoint = new NumericalVector(lArray);
       }
 
@@ -120,11 +120,11 @@ public class NumericalLine implements ILine
   /**
    * @see org.royerloic.math.ILine#angleWith(org.royerloic.math.INumericalVector)
    */
-  public double angleWith(INumericalVector pVect)
+  public double angleWith(final INumericalVector pVect)
   {
-    INumericalVector lVector = (INumericalVector) mFirstPoint.clone();
-    lVector.minusEquals(mSecondPoint);
-    double lAngle = lVector.angleWith(pVect);
+    final INumericalVector lVector = (INumericalVector) this.mFirstPoint.clone();
+    lVector.minusEquals(this.mSecondPoint);
+    final double lAngle = lVector.angleWith(pVect);
 
     return lAngle;
   }
@@ -132,7 +132,7 @@ public class NumericalLine implements ILine
   /**
    * @see org.royerloic.math.ILine#euclideanDistanceTo(org.royerloic.math.INumericalVector)
    */
-  public double euclideanDistanceTo(INumericalVector pVect)
+  public double euclideanDistanceTo(final INumericalVector pVect)
   {
 
     return -1;
@@ -141,60 +141,60 @@ public class NumericalLine implements ILine
   /**
    * @see org.royerloic.math.ILine#minus(org.royerloic.math.INumericalVector)
    */
-  public INumericalVector minus(INumericalVector pVect)
+  public INumericalVector minus(final INumericalVector pVect)
   {
-    mFirstPoint = mFirstPoint.minus(pVect);
-    mSecondPoint = mSecondPoint.minus(pVect);
+    this.mFirstPoint = this.mFirstPoint.minus(pVect);
+    this.mSecondPoint = this.mSecondPoint.minus(pVect);
     return null;
   }
 
   /**
    * @see org.royerloic.math.ILine#minusEquals(org.royerloic.math.INumericalVector)
    */
-  public INumericalVector minusEquals(INumericalVector pVect)
+  public INumericalVector minusEquals(final INumericalVector pVect)
   {
-    mFirstPoint.minusEquals(pVect);
-    mSecondPoint.minusEquals(pVect);
+    this.mFirstPoint.minusEquals(pVect);
+    this.mSecondPoint.minusEquals(pVect);
     return null;
   }
 
   /**
    * @see org.royerloic.math.ILine#plus(org.royerloic.math.INumericalVector)
    */
-  public INumericalVector plus(INumericalVector pVect)
+  public INumericalVector plus(final INumericalVector pVect)
   {
-    mFirstPoint = mFirstPoint.plus(pVect);
-    mSecondPoint = mSecondPoint.plus(pVect);
+    this.mFirstPoint = this.mFirstPoint.plus(pVect);
+    this.mSecondPoint = this.mSecondPoint.plus(pVect);
     return null;
   }
 
   /**
    * @see org.royerloic.math.ILine#plusEquals(org.royerloic.math.INumericalVector)
    */
-  public INumericalVector plusEquals(INumericalVector pVect)
+  public INumericalVector plusEquals(final INumericalVector pVect)
   {
-    mFirstPoint.plusEquals(pVect);
-    mSecondPoint.plusEquals(pVect);
+    this.mFirstPoint.plusEquals(pVect);
+    this.mSecondPoint.plusEquals(pVect);
     return null;
   }
 
   /**
    * @see org.royerloic.math.ILine#times(double)
    */
-  public INumericalVector times(double pScal)
+  public INumericalVector times(final double pScal)
   {
-    mFirstPoint = mFirstPoint.times(pScal);
-    mSecondPoint = mSecondPoint.times(pScal);
+    this.mFirstPoint = this.mFirstPoint.times(pScal);
+    this.mSecondPoint = this.mSecondPoint.times(pScal);
     return null;
   }
 
   /**
    * @see org.royerloic.math.ILine#timesEquals(double)
    */
-  public NumericalVector timesEquals(double pScal)
+  public NumericalVector timesEquals(final double pScal)
   {
-    mFirstPoint = mFirstPoint.timesEquals(pScal);
-    mSecondPoint = mSecondPoint.timesEquals(pScal);
+    this.mFirstPoint = this.mFirstPoint.timesEquals(pScal);
+    this.mSecondPoint = this.mSecondPoint.timesEquals(pScal);
     return null;
   }
 
@@ -203,15 +203,16 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getNormalSupportVector()
   {
-    INumericalVector lVector = (INumericalVector) mFirstPoint.clone();
-    lVector.minusEquals(mSecondPoint);
+    final INumericalVector lVector = (INumericalVector) this.mFirstPoint.clone();
+    lVector.minusEquals(this.mSecondPoint);
     lVector.normalizeEquals();
     return lVector;
   }
 
-  public String toString()
+  @Override
+	public String toString()
   {
-    return "{" + mFirstPoint + ", " + mSecondPoint + "}";
+    return "{" + this.mFirstPoint + ", " + this.mSecondPoint + "}";
   }
 
 }

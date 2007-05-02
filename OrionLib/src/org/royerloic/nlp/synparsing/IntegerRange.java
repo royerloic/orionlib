@@ -8,162 +8,139 @@ public class IntegerRange
 	private int	rangeStart;
 	private int	rangeEnd;
 
-	public IntegerRange(int id)
+	public IntegerRange(final int id)
 	{
-		rangeStart = id;
-		rangeEnd = id;
+		this.rangeStart = id;
+		this.rangeEnd = id;
 	}
 
-	public IntegerRange(int start, int end)
+	public IntegerRange(final int start, final int end)
 	{
-		rangeStart = start;
-		rangeEnd = end;
+		this.rangeStart = start;
+		this.rangeEnd = end;
 	}
 
-	public IntegerRange(IntegerRange baseRange)
+	public IntegerRange(final IntegerRange baseRange)
 	{
 		this.rangeStart = baseRange.rangeStart;
 		this.rangeEnd = baseRange.rangeEnd;
 	}
 
+	@Override
 	public String toString()
 	{
-		return (new StringBuffer()).append("start:").append(rangeStart).append(" end: ").append(rangeEnd)
+		return (new StringBuffer()).append("start:").append(this.rangeStart).append(" end: ").append(this.rangeEnd)
 				.toString();
 	}
 
 	public int getRangeEnd()
 	{
-		return rangeEnd;
+		return this.rangeEnd;
 	}
 
-	public void setRangeEnd(int rangeEnd)
+	public void setRangeEnd(final int rangeEnd)
 	{
 		this.rangeEnd = rangeEnd;
 	}
 
 	public int getRangeStart()
 	{
-		return rangeStart;
+		return this.rangeStart;
 	}
 
-	public void setRangeStart(int rangeStart)
+	public void setRangeStart(final int rangeStart)
 	{
 		this.rangeStart = rangeStart;
 	}
 
-	public boolean isContiguousTo(IntegerRange otherRange)
+	public boolean isContiguousTo(final IntegerRange otherRange)
 	{
-		int otherStart = otherRange.getRangeStart();
-		int otherEnd = otherRange.getRangeEnd();
-		return (rangeStart - 1 <= otherStart) && (otherStart <= rangeEnd + 1) || (rangeStart - 1 <= otherEnd)
-				&& (otherEnd <= rangeEnd + 1) || (otherStart < rangeStart) && (rangeEnd < otherEnd);
+		final int otherStart = otherRange.getRangeStart();
+		final int otherEnd = otherRange.getRangeEnd();
+		return ((this.rangeStart - 1 <= otherStart) && (otherStart <= this.rangeEnd + 1)) || ((this.rangeStart - 1 <= otherEnd)
+				&& (otherEnd <= this.rangeEnd + 1)) || ((otherStart < this.rangeStart) && (this.rangeEnd < otherEnd));
 	}
 
-	public boolean isContiguousDot(int i)
+	public boolean isContiguousDot(final int i)
 	{
-		return rangeStart - 1 <= i && i <= rangeEnd + 1;
+		return (this.rangeStart - 1 <= i) && (i <= this.rangeEnd + 1);
 	}
 
-	public boolean isContiuousOrHigherDot(int i)
+	public boolean isContiuousOrHigherDot(final int i)
 	{
-		return rangeStart - 1 <= i;
+		return this.rangeStart - 1 <= i;
 	}
 
-	public void extendBy(IntegerRange otherRange)
+	public void extendBy(final IntegerRange otherRange)
 	{
-		int otherStart = otherRange.getRangeStart();
-		int otherEnd = otherRange.getRangeEnd();
+		final int otherStart = otherRange.getRangeStart();
+		final int otherEnd = otherRange.getRangeEnd();
 
-		rangeStart = otherStart < rangeStart ? otherStart : rangeStart;
-		rangeEnd = otherEnd > rangeEnd ? otherEnd : rangeEnd;
+		this.rangeStart = otherStart < this.rangeStart ? otherStart : this.rangeStart;
+		this.rangeEnd = otherEnd > this.rangeEnd ? otherEnd : this.rangeEnd;
 	}
 
-	public static List<IntegerRange> extractDocRange(List<Integer> Ids)
+	public static List<IntegerRange> extractDocRange(final List<Integer> Ids)
 	{
-		List<IntegerRange> docRanges = new ArrayList<IntegerRange>();
+		final List<IntegerRange> docRanges = new ArrayList<IntegerRange>();
 		IntegerRange currentRange = null;
-		for (Integer id : Ids)
-		{
+		for (final Integer id : Ids)
 			if (null == currentRange)
-			{
 				currentRange = new IntegerRange(id);
-			}
+			else if (currentRange.getRangeEnd() + 1 == id)
+				currentRange.setRangeEnd(id);
 			else
 			{
-				if (currentRange.getRangeEnd() + 1 == id)
-				{
-					currentRange.setRangeEnd(id);
-				}
-				else
-				{
-					docRanges.add(currentRange);
-					currentRange = new IntegerRange(id);
-				}
-
+				docRanges.add(currentRange);
+				currentRange = new IntegerRange(id);
 			}
-		}
 		docRanges.add(currentRange);
 		return docRanges;
 	}
 
-	public static void addDocRange(List<IntegerRange> list, IntegerRange range)
+	public static void addDocRange(final List<IntegerRange> list, final IntegerRange range)
 	{
-		int i = getNearestRangeIdx(list, range);
+		final int i = getNearestRangeIdx(list, range);
 		list.add(i, new IntegerRange(range));
 		adjustDocRanges(list, i);
 	}
 
-	public static int getNearestRangeIdx(List<IntegerRange> list, IntegerRange range)
+	public static int getNearestRangeIdx(final List<IntegerRange> list, final IntegerRange range)
 	{
-		int listSize = list.size();
+		final int listSize = list.size();
 		if (0 == listSize)
-		{
 			return 0;
-		}
 
-		IntegerRange firstRange = list.get(0);
-		if (range.getRangeEnd() < firstRange.getRangeStart() || firstRange.isContiguousTo(range))
-		{
+		final IntegerRange firstRange = list.get(0);
+		if ((range.getRangeEnd() < firstRange.getRangeStart()) || firstRange.isContiguousTo(range))
 			return 0;
-		}
 
-		int rangeStart = range.getRangeStart();
-		IntegerRange lastRange = list.get(listSize - 1);
+		final int rangeStart = range.getRangeStart();
+		final IntegerRange lastRange = list.get(listSize - 1);
 		if (lastRange.isContiguousDot(rangeStart))
-		{
 			return listSize - 1;
-		}
 
 		if (lastRange.getRangeEnd() + 1 < rangeStart)
-		{
 			return listSize;
-		}
 
 		return quickSearchDocRanges(list, rangeStart, 0, list.size() - 1);
 	}
 
-	private static int quickSearchDocRanges(List<IntegerRange> list, int rangeStart, int begin, int end)
+	private static int quickSearchDocRanges(final List<IntegerRange> list, final int rangeStart, final int begin, final int end)
 	{
 
-		int i = (end + begin) / 2;
-		IntegerRange median = list.get(i);
+		final int i = (end + begin) / 2;
+		final IntegerRange median = list.get(i);
 
 		if (median.isContiguousDot(rangeStart))
-		{
 			return i;
-		}
 
 		// Just to avoid eternal loops
-		if (i == end || i == begin)
-		{
+		if ((i == end) || (i == begin))
 			return end;
-		}
 
 		if (rangeStart < median.getRangeStart())
-		{
 			return quickSearchDocRanges(list, rangeStart, begin, i);
-		}
 
 		return quickSearchDocRanges(list, rangeStart, i, end);
 
@@ -183,15 +160,15 @@ public class IntegerRange
 		 */
 	}
 
-	private static void adjustDocRanges(List<IntegerRange> list, int i)
+	private static void adjustDocRanges(final List<IntegerRange> list, final int i)
 	{
-		IntegerRange currentRange = list.get(i);
-		int currentRangeEnd = currentRange.getRangeEnd();
-		int further = i + 1;
+		final IntegerRange currentRange = list.get(i);
+		final int currentRangeEnd = currentRange.getRangeEnd();
+		final int further = i + 1;
 		int listSize = list.size();
 		for (; further < listSize;)
 		{
-			IntegerRange furtherRange = list.get(further);
+			final IntegerRange furtherRange = list.get(further);
 			if (furtherRange.isContiuousOrHigherDot(currentRangeEnd))
 			{
 				currentRange.extendBy(furtherRange);
@@ -199,18 +176,14 @@ public class IntegerRange
 				listSize = list.size();
 			}
 			else
-			{
 				break;
-			}
 		}
 	}
 
-	public static void mergeBaseWithUpdate(List<IntegerRange> base, List<IntegerRange> update)
+	public static void mergeBaseWithUpdate(final List<IntegerRange> base, final List<IntegerRange> update)
 	{
-		for (IntegerRange range : update)
-		{
+		for (final IntegerRange range : update)
 			addDocRange(base, range);
-		}
 	}
 
 }

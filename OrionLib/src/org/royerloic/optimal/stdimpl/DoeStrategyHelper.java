@@ -28,10 +28,10 @@ public class DoeStrategyHelper
 
 	static INumericalVector generateRandomVector(final int pDimension)
 	{
-		INumericalVector lVector = new NumericalVector(pDimension);
+		final INumericalVector lVector = new NumericalVector(pDimension);
 		for (int i = 0; i < pDimension; i++)
 		{
-			double mCoordinate = (Math.random() * 2.0) - 1.0;
+			final double mCoordinate = (Math.random() * 2.0) - 1.0;
 			lVector.set(i, mCoordinate);
 		}
 		return lVector;
@@ -47,10 +47,10 @@ public class DoeStrategyHelper
 
 		for (int i = 0; i < pIterations; i++)
 		{
-			INumericalVector lVector = generateRandomVector(pFunction.getInputDimension());
+			final INumericalVector lVector = generateRandomVector(pFunction.getInputDimension());
 			lVector.timesEquals(pRadius);
 			lVector.plusEquals(pCenter);
-			double lValue = pFunction.evaluate(lVector);
+			final double lValue = pFunction.evaluate(lVector);
 
 			if (lValue > lBestValue)
 			{
@@ -65,15 +65,13 @@ public class DoeStrategyHelper
 																							final int pSteps,
 																							final int pIterations)
 	{
-		int lDimension = pFunction.getInputDimension();
+		final int lDimension = pFunction.getInputDimension();
 		INumericalVector lCenter = new NumericalVector(lDimension);
 		for (int i = 0; i < lDimension; i++)
-		{
 			lCenter.set(i, 0.5);
-		}
-		int lIterations = pIterations;
+		final int lIterations = pIterations;
 		double lRadius = 0.5;
-		double lFactor = 3 / Math.pow((double) lIterations, 1 / ((double) lDimension));
+		final double lFactor = 3 / Math.pow(lIterations, 1 / ((double) lDimension));
 		// System.out.print("lFactor = " + lFactor);
 		for (int lSteps = 1; lSteps <= pSteps; lSteps++)
 		{
@@ -95,12 +93,10 @@ public class DoeStrategyHelper
 
 	static INumericalVector genetic(final IScalarFunction pFunction, final int pSteps, final int pSize)
 	{
-		int lDimension = pFunction.getInputDimension();
-		INumericalVector lCenter = new NumericalVector(lDimension);
+		final int lDimension = pFunction.getInputDimension();
+		final INumericalVector lCenter = new NumericalVector(lDimension);
 		for (int i = 0; i < lDimension; i++)
-		{
 			lCenter.set(i, 0.5);
-		}
 		double lRadius = 0.5;
 
 		List lPopulation = new ArrayList();
@@ -110,16 +106,14 @@ public class DoeStrategyHelper
 
 		lRadius = 0.1;
 		for (int i = 1; i < pSteps; i++)
-		{
 			lPopulation = geneticInternal(pFunction, lPopulation, lRadius, pSize);
-		}
 
 		INumericalVector lBestVector = null;
 		double lBestValue = Double.NEGATIVE_INFINITY;
 		for (int i = 0; i < lPopulation.size(); i++)
 		{
-			INumericalVector lVector = (INumericalVector) lPopulation.get(i);
-			double lValue = pFunction.evaluate(lVector);
+			final INumericalVector lVector = (INumericalVector) lPopulation.get(i);
+			final double lValue = pFunction.evaluate(lVector);
 
 			if (lValue > lBestValue)
 			{
@@ -136,16 +130,16 @@ public class DoeStrategyHelper
 															final double pRadius,
 															final int pPopulationLimit)
 	{
-		List lNewPopulation = new ArrayList();
-		int lNumberOfSonsPerParent = pPopulationLimit / pInitialPopulation.size();
+		final List lNewPopulation = new ArrayList();
+		final int lNumberOfSonsPerParent = pPopulationLimit / pInitialPopulation.size();
 
 		double lBestValue = Double.NEGATIVE_INFINITY;
 		for (int lIndividual = 0; (lIndividual < pInitialPopulation.size()); lIndividual++)
 		{
-			INumericalVector lCurrentIndividual = (INumericalVector) pInitialPopulation.get(lIndividual);
+			final INumericalVector lCurrentIndividual = (INumericalVector) pInitialPopulation.get(lIndividual);
 			for (int i = 0; i < lNumberOfSonsPerParent; i++)
 			{
-				INumericalVector lSon = generateRandomVector(pFunction.getInputDimension());
+				final INumericalVector lSon = generateRandomVector(pFunction.getInputDimension());
 				lSon.timesEquals(pRadius);
 				lSon.plusEquals(lCurrentIndividual);
 
@@ -157,23 +151,19 @@ public class DoeStrategyHelper
 					lSon.set(j, lValue);
 				}
 
-				double lValue = pFunction.evaluate(lSon);
+				final double lValue = pFunction.evaluate(lSon);
 				if (lValue > lBestValue)
-				{
 					lBestValue = lValue;
-				}
 				lNewPopulation.add(lSon);
 			}
 		}
 
-		for (Iterator lIterator = lNewPopulation.iterator(); lIterator.hasNext();)
+		for (final Iterator lIterator = lNewPopulation.iterator(); lIterator.hasNext();)
 		{
-			INumericalVector lSon = (INumericalVector) lIterator.next();
-			double lValue = pFunction.evaluate(lSon);
+			final INumericalVector lSon = (INumericalVector) lIterator.next();
+			final double lValue = pFunction.evaluate(lSon);
 			if ((lValue < lBestValue * 0.90) && (lNewPopulation.size() > 1))
-			{
 				lIterator.remove();
-			}
 		}
 
 		return lNewPopulation;

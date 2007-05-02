@@ -31,90 +31,85 @@ abstract class Kernel
 
 	abstract float[] get_Q(int column, int len);
 
-	void swap_index(int i, int j)
+	void swap_index(final int i, final int j)
 	{
 		do
 		{
-			Node[] _ = x[i];
-			x[i] = x[j];
-			x[j] = _;
+			final Node[] _ = this.x[i];
+			this.x[i] = this.x[j];
+			this.x[j] = _;
 		}
 		while (false);
-		if (x_square != null)
+		if (this.x_square != null)
 			do
 			{
-				double _ = x_square[i];
-				x_square[i] = x_square[j];
-				x_square[j] = _;
+				final double _ = this.x_square[i];
+				this.x_square[i] = this.x_square[j];
+				this.x_square[j] = _;
 			}
 			while (false);
 	}
 
-	private static double tanh(double x)
+	private static double tanh(final double x)
 	{
-		double e = Math.exp(x);
+		final double e = Math.exp(x);
 		return 1.0 - 2.0 / (e * e + 1);
 	}
 
-	double kernel_function(int i, int j)
+	double kernel_function(final int i, final int j)
 	{
-		switch (kernel_type)
+		switch (this.kernel_type)
 		{
 			case Parameter.LINEAR:
-				return dot(x[i], x[j]);
+				return dot(this.x[i], this.x[j]);
 			case Parameter.POLY:
-				return Math.pow(gamma * dot(x[i], x[j]) + coef0, degree);
+				return Math.pow(this.gamma * dot(this.x[i], this.x[j]) + this.coef0, this.degree);
 			case Parameter.RBF:
-				return Math.exp(-gamma * (x_square[i] + x_square[j] - 2 * dot(x[i], x[j])));
+				return Math.exp(-this.gamma * (this.x_square[i] + this.x_square[j] - 2 * dot(this.x[i], this.x[j])));
 			case Parameter.SIGMOID:
-				return tanh(gamma * dot(x[i], x[j]) + coef0);
+				return tanh(this.gamma * dot(this.x[i], this.x[j]) + this.coef0);
 			default:
 				return 0; // java
 		}
 	}
 
-	Kernel(int l, Node[][] x_, Parameter param)
+	Kernel(final int l, final Node[][] x_, final Parameter param)
 	{
 		this.kernel_type = param.kernel_type;
 		this.degree = param.degree;
 		this.gamma = param.gamma;
 		this.coef0 = param.coef0;
 
-		x = (Node[][]) x_.clone();
+		this.x = x_.clone();
 
-		if (kernel_type == Parameter.RBF)
+		if (this.kernel_type == Parameter.RBF)
 		{
-			x_square = new double[l];
+			this.x_square = new double[l];
 			for (int i = 0; i < l; i++)
-				x_square[i] = dot(x[i], x[i]);
+				this.x_square[i] = dot(this.x[i], this.x[i]);
 		}
 		else
-			x_square = null;
+			this.x_square = null;
 	}
 
-	static double dot(Node[] x, Node[] y)
+	static double dot(final Node[] x, final Node[] y)
 	{
 		double sum = 0;
-		int xlen = x.length;
-		int ylen = y.length;
+		final int xlen = x.length;
+		final int ylen = y.length;
 		int i = 0;
 		int j = 0;
-		while (i < xlen && j < ylen)
-		{
+		while ((i < xlen) && (j < ylen))
 			if (x[i].mIndex == y[j].mIndex)
 				sum += x[i++].mValue * y[j++].mValue;
+			else if (x[i].mIndex > y[j].mIndex)
+				++j;
 			else
-			{
-				if (x[i].mIndex > y[j].mIndex)
-					++j;
-				else
-					++i;
-			}
-		}
+				++i;
 		return sum;
 	}
 
-	static double k_function(Node[] x, Node[] y, Parameter param)
+	static double k_function(final Node[] x, final Node[] y, final Parameter param)
 	{
 		switch (param.kernel_type)
 		{
@@ -125,15 +120,14 @@ abstract class Kernel
 			case Parameter.RBF:
 			{
 				double sum = 0;
-				int xlen = x.length;
-				int ylen = y.length;
+				final int xlen = x.length;
+				final int ylen = y.length;
 				int i = 0;
 				int j = 0;
-				while (i < xlen && j < ylen)
-				{
+				while ((i < xlen) && (j < ylen))
 					if (x[i].mIndex == y[j].mIndex)
 					{
-						double d = x[i++].mValue - y[j++].mValue;
+						final double d = x[i++].mValue - y[j++].mValue;
 						sum += d * d;
 					}
 					else if (x[i].mIndex > y[j].mIndex)
@@ -146,7 +140,6 @@ abstract class Kernel
 						sum += x[i].mValue * x[i].mValue;
 						++i;
 					}
-				}
 
 				while (i < xlen)
 				{

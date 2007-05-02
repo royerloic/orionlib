@@ -23,26 +23,26 @@ import org.royerloic.structures.lattice.HashLattice;
 public class OboOntology extends HashLattice<OboTerm>
 {
 
-	private Map<Integer, OboTerm>	mIdToOboTermMap	= new HashMap<Integer, OboTerm>();
+	private final Map<Integer, OboTerm>	mIdToOboTermMap	= new HashMap<Integer, OboTerm>();
 
 	@Override
-	public void addNode(OboTerm pNode)
+	public void addNode(final OboTerm pNode)
 	{
 		super.addNode(pNode);
-		mIdToOboTermMap.put(pNode.getId(), pNode);
+		this.mIdToOboTermMap.put(pNode.getId(), pNode);
 	}
 
-	public OboTerm getOboTermFromId(Integer pId)
+	public OboTerm getOboTermFromId(final Integer pId)
 	{
-		return mIdToOboTermMap.get(pId);
+		return this.mIdToOboTermMap.get(pId);
 	}
 
-	public List<OboTerm> getOboTermFromId(Collection<Integer> pIdCollection)
+	public List<OboTerm> getOboTermFromId(final Collection<Integer> pIdCollection)
 	{
-		List<OboTerm> lOboTermList = new ArrayList<OboTerm>();
-		for (Integer lId : pIdCollection)
+		final List<OboTerm> lOboTermList = new ArrayList<OboTerm>();
+		for (final Integer lId : pIdCollection)
 		{
-			OboTerm lOboTerm = getOboTermFromId(lId);
+			final OboTerm lOboTerm = getOboTermFromId(lId);
 			if (lOboTerm != null)
 				lOboTermList.add(lOboTerm);
 
@@ -55,79 +55,63 @@ public class OboOntology extends HashLattice<OboTerm>
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public OboOntology(InputStream pInputStream) throws FileNotFoundException, IOException
+	public OboOntology(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
 		super();
 		{
-			List<List<String>> lOboMatrix = MatrixFile.readMatrixFromStream(pInputStream, "(\\: )|( \\! )");
+			final List<List<String>> lOboMatrix = MatrixFile.readMatrixFromStream(pInputStream, "(\\: )|( \\! )");
 
-			Map<OboTerm, OboTerm> lOboTermMap = new HashMap<OboTerm, OboTerm>();
-			Set<DirectedEdge<OboTerm>> lEdgeSet = new HashSet<DirectedEdge<OboTerm>>();
+			final Map<OboTerm, OboTerm> lOboTermMap = new HashMap<OboTerm, OboTerm>();
+			final Set<DirectedEdge<OboTerm>> lEdgeSet = new HashSet<DirectedEdge<OboTerm>>();
 			OboTerm lCurrentOboTerm = null;
 			String lIdString;
 			Integer lId = null;
 			boolean isTerm = false;
 
-			for (List<String> lList : lOboMatrix)
-			{
+			for (final List<String> lList : lOboMatrix)
 				if (lList.get(0).equals("[Term]"))
-				{
 					isTerm = true;
-				}
 				else if (lList.get(0).equals("[Typedef]"))
-				{
 					isTerm = false;
-				}
 				else if (isTerm && lList.get(0).equals("id"))
 				{
 					lIdString = lList.get(1);
 					// System.out.println(lIdString);
-					String[] lGroupArray = StringUtils.captures(lIdString, ".*?([0-9]+)");
-					String lIntegerString = lGroupArray[0];
+					final String[] lGroupArray = StringUtils.captures(lIdString, ".*?([0-9]+)");
+					final String lIntegerString = lGroupArray[0];
 					lId = Integer.parseInt(lIntegerString);
 					lCurrentOboTerm = new OboTerm(lId);
 					lOboTermMap.put(lCurrentOboTerm, lCurrentOboTerm);
 					addNode(lCurrentOboTerm);
 				}
 				else if (lId != null)
-				{
 					if (lList.get(0).equals("name"))
 					{
-						String lName = lList.get(1);
+						final String lName = lList.get(1);
 						lCurrentOboTerm.setName(lName);
 					}
 					else if (lList.get(0).equals("def"))
-					{
 						lCurrentOboTerm.setDefinition(lList.get(1));
-					}
 					else if (lList.get(0).equals("namespace"))
-					{
 						lCurrentOboTerm.setNameSpace(lList.get(1));
-					}
 					else if (lList.get(0).equals("is_a") || lList.get(0).equals("relationship"))
 					{
-						String lParentIdString = lList.get(1);
-						String[] lGroupArray = StringUtils.captures(lParentIdString, ".*?([0-9]+)");
-						String lParentIntegerString = lGroupArray[0];
-						Integer lParentId = Integer.parseInt(lParentIntegerString);
+						final String lParentIdString = lList.get(1);
+						final String[] lGroupArray = StringUtils.captures(lParentIdString, ".*?([0-9]+)");
+						final String lParentIntegerString = lGroupArray[0];
+						final Integer lParentId = Integer.parseInt(lParentIntegerString);
 						OboTerm lParentOboTerm = new OboTerm(lParentId);
-						OboTerm lParentOboTermTemp = lOboTermMap.get(lParentOboTerm);
+						final OboTerm lParentOboTermTemp = lOboTermMap.get(lParentOboTerm);
 						if (lParentOboTermTemp == null)
-						{
 							lOboTermMap.put(lParentOboTerm, lParentOboTerm);
-						}
 						else
-						{
 							lParentOboTerm = lParentOboTermTemp;
-						}
 
-						DirectedEdge<OboTerm> lEdge = new DirectedEdge(lParentOboTerm, lCurrentOboTerm);
+						final DirectedEdge<OboTerm> lEdge = new DirectedEdge(lParentOboTerm, lCurrentOboTerm);
 						lEdgeSet.add(lEdge);
 					}
-				}
-			}
 
-			for (DirectedEdge<OboTerm> lEdge : lEdgeSet)
+			for (final DirectedEdge<OboTerm> lEdge : lEdgeSet)
 			{
 				lEdge.setFirstNode(lOboTermMap.get(lEdge.getFirstNode()));
 				lEdge.setSecondNode(lOboTermMap.get(lEdge.getSecondNode()));

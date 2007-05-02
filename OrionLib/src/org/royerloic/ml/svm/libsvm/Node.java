@@ -2,6 +2,10 @@ package org.royerloic.ml.svm.libsvm;
 
 public class Node implements java.io.Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -3731797707743471399L;
 	public int		mIndex;
 	public double	mValue;
 
@@ -18,13 +22,14 @@ public class Node implements java.io.Serializable
 	 * @param pIndex
 	 * @param pValue
 	 */
-	public Node(int pIndex, double pValue)
+	public Node(final int pIndex, final double pValue)
 	{
 		super();
-		mIndex = pIndex;
-		mValue = pValue;
+		this.mIndex = pIndex;
+		this.mValue = pValue;
 	}
 
+	@Override
 	protected Object clone() throws CloneNotSupportedException
 	{
 		return super.clone();

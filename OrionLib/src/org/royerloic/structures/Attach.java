@@ -13,15 +13,15 @@ public class Attach<O, V>
 	 */
 	public O getO()
 	{
-		return mO;
+		return this.mO;
 	}
 
 	/**
 	 * @param pO
 	 */
-	public void setO(O pO)
+	public void setO(final O pO)
 	{
-		mO = pO;
+		this.mO = pO;
 	}
 
 	/**
@@ -29,65 +29,63 @@ public class Attach<O, V>
 	 */
 	public V getV()
 	{
-		return mV;
+		return this.mV;
 	}
 
 	/**
 	 * @param pV
 	 */
-	public void setV(V pV)
+	public void setV(final V pV)
 	{
-		mV = pV;
+		this.mV = pV;
 	}
 
 	/**
 	 * @param pO
 	 * @param pV
 	 */
-	public Attach(O pO, V pV)
+	public Attach(final O pO, final V pV)
 	{
-		mO = pO;
-		mV = pV;
+		this.mO = pO;
+		this.mV = pV;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public final boolean equals(Object pObj)
+	public final boolean equals(final Object pObj)
 	{
 		final Attach<O, V> lAttachedValue = (Attach<O, V>) pObj;
 		return (this.mO.equals(lAttachedValue.mO));
 	}
 
-	public final boolean fastEquals(Attach<O, V> pAttachedValue)
+	public final boolean fastEquals(final Attach<O, V> pAttachedValue)
 	{
 		if (this == pAttachedValue)
 			return true;
 		else if (this.hashCode() != pAttachedValue.hashCode())
 			return false;
 		else
-		{
 			return (this.mO.equals(pAttachedValue.mO));
-		}
 	}
 
 	@Override
 	public final int hashCode()
 	{
-		return mO.hashCode();
+		return this.mO.hashCode();
 	}
 
 	@Override
 	public final String toString()
 	{
-		return mO.toString() + "(" + mV.toString() + ")";
+		return this.mO.toString() + "(" + this.mV.toString() + ")";
 	}
 
-	public static final <O, V> Set<Attach<O, V>> attachValueToAll(Set<O> pOSet, V pValue)
+	public static final <O, V> Set<Attach<O, V>> attachValueToAll(final Set<O> pOSet, final V pValue)
 	{
-		Set<Attach<O, V>> lAttachedValueSet = new HashSet<Attach<O, V>>();
-		for (O lO : pOSet)
+		final Set<Attach<O, V>> lAttachedValueSet = new HashSet<Attach<O, V>>();
+		for (final O lO : pOSet)
 		{
-			Attach<O, V> lAttachedValue = new Attach<O, V>(lO, pValue);
+			final Attach<O, V> lAttachedValue = new Attach<O, V>(lO, pValue);
 			lAttachedValueSet.add(lAttachedValue);
 		}
 		return lAttachedValueSet;

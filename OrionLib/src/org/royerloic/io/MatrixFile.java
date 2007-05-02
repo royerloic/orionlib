@@ -22,40 +22,38 @@ import org.royerloic.structures.Matrix;
 public class MatrixFile
 {
 
-	public static <O> void writeMatrixToFile(List<List<O>> pMatrix, File pFile)
+	public static <O> void writeMatrixToFile(final List<List<O>> pMatrix, final File pFile)
 			throws FileNotFoundException, IOException
 	{
 		writeMatrixToFile(pMatrix, pFile, "\t");
 	}
 
-	public static <O> void writeMatrixToFile(List<List<O>> pMatrix, File pFile, String lSeparator)
+	public static <O> void writeMatrixToFile(final List<List<O>> pMatrix, final File pFile, final String lSeparator)
 			throws FileNotFoundException, IOException
 	{
 		writeMatrixToStream(pMatrix, new FileOutputStream(pFile), lSeparator);
 	}
 
-	public static <O> void writeMatrixToStream(	List<List<O>> pMatrix,
-																							OutputStream pOutputStream,
-																							String pSeparator) throws FileNotFoundException, IOException
+	public static <O> void writeMatrixToStream(	final List<List<O>> pMatrix,
+																							final OutputStream pOutputStream,
+																							final String pSeparator) throws FileNotFoundException, IOException
 	{
 		{
 			if (pOutputStream == null)
-			{
 				throw new IllegalArgumentException("OutputStream should not be null.");
-			}
 
 			// declared here only to make visible to finally clause; generic reference
 			Writer lWriter = null;
 			try
 			{
 				lWriter = getWriterFromStream(pOutputStream);
-				for (List<O> lList : pMatrix)
+				for (final List<O> lList : pMatrix)
 				{
 					writeListToStream(lWriter, lList, pSeparator);
 					lWriter.append("\r\n");
 				}
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				e.printStackTrace();
 			}
@@ -68,31 +66,29 @@ public class MatrixFile
 		}
 	}
 
-	public static final Writer getWriterFromStream(OutputStream pOutputStream)
+	public static final Writer getWriterFromStream(final OutputStream pOutputStream)
 	{
 		// use buffering
 		// FileWriter always assumes default encoding is OK!
 		final int lBufferSize = 10000000;
-		Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream), lBufferSize);
+		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream), lBufferSize);
 		return lWriter;
 	}
 
-	public static final Writer getWriterFromFile(File pFile) throws FileNotFoundException
+	public static final Writer getWriterFromFile(final File pFile) throws FileNotFoundException
 	{
 		return getWriterFromStream(new FileOutputStream(pFile));
 	}
 
-	public static final <O> void writeListToStream(Writer pWriter, List<O> pList, String pSeparator)
+	public static final <O> void writeListToStream(final Writer pWriter, final List<O> pList, final String pSeparator)
 			throws IOException
 	{
 		int i = 0;
-		for (O lEntry : pList)
+		for (final O lEntry : pList)
 		{
 			boolean isLast = i == pList.size() - 1;
-			if (!(lEntry instanceof Double && ((Double) lEntry).isNaN()))
-			{
+			if (!((lEntry instanceof Double) && ((Double) lEntry).isNaN()))
 				pWriter.append(lEntry.toString());
-			}
 
 			if (!isLast)
 				pWriter.append(pSeparator);
@@ -100,59 +96,59 @@ public class MatrixFile
 		}
 	}
 
-	public static Matrix<String> readMatrixFromFile(File pFile) throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromFile(final File pFile) throws FileNotFoundException, IOException
 	{
 		return readMatrixFromFile(pFile, false, "\\t+");
 	}
 
-	public static Matrix<String> readMatrixFromFile(File pFile, boolean pFileHasHeader)
+	public static Matrix<String> readMatrixFromFile(final File pFile, final boolean pFileHasHeader)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromFile(pFile, pFileHasHeader, "\\t+");
 	}
 
-	public static Matrix<String> readMatrixFromFile(File pFile, String pSeparator)
+	public static Matrix<String> readMatrixFromFile(final File pFile, final String pSeparator)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromStream(new FileInputStream(pFile), false, pSeparator);
 	}
 
-	public static Matrix<String> readMatrixFromFile(File pFile, boolean pFileHasHeader, String pSeparator)
+	public static Matrix<String> readMatrixFromFile(final File pFile, final boolean pFileHasHeader, final String pSeparator)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromStream(new FileInputStream(pFile), pFileHasHeader, pSeparator);
 	}
 
-	public static Matrix<String> readMatrixFromZipFile(File pFile, boolean pFileHasHeader, String pSeparator)
+	public static Matrix<String> readMatrixFromZipFile(final File pFile, final boolean pFileHasHeader, final String pSeparator)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromStream(new FileInputStream(pFile), pFileHasHeader, pSeparator);
 	}
 
-	public static Matrix<String> readMatrixFromStream(InputStream pInputStream) throws FileNotFoundException,
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream) throws FileNotFoundException,
 			IOException
 	{
 		return readMatrixFromStream(pInputStream, "\\t+");
 	}
 
-	public static Matrix<String> readMatrixFromStream(InputStream pInputStream, String pSeparator)
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream, final String pSeparator)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromStream(pInputStream, false, pSeparator);
 	}
 
-	public static Matrix<String> readMatrixFromStream(InputStream pInputStream, boolean pFileHasHeader)
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream, final boolean pFileHasHeader)
 			throws FileNotFoundException, IOException
 	{
 		return readMatrixFromStream(pInputStream, pFileHasHeader, "\\t+");
 	}
 
-	public static Matrix<String> readMatrixFromStream(InputStream pInputStream,
-																										boolean pFileHasHeader,
-																										String pSeparator) throws FileNotFoundException,
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream,
+																										final boolean pFileHasHeader,
+																										final String pSeparator) throws FileNotFoundException,
 			IOException
 	{
-		Matrix<String> lMatrix = new ArrayMatrix<String>();
+		final Matrix<String> lMatrix = new ArrayMatrix<String>();
 		BufferedReader lBufferedReader = null;
 		try
 		{
@@ -161,24 +157,22 @@ public class MatrixFile
 			int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 			lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
 			lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
-			Pattern lColumnSplitPattern = Pattern.compile(pSeparator);
+			final Pattern lColumnSplitPattern = Pattern.compile(pSeparator);
 
 			String lLineString;
 			if (pFileHasHeader)
-			{
 				lLineString = lBufferedReader.readLine();
-			}
 
 			while ((lLineString = lBufferedReader.readLine()) != null)
 			{
-				String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
-				List<String> lColumnsStringList = Arrays.asList(lColumnsStringArray);
+				final String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
+				final List<String> lColumnsStringList = Arrays.asList(lColumnsStringArray);
 				lMatrix.add(lColumnsStringList);
 			}
 
 			return lMatrix;
 		}
-		catch (IOException exception)
+		catch (final IOException exception)
 		{
 			System.err.println(exception);
 			throw exception;
@@ -186,48 +180,46 @@ public class MatrixFile
 		finally
 		{
 			if (lBufferedReader != null)
-			{
 				try
 				{
 					lBufferedReader.close();
 				}
-				catch (IOException exception)
+				catch (final IOException exception)
 				{
 					System.err.println(exception);
 				}
-			}
 		}
 	}
 
-	public static final BufferedReader getBufferedReaderFromStream(InputStream pInputStream)
+	public static final BufferedReader getBufferedReaderFromStream(final InputStream pInputStream)
 	{
 		final int lBufferSize = 10000000;
-		BufferedReader lReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
+		final BufferedReader lReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
 		return lReader;
 	}
 
-	public static final BufferedReader getBufferedReaderFromFile(File pFile) throws FileNotFoundException
+	public static final BufferedReader getBufferedReaderFromFile(final File pFile) throws FileNotFoundException
 	{
 		return getBufferedReaderFromStream(new FileInputStream(pFile));
 	}
 
-	public static final <O> List<String> readListFromStream(BufferedReader pReader, String pSeparator)
+	public static final <O> List<String> readListFromStream(final BufferedReader pReader, final String pSeparator)
 			throws IOException
 	{
-		String lLineString = pReader.readLine();
+		final String lLineString = pReader.readLine();
 		if (lLineString != null)
 		{
-			String[] lColumnsStringArray = lLineString.split(pSeparator, -1);
-			List<String> lColumnsStringList = Arrays.asList(lColumnsStringArray);
+			final String[] lColumnsStringArray = lLineString.split(pSeparator, -1);
+			final List<String> lColumnsStringList = Arrays.asList(lColumnsStringArray);
 			return lColumnsStringList;
 		}
 		return null;
 	}
 
-	public static InputStream getInputStreamFromRessource(Class pClass, String pRessourceName)
+	public static InputStream getInputStreamFromRessource(final Class pClass, final String pRessourceName)
 			throws IOException
 	{
-		InputStream lInputStream = pClass.getResourceAsStream(pRessourceName);
+		final InputStream lInputStream = pClass.getResourceAsStream(pRessourceName);
 		return lInputStream;
 	}
 }

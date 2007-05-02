@@ -21,17 +21,17 @@ public class SentenceSplitter
 		{
 			cAnnotationContextFilter = new AnnotationContextFilter("SentenceSplitting.3rules.txt");
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public static final List<Integer> findSplitPoints(CharSequence pCharSequence)
+	public static final List<Integer> findSplitPoints(final CharSequence pCharSequence)
 	{
-		List<Integer> lIntegerList = new ArrayList<Integer>();
+		final List<Integer> lIntegerList = new ArrayList<Integer>();
 
-		Matcher lMatcher = cSentenceSplitPattern.matcher(pCharSequence);
+		final Matcher lMatcher = cSentenceSplitPattern.matcher(pCharSequence);
 
 		int lIndex = 0;
 		while (lMatcher.find(lIndex + 1))
@@ -52,9 +52,9 @@ public class SentenceSplitter
 		return lIntegerList;
 	}
 
-	public static final <O> void split(final TextTree pTextTree, O pSentenceAnnotation)
+	public static final <O> void split(final TextTree pTextTree, final O pSentenceAnnotation)
 	{
-		List<Integer> lIntegerList = findSplitPoints(pTextTree);
+		final List<Integer> lIntegerList = findSplitPoints(pTextTree);
 		pTextTree.addChildrenAccordingToCutPoints(lIntegerList, pSentenceAnnotation);
 	}
 

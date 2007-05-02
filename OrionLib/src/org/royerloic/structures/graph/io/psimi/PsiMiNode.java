@@ -10,7 +10,7 @@ public class PsiMiNode extends Node
 	List<Integer>	mGoIdList				= new ArrayList<Integer>();
 	List<Integer>	mInterproIdList	= new ArrayList<Integer>();
 
-	public PsiMiNode(String pName)
+	public PsiMiNode(final String pName)
 	{
 		super(pName);
 
@@ -18,22 +18,22 @@ public class PsiMiNode extends Node
 
 	public final List<Integer> getGoIdList()
 	{
-		return mGoIdList;
+		return this.mGoIdList;
 	};
 
 	public final List<Integer> getInterproIdList()
 	{
-		return mInterproIdList;
+		return this.mInterproIdList;
 	}
 
-	public void addGoId(Integer pGoId)
+	public void addGoId(final Integer pGoId)
 	{
-		mGoIdList.add(pGoId);
+		this.mGoIdList.add(pGoId);
 	}
 
-	public void addInterproId(Integer pInterproId)
+	public void addInterproId(final Integer pInterproId)
 	{
-		mInterproIdList.add(pInterproId);
+		this.mInterproIdList.add(pInterproId);
 	};
 
 }

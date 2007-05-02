@@ -64,22 +64,24 @@ public class PsiMiIO
 		private PsiMiNode									mInteractorNode;
 		private String										mRole;
 		private String										mInteractionConfidence;
-		private Map<PsiMiNode, String>		lInteractorsToRoleMap	= new HashMap<PsiMiNode, String>();
-		private Map<PsiMiNode, PsiMiNode>	lPsiMiNodeMap					= new HashMap<PsiMiNode, PsiMiNode>();
+		private final Map<PsiMiNode, String>		lInteractorsToRoleMap	= new HashMap<PsiMiNode, String>();
+		private final Map<PsiMiNode, PsiMiNode>	lPsiMiNodeMap					= new HashMap<PsiMiNode, PsiMiNode>();
 
-		public PsiMiHandler(boolean pSpokeModel, String pConfidenceFilter)
+		public PsiMiHandler(final boolean pSpokeModel, final String pConfidenceFilter)
 		{
 			super();
-			mConfidenceFilter = pConfidenceFilter;
-			mGraph = new PsiMiGraph();
-			mSpokeModel = pSpokeModel;
+			this.mConfidenceFilter = pConfidenceFilter;
+			this.mGraph = new PsiMiGraph();
+			this.mSpokeModel = pSpokeModel;
 		}
 
+		@Override
 		public void startDocument() throws SAXException
 		{
-			mIsInteractorDefinition = true;
+			this.mIsInteractorDefinition = true;
 		}
 
+		@Override
 		public void endDocument() throws SAXException
 		{
 		}
@@ -90,54 +92,52 @@ public class PsiMiIO
 		 * @see org.xml.sax.helpers.DefaultHandler#startElement(java.lang.String,
 		 *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
 		 */
+		@Override
 		@SuppressWarnings("unused")
-		public void startElement(String namespaceURI, String lName, // local name
-															String qName, // qualified name
-															Attributes attrs) throws SAXException
+		public void startElement(final String namespaceURI, final String lName, // local name
+															final String qName, // qualified name
+															final Attributes attrs) throws SAXException
 		{
 			if (qName.equals("proteinInteractor"))
 			{
-				mInteractorId = attrs.getValue("id");
-				if (mInteractorId != null)
+				this.mInteractorId = attrs.getValue("id");
+				if (this.mInteractorId != null)
 				{
-					mInteractorNode = new PsiMiNode(mInteractorId);
-					lPsiMiNodeMap.put(mInteractorNode, mInteractorNode);
+					this.mInteractorNode = new PsiMiNode(this.mInteractorId);
+					this.lPsiMiNodeMap.put(this.mInteractorNode, this.mInteractorNode);
 				}
 			}
 			else if (qName.equals("proteinInteractorRef"))
 			{
-				mInteractorId = attrs.getValue("ref");
-				if (mInteractorId != null)
+				this.mInteractorId = attrs.getValue("ref");
+				if (this.mInteractorId != null)
 				{
-					mInteractorNode = new PsiMiNode(mInteractorId);
-					mInteractorNode = lPsiMiNodeMap.get(mInteractorNode);
+					this.mInteractorNode = new PsiMiNode(this.mInteractorId);
+					this.mInteractorNode = this.lPsiMiNodeMap.get(this.mInteractorNode);
 				}
 			}
-			else if (mIsInteractorDefinition && qName.equals("secondaryRef"))
+			else if (this.mIsInteractorDefinition && qName.equals("secondaryRef"))
 			{
-				String db = attrs.getValue("db");
-				String id = attrs.getValue("id");
-				if (mInteractorNode != null)
+				final String db = attrs.getValue("db");
+				final String id = attrs.getValue("id");
+				if (this.mInteractorNode != null)
 				{
 					if (db.equalsIgnoreCase("go"))
-						mInteractorNode.addGoId(GoIdConversion.getIdFromString(id));
+						this.mInteractorNode.addGoId(GoIdConversion.getIdFromString(id));
 					if (db.equalsIgnoreCase("interpro"))
-						mInteractorNode.addInterproId(InterproIdConversion.getIdFromString(id));
+						this.mInteractorNode.addInterproId(InterproIdConversion.getIdFromString(id));
 				}
 			}
 			else if (qName.equals("interaction"))
-			{
 				startInteraction();
-			}
 			else if (qName.equals("confidence"))
-			{
-				mInteractionConfidence = attrs.getValue("value");
-			}
+				this.mInteractionConfidence = attrs.getValue("value");
 		}
 
-		public void characters(char buf[], int offset, int len) throws SAXException
+		@Override
+		public void characters(final char buf[], final int offset, final int len) throws SAXException
 		{
-			mText = new String(buf, offset, len);
+			this.mText = new String(buf, offset, len);
 		}
 
 		/**
@@ -146,69 +146,62 @@ public class PsiMiIO
 		 * @see org.xml.sax.helpers.DefaultHandler#endElement(java.lang.String,
 		 *      java.lang.String, java.lang.String)
 		 */
+		@Override
 		@SuppressWarnings("unused")
-		public void endElement(String namespaceURI, String sName, // simple name
-														String qName // qualified name
+		public void endElement(final String namespaceURI, final String sName, // simple name
+														final String qName // qualified name
 		) throws SAXException
 		{
 
 			if (qName.equals("proteinInteractor") || qName.equals("proteinInteractorRef"))
-			{
-				mGraph.addNode(mInteractorNode);
-			}
+				this.mGraph.addNode(this.mInteractorNode);
 			else if (qName.equals("interaction"))
-			{
 				endInteraction();
-			}
 			else if (qName.equals("role"))
 			{
-				mRole = mText;
-				addInteractor(mInteractorNode, mRole);
+				this.mRole = this.mText;
+				addInteractor(this.mInteractorNode, this.mRole);
 			}
 			else if (qName.equals("interactorList"))
-			{
-				mIsInteractorDefinition = false;
-			}
+				this.mIsInteractorDefinition = false;
 
 		}
 
 		private void startInteraction()
 		{
-			lInteractorsToRoleMap.clear();
+			this.lInteractorsToRoleMap.clear();
 		}
 
-		private void addInteractor(PsiMiNode pInteractorNode, String pRole)
+		private void addInteractor(final PsiMiNode pInteractorNode, final String pRole)
 		{
-			lInteractorsToRoleMap.put(pInteractorNode, pRole);
+			this.lInteractorsToRoleMap.put(pInteractorNode, pRole);
 		}
 
 		private void endInteraction()
 		{
-			if (mConfidenceFilter == null || mInteractionConfidence.matches(mConfidenceFilter) )
+			if ((this.mConfidenceFilter == null) || this.mInteractionConfidence.matches(this.mConfidenceFilter) )
 			{
-				System.out.println("Interaction confidence: "+mInteractionConfidence);
-				if (lInteractorsToRoleMap.size() == 1)
+				System.out.println("Interaction confidence: "+this.mInteractionConfidence);
+				if (this.lInteractorsToRoleMap.size() == 1)
 				{
-					PsiMiNode lNode = lInteractorsToRoleMap.keySet().iterator().next();
-					mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
+					final PsiMiNode lNode = this.lInteractorsToRoleMap.keySet().iterator().next();
+					this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
 				}
-				else if (!mSpokeModel)
+				else if (!this.mSpokeModel)
 				{
-					for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
-						for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
+					for (final PsiMiNode lNode1 : this.lInteractorsToRoleMap.keySet())
+						for (final PsiMiNode lNode2 : this.lInteractorsToRoleMap.keySet())
+							if (!lNode1.equals(lNode2))
+								this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+				}
+				else if (this.mSpokeModel)
+					for (final PsiMiNode lNode1 : this.lInteractorsToRoleMap.keySet())
+						for (final PsiMiNode lNode2 : this.lInteractorsToRoleMap.keySet())
 							if (!lNode1.equals(lNode2))
 							{
-								mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
-							}
-				}
-				else if (mSpokeModel)
-					for (PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
-						for (PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
-							if (!lNode1.equals(lNode2))
-							{
-								String lRole1 = lInteractorsToRoleMap.get(lNode1);
-								String lRole2 = lInteractorsToRoleMap.get(lNode2);
-								boolean lIsInteraction = /*(lRole1.equals("neutral") && lRole2.equals("neutral"))
+								final String lRole1 = this.lInteractorsToRoleMap.get(lNode1);
+								final String lRole2 = this.lInteractorsToRoleMap.get(lNode2);
+								final boolean lIsInteraction = /*(lRole1.equals("neutral") && lRole2.equals("neutral"))
 										||/**/ (lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
 										|| lRole2.equals("unspecified");
 
@@ -217,7 +210,7 @@ public class PsiMiIO
 									System.out.println("Something strange here:" + lRole1);
 
 								if (lIsInteraction)
-									mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+									this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
 
 							}
 
@@ -225,19 +218,19 @@ public class PsiMiIO
 		}
 	}
 
-	public static final PsiMiGraph load(File pFile, boolean pSpokeModel, String pConfidenceFilter)
+	public static final PsiMiGraph load(final File pFile, final boolean pSpokeModel, final String pConfidenceFilter)
 	{
 		FileInputStream lFileInputStream;
 		try
 		{
 			lFileInputStream = new FileInputStream(pFile);
-			PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel,pConfidenceFilter);
+			final PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel,pConfidenceFilter);
 
 			try
 			{
 				EdgIO.save(lGraph, new File("dump.psimi.edg"));
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -245,7 +238,7 @@ public class PsiMiIO
 
 			return lGraph;
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -253,24 +246,24 @@ public class PsiMiIO
 		return null;
 	}
 
-	public static final PsiMiGraph load(File pFile, boolean pSpokeModel)
+	public static final PsiMiGraph load(final File pFile, final boolean pSpokeModel)
 	{
 		return load(pFile, pSpokeModel, null);
 	}
 
-	public static final PsiMiGraph load(InputStream pInputStream, boolean pSpokeModel, String pConfidenceFilter)
+	public static final PsiMiGraph load(final InputStream pInputStream, final boolean pSpokeModel, final String pConfidenceFilter)
 	{
-		PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel, pConfidenceFilter);
-		DefaultHandler handler = lPsiMiHandler;
-		SAXParserFactory factory = SAXParserFactory.newInstance();
+		final PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel, pConfidenceFilter);
+		final DefaultHandler handler = lPsiMiHandler;
+		final SAXParserFactory factory = SAXParserFactory.newInstance();
 		try
 		{
 			// Parse the input
-			SAXParser saxParser = factory.newSAXParser();
+			final SAXParser saxParser = factory.newSAXParser();
 			saxParser.parse(pInputStream, handler);
 
 		}
-		catch (Throwable t)
+		catch (final Throwable t)
 		{
 			t.printStackTrace();
 		}
@@ -278,7 +271,7 @@ public class PsiMiIO
 		return lPsiMiHandler.mGraph;
 	}
 
-	public static final PsiMiGraph load(InputStream pInputStream, boolean pSpokeModel)
+	public static final PsiMiGraph load(final InputStream pInputStream, final boolean pSpokeModel)
 	{
 		return load(pInputStream, pSpokeModel, null);
 	}

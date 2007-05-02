@@ -36,52 +36,52 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	public SVMRegression(final double pGamma, final double pCost, final double pNu)
 	{
 		super();
-		mGamma = pGamma;
-		mCost = pCost;
-		mNu = pNu;
+		this.mGamma = pGamma;
+		this.mCost = pCost;
+		this.mNu = pNu;
 
-		mParameters = new Parameter();
+		this.mParameters = new Parameter();
 
-		mParameters.svm_type = Parameter.NU_SVR;
-		mParameters.kernel_type = Parameter.RBF;
-		mParameters.gamma = mGamma;
-		mParameters.C = mCost;
-		mParameters.nu = mNu;
+		this.mParameters.svm_type = Parameter.NU_SVR;
+		this.mParameters.kernel_type = Parameter.RBF;
+		this.mParameters.gamma = this.mGamma;
+		this.mParameters.C = this.mCost;
+		this.mParameters.nu = this.mNu;
 
 		// Other standard parameters:
-		mParameters.degree = 3;
-		mParameters.coef0 = 0;
-		mParameters.p = 0.1;
-		mParameters.cache_size = 40;
-		mParameters.eps = 1e-3;
-		mParameters.shrinking = 1;
-		mParameters.nr_weight = 0;
-		mParameters.weight_label = new int[0];
-		mParameters.weight = new double[0];
+		this.mParameters.degree = 3;
+		this.mParameters.coef0 = 0;
+		this.mParameters.p = 0.1;
+		this.mParameters.cache_size = 40;
+		this.mParameters.eps = 1e-3;
+		this.mParameters.shrinking = 1;
+		this.mParameters.nr_weight = 0;
+		this.mParameters.weight_label = new int[0];
+		this.mParameters.weight = new double[0];
 
-		mModel = null;
+		this.mModel = null;
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.IRegression#crossValidation(org.royerloic.ml.svm.ILabelledVectorSet)
 	 */
-	public double crossValidation(ILabelledVectorSet pSet, int pFolds, double pRatio)
+	public double crossValidation(final ILabelledVectorSet pSet, final int pFolds, final double pRatio)
 	{
 		double lError = Double.NEGATIVE_INFINITY;
 
 		for (int i = 0; i < pSet.size(); i++)
 		{
 			pSet.generateTrainTestRandomSubsets(pRatio);
-			ILabelledVectorSet lTrain = pSet.getTrainSubset();
-			ILabelledVectorSet lTest = pSet.getTestSubset();
+			final ILabelledVectorSet lTrain = pSet.getTrainSubset();
+			final ILabelledVectorSet lTest = pSet.getTestSubset();
 			train(lTrain);
 
 			for (int j = 0; j < lTest.size(); j++)
 			{
-				INumericalVector lVector = (INumericalVector) lTest.getVector(j);
-				double lValue = lTest.getClass(j);
+				final INumericalVector lVector = (INumericalVector) lTest.getVector(j);
+				final double lValue = lTest.getClass(j);
 
-				double lPredictedValue = predict(lVector);
+				final double lPredictedValue = predict(lVector);
 
 				// System.out.println(" value= "+lValue+" predicted
 				// value="+lPredictedValue);
@@ -91,29 +91,27 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 
 		}
 		if (Double.isNaN(lError))
-		{
 			lError = Double.POSITIVE_INFINITY;
-		}
 		return lError;
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.IRegression#checkExactness(org.royerloic.ml.svm.ILabelledVectorSet)
 	 */
-	public double checkExactness(ILabelledVectorSet pSet)
+	public double checkExactness(final ILabelledVectorSet pSet)
 	{
 		double lError = 0;
 
-		ILabelledVectorSet lTrain = pSet;
-		ILabelledVectorSet lTest = pSet;
+		final ILabelledVectorSet lTrain = pSet;
+		final ILabelledVectorSet lTest = pSet;
 		train(lTrain);
 
 		for (int j = 0; j < lTest.size(); j++)
 		{
-			INumericalVector lVector = (INumericalVector) lTest.getVector(j);
-			double lValue = lTest.getClass(j);
+			final INumericalVector lVector = (INumericalVector) lTest.getVector(j);
+			final double lValue = lTest.getClass(j);
 
-			double lPredictedValue = predict(lVector);
+			final double lPredictedValue = predict(lVector);
 
 			// System.out.println(" value= "+lValue+" predicted
 			// value="+lPredictedValue);
@@ -127,51 +125,50 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	/**
 	 * @see org.royerloic.ml.svm.IRegression#train(org.royerloic.ml.svm.ILabelledVectorSet)
 	 */
-	public void train(ILabelledVectorSet pTrainingSet)
+	public void train(final ILabelledVectorSet pTrainingSet)
 	{
 		if (pTrainingSet instanceof LabelledVectorSet)
 		{
-			mProblem = ((LabelledVectorSet) pTrainingSet).toProblem();
+			this.mProblem = ((LabelledVectorSet) pTrainingSet).toProblem();
 			/*************************************************************************
 			 * System.out.println("train: gamma="+mParameters.gamma +"
 			 * cost="+mParameters.C);/
 			 ************************************************************************/
 
-			mModel = SVM.svmTrain(mProblem, mParameters);
+			this.mModel = SVM.svmTrain(this.mProblem, this.mParameters);
 		}
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.IRegression#predict(org.royerloic.ml.svm.ILabelledVectorSet)
 	 */
-	public double predict(IVectorArray pVector)
+	public double predict(final IVectorArray pVector)
 	{
 
-		Node[] lVector = new Node[pVector.getDimension()];
+		final Node[] lVector = new Node[pVector.getDimension()];
 		for (int i = 0; i < pVector.getDimension(); i++)
-		{
 			lVector[i] = new Node(i, pVector.get(i));
-		}
 
-		return SVM.svmPredict(mModel, lVector);
+		return SVM.svmPredict(this.mModel, lVector);
 	}
 
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
 		try
 		{
-			SVMRegression lSVMRegression = (SVMRegression) super.clone();
+			final SVMRegression lSVMRegression = (SVMRegression) super.clone();
 
-			lSVMRegression.mProblem = (Problem) mProblem.clone();
-			lSVMRegression.mParameters = (Parameter) mParameters.clone();
+			lSVMRegression.mProblem = (Problem) this.mProblem.clone();
+			lSVMRegression.mParameters = (Parameter) this.mParameters.clone();
 			/* lSVMRegression.mModel = (Model) mModel.clone();/* */
 
 			return lSVMRegression;
 		}
-		catch (CloneNotSupportedException e)
+		catch (final CloneNotSupportedException e)
 		{
 			e.printStackTrace();
 			return null;
@@ -181,7 +178,7 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	/**
 	 * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
 	 */
-	public void copyFrom(Object pObject)
+	public void copyFrom(final Object pObject)
 	{
 		// TODO Auto-generated method stub
 

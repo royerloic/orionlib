@@ -6,14 +6,14 @@ import java.util.regex.Pattern;
 
 public class ReplaceEntities
 {
-	private static Pattern	entity_pattern	= Pattern.compile("&([a-zA-Z]+);");
+	private static final Pattern	entity_pattern	= Pattern.compile("&([a-zA-Z]+);");
 
-	public static String doReplaceEntities(String content)
+	public static String doReplaceEntities(final String content)
 	{
 
-		StringBuffer buff = new StringBuffer(content.length() + 1000);
+		final StringBuffer buff = new StringBuffer(content.length() + 1000);
 
-		Matcher m = entity_pattern.matcher(content);
+		final Matcher m = entity_pattern.matcher(content);
 
 		int begin = 0;
 
@@ -25,9 +25,9 @@ public class ReplaceEntities
 
 			buff.append(content.substring(begin, m.start()));
 
-			String entity = m.group(1);
+			final String entity = m.group(1);
 
-			String value = (String) sEntitiesMap.get(entity);
+			final String value = (String) sEntitiesMap.get(entity);
 
 			if (value != null)
 			{
@@ -200,17 +200,15 @@ public class ReplaceEntities
 																												{ "\u00FF", "yuml" },
 																												{ "\u0080", "euro" } };
 
-	private static HashMap<String, String>	sEntitiesMap	= new HashMap<String, String>(ENTITIES.length);
+	private static final HashMap<String, String>	sEntitiesMap	= new HashMap<String, String>(ENTITIES.length);
 
 	static
 	{
-		int l = ENTITIES.length;
-		StringBuffer temp = new StringBuffer();
+		final int l = ENTITIES.length;
+		final StringBuffer temp = new StringBuffer();
 
-		for (String[] lPair : ENTITIES)
-		{
+		for (final String[] lPair : ENTITIES)
 			sEntitiesMap.put(lPair[1], lPair[0]);
-		}
 	}
 
 }

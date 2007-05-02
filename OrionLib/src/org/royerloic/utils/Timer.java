@@ -24,14 +24,14 @@ public class Timer
 	 */
 	public String getPrefix()
 	{
-		return prefix;
+		return this.prefix;
 	}
 
 	/**
 	 * @param prefix
 	 *          The prefix to set.
 	 */
-	public void setPrefix(String prefix)
+	public void setPrefix(final String prefix)
 	{
 		this.prefix = prefix;
 	}
@@ -41,14 +41,14 @@ public class Timer
 	 */
 	public String getSuffix()
 	{
-		return suffix;
+		return this.suffix;
 	}
 
 	/**
 	 * @param suffix
 	 *          The suffix to set.
 	 */
-	public void setSuffix(String suffix)
+	public void setSuffix(final String suffix)
 	{
 		this.suffix = suffix;
 	}
@@ -67,11 +67,11 @@ public class Timer
 	 * @param name
 	 *          String
 	 */
-	public Timer(String name)
+	public Timer(final String name)
 	{
 		super();
-		nf = NumberFormat.getInstance(Locale.US);
-		nf.setMinimumIntegerDigits(2);
+		this.nf = NumberFormat.getInstance(Locale.US);
+		this.nf.setMinimumIntegerDigits(2);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class Timer
 	 * @param reference
 	 *          de.acid.util.Timer
 	 */
-	public double getSpeedUp(Timer reference)
+	public double getSpeedUp(final Timer reference)
 	{
 		return (double) reference.getTotalTime() / (double) getTotalTime();
 	}
@@ -92,13 +92,13 @@ public class Timer
 	 * @param time
 	 * @return timer string
 	 */
-	private String getTimeString(long time)
+	private String getTimeString(final long time)
 	{
 
-		long hour = time / 1000 / 60 / 60;
-		long minute = time / 1000 / 60 % 60;
-		long second = time / 1000 % 60;
-		long tsecond = time % 1000;
+		final long hour = time / 1000 / 60 / 60;
+		final long minute = time / 1000 / 60 % 60;
+		final long second = time / 1000 % 60;
+		final long tsecond = time % 1000;
 
 		return hour + ":" + minute + ":" + second + "." + tsecond;
 	}
@@ -110,7 +110,7 @@ public class Timer
 	 */
 	private long getTimeTillNow()
 	{
-		return System.currentTimeMillis() - startTime;
+		return System.currentTimeMillis() - this.startTime;
 	}
 
 	/**
@@ -120,14 +120,14 @@ public class Timer
 	 */
 	public long getTotalTime()
 	{
-		return endTime - startTime;
+		return this.endTime - this.startTime;
 	}
 
 	/**
 	 * 
 	 * @see de.tud.biotec.protein.helper.ProgressListener#notifyProgress(double)
 	 */
-	public void notifyProgress(double pProgress)
+	public void notifyProgress(final double pProgress)
 	{
 		printEST(pProgress);
 	}
@@ -138,7 +138,7 @@ public class Timer
 	 * @param percentFinished
 	 *          double
 	 */
-	public void printEST(double percentFinished)
+	public void printEST(final double percentFinished)
 	{
 		System.out.println(getESTString(percentFinished));
 	}
@@ -149,7 +149,7 @@ public class Timer
 	 * @param percentFinished
 	 *          double
 	 */
-	public String getESTString(double percentFinished)
+	public String getESTString(final double percentFinished)
 	{
 		return getPrefix() + getTimeString((long) (getTimeTillNow() * (1 / percentFinished - 1))) + getSuffix();
 	}
@@ -194,7 +194,7 @@ public class Timer
 	 */
 	public void resume()
 	{
-		startTime = System.currentTimeMillis() - (endTime - startTime);
+		this.startTime = System.currentTimeMillis() - (this.endTime - this.startTime);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class Timer
 	 */
 	public void start()
 	{
-		startTime = System.currentTimeMillis();
+		this.startTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class Timer
 	 */
 	public Timer stop()
 	{
-		endTime = System.currentTimeMillis();
+		this.endTime = System.currentTimeMillis();
 		return this;
 	}
 
@@ -220,9 +220,9 @@ public class Timer
 	 * @param timer
 	 * @return time difference between the two timers
 	 */
-	public String difference(Timer timer)
+	public String difference(final Timer timer)
 	{
-		Timer t = new Timer();
+		final Timer t = new Timer();
 		t.startTime = 0;
 		t.endTime = this.getTotalTime() - timer.getTotalTime();
 		return t.getTime();
@@ -236,7 +236,7 @@ public class Timer
 	 *          running timer
 	 * @return percentage of time of this timer that is passed on timer given.
 	 */
-	public double percentage(Timer timer)
+	public double percentage(final Timer timer)
 	{
 		return 100 * (double) timer.getTotalTime() / this.getTotalTime();
 	}

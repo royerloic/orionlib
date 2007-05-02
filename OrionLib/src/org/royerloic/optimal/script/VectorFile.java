@@ -34,11 +34,11 @@ public final class VectorFile
 
 	public static double[] getVector(final String pFileName)
 	{
-		Vector lVector = new Vector();
+		final Vector lVector = new Vector();
 
 		try
 		{
-			File lInputFile = new File(pFileName);
+			final File lInputFile = new File(pFileName);
 
 			FileReader lFileReader;
 			BufferedReader lBufferedReader;
@@ -47,7 +47,7 @@ public final class VectorFile
 				lFileReader = new FileReader(lInputFile);
 				lBufferedReader = new BufferedReader(lFileReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + lInputFile + " not found.");
 				throw e;
@@ -57,11 +57,9 @@ public final class VectorFile
 			try
 			{
 				while ((lLineString = lBufferedReader.readLine()) != null)
-				{
 					lVector.add(Double.valueOf(lLineString));
-				}
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while reading: " + e2.getCause());
 			}
@@ -70,17 +68,15 @@ public final class VectorFile
 				lFileReader.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 
 		}
 
-		double[] lResult = new double[lVector.size()];
+		final double[] lResult = new double[lVector.size()];
 		for (int i = 0; i < lVector.size(); i++)
-		{
 			lResult[i] = ((Double) lVector.elementAt(i)).doubleValue();
-		}
 		return lResult;
 	}
 

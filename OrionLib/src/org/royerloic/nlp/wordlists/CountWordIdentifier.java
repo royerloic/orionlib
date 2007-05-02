@@ -16,33 +16,30 @@ public class CountWordIdentifier extends GenericWordIdentifier
 
 	private final boolean				mCaseSensitive;
 
-	public CountWordIdentifier(Class pClass, String[] pResourceArray, boolean pCaseSensitive)
+	public CountWordIdentifier(final Class pClass, final String[] pResourceArray, final boolean pCaseSensitive)
 	{
 		super();
-		mCaseSensitive = pCaseSensitive;
-		for (String lRessourceName : pResourceArray)
-		{
+		this.mCaseSensitive = pCaseSensitive;
+		for (final String lRessourceName : pResourceArray)
 			try
 			{
 				this.compileIdentificationRulesFromRessource(pClass, lRessourceName);
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				cLogger.info(e);
 			}
-		}
 	}
 
 	/**
 	 * @see de.tud.biotec.protein.interaction.attic.identifiers.EntityIdentifier#normalizeString(java.lang.String)
 	 */
+	@Override
 	public String normalizeString(String pString)
 	{
 		pString = pString.trim();
-		if (!mCaseSensitive)
-		{
+		if (!this.mCaseSensitive)
 			pString = pString.toLowerCase();
-		}
 		return pString;
 	}
 

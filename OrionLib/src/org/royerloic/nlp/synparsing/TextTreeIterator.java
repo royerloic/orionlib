@@ -9,26 +9,26 @@ public class TextTreeIterator<O> implements Iterator<TextTree<O>>
 
 	Deque<Iterator<TextTree<O>>>	mIteratorStack	= new ArrayDeque<Iterator<TextTree<O>>>();
 
-	public TextTreeIterator(TextTree pTextTree)
+	public TextTreeIterator(final TextTree pTextTree)
 	{
-		mIteratorStack.addFirst(pTextTree.getChildTreeList().iterator());
+		this.mIteratorStack.addFirst(pTextTree.getChildTreeList().iterator());
 	}
 
 	public boolean hasNext()
 	{
-		if (mIteratorStack.getFirst().hasNext())
+		if (this.mIteratorStack.getFirst().hasNext())
 			return true;
 
-		mIteratorStack.removeFirst();
-		if (mIteratorStack.isEmpty())
+		this.mIteratorStack.removeFirst();
+		if (this.mIteratorStack.isEmpty())
 			return false;
 		return hasNext();
 	}
 
 	public TextTree<O> next()
 	{
-		TextTree<O> lTextTree = mIteratorStack.getFirst().next();
-		mIteratorStack.addFirst(lTextTree.getChildTreeList().iterator());
+		final TextTree<O> lTextTree = this.mIteratorStack.getFirst().next();
+		this.mIteratorStack.addFirst(lTextTree.getChildTreeList().iterator());
 		return lTextTree;
 	}
 

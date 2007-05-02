@@ -17,9 +17,8 @@ public class ChromosomeRegexes
 		try
 		{
 			cRegexCompiler = new RegexCompiler("chromosome.regex.txt");
-			int dummy = 0;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -28,30 +27,28 @@ public class ChromosomeRegexes
 
 	public static Pattern	cHumanChromosome					= cRegexCompiler.getPattern("HumanChromosome");
 
-	public static final boolean isHumanChromosome(CharSequence pCharSequence)
+	public static final boolean isHumanChromosome(final CharSequence pCharSequence)
 	{
-		Matcher lMatcher = cHumanChromosome.matcher(pCharSequence);
+		final Matcher lMatcher = cHumanChromosome.matcher(pCharSequence);
 		return lMatcher.matches();
 	}
 
 
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 
 		while (true)
 		{
-			String lAbstract = PubMedAccess.getRandomAbstract();
+			final String lAbstract = PubMedAccess.getRandomAbstract();
 			if (lAbstract != null)
 			{
-				List<String> lMatchesList = StringUtils.findAllmatches(lAbstract, cHumanChromosome.toString());
+				final List<String> lMatchesList = StringUtils.findAllmatches(lAbstract, cHumanChromosome.toString());
 
-				for (String lString : lMatchesList)
-				{
+				for (final String lString : lMatchesList)
 					System.out.println(lString);
-				}
 
-				String[] lTokenArray = StringUtils.split(lAbstract, "\\s+", -1);
+				final String[] lTokenArray = StringUtils.split(lAbstract, "\\s+", -1);
 				/***********************************************************************
 				 * for (int i = 1; i < lTokenArray.length - 1; i++) { String
 				 * lTokenBefore = lTokenArray[i-1]; String lToken =

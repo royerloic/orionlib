@@ -26,16 +26,12 @@ public class NumericalVector extends Object implements IVectorArray,
   void allocate(final int pDimension)
   {
     if (pDimension == 0)
+			this.mCoordinatesList = new ArrayList();
+		else
     {
-      mCoordinatesList = new ArrayList();
-    }
-    else
-    {
-      mCoordinatesList = new ArrayList(pDimension);
+      this.mCoordinatesList = new ArrayList(pDimension);
       for (int i = 0; i < pDimension; i++)
-      {
-        addCoordinate(0.0);
-      }
+				addCoordinate(0.0);
     }
   }
 
@@ -62,9 +58,7 @@ public class NumericalVector extends Object implements IVectorArray,
   {
     allocate(pArray.length);
     for (int i = 0; i < getDimension(); i++)
-    {
-      set(i, pArray[i]);
-    }
+			set(i, pArray[i]);
   }
 
   /**
@@ -72,7 +66,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final int getDimension()
   {
-    return mCoordinatesList.size();
+    return this.mCoordinatesList.size();
   }
 
   /**
@@ -81,7 +75,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final void set(final int pIndex, final double pValue)
   {
-    mCoordinatesList.set(pIndex, new Double(pValue));
+    this.mCoordinatesList.set(pIndex, new Double(pValue));
   }
 
   /**
@@ -89,7 +83,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final void addCoordinate(final double pValue)
   {
-    mCoordinatesList.add(new Double(pValue));
+    this.mCoordinatesList.add(new Double(pValue));
   }
 
   /**
@@ -99,13 +93,9 @@ public class NumericalVector extends Object implements IVectorArray,
   {
     final double lCoordinate;
     if (pIndex > (getDimension() - 1))
-    {
-      lCoordinate = 0;
-    }
-    else
-    {
-      lCoordinate = ((Double) mCoordinatesList.get(pIndex)).doubleValue();
-    }
+			lCoordinate = 0;
+		else
+			lCoordinate = ((Double) this.mCoordinatesList.get(pIndex)).doubleValue();
     return lCoordinate;
   }
 
@@ -115,9 +105,7 @@ public class NumericalVector extends Object implements IVectorArray,
   public void toZero()
   {
     for (int i = 0; i < this.getDimension(); i++)
-    {
-      this.set(i, 0);
-    }
+			this.set(i, 0);
   }
 
   /**
@@ -162,9 +150,7 @@ public class NumericalVector extends Object implements IVectorArray,
   {
     final double lNorm = this.euclideanNorm();
     if (lNorm != 0)
-    {
-      timesEquals(1 / lNorm);
-    }
+			timesEquals(1 / lNorm);
   }
 
   /**
@@ -176,11 +162,9 @@ public class NumericalVector extends Object implements IVectorArray,
     final int lMaxDimension = Math.max(pVect.getDimension(), this
         .getDimension());
 
-    NumericalVector lSum = new NumericalVector(lMaxDimension);
+    final NumericalVector lSum = new NumericalVector(lMaxDimension);
     for (int i = 0; i < pVect.getDimension(); i++)
-    {
-      lSum.set(i, pVect.get(i) + this.get(i));
-    }
+			lSum.set(i, pVect.get(i) + this.get(i));
     return lSum;
   }
 
@@ -194,9 +178,7 @@ public class NumericalVector extends Object implements IVectorArray,
         .getDimension());
 
     for (int i = 0; i < lMaxDimension; i++)
-    {
-      this.set(i, pVect.get(i) + this.get(i));
-    }
+			this.set(i, pVect.get(i) + this.get(i));
 
     return this;
   }
@@ -226,12 +208,10 @@ public class NumericalVector extends Object implements IVectorArray,
   public final NumericalVector times(final double pScal)
   {
     final int lSize = this.getDimension();
-    NumericalVector lResult = new NumericalVector(lSize);
+    final NumericalVector lResult = new NumericalVector(lSize);
 
     for (int i = 0; i < lSize; i++)
-    {
-      lResult.set(i, pScal * this.get(i));
-    }
+			lResult.set(i, pScal * this.get(i));
 
     return lResult;
   }
@@ -243,9 +223,7 @@ public class NumericalVector extends Object implements IVectorArray,
   public final NumericalVector timesEquals(final double pScal)
   {
     for (int i = 0; i < this.getDimension(); i++)
-    {
-      this.set(i, pScal * this.get(i));
-    }
+			this.set(i, pScal * this.get(i));
 
     return this;
   }
@@ -258,16 +236,15 @@ public class NumericalVector extends Object implements IVectorArray,
   {
     double lResult = 0;
     for (int i = 0; i < pVect.getDimension(); i++)
-    {
-      lResult += this.get(i) * pVect.get(i);
-    }
+			lResult += this.get(i) * pVect.get(i);
     return lResult;
   }
 
   /**
    * @see java.lang.Object#equals(java.lang.Object)
    */
-  public final boolean equals(final Object pObject)
+  @Override
+	public final boolean equals(final Object pObject)
   {
     boolean lResult = false;
 
@@ -282,9 +259,7 @@ public class NumericalVector extends Object implements IVectorArray,
         lResult = true;
 
         for (int i = 0; (i < lNumberOfCoordinates) && lResult; i++)
-        {
-          lResult = lResult && (get(i) == lVector.get(i));
-        }
+					lResult = lResult && (get(i) == lVector.get(i));
       }
     }
 
@@ -294,30 +269,28 @@ public class NumericalVector extends Object implements IVectorArray,
   /**
    * @see java.lang.Object#clone()
    */
-  public final Object clone()
+  @Override
+	public final Object clone()
   {
-    NumericalVector lVector = new NumericalVector(this.getDimension());
+    final NumericalVector lVector = new NumericalVector(this.getDimension());
     for (int i = 0; i < this.getDimension(); i++)
-    {
-      lVector.set(i, this.get(i));
-    }
-    return (Object) lVector;
+			lVector.set(i, this.get(i));
+    return lVector;
   }
 
   public final void copyTo(final INumericalVector pVector)
   {
     for (int i = 0; i < this.getDimension(); i++)
-    {
-      this.set(i, pVector.get(i));
-    }
+			this.set(i, pVector.get(i));
   }
 
   /**
    * @see java.lang.Object#hashCode()
    */
-  public int hashCode()
+  @Override
+	public int hashCode()
   {
-    return mCoordinatesList.hashCode();
+    return this.mCoordinatesList.hashCode();
   }
 
   /**
@@ -329,21 +302,18 @@ public class NumericalVector extends Object implements IVectorArray,
     allocate(0);
     boolean lCorrect = true;
 	
-    StringTokenizer lStringTokenizer = new StringTokenizer(pString, " \t(),");
+    final StringTokenizer lStringTokenizer = new StringTokenizer(pString, " \t(),");
     while (lStringTokenizer.hasMoreTokens())
-    {
-
-      try
+			try
       {
-		String lString = lStringTokenizer.nextToken();
-        double lValue = stringToDouble(lString);
+		final String lString = lStringTokenizer.nextToken();
+        final double lValue = stringToDouble(lString);
         addCoordinate(lValue);
       }
-      catch (Throwable e)
+      catch (final Throwable e)
       {
         lCorrect = false;
       }
-    }
 
     return lCorrect;
   }
@@ -363,7 +333,7 @@ public class NumericalVector extends Object implements IVectorArray,
   /**
    * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
    */
-  public void copyFrom(Object pObject)
+  public void copyFrom(final Object pObject)
   {
     // TODO Auto-generated method stub
 
@@ -372,7 +342,8 @@ public class NumericalVector extends Object implements IVectorArray,
   /**
    * @see java.lang.Object#toString()
    */
-  public final String toString()
+  @Override
+	public final String toString()
   {
     String lString = "";
     if (getDimension() != 0)
@@ -380,16 +351,12 @@ public class NumericalVector extends Object implements IVectorArray,
       lString = "(" + get(0);
 
       for (int i = 1; i < getDimension(); i++)
-      {
-        lString = lString + ",\t" + get(i);
-      }
+				lString = lString + ",\t" + get(i);
 
       lString = lString + ")";
     }
-    else
-    {
-      lString = "Empty";
-    }
+		else
+			lString = "Empty";
     return lString;
   }
 
@@ -402,7 +369,7 @@ public class NumericalVector extends Object implements IVectorArray,
     return Double.parseDouble(pString);
   }
 
-  public boolean StringToObject(String pString)
+  public boolean StringToObject(final String pString)
   {
     return parse(pString);
   }

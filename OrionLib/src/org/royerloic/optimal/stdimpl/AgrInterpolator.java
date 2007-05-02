@@ -37,17 +37,17 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#setObjectiveFunction(org.royerloic.optimal.interf.IObjectiveFunction)
 	 */
-	public void setObjectiveFunction(IObjectiveFunction pObjectiveFunction)
+	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		mObjectiveFunction = pObjectiveFunction;
+		this.mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#setExperimentDatabase(org.royerloic.optimal.interf.IExperimentDatabase)
 	 */
-	public void setExperimentDatabase(IExperimentDatabase pExperimentDatabase)
+	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		mExperimentDatabase = pExperimentDatabase;
+		this.mExperimentDatabase = pExperimentDatabase;
 
 	}
 
@@ -55,17 +55,17 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			mInputDimension = mExperimentDatabase.getBestExperiment().getInput().getDimension();
-			mRInterpolator = new RInterpolator(mInputDimension);
-			for (int i = 0; i < mExperimentDatabase.getNumberOfExperiments(); i++)
+			this.mInputDimension = this.mExperimentDatabase.getBestExperiment().getInput().getDimension();
+			this.mRInterpolator = new RInterpolator(this.mInputDimension);
+			for (int i = 0; i < this.mExperimentDatabase.getNumberOfExperiments(); i++)
 			{
-				INumericalVector lInputVector = mExperimentDatabase.getExperiment(i).getInput();
-				INumericalVector lOutputputVector = mExperimentDatabase.getExperiment(i).getOutput();
-				double lValue = mObjectiveFunction.evaluate(lOutputputVector);
+				final INumericalVector lInputVector = this.mExperimentDatabase.getExperiment(i).getInput();
+				final INumericalVector lOutputputVector = this.mExperimentDatabase.getExperiment(i).getOutput();
+				final double lValue = this.mObjectiveFunction.evaluate(lOutputputVector);
 
-				mRInterpolator.addPointWithoutUpdate(lInputVector, lValue);
+				this.mRInterpolator.addPointWithoutUpdate(lInputVector, lValue);
 			}
-			mRInterpolator.update();
+			this.mRInterpolator.update();
 
 		}
 	}
@@ -73,17 +73,18 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.optimal.interf.IInterpolator#evaluate(org.royerloic.math.INumericalVector)
 	 */
-	public double evaluate(INumericalVector pVector)
+	public double evaluate(final INumericalVector pVector)
 	{
 		synchronized (this)
 		{
-			return mRInterpolator.evaluate(pVector);
+			return this.mRInterpolator.evaluate(pVector);
 		}
 	}
 
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
 		synchronized (this)
@@ -93,13 +94,13 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 			{
 				lAgrInterpolator = (AgrInterpolator) super.clone();
 
-				lAgrInterpolator.mObjectiveFunction = mObjectiveFunction;
-				lAgrInterpolator.mExperimentDatabase = mExperimentDatabase;
-				lAgrInterpolator.mRInterpolator = (RInterpolator) mRInterpolator.clone();
+				lAgrInterpolator.mObjectiveFunction = this.mObjectiveFunction;
+				lAgrInterpolator.mExperimentDatabase = this.mExperimentDatabase;
+				lAgrInterpolator.mRInterpolator = (RInterpolator) this.mRInterpolator.clone();
 
 				return lAgrInterpolator;
 			}
-			catch (CloneNotSupportedException e)
+			catch (final CloneNotSupportedException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,7 +112,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
 	 */
-	public void copyFrom(Object pObject)
+	public void copyFrom(final Object pObject)
 	{
 		throw new UnsupportedOperationException("copyFrom not implememented in SvmInterpolator");
 	}
@@ -121,7 +122,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	 */
 	public int getInputDimension()
 	{
-		return mInputDimension;
+		return this.mInputDimension;
 	}
 
 	/**
@@ -140,18 +141,16 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			int lSize = mExperimentDatabase.getNumberOfExperiments();
-			double[][] lPoints = new double[lSize][mInputDimension + 1];
+			final int lSize = this.mExperimentDatabase.getNumberOfExperiments();
+			final double[][] lPoints = new double[lSize][this.mInputDimension + 1];
 
 			for (int i = 0; i < lSize; i++)
 			{
-				IExperiment lExperiment = mExperimentDatabase.getExperiment(i);
+				final IExperiment lExperiment = this.mExperimentDatabase.getExperiment(i);
 				for (int k = 0; k < getInputDimension(); k++)
-				{
 					lPoints[i][k] = lExperiment.getInput().get(k);
-				}
 
-				lPoints[i][getInputDimension()] = mObjectiveFunction.evaluate(lExperiment.getOutput());
+				lPoints[i][getInputDimension()] = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
 			}
 
 			return lPoints;
@@ -162,26 +161,22 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IScalarFunction#computePoints(int)
 	 */
-	public double[][] computePoints(int pResolution)
+	public double[][] computePoints(final int pResolution)
 	{
 
 		synchronized (this)
 		{
-			ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
-			double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
-			double[][] lDatabasePoints = computeDatabasePoints(0);
+			final ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
+			final double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
+			final double[][] lDatabasePoints = computeDatabasePoints(0);
 
-			double[][] lPoints = new double[lGridPoints.length + lDatabasePoints.length][getInputDimension() + 1];
+			final double[][] lPoints = new double[lGridPoints.length + lDatabasePoints.length][getInputDimension() + 1];
 
 			for (int i = 0; i < lGridPoints.length; i++)
-			{
 				lPoints[i] = lGridPoints[i];
-			}
 
 			for (int i = 0; i < lDatabasePoints.length; i++)
-			{
 				lPoints[lGridPoints.length + i] = lDatabasePoints[i];
-			}
 			return lPoints;
 		}
 	}
@@ -197,7 +192,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputMin(int)
 	 */
-	public double getInputMin(int pIndex)
+	public double getInputMin(final int pIndex)
 	{
 		return 0;
 	}
@@ -205,7 +200,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputMax(int)
 	 */
-	public double getInputMax(int pIndex)
+	public double getInputMax(final int pIndex)
 	{
 		return 1;
 	}
@@ -213,7 +208,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#getInputDelta(int)
 	 */
-	public double getInputDelta(int pIndex)
+	public double getInputDelta(final int pIndex)
 	{
 		// TODO Auto-generated method stub
 		return 0.00001;
@@ -222,7 +217,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	/**
 	 * @see org.royerloic.math.IFunction#normalizeInputVector(org.royerloic.math.INumericalVector)
 	 */
-	public void normalizeInputVector(INumericalVector pVector)
+	public void normalizeInputVector(final INumericalVector pVector)
 	{
 
 	}

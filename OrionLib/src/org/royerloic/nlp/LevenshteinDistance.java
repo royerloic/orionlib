@@ -5,9 +5,9 @@ public class LevenshteinDistance
 
 	private static final double minimum(final double a, final double b, final double c)
 	{
-		if (a <= b && a <= c)
+		if ((a <= b) && (a <= c))
 			return a;
-		if (b <= a && b <= c)
+		if ((b <= a) && (b <= c))
 			return b;
 		return c;
 	}
@@ -19,9 +19,9 @@ public class LevenshteinDistance
 
 	public static final double similarity(final String str1, final String str2)
 	{
-		double lLevenshteinDistance = distance(str1.toCharArray(), str2.toCharArray());
-		double lMaxLength = max(str1.length(), str2.length());
-		double lLevenshteinSimilarity = (lMaxLength - lLevenshteinDistance) / lMaxLength;
+		final double lLevenshteinDistance = distance(str1.toCharArray(), str2.toCharArray());
+		final double lMaxLength = max(str1.length(), str2.length());
+		final double lLevenshteinSimilarity = (lMaxLength - lLevenshteinDistance) / lMaxLength;
 
 		return lLevenshteinSimilarity;
 	}
@@ -108,22 +108,22 @@ public class LevenshteinDistance
 
 	private static final boolean isDigit(final char c)
 	{
-		return c >= 48 && c <= 57;
+		return (c >= 48) && (c <= 57);
 	}
 
 	private static final boolean isUpper(final char c)
 	{
-		return c >= 65 && c <= 90;
+		return (c >= 65) && (c <= 90);
 	}
 
 	private static final boolean isLower(final char c)
 	{
-		return c >= 97 && c <= 122;
+		return (c >= 97) && (c <= 122);
 	}
 
 	private static final boolean isPunctuation(final char c)
 	{
-		return c >= 32 && c <= 47;
+		return (c >= 32) && (c <= 47);
 	}
 
 }

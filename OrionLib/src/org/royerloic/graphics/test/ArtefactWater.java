@@ -23,43 +23,43 @@ public class ArtefactWater
 	 */
 	public ArtefactWater() throws HeadlessException
 	{
-		mOrionGraphics = new OrionGraphics("ArtefactWater", OrionGraphics.cFIRST_DEVICE);
+		this.mOrionGraphics = new OrionGraphics("ArtefactWater", OrionGraphics.cFIRST_DEVICE);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Graphics getMyGraphics()
 	{
-		Graphics lGraphics = mOrionGraphics.getDrawGraphics();
-		Color lColor = new Color(1.0f, 0.0f, 0.0f);
+		final Graphics lGraphics = this.mOrionGraphics.getDrawGraphics();
+		final Color lColor = new Color(1.0f, 0.0f, 0.0f);
 		lGraphics.setColor(lColor);
-		Font lFontTitle = new Font(null, Font.ITALIC, 90);
-		Font lFontSubTitle = new Font(null, Font.ITALIC, 30);
+		final Font lFontTitle = new Font(null, Font.ITALIC, 90);
+		final Font lFontSubTitle = new Font(null, Font.ITALIC, 30);
 		return lGraphics;
 	}
 
 	public int[] getWaterMap(final int pWidth, final int pHeight)
 	{
 		Robot lRobot = null;
-		int[] lMoonMapBuffer = new int[pWidth * pHeight];
+		final int[] lMoonMapBuffer = new int[pWidth * pHeight];
 
 		try
 		{
 			lRobot = new Robot();
-			BufferedImage lBufferedimage = lRobot.createScreenCapture(new Rectangle(pWidth, pHeight));
+			final BufferedImage lBufferedimage = lRobot.createScreenCapture(new Rectangle(pWidth, pHeight));
 
-			PixelGrabber lPixelGrabber = new PixelGrabber(lBufferedimage, 0, 0, pWidth, pHeight, lMoonMapBuffer, 0,
+			final PixelGrabber lPixelGrabber = new PixelGrabber(lBufferedimage, 0, 0, pWidth, pHeight, lMoonMapBuffer, 0,
 					pWidth);
 			try
 			{
 				lPixelGrabber.grabPixels();
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 				System.err.println("interrupted waiting for pixels!");
 				return null;
 			}
 		}
-		catch (AWTException e1)
+		catch (final AWTException e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -71,8 +71,8 @@ public class ArtefactWater
 
 	public void main(final int pWidth, final int pHeight)
 	{
-		mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
-		int[] MoonMap = getWaterMap(pWidth, pHeight);
+		this.mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
+		final int[] MoonMap = getWaterMap(pWidth, pHeight);
 
 		final int lSize = pWidth * pHeight;
 		final int lPixel[] = new int[lSize];
@@ -87,31 +87,27 @@ public class ArtefactWater
 			lHeightMatrix2[index] = 0;
 		}
 
-		Color lTitleColor = new Color(1.0f, 0.0f, 0.0f);
-		Font lFontTitle = new Font(null, Font.ITALIC, 90);
-		Font lFontSubTitle = new Font(null, Font.ITALIC, 30);
+		final Color lTitleColor = new Color(1.0f, 0.0f, 0.0f);
+		final Font lFontTitle = new Font(null, Font.ITALIC, 90);
+		final Font lFontSubTitle = new Font(null, Font.ITALIC, 30);
 
-		mOrionGraphics.mMouseX = pWidth / 2;
-		mOrionGraphics.mMouseY = pHeight / 2;
+		this.mOrionGraphics.mMouseX = pWidth / 2;
+		this.mOrionGraphics.mMouseY = pHeight / 2;
 
-		mOrionGraphics.startGraphics();
+		this.mOrionGraphics.startGraphics();
 
-		while (!mOrionGraphics.mMouseRight)
+		while (!this.mOrionGraphics.mMouseRight)
 		{
-			Graphics lGraphics = mOrionGraphics.getDrawGraphics();
+			final Graphics lGraphics = this.mOrionGraphics.getDrawGraphics();
 
 			for (int ly = -10; ly < 10; ly++)
 				for (int lx = -10; lx < 10; lx++)
 				{
-					int lIndex = mOrionGraphics.mMouseX + lx + pWidth * (mOrionGraphics.mMouseY + ly);
+					int lIndex = this.mOrionGraphics.mMouseX + lx + pWidth * (this.mOrionGraphics.mMouseY + ly);
 					if (lIndex < 0)
-					{
 						lIndex = 0;
-					}
 					else if (lIndex >= lSize)
-					{
 						lIndex = lSize - 1;
-					}
 
 					lHeightMatrix1[lIndex] = 100;
 					lHeightMatrix2[lIndex] = 100;
@@ -129,36 +125,28 @@ public class ArtefactWater
 				final int gY = lHeightMatrix1[index + pWidth] - lHeightMatrix1[index - pWidth];
 				final int lReflectionIndex = index + 2 * gX + pWidth * 2 * gY;
 				if (lReflectionIndex < 0)
-				{
 					lPixel[index] = 0;
-				}
 				else if (lReflectionIndex >= lSize)
-				{
 					lPixel[index] = 0;
-				}
 				else
-				{
 					lPixel[index] = MoonMap[lReflectionIndex];
-				}
 
 			}
 
 			for (int index = 3 * pWidth; index < (lSize - 3 * pWidth); index++)
-			{
 				lHeightMatrix2[index] = (+lHeightMatrix2[index - 1] + lHeightMatrix2[index + 1]
 						+ lHeightMatrix2[index - 1 * pWidth] + lHeightMatrix2[index + 1 * pWidth]
 				/***********************************************************************
 				 * + lHeightMatrix2[index - 2] + lHeightMatrix2[index + 2] +
 				 * lHeightMatrix2[index - 2*pWidth] + lHeightMatrix2[index + 2*pWidth] /
 				 **********************************************************************/+ 1) / 4;
-			}/**/
 
 			lHeightMatrixTemp = lHeightMatrix1;
 			lHeightMatrix1 = lHeightMatrix2;
 			lHeightMatrix2 = lHeightMatrixTemp; /**/
 
-			mOrionGraphics.update(lPixel);
-			mOrionGraphics.paintPixels();
+			this.mOrionGraphics.update(lPixel);
+			this.mOrionGraphics.paintPixels();
 
 			//
 
@@ -169,15 +157,15 @@ public class ArtefactWater
 			 * 250, 200);
 			 */
 
-			mOrionGraphics.refresh();
+			this.mOrionGraphics.refresh();
 		}
-		mOrionGraphics.stopGraphics();
-		mOrionGraphics.dispose();
+		this.mOrionGraphics.stopGraphics();
+		this.mOrionGraphics.dispose();
 	}
 
-	public static void main(String[] pArguments)
+	public static void main(final String[] pArguments)
 	{
-		ArtefactWater lTestFullScreen1 = new ArtefactWater();
+		final ArtefactWater lTestFullScreen1 = new ArtefactWater();
 		lTestFullScreen1.main(640, 400);
 	}
 

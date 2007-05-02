@@ -13,20 +13,23 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 {
 
 	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 8584828916052243423L;
+
+	/**
 	 * @return
 	 */
 	public Set<V> valuesFromAllSets()
 	{
-		Set<V> lAllValuesSet = new HashSet<V>();
-		Collection<Set<V>> lValues = super.values();
-		for (Set<V> lSet : lValues)
-		{
+		final Set<V> lAllValuesSet = new HashSet<V>();
+		final Collection<Set<V>> lValues = super.values();
+		for (final Set<V> lSet : lValues)
 			lAllValuesSet.addAll(lSet);
-		}
 		return lAllValuesSet;
 	}
 
-	public Set<V> put(K pKey)
+	public Set<V> put(final K pKey)
 	{
 		Set<V> lValueSet = get(pKey);
 		if (lValueSet == null)
@@ -42,7 +45,7 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 	 * @param pValue
 	 * @return
 	 */
-	public Set<V> put(K pKey, V pValue)
+	public Set<V> put(final K pKey, final V pValue)
 	{
 		Set<V> lValueSet = get(pKey);
 		if (lValueSet == null)
@@ -54,7 +57,7 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 		return lValueSet;
 	}
 
-	public Set<V> putAll(K pKey, Collection<V> pVSet)
+	public Set<V> putAll(final K pKey, final Collection<V> pVSet)
 	{
 		Set<V> lValueSet = get(pKey);
 		if (lValueSet == null)
@@ -68,34 +71,28 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
 		return lValueSet;
 	}
 
-	public void addAll(Collection<K> pKSet, Collection<V> pVSet)
+	public void addAll(final Collection<K> pKSet, final Collection<V> pVSet)
 	{
-		for (K lK : pKSet)
-		{
+		for (final K lK : pKSet)
 			this.putAll(lK, pVSet);
-		}
 	}
 
-	public void addAll(SetMap<K, V> pSetMap)
+	public void addAll(final SetMap<K, V> pSetMap)
 	{
-		for (Entry<K, Set<V>> lEntry : pSetMap.entrySet())
+		for (final Entry<K, Set<V>> lEntry : pSetMap.entrySet())
 		{
 			final Set<V> lSet = get(lEntry.getKey());
 			if (lSet == null)
-			{
 				super.put(lEntry.getKey(), new HashSet<V>(lEntry.getValue()));
-			}
 			else
-			{
 				lSet.addAll(lEntry.getValue());
-			}
 		}
 
 	}
 
-	public void clear(K pKey)
+	public void clear(final K pKey)
 	{
-		Set<V> lValueSet = get(pKey);
+		final Set<V> lValueSet = get(pKey);
 		if (lValueSet != null)
 			lValueSet.clear();
 	}

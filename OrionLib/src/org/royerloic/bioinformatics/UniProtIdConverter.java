@@ -57,7 +57,7 @@ public class UniProtIdConverter
 	 * @param pUniProtId
 	 * @return
 	 */
-	public static int convertUniProtIdToInteger(String pUniProtId)
+	public static int convertUniProtIdToInteger(final String pUniProtId)
 	{
 		int lUniProtIntegerId = 0;
 		for (int i = 0; i < 6; i++)
@@ -69,35 +69,35 @@ public class UniProtIdConverter
 	 * @param pUniProtIntegerId
 	 * @return
 	 */
-	public static String convertIntegerToUniProtId(int pUniProtIntegerId)
+	public static String convertIntegerToUniProtId(final int pUniProtIntegerId)
 	{
-		char[] lUniProtIdCharArray = new char[6];
+		final char[] lUniProtIdCharArray = new char[6];
 		int lValue = pUniProtIntegerId;
 		for (int i = 0; i < 6; i++)
 		{
-			int lTranslatedCharCode = lValue % 36;
+			final int lTranslatedCharCode = lValue % 36;
 			lValue = lValue / 36;
 			lUniProtIdCharArray[5 - i] = encodeLetter(lTranslatedCharCode);
 		}
 		return new String(lUniProtIdCharArray);
 	}
 
-	private static int decodeLetter(char pChar)
+	private static int decodeLetter(final char pChar)
 	{
-		int lCode = (int) pChar;
-		if (lCode >= 65 && lCode <= 90)
+		int lCode = pChar;
+		if ((lCode >= 65) && (lCode <= 90))
 			lCode = lCode - 65 + 10;
-		else if (lCode >= 48 && lCode <= 57)
+		else if ((lCode >= 48) && (lCode <= 57))
 			lCode = lCode - 48;
 		return lCode;
 	}
 
-	private static char encodeLetter(int pTranslatedCharCode)
+	private static char encodeLetter(final int pTranslatedCharCode)
 	{
 		char lChar = '!';
 		if (pTranslatedCharCode <= 9)
 			lChar = (char) (48 + pTranslatedCharCode);
-		else if (pTranslatedCharCode >= 10 && pTranslatedCharCode <= 36)
+		else if ((pTranslatedCharCode >= 10) && (pTranslatedCharCode <= 36))
 			lChar = (char) (65 + pTranslatedCharCode - 10);
 		return lChar;
 	}
@@ -106,27 +106,23 @@ public class UniProtIdConverter
 	 * @param pArguments
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] pArguments) throws InterruptedException
+	public static void main(final String[] pArguments) throws InterruptedException
 	{
-		String lA = "A18JX0";
+		final String lA = "A18JX0";
 
-		int lAi = convertUniProtIdToInteger(lA);
-		String lAis = convertIntegerToUniProtId(lAi);
+		final int lAi = convertUniProtIdToInteger(lA);
+		final String lAis = convertIntegerToUniProtId(lAi);
 
 		if (!lA.equals(lAis))
-		{
 			System.out.println(lA + " is not equal to " + lAis);
-		}
 
-		int lB = 1586917556;
+		final int lB = 1586917556;
 
-		String lBs = convertIntegerToUniProtId(lB);
-		int lBsi = convertUniProtIdToInteger(lBs);
+		final String lBs = convertIntegerToUniProtId(lB);
+		final int lBsi = convertUniProtIdToInteger(lBs);
 
 		if (lB != lBsi)
-		{
 			System.out.println(lB + " is not equal to " + lBsi);
-		}
 
 	}
 }

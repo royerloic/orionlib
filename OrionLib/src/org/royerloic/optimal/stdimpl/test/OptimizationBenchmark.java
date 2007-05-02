@@ -44,11 +44,11 @@ public class OptimizationBenchmark
 		public IExperiment	mBestExperiment;
 	}
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
-		OptimizationBenchmark lOptimalEngineTest1 = new OptimizationBenchmark(AgrInterpolator.class,
+		final OptimizationBenchmark lOptimalEngineTest1 = new OptimizationBenchmark(AgrInterpolator.class,
 				DoeStrategyClassic.class, 200, 50);
-		OptimizationBenchmark lOptimalEngineTest2 = new OptimizationBenchmark(SvmInterpolator.class,
+		final OptimizationBenchmark lOptimalEngineTest2 = new OptimizationBenchmark(SvmInterpolator.class,
 				DoeStrategyClassic.class, 200, 50);
 
 		lOptimalEngineTest1.launchBenchmark();
@@ -65,10 +65,10 @@ public class OptimizationBenchmark
 																final int pRepeats)
 	{
 		super();
-		mInterpolatorClass = pInterpolatorClass;
-		mDoeStrategyClass = pDoeStrategyClass;
-		mMaximumIterations = pMaximumIterations;
-		mRepeats = pRepeats;
+		this.mInterpolatorClass = pInterpolatorClass;
+		this.mDoeStrategyClass = pDoeStrategyClass;
+		this.mMaximumIterations = pMaximumIterations;
+		this.mRepeats = pRepeats;
 
 	}
 
@@ -80,16 +80,13 @@ public class OptimizationBenchmark
 		System.out.println("Fn \tR \tMax \tSpeed");
 
 		for (int i = 1; i <= 10; i++)
-		{
-
-			for (int j = 1; j <= mRepeats; j++)
+			for (int j = 1; j <= this.mRepeats; j++)
 			{
 
-				TestResult lResults = launchTest(i);
+				final TestResult lResults = launchTest(i);
 
 				System.out.println(i + "\t" + j + "\t" + lResults.mMaxValue + "\t" + lResults.mSpeed);
 			}
-		}/**/
 	}
 
 	/**
@@ -97,49 +94,47 @@ public class OptimizationBenchmark
 	 */
 	private TestResult launchTest(final int pIndex)
 	{
-		TestFunctions mTestFunction = new TestFunctions(pIndex);
+		final TestFunctions mTestFunction = new TestFunctions(pIndex);
 
-		mOptimalEngine = new OptimalEngine();
+		this.mOptimalEngine = new OptimalEngine();
 
 		try
 		{
-			IInterpolator lInterpolator = (IInterpolator) mInterpolatorClass.newInstance();
-			mOptimalEngine.setInterpolator(lInterpolator);
-			IDoeStrategy lDoeStrategy = (IDoeStrategy) mDoeStrategyClass.newInstance();
-			mOptimalEngine.setDoeStrategy(lDoeStrategy);
+			final IInterpolator lInterpolator = (IInterpolator) this.mInterpolatorClass.newInstance();
+			this.mOptimalEngine.setInterpolator(lInterpolator);
+			final IDoeStrategy lDoeStrategy = (IDoeStrategy) this.mDoeStrategyClass.newInstance();
+			this.mOptimalEngine.setDoeStrategy(lDoeStrategy);
 		}
-		catch (InstantiationException e1)
+		catch (final InstantiationException e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		catch (IllegalAccessException e1)
+		catch (final IllegalAccessException e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		mOptimizationTask = new OptimizationTask(mOptimalEngine, mTestFunction, mMaximumIterations);
+		this.mOptimizationTask = new OptimizationTask(this.mOptimalEngine, mTestFunction, this.mMaximumIterations);
 
-		mOptimizationTask.launchTest();
+		this.mOptimizationTask.launchTest();
 
-		while (!mOptimizationTask.isDone())
-		{
+		while (!this.mOptimizationTask.isDone())
 			try
 			{
 				Thread.sleep(100);
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 
-		TestResult lTestResult = new TestResult();
-		lTestResult.mSpeed = mOptimizationTask.getSpeed();
-		lTestResult.mMaxValue = mOptimizationTask.getMaxValue();
-		lTestResult.mBestExperiment = mOptimizationTask.getBestExperiment();
+		final TestResult lTestResult = new TestResult();
+		lTestResult.mSpeed = this.mOptimizationTask.getSpeed();
+		lTestResult.mMaxValue = this.mOptimizationTask.getMaxValue();
+		lTestResult.mBestExperiment = this.mOptimizationTask.getBestExperiment();
 
 		return lTestResult;
 	}

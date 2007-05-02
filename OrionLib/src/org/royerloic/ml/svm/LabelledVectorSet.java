@@ -31,8 +31,8 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	public LabelledVectorSet()
 	{
 		super();
-		mVectorList = new ArrayList();
-		mClassList = new ArrayList();
+		this.mVectorList = new ArrayList();
+		this.mClassList = new ArrayList();
 	}
 
 	/**
@@ -41,63 +41,61 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	public int size()
 	{
 		// TODO Auto-generated method stub
-		return mVectorList.size();
+		return this.mVectorList.size();
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#addVector(org.royerloic.math.IVectorArray,
 	 *      double)
 	 */
-	public void addVector(IVectorArray pVector, double pClass)
+	public void addVector(final IVectorArray pVector, final double pClass)
 	{
-		mVectorList.add(pVector);
-		mClassList.add(new Double(pClass));
+		this.mVectorList.add(pVector);
+		this.mClassList.add(new Double(pClass));
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#delVector(int)
 	 */
-	public void delVector(int pIndex)
+	public void delVector(final int pIndex)
 	{
-		mVectorList.remove(pIndex);
-		mClassList.remove(pIndex);
+		this.mVectorList.remove(pIndex);
+		this.mClassList.remove(pIndex);
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#getVector(int)
 	 */
-	public IVectorArray getVector(int pIndex)
+	public IVectorArray getVector(final int pIndex)
 	{
-		return (IVectorArray) mVectorList.get(pIndex);
+		return (IVectorArray) this.mVectorList.get(pIndex);
 	}
 
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#getClass(int)
 	 */
-	public double getClass(int pIndex)
+	public double getClass(final int pIndex)
 	{
-		return ((Double) mClassList.get(pIndex)).doubleValue();
+		return ((Double) this.mClassList.get(pIndex)).doubleValue();
 	}
 
 	public Problem toProblem()
 	{
-		Problem lResult = new Problem();
+		final Problem lResult = new Problem();
 
-		lResult.mNumberOfVectors = mVectorList.size();
+		lResult.mNumberOfVectors = this.mVectorList.size();
 
-		lResult.mClass = new double[mVectorList.size()];
-		lResult.mVectorsTable = new Node[mVectorList.size()][];
-		for (int i = 0; i < mVectorList.size(); i++)
+		lResult.mClass = new double[this.mVectorList.size()];
+		lResult.mVectorsTable = new Node[this.mVectorList.size()][];
+		for (int i = 0; i < this.mVectorList.size(); i++)
 		{
-			IVectorArray lVectorArray = (IVectorArray) mVectorList.get(i);
-			int lVectorSize = lVectorArray.getDimension();
+			final IVectorArray lVectorArray = (IVectorArray) this.mVectorList.get(i);
+			final int lVectorSize = lVectorArray.getDimension();
 			lResult.mVectorsTable[i] = new Node[lVectorSize];
 			for (int j = 0; j < lVectorSize; j++)
-			{
 				lResult.mVectorsTable[i][j] = new Node(j, lVectorArray.get(j));
-			}
 
-			lResult.mClass[i] = ((Double) mClassList.get(i)).doubleValue();
+			lResult.mClass[i] = ((Double) this.mClassList.get(i)).doubleValue();
 		}
 
 		return lResult;
@@ -106,17 +104,17 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#generateTrainTestRandomSubsets(double)
 	 */
-	public void generateTrainTestRandomSubsets(double pRatio)
+	public void generateTrainTestRandomSubsets(final double pRatio)
 	{
-		if (mTrainSubset == null)
+		if (this.mTrainSubset == null)
 		{
-			mTrainSubset = new LabelledVectorSet();
-			mTestSubset = new LabelledVectorSet();
+			this.mTrainSubset = new LabelledVectorSet();
+			this.mTestSubset = new LabelledVectorSet();
 		}
 		else
 		{
-			mTrainSubset.clear();
-			mTestSubset.clear();
+			this.mTrainSubset.clear();
+			this.mTestSubset.clear();
 		}
 
 		INumericalVector lVector = null;
@@ -128,20 +126,16 @@ public class LabelledVectorSet implements ILabelledVectorSet
 			lClass = getClass(i);
 
 			if (Math.random() < pRatio)
-			{
-				mTrainSubset.addVector(lVector, lClass);
-			}
+				this.mTrainSubset.addVector(lVector, lClass);
 			else
-			{
-				mTestSubset.addVector(lVector, lClass);
-			}
+				this.mTestSubset.addVector(lVector, lClass);
 
 		}
 
-		if (mTestSubset.size() == 0)
+		if (this.mTestSubset.size() == 0)
 		{
-			mTestSubset.addVector(lVector, lClass);
-			mTrainSubset.delVector(size() - 1);
+			this.mTestSubset.addVector(lVector, lClass);
+			this.mTrainSubset.delVector(size() - 1);
 		}
 
 	}
@@ -149,17 +143,17 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	/**
 	 * @see org.royerloic.ml.svm.ILabelledVectorSet#generateTrainTestRandomSubsets(double)
 	 */
-	public void generateTrainTestUnitarySubsets(int pIndex)
+	public void generateTrainTestUnitarySubsets(final int pIndex)
 	{
-		if (mTrainSubset == null)
+		if (this.mTrainSubset == null)
 		{
-			mTrainSubset = new LabelledVectorSet();
-			mTestSubset = new LabelledVectorSet();
+			this.mTrainSubset = new LabelledVectorSet();
+			this.mTestSubset = new LabelledVectorSet();
 		}
 		else
 		{
-			mTrainSubset.clear();
-			mTestSubset.clear();
+			this.mTrainSubset.clear();
+			this.mTestSubset.clear();
 		}
 
 		INumericalVector lVector = null;
@@ -170,13 +164,9 @@ public class LabelledVectorSet implements ILabelledVectorSet
 			lVector = (INumericalVector) getVector(i);
 			lClass = getClass(i);
 			if (pIndex != i)
-			{
-				mTrainSubset.addVector(lVector, lClass);
-			}
+				this.mTrainSubset.addVector(lVector, lClass);
 			else
-			{
-				mTestSubset.addVector(lVector, lClass);
-			}
+				this.mTestSubset.addVector(lVector, lClass);
 
 		}
 
@@ -187,7 +177,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public ILabelledVectorSet getTrainSubset()
 	{
-		return mTrainSubset;
+		return this.mTrainSubset;
 	}
 
 	/**
@@ -195,7 +185,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public ILabelledVectorSet getTestSubset()
 	{
-		return mTestSubset;
+		return this.mTestSubset;
 	}
 
 	/**
@@ -203,12 +193,12 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void clear()
 	{
-		mVectorList.clear();
-		mClassList.clear();
-		if (mTrainSubset != null)
+		this.mVectorList.clear();
+		this.mClassList.clear();
+		if (this.mTrainSubset != null)
 		{
-			mTrainSubset.clear();
-			mTestSubset.clear();
+			this.mTrainSubset.clear();
+			this.mTestSubset.clear();
 		}
 	}
 

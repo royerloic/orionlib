@@ -25,14 +25,14 @@ public class LocationDatabase
 	public LocationDatabase()
 	{
 		super();
-		mLocationList = new HashMap<String, Location>();
+		this.mLocationList = new HashMap<String, Location>();
 	}
 
-	public void addListFromFile(String pFileName)
+	public void addListFromFile(final String pFileName)
 	{
 		try
 		{
-			URL lURL = this.getClass().getClassLoader().getResource(pFileName);
+			final URL lURL = this.getClass().getClassLoader().getResource(pFileName);
 
 			InputStreamReader lInputStreamReader;
 			BufferedReader lBufferedReader;
@@ -41,7 +41,7 @@ public class LocationDatabase
 				lInputStreamReader = new InputStreamReader(lURL.openStream());
 				lBufferedReader = new BufferedReader(lInputStreamReader);
 			}
-			catch (FileNotFoundException e)
+			catch (final FileNotFoundException e)
 			{
 				System.out.println("File: " + lURL + " not found.");
 				throw e;
@@ -49,40 +49,35 @@ public class LocationDatabase
 
 			try
 			{
-				String lFirstLine = lBufferedReader.readLine();
-				StringTokenizer lFirstLineTokenizer = new StringTokenizer(lFirstLine, cDELIMITERS, false);
-				String lType = lFirstLineTokenizer.nextToken();
+				final String lFirstLine = lBufferedReader.readLine();
+				final StringTokenizer lFirstLineTokenizer = new StringTokenizer(lFirstLine, cDELIMITERS, false);
+				final String lType = lFirstLineTokenizer.nextToken();
 
 				String lLineString;
 				while ((lLineString = lBufferedReader.readLine()) != null)
-				{
 					if (!lLineString.matches("#.*"))
 					{
-						StringTokenizer lStringTokenizer = new StringTokenizer(lLineString, cDELIMITERS, false);
+						final StringTokenizer lStringTokenizer = new StringTokenizer(lLineString, cDELIMITERS, false);
 						String lName = lStringTokenizer.nextToken();
 						lName = lName.trim();
 						lName = lName.replace('_', ' ');
 
-						String lLatitudeString = lStringTokenizer.nextToken();
-						String lLongitudeString = lStringTokenizer.nextToken();
-						String lCountry = lStringTokenizer.nextToken();
+						final String lLatitudeString = lStringTokenizer.nextToken();
+						final String lLongitudeString = lStringTokenizer.nextToken();
+						final String lCountry = lStringTokenizer.nextToken();
 
-						double lLatitude = (Double.valueOf(lLatitudeString)).doubleValue();
-						double lLongitude = (Double.valueOf(lLongitudeString)).doubleValue();
+						final double lLatitude = (Double.valueOf(lLatitudeString)).doubleValue();
+						final double lLongitude = (Double.valueOf(lLongitudeString)).doubleValue();
 
-						Location lLocation = new Location(lType, lName, lLatitude, lLongitude, lCountry);
+						final Location lLocation = new Location(lType, lName, lLatitude, lLongitude, lCountry);
 						if (isDebug())
-						{
 							lLocation.setSourceString(lLineString);
-						}
 
-						mLocationList.put(lName, lLocation);
+						this.mLocationList.put(lName, lLocation);
 
 					}
-
-				}
 			}
-			catch (IOException e2)
+			catch (final IOException e2)
 			{
 				System.out.println("Error while reading: " + e2.getCause());
 			}
@@ -91,7 +86,7 @@ public class LocationDatabase
 				lInputStreamReader.close();
 			}
 		}
-		catch (Exception any)
+		catch (final Exception any)
 		{
 			any.printStackTrace(System.out);
 
@@ -101,7 +96,7 @@ public class LocationDatabase
 
 	public Location findLocationByName(final String pName)
 	{
-		Location lLocation = (Location) mLocationList.get(pName);
+		final Location lLocation = this.mLocationList.get(pName);
 
 		return lLocation;
 	}
@@ -111,22 +106,20 @@ public class LocationDatabase
 		Location lLocation = null;
 		// lLocation = findSingleWordLocationInString(pString);
 		if (lLocation == null)
-		{
 			lLocation = findLocationMatchInString(pString);
-		}
 		return lLocation;
 	}
 
-	public Location findSingleWordLocationInString(String pString)
+	public Location findSingleWordLocationInString(final String pString)
 	{
-		String lLowerCaseString = pString.toLowerCase(Locale.ENGLISH);
-		Iterator lIterator = mLocationList.keySet().iterator();
+		final String lLowerCaseString = pString.toLowerCase(Locale.ENGLISH);
+		final Iterator lIterator = this.mLocationList.keySet().iterator();
 		for (; lIterator.hasNext();)
 		{
-			String lName = (String) lIterator.next();
-			String lLowerCaseName = lName.toLowerCase(Locale.ENGLISH);
-			String lRefactoredlName = lLowerCaseName.trim();
-			Location lLocation = findLocationByName(lRefactoredlName);
+			final String lName = (String) lIterator.next();
+			final String lLowerCaseName = lName.toLowerCase(Locale.ENGLISH);
+			final String lRefactoredlName = lLowerCaseName.trim();
+			final Location lLocation = findLocationByName(lRefactoredlName);
 			return lLocation;
 		}
 
@@ -134,7 +127,7 @@ public class LocationDatabase
 
 	}
 
-	public Location findLocationMatchInString(String pString)
+	public Location findLocationMatchInString(final String pString)
 	{
 
 		String lLowerCaseString = pString.toLowerCase();
@@ -152,43 +145,43 @@ public class LocationDatabase
 
 		Location lLocationFound = null;
 		int lMinimalIndex = Integer.MAX_VALUE;
-		Iterator lIterator = mLocationList.keySet().iterator();
+		final Iterator lIterator = this.mLocationList.keySet().iterator();
 		for (; lIterator.hasNext();)
 		{
-			String lName = (String) lIterator.next();
-			String lLowerCaseName = lName.toLowerCase();
-			String lRefactoredlName = " " + lLowerCaseName + " ";
-			int lIndex = lLowerCaseString.indexOf(lRefactoredlName);
+			final String lName = (String) lIterator.next();
+			final String lLowerCaseName = lName.toLowerCase();
+			final String lRefactoredlName = " " + lLowerCaseName + " ";
+			final int lIndex = lLowerCaseString.indexOf(lRefactoredlName);
 			// System.out.println("Searching for : '"+lRefactoredlName+"', found it
 			// at: "+lIndex);
 			if ((lIndex < lMinimalIndex) && (lIndex >= 0))
 			{
 				lMinimalIndex = lIndex;
-				lLocationFound = (Location) mLocationList.get(lName);
+				lLocationFound = this.mLocationList.get(lName);
 			}
 		}
 
 		return lLocationFound;
 	}
 
-	public Location findLocationByCoordinates(double pLong, double pLat)
+	public Location findLocationByCoordinates(final double pLong, final double pLat)
 	{
 		Location lLocationFound = null;
 		try
 		{
-			Iterator lIterator = mLocationList.entrySet().iterator();
+			final Iterator lIterator = this.mLocationList.entrySet().iterator();
 			double lMinDistance = Double.POSITIVE_INFINITY;
 			for (; lIterator.hasNext();)
 			{
-				Map.Entry lEntry = (Map.Entry) lIterator.next();
-				Location lLocation = (Location) lEntry.getValue();
-				double lLong = lLocation.getLongitude();
-				double lLat = lLocation.getLatitude();
+				final Map.Entry lEntry = (Map.Entry) lIterator.next();
+				final Location lLocation = (Location) lEntry.getValue();
+				final double lLong = lLocation.getLongitude();
+				final double lLat = lLocation.getLatitude();
 
-				double lDifferenceLong = lLong - pLong;
-				double lDifferenceLat = lLat - pLat;
+				final double lDifferenceLong = lLong - pLong;
+				final double lDifferenceLat = lLat - pLat;
 
-				double lDistance = Math.sqrt(lDifferenceLong * lDifferenceLong + lDifferenceLat * lDifferenceLat);
+				final double lDistance = Math.sqrt(lDifferenceLong * lDifferenceLong + lDifferenceLat * lDifferenceLat);
 
 				if (lDistance < lMinDistance)
 				{
@@ -198,7 +191,7 @@ public class LocationDatabase
 
 			}
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -208,12 +201,12 @@ public class LocationDatabase
 
 	public boolean isDebug()
 	{
-		return mDebug;
+		return this.mDebug;
 	}
 
-	public void setDebug(boolean pDebug)
+	public void setDebug(final boolean pDebug)
 	{
-		mDebug = pDebug;
+		this.mDebug = pDebug;
 	}
 
 }

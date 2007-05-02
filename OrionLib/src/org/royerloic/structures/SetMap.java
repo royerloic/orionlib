@@ -1,7 +1,6 @@
 package org.royerloic.structures;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 

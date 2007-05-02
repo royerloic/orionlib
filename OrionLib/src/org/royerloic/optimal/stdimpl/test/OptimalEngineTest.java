@@ -44,30 +44,28 @@ public class OptimalEngineTest implements IOptimalEventListener
 	private DoeStrategyClassic				mDoeStrategy;
 	private IExperimentDatabaseStore	mCsvDatabaseStore;
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
-		OptimalEngineTest lOptimalEngineTest = new OptimalEngineTest();
+		final OptimalEngineTest lOptimalEngineTest = new OptimalEngineTest();
 		lOptimalEngineTest.testOptimalEngine();
 	}
 
 	public void testOptimalEngine()
 	{
-		int lMax = 100;
+		final Interpreter lInterpreter = new Optimal();
 
-		Interpreter lInterpreter = new Optimal();
+		this.mOptimalEngine = new OptimalEngine();
 
-		mOptimalEngine = new OptimalEngine();
+		this.mCsvDatabaseStore = new CsvDatabaseStore(new File("database.txt"));
 
-		mCsvDatabaseStore = new CsvDatabaseStore(new File("database.txt"));
+		this.mOptimalEngine.setOptimalInterpreter(lInterpreter);
 
-		mOptimalEngine.setOptimalInterpreter(lInterpreter);
+		final IExperimentDatabase lExperimentdatabase = new ExperimentDatabase();
+		this.mOptimalEngine.setExperimentDatabase(lExperimentdatabase);
 
-		IExperimentDatabase lExperimentdatabase = new ExperimentDatabase();
-		mOptimalEngine.setExperimentDatabase(lExperimentdatabase);
-
-		IExperimentFunction lExperimentFunction1 = new TestFunctions(8);
-		IExperimentFunctionStub lExperimentFunctionStub1 = new ExperimentFunctionStub(lExperimentFunction1);
-		mOptimalEngine.addExperimentFunctionStub(lExperimentFunctionStub1);
+		final IExperimentFunction lExperimentFunction1 = new TestFunctions(8);
+		final IExperimentFunctionStub lExperimentFunctionStub1 = new ExperimentFunctionStub(lExperimentFunction1);
+		this.mOptimalEngine.addExperimentFunctionStub(lExperimentFunctionStub1);
 
 		/***************************************************************************
 		 * IExperimentFunction lExperimentFunction2 = new TwoPics("function 2");
@@ -76,42 +74,40 @@ public class OptimalEngineTest implements IOptimalEventListener
 		 * mOptimalEngine.addExperimentFunctionStub(lExperimentFunctionStub2);/
 		 **************************************************************************/
 
-		mObjectiveFunction = new ObjectiveFunction("y0");
-		mOptimalEngine.setObjectiveFunction(mObjectiveFunction);
+		this.mObjectiveFunction = new ObjectiveFunction("y0");
+		this.mOptimalEngine.setObjectiveFunction(this.mObjectiveFunction);
 
-		mInterpolator = new PiInterpolator(AgrInterpolator.class); // SvmInterpolator();
-		mOptimalEngine.setInterpolator(mInterpolator);
+		this.mInterpolator = new PiInterpolator(AgrInterpolator.class); // SvmInterpolator();
+		this.mOptimalEngine.setInterpolator(this.mInterpolator);
 
-		mDoeStrategy = new DoeStrategyClassic();
-		mOptimalEngine.setDoeStrategy(mDoeStrategy);
+		this.mDoeStrategy = new DoeStrategyClassic();
+		this.mOptimalEngine.setDoeStrategy(this.mDoeStrategy);
 
-		UniformGrid lGridDefinition = new UniformGrid(lExperimentFunction1.getInputDimension());
+		final UniformGrid lGridDefinition = new UniformGrid(lExperimentFunction1.getInputDimension());
 		lGridDefinition.setNumberOfDivisions(2);
 
-		mOptimalEngine.setEventListener(this);
+		this.mOptimalEngine.setEventListener(this);
 
-		if (mOptimalEngine.validateEngine())
+		if (this.mOptimalEngine.validateEngine())
 		{
-			mOptimalEngine.loadExperimentDatabase(mCsvDatabaseStore);
+			this.mOptimalEngine.loadExperimentDatabase(this.mCsvDatabaseStore);
 
-			mOptimalEngineGui = new OptimalEngineJFrame();
+			this.mOptimalEngineGui = new OptimalEngineJFrame();
 
-			mOptimalEngineGui.initiate();
-			mOptimalEngineGui.setEnabled(true);
-			mOptimalEngineGui.setVisible(true);/**/
+			this.mOptimalEngineGui.initiate();
+			this.mOptimalEngineGui.setEnabled(true);
+			this.mOptimalEngineGui.setVisible(true);/**/
 
 			/*************************************************************************
 			 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
 			 * Auto-generated catch block e.printStackTrace(); }/
 			 ************************************************************************/
 
-			mOptimalEngine.pushGriddedExperiments(lGridDefinition);
-			mOptimalEngine.start();
+			this.mOptimalEngine.pushGriddedExperiments(lGridDefinition);
+			this.mOptimalEngine.start();
 		}
 		else
-		{
 			System.out.print("Optimal Engine not validated.");
-		}
 
 	}
 
@@ -119,14 +115,14 @@ public class OptimalEngineTest implements IOptimalEventListener
 	 * @see org.royerloic.optimal.interf.IOptimalEventListener#experimentDone(org.royerloic.optimal.interf.IExperimentFunctionStub,
 	 *      org.royerloic.optimal.interf.IExperiment)
 	 */
-	public void experimentDone(IExperimentFunctionStub pExperimentFunctionStub, IExperiment pExperiment)
+	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
 	{
-		mOptimalEngineGui.updateIterations(mOptimalEngine.getIterations());
-		mOptimalEngineGui.updateDesignerStatus("Designer Status");
-		mOptimalEngineGui.updateMaximumEvolution(mOptimalEngine.getListOfBestExperimentValues());
-		mOptimalEngineGui.updateModelerView(mInterpolator/* mDoeStrategy.mProxyFunction/* */);/**/
+		this.mOptimalEngineGui.updateIterations(this.mOptimalEngine.getIterations());
+		this.mOptimalEngineGui.updateDesignerStatus("Designer Status");
+		this.mOptimalEngineGui.updateMaximumEvolution(this.mOptimalEngine.getListOfBestExperimentValues());
+		this.mOptimalEngineGui.updateModelerView(this.mInterpolator);/**/
 
-		mOptimalEngine.saveExperimentDatabase(mCsvDatabaseStore);
+		this.mOptimalEngine.saveExperimentDatabase(this.mCsvDatabaseStore);
 
 	}
 
@@ -134,10 +130,10 @@ public class OptimalEngineTest implements IOptimalEventListener
 	 * @see org.royerloic.optimal.interf.IOptimalEventListener#newBestExperiment(org.royerloic.optimal.interf.IExperimentDatabase,
 	 *      org.royerloic.optimal.interf.IExperiment)
 	 */
-	public void newBestExperiment(IExperimentDatabase pExperimentDatabase, IExperiment pExperiment)
+	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment)
 	{
 		System.out.println(pExperiment);
-		mOptimalEngineGui.updateBestExperiment(pExperiment, mObjectiveFunction.evaluate(pExperiment.getOutput()));
+		this.mOptimalEngineGui.updateBestExperiment(pExperiment, this.mObjectiveFunction.evaluate(pExperiment.getOutput()));
 
 	}
 

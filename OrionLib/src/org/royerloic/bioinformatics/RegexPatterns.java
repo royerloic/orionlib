@@ -74,29 +74,27 @@ public class RegexPatterns
 		super();
 	}
 
-	public static boolean isAbbreviationType1(String pSynonym)
+	public static boolean isAbbreviationType1(final String pSynonym)
 	{
 		return StringUtils.matches(pSynonym, sAbbreviationPatternType1);
 	}
 
-	public static boolean isAbbreviationType2(String pSynonym)
+	public static boolean isAbbreviationType2(final String pSynonym)
 	{
 		return StringUtils.matches(pSynonym, sAbbreviationPatternType2)
-				&& (StringUtils.countUpperCase(pSynonym) + StringUtils.countDigits(pSynonym)) > pSynonym.length() / 4;
+				&& ((StringUtils.countUpperCase(pSynonym) + StringUtils.countDigits(pSynonym)) > pSynonym.length() / 4);
 	}
 
-	public static boolean isAbbreviationType3(String pSynonym)
+	public static boolean isAbbreviationType3(final String pSynonym)
 	{
-		String[] lTokenArray = StringUtils.split(pSynonym, "\\W+", 0);
+		final String[] lTokenArray = StringUtils.split(pSynonym, "\\W+", 0);
 		boolean isAbbreviationType3 = true;
-		for (String lToken : lTokenArray)
-		{
+		for (final String lToken : lTokenArray)
 			isAbbreviationType3 &= isAbbreviationType2(lToken);
-		}
 		return isAbbreviationType3;
 	}
 
-	public static boolean isId(String pSynonym)
+	public static boolean isId(final String pSynonym)
 	{
 		boolean lIsId = false;
 		lIsId |= StringUtils.matches(pSynonym, sHugoPattern);
@@ -113,12 +111,12 @@ public class RegexPatterns
 		return lIsId;
 	}
 
-	public static boolean isEnglishWord(String pString)
+	public static boolean isEnglishWord(final String pString)
 	{
 		return sEnglishWordsIdentifier.isEntity(pString);
 	}
 
-	public static boolean isMultiWord(String pString)
+	public static boolean isMultiWord(final String pString)
 	{
 		return StringUtils.matches(pString, sMultiWordPattern);
 	}

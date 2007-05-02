@@ -11,20 +11,18 @@ public class PsiMiGraph extends HashGraph<PsiMiNode, Edge<PsiMiNode>>
 
 	public void addGoIdsFromDomains()
 	{
-		for (PsiMiNode lNode : getNodeSet())
+		for (final PsiMiNode lNode : getNodeSet())
 		{
-			List<Integer> lInterproDomainIdList = lNode.getInterproIdList();
-			for (Integer lInterproDomainId : lInterproDomainIdList)
+			final List<Integer> lInterproDomainIdList = lNode.getInterproIdList();
+			for (final Integer lInterproDomainId : lInterproDomainIdList)
 			{
-				List<Integer> lGoIdList = InterproToGo.getGoIdsForInterproId(lInterproDomainId);
-				for (Integer lNewGoId : lGoIdList)
-				{
+				final List<Integer> lGoIdList = InterproToGo.getGoIdsForInterproId(lInterproDomainId);
+				for (final Integer lNewGoId : lGoIdList)
 					lNode.addGoId(lNewGoId);
 					/*********************************************************************
 					 * if (!getGoIdSet(lNode).contains(lNewGoId))
 					 * System.out.println("added goid: "+lNewGoId);/
 					 ********************************************************************/
-				}
 			}
 		}
 

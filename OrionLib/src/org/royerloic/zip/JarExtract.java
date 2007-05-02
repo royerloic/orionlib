@@ -17,23 +17,23 @@ public class JarExtract
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException
+	public static void main(final String[] args) throws IOException
 	{
 		// Get the jar name and the entry name.
 
-		String jarName = args[0];
-		String entryName = args[1];
+		final String jarName = args[0];
+		final String entryName = args[1];
 
 		// Open the jar.
 
-		JarFile jar = new JarFile(jarName);
+		final JarFile jar = new JarFile(jarName);
 		System.out.println(jarName + " opened.");
 
 		try
 		{
 			// Get the entry and its input stream.
 
-			JarEntry entry = jar.getJarEntry(entryName);
+			final JarEntry entry = jar.getJarEntry(entryName);
 
 			// If the entry is not null, extract it. Otherwise, print a
 			// message.
@@ -42,27 +42,25 @@ public class JarExtract
 			{
 				// Get an input stream for the entry.
 
-				InputStream entryStream = jar.getInputStream(entry);
+				final InputStream entryStream = jar.getInputStream(entry);
 
 				try
 				{
 					// Create the output file (clobbering the file if it exists).
 
-					FileOutputStream file = new FileOutputStream(entry.getName());
+					final FileOutputStream file = new FileOutputStream(entry.getName());
 
 					try
 					{
 						// Allocate a buffer for reading the entry data.
 
-						byte[] buffer = new byte[1024];
+						final byte[] buffer = new byte[1024];
 						int bytesRead;
 
 						// Read the entry data and write it to the output file.
 
 						while ((bytesRead = entryStream.read(buffer)) != -1)
-						{
 							file.write(buffer, 0, bytesRead);
-						}
 
 						System.out.println(entry.getName() + " extracted.");
 					}
@@ -77,9 +75,7 @@ public class JarExtract
 				}
 			}
 			else
-			{
 				System.out.println(entryName + " not found.");
-			} // end if
 		}
 		finally
 		{

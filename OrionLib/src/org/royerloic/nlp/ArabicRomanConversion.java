@@ -11,7 +11,7 @@ public class ArabicRomanConversion
 
 	private static Map<Integer, String> getArabicToRomanMap()
 	{
-		Map<Integer, String> lArabicToRomanMap = new HashMap<Integer, String>();
+		final Map<Integer, String> lArabicToRomanMap = new HashMap<Integer, String>();
 		lArabicToRomanMap.put(1, "I");
 		lArabicToRomanMap.put(2, "II");
 		lArabicToRomanMap.put(3, "III");
@@ -25,7 +25,7 @@ public class ArabicRomanConversion
 
 	private static Map<String, Integer> getRomanToArabicMap()
 	{
-		Map<String, Integer> lRomanToArabicMap = new HashMap<String, Integer>();
+		final Map<String, Integer> lRomanToArabicMap = new HashMap<String, Integer>();
 		lRomanToArabicMap.put("I", 1);
 		lRomanToArabicMap.put("II", 2);
 		lRomanToArabicMap.put("III", 3);

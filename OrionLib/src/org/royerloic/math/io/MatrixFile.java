@@ -29,22 +29,22 @@ public class MatrixFile
 
   private void allocate()
   {
-    mMVectorList = new Vector();
+    this.mMVectorList = new Vector();
   }
 
   private final void addVector(final NumericalVector pMVector)
   {
-    mMVectorList.add(pMVector);
+    this.mMVectorList.add(pMVector);
   }
 
   public final NumericalVector getVector(final int pIndex)
   {
-    return ((NumericalVector) mMVectorList.elementAt(pIndex));
+    return ((NumericalVector) this.mMVectorList.elementAt(pIndex));
   }
 
   public final int size()
   {
-    return mMVectorList.size();
+    return this.mMVectorList.size();
   }
 
   public MatrixFile(final File pFile)
@@ -54,7 +54,7 @@ public class MatrixFile
     try
     {
 
-      File lInputFile = pFile;
+      final File lInputFile = pFile;
 
       FileReader lFileReader;
       BufferedReader lBufferedReader;
@@ -63,7 +63,7 @@ public class MatrixFile
         lFileReader = new FileReader(lInputFile);
         lBufferedReader = new BufferedReader(lFileReader);
       }
-      catch (FileNotFoundException e)
+      catch (final FileNotFoundException e)
       {
         System.out.println("File: " + lInputFile + " not found.");
         throw e;
@@ -74,13 +74,13 @@ public class MatrixFile
         String lLineString;
         while ((lLineString = lBufferedReader.readLine()) != null)
         {
-          NumericalVector lMVector = new NumericalVector();
-          boolean lCorrectMVector = lMVector.parse(lLineString);
+          final NumericalVector lMVector = new NumericalVector();
+          final boolean lCorrectMVector = lMVector.parse(lLineString);
           addVector(lMVector);
         }
 
       }
-      catch (IOException e2)
+      catch (final IOException e2)
       {
         System.out.println("Error while reading: " + e2.getCause());
       }
@@ -89,7 +89,7 @@ public class MatrixFile
         lFileReader.close();
       }
     }
-    catch (Exception any)
+    catch (final Exception any)
     {
       any.printStackTrace(System.out);
 
@@ -99,13 +99,12 @@ public class MatrixFile
   /**
    * @see java.lang.Object#toString()
    */
-  public String toString()
+  @Override
+	public String toString()
   {
     String lString = "";
     for (int i = 0; i < size(); i++)
-    {
-      lString += getVector(i) + "\n";
-    }
+			lString += getVector(i) + "\n";
     return lString;
   }
 }

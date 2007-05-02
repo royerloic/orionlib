@@ -19,18 +19,15 @@ public class Location
 
 	private String	mPlaceName;
 
+	@Override
 	public String toString()
 	{
 		String lString = new String();
-		if ((mType != null) && mType.equalsIgnoreCase("city"))
-		{
-			lString = mName + ", ";
-		}
-		lString += mCountry + ", Coordinates: (" + mLatitude + ", " + mLongitude + ")";
-		if (mSourceString != null)
-		{
-			lString += "\n '" + mSourceString + "' \n";
-		}
+		if ((this.mType != null) && this.mType.equalsIgnoreCase("city"))
+			lString = this.mName + ", ";
+		lString += this.mCountry + ", Coordinates: (" + this.mLatitude + ", " + this.mLongitude + ")";
+		if (this.mSourceString != null)
+			lString += "\n '" + this.mSourceString + "' \n";
 		return lString;
 	}
 
@@ -40,136 +37,128 @@ public class Location
 		// TODO Auto-generated constructor stub
 	}
 
-	public Location(String pType, String pName, double pLatitude, double pLongitude, String pCountry)
+	public Location(final String pType, final String pName, final double pLatitude, final double pLongitude, final String pCountry)
 	{
 		super();
-		mType = pType;
-		mName = pName;
-		if (!mType.matches("@.*"))
-		{
-			mPlaceName = mName;
-		}
+		this.mType = pType;
+		this.mName = pName;
+		if (!this.mType.matches("@.*"))
+			this.mPlaceName = this.mName;
 		else
-		{
-			mPlaceName = pCountry;
-		}
-		mLatitude = pLatitude;
-		mLongitude = pLongitude;
-		mCountry = pCountry;
+			this.mPlaceName = pCountry;
+		this.mLatitude = pLatitude;
+		this.mLongitude = pLongitude;
+		this.mCountry = pCountry;
 	}
 
 	public double getLatitude()
 	{
-		return mLatitude;
+		return this.mLatitude;
 	}
 
-	public void setLatitude(double pLatitude)
+	public void setLatitude(final double pLatitude)
 	{
-		mLatitude = pLatitude;
+		this.mLatitude = pLatitude;
 	}
 
 	public double getLongitude()
 	{
-		return mLongitude;
+		return this.mLongitude;
 	}
 
-	public void setLongitude(double pLongitude)
+	public void setLongitude(final double pLongitude)
 	{
-		mLongitude = pLongitude;
+		this.mLongitude = pLongitude;
 	}
 
-	public double computeDistanceTo(Location pLocation)
+	public double computeDistanceTo(final Location pLocation)
 	{
-		double lLatDiff = mLatitude - pLocation.mLatitude;
-		double lLongDiff = mLongitude - pLocation.mLongitude;
-		double lDistance = Math.sqrt(lLatDiff * lLatDiff + lLongDiff * lLongDiff);
+		final double lLatDiff = this.mLatitude - pLocation.mLatitude;
+		final double lLongDiff = this.mLongitude - pLocation.mLongitude;
+		final double lDistance = Math.sqrt(lLatDiff * lLatDiff + lLongDiff * lLongDiff);
 		return lDistance;
 	}
 
 	public String getName()
 	{
-		return mName;
+		return this.mName;
 	}
 
-	public void setName(String pName)
+	public void setName(final String pName)
 	{
-		mName = pName;
+		this.mName = pName;
 	}
 
 	public String getType()
 	{
-		return mType;
+		return this.mType;
 	}
 
-	public void setType(String pType)
+	public void setType(final String pType)
 	{
-		mType = pType;
+		this.mType = pType;
 	}
 
 	public String getSourceString()
 	{
-		return mSourceString;
+		return this.mSourceString;
 	}
 
-	public void setSourceString(String pSourceString)
+	public void setSourceString(final String pSourceString)
 	{
-		mSourceString = pSourceString;
+		this.mSourceString = pSourceString;
 	}
 
-	public boolean equals(Object pObj)
+	@Override
+	public boolean equals(final Object pObj)
 	{
 		if (pObj instanceof Location)
 		{
-			Location lLocation = (Location) pObj;
+			final Location lLocation = (Location) pObj;
 			boolean lEquals = true;
-			lEquals |= (lLocation.mType.equals(mType));
-			lEquals |= (lLocation.mName.equals(mName));
-			lEquals |= (lLocation.mCountry.equals(mCountry));
+			lEquals |= (lLocation.mType.equals(this.mType));
+			lEquals |= (lLocation.mName.equals(this.mName));
+			lEquals |= (lLocation.mCountry.equals(this.mCountry));
 			return lEquals;
 		}
 		else
-		{
 			return false;
-		}
 
 	}
 
+	@Override
 	public int hashCode()
 	{
-		Double lLongitude = new Double(getLongitude());
-		Double lLatitude = new Double(getLatitude());
+		final Double lLongitude = new Double(getLongitude());
+		final Double lLatitude = new Double(getLatitude());
 		return lLongitude.hashCode() ^ lLatitude.hashCode();
 	}
 
 	public String getPlaceName()
 	{
-		return mPlaceName;
+		return this.mPlaceName;
 	}
 
 	public String getPlaceNameAndCountry()
 	{
 		String lString;
-		if (!mType.matches("@.*"))
-		{
-			lString = mName + ", " + mCountry;
-		}
+		if (!this.mType.matches("@.*"))
+			lString = this.mName + ", " + this.mCountry;
 		else
-		{
-			lString = mCountry;
-		}
+			lString = this.mCountry;
 		return lString;
 	}
 
 	public String getPlaceNameCountryAndCoordinates()
 	{
-		String lString = getPlaceNameAndCountry() + ", (" + mLatitude + "," + mLongitude + ")";
+		final String lString = getPlaceNameAndCountry() + ", (" + this.mLatitude + "," + this.mLongitude + ")";
 
 		return lString;
 	}
 
 	public String getCountry()
 	{
-		return mCountry;
+		return this.mCountry;
 	}
 
 }

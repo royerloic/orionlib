@@ -109,45 +109,45 @@ public class DoeStrategyClassic implements IDoeStrategy
 	{
 		super();
 
-		mResetTime = 1000;
-		mResetCounter = mResetTime;
-		mMode = cMODE_START;
-		mModeCounter = 0;
+		this.mResetTime = 1000;
+		this.mResetCounter = this.mResetTime;
+		this.mMode = cMODE_START;
+		this.mModeCounter = 0;
 
-		mStochMaxIterationsMinimum = 10;
-		mStochMaxIterationsMaximum = 30;
+		this.mStochMaxIterationsMinimum = 10;
+		this.mStochMaxIterationsMaximum = 30;
 
-		mStagnationLatency = 5;
-		mStochFillIterationsMinimum = 10;
-		mStochFillIterationsMaximum = 30;
-		mStochMaxActivationThreshold = 0.01;
+		this.mStagnationLatency = 5;
+		this.mStochFillIterationsMinimum = 10;
+		this.mStochFillIterationsMaximum = 30;
+		this.mStochMaxActivationThreshold = 0.01;
 
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IDoeStrategy#setExperimentDatabase(org.royerloic.optimal.interf.IExperimentDatabase)
 	 */
-	public void setExperimentDatabase(IExperimentDatabase pExperimentDatabase)
+	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		mExperimentDatabase = pExperimentDatabase;
+		this.mExperimentDatabase = pExperimentDatabase;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IDoeStrategy#setObjectiveFunction(org.royerloic.optimal.interf.IObjectiveFunction)
 	 */
-	public void setObjectiveFunction(IObjectiveFunction pObjectiveFunction)
+	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		mObjectiveFunction = pObjectiveFunction;
+		this.mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IDoeStrategy#setInterpolator(org.royerloic.optimal.interf.IInterpolator)
 	 */
-	public void setInterpolator(IInterpolator pInterpolator)
+	public void setInterpolator(final IInterpolator pInterpolator)
 	{
-		mInterpolator = pInterpolator;
-		mBaseFunction = getNullBaseFunction();
-		mProxyFunction = getProxyFunction();
+		this.mInterpolator = pInterpolator;
+		this.mBaseFunction = getNullBaseFunction();
+		this.mProxyFunction = getProxyFunction();
 	}
 
 	/**
@@ -157,75 +157,64 @@ public class DoeStrategyClassic implements IDoeStrategy
 	{
 		INumericalVector lVector = null;
 
-		if (mExperimentDatabase.getNumberOfExperiments() != 0)
+		if (this.mExperimentDatabase.getNumberOfExperiments() != 0)
 		{
-			mModeCounter++;
+			this.mModeCounter++;
 
 			/**
 			 * decrements the counter <code>mResetCounter</code> until 0. When it
 			 * reaches 0 we reset the Base Function.
 			 */
-			if (mResetCounter > 0)
-			{
-				mResetCounter--;
-			}
+			if (this.mResetCounter > 0)
+				this.mResetCounter--;
 			else
 			{
-				mResetCounter = mResetTime;
-				mBaseFunction = getNullBaseFunction();
+				this.mResetCounter = this.mResetTime;
+				this.mBaseFunction = getNullBaseFunction();
 			}
 
-			if (mMode == cMODE_START)
+			if (this.mMode == cMODE_START)
 			{
-				mStochFillFunction = getStochFillFunction();
-				mMode = cMODE_STOCHMAX;
-				mStagnationStart = mExperimentDatabase.getNumberOfExperiments();
+				this.mStochFillFunction = getStochFillFunction();
+				this.mMode = cMODE_STOCHMAX;
+				this.mStagnationStart = this.mExperimentDatabase.getNumberOfExperiments();
 			}
-			else if ((mMode == cMODE_STOCHMAX)
-					&& ((mExperimentDatabase.stagnating(mStagnationStart, mStagnationLatency) && (mModeCounter > mStochMaxIterationsMinimum)) || (mModeCounter > mStochMaxIterationsMaximum)))
+			else if ((this.mMode == cMODE_STOCHMAX)
+					&& ((this.mExperimentDatabase.stagnating(this.mStagnationStart, this.mStagnationLatency) && (this.mModeCounter > this.mStochMaxIterationsMinimum)) || (this.mModeCounter > this.mStochMaxIterationsMaximum)))
 			{
 				/**
 				 * The Database is stagnating we switch to StochFill mode.
 				 */
-				mMode = cMODE_STOCHFILL;
-				setBaseFunction(mInterpolator);
-				mModeCounter = 0;
-				mLastMaximumValue = mLastValue;
-				mLastValue = 0;
+				this.mMode = cMODE_STOCHFILL;
+				setBaseFunction(this.mInterpolator);
+				this.mModeCounter = 0;
+				this.mLastMaximumValue = this.mLastValue;
+				this.mLastValue = 0;
 
 			}
-			else if ((mMode == cMODE_STOCHFILL)
-					&& (((mLastValue > mStochMaxActivationThreshold * mLastMaximumValue) && (mModeCounter > mStochFillIterationsMinimum)) || (mModeCounter > mStochFillIterationsMaximum)))
+			else if ((this.mMode == cMODE_STOCHFILL)
+					&& (((this.mLastValue > this.mStochMaxActivationThreshold * this.mLastMaximumValue) && (this.mModeCounter > this.mStochFillIterationsMinimum)) || (this.mModeCounter > this.mStochFillIterationsMaximum)))
 			{
-				mMode = cMODE_STOCHMAX;
-				mModeCounter = 0;
+				this.mMode = cMODE_STOCHMAX;
+				this.mModeCounter = 0;
 			}
 
-			if (mMode == cMODE_STOCHMAX)
-			{
+			if (this.mMode == cMODE_STOCHMAX)
 				/**
 				 * We are in StochMax Mode.
 				 */
-				lVector = DoeStrategyHelper.genetic(mProxyFunction, 4, 1000);
-			}
-			else if (mMode == cMODE_STOCHFILL)
-			{
+				lVector = DoeStrategyHelper.genetic(this.mProxyFunction, 4, 1000);
+			else if (this.mMode == cMODE_STOCHFILL)
 				/**
 				 * We are in StochFill Mode.
 				 */
-				lVector = DoeStrategyHelper.multiStepsStochmax(mStochFillFunction, 1, 100);
-			}
+				lVector = DoeStrategyHelper.multiStepsStochmax(this.mStochFillFunction, 1, 100);
 
 			// System.out.println("DOE Mode: " + mMode);
-			mLastValue = mProxyFunction.evaluate(lVector);
+			this.mLastValue = this.mProxyFunction.evaluate(lVector);
 		}
 
 		return lVector;
-	}
-
-	private double getCurrentBestValue()
-	{
-		return mObjectiveFunction.evaluate(mExperimentDatabase.getBestExperiment().getOutput());
 	}
 
 	private IScalarFunction getStochFillFunction()
@@ -238,7 +227,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getInputDimension()
 			{
-				return mInterpolator.getInputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getInputDimension();
 			}
 
 			/**
@@ -246,7 +235,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getOutputDimension()
 			{
-				return mInterpolator.getOutputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getOutputDimension();
 			}
 
 			/**
@@ -254,7 +243,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMin(final int pIndex)
 			{
-				return mInterpolator.getInputMin(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMin(pIndex);
 			}
 
 			/**
@@ -262,7 +251,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMax(final int pIndex)
 			{
-				return mInterpolator.getInputMax(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMax(pIndex);
 			}
 
 			/**
@@ -270,7 +259,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputDelta(final int pIndex)
 			{
-				return mInterpolator.getInputDelta(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputDelta(pIndex);
 			}
 
 			/**
@@ -286,8 +275,8 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double evaluate(final INumericalVector pVector)
 			{
-				INumericalVector lNVector = mExperimentDatabase.getNeighboor(pVector).getInput();
-				double lDistance = lNVector.euclideanDistanceTo(pVector);
+				final INumericalVector lNVector = DoeStrategyClassic.this.mExperimentDatabase.getNeighboor(pVector).getInput();
+				final double lDistance = lNVector.euclideanDistanceTo(pVector);
 				return lDistance;
 			}
 
@@ -309,7 +298,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 	 */
 	private void setBaseFunction(final IInterpolator pInterpolator)
 	{
-		mBaseFunction = (IScalarFunction) (pInterpolator.clone());
+		this.mBaseFunction = (IScalarFunction) (pInterpolator.clone());
 	}
 
 	/**
@@ -341,7 +330,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getInputDimension()
 			{
-				return mInterpolator.getInputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getInputDimension();
 			}
 
 			/**
@@ -349,7 +338,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getOutputDimension()
 			{
-				return mInterpolator.getOutputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getOutputDimension();
 			}
 
 			/**
@@ -357,7 +346,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMin(final int pIndex)
 			{
-				return mInterpolator.getInputMin(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMin(pIndex);
 			}
 
 			/**
@@ -365,7 +354,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMax(final int pIndex)
 			{
-				return mInterpolator.getInputMax(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMax(pIndex);
 			}
 
 			/**
@@ -373,7 +362,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputDelta(final int pIndex)
 			{
-				return mInterpolator.getInputDelta(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputDelta(pIndex);
 			}
 
 			/**
@@ -381,7 +370,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final void normalizeInputVector(final INumericalVector pVector)
 			{
-				mInterpolator.normalizeInputVector(pVector);
+				DoeStrategyClassic.this.mInterpolator.normalizeInputVector(pVector);
 			}
 		};
 
@@ -397,7 +386,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double evaluate(final INumericalVector pVector)
 			{
-				return mInterpolator.evaluate(pVector) - mBaseFunction.evaluate(pVector);
+				return DoeStrategyClassic.this.mInterpolator.evaluate(pVector) - DoeStrategyClassic.this.mBaseFunction.evaluate(pVector);
 			}
 
 			/**
@@ -405,8 +394,8 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double[][] computePoints(final int pResolution)
 			{
-				ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
-				double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
+				final ScalarFunctionGridder lGridder = new ScalarFunctionGridder(this);
+				final double[][] lGridPoints = lGridder.computeGridPoints(pResolution);
 				return lGridPoints;
 			}
 
@@ -415,7 +404,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getInputDimension()
 			{
-				return mInterpolator.getInputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getInputDimension();
 			}
 
 			/**
@@ -423,7 +412,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final int getOutputDimension()
 			{
-				return mInterpolator.getOutputDimension();
+				return DoeStrategyClassic.this.mInterpolator.getOutputDimension();
 			}
 
 			/**
@@ -431,7 +420,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMin(final int pIndex)
 			{
-				return mInterpolator.getInputMin(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMin(pIndex);
 			}
 
 			/**
@@ -439,7 +428,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputMax(final int pIndex)
 			{
-				return mInterpolator.getInputMax(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputMax(pIndex);
 			}
 
 			/**
@@ -447,7 +436,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double getInputDelta(final int pIndex)
 			{
-				return mInterpolator.getInputDelta(pIndex);
+				return DoeStrategyClassic.this.mInterpolator.getInputDelta(pIndex);
 			}
 
 			/**
@@ -455,7 +444,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final void normalizeInputVector(final INumericalVector pVector)
 			{
-				mInterpolator.normalizeInputVector(pVector);
+				DoeStrategyClassic.this.mInterpolator.normalizeInputVector(pVector);
 			}
 		};
 	}

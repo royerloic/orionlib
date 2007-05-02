@@ -15,16 +15,19 @@ public class ArrayListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K
 {
 
 	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 2439064125823640434L;
+
+	/**
 	 * @return
 	 */
 	public Set<V> valuesFromAllLists()
 	{
-		Set<V> lAllValuesSet = new HashSet<V>();
-		Collection<List<V>> lValues = super.values();
-		for (List<V> lSet : lValues)
-		{
+		final Set<V> lAllValuesSet = new HashSet<V>();
+		final Collection<List<V>> lValues = super.values();
+		for (final List<V> lSet : lValues)
 			lAllValuesSet.addAll(lSet);
-		}
 		return lAllValuesSet;
 	}
 
@@ -33,7 +36,7 @@ public class ArrayListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K
 	 * @param pValue
 	 * @return
 	 */
-	public List<V> put(K pKey, V pValue)
+	public List<V> put(final K pKey, final V pValue)
 	{
 		List<V> lValueList = get(pKey);
 		if (lValueList == null)
@@ -50,7 +53,8 @@ public class ArrayListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K
 	 * 
 	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
 	 */
-	public List<V> put(K pKey, List<V> pVList)
+	@Override
+	public List<V> put(final K pKey, final List<V> pVList)
 	{
 		List<V> lValueList = get(pKey);
 		if (lValueList == null)

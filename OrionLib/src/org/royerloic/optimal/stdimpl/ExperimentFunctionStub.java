@@ -25,36 +25,36 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	/**
 	 * @param pExperimentFunction
 	 */
-	public ExperimentFunctionStub(IExperimentFunction pExperimentFunction)
+	public ExperimentFunctionStub(final IExperimentFunction pExperimentFunction)
 	{
 		super();
-		mExperimentFunction = pExperimentFunction;
+		this.mExperimentFunction = pExperimentFunction;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentFunctionStub#setExperimentFunction(org.royerloic.optimal.interf.IExperimentFunction)
 	 */
-	public void setExperimentFunction(IExperimentFunction pExperimentFunction)
+	public void setExperimentFunction(final IExperimentFunction pExperimentFunction)
 	{
-		mExperimentFunction = pExperimentFunction;
+		this.mExperimentFunction = pExperimentFunction;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentFunctionStub#setOptimalEventListener(org.royerloic.optimal.interf.IOptimalEventListener)
 	 */
-	public void setOptimalEventListener(IOptimalEventListener pTerminationListener)
+	public void setOptimalEventListener(final IOptimalEventListener pTerminationListener)
 	{
-		mTerminationListener = pTerminationListener;
+		this.mTerminationListener = pTerminationListener;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IExperimentFunctionStub#evaluate(org.royerloic.math.INumericalVector)
 	 */
-	public void evaluate(INumericalVector pExperimentInputVector)
+	public void evaluate(final INumericalVector pExperimentInputVector)
 	{
-		mExperimentInputVector = pExperimentInputVector;
-		mThread = new Thread(this);
-		mThread.start();
+		this.mExperimentInputVector = pExperimentInputVector;
+		this.mThread = new Thread(this);
+		this.mThread.start();
 	}
 
 	/**
@@ -62,15 +62,15 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	 */
 	public void run()
 	{
-		IExperiment lExperiment = new Experiment();
+		final IExperiment lExperiment = new Experiment();
 
 		lExperiment.begin();
-		INumericalVector lExperimentOutputVector = mExperimentFunction.evaluate(mExperimentInputVector);
+		final INumericalVector lExperimentOutputVector = this.mExperimentFunction.evaluate(this.mExperimentInputVector);
 		lExperiment.end();
 
-		lExperiment.set(mExperimentInputVector, lExperimentOutputVector);
+		lExperiment.set(this.mExperimentInputVector, lExperimentOutputVector);
 
-		mTerminationListener.experimentDone(this, lExperiment);
+		this.mTerminationListener.experimentDone(this, lExperiment);
 
 	}
 

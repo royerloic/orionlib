@@ -37,7 +37,7 @@ public final class LinearKernel implements Kernel {
 
     private LinearKernel() {}
 
-    public double eval(GVector x1, GVector x2) {
+    public double eval(final GVector x1, final GVector x2) {
         return x1.dot(x2);
     }
 

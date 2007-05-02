@@ -23,19 +23,19 @@ public class OrionSoundIn
 	{
 		try
 		{
-			audioFormat = getAudioFormat();
+			this.audioFormat = getAudioFormat();
 			/*************************************************************************
 			 * DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class,
 			 * audioFormat); targetDataLine = (TargetDataLine)
 			 * AudioSystem.getLine(dataLineInfo);/
 			 ************************************************************************/
 
-			targetDataLine = (TargetDataLine) AudioSystem.getTargetDataLine(getAudioFormat());
-			targetDataLine.open(audioFormat);
-			targetDataLine.start();
+			this.targetDataLine = AudioSystem.getTargetDataLine(getAudioFormat());
+			this.targetDataLine.open(this.audioFormat);
+			this.targetDataLine.start();
 
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			System.out.println(e);
 			System.exit(0);
@@ -46,11 +46,11 @@ public class OrionSoundIn
 	{
 		try
 		{
-			targetDataLine.flush();
-			targetDataLine.stop();
-			targetDataLine.close();
+			this.targetDataLine.flush();
+			this.targetDataLine.stop();
+			this.targetDataLine.close();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			System.out.println(e);
 			System.exit(0);
@@ -59,20 +59,20 @@ public class OrionSoundIn
 
 	public int record(final byte[] pBuffer)
 	{
-		return targetDataLine.read(pBuffer, 0, pBuffer.length);
+		return this.targetDataLine.read(pBuffer, 0, pBuffer.length);
 	}
 
 	private AudioFormat getAudioFormat()
 	{
-		float sampleRate = 44100.0F;
+		final float sampleRate = 44100.0F;
 		// 8000,11025,16000,22050,44100
-		int sampleSizeInBits = 16;
+		final int sampleSizeInBits = 16;
 		// 8,16
-		int channels = 1;
+		final int channels = 1;
 		// 1,2
-		boolean signed = true;
+		final boolean signed = true;
 		// true,false
-		boolean bigEndian = false;
+		final boolean bigEndian = false;
 		// true,false
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
 	}

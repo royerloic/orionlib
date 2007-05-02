@@ -25,29 +25,23 @@ public class GraphLoader
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Graph<Node, Edge<Node>> loadGraph(File pFile) throws FileNotFoundException, IOException
+	public static Graph<Node, Edge<Node>> loadGraph(final File pFile) throws FileNotFoundException, IOException
 	{
 		return loadGraph(pFile, true,null);
 	}
 
-	public static Graph<Node, Edge<Node>> loadGraph(File pFile, boolean pSpokeModel, String pConfidenceFilter)
+	public static Graph<Node, Edge<Node>> loadGraph(final File pFile, final boolean pSpokeModel, final String pConfidenceFilter)
 			throws FileNotFoundException, IOException
 	{
-		Graph lGraph = (Graph<Node, Edge<Node>>) new HashGraph<Node, Edge<Node>>();
+		Graph lGraph = new HashGraph<Node, Edge<Node>>();
 		if (isPsiMi(pFile))
-		{
 			lGraph = PsiMiIO.load(pFile, pSpokeModel,pConfidenceFilter);
-		}
 		else if (isEdg(pFile))
-		{
 			lGraph = EdgIO.load(pFile);
-		}
 		else if (isSif(pFile))
-		{
 			lGraph = SifIO.load(pFile);
-		}
 			
-		EdgIO.save(lGraph, new File("dump.edg"));
+		//EdgIO.save(lGraph, new File("dump.edg"));
 		return lGraph;
 	}
 
@@ -57,42 +51,42 @@ public class GraphLoader
 //		return loadGraph(pFile, pSpokeModel, null);
 //	}
 
-	public static boolean isPsiMi(File pFile)
+	public static boolean isPsiMi(final File pFile)
 	{
 		return pFile.getName().endsWith(".xml");
 	}
 
-	public static boolean isEdg(File pFile)
+	public static boolean isEdg(final File pFile)
 	{
 		return pFile.getName().endsWith(".edg");
 	}
 
-	private static boolean isSif(File pFile)
+	private static boolean isSif(final File pFile)
 	{
 		return pFile.getName().endsWith(".sif");
 	}
 	
-	public static PowerGraph<Node> loadPowerGraph(File pFile,
-																								boolean pSpokeModel,
-																								double pDensityThreshold,
+	public static PowerGraph<Node> loadPowerGraph(final File pFile,
+																								final boolean pSpokeModel,
+																								final double pDensityThreshold,
 																								boolean pKeepAsInPsiMi,
-																								String pConfidenceFilter) throws FileNotFoundException,
+																								final String pConfidenceFilter) throws FileNotFoundException,
 			IOException
 	{
 		if (isPsiMi(pFile) && pKeepAsInPsiMi)
 		{
 			System.out
 					.println("File is PsiMi, using special PsiMi loader (does not reduce representation to individual interactions)");
-			PsiMiPowerGraphIO lPsiMiPowerGraphIO = new PsiMiPowerGraphIO();
-			PowerGraph<Node> lPowerGraph = lPsiMiPowerGraphIO.load(pFile, pSpokeModel);
+			final PsiMiPowerGraphIO lPsiMiPowerGraphIO = new PsiMiPowerGraphIO();
+			final PowerGraph<Node> lPowerGraph = lPsiMiPowerGraphIO.load(pFile, pSpokeModel);
 			return lPowerGraph;
 		}
 		else if (isEdg(pFile) || (isPsiMi(pFile) && !pKeepAsInPsiMi))
 		{
 			System.out.println("File is Edg, using standard Edg file loader...");
-			Graph<Node, Edge<Node>> lGraph = loadGraph(pFile, pSpokeModel,pConfidenceFilter);
-			PowerGraphExtractor<Node> lPowerGraphExtractor = new PowerGraphExtractor<Node>();
-			PowerGraph<Node> lPowerGraph = lPowerGraphExtractor.extractPowerGraph(lGraph, pDensityThreshold);
+			final Graph<Node, Edge<Node>> lGraph = loadGraph(pFile, pSpokeModel,pConfidenceFilter);
+			final PowerGraphExtractor<Node> lPowerGraphExtractor = new PowerGraphExtractor<Node>();
+			final PowerGraph<Node> lPowerGraph = lPowerGraphExtractor.extractPowerGraph(lGraph, pDensityThreshold);
 			return lPowerGraph;
 		}
 		return null;

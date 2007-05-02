@@ -9,6 +9,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -28,7 +29,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	// data
 	private GraphicsDevice				mGraphicsDevice;
 
-	private boolean								mFullScreen					= true;
+	private final boolean								mFullScreen					= true;
 
 	private int										mWidth;
 
@@ -56,7 +57,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 	protected boolean							mMouseRight;
 
-	private static DisplayMode[]	BEST_DISPLAY_MODES	= new DisplayMode[]
+	private static final DisplayMode[]	BEST_DISPLAY_MODES	= new DisplayMode[]
 																										{ new DisplayMode(400, 300, 32, 0),
 			new DisplayMode(512, 384, 32, 0), new DisplayMode(640, 400, 32, 0), new DisplayMode(640, 480, 32, 0) };
 
@@ -64,29 +65,23 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 	private static DisplayMode getBestDisplayMode(final GraphicsDevice pGraphicsDevice)
 	{
-		for (int x = 0; x < BEST_DISPLAY_MODES.length; x++)
+		for (DisplayMode element : BEST_DISPLAY_MODES)
 		{
-			DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
-			for (int i = 0; i < modes.length; i++)
-			{
-				if (modes[i].getWidth() == BEST_DISPLAY_MODES[x].getWidth()
-						&& modes[i].getHeight() == BEST_DISPLAY_MODES[x].getHeight()
-						&& modes[i].getBitDepth() == BEST_DISPLAY_MODES[x].getBitDepth())
-				{
-					return BEST_DISPLAY_MODES[x];
-				}
-			}
+			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
+			for (DisplayMode element0 : modes)
+				if ((element0.getWidth() == element.getWidth())
+						&& (element0.getHeight() == element.getHeight())
+						&& (element0.getBitDepth() == element.getBitDepth()))
+					return element;
 		}
 		return null;
 	}
 
 	public void activateBestDisplayMode(final GraphicsDevice pGraphicsDevice)
 	{
-		DisplayMode lBestDisplayMode = getBestDisplayMode(pGraphicsDevice);
+		final DisplayMode lBestDisplayMode = getBestDisplayMode(pGraphicsDevice);
 		if (lBestDisplayMode != null)
-		{
 			pGraphicsDevice.setDisplayMode(lBestDisplayMode);
-		}
 
 	}
 
@@ -95,10 +90,10 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	public synchronized void update(final Object pixels)
 	{
 		// check consumer
-		if (mImageConsumer != null)
+		if (this.mImageConsumer != null)
 		{
 			// copy integer pixel data to image consumer
-			mImageConsumer.setPixels(0, 0, mWidth, mHeight, mColorModel, (int[]) pixels, 0, mWidth);
+			this.mImageConsumer.setPixels(0, 0, this.mWidth, this.mHeight, this.mColorModel, (int[]) pixels, 0, this.mWidth);
 
 			done();
 		}
@@ -108,19 +103,19 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	public synchronized void done()
 	{
 		// notify image consumer that the frame is done
-		mImageConsumer.imageComplete(ImageConsumer.SINGLEFRAMEDONE);
+		this.mImageConsumer.imageComplete(ImageConsumer.SINGLEFRAMEDONE);
 	}
 
 	public void start()
 	{
 		// check thread
-		if (mThread == null)
+		if (this.mThread == null)
 		{
 			// create thread
-			mThread = new Thread(this);
+			this.mThread = new Thread(this);
 
 			// start thread
-			mThread.start();
+			this.mThread.start();
 		}
 
 	}
@@ -128,9 +123,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	synchronized void setFullscreen()
 	{
 		if (isDisplayable())
-		{
 			dispose();
-		}
 
 		setVisible(false);
 
@@ -139,9 +132,9 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 		setResizable(false);
 		setFocusable(true);
 
-		mGraphicsDevice.setFullScreenWindow(this);
+		this.mGraphicsDevice.setFullScreenWindow(this);
 
-		activateBestDisplayMode(mGraphicsDevice);
+		activateBestDisplayMode(this.mGraphicsDevice);
 
 		validate();
 
@@ -167,13 +160,13 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 		setIgnoreRepaint(false);
 		setResizable(false);
 
-		mGraphicsDevice.setFullScreenWindow(null);
+		this.mGraphicsDevice.setFullScreenWindow(null);
 
-		DisplayMode lBestDisplayMode = getBestDisplayMode(mGraphicsDevice);
-		mHeight = lBestDisplayMode.getHeight();
-		mWidth = lBestDisplayMode.getWidth();
+		final DisplayMode lBestDisplayMode = getBestDisplayMode(this.mGraphicsDevice);
+		this.mHeight = lBestDisplayMode.getHeight();
+		this.mWidth = lBestDisplayMode.getWidth();
 
-		setSize(mWidth, mHeight);
+		setSize(this.mWidth, this.mHeight);
 
 		validate();
 
@@ -190,14 +183,12 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 	public void run()
 	{
-		GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
-		if (mScreenIndex == cLAST_DEVICE)
-		{
-			mScreenIndex = lAllGraphicsDevices.length - 1;
-		}
+		final GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
+		if (this.mScreenIndex == cLAST_DEVICE)
+			this.mScreenIndex = lAllGraphicsDevices.length - 1;
 
-		mGraphicsDevice = lAllGraphicsDevices[mScreenIndex];
+		this.mGraphicsDevice = lAllGraphicsDevices[this.mScreenIndex];
 
 		removeAll();
 		addMouseMotionListener(this);
@@ -206,61 +197,55 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 		try
 		{
-			if (mFullScreen)
-			{
+			if (this.mFullScreen)
 				setFullscreen();
-			}
 			else
-			{
 				setWindowed();
-			}
 
 			// get component size
-			Dimension lComponentSize = getSize();
+			final Dimension lComponentSize = getSize();
 
 			// setup data
-			mWidth = lComponentSize.width;
-			mHeight = lComponentSize.height;
+			this.mWidth = lComponentSize.width;
+			this.mHeight = lComponentSize.height;
 
 			// setup color model
-			mColorModel = new DirectColorModel(32, 0x00FF0000, 0x000FF00, 0x000000FF, 0);
+			this.mColorModel = new DirectColorModel(32, 0x00FF0000, 0x000FF00, 0x000000FF, 0);
 
 			// create image using default toolkit
-			mImage = Toolkit.getDefaultToolkit().createImage(this);
+			this.mImage = Toolkit.getDefaultToolkit().createImage(this);
 
 			// call user main
-			main(mWidth, mHeight);
+			main(this.mWidth, this.mHeight);
 		}
-		catch (Exception lExeption)
+		catch (final Exception lExeption)
 		{
 			lExeption.printStackTrace();
 		}
 		finally
 		{
-			mGraphicsDevice.setFullScreenWindow(null);
+			this.mGraphicsDevice.setFullScreenWindow(null);
 		}
 	}
 
 	public void stop()
 	{
 		// check thread is valid and alive
-		if (mThread != null && mThread.isAlive())
-		{
+		if ((this.mThread != null) && this.mThread.isAlive())
 			// stop thread
-			mThread.stop();
-		}
+			this.mThread.stop();
 
 		// null thread
-		mThread = null;
+		this.mThread = null;
 	}
 
 	public synchronized void paint()
 	{
 
 		// get component graphics object
-		mGraphics = getBufferStrategy().getDrawGraphics();
+		this.mGraphics = getBufferStrategy().getDrawGraphics();
 		// draw image to graphics context
-		mGraphics.drawImage(mImage, 0, 0, mWidth, mHeight, null);
+		this.mGraphics.drawImage(this.mImage, 0, 0, this.mWidth, this.mHeight, null);
 
 		// getGraphics().drawImage(backBuffer, 0, 0, mWidth, mHeight,
 		// null);
@@ -269,37 +254,37 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	public synchronized void addConsumer(final ImageConsumer ic)
 	{
 		// register image consumer
-		mImageConsumer = ic;
+		this.mImageConsumer = ic;
 
 		// set image dimensions
-		mImageConsumer.setDimensions(mWidth, mHeight);
+		this.mImageConsumer.setDimensions(this.mWidth, this.mHeight);
 
 		// set image consumer hints for speed
-		mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
+		this.mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
 				| ImageConsumer.SINGLEPASS | ImageConsumer.SINGLEFRAME);
 
 		// set image color model
-		mImageConsumer.setColorModel(mColorModel);
+		this.mImageConsumer.setColorModel(this.mColorModel);
 	}
 
-	public synchronized boolean isConsumer(ImageConsumer ic)
+	public synchronized boolean isConsumer(final ImageConsumer ic)
 	{
 		// check if consumer is registered
 		return true;
 	}
 
-	public synchronized void removeConsumer(ImageConsumer ic)
+	public synchronized void removeConsumer(final ImageConsumer ic)
 	{
 		// remove image consumer
 	}
 
-	public void startProduction(ImageConsumer ic)
+	public void startProduction(final ImageConsumer ic)
 	{
 		// add consumer
 		addConsumer(ic);
 	}
 
-	public void requestTopDownLeftRightResend(ImageConsumer ic)
+	public void requestTopDownLeftRightResend(final ImageConsumer ic)
 	{
 		// ignore resend request
 	}
@@ -321,7 +306,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	public OrionGraphicsOld(final int pScreenIndex) throws HeadlessException
 	{
 		super();
-		mScreenIndex = pScreenIndex;
+		this.mScreenIndex = pScreenIndex;
 	}
 
 	/**
@@ -338,7 +323,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
-	public void mouseClicked(MouseEvent pMouseEvent)
+	public void mouseClicked(final MouseEvent pMouseEvent)
 	{
 
 	}
@@ -346,7 +331,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
 	 */
-	public void mouseEntered(MouseEvent arg0)
+	public void mouseEntered(final MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
 
@@ -355,7 +340,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
 	 */
-	public void mouseExited(MouseEvent arg0)
+	public void mouseExited(final MouseEvent arg0)
 	{
 		// TODO Auto-generated method stub
 
@@ -364,57 +349,57 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
-	public void mousePressed(MouseEvent pMouseEvent)
+	public void mousePressed(final MouseEvent pMouseEvent)
 	{
-		mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-		mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-		mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
+		this.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+		this.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+		this.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
 
 	}
 
 	/**
 	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
-	public void mouseReleased(MouseEvent pMouseEvent)
+	public void mouseReleased(final MouseEvent pMouseEvent)
 	{
 
 		if (SwingUtilities.isLeftMouseButton(pMouseEvent))
-			mMouseLeft = false;
+			this.mMouseLeft = false;
 
 		if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
-			mMouseMiddle = false;
+			this.mMouseMiddle = false;
 
 		if (SwingUtilities.isRightMouseButton(pMouseEvent))
-			mMouseRight = false;
+			this.mMouseRight = false;
 
 	}
 
 	/**
 	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
 	 */
-	public void mouseDragged(MouseEvent pMouseEvent)
+	public void mouseDragged(final MouseEvent pMouseEvent)
 	{
-		mMouseX = pMouseEvent.getX();
-		mMouseY = pMouseEvent.getY();
+		this.mMouseX = pMouseEvent.getX();
+		this.mMouseY = pMouseEvent.getY();
 
 	}
 
 	/**
 	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
 	 */
-	public void mouseMoved(MouseEvent pMouseEvent)
+	public void mouseMoved(final MouseEvent pMouseEvent)
 	{
-		mMouseX = pMouseEvent.getX();
-		mMouseY = pMouseEvent.getY();
+		this.mMouseX = pMouseEvent.getX();
+		this.mMouseY = pMouseEvent.getY();
 
 	}
 
 	/**
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
-	public void keyPressed(KeyEvent pKeyEvent)
+	public void keyPressed(final KeyEvent pKeyEvent)
 	{
-		if (pKeyEvent.getKeyCode() == (KeyEvent.ALT_MASK | KeyEvent.VK_ENTER))
+		if (pKeyEvent.getKeyCode() == (InputEvent.ALT_MASK | KeyEvent.VK_ENTER))
 		{
 
 		}
@@ -424,7 +409,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
 	 */
-	public void keyReleased(KeyEvent pKeyEvent)
+	public void keyReleased(final KeyEvent pKeyEvent)
 	{
 		// TODO Auto-generated method stub
 
@@ -433,7 +418,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 	/**
 	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
 	 */
-	public void keyTyped(KeyEvent pKeyEvent)
+	public void keyTyped(final KeyEvent pKeyEvent)
 	{
 		// TODO Auto-generated method stub
 

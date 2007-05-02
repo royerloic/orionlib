@@ -50,25 +50,23 @@ public final class WebPageFetcher
 
 	private URLConnection				mURLConnection;
 
-	public WebPageFetcher(URL pURL)
+	public WebPageFetcher(final URL pURL)
 	{
 		if (!pURL.getProtocol().equals(cHTTP))
-		{
 			throw new IllegalArgumentException("URL is not for HTTP Protocol: " + pURL);
-		}
-		mURL = pURL;
-		mUserAgent = cUSERAGENT_FIREFOX;
-		mReferer = "";
+		this.mURL = pURL;
+		this.mUserAgent = cUSERAGENT_FIREFOX;
+		this.mReferer = "";
 
-		mAccept = "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
-		mAcceptLanguage = "en-us,en;q=0.5";
-		mAcceptEncoding = "identity";
-		mAcceptCharset = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
-		mKeepAlive = "300";
-		mConnection = "keep-alive";
+		this.mAccept = "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
+		this.mAcceptLanguage = "en-us,en;q=0.5";
+		this.mAcceptEncoding = "identity";
+		this.mAcceptCharset = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+		this.mKeepAlive = "300";
+		this.mConnection = "keep-alive";
 	}
 
-	public WebPageFetcher(String aUrlName) throws MalformedURLException
+	public WebPageFetcher(final String aUrlName) throws MalformedURLException
 	{
 		this(new URL(aUrlName));
 	}
@@ -82,22 +80,22 @@ public final class WebPageFetcher
 	 */
 	public String getPageHeader() throws IOException
 	{
-		StringBuffer result = new StringBuffer();
+		final StringBuffer result = new StringBuffer();
 
-		mURLConnection = null;
+		this.mURLConnection = null;
 
 		try
 		{
-			mURLConnection = mURL.openConnection();
+			this.mURLConnection = this.mURL.openConnection();
 
-			mURLConnection.setRequestProperty("Host", mURL.getHost());
-			mURLConnection.setRequestProperty("User-Agent", mUserAgent);
-			mURLConnection.setRequestProperty("Accept", mAccept);
-			mURLConnection.setRequestProperty("Accept-Language", mAcceptLanguage);
-			mURLConnection.setRequestProperty("Accept-Encoding", mAcceptEncoding);
-			mURLConnection.setRequestProperty("Accept-Charset", mAcceptCharset);
-			mURLConnection.setRequestProperty("Keep-Alive", mKeepAlive);
-			mURLConnection.setRequestProperty("Connection", mConnection);
+			this.mURLConnection.setRequestProperty("Host", this.mURL.getHost());
+			this.mURLConnection.setRequestProperty("User-Agent", this.mUserAgent);
+			this.mURLConnection.setRequestProperty("Accept", this.mAccept);
+			this.mURLConnection.setRequestProperty("Accept-Language", this.mAcceptLanguage);
+			this.mURLConnection.setRequestProperty("Accept-Encoding", this.mAcceptEncoding);
+			this.mURLConnection.setRequestProperty("Accept-Charset", this.mAcceptCharset);
+			this.mURLConnection.setRequestProperty("Keep-Alive", this.mKeepAlive);
+			this.mURLConnection.setRequestProperty("Connection", this.mConnection);
 			/*************************************************************************
 			 * if (!mReferer.equals("")) { connection.setRequestProperty("Referer",
 			 * mReferer); }/
@@ -108,10 +106,10 @@ public final class WebPageFetcher
 			int headerIdx = 0;
 			String headerKey = null;
 			String headerValue = null;
-			while ((headerValue = mURLConnection.getHeaderField(headerIdx)) != null)
+			while ((headerValue = this.mURLConnection.getHeaderField(headerIdx)) != null)
 			{
-				headerKey = mURLConnection.getHeaderFieldKey(headerIdx);
-				if (headerKey != null && headerKey.length() > 0)
+				headerKey = this.mURLConnection.getHeaderFieldKey(headerIdx);
+				if ((headerKey != null) && (headerKey.length() > 0))
 				{
 					result.append(headerKey);
 					result.append(" : ");
@@ -123,9 +121,9 @@ public final class WebPageFetcher
 			return result.toString();
 
 		}
-		catch (IOException ex)
+		catch (final IOException ex)
 		{
-			throw new IOException("Cannot open connection to URL: " + mURL);
+			throw new IOException("Cannot open connection to URL: " + this.mURL);
 		}
 
 	}
@@ -139,11 +137,11 @@ public final class WebPageFetcher
 	 */
 	public String getPageContent() throws IOException
 	{
-		StringBuffer result = new StringBuffer();
+		final StringBuffer result = new StringBuffer();
 		BufferedReader reader = null;
 		try
 		{
-			reader = new BufferedReader(new InputStreamReader(mURLConnection.getInputStream()), sBufferSize);
+			reader = new BufferedReader(new InputStreamReader(this.mURLConnection.getInputStream()), sBufferSize);
 			String line = null;
 			while ((line = reader.readLine()) != null)
 			{
@@ -151,9 +149,9 @@ public final class WebPageFetcher
 				result.append(cNEWLINE);
 			}
 		}
-		catch (IOException ex)
+		catch (final IOException ex)
 		{
-			throw new IOException("Cannot retrieve contents of: " + mURL + "\n" + ex.getMessage());
+			throw new IOException("Cannot retrieve contents of: " + this.mURL + "\n" + ex.getMessage());
 		}
 		finally
 		{
@@ -162,14 +160,14 @@ public final class WebPageFetcher
 		return result.toString();
 	}
 
-	private void shutdown(Reader aReader)
+	private void shutdown(final Reader aReader)
 	{
 		try
 		{
 			if (aReader != null)
 				aReader.close();
 		}
-		catch (IOException ex)
+		catch (final IOException ex)
 		{
 			System.err.println("Cannot close reader: " + aReader);
 		}
@@ -186,31 +184,25 @@ public final class WebPageFetcher
 	 * 
 	 * @throws IOException
 	 */
-	public static void main(String[] aArguments) throws IOException
+	public static void main(final String[] aArguments) throws IOException
 	{
-		WebPageFetcher fetcher = new WebPageFetcher(aArguments[0]);
+		final WebPageFetcher fetcher = new WebPageFetcher(aArguments[0]);
 		if (aArguments[1].equalsIgnoreCase("header"))
-		{
 			System.out.println(fetcher.getPageHeader());
-		}
 		else if (aArguments[1].equalsIgnoreCase("content"))
-		{
 			System.out.println(fetcher.getPageContent());
-		}
 		else
-		{
 			System.err.println("Unknown option.");
-		}
 	}
 
 	public String getReferer()
 	{
-		return mReferer;
+		return this.mReferer;
 	}
 
-	public void setReferer(String pReferer)
+	public void setReferer(final String pReferer)
 	{
-		mReferer = pReferer;
+		this.mReferer = pReferer;
 	}
 
 }

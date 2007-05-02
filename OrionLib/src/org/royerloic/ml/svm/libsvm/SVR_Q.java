@@ -20,58 +20,58 @@ class SVR_Q extends Kernel
 
 	private float[][]			buffer;
 
-	SVR_Q(Problem prob, Parameter param)
+	SVR_Q(final Problem prob, final Parameter param)
 	{
 		super(prob.mNumberOfVectors, prob.mVectorsTable, param);
-		l = prob.mNumberOfVectors;
-		cache = new Cache(l, (int) (param.cache_size * (1 << 20)));
-		sign = new byte[2 * l];
-		index = new int[2 * l];
-		for (int k = 0; k < l; k++)
+		this.l = prob.mNumberOfVectors;
+		this.cache = new Cache(this.l, (int) (param.cache_size * (1 << 20)));
+		this.sign = new byte[2 * this.l];
+		this.index = new int[2 * this.l];
+		for (int k = 0; k < this.l; k++)
 		{
-			sign[k] = 1;
-			sign[k + l] = -1;
-			index[k] = k;
-			index[k + l] = k;
+			this.sign[k] = 1;
+			this.sign[k + this.l] = -1;
+			this.index[k] = k;
+			this.index[k + this.l] = k;
 		}
-		buffer = new float[2][2 * l];
-		next_buffer = 0;
+		this.buffer = new float[2][2 * this.l];
+		this.next_buffer = 0;
 	}
 
-	void swap_index(int i, int j)
+	@Override
+	void swap_index(final int i, final int j)
 	{
 		do
 		{
-			byte _ = sign[i];
-			sign[i] = sign[j];
-			sign[j] = _;
+			final byte _ = this.sign[i];
+			this.sign[i] = this.sign[j];
+			this.sign[j] = _;
 		}
 		while (false);
 		do
 		{
-			int _ = index[i];
-			index[i] = index[j];
-			index[j] = _;
+			final int _ = this.index[i];
+			this.index[i] = this.index[j];
+			this.index[j] = _;
 		}
 		while (false);
 	}
 
-	float[] get_Q(int i, int len)
+	@Override
+	float[] get_Q(final int i, final int len)
 	{
-		float[][] data = new float[1][];
-		int real_i = index[i];
-		if (cache.get_data(real_i, data, l) < l)
-		{
-			for (int j = 0; j < l; j++)
+		final float[][] data = new float[1][];
+		final int real_i = this.index[i];
+		if (this.cache.get_data(real_i, data, this.l) < this.l)
+			for (int j = 0; j < this.l; j++)
 				data[0][j] = (float) kernel_function(real_i, j);
-		}
 
 		// reorder and copy
-		float buf[] = buffer[next_buffer];
-		next_buffer = 1 - next_buffer;
-		byte si = sign[i];
+		final float buf[] = this.buffer[this.next_buffer];
+		this.next_buffer = 1 - this.next_buffer;
+		final byte si = this.sign[i];
 		for (int j = 0; j < len; j++)
-			buf[j] = si * sign[j] * data[0][index[j]];
+			buf[j] = si * this.sign[j] * data[0][this.index[j]];
 		return buf;
 	}
 }

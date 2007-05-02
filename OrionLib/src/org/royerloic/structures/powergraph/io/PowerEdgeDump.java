@@ -12,13 +12,11 @@ import org.royerloic.structures.powergraph.PowerGraph;
 
 public class PowerEdgeDump<N>
 {
-	public static <N> void dumpPowerEdges(PowerGraph<N> pPowerGraph, File pFile) throws IOException
+	public static <N> void dumpPowerEdges(final PowerGraph<N> pPowerGraph, final File pFile) throws IOException
 	{
 		{
 			if (pFile == null)
-			{
 				throw new IllegalArgumentException("File should not be null.");
-			}
 
 			// declared here only to make visible to finally clause; generic reference
 			Writer lWriter = null;
@@ -28,7 +26,7 @@ public class PowerEdgeDump<N>
 				// FileWriter always assumes default encoding is OK!
 				lWriter = new BufferedWriter(new FileWriter(pFile));
 
-				for (Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())
+				for (final Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())
 				{
 					String lFirst = lPowerEdge.getFirstNode().toString();
 					lFirst = lFirst.replace('[', ' ');

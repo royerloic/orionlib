@@ -15,39 +15,37 @@ public class GeoLocator implements Locator
 	{
 		super();
 
-		mCountryDatabase = new LocationDatabase();
-		mCountryDatabase.setDebug(true);
+		this.mCountryDatabase = new LocationDatabase();
+		this.mCountryDatabase.setDebug(true);
 
-		mCountryDatabase.addListFromFile("org/royerloic/geolocator/data/country-lat-long-country.txt");
-		mCountryDatabase.addListFromFile("org/royerloic/geolocator/data/nationality-lat-long-country.txt");
+		this.mCountryDatabase.addListFromFile("org/royerloic/geolocator/data/country-lat-long-country.txt");
+		this.mCountryDatabase.addListFromFile("org/royerloic/geolocator/data/nationality-lat-long-country.txt");
 
-		mBigCityDatabase = new LocationDatabase();
-		mBigCityDatabase.setDebug(true);
-		mBigCityDatabase.addListFromFile("org/royerloic/geolocator/data/city-lat-long-country-pop.txt");
+		this.mBigCityDatabase = new LocationDatabase();
+		this.mBigCityDatabase.setDebug(true);
+		this.mBigCityDatabase.addListFromFile("org/royerloic/geolocator/data/city-lat-long-country-pop.txt");
 
-		mAllCityDatabase = new LocationDatabase();
-		mAllCityDatabase.setDebug(true);
-		mAllCityDatabase.addListFromFile("org/royerloic/geolocator/data/city-lat-long-country.txt");
+		this.mAllCityDatabase = new LocationDatabase();
+		this.mAllCityDatabase.setDebug(true);
+		this.mAllCityDatabase.addListFromFile("org/royerloic/geolocator/data/city-lat-long-country.txt");
 
-		mUSSDatabase = new LocationDatabase();
-		mUSSDatabase.setDebug(true);
-		mUSSDatabase.addListFromFile("org/royerloic/geolocator/data/USState-lat-long-code.txt");
+		this.mUSSDatabase = new LocationDatabase();
+		this.mUSSDatabase.setDebug(true);
+		this.mUSSDatabase.addListFromFile("org/royerloic/geolocator/data/USState-lat-long-code.txt");
 
 	}
 
-	public Location locateString(String pString)
+	public Location locateString(final String pString)
 	{
 		Location lLocation = null;
 
-		lLocation = mBigCityDatabase.findLocationInString(pString);
+		lLocation = this.mBigCityDatabase.findLocationInString(pString);
 		if (lLocation == null)
 		{
-			lLocation = mCountryDatabase.findLocationInString(pString);
+			lLocation = this.mCountryDatabase.findLocationInString(pString);
 
 			if (lLocation == null)
-			{
-				lLocation = mUSSDatabase.findLocationInString(pString);
-			}/**/
+				lLocation = this.mUSSDatabase.findLocationInString(pString);
 		}
 
 		return lLocation;

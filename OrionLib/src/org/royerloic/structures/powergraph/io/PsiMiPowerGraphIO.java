@@ -56,22 +56,22 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 	private String							mInteractorId;
 	private String							mInteractorName;
 	private String							mRole;
-	private Map<String, String>	lIdToNameMap					= new HashMap<String, String>();
-	private Map<Node, String>		lInteractorsToRoleMap	= new HashMap<Node, String>();
+	private final Map<String, String>	lIdToNameMap					= new HashMap<String, String>();
+	private final Map<Node, String>		lInteractorsToRoleMap	= new HashMap<Node, String>();
 	private PowerGraph<Node>		mPowerGraph;
 
-	public PowerGraph<Node> load(File pFile, boolean pSpokeModel)
+	public PowerGraph<Node> load(final File pFile, final boolean pSpokeModel)
 	{
-		mSpokeModel = pSpokeModel;
+		this.mSpokeModel = pSpokeModel;
 		FileInputStream lFileInputStream;
 		try
 		{
 			lFileInputStream = new FileInputStream(pFile);
-			PowerGraph<Node> lPowerGraph = load(lFileInputStream);
+			final PowerGraph<Node> lPowerGraph = load(lFileInputStream);
 
 			return lPowerGraph;
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,125 +79,121 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 		return null;
 	}
 
-	public PowerGraph<Node> load(InputStream pInputStream)
+	public PowerGraph<Node> load(final InputStream pInputStream)
 	{
-		mPowerGraph = new PowerGraph<Node>();
+		this.mPowerGraph = new PowerGraph<Node>();
 
 		// Use an instance of ourselves as the SAX event handler
-		DefaultHandler handler = this;
+		final DefaultHandler handler = this;
 		// Use the default (non-validating) parser
-		SAXParserFactory factory = SAXParserFactory.newInstance();
+		final SAXParserFactory factory = SAXParserFactory.newInstance();
 		try
 		{
 			// Parse the input
-			SAXParser saxParser = factory.newSAXParser();
+			final SAXParser saxParser = factory.newSAXParser();
 			saxParser.parse(pInputStream, handler);
 
 		}
-		catch (Throwable t)
+		catch (final Throwable t)
 		{
 			t.printStackTrace();
 		}
 
-		return mPowerGraph;
+		return this.mPowerGraph;
 	}
 
 	// ===========================================================
 	// SAX DocumentHandler methods
 	// ===========================================================
 
+	@Override
 	public void startDocument() throws SAXException
 	{
 		// System.out.println("Start of document");
 	}
 
-	public void startElement(String namespaceURI, String lName, // local name
-														String qName, // qualified name
-														Attributes attrs) throws SAXException
+	@Override
+	public void startElement(final String namespaceURI, final String lName, // local name
+														final String qName, // qualified name
+														final Attributes attrs) throws SAXException
 	{
 		if (qName.equals("interactor") || qName.equals("proteinInteractor"))
 		{
-			mInteractorId = attrs.getValue("id");
-			mInteractorName = null;
+			this.mInteractorId = attrs.getValue("id");
+			this.mInteractorName = null;
 		}
 		else if (qName.equals("interaction"))
-		{
 			startInteraction();
-		}
 		else if (qName.equals("proteinInteractorRef"))
-		{
-			mInteractorId = attrs.getValue("ref");
-		}
+			this.mInteractorId = attrs.getValue("ref");
 
 	}
 
-	public void characters(char buf[], int offset, int len) throws SAXException
+	@Override
+	public void characters(final char buf[], final int offset, final int len) throws SAXException
 	{
-		mText = new String(buf, offset, len);
+		this.mText = new String(buf, offset, len);
 	}
 
-	public void endElement(String namespaceURI, String sName, // simple name
-													String qName // qualified name
+	@Override
+	public void endElement(final String namespaceURI, final String sName, // simple name
+													final String qName // qualified name
 	) throws SAXException
 	{
 
 		if (qName.equals("interactor") || qName.equals("proteinInteractor"))
 		{
-			lIdToNameMap.put(mInteractorId, mInteractorName);
-			mPowerGraph.addNode(new Node(mInteractorName));
+			this.lIdToNameMap.put(this.mInteractorId, this.mInteractorName);
+			this.mPowerGraph.addNode(new Node(this.mInteractorName));
 		}
 		else if (qName.equals("interaction"))
-		{
 			endInteraction();
-		}
 		else if (qName.equals("interactorRef"))
 		{
-			if (mText != null)
-				mInteractorId = mText;
-			addInteractor(mInteractorId, lIdToNameMap.get(mInteractorId), mRole);
+			if (this.mText != null)
+				this.mInteractorId = this.mText;
+			addInteractor(this.mInteractorId, this.lIdToNameMap.get(this.mInteractorId), this.mRole);
 		}
 		else if (qName.equals("shortLabel"))
 		{
-			if (mInteractorName == null)
-				mInteractorName = mText;
+			if (this.mInteractorName == null)
+				this.mInteractorName = this.mText;
 		}
 		else if (qName.equals("role"))
 		{
-			mRole = mText;
-			addInteractor(mInteractorId, lIdToNameMap.get(mInteractorId), mRole);
+			this.mRole = this.mText;
+			addInteractor(this.mInteractorId, this.lIdToNameMap.get(this.mInteractorId), this.mRole);
 		}
 
 	}
 
 	private void startInteraction()
 	{
-		lInteractorsToRoleMap.clear();
+		this.lInteractorsToRoleMap.clear();
 	}
 
-	private void addInteractor(String lInteractorId, String pName, String pRole)
+	private void addInteractor(final String lInteractorId, final String pName, final String pRole)
 	{
-		lInteractorsToRoleMap.put(new Node(pName), pRole);
+		this.lInteractorsToRoleMap.put(new Node(pName), pRole);
 	}
 
 	private void endInteraction()
 	{
-		if (lInteractorsToRoleMap.size() == 1)
+		if (this.lInteractorsToRoleMap.size() == 1)
 		{
-			Node lNode = lInteractorsToRoleMap.keySet().iterator().next();
-			Set<Node> lPowerNode = new HashSet<Node>();
+			final Node lNode = this.lInteractorsToRoleMap.keySet().iterator().next();
+			final Set<Node> lPowerNode = new HashSet<Node>();
 			lPowerNode.add(lNode);
-			mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+			this.mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
 		}
-		else if (!mSpokeModel)
-		{
-			mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lInteractorsToRoleMap.keySet(),
-					lInteractorsToRoleMap.keySet()));
-		}
-		else if (mSpokeModel)
+		else if (!this.mSpokeModel)
+			this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(this.lInteractorsToRoleMap.keySet(),
+					this.lInteractorsToRoleMap.keySet()));
+		else if (this.mSpokeModel)
 		{
 			Node lBait = null;
-			for (Node lNode : lInteractorsToRoleMap.keySet())
-				if (lInteractorsToRoleMap.get(lNode).equals("bait"))
+			for (final Node lNode : this.lInteractorsToRoleMap.keySet())
+				if (this.lInteractorsToRoleMap.get(lNode).equals("bait"))
 				{
 					lBait = lNode;
 					break;
@@ -205,26 +201,27 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 			if (lBait != null)
 			{
-				Set<Node> lBaitPowerNode = new HashSet<Node>();
+				final Set<Node> lBaitPowerNode = new HashSet<Node>();
 				lBaitPowerNode.add(lBait);
-				Set<Node> lPreysPowerNode = new HashSet<Node>();
-				lPreysPowerNode.addAll(lInteractorsToRoleMap.keySet());
+				final Set<Node> lPreysPowerNode = new HashSet<Node>();
+				lPreysPowerNode.addAll(this.lInteractorsToRoleMap.keySet());
 				lPreysPowerNode.removeAll(lBaitPowerNode);
 
-				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode, lPreysPowerNode));
+				this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode, lPreysPowerNode));
 			}
 			else
 			{
-				Set<Node> lPowerNode = lInteractorsToRoleMap.keySet();
-				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+				final Set<Node> lPowerNode = this.lInteractorsToRoleMap.keySet();
+				this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
 			}
 
 		}
 
 	}
 
+	@Override
 	public void endDocument() throws SAXException
 	{
-		mPowerGraph.commitDelayedEdges();
+		this.mPowerGraph.commitDelayedEdges();
 	}
 }

@@ -37,7 +37,7 @@ public final class MultiquadricKernel implements Kernel {
     /**
      * Construct a multiquadric kernel with the specified value for &gamma;.
      */
-    public MultiquadricKernel(double gamma) {
+    public MultiquadricKernel(final double gamma) {
         this.gamma = gamma;
         this.a = gamma * gamma;
     }
@@ -46,11 +46,11 @@ public final class MultiquadricKernel implements Kernel {
      * Returns the value of &gamma;.
      */
     public double gamma() {
-        return gamma;
+        return this.gamma;
     }
 
-    public double eval(GVector x1, GVector x2) {
-        return -Math.sqrt(Matrices.distanceSquared(x1, x2) + a);
+    public double eval(final GVector x1, final GVector x2) {
+        return -Math.sqrt(Matrices.distanceSquared(x1, x2) + this.a);
     }
 
 }

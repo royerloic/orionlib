@@ -8,16 +8,16 @@ import javax.imageio.ImageIO;
 
 public class GraphicsUtils
 {
-	private static GraphicsUtils	cGraphicsUtils	= new GraphicsUtils();
+	private static final GraphicsUtils	cGraphicsUtils	= new GraphicsUtils();
 
 	private GraphicsUtils()
 	{
 	}
 
-	public static BufferedImage loadImageFromRessources(String pFileName) throws IOException
+	public static BufferedImage loadImageFromRessources(final String pFileName) throws IOException
 	{
 		BufferedImage lImage;
-		InputStream stream = cGraphicsUtils.getClass().getClassLoader().getResource(pFileName).openStream();
+		final InputStream stream = cGraphicsUtils.getClass().getClassLoader().getResource(pFileName).openStream();
 
 		System.err.print("Loading Image '" + pFileName + "'...");
 		lImage = ImageIO.read(stream);

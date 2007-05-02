@@ -5,37 +5,37 @@ public class Node
 	private String	mName;
 	private int			mHashCode;
 
-	public Node(String pName)
+	public Node(final String pName)
 	{
 		super();
-		mName = pName;
-		mHashCode = mName.hashCode();
+		this.mName = pName;
+		this.mHashCode = this.mName.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return mName;
+		return this.mName;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
 			return true;
 
-		return mName.equals(((Node) obj).mName);
+		return this.mName.equals(((Node) obj).mName);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return mHashCode;
+		return this.mHashCode;
 	}
 
 	public String getName()
 	{
-		return mName;
+		return this.mName;
 	}
 
 }

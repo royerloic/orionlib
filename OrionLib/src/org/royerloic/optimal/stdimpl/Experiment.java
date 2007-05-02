@@ -66,8 +66,8 @@ public class Experiment implements IExperiment
 	public Experiment(final INumericalVector pInput, final INumericalVector pOutput)
 	{
 		super();
-		mInput = pInput;
-		mOutput = pOutput;
+		this.mInput = pInput;
+		this.mOutput = pOutput;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Experiment implements IExperiment
 	 */
 	public final void begin()
 	{
-		mDate = new Date();
+		this.mDate = new Date();
 
 	}
 
@@ -97,10 +97,10 @@ public class Experiment implements IExperiment
 	 */
 	public final void end()
 	{
-		Date lDate = new Date();
-		long lBegin = mDate.getTime();
-		long lEnd = lDate.getTime();
-		mDuration = (int) ((lEnd - lBegin));
+		final Date lDate = new Date();
+		final long lBegin = this.mDate.getTime();
+		final long lEnd = lDate.getTime();
+		this.mDuration = (int) ((lEnd - lBegin));
 	}
 
 	/**
@@ -113,8 +113,8 @@ public class Experiment implements IExperiment
 	 */
 	public final void set(final INumericalVector pInput, final INumericalVector pOutput)
 	{
-		mInput = pInput;
-		mOutput = pOutput;
+		this.mInput = pInput;
+		this.mOutput = pOutput;
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class Experiment implements IExperiment
 	 */
 	public final INumericalVector getInput()
 	{
-		return mInput;
+		return this.mInput;
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class Experiment implements IExperiment
 	 */
 	public final INumericalVector getOutput()
 	{
-		return mOutput;
+		return this.mOutput;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Experiment implements IExperiment
 	 */
 	public final Date getDate()
 	{
-		return mDate;
+		return this.mDate;
 	}
 
 	/**
@@ -158,16 +158,17 @@ public class Experiment implements IExperiment
 	 */
 	public final int getDuration()
 	{
-		return mDuration;
+		return this.mDuration;
 	}
 
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public final String toString()
 	{
-		return " Date: " + mDate.toString() + "\n" + " Duration: " + mDuration + "\n" + " Input: "
-				+ mInput.toString() + "\n" + " Output: " + mOutput.toString();
+		return " Date: " + this.mDate.toString() + "\n" + " Duration: " + this.mDuration + "\n" + " Input: "
+				+ this.mInput.toString() + "\n" + " Output: " + this.mOutput.toString();
 	}
 
 	/**
@@ -246,14 +247,15 @@ public class Experiment implements IExperiment
 	/**
 	 * @see org.royerloic.java.IObject#clone()
 	 */
+	@Override
 	public Object clone()
 	{
-		Experiment lExperiment = new Experiment();
-		lExperiment.mDate = (Date) mDate.clone();
-		lExperiment.mDateFormat = (SimpleDateFormat) mDateFormat.clone();
-		lExperiment.mDuration = mDuration;
-		lExperiment.mInput = (INumericalVector) mInput.clone();
-		lExperiment.mOutput = (INumericalVector) mOutput.clone();
+		final Experiment lExperiment = new Experiment();
+		lExperiment.mDate = (Date) this.mDate.clone();
+		lExperiment.mDateFormat = (SimpleDateFormat) this.mDateFormat.clone();
+		lExperiment.mDuration = this.mDuration;
+		lExperiment.mInput = (INumericalVector) this.mInput.clone();
+		lExperiment.mOutput = (INumericalVector) this.mOutput.clone();
 
 		return lExperiment;
 	}
@@ -261,44 +263,46 @@ public class Experiment implements IExperiment
 	/**
 	 * @see org.royerloic.java.IObject#copyFrom(java.lang.Object)
 	 */
-	public void copyFrom(Object pObject)
+	public void copyFrom(final Object pObject)
 	{
 		if (pObject instanceof Experiment)
 		{
-			Experiment lExperiment = (Experiment) pObject;
+			final Experiment lExperiment = (Experiment) pObject;
 
-			lExperiment.mDate = (Date) mDate.clone();
-			lExperiment.mDateFormat = (SimpleDateFormat) mDateFormat.clone();
-			lExperiment.mDuration = mDuration;
-			lExperiment.mInput = (INumericalVector) mInput.clone();
-			lExperiment.mOutput = (INumericalVector) mOutput.clone();
+			lExperiment.mDate = (Date) this.mDate.clone();
+			lExperiment.mDateFormat = (SimpleDateFormat) this.mDateFormat.clone();
+			lExperiment.mDuration = this.mDuration;
+			lExperiment.mInput = (INumericalVector) this.mInput.clone();
+			lExperiment.mOutput = (INumericalVector) this.mOutput.clone();
 		}
 
 	}
 
-	public boolean equals(Object pObject)
+	@Override
+	public boolean equals(final Object pObject)
 	{
 		boolean lEquals = false;
 		if (pObject instanceof Experiment)
 		{
-			Experiment lExperiment = (Experiment) pObject;
+			final Experiment lExperiment = (Experiment) pObject;
 
 			lEquals = true;
-			lEquals &= lExperiment.mDate.equals(mDate);
-			lEquals &= lExperiment.mDuration == mDuration;
-			lEquals &= lExperiment.mInput.equals(mInput);
-			lEquals &= lExperiment.mOutput.equals(mOutput);
+			lEquals &= lExperiment.mDate.equals(this.mDate);
+			lEquals &= lExperiment.mDuration == this.mDuration;
+			lEquals &= lExperiment.mInput.equals(this.mInput);
+			lEquals &= lExperiment.mOutput.equals(this.mOutput);
 		}
 		return lEquals;
 	}
 
+	@Override
 	public int hashCode()
 	{
 		int lCode = 1;
-		lCode *= mDate.hashCode();
-		lCode *= (int) mDuration;
-		lCode *= mInput.hashCode();
-		lCode *= mOutput.hashCode();
+		lCode *= this.mDate.hashCode();
+		lCode *= this.mDuration;
+		lCode *= this.mInput.hashCode();
+		lCode *= this.mOutput.hashCode();
 		return lCode;
 	}
 }

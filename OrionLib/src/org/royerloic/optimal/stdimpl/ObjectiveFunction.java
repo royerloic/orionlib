@@ -26,17 +26,17 @@ public class ObjectiveFunction implements IObjectiveFunction
 
 	private IExperimentDatabase	mDatabase;
 
-	public void setInterpreter(Interpreter pInterpreter)
+	public void setInterpreter(final Interpreter pInterpreter)
 	{
-		mInterpreter = pInterpreter;
+		this.mInterpreter = pInterpreter;
 	}
 
 	/**
 	 * @see org.royerloic.optimal.interf.IObjectiveFunction#setExperimentDatabase(org.royerloic.optimal.interf.IExperimentDatabase)
 	 */
-	public void setExperimentDatabase(IExperimentDatabase pDatabase)
+	public void setExperimentDatabase(final IExperimentDatabase pDatabase)
 	{
-		mDatabase = pDatabase;
+		this.mDatabase = pDatabase;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 	public ObjectiveFunction(final String pFormula)
 	{
 		super();
-		mFormula = pFormula;
+		this.mFormula = pFormula;
 	}
 
 	/**
@@ -56,55 +56,49 @@ public class ObjectiveFunction implements IObjectiveFunction
 
 		Double lResult;
 
-		int lDimension = pVector.getDimension();
+		final int lDimension = pVector.getDimension();
 
-		INumericalVector lVector = new NumericalVector(lDimension);
-		INumericalVector lMaxVector = mDatabase.getMaximumOutputValuesVector();
-		INumericalVector lMinVector = mDatabase.getMinimumOutputValuesVector();
+		final INumericalVector lVector = new NumericalVector(lDimension);
+		final INumericalVector lMaxVector = this.mDatabase.getMaximumOutputValuesVector();
+		final INumericalVector lMinVector = this.mDatabase.getMinimumOutputValuesVector();
 
 		for (int i = 0; i < lDimension; i++)
 		{
-			double lValue = (pVector.get(i) - lMinVector.get(i)) / (lMaxVector.get(i) - lMinVector.get(i));
+			final double lValue = (pVector.get(i) - lMinVector.get(i)) / (lMaxVector.get(i) - lMinVector.get(i));
 
 			if (Double.isNaN(lValue))
-			{
 				lVector.set(i, 0);
-			}
 			else
-			{
 				lVector.set(i, lValue);
-			}
 
 		}
 
 		synchronized (this)
 		{
 			for (int i = 0; i < lDimension; i++)
-			{
 				try
 				{
-					mInterpreter.set("y" + i, pVector.get(i));
-					mInterpreter.set("n" + i, lVector.get(i));
+					this.mInterpreter.set("y" + i, pVector.get(i));
+					this.mInterpreter.set("n" + i, lVector.get(i));
 				}
-				catch (EvalError e1)
+				catch (final EvalError e1)
 				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace(System.out);
 				}
-			}
 
 			try
 			{
-				lResult = (Double) mInterpreter.eval(mFormula);
-				double lResultPrimitive = lResult.doubleValue();
+				lResult = (Double) this.mInterpreter.eval(this.mFormula);
+				final double lResultPrimitive = lResult.doubleValue();
 				return lResultPrimitive;
 			}
-			catch (EvalError e)
+			catch (final EvalError e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				mLogger.error(e);
-				throw new RuntimeException("Error evaluating Objective formula:" + mFormula);
+				throw new RuntimeException("Error evaluating Objective formula:" + this.mFormula);
 			}
 		}
 

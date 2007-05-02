@@ -26,10 +26,12 @@ import org.royerloic.utils.gui.IwuJFrame;
  */
 public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IOptimalEngineView
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1016157805708654249L;
 	private static final int			cOPTIMAL_ENGINE_FRAME_HEIGHT	= 600;
 	private static final int			cOPTIMAL_ENGINE_FRAME_WIDTH		= 900;
-
-	private String								mProjectName;
 
 	private ErrorLogBox						mErrorLogBox;
 
@@ -43,8 +45,8 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 		setTitle("-Optimal- Press Start...");
 		setVisible(false);
 		addWindowListener(this);
-		mOptimalEngineJPanel = new OptimalEngineJPanel();
-		setContentPane(mOptimalEngineJPanel);
+		this.mOptimalEngineJPanel = new OptimalEngineJPanel();
+		setContentPane(this.mOptimalEngineJPanel);
 		setSize(cOPTIMAL_ENGINE_FRAME_WIDTH, cOPTIMAL_ENGINE_FRAME_HEIGHT);
 		validate();
 		setVisible(true);
@@ -55,7 +57,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void initiate()
 	{
-		mOptimalEngineJPanel.initiate();
+		this.mOptimalEngineJPanel.initiate();
 	}
 
 	/**
@@ -65,16 +67,16 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	{
 		setVisible(false);
 		removeWindowListener(this);
-		mOptimalEngineJPanel.terminate();
+		this.mOptimalEngineJPanel.terminate();
 
 	}
 
 	/**
 	 * @see IOptimalEngineView#updateMaximumEvolution(double[])
 	 */
-	public void updateMaximumEvolution(List pList)
+	public void updateMaximumEvolution(final List pList)
 	{
-		mOptimalEngineJPanel.updateMaximumEvolution(pList);
+		this.mOptimalEngineJPanel.updateMaximumEvolution(pList);
 	}
 
 	/**
@@ -82,7 +84,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateIterations(final int mIterations)
 	{
-		mOptimalEngineJPanel.updateIterations(mIterations);
+		this.mOptimalEngineJPanel.updateIterations(mIterations);
 	}
 
 	/**
@@ -90,12 +92,10 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void notifyError(final String pError, final Throwable pException)
 	{
-		if (mErrorLogBox == null)
-		{
-			mErrorLogBox = new ErrorLogBox(this, "Error", "", false);
-		}
+		if (this.mErrorLogBox == null)
+			this.mErrorLogBox = new ErrorLogBox(this, "Error", "", false);
 
-		mErrorLogBox.addErrorLog(pError + "\n" + pException.toString());
+		this.mErrorLogBox.addErrorLog(pError + "\n" + pException.toString());
 
 		System.out.println(pError);
 		pException.printStackTrace(System.out);
@@ -107,7 +107,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateBestExperiment(final IExperiment pExperiment, final double pValue)
 	{
-		mOptimalEngineJPanel.updateBestExperiment(pExperiment, pValue);
+		this.mOptimalEngineJPanel.updateBestExperiment(pExperiment, pValue);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateDesignerStatus(final String pStatus)
 	{
-		mOptimalEngineJPanel.updateDesignerStatus(pStatus);
+		this.mOptimalEngineJPanel.updateDesignerStatus(pStatus);
 	}
 
 	/**
@@ -123,8 +123,8 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void setControlListener(final IOptimalEngineControl pIOptimalEngineControl)
 	{
-		mIOptimalEngineControl = pIOptimalEngineControl;
-		mOptimalEngineJPanel.setControlListener(pIOptimalEngineControl);
+		this.mIOptimalEngineControl = pIOptimalEngineControl;
+		this.mOptimalEngineJPanel.setControlListener(pIOptimalEngineControl);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateModelerView(final IScalarFunction mModeler)
 	{
-		mOptimalEngineJPanel.updateModelerView(mModeler);
+		this.mOptimalEngineJPanel.updateModelerView(mModeler);
 
 	}
 
@@ -147,7 +147,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	private void exit()
 	{
 		terminate();
-		mIOptimalEngineControl.doStop();
+		this.mIOptimalEngineControl.doStop();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void setViewOnlyMode(final boolean pMode)
 	{
-		mOptimalEngineJPanel.setViewOnlyMode(pMode);
+		this.mOptimalEngineJPanel.setViewOnlyMode(pMode);
 	}
 
 	// ******************************************************************************/

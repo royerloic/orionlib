@@ -27,15 +27,15 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 		if (cUniqueInstanceEnglishWordsIdentifier == null)
 		{
 			cUniqueInstanceEnglishWordsIdentifier = new EnglishWordsIdentifier();
-			InputStream lStream = EnglishWordsIdentifier.class.getClassLoader().getResourceAsStream(
+			final InputStream lStream = EnglishWordsIdentifier.class.getClassLoader().getResourceAsStream(
 					"org/royerloic/nlp/wordlists/lists/EnglishWords.word.txt");
-			InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
-			BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
+			final InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
+			final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 			try
 			{
 				cUniqueInstanceEnglishWordsIdentifier.compileIdentificationRulesFromReader(lBufferedReader);
 			}
-			catch (IOException exception)
+			catch (final IOException exception)
 			{
 				cLogger.error(exception);
 			}
@@ -46,18 +46,20 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 	/**
 	 * @see de.tud.biotec.protein.interaction.attic.identifiers.EntityIdentifier#normalizeString(java.lang.String)
 	 */
+	@Override
 	public String normalizeString(String pString)
 	{
 		pString = pString.trim();
 		return pString;
 	}
 
-	public boolean isEntity(String pToken)
+	@Override
+	public boolean isEntity(final String pToken)
 	{
 		if (pToken.length() == 0)
 			return false;
-		String lAfterFirstCaracterString = pToken.substring(1);
-		boolean lCorrectCapitalization = lAfterFirstCaracterString.toLowerCase()
+		final String lAfterFirstCaracterString = pToken.substring(1);
+		final boolean lCorrectCapitalization = lAfterFirstCaracterString.toLowerCase()
 				.equals(lAfterFirstCaracterString);
 		return lCorrectCapitalization && super.isEntity(pToken.toLowerCase());
 	}

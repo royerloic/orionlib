@@ -42,7 +42,7 @@ public class PlotScalarFuntionFactory
 	{
 		if (pFunction.getInputDimension() <= 2)
 		{
-			IPlot lIPlot =
+			final IPlot lIPlot =
 				(IPlot) Plugin.load(
 					"org.royerloic.math.plot.PlotScalarFuntion"
 						+ Integer.toString(pFunction.getInputDimension() + 1));
@@ -53,9 +53,7 @@ public class PlotScalarFuntionFactory
 			return lIPlot;
 		}
 		else
-		{
 			throw new Exception("bad dimension");
-		}
 
 	};
 }

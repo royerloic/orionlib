@@ -5,32 +5,32 @@ public class Couple<A, B>
 	public A	mA;
 	public B	mB;
 
-	public Couple(A pA, B pB)
+	public Couple(final A pA, final B pB)
 	{
 		super();
-		mA = pA;
-		mB = pB;
+		this.mA = pA;
+		this.mB = pB;
 
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean equals(Object pObj)
+	public boolean equals(final Object pObj)
 	{
-		Couple<A, B> lPair = (Couple<A, B>) pObj;
+		final Couple<A, B> lPair = (Couple<A, B>) pObj;
 		return (this.mA.equals(lPair.mA) && this.mB.equals(lPair.mB));
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return mA.hashCode() ^ mB.hashCode();
+		return this.mA.hashCode() ^ this.mB.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return "(" + mA.toString() + "," + mB.toString() + ")";
+		return "(" + this.mA.toString() + "," + this.mB.toString() + ")";
 	}
 
 }

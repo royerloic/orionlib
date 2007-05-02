@@ -29,6 +29,11 @@ import org.royerloic.math.plot.PlotScalarFuntionFactory;
  */
 public class ModelerView extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 6952366308707407816L;
+
 	private IPlot	mModelPlot;
 
 	private int		mResolution;
@@ -42,9 +47,9 @@ public class ModelerView extends JPanel
 	public ModelerView()
 	{
 		super();
-		mResolution = 10;
-		Border lRaisedBevel = BorderFactory.createRaisedBevelBorder();
-		Border lLoweredBevel = BorderFactory.createLoweredBevelBorder();
+		this.mResolution = 10;
+		final Border lRaisedBevel = BorderFactory.createRaisedBevelBorder();
+		final Border lLoweredBevel = BorderFactory.createLoweredBevelBorder();
 		setBorder(BorderFactory.createCompoundBorder(lRaisedBevel, lLoweredBevel));
 		setLayout(new BorderLayout(5, 5));
 	}
@@ -56,26 +61,24 @@ public class ModelerView extends JPanel
 
 	public void updateModeler(final IScalarFunction pModeler)
 	{
-		if (mModelPlot == null)
+		if (this.mModelPlot == null)
 		{
 			try
 			{
-				mModelPlot = PlotScalarFuntionFactory.build(pModeler, mResolution, "Model");
+				this.mModelPlot = PlotScalarFuntionFactory.build(pModeler, this.mResolution, "Model");
 			}
-			catch (Throwable e)
+			catch (final Throwable e)
 			{
 				throw new RuntimeException("Error while updating modeler.", e);
 			}
 
-			mModelPlot.display();
-			add((Container) mModelPlot);
+			this.mModelPlot.display();
+			add((Container) this.mModelPlot);
 			validate();
 			setVisible(true);
 		}
 		else
-		{
-			mModelPlot.update();
-		}
+			this.mModelPlot.update();
 	};
 
 	/**
@@ -83,7 +86,7 @@ public class ModelerView extends JPanel
 	 */
 	public final void terminate()
 	{
-		mModelPlot.hide();
+		this.mModelPlot.hide();
 		removeAll();
 	};
 

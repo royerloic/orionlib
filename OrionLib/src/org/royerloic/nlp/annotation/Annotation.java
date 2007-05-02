@@ -25,28 +25,24 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 	public Map<String, Double>	mCaracteristics	= new HashMap<String, Double>();
 	public String								mAnnotatorName;
 
-	public Annotation(String pText, O pAnnotationObject, String pAnnotatedFragment, Integer pStart)
+	public Annotation(final String pText, final O pAnnotationObject, final String pAnnotatedFragment, final Integer pStart)
 	{
 		super();
-		mText = pText;
-		mAnnotationObject = pAnnotationObject;
-		mAnnotatedFragment = pAnnotatedFragment;
-		mStart = pStart;
+		this.mText = pText;
+		this.mAnnotationObject = pAnnotationObject;
+		this.mAnnotatedFragment = pAnnotatedFragment;
+		this.mStart = pStart;
 
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
-		{
 			return true;
-		}
 		else if (this.hashCode() != ((Annotation) obj).hashCode())
-		{
 			return false;
-		}
-		Annotation lAnnotation = (Annotation) obj;
+		final Annotation lAnnotation = (Annotation) obj;
 
 		boolean lEquals = true;
 		lEquals &= this.mText.equals(lAnnotation.mText);
@@ -61,139 +57,123 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 	@Override
 	public int hashCode()
 	{
-		return mText.hashCode() + mAnnotatedFragment.hashCode() + mStart + mAnnotationObject.hashCode();// +
+		return this.mText.hashCode() + this.mAnnotatedFragment.hashCode() + this.mStart + this.mAnnotationObject.hashCode();// +
 		// mConfidence.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return mAnnotationObject + "\t" + mAnnotatedFragment + "\t" + mConfidence + "\t" + mStart + "\t"
-				+ mAnnotatedFragment.length() + "\t" + mCaracteristics.toString() + "\t" + mAnnotatorName;
+		return this.mAnnotationObject + "\t" + this.mAnnotatedFragment + "\t" + this.mConfidence + "\t" + this.mStart + "\t"
+				+ this.mAnnotatedFragment.length() + "\t" + this.mCaracteristics.toString() + "\t" + this.mAnnotatorName;
 	}
 
 	public List<String> toList()
 	{
 		return Arrays.asList(new String[]
-		{ mAnnotationObject.toString(), mAnnotatedFragment, mConfidence.toString(), mStart.toString(),
-				Integer.toString(mAnnotatedFragment.length()) });
+		{ this.mAnnotationObject.toString(), this.mAnnotatedFragment, this.mConfidence.toString(), this.mStart.toString(),
+				Integer.toString(this.mAnnotatedFragment.length()) });
 	}
 
-	public static Annotation fromList(List<String> pList)
+	public static Annotation fromList(final List<String> pList)
 	{
-		String lEntrezIdString = pList.get(0);
-		Integer lEntrezIdInteger = Integer.parseInt(lEntrezIdString);
-		String lAnnotatedFragment = pList.get(1);
-		String lConfidenceString = pList.get(2);
-		Double lConfidenceDouble = Double.parseDouble(lConfidenceString);
-		String lStartString = pList.get(3);
-		Integer lStart = Integer.parseInt(lStartString);
+		final String lEntrezIdString = pList.get(0);
+		final Integer lEntrezIdInteger = Integer.parseInt(lEntrezIdString);
+		final String lAnnotatedFragment = pList.get(1);
+		final String lConfidenceString = pList.get(2);
+		final Double lConfidenceDouble = Double.parseDouble(lConfidenceString);
+		final String lStartString = pList.get(3);
+		final Integer lStart = Integer.parseInt(lStartString);
 
 		// String lAnnotatorName = pList.get(5);
 
-		Annotation lAnnotation = new Annotation(lAnnotatedFragment, lEntrezIdInteger, lAnnotatedFragment, lStart);
+		final Annotation lAnnotation = new Annotation(lAnnotatedFragment, lEntrezIdInteger, lAnnotatedFragment, lStart);
 		lAnnotation.mConfidence = lConfidenceDouble;
 		// lAnnotation.mAnnotatorName = lAnnotatorName;
 		return lAnnotation;
 	}
 
-	public int compareTo(Annotation pO)
+	public int compareTo(final Annotation pO)
 	{
-		return -(int) (mConfidence - pO.mConfidence > 0 ? 1 : -1);
+		return -(this.mConfidence - pO.mConfidence > 0 ? 1 : -1);
 	}
 
-	public static void renormalizeDistribution(List<Annotation> pAnnotationsList)
+	public static void renormalizeDistribution(final List<Annotation> pAnnotationsList)
 	{
 		if (!pAnnotationsList.isEmpty())
 		{
 			double lTotal = 0;
-			for (Annotation lAnnotation : pAnnotationsList)
+			for (final Annotation lAnnotation : pAnnotationsList)
 				lTotal += lAnnotation.mConfidence;
 
 			if (lTotal == 0)
 			{
-				for (Annotation lAnnotation : pAnnotationsList)
-				{
+				for (final Annotation lAnnotation : pAnnotationsList)
 					lAnnotation.mConfidence = 1.0;
-				}
 				renormalizeDistribution(pAnnotationsList);
 			}
 			else
-			{
-				for (Annotation lAnnotation : pAnnotationsList)
-				{
+				for (final Annotation lAnnotation : pAnnotationsList)
 					lAnnotation.mConfidence = lAnnotation.mConfidence / lTotal;
-				}
-			}
 		}
 	}
 
-	public static void sort(List<Annotation> pAnnotationsList)
+	public static void sort(final List<Annotation> pAnnotationsList)
 	{
 		Collections.sort(pAnnotationsList);
 	}
 
-	public static List<Annotation> keepBestAnnotationsAssumingSorted(List<Annotation> pAnnotationsList)
+	public static List<Annotation> keepBestAnnotationsAssumingSorted(final List<Annotation> pAnnotationsList)
 	{
-		List<Annotation> lAnnotationsList = new ArrayList<Annotation>();
+		final List<Annotation> lAnnotationsList = new ArrayList<Annotation>();
 		if (!pAnnotationsList.isEmpty())
 		{
-			double lMaxConfidence = pAnnotationsList.get(0).mConfidence;
-			for (Annotation lAnnotation : pAnnotationsList)
+			final double lMaxConfidence = pAnnotationsList.get(0).mConfidence;
+			for (final Annotation lAnnotation : pAnnotationsList)
 				if (lAnnotation.mConfidence == lMaxConfidence)
-				{
 					lAnnotationsList.add(lAnnotation);
-				}
 		}
 		return lAnnotationsList;
 	}
 
-	public static List<Annotation> filterAnnotations(List<Annotation> pAnnotationsList, double pThreshold)
+	public static List<Annotation> filterAnnotations(final List<Annotation> pAnnotationsList, final double pThreshold)
 	{
-		List<Annotation> lAnnotationsList = new ArrayList<Annotation>();
+		final List<Annotation> lAnnotationsList = new ArrayList<Annotation>();
 		if (!pAnnotationsList.isEmpty())
-		{
-			for (Annotation lAnnotation : pAnnotationsList)
+			for (final Annotation lAnnotation : pAnnotationsList)
 				if (lAnnotation.mConfidence > pThreshold)
-				{
 					lAnnotationsList.add(lAnnotation);
-				}
-		}
 		return lAnnotationsList;
 	}
 
-	public static void addOffset(Collection<Annotation> pAnnotationSet, int pSentenceOffset)
+	public static void addOffset(final Collection<Annotation> pAnnotationSet, final int pSentenceOffset)
 	{
-		for (Annotation lAnnotation : pAnnotationSet)
-		{
+		for (final Annotation lAnnotation : pAnnotationSet)
 			lAnnotation.mStart += pSentenceOffset;
-		}
 	}
 
-	public static void setTextForAll(String pText, Set<Annotation> pAnnotationSet)
+	public static void setTextForAll(final String pText, final Set<Annotation> pAnnotationSet)
 	{
-		for (Annotation lAnnotation : pAnnotationSet)
+		for (final Annotation lAnnotation : pAnnotationSet)
 			lAnnotation.mText = pText;
 
 	}
 
-	public static <O> void computeLevenshteinSimilarity(Map<O, Set<String>> pMasterListMap,
-																											Collection<Annotation> pAnnotationSetForAbstract)
+	public static <O> void computeLevenshteinSimilarity(final Map<O, Set<String>> pMasterListMap,
+																											final Collection<Annotation> pAnnotationSetForAbstract)
 	{
-		for (Annotation<O> lAnnotation : pAnnotationSetForAbstract)
+		for (final Annotation<O> lAnnotation : pAnnotationSetForAbstract)
 		{
-			O lAnnotationObject = lAnnotation.mAnnotationObject;
-			String lAnnotationString = lAnnotation.mAnnotatedFragment;
-			Set<String> lSynonymSet = pMasterListMap.get(lAnnotationObject);
+			final O lAnnotationObject = lAnnotation.mAnnotationObject;
+			final String lAnnotationString = lAnnotation.mAnnotatedFragment;
+			final Set<String> lSynonymSet = pMasterListMap.get(lAnnotationObject);
 
 			double lMaxSimilarity = 0;
-			for (String lSynonym : lSynonymSet)
+			for (final String lSynonym : lSynonymSet)
 			{
-				double lSimilarity = LevenshteinDistance.similarity(lSynonym, lAnnotationString);
+				final double lSimilarity = LevenshteinDistance.similarity(lSynonym, lAnnotationString);
 				if (lSimilarity > lMaxSimilarity)
-				{
 					lMaxSimilarity = lSimilarity;
-				}
 			}
 
 			lAnnotation.mConfidence = lMaxSimilarity;
@@ -204,27 +184,27 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 
 	public String getText()
 	{
-		return mText;
+		return this.mText;
 	}
 
 	public Integer getStart()
 	{
-		return mStart;
+		return this.mStart;
 	}
 
 	public String getMatch()
 	{
-		return mAnnotatedFragment;
+		return this.mAnnotatedFragment;
 	}
 
 	public Integer getLength()
 	{
-		return mAnnotatedFragment.length();
+		return this.mAnnotatedFragment.length();
 	}
 
 	public O getAnnotation()
 	{
-		return mAnnotationObject;
+		return this.mAnnotationObject;
 	}
 
 }

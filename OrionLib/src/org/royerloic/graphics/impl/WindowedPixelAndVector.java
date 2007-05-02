@@ -43,15 +43,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	private static GraphicsDevice				mGraphicsDevice;
 
-	private static JPanel								mJPanel;
-
 	private DisplayMode									mDisplayMode;
 
 	private MemoryImageSource						mMemoryImageSource;
-
-	private Image												mOffscreenImage;
-
-	// private BufferStrategy mStrategy;
 
 	private Image												mPixelOffscreen;
 
@@ -68,8 +62,6 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	private boolean											mDisplayFramerate;
 
 	private int													mNumberOfBuffers;
-
-	private double											mTotalElapsedTime;
 
 	private double											mFrameRate;
 
@@ -105,47 +97,47 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 		public int getMouseX()
 		{
-			return mMouseX;
+			return this.mMouseX;
 		}
 
 		public int getMouseY()
 		{
-			return mMouseY;
+			return this.mMouseY;
 		}
 
 		public int getMouseDeltaZ()
 		{
-			return mMouseDeltaZ;
+			return this.mMouseDeltaZ;
 		}
 
 		public boolean getMouseLeft()
 		{
-			return mMouseLeft;
+			return this.mMouseLeft;
 		}
 
 		public boolean getMouseMiddle()
 		{
-			return mMouseMiddle;
+			return this.mMouseMiddle;
 		}
 
 		public boolean getMouseRight()
 		{
-			return mMouseRight;
+			return this.mMouseRight;
 		}
 
 		public boolean getShift()
 		{
-			return mShift;
+			return this.mShift;
 		}
 
 		public boolean getCtrl()
 		{
-			return mCtrl;
+			return this.mCtrl;
 		}
 
 		public boolean getAlt()
 		{
-			return mAlt;
+			return this.mAlt;
 		}
 
 	};
@@ -163,10 +155,10 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	public WindowedPixelAndVector(final int pDevice, final DisplayMode pDisplayMode)
 	{
 		super();
-		mIconFileName = null;
-		mDisplayFramerate = false;
-		mMaxFramesForFrameRate = 512;
-		mNumberOfBuffers = 1;
+		this.mIconFileName = null;
+		this.mDisplayFramerate = false;
+		this.mMaxFramesForFrameRate = 512;
+		this.mNumberOfBuffers = 1;
 		System.setProperty("sun.java2d.translaccel", "true");
 		System.setProperty("sun.java2d.accthreshold", "0");
 		System.setProperty("sun.java2d.ddscale", "true");
@@ -175,20 +167,18 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 		mGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-		GraphicsDevice[] lAllGraphicsDevices = mGraphicsEnvironment.getScreenDevices();
+		final GraphicsDevice[] lAllGraphicsDevices = mGraphicsEnvironment.getScreenDevices();
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
-		{
 			lDevice = lAllGraphicsDevices.length - 1;
-		}
 
 		mGraphicsDevice = lAllGraphicsDevices[lDevice];
 
-		mDisplayMode = pDisplayMode;
+		this.mDisplayMode = pDisplayMode;
 
-		mWidth = mDisplayMode.getWidth();
-		mHeight = mDisplayMode.getHeight();
+		this.mWidth = this.mDisplayMode.getWidth();
+		this.mHeight = this.mDisplayMode.getHeight();
 
 	}
 
@@ -197,28 +187,28 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 		try
 		{
-			mFrame = new Frame("OrionGraphics");
+			this.mFrame = new Frame("OrionGraphics");
 
-			mFrame.setResizable(false);
-			mFrame.setUndecorated(true);
+			this.mFrame.setResizable(false);
+			this.mFrame.setUndecorated(true);
 
 			// mJPanel = new JPanel();
 			// mJPanel.setIgnoreRepaint(true);
 
-			mFrame.setSize(mWidth, mHeight);
+			this.mFrame.setSize(this.mWidth, this.mHeight);
 
-			Rectangle lRectangle = mGraphicsDevice.getDefaultConfiguration().getBounds();
-			mFrame.setBounds(lRectangle);
+			final Rectangle lRectangle = mGraphicsDevice.getDefaultConfiguration().getBounds();
+			this.mFrame.setBounds(lRectangle);
 
-			mFrame.setIgnoreRepaint(true);
+			this.mFrame.setIgnoreRepaint(true);
 
 			// mFrame.setContentPane(mJPanel);
-			mFrame.setVisible(true);
+			this.mFrame.setVisible(true);
 
-			mFrame.createBufferStrategy(mNumberOfBuffers);
-			mStrategy = mFrame.getBufferStrategy();
+			this.mFrame.createBufferStrategy(this.mNumberOfBuffers);
+			this.mStrategy = this.mFrame.getBufferStrategy();
 
-			BufferCapabilities lBufferCapablities = mStrategy.getCapabilities();
+			final BufferCapabilities lBufferCapablities = this.mStrategy.getCapabilities();
 			System.out.println("isFullScreenRequired: " + lBufferCapablities.isFullScreenRequired());
 			System.out.println("isMultiBufferAvailable: " + lBufferCapablities.isMultiBufferAvailable());
 			System.out.println("isPageFlipping: " + lBufferCapablities.isPageFlipping());
@@ -238,12 +228,12 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			{
 				Thread.sleep(50);
 			}
-			catch (InterruptedException e)
+			catch (final InterruptedException e)
 			{
 			}
 
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			e.printStackTrace();
 			return false;
@@ -251,8 +241,8 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 		startMouseEventListeners();
 
-		mMouseInfo.mMouseX = mFrame.getWidth() / 2;
-		mMouseInfo.mMouseY = mFrame.getHeight() / 2;
+		this.mMouseInfo.mMouseX = this.mFrame.getWidth() / 2;
+		this.mMouseInfo.mMouseY = this.mFrame.getHeight() / 2;
 
 		return true;
 	}
@@ -260,84 +250,79 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	public void stopGraphics()
 	{
 		stopMouseEventListeners();
-		mFrame.dispose();
+		this.mFrame.dispose();
 	}
 
-	public void setPixelArray(int[] pPixelArray, final int pOffset, final int pScan)
+	public void setPixelArray(final int[] pPixelArray, final int pOffset, final int pScan)
 	{
-		int lScreenWidth = mFrame.getWidth();
-		int lScreenHeight = mFrame.getHeight();
+		final int lScreenWidth = this.mFrame.getWidth();
+		final int lScreenHeight = this.mFrame.getHeight();
 
 		if (lScreenWidth * lScreenHeight != pPixelArray.length)
-		{
 			throw new IllegalArgumentException("Wrong dimension for the Pixel Array.");
-		}
-		DirectColorModel lColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
-		mMemoryImageSource = new MemoryImageSource(lScreenWidth, lScreenHeight, lColorModel, pPixelArray,
+		final DirectColorModel lColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+		this.mMemoryImageSource = new MemoryImageSource(lScreenWidth, lScreenHeight, lColorModel, pPixelArray,
 				pOffset, pScan);
 
-		mMemoryImageSource.setAnimated(true);
+		this.mMemoryImageSource.setAnimated(true);
 
-		mPixelOffscreen = Toolkit.getDefaultToolkit().createImage(mMemoryImageSource);
+		this.mPixelOffscreen = Toolkit.getDefaultToolkit().createImage(this.mMemoryImageSource);
 	}
 
 	public void updateAllPixels()
 	{
-		mMemoryImageSource.newPixels();
+		this.mMemoryImageSource.newPixels();
 	}
 
-	public void updatePixelArea(int pX, int pY, int pW, int pH)
+	public void updatePixelArea(final int pX, final int pY, final int pW, final int pH)
 	{
-		mMemoryImageSource.newPixels(pX, pY, pW, pH);
+		this.mMemoryImageSource.newPixels(pX, pY, pW, pH);
 	}
 
 	public void paintPixels()
 	{
-		getDrawGraphics().drawImage(mPixelOffscreen, 0, 0, null);
+		getDrawGraphics().drawImage(this.mPixelOffscreen, 0, 0, null);
 	}
 
 	public Graphics2D getDrawGraphics()
 	{
-		return (Graphics2D) mStrategy.getDrawGraphics();
+		return (Graphics2D) this.mStrategy.getDrawGraphics();
 		// return (Graphics2D) mFrame.getGraphics();
 	}
 
 	public void show()
 	{
-		if (mDisplayFramerate)
-		{
+		if (this.mDisplayFramerate)
 			displayFrameRate();
-		}
-		mStrategy.show();
+		this.mStrategy.show();
 
 	}
 
 	private void displayFrameRate()
 	{
-		if ((!mTimerStarted) || (mFrameCounter > mMaxFramesForFrameRate))
+		if ((!this.mTimerStarted) || (this.mFrameCounter > this.mMaxFramesForFrameRate))
 		{
-			mTimerStarted = true;
-			mInitialTime = System.currentTimeMillis();
-			mFrameCounter = 1;
+			this.mTimerStarted = true;
+			this.mInitialTime = System.currentTimeMillis();
+			this.mFrameCounter = 1;
 		}
 		else
 		{
-			mFrameCounter++;
-			long lCurrentTime = System.currentTimeMillis();
-			long lDifference = lCurrentTime - mInitialTime;
-			long lDeltaInSeconds = lDifference / 1000;
+			this.mFrameCounter++;
+			final long lCurrentTime = System.currentTimeMillis();
+			final long lDifference = lCurrentTime - this.mInitialTime;
+			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				mTotalElapsedTime = lDeltaInSeconds;
-				mFrameRate = (mFrameCounter) / (lDeltaInSeconds);
+				this.mFrameRate = (this.mFrameCounter) / (lDeltaInSeconds);
 
-				if (mDisplayFramerate)
+				if (this.mDisplayFramerate)
 				{
-					Graphics2D lGraphics = getDrawGraphics();
+					final Graphics2D lGraphics = getDrawGraphics();
 					lGraphics.setColor(Color.BLACK);
 					lGraphics.fillRect(0, 0, 150, 15);
 					lGraphics.setColor(Color.WHITE);
-					lGraphics.drawString("Images per second: " + mFrameRate, 10, 10);
+					lGraphics.drawString("Images per second: " + this.mFrameRate, 10, 10);
 					lGraphics.dispose();
 				}
 			}
@@ -346,239 +331,233 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	public double getFrameRate()
 	{
-		return mFrameRate;
+		return this.mFrameRate;
 	}
 
 	public double getInterFrameTime()
 	{
 		double lInterFrameTime = -1;
-		if (mFrameRate != 0)
-		{
-			lInterFrameTime = 1 / mFrameRate;
-		}
+		if (this.mFrameRate != 0)
+			lInterFrameTime = 1 / this.mFrameRate;
 		return lInterFrameTime;
 	}
 
 	public boolean isDisplayFramerate()
 	{
-		return mDisplayFramerate;
+		return this.mDisplayFramerate;
 	}
 
-	public void setDisplayFramerate(boolean pDisplayFramerate)
+	public void setDisplayFramerate(final boolean pDisplayFramerate)
 	{
-		mDisplayFramerate = pDisplayFramerate;
+		this.mDisplayFramerate = pDisplayFramerate;
 	}
 
 	public void startMouseEventListeners()
 	{
-		mMouseInfo = new MyMouseInfo();
+		this.mMouseInfo = new MyMouseInfo();
 
-		mMouseListenerAdapter = new MouseAdapter()
+		this.mMouseListenerAdapter = new MouseAdapter()
 		{
 
-			public void mousePressed(MouseEvent pMouseEvent)
+			@Override
+			public void mousePressed(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-				mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-				mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
-				if (mOrionGraphicsMouseListener != null)
-					if (mMouseInfo.mMouseLeft)
-					{
-						mOrionGraphicsMouseListener.onLeftPress(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseRight)
-					{
-						mOrionGraphicsMouseListener.onRightPress(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseMiddle)
-					{
-						mOrionGraphicsMouseListener.onMiddlePress(mMouseInfo);
-					}
+				WindowedPixelAndVector.this.mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+				WindowedPixelAndVector.this.mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+				WindowedPixelAndVector.this.mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					if (WindowedPixelAndVector.this.mMouseInfo.mMouseLeft)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onLeftPress(WindowedPixelAndVector.this.mMouseInfo);
+					else if (WindowedPixelAndVector.this.mMouseInfo.mMouseRight)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onRightPress(WindowedPixelAndVector.this.mMouseInfo);
+					else if (WindowedPixelAndVector.this.mMouseInfo.mMouseMiddle)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onMiddlePress(WindowedPixelAndVector.this.mMouseInfo);
 			}
 
-			public void mouseReleased(MouseEvent pMouseEvent)
+			@Override
+			public void mouseReleased(final MouseEvent pMouseEvent)
 			{
 				if (SwingUtilities.isLeftMouseButton(pMouseEvent))
-					mMouseInfo.mMouseLeft = false;
+					WindowedPixelAndVector.this.mMouseInfo.mMouseLeft = false;
 				if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
-					mMouseInfo.mMouseMiddle = false;
+					WindowedPixelAndVector.this.mMouseInfo.mMouseMiddle = false;
 				if (SwingUtilities.isRightMouseButton(pMouseEvent))
-					mMouseInfo.mMouseRight = false;
+					WindowedPixelAndVector.this.mMouseInfo.mMouseRight = false;
 			}
 
-			public void mouseClicked(MouseEvent pMouseEvent)
+			@Override
+			public void mouseClicked(final MouseEvent pMouseEvent)
 			{
-				if (mOrionGraphicsMouseListener != null)
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
 				{
-					mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-					mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-					mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
-					if (mMouseInfo.mMouseLeft)
-					{
-						mOrionGraphicsMouseListener.onLeftClick(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseRight)
-					{
-						mOrionGraphicsMouseListener.onRightClick(mMouseInfo);
-					}
-					else if (mMouseInfo.mMouseMiddle)
-					{
-						mOrionGraphicsMouseListener.onMiddleClick(mMouseInfo);
-					}
+					WindowedPixelAndVector.this.mMouseInfo.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+					WindowedPixelAndVector.this.mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+					WindowedPixelAndVector.this.mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
+					if (WindowedPixelAndVector.this.mMouseInfo.mMouseLeft)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onLeftClick(WindowedPixelAndVector.this.mMouseInfo);
+					else if (WindowedPixelAndVector.this.mMouseInfo.mMouseRight)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onRightClick(WindowedPixelAndVector.this.mMouseInfo);
+					else if (WindowedPixelAndVector.this.mMouseInfo.mMouseMiddle)
+						WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onMiddleClick(WindowedPixelAndVector.this.mMouseInfo);
 				}
 			}
 
 		};
-		mFrame.addMouseListener(mMouseListenerAdapter);
+		this.mFrame.addMouseListener(this.mMouseListenerAdapter);
 
-		mMouseMotionListenerAdapter = new MouseMotionAdapter()
+		this.mMouseMotionListenerAdapter = new MouseMotionAdapter()
 		{
 
-			public void mouseDragged(MouseEvent pMouseEvent)
+			@Override
+			public void mouseDragged(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mMouseX = pMouseEvent.getX();
-				mMouseInfo.mMouseY = pMouseEvent.getY();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				WindowedPixelAndVector.this.mMouseInfo.mMouseX = pMouseEvent.getX();
+				WindowedPixelAndVector.this.mMouseInfo.mMouseY = pMouseEvent.getY();
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onMove(WindowedPixelAndVector.this.mMouseInfo);
 			}
 
-			public void mouseMoved(MouseEvent pMouseEvent)
+			@Override
+			public void mouseMoved(final MouseEvent pMouseEvent)
 			{
-				mMouseInfo.mMouseX = pMouseEvent.getX();
-				mMouseInfo.mMouseY = pMouseEvent.getY();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onMove(mMouseInfo);
-			}
-		};
-		mFrame.addMouseMotionListener(mMouseMotionListenerAdapter);
-
-		mMouseWheelListenerAdapter = new MouseWheelListener()
-		{
-			public void mouseWheelMoved(MouseWheelEvent pE)
-			{
-				mMouseInfo.mMouseDeltaZ = pE.getWheelRotation();
-				if (mOrionGraphicsMouseListener != null)
-					mOrionGraphicsMouseListener.onWheel(mMouseInfo);
+				WindowedPixelAndVector.this.mMouseInfo.mMouseX = pMouseEvent.getX();
+				WindowedPixelAndVector.this.mMouseInfo.mMouseY = pMouseEvent.getY();
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onMove(WindowedPixelAndVector.this.mMouseInfo);
 			}
 		};
+		this.mFrame.addMouseMotionListener(this.mMouseMotionListenerAdapter);
 
-		mFrame.addMouseWheelListener(mMouseWheelListenerAdapter);
-
-		mKeyListenerAdapter = new KeyAdapter()
+		this.mMouseWheelListenerAdapter = new MouseWheelListener()
 		{
-			public void keyTyped(KeyEvent pE)
+			public void mouseWheelMoved(final MouseWheelEvent pE)
+			{
+				WindowedPixelAndVector.this.mMouseInfo.mMouseDeltaZ = pE.getWheelRotation();
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onWheel(WindowedPixelAndVector.this.mMouseInfo);
+			}
+		};
+
+		this.mFrame.addMouseWheelListener(this.mMouseWheelListenerAdapter);
+
+		this.mKeyListenerAdapter = new KeyAdapter()
+		{
+			@Override
+			public void keyTyped(final KeyEvent pE)
 			{
 				super.keyTyped(pE);
-				if (mOrionGraphicsMouseListener != null)
-				{
-					mOrionGraphicsMouseListener.onKeyTyped(pE);
-				}
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onKeyTyped(pE);
 			}
 
-			public void keyPressed(KeyEvent pE)
+			@Override
+			public void keyPressed(final KeyEvent pE)
 			{
 				super.keyPressed(pE);
-				if (mOrionGraphicsMouseListener != null)
-				{
-					mOrionGraphicsMouseListener.onKeyPressed(pE);
-				}
+				if (WindowedPixelAndVector.this.mOrionGraphicsMouseListener != null)
+					WindowedPixelAndVector.this.mOrionGraphicsMouseListener.onKeyPressed(pE);
 			}
 		};
-		mFrame.addKeyListener(mKeyListenerAdapter);
+		this.mFrame.addKeyListener(this.mKeyListenerAdapter);
 	}
 
 	public void stopMouseEventListeners()
 	{
-		mFrame.removeMouseListener(mMouseListenerAdapter);
-		mFrame.removeMouseMotionListener(mMouseMotionListenerAdapter);
-		mFrame.removeMouseWheelListener(mMouseWheelListenerAdapter);
+		this.mFrame.removeMouseListener(this.mMouseListenerAdapter);
+		this.mFrame.removeMouseMotionListener(this.mMouseMotionListenerAdapter);
+		this.mFrame.removeMouseWheelListener(this.mMouseWheelListenerAdapter);
 	}
 
-	public void setMouseListener(IOrionGraphicsMouseListener pOrionGraphicsMouseListener)
+	public void setMouseListener(final IOrionGraphicsMouseListener pOrionGraphicsMouseListener)
 	{
-		mOrionGraphicsMouseListener = pOrionGraphicsMouseListener;
+		this.mOrionGraphicsMouseListener = pOrionGraphicsMouseListener;
 
 	}
 
 	public IMouseInfo getMouseInfo()
 	{
-		return mMouseInfo;
+		return this.mMouseInfo;
 	}
 
 	public int getNumberOfBuffers()
 	{
-		return mNumberOfBuffers;
+		return this.mNumberOfBuffers;
 	}
 
-	public void setNumberOfBuffers(int pNumberOfBuffers)
+	public void setNumberOfBuffers(final int pNumberOfBuffers)
 	{
-		mNumberOfBuffers = pNumberOfBuffers;
+		this.mNumberOfBuffers = pNumberOfBuffers;
 	}
 
 	public int getHeight()
 	{
-		return mHeight;
+		return this.mHeight;
 	}
 
 	public int getWidth()
 	{
-		return mWidth;
+		return this.mWidth;
 	}
 
 	public int getMaxFramesForFrameRate()
 	{
-		return mMaxFramesForFrameRate;
+		return this.mMaxFramesForFrameRate;
 	}
 
-	public void setMaxFramesForFrameRate(int pMaxFramesForFrameRate)
+	public void setMaxFramesForFrameRate(final int pMaxFramesForFrameRate)
 	{
-		mMaxFramesForFrameRate = pMaxFramesForFrameRate;
+		this.mMaxFramesForFrameRate = pMaxFramesForFrameRate;
 	}
 
 	public void minimize()
 	{
-		mFrame.toBack();
-		mFrame.setExtendedState(Frame.ICONIFIED);
+		this.mFrame.toBack();
+		this.mFrame.setExtendedState(Frame.ICONIFIED);
 	}
 
 	public void maximize()
 	{
-		mFrame.toFront();
-		mFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.mFrame.toFront();
+		this.mFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
 
-	public void setIconImage(String pIconFileName)
+	public void setIconImage(final String pIconFileName)
 	{
-		mIconFileName = pIconFileName;
+		this.mIconFileName = pIconFileName;
 	}
 
 	public void doSetIconImage()
 	{
-		if (mIconFileName != null)
+		if (this.mIconFileName != null)
 		{
-			Toolkit lToolkit = Toolkit.getDefaultToolkit();
-			URL lURL = ClassLoader.getSystemResource(mIconFileName);
+			final Toolkit lToolkit = Toolkit.getDefaultToolkit();
+			final URL lURL = ClassLoader.getSystemResource(this.mIconFileName);
 			if (lURL == null)
 				throw new NullPointerException("lURL == null");
 			new File(lURL.toString());
-			mFrame.setIconImage(lToolkit.getImage(lURL));
+			this.mFrame.setIconImage(lToolkit.getImage(lURL));
 		}
 	}
 
-	public void setFrameName(String pName)
+	public void setFrameName(final String pName)
 	{
-		mFrame.setTitle(pName);
+		this.mFrame.setTitle(pName);
 	}
 
 	public Frame getFrame()
 	{
-		return mFrame;
+		return this.mFrame;
 	}
 
-	public boolean isImageAccelerated(BufferedImage pImage)
+	public boolean isImageAccelerated(final BufferedImage pImage)
 	{
-		ImageCapabilities lImageCapabilities = pImage.getCapabilities(mGraphicsDevice.getDefaultConfiguration());
+		final ImageCapabilities lImageCapabilities = pImage.getCapabilities(mGraphicsDevice.getDefaultConfiguration());
 		return lImageCapabilities.isAccelerated();
+	}
+
+	public void showGraphics()
+	{
+		show();	
 	}
 
 }
