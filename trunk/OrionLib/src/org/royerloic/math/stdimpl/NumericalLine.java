@@ -23,8 +23,8 @@ public class NumericalLine implements ILine
   public NumericalLine()
   {
     super();
-    this.mFirstPoint = new NumericalVector();
-    this.mSecondPoint = new NumericalVector();
+    mFirstPoint = new NumericalVector();
+    mSecondPoint = new NumericalVector();
   }
 
   /**
@@ -33,8 +33,8 @@ public class NumericalLine implements ILine
   public NumericalLine(final INumericalVector lVector)
   {
     super();
-    (this.mFirstPoint = (INumericalVector) lVector.clone()).toZero();
-    this.mSecondPoint = lVector;
+    (mFirstPoint = (INumericalVector) lVector.clone()).toZero();
+    mSecondPoint = lVector;
   }
 
   /**
@@ -42,7 +42,7 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getFirstPoint()
   {
-    return this.mFirstPoint;
+    return mFirstPoint;
   }
 
   /**
@@ -50,7 +50,7 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getSecondPoint()
   {
-    return this.mSecondPoint;
+    return mSecondPoint;
   }
 
   /**
@@ -58,7 +58,7 @@ public class NumericalLine implements ILine
    */
   public void setFirstPoint(final INumericalVector pPoint)
   {
-    this.mFirstPoint = pPoint;
+    mFirstPoint = pPoint;
   }
 
   /**
@@ -66,13 +66,13 @@ public class NumericalLine implements ILine
    */
   public void setSecondPoint(final INumericalVector pPoint)
   {
-    this.mSecondPoint = pPoint;
+    mSecondPoint = pPoint;
   }
 
   public IntersectionInformation intersection(final ILine pLine)
   {
     final IntersectionInformation lIntersectionInformation = new IntersectionInformation();
-    if (this.mFirstPoint.getDimension() == 2)
+    if (mFirstPoint.getDimension() == 2)
     {
       final double x1 = getFirstPoint().get(0);
       final double y1 = getFirstPoint().get(1);
@@ -122,8 +122,8 @@ public class NumericalLine implements ILine
    */
   public double angleWith(final INumericalVector pVect)
   {
-    final INumericalVector lVector = (INumericalVector) this.mFirstPoint.clone();
-    lVector.minusEquals(this.mSecondPoint);
+    final INumericalVector lVector = (INumericalVector) mFirstPoint.clone();
+    lVector.minusEquals(mSecondPoint);
     final double lAngle = lVector.angleWith(pVect);
 
     return lAngle;
@@ -143,8 +143,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector minus(final INumericalVector pVect)
   {
-    this.mFirstPoint = this.mFirstPoint.minus(pVect);
-    this.mSecondPoint = this.mSecondPoint.minus(pVect);
+    mFirstPoint = mFirstPoint.minus(pVect);
+    mSecondPoint = mSecondPoint.minus(pVect);
     return null;
   }
 
@@ -153,8 +153,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector minusEquals(final INumericalVector pVect)
   {
-    this.mFirstPoint.minusEquals(pVect);
-    this.mSecondPoint.minusEquals(pVect);
+    mFirstPoint.minusEquals(pVect);
+    mSecondPoint.minusEquals(pVect);
     return null;
   }
 
@@ -163,8 +163,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector plus(final INumericalVector pVect)
   {
-    this.mFirstPoint = this.mFirstPoint.plus(pVect);
-    this.mSecondPoint = this.mSecondPoint.plus(pVect);
+    mFirstPoint = mFirstPoint.plus(pVect);
+    mSecondPoint = mSecondPoint.plus(pVect);
     return null;
   }
 
@@ -173,8 +173,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector plusEquals(final INumericalVector pVect)
   {
-    this.mFirstPoint.plusEquals(pVect);
-    this.mSecondPoint.plusEquals(pVect);
+    mFirstPoint.plusEquals(pVect);
+    mSecondPoint.plusEquals(pVect);
     return null;
   }
 
@@ -183,8 +183,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector times(final double pScal)
   {
-    this.mFirstPoint = this.mFirstPoint.times(pScal);
-    this.mSecondPoint = this.mSecondPoint.times(pScal);
+    mFirstPoint = mFirstPoint.times(pScal);
+    mSecondPoint = mSecondPoint.times(pScal);
     return null;
   }
 
@@ -193,8 +193,8 @@ public class NumericalLine implements ILine
    */
   public NumericalVector timesEquals(final double pScal)
   {
-    this.mFirstPoint = this.mFirstPoint.timesEquals(pScal);
-    this.mSecondPoint = this.mSecondPoint.timesEquals(pScal);
+    mFirstPoint = mFirstPoint.timesEquals(pScal);
+    mSecondPoint = mSecondPoint.timesEquals(pScal);
     return null;
   }
 
@@ -203,8 +203,8 @@ public class NumericalLine implements ILine
    */
   public INumericalVector getNormalSupportVector()
   {
-    final INumericalVector lVector = (INumericalVector) this.mFirstPoint.clone();
-    lVector.minusEquals(this.mSecondPoint);
+    final INumericalVector lVector = (INumericalVector) mFirstPoint.clone();
+    lVector.minusEquals(mSecondPoint);
     lVector.normalizeEquals();
     return lVector;
   }
@@ -212,7 +212,7 @@ public class NumericalLine implements ILine
   @Override
 	public String toString()
   {
-    return "{" + this.mFirstPoint + ", " + this.mSecondPoint + "}";
+    return "{" + mFirstPoint + ", " + mSecondPoint + "}";
   }
 
 }

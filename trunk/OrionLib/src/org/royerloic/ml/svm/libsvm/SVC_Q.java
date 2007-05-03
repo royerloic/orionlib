@@ -18,8 +18,8 @@ class SVC_Q extends Kernel
 	SVC_Q(final Problem prob, final Parameter param, final byte[] y_)
 	{
 		super(prob.mNumberOfVectors, prob.mVectorsTable, param);
-		this.y = y_.clone();
-		this.cache = new Cache(prob.mNumberOfVectors, (int) (param.cache_size * (1 << 20)));
+		y = y_.clone();
+		cache = new Cache(prob.mNumberOfVectors, (int) (param.cache_size * (1 << 20)));
 	}
 
 	@Override
@@ -27,22 +27,22 @@ class SVC_Q extends Kernel
 	{
 		final float[][] data = new float[1][];
 		int start;
-		if ((start = this.cache.get_data(i, data, len)) < len)
+		if ((start = cache.get_data(i, data, len)) < len)
 			for (int j = start; j < len; j++)
-				data[0][j] = (float) (this.y[i] * this.y[j] * kernel_function(i, j));
+				data[0][j] = (float) (y[i] * y[j] * kernel_function(i, j));
 		return data[0];
 	}
 
 	@Override
 	void swap_index(final int i, final int j)
 	{
-		this.cache.swap_index(i, j);
+		cache.swap_index(i, j);
 		super.swap_index(i, j);
 		do
 		{
-			final byte _ = this.y[i];
-			this.y[i] = this.y[j];
-			this.y[j] = _;
+			final byte _ = y[i];
+			y[i] = y[j];
+			y[j] = _;
 		}
 		while (false);
 	}

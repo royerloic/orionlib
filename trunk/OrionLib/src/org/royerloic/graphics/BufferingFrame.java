@@ -59,14 +59,14 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		if (checkOffscreenImage())
 		{
 			// It's changed size: must actually redraw it.
-			final Graphics offG = this.mImage.getGraphics();
+			final Graphics offG = mImage.getGraphics();
 			offG.setColor(getBackground());
 			offG.fillRect(0, 0, d.width, d.height);
 			// Draw into the offscreen image.
-			paintOffscreen(this.mImage.getGraphics());
+			paintOffscreen(mImage.getGraphics());
 		}
 		// Put the offscreen image on the screen.
-		g.drawImage(this.mImage, 0, 0, null);
+		g.drawImage(mImage, 0, 0, null);
 	}
 
 	
@@ -79,9 +79,9 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	private boolean checkOffscreenImage()
 	{
 		final Dimension d = getSize();
-		if ((this.mImage == null) || (this.mImage.getWidth(null) != d.width) || (this.mImage.getHeight(null) != d.height))
+		if ((mImage == null) || (mImage.getWidth(null) != d.width) || (mImage.getHeight(null) != d.height))
 		{
-			this.mImage = createImage(d.width, d.height);
+			mImage = createImage(d.width, d.height);
 			return true;
 		}
 		return false;
@@ -93,16 +93,16 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		if (checkOffscreenImage())
 		{
 			// It's changed size: must actually redraw it.
-			final Graphics offG = this.mImage.getGraphics();
+			final Graphics offG = mImage.getGraphics();
 			offG.setColor(getBackground());
 			offG.fillRect(0, 0, d.width, d.height);
 		}
-		return (Graphics2D) this.mImage.getGraphics();
+		return (Graphics2D) mImage.getGraphics();
 	}
 
 	public void showGraphics()
 	{
-		getGraphics().drawImage(this.mImage, 0, 0, null);
+		getGraphics().drawImage(mImage, 0, 0, null);
 	}
 
 	public Frame getFrame()

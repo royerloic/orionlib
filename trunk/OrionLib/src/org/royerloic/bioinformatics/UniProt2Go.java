@@ -26,7 +26,7 @@ public class UniProt2Go
 				final Integer lUniProtIdInteger = UniProtIdConverter.convertUniProtIdToInteger(lUniProtId);
 				final String lGoIdString = lList.get(1);
 				final Integer lGoIdInteger = Integer.parseInt(lGoIdString);
-				this.mUniProt2GoListMap.put(lUniProtIdInteger, lGoIdInteger);
+				mUniProt2GoListMap.put(lUniProtIdInteger, lGoIdInteger);
 			}
 		}
 	}

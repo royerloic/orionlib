@@ -28,7 +28,7 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	public ExperimentFunctionStub(final IExperimentFunction pExperimentFunction)
 	{
 		super();
-		this.mExperimentFunction = pExperimentFunction;
+		mExperimentFunction = pExperimentFunction;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	 */
 	public void setExperimentFunction(final IExperimentFunction pExperimentFunction)
 	{
-		this.mExperimentFunction = pExperimentFunction;
+		mExperimentFunction = pExperimentFunction;
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	 */
 	public void setOptimalEventListener(final IOptimalEventListener pTerminationListener)
 	{
-		this.mTerminationListener = pTerminationListener;
+		mTerminationListener = pTerminationListener;
 	}
 
 	/**
@@ -52,9 +52,9 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 	 */
 	public void evaluate(final INumericalVector pExperimentInputVector)
 	{
-		this.mExperimentInputVector = pExperimentInputVector;
-		this.mThread = new Thread(this);
-		this.mThread.start();
+		mExperimentInputVector = pExperimentInputVector;
+		mThread = new Thread(this);
+		mThread.start();
 	}
 
 	/**
@@ -65,12 +65,12 @@ public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
 		final IExperiment lExperiment = new Experiment();
 
 		lExperiment.begin();
-		final INumericalVector lExperimentOutputVector = this.mExperimentFunction.evaluate(this.mExperimentInputVector);
+		final INumericalVector lExperimentOutputVector = mExperimentFunction.evaluate(mExperimentInputVector);
 		lExperiment.end();
 
-		lExperiment.set(this.mExperimentInputVector, lExperimentOutputVector);
+		lExperiment.set(mExperimentInputVector, lExperimentOutputVector);
 
-		this.mTerminationListener.experimentDone(this, lExperiment);
+		mTerminationListener.experimentDone(this, lExperiment);
 
 	}
 

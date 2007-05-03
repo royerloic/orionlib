@@ -45,8 +45,8 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 		setTitle("-Optimal- Press Start...");
 		setVisible(false);
 		addWindowListener(this);
-		this.mOptimalEngineJPanel = new OptimalEngineJPanel();
-		setContentPane(this.mOptimalEngineJPanel);
+		mOptimalEngineJPanel = new OptimalEngineJPanel();
+		setContentPane(mOptimalEngineJPanel);
 		setSize(cOPTIMAL_ENGINE_FRAME_WIDTH, cOPTIMAL_ENGINE_FRAME_HEIGHT);
 		validate();
 		setVisible(true);
@@ -57,7 +57,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void initiate()
 	{
-		this.mOptimalEngineJPanel.initiate();
+		mOptimalEngineJPanel.initiate();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	{
 		setVisible(false);
 		removeWindowListener(this);
-		this.mOptimalEngineJPanel.terminate();
+		mOptimalEngineJPanel.terminate();
 
 	}
 
@@ -76,7 +76,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateMaximumEvolution(final List pList)
 	{
-		this.mOptimalEngineJPanel.updateMaximumEvolution(pList);
+		mOptimalEngineJPanel.updateMaximumEvolution(pList);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateIterations(final int mIterations)
 	{
-		this.mOptimalEngineJPanel.updateIterations(mIterations);
+		mOptimalEngineJPanel.updateIterations(mIterations);
 	}
 
 	/**
@@ -92,10 +92,10 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void notifyError(final String pError, final Throwable pException)
 	{
-		if (this.mErrorLogBox == null)
-			this.mErrorLogBox = new ErrorLogBox(this, "Error", "", false);
+		if (mErrorLogBox == null)
+			mErrorLogBox = new ErrorLogBox(this, "Error", "", false);
 
-		this.mErrorLogBox.addErrorLog(pError + "\n" + pException.toString());
+		mErrorLogBox.addErrorLog(pError + "\n" + pException.toString());
 
 		System.out.println(pError);
 		pException.printStackTrace(System.out);
@@ -107,7 +107,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateBestExperiment(final IExperiment pExperiment, final double pValue)
 	{
-		this.mOptimalEngineJPanel.updateBestExperiment(pExperiment, pValue);
+		mOptimalEngineJPanel.updateBestExperiment(pExperiment, pValue);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateDesignerStatus(final String pStatus)
 	{
-		this.mOptimalEngineJPanel.updateDesignerStatus(pStatus);
+		mOptimalEngineJPanel.updateDesignerStatus(pStatus);
 	}
 
 	/**
@@ -123,8 +123,8 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void setControlListener(final IOptimalEngineControl pIOptimalEngineControl)
 	{
-		this.mIOptimalEngineControl = pIOptimalEngineControl;
-		this.mOptimalEngineJPanel.setControlListener(pIOptimalEngineControl);
+		mIOptimalEngineControl = pIOptimalEngineControl;
+		mOptimalEngineJPanel.setControlListener(pIOptimalEngineControl);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void updateModelerView(final IScalarFunction mModeler)
 	{
-		this.mOptimalEngineJPanel.updateModelerView(mModeler);
+		mOptimalEngineJPanel.updateModelerView(mModeler);
 
 	}
 
@@ -147,7 +147,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	private void exit()
 	{
 		terminate();
-		this.mIOptimalEngineControl.doStop();
+		mIOptimalEngineControl.doStop();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	 */
 	public void setViewOnlyMode(final boolean pMode)
 	{
-		this.mOptimalEngineJPanel.setViewOnlyMode(pMode);
+		mOptimalEngineJPanel.setViewOnlyMode(pMode);
 	}
 
 	// ******************************************************************************/

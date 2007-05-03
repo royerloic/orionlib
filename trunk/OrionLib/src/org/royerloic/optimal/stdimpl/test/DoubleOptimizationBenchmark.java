@@ -68,10 +68,10 @@ public class DoubleOptimizationBenchmark
 																			final int pRepeats)
 	{
 		super();
-		this.mInterpolatorClass = pInterpolatorClass;
-		this.mDoeStrategyClass = pDoeStrategyClass;
-		this.mMaximumIterations = pMaximumIterations;
-		this.mRepeats = pRepeats;
+		mInterpolatorClass = pInterpolatorClass;
+		mDoeStrategyClass = pDoeStrategyClass;
+		mMaximumIterations = pMaximumIterations;
+		mRepeats = pRepeats;
 
 	}
 
@@ -84,7 +84,7 @@ public class DoubleOptimizationBenchmark
 
 		for (int i1 = 0; i1 < 10; i1++)
 			for (int i2 = i1 + 1; i2 <= 10; i2++)
-				for (int j = 1; j <= this.mRepeats; j++)
+				for (int j = 1; j <= mRepeats; j++)
 				{
 
 					final TestResult lResults = launchTest(i1, i2);
@@ -100,14 +100,14 @@ public class DoubleOptimizationBenchmark
 	{
 		final DoubleTestFunctions mTestFunction = new DoubleTestFunctions(pIndex1, pIndex2);
 
-		this.mOptimalEngine = new OptimalEngine();
+		mOptimalEngine = new OptimalEngine();
 
 		try
 		{
-			final IInterpolator lInterpolator = (IInterpolator) this.mInterpolatorClass.newInstance();
-			this.mOptimalEngine.setInterpolator(lInterpolator);
-			final IDoeStrategy lDoeStrategy = (IDoeStrategy) this.mDoeStrategyClass.newInstance();
-			this.mOptimalEngine.setDoeStrategy(lDoeStrategy);
+			final IInterpolator lInterpolator = (IInterpolator) mInterpolatorClass.newInstance();
+			mOptimalEngine.setInterpolator(lInterpolator);
+			final IDoeStrategy lDoeStrategy = (IDoeStrategy) mDoeStrategyClass.newInstance();
+			mOptimalEngine.setDoeStrategy(lDoeStrategy);
 		}
 		catch (final InstantiationException e1)
 		{
@@ -120,11 +120,11 @@ public class DoubleOptimizationBenchmark
 			e1.printStackTrace();
 		}
 
-		this.mOptimizationTask = new OptimizationTask(this.mOptimalEngine, mTestFunction, this.mMaximumIterations);
+		mOptimizationTask = new OptimizationTask(mOptimalEngine, mTestFunction, mMaximumIterations);
 
-		this.mOptimizationTask.launchTest();
+		mOptimizationTask.launchTest();
 
-		while (!this.mOptimizationTask.isDone())
+		while (!mOptimizationTask.isDone())
 			try
 			{
 				Thread.sleep(100);
@@ -136,9 +136,9 @@ public class DoubleOptimizationBenchmark
 			}
 
 		final TestResult lTestResult = new TestResult();
-		lTestResult.mSpeed = this.mOptimizationTask.getSpeed();
-		lTestResult.mMaxValue = this.mOptimizationTask.getMaxValue();
-		lTestResult.mBestExperiment = this.mOptimizationTask.getBestExperiment();
+		lTestResult.mSpeed = mOptimizationTask.getSpeed();
+		lTestResult.mMaxValue = mOptimizationTask.getMaxValue();
+		lTestResult.mBestExperiment = mOptimizationTask.getBestExperiment();
 
 		return lTestResult;
 	}

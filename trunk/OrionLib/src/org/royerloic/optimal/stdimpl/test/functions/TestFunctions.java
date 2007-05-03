@@ -23,7 +23,7 @@ public class TestFunctions implements IExperimentFunction
 	public TestFunctions(final int pFunctionIndex)
 	{
 		super();
-		this.mFunctionIndex = pFunctionIndex;
+		mFunctionIndex = pFunctionIndex;
 	}
 
 	static double dist(final double x, final double y)
@@ -109,7 +109,7 @@ public class TestFunctions implements IExperimentFunction
 
 		double z = 0;
 
-		switch (this.mFunctionIndex)
+		switch (mFunctionIndex)
 		{
 			case 1:
 			{

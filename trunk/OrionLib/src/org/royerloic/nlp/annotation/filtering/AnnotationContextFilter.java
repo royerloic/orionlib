@@ -26,9 +26,9 @@ public class AnnotationContextFilter
 	{
 		public FilterRule(final String pPreRegex, final String pMatchRegex, final String pPostRegex)
 		{
-			this.mPreRegex = pPreRegex;
-			this.mMatchRegex = pMatchRegex;
-			this.mPostRegex = pPostRegex;
+			mPreRegex = pPreRegex;
+			mMatchRegex = pMatchRegex;
+			mPostRegex = pPostRegex;
 		}
 		public String	mPreRegex;
 		public String	mMatchRegex;
@@ -37,11 +37,11 @@ public class AnnotationContextFilter
 
 	private final SetMap<String, String>	mSetNameToNameSetMap		= new HashSetMap<String, String>();
 	{
-		this.mSetNameToNameSetMap.put("S", Collections.singleton("\\s*"));
-		this.mSetNameToNameSetMap.put("W", Collections.singleton("\\W*"));
-		this.mSetNameToNameSetMap.put("P", Collections.singleton("\\p{Punct}*"));
-		this.mSetNameToNameSetMap.put("WORD", Collections.singleton("(?:[a-zA-z][a-z]+)"));
-		this.mSetNameToNameSetMap.put("ASE", Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
+		mSetNameToNameSetMap.put("S", Collections.singleton("\\s*"));
+		mSetNameToNameSetMap.put("W", Collections.singleton("\\W*"));
+		mSetNameToNameSetMap.put("P", Collections.singleton("\\p{Punct}*"));
+		mSetNameToNameSetMap.put("WORD", Collections.singleton("(?:[a-zA-z][a-z]+)"));
+		mSetNameToNameSetMap.put("ASE", Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
 	}
 
 	private final List<FilterRule>				mPositiveFilterRuleList	= new ArrayList<FilterRule>();
@@ -103,7 +103,7 @@ public class AnnotationContextFilter
 				lIsNegative = false;
 				final String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
 				lSetName = lStringArray[1].trim().toLowerCase();
-				this.mSetNameToNameSetMap.put(lSetName);
+				mSetNameToNameSetMap.put(lSetName);
 				continue;
 			}
 			else if (lFirstString.equalsIgnoreCase("positive:"))
@@ -126,7 +126,7 @@ public class AnnotationContextFilter
 				String lMatchRegex = lList.get(1);
 				String lPostFixRegex = lList.get(2) + (lList.get(2).endsWith(".*") ? "" : "@W@.*");
 
-				for (final Map.Entry<String, Set<String>> lEntry : this.mSetNameToNameSetMap.entrySet())
+				for (final Map.Entry<String, Set<String>> lEntry : mSetNameToNameSetMap.entrySet())
 				{
 					final String lSetNameUse = "@" + lEntry.getKey() + "@";
 					final String lSetReplacement = mergeRegexSetToRegex(lEntry.getValue());
@@ -137,12 +137,12 @@ public class AnnotationContextFilter
 
 				final FilterRule lFilterRule = new FilterRule(lPreFixRegex, lMatchRegex, lPostFixRegex);
 				if (lIsPositive)
-					this.mPositiveFilterRuleList.add(lFilterRule);
+					mPositiveFilterRuleList.add(lFilterRule);
 				else if (lIsNegative)
-					this.mNegativeFilterRuleList.add(lFilterRule);
+					mNegativeFilterRuleList.add(lFilterRule);
 			}
 			else if (lIsSet)
-				this.mSetNameToNameSetMap.put(lSetName, lFirstString);
+				mSetNameToNameSetMap.put(lSetName, lFirstString);
 
 		}
 	}
@@ -155,7 +155,7 @@ public class AnnotationContextFilter
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();
-			this.mSetNameToNameSetMap.put(pImportedSetName, lEntry);
+			mSetNameToNameSetMap.put(pImportedSetName, lEntry);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class AnnotationContextFilter
 
 			if (lFiltered)
 			{
-				System.out.println("REMOVING: " + lAnnotation + "\n because of: " + this.mResponsibleFilterRule);
+				System.out.println("REMOVING: " + lAnnotation + "\n because of: " + mResponsibleFilterRule);
 				pAnnotationSetForAbstract.remove(lAnnotation);
 			}
 
@@ -211,7 +211,7 @@ public class AnnotationContextFilter
 	{
 
 		boolean isPositiveMatched = false;
-		for (final FilterRule lFilterRule : this.mPositiveFilterRuleList)
+		for (final FilterRule lFilterRule : mPositiveFilterRuleList)
 			if (StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
 				if (StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
 					if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
@@ -222,12 +222,12 @@ public class AnnotationContextFilter
 
 		boolean isNegativeMatched = false;
 		if (!isPositiveMatched)
-			for (final FilterRule lFilterRule : this.mNegativeFilterRuleList)
+			for (final FilterRule lFilterRule : mNegativeFilterRuleList)
 				if (StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
 					if (StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
 						if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
 						{
-							this.mResponsibleFilterRule = lFilterRule;
+							mResponsibleFilterRule = lFilterRule;
 							isNegativeMatched = true;
 							break;
 						}

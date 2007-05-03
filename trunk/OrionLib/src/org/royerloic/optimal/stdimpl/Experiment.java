@@ -66,8 +66,8 @@ public class Experiment implements IExperiment
 	public Experiment(final INumericalVector pInput, final INumericalVector pOutput)
 	{
 		super();
-		this.mInput = pInput;
-		this.mOutput = pOutput;
+		mInput = pInput;
+		mOutput = pOutput;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Experiment implements IExperiment
 	 */
 	public final void begin()
 	{
-		this.mDate = new Date();
+		mDate = new Date();
 
 	}
 
@@ -98,9 +98,9 @@ public class Experiment implements IExperiment
 	public final void end()
 	{
 		final Date lDate = new Date();
-		final long lBegin = this.mDate.getTime();
+		final long lBegin = mDate.getTime();
 		final long lEnd = lDate.getTime();
-		this.mDuration = (int) ((lEnd - lBegin));
+		mDuration = (int) ((lEnd - lBegin));
 	}
 
 	/**
@@ -113,8 +113,8 @@ public class Experiment implements IExperiment
 	 */
 	public final void set(final INumericalVector pInput, final INumericalVector pOutput)
 	{
-		this.mInput = pInput;
-		this.mOutput = pOutput;
+		mInput = pInput;
+		mOutput = pOutput;
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class Experiment implements IExperiment
 	 */
 	public final INumericalVector getInput()
 	{
-		return this.mInput;
+		return mInput;
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class Experiment implements IExperiment
 	 */
 	public final INumericalVector getOutput()
 	{
-		return this.mOutput;
+		return mOutput;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Experiment implements IExperiment
 	 */
 	public final Date getDate()
 	{
-		return this.mDate;
+		return mDate;
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class Experiment implements IExperiment
 	 */
 	public final int getDuration()
 	{
-		return this.mDuration;
+		return mDuration;
 	}
 
 	/**
@@ -167,8 +167,8 @@ public class Experiment implements IExperiment
 	@Override
 	public final String toString()
 	{
-		return " Date: " + this.mDate.toString() + "\n" + " Duration: " + this.mDuration + "\n" + " Input: "
-				+ this.mInput.toString() + "\n" + " Output: " + this.mOutput.toString();
+		return " Date: " + mDate.toString() + "\n" + " Duration: " + mDuration + "\n" + " Input: "
+				+ mInput.toString() + "\n" + " Output: " + mOutput.toString();
 	}
 
 	/**
@@ -251,11 +251,11 @@ public class Experiment implements IExperiment
 	public Object clone()
 	{
 		final Experiment lExperiment = new Experiment();
-		lExperiment.mDate = (Date) this.mDate.clone();
-		lExperiment.mDateFormat = (SimpleDateFormat) this.mDateFormat.clone();
-		lExperiment.mDuration = this.mDuration;
-		lExperiment.mInput = (INumericalVector) this.mInput.clone();
-		lExperiment.mOutput = (INumericalVector) this.mOutput.clone();
+		lExperiment.mDate = (Date) mDate.clone();
+		lExperiment.mDateFormat = (SimpleDateFormat) mDateFormat.clone();
+		lExperiment.mDuration = mDuration;
+		lExperiment.mInput = (INumericalVector) mInput.clone();
+		lExperiment.mOutput = (INumericalVector) mOutput.clone();
 
 		return lExperiment;
 	}
@@ -269,11 +269,11 @@ public class Experiment implements IExperiment
 		{
 			final Experiment lExperiment = (Experiment) pObject;
 
-			lExperiment.mDate = (Date) this.mDate.clone();
-			lExperiment.mDateFormat = (SimpleDateFormat) this.mDateFormat.clone();
-			lExperiment.mDuration = this.mDuration;
-			lExperiment.mInput = (INumericalVector) this.mInput.clone();
-			lExperiment.mOutput = (INumericalVector) this.mOutput.clone();
+			lExperiment.mDate = (Date) mDate.clone();
+			lExperiment.mDateFormat = (SimpleDateFormat) mDateFormat.clone();
+			lExperiment.mDuration = mDuration;
+			lExperiment.mInput = (INumericalVector) mInput.clone();
+			lExperiment.mOutput = (INumericalVector) mOutput.clone();
 		}
 
 	}
@@ -287,10 +287,10 @@ public class Experiment implements IExperiment
 			final Experiment lExperiment = (Experiment) pObject;
 
 			lEquals = true;
-			lEquals &= lExperiment.mDate.equals(this.mDate);
-			lEquals &= lExperiment.mDuration == this.mDuration;
-			lEquals &= lExperiment.mInput.equals(this.mInput);
-			lEquals &= lExperiment.mOutput.equals(this.mOutput);
+			lEquals &= lExperiment.mDate.equals(mDate);
+			lEquals &= lExperiment.mDuration == mDuration;
+			lEquals &= lExperiment.mInput.equals(mInput);
+			lEquals &= lExperiment.mOutput.equals(mOutput);
 		}
 		return lEquals;
 	}
@@ -299,10 +299,10 @@ public class Experiment implements IExperiment
 	public int hashCode()
 	{
 		int lCode = 1;
-		lCode *= this.mDate.hashCode();
-		lCode *= this.mDuration;
-		lCode *= this.mInput.hashCode();
-		lCode *= this.mOutput.hashCode();
+		lCode *= mDate.hashCode();
+		lCode *= mDuration;
+		lCode *= mInput.hashCode();
+		lCode *= mOutput.hashCode();
 		return lCode;
 	}
 }

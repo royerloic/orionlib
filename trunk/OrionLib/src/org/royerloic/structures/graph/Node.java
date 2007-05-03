@@ -8,14 +8,14 @@ public class Node
 	public Node(final String pName)
 	{
 		super();
-		this.mName = pName;
-		this.mHashCode = this.mName.hashCode();
+		mName = pName;
+		mHashCode = mName.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return this.mName;
+		return mName;
 	}
 
 	@Override
@@ -24,18 +24,18 @@ public class Node
 		if (this == obj)
 			return true;
 
-		return this.mName.equals(((Node) obj).mName);
+		return mName.equals(((Node) obj).mName);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return this.mHashCode;
+		return mHashCode;
 	}
 
 	public String getName()
 	{
-		return this.mName;
+		return mName;
 	}
 
 }

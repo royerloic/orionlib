@@ -25,18 +25,18 @@ public class IntersectionInformation
 	public String toString()
   {
     String lString;
-    if (this.mIntersects)
+    if (mIntersects)
     {
-      final String lWithinFirstSegment = (this.mWithinFirstSegment ? "within first segment,"
+      final String lWithinFirstSegment = (mWithinFirstSegment ? "within first segment,"
           : "");
-      final String lWithinSecondSegment = (this.mWithinSecondSegment ? "within second segment,"
+      final String lWithinSecondSegment = (mWithinSecondSegment ? "within second segment,"
           : "");
 
       lString = "Intersection "
                 + lWithinFirstSegment + " " + lWithinSecondSegment + " at : "
-                + this.mIntersectionPoint;
+                + mIntersectionPoint;
     }
-    else if (this.mCoincident)
+    else if (mCoincident)
 			lString = "Coincident Lines ";
 		else
 			lString = "Parallel Lines ";

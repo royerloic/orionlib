@@ -60,11 +60,11 @@ public class Model implements java.io.Serializable, Cloneable
 		{
 			final Model lModel = (Model) super.clone();
 
-			for (int i = 0; i < this.mNumberOfSupportVectors; i++)
+			for (int i = 0; i < mNumberOfSupportVectors; i++)
 			{
-				for (int j = 0; j < this.mSupportVectorsTable[i].length; j++)
-					lModel.mSupportVectorsTable[i][j] = (Node) this.mSupportVectorsTable[i][j].clone();
-				lModel.mSupportVectorCoeficientsTable[i] = this.mSupportVectorCoeficientsTable[i].clone();
+				for (int j = 0; j < mSupportVectorsTable[i].length; j++)
+					lModel.mSupportVectorsTable[i][j] = (Node) mSupportVectorsTable[i][j].clone();
+				lModel.mSupportVectorCoeficientsTable[i] = mSupportVectorCoeficientsTable[i].clone();
 			}
 
 			return lModel;

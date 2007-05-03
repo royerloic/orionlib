@@ -23,13 +23,13 @@ public class ArtefactWater
 	 */
 	public ArtefactWater() throws HeadlessException
 	{
-		this.mOrionGraphics = new OrionGraphics("ArtefactWater", OrionGraphics.cFIRST_DEVICE);
+		mOrionGraphics = new OrionGraphics("ArtefactWater", OrionGraphics.cFIRST_DEVICE);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Graphics getMyGraphics()
 	{
-		final Graphics lGraphics = this.mOrionGraphics.getDrawGraphics();
+		final Graphics lGraphics = mOrionGraphics.getDrawGraphics();
 		final Color lColor = new Color(1.0f, 0.0f, 0.0f);
 		lGraphics.setColor(lColor);
 		final Font lFontTitle = new Font(null, Font.ITALIC, 90);
@@ -71,7 +71,7 @@ public class ArtefactWater
 
 	public void main(final int pWidth, final int pHeight)
 	{
-		this.mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
+		mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
 		final int[] MoonMap = getWaterMap(pWidth, pHeight);
 
 		final int lSize = pWidth * pHeight;
@@ -91,19 +91,19 @@ public class ArtefactWater
 		final Font lFontTitle = new Font(null, Font.ITALIC, 90);
 		final Font lFontSubTitle = new Font(null, Font.ITALIC, 30);
 
-		this.mOrionGraphics.mMouseX = pWidth / 2;
-		this.mOrionGraphics.mMouseY = pHeight / 2;
+		mOrionGraphics.mMouseX = pWidth / 2;
+		mOrionGraphics.mMouseY = pHeight / 2;
 
-		this.mOrionGraphics.startGraphics();
+		mOrionGraphics.startGraphics();
 
-		while (!this.mOrionGraphics.mMouseRight)
+		while (!mOrionGraphics.mMouseRight)
 		{
-			final Graphics lGraphics = this.mOrionGraphics.getDrawGraphics();
+			final Graphics lGraphics = mOrionGraphics.getDrawGraphics();
 
 			for (int ly = -10; ly < 10; ly++)
 				for (int lx = -10; lx < 10; lx++)
 				{
-					int lIndex = this.mOrionGraphics.mMouseX + lx + pWidth * (this.mOrionGraphics.mMouseY + ly);
+					int lIndex = mOrionGraphics.mMouseX + lx + pWidth * (mOrionGraphics.mMouseY + ly);
 					if (lIndex < 0)
 						lIndex = 0;
 					else if (lIndex >= lSize)
@@ -145,8 +145,8 @@ public class ArtefactWater
 			lHeightMatrix1 = lHeightMatrix2;
 			lHeightMatrix2 = lHeightMatrixTemp; /**/
 
-			this.mOrionGraphics.update(lPixel);
-			this.mOrionGraphics.paintPixels();
+			mOrionGraphics.update(lPixel);
+			mOrionGraphics.paintPixels();
 
 			//
 
@@ -157,10 +157,10 @@ public class ArtefactWater
 			 * 250, 200);
 			 */
 
-			this.mOrionGraphics.refresh();
+			mOrionGraphics.refresh();
 		}
-		this.mOrionGraphics.stopGraphics();
-		this.mOrionGraphics.dispose();
+		mOrionGraphics.stopGraphics();
+		mOrionGraphics.dispose();
 	}
 
 	public static void main(final String[] pArguments)

@@ -32,8 +32,8 @@ public class RInterpolator implements IScalarFunction
 	{
 		public Point(final INumericalVector pVector, final double pValue)
 		{
-			this.mVector = pVector;
-			this.mValue = pValue;
+			mVector = pVector;
+			mValue = pValue;
 		}
 		public INumericalVector mVector;
 		public double mValue;
@@ -45,37 +45,37 @@ public class RInterpolator implements IScalarFunction
 
 	public void setPointList(final Vector pPointList)
 	{
-		this.mPointList = pPointList;
+		mPointList = pPointList;
 	}
 
 	private final int getNumberOfPoints()
 	{
-		return this.mPointList.size();
+		return mPointList.size();
 	}
 
 	private final Point getPoint(final int pIndex)
 	{
-		return ((Point) this.mPointList.elementAt(pIndex));
+		return ((Point) mPointList.elementAt(pIndex));
 	}
 
 	private final INumericalVector getVector(final int pIndex)
 	{
-		return ((Point) this.mPointList.elementAt(pIndex)).mVector;
+		return ((Point) mPointList.elementAt(pIndex)).mVector;
 	}
 
 	private final double getValue(final int pIndex)
 	{
-		return ((Point) this.mPointList.elementAt(pIndex)).mValue;
+		return ((Point) mPointList.elementAt(pIndex)).mValue;
 	}
 
 	private final INumericalVector getGradient(final int pIndex)
 	{
-		return ((Point) this.mPointList.elementAt(pIndex)).mGradient;
+		return ((Point) mPointList.elementAt(pIndex)).mGradient;
 	}
 
 	private final void setGradient(final int pIndex, final INumericalVector pGradient)
 	{
-		((Point) this.mPointList.elementAt(pIndex)).mGradient = pGradient;
+		((Point) mPointList.elementAt(pIndex)).mGradient = pGradient;
 	}
 
 	/**
@@ -85,8 +85,8 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public RInterpolator(final int pInputDimension)
 	{
-		this.mPointList = new Vector();
-		this.mInputDimension = pInputDimension;
+		mPointList = new Vector();
+		mInputDimension = pInputDimension;
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class RInterpolator implements IScalarFunction
 		final double pValue)
 	{
 		final Point lPoint = new Point(pVector, pValue);
-		this.mPointList.addElement(lPoint);
+		mPointList.addElement(lPoint);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class RInterpolator implements IScalarFunction
 	public final void addPoint(final INumericalVector pVector, final double pValue)
 	{
 		final Point lPoint = new Point(pVector, pValue);
-		this.mPointList.addElement(lPoint);
+		mPointList.addElement(lPoint);
 		update();
 	}
 
@@ -282,7 +282,7 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public int getInputDimension()
 	{
-		return this.mInputDimension;
+		return mInputDimension;
 	}
 
 	/**
@@ -331,8 +331,8 @@ public class RInterpolator implements IScalarFunction
 	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
-		final RInterpolator lClonedInterpolator = new RInterpolator(this.mInputDimension);
-		final Vector lClonedPointList = (Vector) this.mPointList.clone();
+		final RInterpolator lClonedInterpolator = new RInterpolator(mInputDimension);
+		final Vector lClonedPointList = (Vector) mPointList.clone();
 		lClonedInterpolator.setPointList(lClonedPointList);
 		lClonedInterpolator.update();
 		return lClonedInterpolator;

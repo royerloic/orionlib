@@ -25,8 +25,8 @@ public class Node implements java.io.Serializable
 	public Node(final int pIndex, final double pValue)
 	{
 		super();
-		this.mIndex = pIndex;
-		this.mValue = pValue;
+		mIndex = pIndex;
+		mValue = pValue;
 	}
 
 	@Override

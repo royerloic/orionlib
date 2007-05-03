@@ -15,37 +15,37 @@ public class OboTerm
 
 	public OboTerm(final Integer pId)
 	{
-		this.mId = pId;
+		mId = pId;
 	}
 
 	public String getDefinition()
 	{
-		return this.mDefinition;
+		return mDefinition;
 	}
 
 	public void setDefinition(final String pDefinition)
 	{
-		this.mDefinition = pDefinition;
+		mDefinition = pDefinition;
 	}
 
 	public Integer getId()
 	{
-		return this.mId;
+		return mId;
 	}
 
 	public String getName()
 	{
-		return this.mName;
+		return mName;
 	}
 
 	public String getNameSpace()
 	{
-		return this.mNameSpace;
+		return mNameSpace;
 	}
 
 	public void setNameSpace(final String pNameSpace)
 	{
-		this.mNameSpace = pNameSpace;
+		mNameSpace = pNameSpace;
 	}
 
 	@Override
@@ -56,24 +56,24 @@ public class OboTerm
 
 		final OboTerm lOboTerm = (OboTerm) pObj;
 
-		return this.mId.equals(lOboTerm.mId);
+		return mId.equals(lOboTerm.mId);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return this.mId;
+		return mId;
 	}
 
 	@Override
 	public String toString()
 	{
-		return this.mId + ":" + this.mName;
+		return mId + ":" + mName;
 	}
 
 	public void setName(final String pName)
 	{
-		this.mName = pName;
+		mName = pName;
 	}
 
 }

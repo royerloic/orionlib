@@ -4,7 +4,6 @@
 package org.royerloic.optimal.stdimpl;
 
 import org.royerloic.math.INumericalVector;
-import org.royerloic.math.IScalarFunction;
 import org.royerloic.optimal.interf.IDoeStrategy;
 import org.royerloic.optimal.interf.IExperiment;
 import org.royerloic.optimal.interf.IExperimentDatabase;
@@ -32,7 +31,7 @@ public class DoeStrategy implements IDoeStrategy
 	{
 		super();
 
-		this.mRewardThreshold = 0.01; // 1 percent better;
+		mRewardThreshold = 0.01; // 1 percent better;
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class DoeStrategy implements IDoeStrategy
 	 */
 	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		this.mExperimentDatabase = pExperimentDatabase;
+		mExperimentDatabase = pExperimentDatabase;
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class DoeStrategy implements IDoeStrategy
 	 */
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -56,7 +55,7 @@ public class DoeStrategy implements IDoeStrategy
 	 */
 	public void setInterpolator(final IInterpolator pInterpolator)
 	{
-		this.mInterpolator = pInterpolator;
+		mInterpolator = pInterpolator;
 	}
 
 	/**
@@ -64,18 +63,18 @@ public class DoeStrategy implements IDoeStrategy
 	 */
 	public INumericalVector designNewExperiment()
 	{
-		if (this.mExperimentDatabase.getNumberOfExperiments() != 0)
+		if (mExperimentDatabase.getNumberOfExperiments() != 0)
 		{
 			/*************************************************************************
 			 * INumericalVector lNewVector =
 			 * DoeStrategyHelper.multiStepsStochmax(mInterpolator,4,3000);/
 			 ************************************************************************/
-			final INumericalVector lNewVector = DoeStrategyHelper.genetic(this.mInterpolator, 4, 3000);
+			final INumericalVector lNewVector = DoeStrategyHelper.genetic(mInterpolator, 4, 3000);
 
-			final double lEstimatedValue = this.mInterpolator.evaluate(lNewVector);
+			final double lEstimatedValue = mInterpolator.evaluate(lNewVector);
 			final double lCurrentBestValue = getCurrentBestValue();
 			final double lEstimatedReward = ((lEstimatedValue - lCurrentBestValue) / lCurrentBestValue);
-			if (lEstimatedReward > this.mRewardThreshold)
+			if (lEstimatedReward > mRewardThreshold)
 				return lNewVector;
 			else
 				// lNewVector =
@@ -91,10 +90,10 @@ public class DoeStrategy implements IDoeStrategy
 	{
 		double lValue = Double.NEGATIVE_INFINITY;
 
-		for (int i = 0; i < this.mExperimentDatabase.getNumberOfExperiments(); i++)
+		for (int i = 0; i < mExperimentDatabase.getNumberOfExperiments(); i++)
 		{
-			final IExperiment lExperiment = this.mExperimentDatabase.getExperiment(i);
-			lValue = Math.max(lValue, this.mObjectiveFunction.evaluate(lExperiment.getOutput()));
+			final IExperiment lExperiment = mExperimentDatabase.getExperiment(i);
+			lValue = Math.max(lValue, mObjectiveFunction.evaluate(lExperiment.getOutput()));
 		}
 		return lValue;
 	}

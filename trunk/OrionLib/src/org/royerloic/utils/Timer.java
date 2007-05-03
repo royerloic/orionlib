@@ -24,7 +24,7 @@ public class Timer
 	 */
 	public String getPrefix()
 	{
-		return this.prefix;
+		return prefix;
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class Timer
 	 */
 	public String getSuffix()
 	{
-		return this.suffix;
+		return suffix;
 	}
 
 	/**
@@ -70,8 +70,8 @@ public class Timer
 	public Timer(final String name)
 	{
 		super();
-		this.nf = NumberFormat.getInstance(Locale.US);
-		this.nf.setMinimumIntegerDigits(2);
+		nf = NumberFormat.getInstance(Locale.US);
+		nf.setMinimumIntegerDigits(2);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class Timer
 	 */
 	private long getTimeTillNow()
 	{
-		return System.currentTimeMillis() - this.startTime;
+		return System.currentTimeMillis() - startTime;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Timer
 	 */
 	public long getTotalTime()
 	{
-		return this.endTime - this.startTime;
+		return endTime - startTime;
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class Timer
 	 */
 	public void resume()
 	{
-		this.startTime = System.currentTimeMillis() - (this.endTime - this.startTime);
+		startTime = System.currentTimeMillis() - (endTime - startTime);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class Timer
 	 */
 	public void start()
 	{
-		this.startTime = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class Timer
 	 */
 	public Timer stop()
 	{
-		this.endTime = System.currentTimeMillis();
+		endTime = System.currentTimeMillis();
 		return this;
 	}
 

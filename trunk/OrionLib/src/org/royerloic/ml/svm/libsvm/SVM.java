@@ -1128,7 +1128,7 @@ public class SVM
 				fp.writeBytes(sv_coef[j][i] + " ");
 
 			final Node[] p = SV[i];
-			for (Node element : p)
+			for (final Node element : p)
 				fp.writeBytes(element.mIndex + ":" + element.mValue + " ");
 			fp.writeBytes("\n");
 		}

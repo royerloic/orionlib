@@ -50,9 +50,9 @@ public class ExperimentDatabase implements IExperimentDatabase
 	public ExperimentDatabase()
 	{
 		super();
-		this.mExperimentList = Collections.synchronizedList(new ArrayList());
-		this.mBestExperimentList = new ArrayList();
-		this.mBestExperimentValuesList = new ArrayList();
+		mExperimentList = Collections.synchronizedList(new ArrayList());
+		mBestExperimentList = new ArrayList();
+		mBestExperimentValuesList = new ArrayList();
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public int getNumberOfExperiments()
 	{
-		return this.mExperimentList.size();
+		return mExperimentList.size();
 	}
 
 	/**
@@ -76,30 +76,30 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public boolean addExperiment(final IExperiment pExperiment)
 	{
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
 			if (!this.contains(pExperiment))
 			{
-				this.mExperimentList.add(pExperiment);
+				mExperimentList.add(pExperiment);
 				calculateMinMaxValues();
 			}
 
-			final double lNewValue = this.mObjectiveFunction.evaluate(pExperiment.getOutput());
+			final double lNewValue = mObjectiveFunction.evaluate(pExperiment.getOutput());
 			boolean lBetter = true;
 
 			for (int i = 0; i < getNumberOfExperiments(); i++)
 			{
 				final IExperiment lExperiment = getExperiment(i);
-				final double lValue = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
+				final double lValue = mObjectiveFunction.evaluate(lExperiment.getOutput());
 				lBetter = lBetter && (lNewValue >= lValue);
 			}
 
-			if (lBetter || (this.mBestExperimentList.size() == 0))
-				this.mBestExperimentList.add(pExperiment);
+			if (lBetter || (mBestExperimentList.size() == 0))
+				mBestExperimentList.add(pExperiment);
 			else
 			{
-				final IExperiment lExperiment = (IExperiment) this.mBestExperimentList.get(this.mBestExperimentList.size() - 1);
-				this.mBestExperimentList.add(lExperiment);
+				final IExperiment lExperiment = (IExperiment) mBestExperimentList.get(mBestExperimentList.size() - 1);
+				mBestExperimentList.add(lExperiment);
 			}
 
 			return lBetter;
@@ -112,7 +112,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public boolean contains(final IExperiment pExperiment)
 	{
-		return this.mExperimentList.contains(pExperiment);
+		return mExperimentList.contains(pExperiment);
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public int findExperiment(final IExperiment pExperiment)
 	{
-		return this.mExperimentList.indexOf(pExperiment);
+		return mExperimentList.indexOf(pExperiment);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public IExperiment getExperiment(final int pIndex)
 	{
-		return (IExperiment) this.mExperimentList.get(pIndex);
+		return (IExperiment) mExperimentList.get(pIndex);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 		IExperiment lResult = null;
 		double lMinDistance = Double.POSITIVE_INFINITY;
 
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
 			for (int i = 0; i < getNumberOfExperiments(); i++)
 			{
@@ -168,7 +168,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	public boolean containsInputVector(final INumericalVector pVector)
 	{
 		boolean lResult = false;
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
 			for (int i = 0; i < getNumberOfExperiments(); i++)
 				if (getExperiment(i).getInput().equals(pVector))
@@ -187,7 +187,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	public Object clone()
 	{
 		final ExperimentDatabase lExperimentDatabase = new ExperimentDatabase();
-		lExperimentDatabase.mExperimentList = this.mExperimentList;
+		lExperimentDatabase.mExperimentList = mExperimentList;
 		return lExperimentDatabase;
 	}
 
@@ -199,13 +199,13 @@ public class ExperimentDatabase implements IExperimentDatabase
 		if (pObject instanceof ExperimentDatabase)
 		{
 			final ExperimentDatabase lExperimentDatabase = (ExperimentDatabase) pObject;
-			this.mExperimentList = lExperimentDatabase.mExperimentList;
+			mExperimentList = lExperimentDatabase.mExperimentList;
 		}
 	}
 
 	private void calculateMinMaxValues()
 	{
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
 			final int lNumberOfExperiments = getNumberOfExperiments();
 			if (lNumberOfExperiments != 0)
@@ -229,8 +229,8 @@ public class ExperimentDatabase implements IExperimentDatabase
 
 				}
 
-				this.mMinimumValuesVector = new NumericalVector(lMin);
-				this.mMaximumValuesVector = new NumericalVector(lMax);
+				mMinimumValuesVector = new NumericalVector(lMin);
+				mMaximumValuesVector = new NumericalVector(lMax);
 			}
 		}
 	}
@@ -257,9 +257,9 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public INumericalVector getMinimumOutputValuesVector()
 	{
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
-			return this.mMinimumValuesVector;
+			return mMinimumValuesVector;
 		}
 	}
 
@@ -268,9 +268,9 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public INumericalVector getMaximumOutputValuesVector()
 	{
-		synchronized (this.mExperimentList)
+		synchronized (mExperimentList)
 		{
-			return this.mMaximumValuesVector;
+			return mMaximumValuesVector;
 		}
 	}
 
@@ -279,7 +279,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public IExperiment getBestExperiment()
 	{
-		return (IExperiment) this.mBestExperimentList.get(getNumberOfExperiments() - 1);
+		return (IExperiment) mBestExperimentList.get(getNumberOfExperiments() - 1);
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public List getListOfBestExperiments()
 	{
-		return this.mBestExperimentList;
+		return mBestExperimentList;
 	}
 
 	/**
@@ -295,17 +295,17 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public List getListOfBestExperimentValues()
 	{
-		synchronized (this.mBestExperimentList)
+		synchronized (mBestExperimentList)
 		{
-			this.mBestExperimentValuesList.clear();
-			for (int i = 0; i < this.mBestExperimentList.size(); i++)
+			mBestExperimentValuesList.clear();
+			for (int i = 0; i < mBestExperimentList.size(); i++)
 			{
-				final IExperiment lExperiment = (IExperiment) this.mBestExperimentList.get(i);
-				final double lValue = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
-				this.mBestExperimentValuesList.add(new Double(lValue));
+				final IExperiment lExperiment = (IExperiment) mBestExperimentList.get(i);
+				final double lValue = mObjectiveFunction.evaluate(lExperiment.getOutput());
+				mBestExperimentValuesList.add(new Double(lValue));
 			}
 		}
-		return this.mBestExperimentValuesList;
+		return mBestExperimentValuesList;
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class ExperimentDatabase implements IExperimentDatabase
 	 */
 	public final boolean stagnating(final int pStart, final int pTime)
 	{
-		synchronized (this.mBestExperimentList)
+		synchronized (mBestExperimentList)
 		{
 			int lTime = pTime;
 			final List lList = getListOfBestExperimentValues();

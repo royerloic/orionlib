@@ -47,7 +47,7 @@ public class ModelerView extends JPanel
 	public ModelerView()
 	{
 		super();
-		this.mResolution = 10;
+		mResolution = 10;
 		final Border lRaisedBevel = BorderFactory.createRaisedBevelBorder();
 		final Border lLoweredBevel = BorderFactory.createLoweredBevelBorder();
 		setBorder(BorderFactory.createCompoundBorder(lRaisedBevel, lLoweredBevel));
@@ -61,24 +61,24 @@ public class ModelerView extends JPanel
 
 	public void updateModeler(final IScalarFunction pModeler)
 	{
-		if (this.mModelPlot == null)
+		if (mModelPlot == null)
 		{
 			try
 			{
-				this.mModelPlot = PlotScalarFuntionFactory.build(pModeler, this.mResolution, "Model");
+				mModelPlot = PlotScalarFuntionFactory.build(pModeler, mResolution, "Model");
 			}
 			catch (final Throwable e)
 			{
 				throw new RuntimeException("Error while updating modeler.", e);
 			}
 
-			this.mModelPlot.display();
-			add((Container) this.mModelPlot);
+			mModelPlot.display();
+			add((Container) mModelPlot);
 			validate();
 			setVisible(true);
 		}
 		else
-			this.mModelPlot.update();
+			mModelPlot.update();
 	};
 
 	/**
@@ -86,7 +86,7 @@ public class ModelerView extends JPanel
 	 */
 	public final void terminate()
 	{
-		this.mModelPlot.hide();
+		mModelPlot.hide();
 		removeAll();
 	};
 

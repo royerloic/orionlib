@@ -20,17 +20,17 @@ public class OrionSoundOut
 	{
 		try
 		{
-			this.audioFormat = getAudioFormat();
+			audioFormat = getAudioFormat();
 			/*************************************************************************
 			 * DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class,
 			 * audioFormat); sourceDataLine = (SourceDataLine)
 			 * AudioSystem.getLine(dataLineInfo);/
 			 ************************************************************************/
 
-			this.sourceDataLine = AudioSystem.getSourceDataLine(getAudioFormat());
+			sourceDataLine = AudioSystem.getSourceDataLine(getAudioFormat());
 
-			this.sourceDataLine.open(this.audioFormat);
-			this.sourceDataLine.start();
+			sourceDataLine.open(audioFormat);
+			sourceDataLine.start();
 
 		}
 		catch (final Exception e)
@@ -45,9 +45,9 @@ public class OrionSoundOut
 	{
 		try
 		{
-			this.sourceDataLine.flush();
-			this.sourceDataLine.stop();
-			this.sourceDataLine.close();
+			sourceDataLine.flush();
+			sourceDataLine.stop();
+			sourceDataLine.close();
 		}
 		catch (final Exception e)
 		{
@@ -64,7 +64,7 @@ public class OrionSoundOut
 			lLength = pBuffer.length;
 		else
 			lLength = pLength;
-		this.sourceDataLine.write(pBuffer, 0, lLength);
+		sourceDataLine.write(pBuffer, 0, lLength);
 	}
 
 	public static byte[] intArrayToByte(final int[] pIntArray, final byte[] pByteArray)

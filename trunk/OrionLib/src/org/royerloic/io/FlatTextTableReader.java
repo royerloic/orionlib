@@ -63,7 +63,7 @@ public class FlatTextTableReader
 	@Override
 	public String toString()
 	{
-		final String lFileNameString = "Handler name= " + this.mHandler;
+		final String lFileNameString = "Handler name= " + mHandler;
 		return "(" + lFileNameString + ")";
 	}
 
@@ -72,13 +72,13 @@ public class FlatTextTableReader
 	private FlatTextTableReader()
 	{
 		super();
-		this.mExcludedColumns = new HashSet<Integer>();
+		mExcludedColumns = new HashSet<Integer>();
 	}
 
 	public FlatTextTableReader(final FlatTextTableReaderHandler pHandler)
 	{
 		this();
-		this.mHandler = pHandler;
+		mHandler = pHandler;
 	}
 
 	/**
@@ -91,9 +91,9 @@ public class FlatTextTableReader
 	{
 		pMaximumNumberOfColumns = Math.max(pMaximumNumberOfColumns, pIntegerArray.length);
 		for (int i = 1; i < pMaximumNumberOfColumns; i++)
-			this.mExcludedColumns.add(i);
+			mExcludedColumns.add(i);
 		for (final int lI : pIntegerArray)
-			this.mExcludedColumns.remove(lI);
+			mExcludedColumns.remove(lI);
 	}
 
 	/**
@@ -150,9 +150,9 @@ public class FlatTextTableReader
 	 */
 	public void readStream(final BufferedReader pBufferedReader, final boolean pFileHasHeader) throws IOException
 	{
-		final Pattern lColumnSplitPattern = Pattern.compile(this.mColumnSplitRegex);
-		final Pattern lSetSplitPattern = Pattern.compile(this.mSetSplitRegex);
-		final Pattern lNullPattern = Pattern.compile(this.mNullRegex);
+		final Pattern lColumnSplitPattern = Pattern.compile(mColumnSplitRegex);
+		final Pattern lSetSplitPattern = Pattern.compile(mSetSplitRegex);
+		final Pattern lNullPattern = Pattern.compile(mNullRegex);
 
 		String lLineString;
 		if (pFileHasHeader)
@@ -165,16 +165,16 @@ public class FlatTextTableReader
 			int lColumnCounter = 0;
 			for (final String lColumnsElementString : lColumnsStringArray)
 			{
-				if (!this.mExcludedColumns.contains(lColumnCounter))
+				if (!mExcludedColumns.contains(lColumnCounter))
 				{
 					final String[] lSetStringArray = lSetSplitPattern.split(lColumnsElementString, -1);
 					int lSetCounter = 0;
-					for (String element : lSetStringArray)
+					for (final String element : lSetStringArray)
 					{
 						final Matcher lMatcher = lNullPattern.matcher(element);
 						if (!lMatcher.matches())
 						{
-							final boolean lSkipCell = !this.mHandler.handleCell(lLineCounter, lColumnCounter, lSetCounter,
+							final boolean lSkipCell = !mHandler.handleCell(lLineCounter, lColumnCounter, lSetCounter,
 									element);
 							if (lSkipCell)
 								continue lineloop;
@@ -185,7 +185,7 @@ public class FlatTextTableReader
 				lColumnCounter++;
 			}
 
-			if (!this.mHandler.handleEndOfCell(lLineCounter))
+			if (!mHandler.handleEndOfCell(lLineCounter))
 				return;
 		}
 	}
@@ -203,7 +203,7 @@ public class FlatTextTableReader
 	 */
 	public String getColumnSplitRegex()
 	{
-		return this.mColumnSplitRegex;
+		return mColumnSplitRegex;
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class FlatTextTableReader
 	 */
 	public void setColumnSplitRegex(final String pColumnSplitRegex)
 	{
-		this.mColumnSplitRegex = pColumnSplitRegex;
+		mColumnSplitRegex = pColumnSplitRegex;
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class FlatTextTableReader
 	 */
 	public String getNullRegex()
 	{
-		return this.mNullRegex;
+		return mNullRegex;
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class FlatTextTableReader
 	 */
 	public void setNullRegex(final String pNullRegex)
 	{
-		this.mNullRegex = pNullRegex;
+		mNullRegex = pNullRegex;
 	}
 
 	/**
@@ -242,7 +242,7 @@ public class FlatTextTableReader
 	 */
 	public String getSetSplitRegex()
 	{
-		return this.mSetSplitRegex;
+		return mSetSplitRegex;
 	}
 
 	/**
@@ -254,6 +254,6 @@ public class FlatTextTableReader
 	 */
 	public void setSetSplitRegex(final String pSetSplitRegex)
 	{
-		this.mSetSplitRegex = pSetSplitRegex;
+		mSetSplitRegex = pSetSplitRegex;
 	}
 }

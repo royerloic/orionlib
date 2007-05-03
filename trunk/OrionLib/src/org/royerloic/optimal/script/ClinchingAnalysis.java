@@ -57,7 +57,7 @@ public final class ClinchingAnalysis
 	 */
 	public double getTn()
 	{
-		return this.mTn;
+		return mTn;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public final class ClinchingAnalysis
 	 */
 	public double getF()
 	{
-		return this.mF;
+		return mF;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public final class ClinchingAnalysis
 	 */
 	public double getB1()
 	{
-		return this.mB1;
+		return mB1;
 	}
 
 	/**
@@ -83,84 +83,84 @@ public final class ClinchingAnalysis
 	{
 		try
 		{
-			this.lGeometryFile = new GeometryFile(pGeometryFileName);
+			lGeometryFile = new GeometryFile(pGeometryFileName);
 
-			this.lTopSheet = (GeometryFile.PointList) this.lGeometryFile.getGeometryObjectAt(0);
-			this.lBottomSheet = (GeometryFile.PointList) this.lGeometryFile.getGeometryObjectAt(1);
+			lTopSheet = (GeometryFile.PointList) lGeometryFile.getGeometryObjectAt(0);
+			lBottomSheet = (GeometryFile.PointList) lGeometryFile.getGeometryObjectAt(1);
 
-			this.lSearchTopSheet = new SearchPointList(this.lTopSheet);
-			this.lSearchBottomSheet = new SearchPointList(this.lBottomSheet);
+			lSearchTopSheet = new SearchPointList(lTopSheet);
+			lSearchBottomSheet = new SearchPointList(lBottomSheet);
 
 			final PointPatternP0 lPointPatternP0 = new PointPatternP0();
 
-			boolean lFoundP01 = (this.mP01 = searchPoint(this.lSearchTopSheet, "P01", 0, lPointPatternP0)) != null;
-			this.mIndexP01 = (int) (this.mP01.getCoordinate(0)) - 1;
+			final boolean lFoundP01 = (mP01 = searchPoint(lSearchTopSheet, "P01", 0, lPointPatternP0)) != null;
+			mIndexP01 = (int) (mP01.getCoordinate(0)) - 1;
 
 			final PatternExtremumX lPatternPB1 = new PatternExtremumX("maximum", "forwards");
 
-			this.lSearchTopSheet.positiveDirection();
-			final boolean lFoundPB1 = (this.mPB1 = searchPoint(this.lSearchTopSheet, "PB1", this.mIndexP01, lPatternPB1)) != null;
-			this.mIndexPB1 = (int) this.mPB1.getCoordinate(0) - 1;
+			lSearchTopSheet.positiveDirection();
+			final boolean lFoundPB1 = (mPB1 = searchPoint(lSearchTopSheet, "PB1", mIndexP01, lPatternPB1)) != null;
+			mIndexPB1 = (int) mPB1.getCoordinate(0) - 1;
 
 			final PatternExtremumX lPatternPA1 = new PatternExtremumX("minimum", "forwards");
 
-			final boolean lFoundPA1 = (this.mPA1 = searchPoint(this.lSearchTopSheet, "PA1", this.mIndexPB1, lPatternPA1)) != null;
+			final boolean lFoundPA1 = (mPA1 = searchPoint(lSearchTopSheet, "PA1", mIndexPB1, lPatternPA1)) != null;
 
-			this.mIndexPA1 = (int) this.mPA1.getCoordinate(0) - 1;
+			mIndexPA1 = (int) mPA1.getCoordinate(0) - 1;
 
-			this.lSearchTopSheet.negativeDirection();
+			lSearchTopSheet.negativeDirection();
 
 			final PatternPAp lPatternPAp = new PatternPAp();
 
-			final boolean lFoundPAp = (this.mPAp = searchPoint(this.lSearchTopSheet, "PAp", this.mIndexP01, lPatternPAp)) != null;
+			final boolean lFoundPAp = (mPAp = searchPoint(lSearchTopSheet, "PAp", mIndexP01, lPatternPAp)) != null;
 
-			this.mIndexPAp = (int) this.mPAp.getCoordinate(0) - 1;
+			mIndexPAp = (int) mPAp.getCoordinate(0) - 1;
 
-			this.lSearchBottomSheet.negativeDirection();
+			lSearchBottomSheet.negativeDirection();
 
-			boolean lFoundP02 = (this.mP02 = searchPoint(this.lSearchBottomSheet, "P02", 0, lPointPatternP0)) != null;
+			final boolean lFoundP02 = (mP02 = searchPoint(lSearchBottomSheet, "P02", 0, lPointPatternP0)) != null;
 
-			this.mIndexP02 = (int) this.mP02.getCoordinate(0) - 1;
+			mIndexP02 = (int) mP02.getCoordinate(0) - 1;
 
 			final PatternExtremumX lPatternPB2 = new PatternExtremumX("maximum", "backwards");
 
-			final boolean lFoundPB2 = (this.mPB2 = searchPoint(this.lSearchBottomSheet, "PB2", this.mIndexP02, lPatternPB2)) != null;
+			final boolean lFoundPB2 = (mPB2 = searchPoint(lSearchBottomSheet, "PB2", mIndexP02, lPatternPB2)) != null;
 
-			this.mIndexPB2 = (int) this.mPB2.getCoordinate(0) - 1;
+			mIndexPB2 = (int) mPB2.getCoordinate(0) - 1;
 
 			final PatternExtremumX lPatternPA2 = new PatternExtremumX("minimum", "backwards");
 
-			final boolean lFoundPA2 = (this.mPA2 = searchPoint(this.lSearchBottomSheet, "PA2", this.mIndexPB2, lPatternPA2)) != null;
+			final boolean lFoundPA2 = (mPA2 = searchPoint(lSearchBottomSheet, "PA2", mIndexPB2, lPatternPA2)) != null;
 
-			this.mIndexPA2 = (int) this.mPA2.getCoordinate(0) - 1;
+			mIndexPA2 = (int) mPA2.getCoordinate(0) - 1;
 
-			final boolean lFoundPC2 = (this.mPC2 = searchPoint(this.lSearchTopSheet, "PC2", this.mIndexP01, this.mPatternPC2)) != null;
+			final boolean lFoundPC2 = (mPC2 = searchPoint(lSearchTopSheet, "PC2", mIndexP01, mPatternPC2)) != null;
 
-			this.mIndexPC2 = (int) this.mPC2.getCoordinate(0) - 1;
+			mIndexPC2 = (int) mPC2.getCoordinate(0) - 1;
 
 			if (lFoundPA1)
-				this.mTn = lPatternPAp.mDistanceMinimum;
+				mTn = lPatternPAp.mDistanceMinimum;
 			else
-				this.mTn = 0;
-			print("mTn = " + this.mTn);
+				mTn = 0;
+			print("mTn = " + mTn);
 
 			if (lFoundPA2 && lFoundPB2)
-				this.mF = Math.abs(this.mPB1.getCoordinate(1) - this.mPA2.getCoordinate(1));
+				mF = Math.abs(mPB1.getCoordinate(1) - mPA2.getCoordinate(1));
 			else
-				this.mF = 0;
-			print("mF = " + this.mF);
+				mF = 0;
+			print("mF = " + mF);
 
-			this.mB1 = this.mPreB1 - 19.5;
-			print("mPreB1 = " + this.mPreB1);
-			print("mB1 = " + this.mB1);
+			mB1 = mPreB1 - 19.5;
+			print("mPreB1 = " + mPreB1);
+			print("mB1 = " + mB1);
 		}
 		catch (final RuntimeException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace(System.out);
-			this.mTn = 0;
-			this.mF = 0;
-			this.mB1 = 0;
+			mTn = 0;
+			mF = 0;
+			mB1 = 0;
 		}
 	}
 
@@ -209,24 +209,24 @@ public final class ClinchingAnalysis
 		{
 			if (pMode.equals("maximum"))
 			{
-				this.mMode = true;
-				this.mOptimumX = Double.NEGATIVE_INFINITY;
+				mMode = true;
+				mOptimumX = Double.NEGATIVE_INFINITY;
 			}
 			else if (pMode.equals("minimum"))
 			{
-				this.mMode = false;
-				this.mOptimumX = Double.POSITIVE_INFINITY;
+				mMode = false;
+				mOptimumX = Double.POSITIVE_INFINITY;
 			}
 
 			if (pDirection.equals("forwards"))
-				this.mDirection = true;
+				mDirection = true;
 			else if (pDirection.equals("backwards"))
-				this.mDirection = false;
+				mDirection = false;
 		}
 
 		public boolean conditionOnPointBefore(final GeometryFile.Point pPoint)
 		{
-			if (!this.mDirection)
+			if (!mDirection)
 				return conditionOnPoint(pPoint);
 			else
 				return true;
@@ -239,7 +239,7 @@ public final class ClinchingAnalysis
 
 		public boolean conditionOnPointAfter(final GeometryFile.Point pPoint)
 		{
-			if (this.mDirection)
+			if (mDirection)
 				return conditionOnPoint(pPoint);
 			else
 				return true;
@@ -249,29 +249,29 @@ public final class ClinchingAnalysis
 		{
 			final double lCurrentX = pPoint.getCoordinate(1);
 
-			if (lCurrentX > ClinchingAnalysis.this.mSearchLimit)
+			if (lCurrentX > mSearchLimit)
 			{
-				this.mOutOfDomain = true;
+				mOutOfDomain = true;
 				System.out.println("Out of domain !!");
 			}
 
 			boolean isExtremum = false;
 
-			if (this.mMode)
+			if (mMode)
 			{
 				// Maximum
-				if (lCurrentX > this.mOptimumX)
-					this.mOptimumX = lCurrentX;
+				if (lCurrentX > mOptimumX)
+					mOptimumX = lCurrentX;
 				else
 					isExtremum = true;
 			}
 			else // Minimum
-			if (lCurrentX < this.mOptimumX)
-				this.mOptimumX = lCurrentX;
+			if (lCurrentX < mOptimumX)
+				mOptimumX = lCurrentX;
 			else
 				isExtremum = true;
 
-			final boolean isFound = isExtremum && !this.mOutOfDomain;
+			final boolean isFound = isExtremum && !mOutOfDomain;
 
 			return isFound;
 		};
@@ -293,12 +293,12 @@ public final class ClinchingAnalysis
 		{
 			final double lX = pPoint.getCoordinate(1);
 
-			if (SearchPointList.isEqualTol(lX, 0, ClinchingAnalysis.this.mTol))
+			if (SearchPointList.isEqualTol(lX, 0, mTol))
 			{
-				this.mIn = true;
+				mIn = true;
 				return false;
 			}
-			else if (this.mIn)
+			else if (mIn)
 				return true;
 			else
 				return false;
@@ -324,12 +324,12 @@ public final class ClinchingAnalysis
 
 		public boolean conditionOnPointCurrent(final GeometryFile.Point pPoint)
 		{
-			final double mDistance = distance(pPoint, ClinchingAnalysis.this.mPA1);
-			if (mDistance < this.mDistanceMinimum)
-				this.mDistanceMinimum = mDistance;
+			final double mDistance = distance(pPoint, mPA1);
+			if (mDistance < mDistanceMinimum)
+				mDistanceMinimum = mDistance;
 
 			final double lX = pPoint.getCoordinate(1);
-			if (lX > ClinchingAnalysis.this.mSearchLimit)
+			if (lX > mSearchLimit)
 				return true;
 			else
 				return false;
@@ -356,14 +356,14 @@ public final class ClinchingAnalysis
 																											public boolean conditionOnPointCurrent(GeometryFile.Point pPoint)
 																											{
 																												double lY = pPoint.getCoordinate(2);
-																												if (SearchPointList.isGreaterTol(this.mYMinimum, lY, ClinchingAnalysis.this.mTol))
-																													this.mYMinimum = lY;
+																												if (SearchPointList.isGreaterTol(mYMinimum, lY, mTol))
+																													mYMinimum = lY;
 
 																												double lX = pPoint.getCoordinate(1);
-																												if (SearchPointList.isGreaterTol(lX, ClinchingAnalysis.this.mPB2
-																														.getCoordinate(1), ClinchingAnalysis.this.mTol))
+																												if (SearchPointList.isGreaterTol(lX, mPB2
+																														.getCoordinate(1), mTol))
 																												{
-																													ClinchingAnalysis.this.mPreB1 = this.mYMinimum;
+																													mPreB1 = mYMinimum;
 																													return true;
 																												}
 																												else

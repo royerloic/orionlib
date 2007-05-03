@@ -46,8 +46,8 @@ public class IwuJFrame extends JFrame
 
 		final Toolkit kit = Toolkit.getDefaultToolkit();
 		final URL lUrl = ClassLoader.getSystemResource("org/royerloic/utils/gui/images/IWU.gif");
-		this.mWindowIcon = kit.getImage(lUrl);
-		setIconImage(this.mWindowIcon); /**/
+		mWindowIcon = kit.getImage(lUrl);
+		setIconImage(mWindowIcon); /**/
 
 	}
 

@@ -70,15 +70,15 @@ public class PsiMiIO
 		public PsiMiHandler(final boolean pSpokeModel, final String pConfidenceFilter)
 		{
 			super();
-			this.mConfidenceFilter = pConfidenceFilter;
-			this.mGraph = new PsiMiGraph();
-			this.mSpokeModel = pSpokeModel;
+			mConfidenceFilter = pConfidenceFilter;
+			mGraph = new PsiMiGraph();
+			mSpokeModel = pSpokeModel;
 		}
 
 		@Override
 		public void startDocument() throws SAXException
 		{
-			this.mIsInteractorDefinition = true;
+			mIsInteractorDefinition = true;
 		}
 
 		@Override
@@ -100,44 +100,44 @@ public class PsiMiIO
 		{
 			if (qName.equals("proteinInteractor"))
 			{
-				this.mInteractorId = attrs.getValue("id");
-				if (this.mInteractorId != null)
+				mInteractorId = attrs.getValue("id");
+				if (mInteractorId != null)
 				{
-					this.mInteractorNode = new PsiMiNode(this.mInteractorId);
-					this.lPsiMiNodeMap.put(this.mInteractorNode, this.mInteractorNode);
+					mInteractorNode = new PsiMiNode(mInteractorId);
+					lPsiMiNodeMap.put(mInteractorNode, mInteractorNode);
 				}
 			}
 			else if (qName.equals("proteinInteractorRef"))
 			{
-				this.mInteractorId = attrs.getValue("ref");
-				if (this.mInteractorId != null)
+				mInteractorId = attrs.getValue("ref");
+				if (mInteractorId != null)
 				{
-					this.mInteractorNode = new PsiMiNode(this.mInteractorId);
-					this.mInteractorNode = this.lPsiMiNodeMap.get(this.mInteractorNode);
+					mInteractorNode = new PsiMiNode(mInteractorId);
+					mInteractorNode = lPsiMiNodeMap.get(mInteractorNode);
 				}
 			}
-			else if (this.mIsInteractorDefinition && qName.equals("secondaryRef"))
+			else if (mIsInteractorDefinition && qName.equals("secondaryRef"))
 			{
 				final String db = attrs.getValue("db");
 				final String id = attrs.getValue("id");
-				if (this.mInteractorNode != null)
+				if (mInteractorNode != null)
 				{
 					if (db.equalsIgnoreCase("go"))
-						this.mInteractorNode.addGoId(GoIdConversion.getIdFromString(id));
+						mInteractorNode.addGoId(GoIdConversion.getIdFromString(id));
 					if (db.equalsIgnoreCase("interpro"))
-						this.mInteractorNode.addInterproId(InterproIdConversion.getIdFromString(id));
+						mInteractorNode.addInterproId(InterproIdConversion.getIdFromString(id));
 				}
 			}
 			else if (qName.equals("interaction"))
 				startInteraction();
 			else if (qName.equals("confidence"))
-				this.mInteractionConfidence = attrs.getValue("value");
+				mInteractionConfidence = attrs.getValue("value");
 		}
 
 		@Override
 		public void characters(final char buf[], final int offset, final int len) throws SAXException
 		{
-			this.mText = new String(buf, offset, len);
+			mText = new String(buf, offset, len);
 		}
 
 		/**
@@ -154,53 +154,53 @@ public class PsiMiIO
 		{
 
 			if (qName.equals("proteinInteractor") || qName.equals("proteinInteractorRef"))
-				this.mGraph.addNode(this.mInteractorNode);
+				mGraph.addNode(mInteractorNode);
 			else if (qName.equals("interaction"))
 				endInteraction();
 			else if (qName.equals("role"))
 			{
-				this.mRole = this.mText;
-				addInteractor(this.mInteractorNode, this.mRole);
+				mRole = mText;
+				addInteractor(mInteractorNode, mRole);
 			}
 			else if (qName.equals("interactorList"))
-				this.mIsInteractorDefinition = false;
+				mIsInteractorDefinition = false;
 
 		}
 
 		private void startInteraction()
 		{
-			this.lInteractorsToRoleMap.clear();
+			lInteractorsToRoleMap.clear();
 		}
 
 		private void addInteractor(final PsiMiNode pInteractorNode, final String pRole)
 		{
-			this.lInteractorsToRoleMap.put(pInteractorNode, pRole);
+			lInteractorsToRoleMap.put(pInteractorNode, pRole);
 		}
 
 		private void endInteraction()
 		{
-			if ((this.mConfidenceFilter == null) || this.mInteractionConfidence.matches(this.mConfidenceFilter) )
+			if ((mConfidenceFilter == null) || mInteractionConfidence.matches(mConfidenceFilter) )
 			{
-				System.out.println("Interaction confidence: "+this.mInteractionConfidence);
-				if (this.lInteractorsToRoleMap.size() == 1)
+				System.out.println("Interaction confidence: "+mInteractionConfidence);
+				if (lInteractorsToRoleMap.size() == 1)
 				{
-					final PsiMiNode lNode = this.lInteractorsToRoleMap.keySet().iterator().next();
-					this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
+					final PsiMiNode lNode = lInteractorsToRoleMap.keySet().iterator().next();
+					mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
 				}
-				else if (!this.mSpokeModel)
+				else if (!mSpokeModel)
 				{
-					for (final PsiMiNode lNode1 : this.lInteractorsToRoleMap.keySet())
-						for (final PsiMiNode lNode2 : this.lInteractorsToRoleMap.keySet())
+					for (final PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+						for (final PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
 							if (!lNode1.equals(lNode2))
-								this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+								mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
 				}
-				else if (this.mSpokeModel)
-					for (final PsiMiNode lNode1 : this.lInteractorsToRoleMap.keySet())
-						for (final PsiMiNode lNode2 : this.lInteractorsToRoleMap.keySet())
+				else if (mSpokeModel)
+					for (final PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+						for (final PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
 							if (!lNode1.equals(lNode2))
 							{
-								final String lRole1 = this.lInteractorsToRoleMap.get(lNode1);
-								final String lRole2 = this.lInteractorsToRoleMap.get(lNode2);
+								final String lRole1 = lInteractorsToRoleMap.get(lNode1);
+								final String lRole2 = lInteractorsToRoleMap.get(lNode2);
 								final boolean lIsInteraction = /*(lRole1.equals("neutral") && lRole2.equals("neutral"))
 										||/**/ (lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
 										|| lRole2.equals("unspecified");
@@ -210,7 +210,7 @@ public class PsiMiIO
 									System.out.println("Something strange here:" + lRole1);
 
 								if (lIsInteraction)
-									this.mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+									mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
 
 							}
 
