@@ -19,7 +19,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 	public CountWordIdentifier(final Class pClass, final String[] pResourceArray, final boolean pCaseSensitive)
 	{
 		super();
-		this.mCaseSensitive = pCaseSensitive;
+		mCaseSensitive = pCaseSensitive;
 		for (final String lRessourceName : pResourceArray)
 			try
 			{
@@ -38,7 +38,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 	public String normalizeString(String pString)
 	{
 		pString = pString.trim();
-		if (!this.mCaseSensitive)
+		if (!mCaseSensitive)
 			pString = pString.toLowerCase();
 		return pString;
 	}

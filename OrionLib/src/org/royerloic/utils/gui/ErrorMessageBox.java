@@ -45,7 +45,7 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 
 	public boolean getResult()
 	{
-		return this.mResult;
+		return mResult;
 	}
 
 	/**
@@ -63,11 +63,11 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 		final String lSpaces = "";
 		final String lMessage = lSpaces + pMessage + lSpaces;
 
-		this.mJTextArea = new JTextArea(lMessage);
-		this.mJTextArea.setEditable(false);
-		this.mJTextArea.setSize(200, 30);
+		mJTextArea = new JTextArea(lMessage);
+		mJTextArea.setEditable(false);
+		mJTextArea.setSize(200, 30);
 
-		getContentPane().add("Center", new JScrollPane(this.mJTextArea));
+		getContentPane().add("Center", new JScrollPane(mJTextArea));
 		addOKCancelPanel(pOkCancelButtons);
 		setResizable(false);
 		setTitle(pTitle);
@@ -94,8 +94,8 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 	 */
 	private void createOKButton(final Panel pPanel)
 	{
-		pPanel.add(this.mButtonOk = new Button("OK"));
-		this.mButtonOk.addActionListener(this);
+		pPanel.add(mButtonOk = new Button("OK"));
+		mButtonOk.addActionListener(this);
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 	 */
 	private void createCancelButton(final Panel pPanel)
 	{
-		this.mButtonCancel = new Button("Cancel");
-		pPanel.add(this.mButtonCancel);
-		this.mButtonCancel.addActionListener(this);
+		mButtonCancel = new Button("Cancel");
+		pPanel.add(mButtonCancel);
+		mButtonCancel.addActionListener(this);
 	}
 
 	/**
@@ -122,14 +122,14 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 	 */
 	public void actionPerformed(final ActionEvent pActionEvent)
 	{
-		if (pActionEvent.getSource() == this.mButtonOk)
+		if (pActionEvent.getSource() == mButtonOk)
 		{
-			this.mResult = true;
+			mResult = true;
 			setVisible(false);
 		}
-		else if (pActionEvent.getSource() == this.mButtonCancel)
+		else if (pActionEvent.getSource() == mButtonCancel)
 		{
-			this.mResult = false;
+			mResult = false;
 			setVisible(false);
 		}
 	}

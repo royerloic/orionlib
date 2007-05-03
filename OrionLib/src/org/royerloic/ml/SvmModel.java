@@ -24,14 +24,14 @@ public class SvmModel
 		public UniProtPair(final String pUniProt1, final String pUniProt2)
 		{
 			super();
-			this.mUniProt1 = pUniProt1;
-			this.mUniProt2 = pUniProt2;
+			mUniProt1 = pUniProt1;
+			mUniProt2 = pUniProt2;
 		}
 
 		@Override
 		public String toString()
 		{
-			return "[" + this.mUniProt1 + " - " + this.mUniProt2 + "]";
+			return "[" + mUniProt1 + " - " + mUniProt2 + "]";
 		}
 	}
 
@@ -46,8 +46,8 @@ public class SvmModel
 
 		public GoIdAndDistance(final Integer pGoId, final Integer pDistance)
 		{
-			this.mGoId = pGoId;
-			this.mDistance = pDistance;
+			mGoId = pGoId;
+			mDistance = pDistance;
 		}
 
 		@Override
@@ -60,20 +60,20 @@ public class SvmModel
 			else
 			{
 				final GoIdAndDistance lGoIdAndDistance = (GoIdAndDistance) pObj;
-				return (this.mGoId.equals(lGoIdAndDistance.mGoId));
+				return (mGoId.equals(lGoIdAndDistance.mGoId));
 			}
 		}
 
 		@Override
 		public int hashCode()
 		{
-			return this.mGoId.hashCode();
+			return mGoId.hashCode();
 		}
 
 		@Override
 		public String toString()
 		{
-			return "(GO:" + this.mGoId + " d=" + this.mDistance + ")";
+			return "(GO:" + mGoId + " d=" + mDistance + ")";
 		}
 	}
 
@@ -87,29 +87,29 @@ public class SvmModel
 		public GoIdPair(final Integer pGoId1, final Integer pGoId2)
 		{
 			super();
-			this.mGoId1 = pGoId1;
-			this.mGoId2 = pGoId2;
+			mGoId1 = pGoId1;
+			mGoId2 = pGoId2;
 		}
 
 		@Override
 		public boolean equals(final Object pObj)
 		{
 			final GoIdPair lGoIdPair = (GoIdPair) pObj;
-			return ((this.mGoId1 == lGoIdPair.mGoId1) && (this.mGoId2 == lGoIdPair.mGoId2))
-					|| ((this.mGoId1 == lGoIdPair.mGoId2) && (this.mGoId2 == lGoIdPair.mGoId1));
+			return ((mGoId1 == lGoIdPair.mGoId1) && (mGoId2 == lGoIdPair.mGoId2))
+					|| ((mGoId1 == lGoIdPair.mGoId2) && (mGoId2 == lGoIdPair.mGoId1));
 
 		}
 
 		@Override
 		public int hashCode()
 		{
-			return this.mGoId1 ^ this.mGoId2;
+			return mGoId1 ^ mGoId2;
 		}
 
 		@Override
 		public String toString()
 		{
-			return "[" + this.mGoId1 + " - " + this.mGoId2 + "]";
+			return "[" + mGoId1 + " - " + mGoId2 + "]";
 		}
 	}
 
@@ -123,14 +123,14 @@ public class SvmModel
 
 		public SparseVectorEntry(final Integer pIndex, final Double pValue)
 		{
-			this.mIndex = pIndex;
-			this.mValue = pValue;
+			mIndex = pIndex;
+			mValue = pValue;
 		}
 
 		@Override
 		public String toString()
 		{
-			return this.mIndex + ":" + this.mValue;
+			return mIndex + ":" + mValue;
 		}
 
 	}
@@ -146,11 +146,11 @@ public class SvmModel
 			for (final List<String> lList : lUniprot2GoMatrix)
 			{
 				final String lUniProtId = lList.get(0);
-				List<Integer> lGoIdList = this.mUniprot2GoListMap.get(lUniProtId);
+				List<Integer> lGoIdList = mUniprot2GoListMap.get(lUniProtId);
 				if (lGoIdList == null)
 				{
 					lGoIdList = new ArrayList<Integer>();
-					this.mUniprot2GoListMap.put(lUniProtId, lGoIdList);
+					mUniprot2GoListMap.put(lUniProtId, lGoIdList);
 				}
 				final String lGoIdString = lList.get(1);
 				final Integer lGoIdInteger = Integer.parseInt(lGoIdString);
@@ -172,7 +172,7 @@ public class SvmModel
 				for (String lUniProtId : lUniProtIdsList)
 				{
 					lUniProtId = lUniProtId.replaceAll("-[0-9]+", "");
-					final boolean isValidUniProtId = this.mUniprot2GoListMap.containsKey(lUniProtId);
+					final boolean isValidUniProtId = mUniprot2GoListMap.containsKey(lUniProtId);
 					if (isValidUniProtId)
 						lValidatedUniProtIdList.add(lUniProtId);
 					else
@@ -197,7 +197,7 @@ public class SvmModel
 					lPairSet.add(lPair);
 				}
 
-				this.mUniProtInteractionPairsList.addAll(lPairSet);
+				mUniProtInteractionPairsList.addAll(lPairSet);
 			}
 		}
 
@@ -218,11 +218,11 @@ public class SvmModel
 
 				// first direction up the tree:
 				{
-					Set<GoIdAndDistance> lGoIdAndDistanceSet = this.mGoIdToGoIdAndDistanceSetMap.get(lGoChildId);
+					Set<GoIdAndDistance> lGoIdAndDistanceSet = mGoIdToGoIdAndDistanceSetMap.get(lGoChildId);
 					if (lGoIdAndDistanceSet == null)
 					{
 						lGoIdAndDistanceSet = new HashSet<GoIdAndDistance>();
-						this.mGoIdToGoIdAndDistanceSetMap.put(lGoChildId, lGoIdAndDistanceSet);
+						mGoIdToGoIdAndDistanceSetMap.put(lGoChildId, lGoIdAndDistanceSet);
 					}
 					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(lGoParentId, -lDistance);
 					lGoIdAndDistanceSet.add(lGoIdAndDistance);
@@ -230,11 +230,11 @@ public class SvmModel
 
 				// second direction down the tree:
 				{
-					Set<GoIdAndDistance> lGoIdAndDistanceSet = this.mGoIdToGoIdAndDistanceSetMap.get(lGoParentId);
+					Set<GoIdAndDistance> lGoIdAndDistanceSet = mGoIdToGoIdAndDistanceSetMap.get(lGoParentId);
 					if (lGoIdAndDistanceSet == null)
 					{
 						lGoIdAndDistanceSet = new HashSet<GoIdAndDistance>();
-						this.mGoIdToGoIdAndDistanceSetMap.put(lGoParentId, lGoIdAndDistanceSet);
+						mGoIdToGoIdAndDistanceSetMap.put(lGoParentId, lGoIdAndDistanceSet);
 					}
 					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(lGoChildId, lDistance);
 					lGoIdAndDistanceSet.add(lGoIdAndDistance);
@@ -248,14 +248,14 @@ public class SvmModel
 
 		final List<List<SparseVectorEntry>> lSparseVectorEntryListList = new ArrayList<List<SparseVectorEntry>>();
 		double lPercentFinished = 0;
-		for (final UniProtPair lUniProtPair : this.mUniProtInteractionPairsList)
+		for (final UniProtPair lUniProtPair : mUniProtInteractionPairsList)
 		{
 
 			Map<Integer, Double> lExtendedGoIdList1;
 			{
 				final String lUniProt1 = lUniProtPair.mUniProt1;
 				final Map<Integer, Double> lGoIdMap1 = new HashMap<Integer, Double>();
-				final List<Integer> lGoIdList1 = this.mUniprot2GoListMap.get(lUniProt1);
+				final List<Integer> lGoIdList1 = mUniprot2GoListMap.get(lUniProt1);
 				for (final Integer lGoId : lGoIdList1)
 					lGoIdMap1.put(lGoId, 1.0);
 				lExtendedGoIdList1 = lGoIdMap1; // addRelatedGoIds(lGoIdMap1,0.3);
@@ -266,7 +266,7 @@ public class SvmModel
 			{
 				final String lUniProt2 = lUniProtPair.mUniProt2;
 				final Map<Integer, Double> lGoIdMap2 = new HashMap<Integer, Double>();
-				final List<Integer> lGoIdList2 = this.mUniprot2GoListMap.get(lUniProt2);
+				final List<Integer> lGoIdList2 = mUniprot2GoListMap.get(lUniProt2);
 				for (final Integer lGoId : lGoIdList2)
 					lGoIdMap2.put(lGoId, 1.0);
 				lExtendedGoIdList2 = lGoIdMap2; // addRelatedGoIds(lGoIdMap2,0.3);
@@ -303,7 +303,7 @@ public class SvmModel
 			lSparseVectorEntryListList.add(lSparseVectorEntryList);
 
 			// System.out.println(lSparseVectorEntryList.size());
-			lPercentFinished += 1 / (double) this.mUniProtInteractionPairsList.size();
+			lPercentFinished += 1 / (double) mUniProtInteractionPairsList.size();
 			final String lESTString = lTimer.getESTString(lPercentFinished);
 			System.out.println(lESTString);
 		}
@@ -327,27 +327,14 @@ public class SvmModel
 		MatrixFile.writeMatrixToFile(lOutputMatrix, lTrainingFile);
 	}
 
-	private double computeValueFromDistance(int pDistance)
-	{
-		if (pDistance <= 0)
-			return 1.0;
-		else if (pDistance > 0)
-		{
-			final double lValue = Math.pow(2, -pDistance);
-			return lValue;
-		}
-		else
-			return 0;
-	}
-
 	private Integer getIndexForGoIdPair(final GoIdPair pGoIdPair)
 	{
-		Integer lIndex = this.mGoIdPairToIndexMap.get(pGoIdPair);
+		Integer lIndex = mGoIdPairToIndexMap.get(pGoIdPair);
 		if (lIndex == null)
 		{
-			lIndex = this.mNextFreeIndex;
-			this.mNextFreeIndex++;
-			this.mGoIdPairToIndexMap.put(pGoIdPair, lIndex);
+			lIndex = mNextFreeIndex;
+			mNextFreeIndex++;
+			mGoIdPairToIndexMap.put(pGoIdPair, lIndex);
 		}
 		return lIndex;
 	}

@@ -65,30 +65,30 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 
 		setLayout(new BorderLayout(5, 5));
 
-		this.mEngineControl = new JPanel();
-		this.mEngineControl.setLayout(new BoxLayout(this.mEngineControl, BoxLayout.X_AXIS));
+		mEngineControl = new JPanel();
+		mEngineControl.setLayout(new BoxLayout(mEngineControl, BoxLayout.X_AXIS));
 
-		this.mPauseResumeButton = new JButton("Start");
-		this.mPauseResumeButton.addActionListener(this);
+		mPauseResumeButton = new JButton("Start");
+		mPauseResumeButton.addActionListener(this);
 
-		this.mEngineControl.add(this.mPauseResumeButton);
+		mEngineControl.add(mPauseResumeButton);
 
-		this.mEngineStatusView = new JPanel();
-		this.mEngineStatusView.setLayout(new BoxLayout(this.mEngineStatusView, BoxLayout.X_AXIS));
+		mEngineStatusView = new JPanel();
+		mEngineStatusView.setLayout(new BoxLayout(mEngineStatusView, BoxLayout.X_AXIS));
 
-		this.mEngineStatusTextField = new JTextField();
-		this.mEngineStatusTextField.setEditable(false);
-		this.mEngineStatusView.add(this.mEngineStatusTextField);
+		mEngineStatusTextField = new JTextField();
+		mEngineStatusTextField.setEditable(false);
+		mEngineStatusView.add(mEngineStatusTextField);
 
-		this.mMainView = new MainView();
-		this.mModelerView = new ModelerView();
-		this.mMainContainerView = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.mModelerView, this.mMainView);
-		this.mMainContainerView.setOneTouchExpandable(true);
-		this.mMainContainerView.setResizeWeight(0.75);
+		mMainView = new MainView();
+		mModelerView = new ModelerView();
+		mMainContainerView = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mModelerView, mMainView);
+		mMainContainerView.setOneTouchExpandable(true);
+		mMainContainerView.setResizeWeight(0.75);
 
-		add(this.mEngineControl, BorderLayout.NORTH);
-		add(this.mMainContainerView, BorderLayout.CENTER);
-		add(this.mEngineStatusView, BorderLayout.SOUTH);
+		add(mEngineControl, BorderLayout.NORTH);
+		add(mMainContainerView, BorderLayout.CENTER);
+		add(mEngineStatusView, BorderLayout.SOUTH);
 
 		validate();
 	}
@@ -99,10 +99,10 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	public void updateIterations(final int mIterations)
 	{
 
-		this.mEngineStatusTextField.setText("The Optimal Engine as performed " + Integer.toString(mIterations)
+		mEngineStatusTextField.setText("The Optimal Engine as performed " + Integer.toString(mIterations)
 				+ " iterations.");
 
-		this.mEngineStatusTextField.repaint();
+		mEngineStatusTextField.repaint();
 
 	}
 
@@ -111,26 +111,26 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	 */
 	public void setControlListener(final IOptimalEngineControl pIOptimalEngineControl)
 	{
-		this.mIOptimalEngineControl = pIOptimalEngineControl;
+		mIOptimalEngineControl = pIOptimalEngineControl;
 	}
 
 	public void actionPerformed(final ActionEvent pEvent)
 	{
-		if (!this.mIOptimalEngineControl.isStarted())
+		if (!mIOptimalEngineControl.isStarted())
 		{
-			this.mEngineStatusTextField.setText("Please wait until engine started...");
-			this.mIOptimalEngineControl.doStart();
-			this.mPauseResumeButton.setText("Pause");
+			mEngineStatusTextField.setText("Please wait until engine started...");
+			mIOptimalEngineControl.doStart();
+			mPauseResumeButton.setText("Pause");
 		}
-		else if (this.mIOptimalEngineControl.isPaused())
+		else if (mIOptimalEngineControl.isPaused())
 		{
-			this.mIOptimalEngineControl.doResume();
-			this.mPauseResumeButton.setText("Pause");
+			mIOptimalEngineControl.doResume();
+			mPauseResumeButton.setText("Pause");
 		}
-		else if (!this.mIOptimalEngineControl.isPaused())
+		else if (!mIOptimalEngineControl.isPaused())
 		{
-			this.mIOptimalEngineControl.doPause();
-			this.mPauseResumeButton.setText("Resume");
+			mIOptimalEngineControl.doPause();
+			mPauseResumeButton.setText("Resume");
 		}
 
 	}
@@ -140,7 +140,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	 */
 	public void initiate()
 	{
-		this.mMainView.initiate();
+		mMainView.initiate();
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	 */
 	public void terminate()
 	{
-		this.mMainView.terminate();
+		mMainView.terminate();
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	public void updateBestExperiment(final IExperiment pExperiment, final double pValue)
 	{
 
-		this.mMainView.updateBestExperiment(pExperiment, pValue);
+		mMainView.updateBestExperiment(pExperiment, pValue);
 
 	}
 
@@ -167,7 +167,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	public void updateMaximumEvolution(final List pList)
 	{
 
-		this.mMainView.updateMaximumEvolutionArray(pList);
+		mMainView.updateMaximumEvolutionArray(pList);
 
 	}
 
@@ -185,7 +185,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	public void updateModelerView(final IScalarFunction mModeler)
 	{
 
-		this.mModelerView.updateModeler(mModeler);
+		mModelerView.updateModeler(mModeler);
 
 	}
 
@@ -212,7 +212,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	 */
 	public void setViewOnlyMode(final boolean pMode)
 	{
-		this.mPauseResumeButton.setEnabled(!pMode);
+		mPauseResumeButton.setEnabled(!pMode);
 	}
 
 }

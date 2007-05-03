@@ -54,16 +54,16 @@ public final class WebPageFetcher
 	{
 		if (!pURL.getProtocol().equals(cHTTP))
 			throw new IllegalArgumentException("URL is not for HTTP Protocol: " + pURL);
-		this.mURL = pURL;
-		this.mUserAgent = cUSERAGENT_FIREFOX;
-		this.mReferer = "";
+		mURL = pURL;
+		mUserAgent = cUSERAGENT_FIREFOX;
+		mReferer = "";
 
-		this.mAccept = "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
-		this.mAcceptLanguage = "en-us,en;q=0.5";
-		this.mAcceptEncoding = "identity";
-		this.mAcceptCharset = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
-		this.mKeepAlive = "300";
-		this.mConnection = "keep-alive";
+		mAccept = "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
+		mAcceptLanguage = "en-us,en;q=0.5";
+		mAcceptEncoding = "identity";
+		mAcceptCharset = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
+		mKeepAlive = "300";
+		mConnection = "keep-alive";
 	}
 
 	public WebPageFetcher(final String aUrlName) throws MalformedURLException
@@ -82,20 +82,20 @@ public final class WebPageFetcher
 	{
 		final StringBuffer result = new StringBuffer();
 
-		this.mURLConnection = null;
+		mURLConnection = null;
 
 		try
 		{
-			this.mURLConnection = this.mURL.openConnection();
+			mURLConnection = mURL.openConnection();
 
-			this.mURLConnection.setRequestProperty("Host", this.mURL.getHost());
-			this.mURLConnection.setRequestProperty("User-Agent", this.mUserAgent);
-			this.mURLConnection.setRequestProperty("Accept", this.mAccept);
-			this.mURLConnection.setRequestProperty("Accept-Language", this.mAcceptLanguage);
-			this.mURLConnection.setRequestProperty("Accept-Encoding", this.mAcceptEncoding);
-			this.mURLConnection.setRequestProperty("Accept-Charset", this.mAcceptCharset);
-			this.mURLConnection.setRequestProperty("Keep-Alive", this.mKeepAlive);
-			this.mURLConnection.setRequestProperty("Connection", this.mConnection);
+			mURLConnection.setRequestProperty("Host", mURL.getHost());
+			mURLConnection.setRequestProperty("User-Agent", mUserAgent);
+			mURLConnection.setRequestProperty("Accept", mAccept);
+			mURLConnection.setRequestProperty("Accept-Language", mAcceptLanguage);
+			mURLConnection.setRequestProperty("Accept-Encoding", mAcceptEncoding);
+			mURLConnection.setRequestProperty("Accept-Charset", mAcceptCharset);
+			mURLConnection.setRequestProperty("Keep-Alive", mKeepAlive);
+			mURLConnection.setRequestProperty("Connection", mConnection);
 			/*************************************************************************
 			 * if (!mReferer.equals("")) { connection.setRequestProperty("Referer",
 			 * mReferer); }/
@@ -106,9 +106,9 @@ public final class WebPageFetcher
 			int headerIdx = 0;
 			String headerKey = null;
 			String headerValue = null;
-			while ((headerValue = this.mURLConnection.getHeaderField(headerIdx)) != null)
+			while ((headerValue = mURLConnection.getHeaderField(headerIdx)) != null)
 			{
-				headerKey = this.mURLConnection.getHeaderFieldKey(headerIdx);
+				headerKey = mURLConnection.getHeaderFieldKey(headerIdx);
 				if ((headerKey != null) && (headerKey.length() > 0))
 				{
 					result.append(headerKey);
@@ -123,7 +123,7 @@ public final class WebPageFetcher
 		}
 		catch (final IOException ex)
 		{
-			throw new IOException("Cannot open connection to URL: " + this.mURL);
+			throw new IOException("Cannot open connection to URL: " + mURL);
 		}
 
 	}
@@ -141,7 +141,7 @@ public final class WebPageFetcher
 		BufferedReader reader = null;
 		try
 		{
-			reader = new BufferedReader(new InputStreamReader(this.mURLConnection.getInputStream()), sBufferSize);
+			reader = new BufferedReader(new InputStreamReader(mURLConnection.getInputStream()), sBufferSize);
 			String line = null;
 			while ((line = reader.readLine()) != null)
 			{
@@ -151,7 +151,7 @@ public final class WebPageFetcher
 		}
 		catch (final IOException ex)
 		{
-			throw new IOException("Cannot retrieve contents of: " + this.mURL + "\n" + ex.getMessage());
+			throw new IOException("Cannot retrieve contents of: " + mURL + "\n" + ex.getMessage());
 		}
 		finally
 		{
@@ -197,12 +197,12 @@ public final class WebPageFetcher
 
 	public String getReferer()
 	{
-		return this.mReferer;
+		return mReferer;
 	}
 
 	public void setReferer(final String pReferer)
 	{
-		this.mReferer = pReferer;
+		mReferer = pReferer;
 	}
 
 }

@@ -28,7 +28,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 
 	public void setInterpreter(final Interpreter pInterpreter)
 	{
-		this.mInterpreter = pInterpreter;
+		mInterpreter = pInterpreter;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 	 */
 	public void setExperimentDatabase(final IExperimentDatabase pDatabase)
 	{
-		this.mDatabase = pDatabase;
+		mDatabase = pDatabase;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 	public ObjectiveFunction(final String pFormula)
 	{
 		super();
-		this.mFormula = pFormula;
+		mFormula = pFormula;
 	}
 
 	/**
@@ -59,8 +59,8 @@ public class ObjectiveFunction implements IObjectiveFunction
 		final int lDimension = pVector.getDimension();
 
 		final INumericalVector lVector = new NumericalVector(lDimension);
-		final INumericalVector lMaxVector = this.mDatabase.getMaximumOutputValuesVector();
-		final INumericalVector lMinVector = this.mDatabase.getMinimumOutputValuesVector();
+		final INumericalVector lMaxVector = mDatabase.getMaximumOutputValuesVector();
+		final INumericalVector lMinVector = mDatabase.getMinimumOutputValuesVector();
 
 		for (int i = 0; i < lDimension; i++)
 		{
@@ -78,8 +78,8 @@ public class ObjectiveFunction implements IObjectiveFunction
 			for (int i = 0; i < lDimension; i++)
 				try
 				{
-					this.mInterpreter.set("y" + i, pVector.get(i));
-					this.mInterpreter.set("n" + i, lVector.get(i));
+					mInterpreter.set("y" + i, pVector.get(i));
+					mInterpreter.set("n" + i, lVector.get(i));
 				}
 				catch (final EvalError e1)
 				{
@@ -89,7 +89,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 
 			try
 			{
-				lResult = (Double) this.mInterpreter.eval(this.mFormula);
+				lResult = (Double) mInterpreter.eval(mFormula);
 				final double lResultPrimitive = lResult.doubleValue();
 				return lResultPrimitive;
 			}
@@ -98,7 +98,7 @@ public class ObjectiveFunction implements IObjectiveFunction
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				mLogger.error(e);
-				throw new RuntimeException("Error evaluating Objective formula:" + this.mFormula);
+				throw new RuntimeException("Error evaluating Objective formula:" + mFormula);
 			}
 		}
 

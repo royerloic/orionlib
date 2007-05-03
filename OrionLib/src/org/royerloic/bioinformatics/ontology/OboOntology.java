@@ -29,12 +29,12 @@ public class OboOntology extends HashLattice<OboTerm>
 	public void addNode(final OboTerm pNode)
 	{
 		super.addNode(pNode);
-		this.mIdToOboTermMap.put(pNode.getId(), pNode);
+		mIdToOboTermMap.put(pNode.getId(), pNode);
 	}
 
 	public OboTerm getOboTermFromId(final Integer pId)
 	{
-		return this.mIdToOboTermMap.get(pId);
+		return mIdToOboTermMap.get(pId);
 	}
 
 	public List<OboTerm> getOboTermFromId(final Collection<Integer> pIdCollection)

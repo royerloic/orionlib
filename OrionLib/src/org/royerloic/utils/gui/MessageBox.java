@@ -42,7 +42,7 @@ public class MessageBox extends JDialog implements ActionListener
 
 	public boolean getResult()
 	{
-		return this.mResult;
+		return mResult;
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void createOKButton(final Panel pPanel)
 	{
-		pPanel.add(this.mButtonOk = new Button("OK"));
-		this.mButtonOk.addActionListener(this);
+		pPanel.add(mButtonOk = new Button("OK"));
+		mButtonOk.addActionListener(this);
 	}
 
 	/**
@@ -95,9 +95,9 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	private void createCancelButton(final Panel pPanel)
 	{
-		this.mButtonCancel = new Button("Cancel");
-		pPanel.add(this.mButtonCancel);
-		this.mButtonCancel.addActionListener(this);
+		mButtonCancel = new Button("Cancel");
+		pPanel.add(mButtonCancel);
+		mButtonCancel.addActionListener(this);
 	}
 
 	/**
@@ -114,14 +114,14 @@ public class MessageBox extends JDialog implements ActionListener
 	 */
 	public void actionPerformed(final ActionEvent pActionEvent)
 	{
-		if (pActionEvent.getSource() == this.mButtonOk)
+		if (pActionEvent.getSource() == mButtonOk)
 		{
-			this.mResult = true;
+			mResult = true;
 			setVisible(false);
 		}
-		else if (pActionEvent.getSource() == this.mButtonCancel)
+		else if (pActionEvent.getSource() == mButtonCancel)
 		{
-			this.mResult = false;
+			mResult = false;
 			setVisible(false);
 		}
 	}

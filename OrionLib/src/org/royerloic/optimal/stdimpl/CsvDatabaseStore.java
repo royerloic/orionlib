@@ -35,7 +35,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	public CsvDatabaseStore(final File pCsvFile)
 	{
 		super();
-		this.mCsvFile = pCsvFile;
+		mCsvFile = pCsvFile;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	 */
 	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		this.mExperimentDatabase = pExperimentDatabase;
+		mExperimentDatabase = pExperimentDatabase;
 
 	}
 
@@ -52,7 +52,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	 */
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 
 	}
 
@@ -61,7 +61,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	 */
 	public void load()
 	{
-		final MatrixFile lMatrixFile = new MatrixFile(this.mCsvFile);
+		final MatrixFile lMatrixFile = new MatrixFile(mCsvFile);
 		final INumericalVector lHeaderVector = lMatrixFile.getVector(0);
 
 		final int lNumberOfExperiments = (int) lHeaderVector.get(0);
@@ -91,7 +91,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 			lExperiment.end();
 
 			lExperiment.set(lInput, lOutput);
-			this.mExperimentDatabase.addExperiment(lExperiment);
+			mExperimentDatabase.addExperiment(lExperiment);
 		}
 
 	}
@@ -103,7 +103,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 	{
 		try
 		{
-			final File lOutputFile = this.mCsvFile;
+			final File lOutputFile = mCsvFile;
 
 			try
 			{
@@ -130,7 +130,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 
 			try
 			{
-				final IExperimentDatabase lDatabase = this.mExperimentDatabase;
+				final IExperimentDatabase lDatabase = mExperimentDatabase;
 				final int lSize = lDatabase.getNumberOfExperiments();
 
 				String lValueString = Integer.toString(lSize);
@@ -171,7 +171,7 @@ public class CsvDatabaseStore implements IExperimentDatabaseStore
 						lBufferedWriter.write(lValueString + "\t");
 					}
 
-					final double lObjectiveValue = this.mObjectiveFunction.evaluate(lOutputVector);
+					final double lObjectiveValue = mObjectiveFunction.evaluate(lOutputVector);
 
 					final String lObjectiveValueString = Double.toString(lObjectiveValue);
 					lBufferedWriter.write(lObjectiveValueString + "\t");

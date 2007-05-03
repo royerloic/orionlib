@@ -35,17 +35,17 @@ abstract class Kernel
 	{
 		do
 		{
-			final Node[] _ = this.x[i];
-			this.x[i] = this.x[j];
-			this.x[j] = _;
+			final Node[] _ = x[i];
+			x[i] = x[j];
+			x[j] = _;
 		}
 		while (false);
-		if (this.x_square != null)
+		if (x_square != null)
 			do
 			{
-				final double _ = this.x_square[i];
-				this.x_square[i] = this.x_square[j];
-				this.x_square[j] = _;
+				final double _ = x_square[i];
+				x_square[i] = x_square[j];
+				x_square[j] = _;
 			}
 			while (false);
 	}
@@ -58,16 +58,16 @@ abstract class Kernel
 
 	double kernel_function(final int i, final int j)
 	{
-		switch (this.kernel_type)
+		switch (kernel_type)
 		{
 			case Parameter.LINEAR:
-				return dot(this.x[i], this.x[j]);
+				return dot(x[i], x[j]);
 			case Parameter.POLY:
-				return Math.pow(this.gamma * dot(this.x[i], this.x[j]) + this.coef0, this.degree);
+				return Math.pow(gamma * dot(x[i], x[j]) + coef0, degree);
 			case Parameter.RBF:
-				return Math.exp(-this.gamma * (this.x_square[i] + this.x_square[j] - 2 * dot(this.x[i], this.x[j])));
+				return Math.exp(-gamma * (x_square[i] + x_square[j] - 2 * dot(x[i], x[j])));
 			case Parameter.SIGMOID:
-				return tanh(this.gamma * dot(this.x[i], this.x[j]) + this.coef0);
+				return tanh(gamma * dot(x[i], x[j]) + coef0);
 			default:
 				return 0; // java
 		}
@@ -75,21 +75,21 @@ abstract class Kernel
 
 	Kernel(final int l, final Node[][] x_, final Parameter param)
 	{
-		this.kernel_type = param.kernel_type;
-		this.degree = param.degree;
-		this.gamma = param.gamma;
-		this.coef0 = param.coef0;
+		kernel_type = param.kernel_type;
+		degree = param.degree;
+		gamma = param.gamma;
+		coef0 = param.coef0;
 
-		this.x = x_.clone();
+		x = x_.clone();
 
-		if (this.kernel_type == Parameter.RBF)
+		if (kernel_type == Parameter.RBF)
 		{
-			this.x_square = new double[l];
+			x_square = new double[l];
 			for (int i = 0; i < l; i++)
-				this.x_square[i] = dot(this.x[i], this.x[i]);
+				x_square[i] = dot(x[i], x[i]);
 		}
 		else
-			this.x_square = null;
+			x_square = null;
 	}
 
 	static double dot(final Node[] x, final Node[] y)

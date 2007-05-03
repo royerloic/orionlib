@@ -79,44 +79,44 @@ public class Graphics2DTextWriter
 	public int hashCode()
 	{
 		int lHashCode = 1;
-		lHashCode += this.mMultiLine ? 1876541 : 1087632;
-		lHashCode += this.mAntialiasing ? 2973430 : 3946279;
-		lHashCode += this.mShadow ? 208764986 : 37840812;
-		lHashCode += this.mString.hashCode();
-		lHashCode += this.mFont.hashCode();
-		lHashCode += this.mTextColor.hashCode();
+		lHashCode += mMultiLine ? 1876541 : 1087632;
+		lHashCode += mAntialiasing ? 2973430 : 3946279;
+		lHashCode += mShadow ? 208764986 : 37840812;
+		lHashCode += mString.hashCode();
+		lHashCode += mFont.hashCode();
+		lHashCode += mTextColor.hashCode();
 		lHashCode = (lHashCode += 137951) * 137951;
-		lHashCode += this.mBackgroundColor == null ? 0 : this.mBackgroundColor.hashCode();
+		lHashCode += mBackgroundColor == null ? 0 : mBackgroundColor.hashCode();
 		lHashCode = (lHashCode += 137951) * 137951;
-		lHashCode += this.mWrappingWidth;
-		lHashCode += this.mMinNumberOfLines;
-		lHashCode += this.mMaxNumberOfLines;
+		lHashCode += mWrappingWidth;
+		lHashCode += mMinNumberOfLines;
+		lHashCode += mMaxNumberOfLines;
 		return lHashCode;
 	}
 
 	public Graphics2DTextWriter(final String pString)
 	{
 		super();
-		this.mMultiLine = false;
-		this.mString = pString;
+		mMultiLine = false;
+		mString = pString;
 	}
 
 	public Graphics2DTextWriter(final String pString, final Font pFont)
 	{
 		this(pString);
-		this.mFont = pFont;
+		mFont = pFont;
 	}
 
 	public Graphics2DTextWriter(final String pString, final Font pFont, final Color pTextColor)
 	{
 		this(pString, pFont);
-		this.mTextColor = pTextColor;
+		mTextColor = pTextColor;
 	}
 
 	public Graphics2DTextWriter(final String pString, final Font pFont, final Color pTextColor, final Color pBackgroundColor)
 	{
 		this(pString, pFont, pTextColor);
-		this.mBackgroundColor = pBackgroundColor;
+		mBackgroundColor = pBackgroundColor;
 	}
 
 	public Graphics2DTextWriter(final String pString,
@@ -126,8 +126,8 @@ public class Graphics2DTextWriter
 															final double pWrappingWidth)
 	{
 		this(pString, pFont, pTextColor, pBackgroundColor);
-		this.mWrappingWidth = pWrappingWidth;
-		this.mMultiLine = true;
+		mWrappingWidth = pWrappingWidth;
+		mMultiLine = true;
 	}
 
 	public Graphics2DTextWriter(final String pString,
@@ -139,32 +139,32 @@ public class Graphics2DTextWriter
 															final int pMaxNumberOfLines)
 	{
 		this(pString, pFont, pTextColor, pBackgroundColor, pWrappingWidth);
-		this.mMinNumberOfLines = pMinNumberOfLines;
-		this.mMaxNumberOfLines = pMaxNumberOfLines;
-		this.mMultiLine = true;
+		mMinNumberOfLines = pMinNumberOfLines;
+		mMaxNumberOfLines = pMaxNumberOfLines;
+		mMultiLine = true;
 	}
 
 	public Image getImage(final BufferedImage pRecycledImage)
 	{
-		this.mImage = null;
+		mImage = null;
 		final SoftReference<Image> lImageSoftReference = lWriterToImageMap.get(this);
 		if (lImageSoftReference != null)
 		{
-			this.mImage = lImageSoftReference.get();
-			if (this.mImage != null)
-				return this.mImage;
+			mImage = lImageSoftReference.get();
+			if (mImage != null)
+				return mImage;
 		}
 		displayAvailableVideoMemory();
-		this.mImage = generateImage(pRecycledImage);
+		mImage = generateImage(pRecycledImage);
 		if (mCacheActivated)
 		{
-			lWriterToImageMap.put(this, new SoftReference<Image>(this.mImage));
-			System.out.println("Graphics2DTextWriter> cached image for text:  '" + this.mString + "'");
+			lWriterToImageMap.put(this, new SoftReference<Image>(mImage));
+			System.out.println("Graphics2DTextWriter> cached image for text:  '" + mString + "'");
 
 		}
 		displayAvailableVideoMemory();
 
-		return this.mImage;
+		return mImage;
 	}
 
 	public Image getImage()
@@ -175,25 +175,25 @@ public class Graphics2DTextWriter
 	private Image generateImage(final BufferedImage pRecycledImage)
 	{
 		Image lImage = null;
-		if (this.mMultiLine)
-			lImage = createMultiLineTextImage(this.mString, this.mFont, this.mTextColor, this.mBackgroundColor, this.mWrappingWidth,
-					this.mMinNumberOfLines, this.mMaxNumberOfLines, this.mAntialiasing, this.mShadow);
+		if (mMultiLine)
+			lImage = createMultiLineTextImage(mString, mFont, mTextColor, mBackgroundColor, mWrappingWidth,
+					mMinNumberOfLines, mMaxNumberOfLines, mAntialiasing, mShadow);
 		else
-			lImage = createTextImage(pRecycledImage, this.mString, this.mFont, this.mTextColor, this.mBackgroundColor, this.mAntialiasing,
-					this.mShadow);
+			lImage = createTextImage(pRecycledImage, mString, mFont, mTextColor, mBackgroundColor, mAntialiasing,
+					mShadow);
 		return lImage;
 	}
 
 	public void flushFromCache()
 	{
 		displayAvailableVideoMemory();
-		if (this.mImage != null)
+		if (mImage != null)
 		{
-			this.mImage.flush();
-			System.out.println("flushed image: " + this.mImage);
+			mImage.flush();
+			System.out.println("flushed image: " + mImage);
 		}
 		lWriterToImageMap.remove(this);
-		this.mImage = null;
+		mImage = null;
 		displayAvailableVideoMemory();
 	}
 

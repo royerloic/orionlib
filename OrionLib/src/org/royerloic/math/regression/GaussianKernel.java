@@ -39,18 +39,18 @@ public class GaussianKernel implements Kernel {
      */
     public GaussianKernel(double gamma) {
         this.gamma = gamma;
-        this.a = -gamma * gamma;
+        a = -gamma * gamma;
     }
     
     /**
      * Returns the value of &gamma;.
      */
     public double gamma() {
-        return this.gamma;
+        return gamma;
     }
     
     public double eval(final GVector x1, final GVector x2) {
-        return Math.exp(this.a * Matrices.distanceSquared(x1, x2));
+        return Math.exp(a * Matrices.distanceSquared(x1, x2));
     }
 
 }

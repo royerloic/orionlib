@@ -28,12 +28,12 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	public GenericWordIdentifier()
 	{
 		super();
-		this.mWordMap = new HashMap<String, String>();
-		this.mWordToCountMap = new HashMap<String, Double>();
-		this.mFlatTextTableReader = new FlatTextTableReader(this);
-		this.mFlatTextTableReader.setColumnSplitRegex("\t+");
-		this.mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
-		this.mFlatTextTableReader.setNullRegex("#@nonullregex@#");
+		mWordMap = new HashMap<String, String>();
+		mWordToCountMap = new HashMap<String, Double>();
+		mFlatTextTableReader = new FlatTextTableReader(this);
+		mFlatTextTableReader.setColumnSplitRegex("\t+");
+		mFlatTextTableReader.setSetSplitRegex("#@nosetsplitregex@#");
+		mFlatTextTableReader.setNullRegex("#@nonullregex@#");
 	}
 
 	/**
@@ -42,7 +42,7 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	 */
 	public void compileIdentificationRulesFromFile(final File pFile) throws IOException
 	{
-		this.mFlatTextTableReader.readFile(pFile, false);
+		mFlatTextTableReader.readFile(pFile, false);
 	}
 
 	/**
@@ -51,12 +51,12 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	 */
 	public void compileIdentificationRulesFromReader(final BufferedReader pBufferedReader) throws IOException
 	{
-		this.mFlatTextTableReader.readStream(pBufferedReader, false);
+		mFlatTextTableReader.readStream(pBufferedReader, false);
 	}
 
 	public void compileIdentificationRulesFromRessource(final Class pClass, final String pRessourceName) throws IOException
 	{
-		this.mFlatTextTableReader.readRessource(pClass, pRessourceName, false);
+		mFlatTextTableReader.readRessource(pClass, pRessourceName, false);
 	}
 
 	/**
@@ -82,8 +82,8 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 						if ((pCellString.charAt(0) != '#'))
 						{
 							final String lWord = normalizeString(pCellString);
-							this.mWordMap.put(lWord, lWord);
-							this.mCurrentWord = lWord;
+							mWordMap.put(lWord, lWord);
+							mCurrentWord = lWord;
 						}
 				}
 					break;
@@ -93,7 +93,7 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 					if (pCellString.length() != 0)
 					{
 						final double lValue = Double.parseDouble(pCellString);
-						this.mWordToCountMap.put(this.mCurrentWord, lValue);
+						mWordToCountMap.put(mCurrentWord, lValue);
 					}
 				}
 
@@ -113,7 +113,7 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 
 	public boolean isEntity(final String pToken)
 	{
-		return this.mWordMap.containsKey(pToken);
+		return mWordMap.containsKey(pToken);
 	}
 
 	/**

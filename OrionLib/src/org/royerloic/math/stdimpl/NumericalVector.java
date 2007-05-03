@@ -26,10 +26,10 @@ public class NumericalVector extends Object implements IVectorArray,
   void allocate(final int pDimension)
   {
     if (pDimension == 0)
-			this.mCoordinatesList = new ArrayList();
+			mCoordinatesList = new ArrayList();
 		else
     {
-      this.mCoordinatesList = new ArrayList(pDimension);
+      mCoordinatesList = new ArrayList(pDimension);
       for (int i = 0; i < pDimension; i++)
 				addCoordinate(0.0);
     }
@@ -66,7 +66,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final int getDimension()
   {
-    return this.mCoordinatesList.size();
+    return mCoordinatesList.size();
   }
 
   /**
@@ -75,7 +75,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final void set(final int pIndex, final double pValue)
   {
-    this.mCoordinatesList.set(pIndex, new Double(pValue));
+    mCoordinatesList.set(pIndex, new Double(pValue));
   }
 
   /**
@@ -83,7 +83,7 @@ public class NumericalVector extends Object implements IVectorArray,
    */
   public final void addCoordinate(final double pValue)
   {
-    this.mCoordinatesList.add(new Double(pValue));
+    mCoordinatesList.add(new Double(pValue));
   }
 
   /**
@@ -95,7 +95,7 @@ public class NumericalVector extends Object implements IVectorArray,
     if (pIndex > (getDimension() - 1))
 			lCoordinate = 0;
 		else
-			lCoordinate = ((Double) this.mCoordinatesList.get(pIndex)).doubleValue();
+			lCoordinate = ((Double) mCoordinatesList.get(pIndex)).doubleValue();
     return lCoordinate;
   }
 
@@ -290,7 +290,7 @@ public class NumericalVector extends Object implements IVectorArray,
   @Override
 	public int hashCode()
   {
-    return this.mCoordinatesList.hashCode();
+    return mCoordinatesList.hashCode();
   }
 
   /**

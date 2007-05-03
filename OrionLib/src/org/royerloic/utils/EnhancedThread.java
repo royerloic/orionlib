@@ -52,43 +52,43 @@ public abstract class EnhancedThread extends Thread
 
 	public boolean isStarted()
 	{
-		synchronized (this.mLock)
+		synchronized (mLock)
 		{
-			return this.mStarted;
+			return mStarted;
 		}
 	}
 
 	public boolean isStopped()
 	{
-		synchronized (this.mLock)
+		synchronized (mLock)
 		{
-			return this.mStopped;
+			return mStopped;
 		}
 	}
 
 	public boolean isPaused()
 	{
-		synchronized (this.mLock)
+		synchronized (mLock)
 		{
-			return this.mSuspendRequested;
+			return mSuspendRequested;
 		}
 	}
 
 	public void setSuspendRequest(final boolean pSuspendRequested)
 	{
-		synchronized (this.mLock)
+		synchronized (mLock)
 		{
-			this.mSuspendRequested = pSuspendRequested;
-			this.mLock.notifyAll();
+			mSuspendRequested = pSuspendRequested;
+			mLock.notifyAll();
 		}
 	}
 
 	public void setStopRequest(final boolean pStopRequested)
 	{
-		synchronized (this.mLock)
+		synchronized (mLock)
 		{
-			this.mStopRequested = pStopRequested;
-			this.mLock.notifyAll();
+			mStopRequested = pStopRequested;
+			mLock.notifyAll();
 		}
 	}
 
@@ -97,27 +97,27 @@ public abstract class EnhancedThread extends Thread
 	{
 		try
 		{
-			synchronized (this.mLock)
+			synchronized (mLock)
 			{
-				this.mStopped = false;
+				mStopped = false;
 			}
 
 			if (initiate())
 			{
-				synchronized (this.mLock)
+				synchronized (mLock)
 				{
-					this.mStarted = true;
+					mStarted = true;
 				}
 
 				while (execute())
-					synchronized (this.mLock)
+					synchronized (mLock)
 					{
 						// if suspended, then wait:
-						while (this.mSuspendRequested && !this.mStopRequested)
-							this.mLock.wait();
+						while (mSuspendRequested && !mStopRequested)
+							mLock.wait();
 
 						// id stopped, then get out...
-						if (this.mStopRequested)
+						if (mStopRequested)
 							break;
 
 					}
@@ -129,9 +129,9 @@ public abstract class EnhancedThread extends Thread
 		}
 		finally
 		{
-			synchronized (this.mLock)
+			synchronized (mLock)
 			{
-				this.mStopped = true;
+				mStopped = true;
 			}
 		}
 	}

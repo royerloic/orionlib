@@ -18,22 +18,22 @@ public class PsiMiNode extends Node
 
 	public final List<Integer> getGoIdList()
 	{
-		return this.mGoIdList;
+		return mGoIdList;
 	};
 
 	public final List<Integer> getInterproIdList()
 	{
-		return this.mInterproIdList;
+		return mInterproIdList;
 	}
 
 	public void addGoId(final Integer pGoId)
 	{
-		this.mGoIdList.add(pGoId);
+		mGoIdList.add(pGoId);
 	}
 
 	public void addInterproId(final Integer pInterproId)
 	{
-		this.mInterproIdList.add(pInterproId);
+		mInterproIdList.add(pInterproId);
 	};
 
 }

@@ -23,16 +23,16 @@ public class OrionSoundIn
 	{
 		try
 		{
-			this.audioFormat = getAudioFormat();
+			audioFormat = getAudioFormat();
 			/*************************************************************************
 			 * DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class,
 			 * audioFormat); targetDataLine = (TargetDataLine)
 			 * AudioSystem.getLine(dataLineInfo);/
 			 ************************************************************************/
 
-			this.targetDataLine = AudioSystem.getTargetDataLine(getAudioFormat());
-			this.targetDataLine.open(this.audioFormat);
-			this.targetDataLine.start();
+			targetDataLine = AudioSystem.getTargetDataLine(getAudioFormat());
+			targetDataLine.open(audioFormat);
+			targetDataLine.start();
 
 		}
 		catch (final Exception e)
@@ -46,9 +46,9 @@ public class OrionSoundIn
 	{
 		try
 		{
-			this.targetDataLine.flush();
-			this.targetDataLine.stop();
-			this.targetDataLine.close();
+			targetDataLine.flush();
+			targetDataLine.stop();
+			targetDataLine.close();
 		}
 		catch (final Exception e)
 		{
@@ -59,7 +59,7 @@ public class OrionSoundIn
 
 	public int record(final byte[] pBuffer)
 	{
-		return this.targetDataLine.read(pBuffer, 0, pBuffer.length);
+		return targetDataLine.read(pBuffer, 0, pBuffer.length);
 	}
 
 	private AudioFormat getAudioFormat()

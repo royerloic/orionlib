@@ -129,40 +129,6 @@ public class PowerGraph<N>
 		return false;
 	}
 
-	private boolean strictlyInterlockingWith(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
-	{
-		final Set<N> lF1 = pPowerEdge1.getFirstNode();
-		final Set<N> lS1 = pPowerEdge1.getSecondNode();
-		final Set<N> lF2 = pPowerEdge2.getFirstNode();
-		final Set<N> lS2 = pPowerEdge2.getSecondNode();
-
-		final boolean isA1 = lF1.containsAll(lF2);
-		final boolean isA2 = lS2.containsAll(lS1);
-		final boolean isStrictA = (lF1.size() > lF2.size()) && (lS2.size() > lS1.size());
-		if (isA1 && isA2 && isStrictA)
-			return true;
-
-		final boolean isB1 = lF1.containsAll(lS2);
-		final boolean isB2 = lF2.containsAll(lS1);
-		final boolean isStrictB = (lF1.size() > lS2.size()) && (lF2.size() > lS1.size());
-		if (isB1 && isB2 && isStrictB)
-			return true;
-
-		final boolean isC1 = lS1.containsAll(lF2);
-		final boolean isC2 = lS2.containsAll(lF1);
-		final boolean isStrictC = (lS1.size() > lF2.size()) && (lS2.size() > lF1.size());
-		if (isC1 && isC2 && isStrictC)
-			return true;
-
-		final boolean isD1 = lS1.containsAll(lS2);
-		final boolean isD2 = lF2.containsAll(lF1);
-		final boolean isStrictD = (lS1.size() > lS2.size()) && (lF2.size() > lF1.size());
-		if (isD1 && isD2 && isStrictD)
-			return true;
-
-		return false;
-	}
-
 	public boolean isIntersectingPowerEdgePresent(final Edge<Set<N>> pPowerEdge)
 	{
 		for (final Edge<Set<N>> lPowerEdge : this.mPowerEdgeSet)

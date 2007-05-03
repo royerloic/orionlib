@@ -10,32 +10,32 @@ public class IntegerRange
 
 	public IntegerRange(final int id)
 	{
-		this.rangeStart = id;
-		this.rangeEnd = id;
+		rangeStart = id;
+		rangeEnd = id;
 	}
 
 	public IntegerRange(final int start, final int end)
 	{
-		this.rangeStart = start;
-		this.rangeEnd = end;
+		rangeStart = start;
+		rangeEnd = end;
 	}
 
 	public IntegerRange(final IntegerRange baseRange)
 	{
-		this.rangeStart = baseRange.rangeStart;
-		this.rangeEnd = baseRange.rangeEnd;
+		rangeStart = baseRange.rangeStart;
+		rangeEnd = baseRange.rangeEnd;
 	}
 
 	@Override
 	public String toString()
 	{
-		return (new StringBuffer()).append("start:").append(this.rangeStart).append(" end: ").append(this.rangeEnd)
+		return (new StringBuffer()).append("start:").append(rangeStart).append(" end: ").append(rangeEnd)
 				.toString();
 	}
 
 	public int getRangeEnd()
 	{
-		return this.rangeEnd;
+		return rangeEnd;
 	}
 
 	public void setRangeEnd(final int rangeEnd)
@@ -45,7 +45,7 @@ public class IntegerRange
 
 	public int getRangeStart()
 	{
-		return this.rangeStart;
+		return rangeStart;
 	}
 
 	public void setRangeStart(final int rangeStart)
@@ -57,18 +57,18 @@ public class IntegerRange
 	{
 		final int otherStart = otherRange.getRangeStart();
 		final int otherEnd = otherRange.getRangeEnd();
-		return ((this.rangeStart - 1 <= otherStart) && (otherStart <= this.rangeEnd + 1)) || ((this.rangeStart - 1 <= otherEnd)
-				&& (otherEnd <= this.rangeEnd + 1)) || ((otherStart < this.rangeStart) && (this.rangeEnd < otherEnd));
+		return ((rangeStart - 1 <= otherStart) && (otherStart <= rangeEnd + 1)) || ((rangeStart - 1 <= otherEnd)
+				&& (otherEnd <= rangeEnd + 1)) || ((otherStart < rangeStart) && (rangeEnd < otherEnd));
 	}
 
 	public boolean isContiguousDot(final int i)
 	{
-		return (this.rangeStart - 1 <= i) && (i <= this.rangeEnd + 1);
+		return (rangeStart - 1 <= i) && (i <= rangeEnd + 1);
 	}
 
 	public boolean isContiuousOrHigherDot(final int i)
 	{
-		return this.rangeStart - 1 <= i;
+		return rangeStart - 1 <= i;
 	}
 
 	public void extendBy(final IntegerRange otherRange)
@@ -76,8 +76,8 @@ public class IntegerRange
 		final int otherStart = otherRange.getRangeStart();
 		final int otherEnd = otherRange.getRangeEnd();
 
-		this.rangeStart = otherStart < this.rangeStart ? otherStart : this.rangeStart;
-		this.rangeEnd = otherEnd > this.rangeEnd ? otherEnd : this.rangeEnd;
+		rangeStart = otherStart < rangeStart ? otherStart : rangeStart;
+		rangeEnd = otherEnd > rangeEnd ? otherEnd : rangeEnd;
 	}
 
 	public static List<IntegerRange> extractDocRange(final List<Integer> Ids)

@@ -27,7 +27,7 @@ public class SVMRegressionTest extends TestCase
 	{
 		super();
 
-		this.mSVMRegression = new SVMRegression(0.001, 10000, 0.5);
+		mSVMRegression = new SVMRegression(0.001, 10000, 0.5);
 
 		final ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
 
@@ -44,9 +44,9 @@ public class SVMRegressionTest extends TestCase
 		lLabelledVectorSet.addVector(lVector2, 0.5);
 		lLabelledVectorSet.addVector(lVector3, 1);
 
-		this.mSVMRegression.train(lLabelledVectorSet);
+		mSVMRegression.train(lLabelledVectorSet);
 
-		final double lResult = this.mSVMRegression.predict(lVector4);
+		final double lResult = mSVMRegression.predict(lVector4);
 
 		System.out.println("Result: " + lResult);
 

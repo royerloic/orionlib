@@ -89,8 +89,8 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		System.setProperty("sun.java2d.ddscale", "true");
 		System.setProperty("sun.java2d.ddforcevram", "true");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.mScreenIndex = pScreenIndex;
-		this.mDisplayModeWishList = new ArrayList<DisplayMode>();
+		mScreenIndex = pScreenIndex;
+		mDisplayModeWishList = new ArrayList<DisplayMode>();
 	}
 
 	/**
@@ -100,15 +100,15 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	public OrionGraphics(final String pFrameTitle) throws HeadlessException
 	{
 		super(pFrameTitle);
-		this.mDisplayModeWishList = new ArrayList<DisplayMode>();
-		this.mFullScreen = false;
+		mDisplayModeWishList = new ArrayList<DisplayMode>();
+		mFullScreen = false;
 	}
 
 	/**
 	 */
 	public void clearModeWishList()
 	{
-		this.mDisplayModeWishList.clear();
+		mDisplayModeWishList.clear();
 	}
 
 	/**
@@ -116,20 +116,20 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public void addModeInWishList(final DisplayMode pDisplayMode)
 	{
-		this.mDisplayModeWishList.add(pDisplayMode);
+		mDisplayModeWishList.add(pDisplayMode);
 	}
 
 	private DisplayMode getBestDisplayMode(final GraphicsDevice pGraphicsDevice)
 	{
 
-		for (int x = 0; x < this.mDisplayModeWishList.size(); x++)
+		for (int x = 0; x < mDisplayModeWishList.size(); x++)
 		{
 			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
-			for (DisplayMode element : modes)
-				if ((element.getWidth() == (this.mDisplayModeWishList.get(x)).getWidth())
-						&& (element.getHeight() == (this.mDisplayModeWishList.get(x)).getHeight())
-						&& (element.getBitDepth() == (this.mDisplayModeWishList.get(x)).getBitDepth()))
-					return (this.mDisplayModeWishList.get(x));
+			for (final DisplayMode element : modes)
+				if ((element.getWidth() == (mDisplayModeWishList.get(x)).getWidth())
+						&& (element.getHeight() == (mDisplayModeWishList.get(x)).getHeight())
+						&& (element.getBitDepth() == (mDisplayModeWishList.get(x)).getBitDepth()))
+					return (mDisplayModeWishList.get(x));
 		}
 		return null;
 	}
@@ -158,9 +158,9 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		setResizable(false);
 		setFocusable(true);
 
-		this.mGraphicsDevice.setFullScreenWindow(this);
+		mGraphicsDevice.setFullScreenWindow(this);
 
-		activateBestDisplayMode(this.mGraphicsDevice);
+		activateBestDisplayMode(mGraphicsDevice);
 
 		validate();
 
@@ -189,13 +189,13 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		setIgnoreRepaint(false);
 		setResizable(false);
 
-		this.mGraphicsDevice.setFullScreenWindow(null);
+		mGraphicsDevice.setFullScreenWindow(null);
 
-		final DisplayMode lBestDisplayMode = getBestDisplayMode(this.mGraphicsDevice);
-		this.mHeight = lBestDisplayMode.getHeight();
-		this.mWidth = lBestDisplayMode.getWidth();
+		final DisplayMode lBestDisplayMode = getBestDisplayMode(mGraphicsDevice);
+		mHeight = lBestDisplayMode.getHeight();
+		mWidth = lBestDisplayMode.getWidth();
 
-		setSize(this.mWidth, this.mHeight);
+		setSize(mWidth, mHeight);
 
 		validate();
 
@@ -220,10 +220,10 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		final GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		final GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
 
-		if (this.mScreenIndex == cLAST_DEVICE)
-			this.mScreenIndex = lAllGraphicsDevices.length - 1;
+		if (mScreenIndex == cLAST_DEVICE)
+			mScreenIndex = lAllGraphicsDevices.length - 1;
 
-		this.mGraphicsDevice = lAllGraphicsDevices[this.mScreenIndex];
+		mGraphicsDevice = lAllGraphicsDevices[mScreenIndex];
 
 		removeAll();
 		addMouseMotionListener(this);
@@ -232,7 +232,7 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 
 		try
 		{
-			if (this.mFullScreen && (getBestDisplayMode(this.mGraphicsDevice) != null))
+			if (mFullScreen && (getBestDisplayMode(mGraphicsDevice) != null))
 				setFullscreen();
 			else
 				setWindowed();
@@ -241,14 +241,14 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 			final Dimension lComponentSize = getSize();
 
 			// setup data
-			this.mWidth = lComponentSize.width;
-			this.mHeight = lComponentSize.height;
+			mWidth = lComponentSize.width;
+			mHeight = lComponentSize.height;
 
 			// setup color model
-			this.mColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+			mColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
 
 			// create image using default toolkit
-			this.mImage = Toolkit.getDefaultToolkit().createImage(this);
+			mImage = Toolkit.getDefaultToolkit().createImage(this);
 
 		}
 		catch (final Exception lExeption)
@@ -260,13 +260,13 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	public synchronized void update(final Object pixels)
 	{
 		// check consumer
-		if (this.mImageConsumer != null)
+		if (mImageConsumer != null)
 		{
 			// copy integer pixel data to image consumer
-			this.mImageConsumer.setPixels(0, 0, this.mWidth, this.mHeight, this.mColorModel, (int[]) pixels, 0, this.mWidth);
+			mImageConsumer.setPixels(0, 0, mWidth, mHeight, mColorModel, (int[]) pixels, 0, mWidth);
 
 			// done(); notify image consumer that the frame is done
-			this.mImageConsumer.imageComplete(ImageConsumer.SINGLEFRAMEDONE);
+			mImageConsumer.imageComplete(ImageConsumer.SINGLEFRAMEDONE);
 		}
 	}
 
@@ -276,30 +276,30 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	public synchronized void paintPixels()
 	{
 		// get component graphics object
-		this.mGraphics = getBufferStrategy().getDrawGraphics();
+		mGraphics = getBufferStrategy().getDrawGraphics();
 		// draw image to graphics context
-		this.mGraphics.drawImage(this.mImage, 0, 0, this.mWidth, this.mHeight, null);
+		mGraphics.drawImage(mImage, 0, 0, mWidth, mHeight, null);
 	}
 
 	/**
 	 */
 	public synchronized void refresh()
 	{
-		if (!this.mTimerStarted)
+		if (!mTimerStarted)
 		{
-			this.mTimerStarted = true;
-			this.mInitialTime = System.currentTimeMillis();
-			this.mFrameCounter = 1;
+			mTimerStarted = true;
+			mInitialTime = System.currentTimeMillis();
+			mFrameCounter = 1;
 		}
 		else
 		{
-			this.mFrameCounter++;
+			mFrameCounter++;
 			final long lCurrentTime = System.currentTimeMillis();
-			final long lDifference = lCurrentTime - this.mInitialTime;
+			final long lDifference = lCurrentTime - mInitialTime;
 			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				final long lFrameRate = (this.mFrameCounter) / (lDeltaInSeconds);
+				final long lFrameRate = (mFrameCounter) / (lDeltaInSeconds);
 
 				final Graphics2D lGraphics = getDrawGraphics();
 				lGraphics.setColor(Color.BLACK);
@@ -319,7 +319,7 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public synchronized void stopGraphics()
 	{
-		this.mGraphicsDevice.setFullScreenWindow(null);
+		mGraphicsDevice.setFullScreenWindow(null);
 		// hide();
 		// setVisible(false);
 	}
@@ -336,17 +336,17 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	public synchronized void addConsumer(final ImageConsumer ic)
 	{
 		// register image consumer
-		this.mImageConsumer = ic;
+		mImageConsumer = ic;
 
 		// set image dimensions
-		this.mImageConsumer.setDimensions(this.mWidth, this.mHeight);
+		mImageConsumer.setDimensions(mWidth, mHeight);
 
 		// set image consumer hints for speed
-		this.mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
+		mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
 				| ImageConsumer.SINGLEPASS | ImageConsumer.SINGLEFRAME);
 
 		// set image color model
-		this.mImageConsumer.setColorModel(this.mColorModel);
+		mImageConsumer.setColorModel(mColorModel);
 	}
 
 	public synchronized boolean isConsumer(final ImageConsumer ic)
@@ -397,9 +397,9 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public void mousePressed(final MouseEvent pMouseEvent)
 	{
-		this.mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
-		this.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
-		this.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
+		mMouseLeft = SwingUtilities.isLeftMouseButton(pMouseEvent);
+		mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
+		mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
 	}
 
 	/**
@@ -408,11 +408,11 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	public void mouseReleased(final MouseEvent pMouseEvent)
 	{
 		if (SwingUtilities.isLeftMouseButton(pMouseEvent))
-			this.mMouseLeft = false;
+			mMouseLeft = false;
 		if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
-			this.mMouseMiddle = false;
+			mMouseMiddle = false;
 		if (SwingUtilities.isRightMouseButton(pMouseEvent))
-			this.mMouseRight = false;
+			mMouseRight = false;
 	}
 
 	/**
@@ -420,8 +420,8 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public void mouseDragged(final MouseEvent pMouseEvent)
 	{
-		this.mMouseX = pMouseEvent.getX();
-		this.mMouseY = pMouseEvent.getY();
+		mMouseX = pMouseEvent.getX();
+		mMouseY = pMouseEvent.getY();
 	}
 
 	/**
@@ -429,8 +429,8 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public void mouseMoved(final MouseEvent pMouseEvent)
 	{
-		this.mMouseX = pMouseEvent.getX();
-		this.mMouseY = pMouseEvent.getY();
+		mMouseX = pMouseEvent.getX();
+		mMouseY = pMouseEvent.getY();
 	}
 
 	/**
@@ -462,7 +462,7 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public boolean isFullScreen()
 	{
-		return this.mFullScreen;
+		return mFullScreen;
 	}
 
 	/**
@@ -471,6 +471,6 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 	 */
 	public void setFullScreen(final boolean pFullScreen)
 	{
-		this.mFullScreen = pFullScreen;
+		mFullScreen = pFullScreen;
 	}
 }

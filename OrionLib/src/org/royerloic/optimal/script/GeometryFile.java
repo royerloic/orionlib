@@ -121,7 +121,7 @@ public class GeometryFile extends Vector
 		 */
 		public final int getPointPointer()
 		{
-			return this.mPointPointer;
+			return mPointPointer;
 		}
 
 		/**
@@ -133,8 +133,8 @@ public class GeometryFile extends Vector
 				return null;
 			else
 			{
-				this.mPointPointer = 0;
-				return (Point) elementAt(this.mPointPointer);
+				mPointPointer = 0;
+				return (Point) elementAt(mPointPointer);
 			}
 		}
 
@@ -147,18 +147,18 @@ public class GeometryFile extends Vector
 				return null;
 			else
 			{
-				if (this.mPointPointer >= size())
-					this.mPointPointer = 0;
-				else if (this.mPointPointer < 0)
-					this.mPointPointer = 0;
+				if (mPointPointer >= size())
+					mPointPointer = 0;
+				else if (mPointPointer < 0)
+					mPointPointer = 0;
 				else
 				{
-					this.mPointPointer++;
-					if (this.mPointPointer >= size())
-						this.mPointPointer = 0;
+					mPointPointer++;
+					if (mPointPointer >= size())
+						mPointPointer = 0;
 				}
 
-				return (Point) elementAt(this.mPointPointer);
+				return (Point) elementAt(mPointPointer);
 			}
 		}
 

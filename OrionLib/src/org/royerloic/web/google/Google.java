@@ -36,34 +36,34 @@ public class Google
 	private Google()
 	{
 		super();
-		this.mGoogleServer = cGOOGLE_MAIN_SERVER;
-		this.mLocalCode = "en";
-		this.mFileType = "";
+		mGoogleServer = cGOOGLE_MAIN_SERVER;
+		mLocalCode = "en";
+		mFileType = "";
 	}
 
 	private Google(final String pSearchString)
 	{
 		this();
-		this.mSearchString = pSearchString;
+		mSearchString = pSearchString;
 	}
 
 	private Google(final String pSearchString, final String pFileType)
 	{
 		this();
-		this.mSearchString = pSearchString;
-		this.mFileType = pFileType;
+		mSearchString = pSearchString;
+		mFileType = pFileType;
 	}
 
 	public void doQuery() throws IOException
 	{
-		final String lQuery = buildGoogleQueryURL(this.mGoogleServer, this.mLocalCode, this.mSearchString, this.mFileType);
+		final String lQuery = buildGoogleQueryURL(mGoogleServer, mLocalCode, mSearchString, mFileType);
 		System.out.println("Query:" + lQuery);
-		this.mWebPageFetcher = new WebPageFetcher(lQuery);
-		this.mWebPageFetcher.setReferer(this.mGoogleServer);
-		this.mHeader = this.mWebPageFetcher.getPageHeader();
-		System.out.println(this.mHeader);
-		this.mContent = this.mWebPageFetcher.getPageContent();
-		this.mMatcher = this.mPattern.matcher(this.mContent);
+		mWebPageFetcher = new WebPageFetcher(lQuery);
+		mWebPageFetcher.setReferer(mGoogleServer);
+		mHeader = mWebPageFetcher.getPageHeader();
+		System.out.println(mHeader);
+		mContent = mWebPageFetcher.getPageContent();
+		mMatcher = mPattern.matcher(mContent);
 	}
 
 	private String buildGoogleQueryURL(	final String pGoogleServer,
@@ -77,7 +77,7 @@ public class Google
 			lTypeString = "+filetype%3A" + pFileType;
 
 		final String lSearchString = pSearchString.trim().replaceAll("\\s+", "+");
-		final String lQueryUrl = "http://" + this.mGoogleServer + "/search?hl=" + pLocalCode + "&q=" + lSearchString
+		final String lQueryUrl = "http://" + mGoogleServer + "/search?hl=" + pLocalCode + "&q=" + lSearchString
 				+ lTypeString + "&btnG=Search";
 
 		return lQueryUrl;
@@ -85,55 +85,55 @@ public class Google
 
 	public void grabUrlFromFileType(final String pFileType)
 	{
-		this.mPattern = Pattern.compile("http://[^<>]+\\." + pFileType);
+		mPattern = Pattern.compile("http://[^<>]+\\." + pFileType);
 	}
 
 	public String nextMatch()
 	{
-		if (this.mMatcher.find())
-			return this.mMatcher.group();
+		if (mMatcher.find())
+			return mMatcher.group();
 		else
 			return null;
 	}
 
 	public String getFileType()
 	{
-		return this.mFileType;
+		return mFileType;
 	}
 
 	public void setFileType(final String pFileType)
 	{
-		this.mFileType = pFileType;
+		mFileType = pFileType;
 	}
 
 	public String getGoogleServer()
 	{
-		return this.mGoogleServer;
+		return mGoogleServer;
 	}
 
 	public void setGoogleServer(final String pGoogleServer)
 	{
-		this.mGoogleServer = pGoogleServer;
+		mGoogleServer = pGoogleServer;
 	}
 
 	public String getLocalCode()
 	{
-		return this.mLocalCode;
+		return mLocalCode;
 	}
 
 	public void setLocalCode(final String pLocalCode)
 	{
-		this.mLocalCode = pLocalCode;
+		mLocalCode = pLocalCode;
 	}
 
 	public String getContent()
 	{
-		return this.mContent;
+		return mContent;
 	}
 
 	public String getHeader()
 	{
-		return this.mHeader;
+		return mHeader;
 	}
 
 	/**

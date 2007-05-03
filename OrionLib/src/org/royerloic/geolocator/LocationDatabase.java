@@ -25,7 +25,7 @@ public class LocationDatabase
 	public LocationDatabase()
 	{
 		super();
-		this.mLocationList = new HashMap<String, Location>();
+		mLocationList = new HashMap<String, Location>();
 	}
 
 	public void addListFromFile(final String pFileName)
@@ -73,7 +73,7 @@ public class LocationDatabase
 						if (isDebug())
 							lLocation.setSourceString(lLineString);
 
-						this.mLocationList.put(lName, lLocation);
+						mLocationList.put(lName, lLocation);
 
 					}
 			}
@@ -96,7 +96,7 @@ public class LocationDatabase
 
 	public Location findLocationByName(final String pName)
 	{
-		final Location lLocation = this.mLocationList.get(pName);
+		final Location lLocation = mLocationList.get(pName);
 
 		return lLocation;
 	}
@@ -113,7 +113,7 @@ public class LocationDatabase
 	public Location findSingleWordLocationInString(final String pString)
 	{
 		final String lLowerCaseString = pString.toLowerCase(Locale.ENGLISH);
-		final Iterator lIterator = this.mLocationList.keySet().iterator();
+		final Iterator lIterator = mLocationList.keySet().iterator();
 		for (; lIterator.hasNext();)
 		{
 			final String lName = (String) lIterator.next();
@@ -145,7 +145,7 @@ public class LocationDatabase
 
 		Location lLocationFound = null;
 		int lMinimalIndex = Integer.MAX_VALUE;
-		final Iterator lIterator = this.mLocationList.keySet().iterator();
+		final Iterator lIterator = mLocationList.keySet().iterator();
 		for (; lIterator.hasNext();)
 		{
 			final String lName = (String) lIterator.next();
@@ -157,7 +157,7 @@ public class LocationDatabase
 			if ((lIndex < lMinimalIndex) && (lIndex >= 0))
 			{
 				lMinimalIndex = lIndex;
-				lLocationFound = this.mLocationList.get(lName);
+				lLocationFound = mLocationList.get(lName);
 			}
 		}
 
@@ -169,7 +169,7 @@ public class LocationDatabase
 		Location lLocationFound = null;
 		try
 		{
-			final Iterator lIterator = this.mLocationList.entrySet().iterator();
+			final Iterator lIterator = mLocationList.entrySet().iterator();
 			double lMinDistance = Double.POSITIVE_INFINITY;
 			for (; lIterator.hasNext();)
 			{
@@ -201,12 +201,12 @@ public class LocationDatabase
 
 	public boolean isDebug()
 	{
-		return this.mDebug;
+		return mDebug;
 	}
 
 	public void setDebug(final boolean pDebug)
 	{
-		this.mDebug = pDebug;
+		mDebug = pDebug;
 	}
 
 }

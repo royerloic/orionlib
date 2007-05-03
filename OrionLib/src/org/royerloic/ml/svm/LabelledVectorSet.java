@@ -31,8 +31,8 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	public LabelledVectorSet()
 	{
 		super();
-		this.mVectorList = new ArrayList();
-		this.mClassList = new ArrayList();
+		mVectorList = new ArrayList();
+		mClassList = new ArrayList();
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	public int size()
 	{
 		// TODO Auto-generated method stub
-		return this.mVectorList.size();
+		return mVectorList.size();
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void addVector(final IVectorArray pVector, final double pClass)
 	{
-		this.mVectorList.add(pVector);
-		this.mClassList.add(new Double(pClass));
+		mVectorList.add(pVector);
+		mClassList.add(new Double(pClass));
 	}
 
 	/**
@@ -59,8 +59,8 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void delVector(final int pIndex)
 	{
-		this.mVectorList.remove(pIndex);
-		this.mClassList.remove(pIndex);
+		mVectorList.remove(pIndex);
+		mClassList.remove(pIndex);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public IVectorArray getVector(final int pIndex)
 	{
-		return (IVectorArray) this.mVectorList.get(pIndex);
+		return (IVectorArray) mVectorList.get(pIndex);
 	}
 
 	/**
@@ -76,26 +76,26 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public double getClass(final int pIndex)
 	{
-		return ((Double) this.mClassList.get(pIndex)).doubleValue();
+		return ((Double) mClassList.get(pIndex)).doubleValue();
 	}
 
 	public Problem toProblem()
 	{
 		final Problem lResult = new Problem();
 
-		lResult.mNumberOfVectors = this.mVectorList.size();
+		lResult.mNumberOfVectors = mVectorList.size();
 
-		lResult.mClass = new double[this.mVectorList.size()];
-		lResult.mVectorsTable = new Node[this.mVectorList.size()][];
-		for (int i = 0; i < this.mVectorList.size(); i++)
+		lResult.mClass = new double[mVectorList.size()];
+		lResult.mVectorsTable = new Node[mVectorList.size()][];
+		for (int i = 0; i < mVectorList.size(); i++)
 		{
-			final IVectorArray lVectorArray = (IVectorArray) this.mVectorList.get(i);
+			final IVectorArray lVectorArray = (IVectorArray) mVectorList.get(i);
 			final int lVectorSize = lVectorArray.getDimension();
 			lResult.mVectorsTable[i] = new Node[lVectorSize];
 			for (int j = 0; j < lVectorSize; j++)
 				lResult.mVectorsTable[i][j] = new Node(j, lVectorArray.get(j));
 
-			lResult.mClass[i] = ((Double) this.mClassList.get(i)).doubleValue();
+			lResult.mClass[i] = ((Double) mClassList.get(i)).doubleValue();
 		}
 
 		return lResult;
@@ -106,15 +106,15 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void generateTrainTestRandomSubsets(final double pRatio)
 	{
-		if (this.mTrainSubset == null)
+		if (mTrainSubset == null)
 		{
-			this.mTrainSubset = new LabelledVectorSet();
-			this.mTestSubset = new LabelledVectorSet();
+			mTrainSubset = new LabelledVectorSet();
+			mTestSubset = new LabelledVectorSet();
 		}
 		else
 		{
-			this.mTrainSubset.clear();
-			this.mTestSubset.clear();
+			mTrainSubset.clear();
+			mTestSubset.clear();
 		}
 
 		INumericalVector lVector = null;
@@ -126,16 +126,16 @@ public class LabelledVectorSet implements ILabelledVectorSet
 			lClass = getClass(i);
 
 			if (Math.random() < pRatio)
-				this.mTrainSubset.addVector(lVector, lClass);
+				mTrainSubset.addVector(lVector, lClass);
 			else
-				this.mTestSubset.addVector(lVector, lClass);
+				mTestSubset.addVector(lVector, lClass);
 
 		}
 
-		if (this.mTestSubset.size() == 0)
+		if (mTestSubset.size() == 0)
 		{
-			this.mTestSubset.addVector(lVector, lClass);
-			this.mTrainSubset.delVector(size() - 1);
+			mTestSubset.addVector(lVector, lClass);
+			mTrainSubset.delVector(size() - 1);
 		}
 
 	}
@@ -145,15 +145,15 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void generateTrainTestUnitarySubsets(final int pIndex)
 	{
-		if (this.mTrainSubset == null)
+		if (mTrainSubset == null)
 		{
-			this.mTrainSubset = new LabelledVectorSet();
-			this.mTestSubset = new LabelledVectorSet();
+			mTrainSubset = new LabelledVectorSet();
+			mTestSubset = new LabelledVectorSet();
 		}
 		else
 		{
-			this.mTrainSubset.clear();
-			this.mTestSubset.clear();
+			mTrainSubset.clear();
+			mTestSubset.clear();
 		}
 
 		INumericalVector lVector = null;
@@ -164,9 +164,9 @@ public class LabelledVectorSet implements ILabelledVectorSet
 			lVector = (INumericalVector) getVector(i);
 			lClass = getClass(i);
 			if (pIndex != i)
-				this.mTrainSubset.addVector(lVector, lClass);
+				mTrainSubset.addVector(lVector, lClass);
 			else
-				this.mTestSubset.addVector(lVector, lClass);
+				mTestSubset.addVector(lVector, lClass);
 
 		}
 
@@ -177,7 +177,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public ILabelledVectorSet getTrainSubset()
 	{
-		return this.mTrainSubset;
+		return mTrainSubset;
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public ILabelledVectorSet getTestSubset()
 	{
-		return this.mTestSubset;
+		return mTestSubset;
 	}
 
 	/**
@@ -193,12 +193,12 @@ public class LabelledVectorSet implements ILabelledVectorSet
 	 */
 	public void clear()
 	{
-		this.mVectorList.clear();
-		this.mClassList.clear();
-		if (this.mTrainSubset != null)
+		mVectorList.clear();
+		mClassList.clear();
+		if (mTrainSubset != null)
 		{
-			this.mTrainSubset.clear();
-			this.mTestSubset.clear();
+			mTrainSubset.clear();
+			mTestSubset.clear();
 		}
 	}
 

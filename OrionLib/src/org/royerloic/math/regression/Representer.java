@@ -56,13 +56,13 @@ public final class Representer implements Function {
 					throw new MismatchedSizeException();
         
         this.kernel = kernel;
-        this.points = new GVector[data.getNumCol()];
+        points = new GVector[data.getNumCol()];
         this.coeffs = new GVector(coeffs);
-        this.copyCoeffs = new GVector(coeffs);
+        copyCoeffs = new GVector(coeffs);
         
         for(int i = 0; i < data.getNumCol(); i++) {
-            this.points[i] = new GVector(data.getNumRow());
-            data.getColumn(i, this.points[i]);
+            points[i] = new GVector(data.getNumRow());
+            data.getColumn(i, points[i]);
         }
     }
     
@@ -70,13 +70,13 @@ public final class Representer implements Function {
      * Returns a copy of the vector of coefficients.
      */
     public GVector coeffs() {
-        return this.copyCoeffs;
+        return copyCoeffs;
     }
     
     public double eval(final GVector x) {
         double sum = 0;
-        for(int i = 0; i < this.coeffs.getSize(); i++)
-					sum += this.coeffs.getElement(i) * this.kernel.eval(this.points[i], x);
+        for(int i = 0; i < coeffs.getSize(); i++)
+					sum += coeffs.getElement(i) * kernel.eval(points[i], x);
         return sum;
     }
 

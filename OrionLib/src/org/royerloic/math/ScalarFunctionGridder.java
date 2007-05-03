@@ -25,7 +25,7 @@ public class ScalarFunctionGridder
 	public ScalarFunctionGridder(final IScalarFunction pFunction)
 	{
 		super();
-		this.mFunction = pFunction;
+		mFunction = pFunction;
 
 	}
 
@@ -37,7 +37,7 @@ public class ScalarFunctionGridder
 	{
 		if (pResolution <= 0)
 			return new double[0][0];
-		final int lDimension = this.mFunction.getInputDimension();
+		final int lDimension = mFunction.getInputDimension();
 		final int[] lIndex = new int[lDimension];
 		final int[] lRes = new int[lDimension];
 		final double[] lDelta = new double[lDimension];
@@ -48,7 +48,7 @@ public class ScalarFunctionGridder
 		{
 			lRes[i] = pResolution;
 			lDelta[i] =
-				(this.mFunction.getInputMax(i) - this.mFunction.getInputMin(i)) / lRes[i];
+				(mFunction.getInputMax(i) - mFunction.getInputMin(i)) / lRes[i];
 			lTotal = lTotal * (lRes[i] + 1);
 			lIndex[i] = 0;
 		}
@@ -67,13 +67,13 @@ public class ScalarFunctionGridder
 			for (int j = 0; j < lDimension; j++)
 			{
 				lComputedPoints[i][j] =
-					this.mFunction.getInputMin(j) + lIndex[j] * lDelta[j];
+					mFunction.getInputMin(j) + lIndex[j] * lDelta[j];
 				lInputArray[j] = lComputedPoints[i][j];
 			}
 
 			final INumericalVector lInput = new NumericalVector(lInputArray);
 
-			lComputedPoints[i][lDimension] = this.mFunction.evaluate(lInput);
+			lComputedPoints[i][lDimension] = mFunction.evaluate(lInput);
 
 			lIndex[0]++;
 		}

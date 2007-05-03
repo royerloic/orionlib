@@ -23,8 +23,8 @@ public class Problem implements java.io.Serializable, Cloneable
 		{
 			final Problem lProblem = (Problem) super.clone();
 
-			for (int i = 0; i < this.mNumberOfVectors; i++)
-				lProblem.mVectorsTable[i] = this.mVectorsTable[i].clone();
+			for (int i = 0; i < mNumberOfVectors; i++)
+				lProblem.mVectorsTable[i] = mVectorsTable[i].clone();
 
 			return lProblem;
 		}

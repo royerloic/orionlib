@@ -70,10 +70,10 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	{
 		super();
 
-		this.mExperimentFunctionStubsList = new ArrayList();
-		this.mExperimentQueue = new ArrayList();
+		mExperimentFunctionStubsList = new ArrayList();
+		mExperimentQueue = new ArrayList();
 
-		this.mEngineValidated = false;
+		mEngineValidated = false;
 		final HTMLLayout layout = new HTMLLayout();
 
 		WriterAppender appender = null;
@@ -99,12 +99,12 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setOptimalInterpreter(final Interpreter pInterpreter)
 	{
 		mLogger.info("call to setOptimalInterpreter(" + pInterpreter + ")");
-		this.mInterpreter = pInterpreter;
+		mInterpreter = pInterpreter;
 	}
 
 	public Interpreter getOptimalInterpreter()
 	{
-		return this.mInterpreter;
+		return mInterpreter;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
 		mLogger.info("call to setExperimentDatabase(" + pExperimentDatabase + ")");
-		this.mExperimentDatabase = pExperimentDatabase;
+		mExperimentDatabase = pExperimentDatabase;
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
 		mLogger.info("call to setObjectiveFunction(" + pObjectiveFunction + ")");
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setInterpolator(final IInterpolator pInterpolator)
 	{
 		mLogger.info("call to setInterpolator(" + pInterpolator + ")");
-		this.mInterpolator = pInterpolator;
+		mInterpolator = pInterpolator;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setDoeStrategy(final IDoeStrategy pDoeStrategy)
 	{
 		mLogger.info("call to setDoeStrategy(" + pDoeStrategy + ")");
-		this.mDoeStrategy = pDoeStrategy;
+		mDoeStrategy = pDoeStrategy;
 	}
 
 	/**
@@ -150,32 +150,32 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	{
 		boolean lValidated = true;
 
-		lValidated &= this.mInterpreter != null;
-		lValidated &= this.mExperimentDatabase != null;
-		lValidated &= this.mObjectiveFunction != null;
-		lValidated &= this.mInterpolator != null;
-		lValidated &= this.mDoeStrategy != null;
-		lValidated &= (this.mExperimentFunctionStubsList.size() >= 1);
+		lValidated &= mInterpreter != null;
+		lValidated &= mExperimentDatabase != null;
+		lValidated &= mObjectiveFunction != null;
+		lValidated &= mInterpolator != null;
+		lValidated &= mDoeStrategy != null;
+		lValidated &= (mExperimentFunctionStubsList.size() >= 1);
 
 		if (lValidated)
 		{
 			mLogger.info("OptimalEngine validated.");
-			this.mExperimentDatabase.setObjectiveFunction(this.mObjectiveFunction);
+			mExperimentDatabase.setObjectiveFunction(mObjectiveFunction);
 
-			this.mObjectiveFunction.setExperimentDatabase(this.mExperimentDatabase);
-			this.mObjectiveFunction.setInterpreter(this.mInterpreter);
+			mObjectiveFunction.setExperimentDatabase(mExperimentDatabase);
+			mObjectiveFunction.setInterpreter(mInterpreter);
 
-			this.mInterpolator.setObjectiveFunction(this.mObjectiveFunction);
-			this.mInterpolator.setExperimentDatabase(this.mExperimentDatabase);
+			mInterpolator.setObjectiveFunction(mObjectiveFunction);
+			mInterpolator.setExperimentDatabase(mExperimentDatabase);
 
-			this.mDoeStrategy.setExperimentDatabase(this.mExperimentDatabase);
-			this.mDoeStrategy.setObjectiveFunction(this.mObjectiveFunction);
-			this.mDoeStrategy.setInterpolator(this.mInterpolator);
+			mDoeStrategy.setExperimentDatabase(mExperimentDatabase);
+			mDoeStrategy.setObjectiveFunction(mObjectiveFunction);
+			mDoeStrategy.setInterpolator(mInterpolator);
 		}
 		else
 			mLogger.error("Optimal Engine could not be validated");
 
-		this.mEngineValidated = lValidated;
+		mEngineValidated = lValidated;
 
 		return lValidated;
 	}
@@ -185,12 +185,12 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public void loadExperimentDatabase(final IExperimentDatabaseStore pStore)
 	{
-		if (this.mEngineValidated)
+		if (mEngineValidated)
 		{
 			mLogger.info("call to loadExperimentDatabase(" + pStore + ")");
 
-			pStore.setExperimentDatabase(this.mExperimentDatabase);
-			pStore.setObjectiveFunction(this.mObjectiveFunction);
+			pStore.setExperimentDatabase(mExperimentDatabase);
+			pStore.setObjectiveFunction(mObjectiveFunction);
 			try
 			{
 				pStore.load();
@@ -210,12 +210,12 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public void saveExperimentDatabase(final IExperimentDatabaseStore pStore)
 	{
-		if (this.mEngineValidated)
+		if (mEngineValidated)
 		{
 			mLogger.info("call to saveExperimentDatabase: " + pStore);
 
-			pStore.setExperimentDatabase(this.mExperimentDatabase);
-			pStore.setObjectiveFunction(this.mObjectiveFunction);
+			pStore.setExperimentDatabase(mExperimentDatabase);
+			pStore.setObjectiveFunction(mObjectiveFunction);
 			try
 			{
 				pStore.save();
@@ -236,7 +236,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void addExperimentFunctionStub(final IExperimentFunctionStub pExperimentFunctionStub)
 	{
 		mLogger.info("adding a IExperimentFunctionStub to the OptimalEngine: " + pExperimentFunctionStub);
-		this.mExperimentFunctionStubsList.add(pExperimentFunctionStub);
+		mExperimentFunctionStubsList.add(pExperimentFunctionStub);
 		pExperimentFunctionStub.setOptimalEventListener(this);
 	}
 
@@ -246,11 +246,11 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public INumericalVector designNewExperiment()
 	{
 		INumericalVector lNewExperimentInputVector = null;
-		if (this.mEngineValidated)
+		if (mEngineValidated)
 		{
-			lNewExperimentInputVector = this.mDoeStrategy.designNewExperiment();
+			lNewExperimentInputVector = mDoeStrategy.designNewExperiment();
 			if (lNewExperimentInputVector == null)
-				mLogger.error("The DOE strategy: " + this.mDoeStrategy + " could not design a new experiment.");
+				mLogger.error("The DOE strategy: " + mDoeStrategy + " could not design a new experiment.");
 		}
 		else
 			mLogger.error("call to designNewExperiment from a non validated OptimalEngine.");
@@ -262,7 +262,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public void pushGriddedExperiments(final IGridDefinition pGridDefinition)
 	{
-		if (this.mEngineValidated)
+		if (mEngineValidated)
 		{
 			mLogger.info("call to popExperiment: removing an experiment from the experiment queue");
 			final List lExperimentList = pGridDefinition.generateGrid();
@@ -278,12 +278,12 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public void pushExperiment(final INumericalVector pInputVector)
 	{
-		synchronized (this.mExperimentQueue)
+		synchronized (mExperimentQueue)
 		{
-			if (this.mEngineValidated)
+			if (mEngineValidated)
 			{
 				mLogger.info("call to pushExperiment(): adding an experiment from the experiment queue");
-				this.mExperimentQueue.add(pInputVector);
+				mExperimentQueue.add(pInputVector);
 			}
 			else
 				mLogger.error("call to pushExperiment() from a non validated OptimalEngine.");
@@ -295,17 +295,17 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public INumericalVector popExperiment()
 	{
-		synchronized (this.mExperimentQueue)
+		synchronized (mExperimentQueue)
 		{
-			if (this.mEngineValidated)
+			if (mEngineValidated)
 			{
 				mLogger.info("call to popExperiment(): removing an experiment from the experiment queue");
-				if (this.mExperimentQueue.size() == 0)
+				if (mExperimentQueue.size() == 0)
 				{
 					mLogger.info("experiment queue empty: designing a new experiment.");
-					this.mExperimentQueue.add(designNewExperiment());
+					mExperimentQueue.add(designNewExperiment());
 				}
-				return (INumericalVector) this.mExperimentQueue.remove(0);
+				return (INumericalVector) mExperimentQueue.remove(0);
 			}
 			else
 			{
@@ -320,14 +320,14 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public void start()
 	{
-		if (this.mEngineValidated)
+		if (mEngineValidated)
 		{
 			mLogger.info("call to start(): starting the optimization.");
-			this.mFeedExperimentFunctions = true;
-			final int lNumberOfExperimentFunctionStubs = this.mExperimentFunctionStubsList.size();
+			mFeedExperimentFunctions = true;
+			final int lNumberOfExperimentFunctionStubs = mExperimentFunctionStubsList.size();
 			for (int i = 0; i < lNumberOfExperimentFunctionStubs; i++)
 			{
-				final IExperimentFunctionStub lStub = (IExperimentFunctionStub) this.mExperimentFunctionStubsList.get(i);
+				final IExperimentFunctionStub lStub = (IExperimentFunctionStub) mExperimentFunctionStubsList.get(i);
 				final INumericalVector lVector = popExperiment();
 				lStub.evaluate(lVector);
 			}
@@ -342,7 +342,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void stop()
 	{
 		mLogger.info("call to stop: stopping the optimization.");
-		this.mFeedExperimentFunctions = false;
+		mFeedExperimentFunctions = false;
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void setEventListener(final IOptimalEventListener pOptimalEventListener)
 	{
 		mLogger.info("call to setEventListener: " + pOptimalEventListener);
-		this.mOptimalEventListener = pOptimalEventListener;
+		mOptimalEventListener = pOptimalEventListener;
 	}
 
 	/**
@@ -361,18 +361,18 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
 	{
 		mLogger.info("experiment finished: " + pExperiment);
-		final boolean lBetter = this.mExperimentDatabase.addExperiment(pExperiment);
+		final boolean lBetter = mExperimentDatabase.addExperiment(pExperiment);
 
-		this.mInterpolator.update();
+		mInterpolator.update();
 
-		this.mOptimalEventListener.experimentDone(pExperimentFunctionStub, pExperiment);
+		mOptimalEventListener.experimentDone(pExperimentFunctionStub, pExperiment);
 
 		if (lBetter)
-			newBestExperiment(this.mExperimentDatabase, pExperiment);
+			newBestExperiment(mExperimentDatabase, pExperiment);
 
 		// This should be allways at the end of this call back since it launches a
 		// new thread.
-		if (this.mFeedExperimentFunctions)
+		if (mFeedExperimentFunctions)
 			pExperimentFunctionStub.evaluate(popExperiment());
 	}
 
@@ -383,7 +383,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment)
 	{
 		mLogger.info("new best experiment: " + pExperiment);
-		this.mOptimalEventListener.newBestExperiment(pExperimentDatabase, pExperiment);
+		mOptimalEventListener.newBestExperiment(pExperimentDatabase, pExperiment);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public int getIterations()
 	{
-		return this.mExperimentDatabase.getNumberOfExperiments();
+		return mExperimentDatabase.getNumberOfExperiments();
 	}
 
 	/**
@@ -407,7 +407,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public List getListOfBestExperiments()
 	{
-		return this.mExperimentDatabase.getListOfBestExperiments();
+		return mExperimentDatabase.getListOfBestExperiments();
 	}
 
 	/**
@@ -415,7 +415,7 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 */
 	public List getListOfBestExperimentValues()
 	{
-		return this.mExperimentDatabase.getListOfBestExperimentValues();
+		return mExperimentDatabase.getListOfBestExperimentValues();
 	}
 
 }

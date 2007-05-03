@@ -102,15 +102,15 @@ public class MainView extends JPanel implements IScalarFunction
 
 		setLayout(new BorderLayout(5, 5));
 
-		this.mControlContainer = new JPanel();
-		this.mControlContainer.setLayout(new BoxLayout(this.mControlContainer, BoxLayout.X_AXIS));
+		mControlContainer = new JPanel();
+		mControlContainer.setLayout(new BoxLayout(mControlContainer, BoxLayout.X_AXIS));
 
-		this.mMainContainer = new JPanel();
-		this.mMainContainer.setLayout(new BoxLayout(this.mMainContainer, BoxLayout.Y_AXIS));
+		mMainContainer = new JPanel();
+		mMainContainer.setLayout(new BoxLayout(mMainContainer, BoxLayout.Y_AXIS));
 
 		try
 		{
-			this.mMaximumEvolutionPlot = PlotScalarFuntionFactory.build(this, 0, "Maximum");
+			mMaximumEvolutionPlot = PlotScalarFuntionFactory.build(this, 0, "Maximum");
 		}
 		catch (final Exception e)
 		{
@@ -118,20 +118,20 @@ public class MainView extends JPanel implements IScalarFunction
 			e.printStackTrace(System.out);
 		}
 
-		this.mBestExperimentView = new JTextArea(cBEST_EXPERIMENT_VIEW_HEIGHT, cBEST_EXPERIMENT_VIEW_WIDTH);
-		this.mBestExperimentView.setEditable(false);
-		this.mMainContainer.add(new JScrollPane(this.mBestExperimentView));
+		mBestExperimentView = new JTextArea(cBEST_EXPERIMENT_VIEW_HEIGHT, cBEST_EXPERIMENT_VIEW_WIDTH);
+		mBestExperimentView.setEditable(false);
+		mMainContainer.add(new JScrollPane(mBestExperimentView));
 
-		this.mStatusContainer = new JPanel();
-		this.mStatusContainer.setLayout(new BoxLayout(this.mStatusContainer, BoxLayout.X_AXIS));
+		mStatusContainer = new JPanel();
+		mStatusContainer.setLayout(new BoxLayout(mStatusContainer, BoxLayout.X_AXIS));
 
-		this.mDatabaseSizeView = new JTextField("...");
-		this.mDatabaseSizeView.setEditable(false);
-		this.mStatusContainer.add(this.mDatabaseSizeView);
+		mDatabaseSizeView = new JTextField("...");
+		mDatabaseSizeView.setEditable(false);
+		mStatusContainer.add(mDatabaseSizeView);
 
-		add(this.mControlContainer, BorderLayout.NORTH);
-		add(this.mMainContainer, BorderLayout.CENTER);
-		add(this.mStatusContainer, BorderLayout.SOUTH);
+		add(mControlContainer, BorderLayout.NORTH);
+		add(mMainContainer, BorderLayout.CENTER);
+		add(mStatusContainer, BorderLayout.SOUTH);
 
 		validate();
 
@@ -185,7 +185,7 @@ public class MainView extends JPanel implements IScalarFunction
 	 */
 	public final void initiate()
 	{
-		this.mBestExperimentView.setText("...");
+		mBestExperimentView.setText("...");
 
 		setVisible(true);
 	}
@@ -196,7 +196,7 @@ public class MainView extends JPanel implements IScalarFunction
 	public final void terminate()
 	{
 		setVisible(false);
-		this.mMaximumEvolutionPlot.hide();
+		mMaximumEvolutionPlot.hide();
 
 	}
 
@@ -208,18 +208,18 @@ public class MainView extends JPanel implements IScalarFunction
 	 */
 	public final void updateMaximumEvolutionArray(final List pList)
 	{
-		if (this.mMaximumEvolutionList == null)
+		if (mMaximumEvolutionList == null)
 		{
-			this.mMaximumEvolutionList = pList;
-			this.mMaximumEvolutionPlot.display();
-			this.mMainContainer.add((Container) this.mMaximumEvolutionPlot);
-			this.mMainContainer.validate();
+			mMaximumEvolutionList = pList;
+			mMaximumEvolutionPlot.display();
+			mMainContainer.add((Container) mMaximumEvolutionPlot);
+			mMainContainer.validate();
 		}
 
-		this.mMaximumEvolutionList = pList;
-		this.mDatabaseSizeView.setText(getDatabaseSizeText(pList.size()));
+		mMaximumEvolutionList = pList;
+		mDatabaseSizeView.setText(getDatabaseSizeText(pList.size()));
 
-		this.mMaximumEvolutionPlot.update();
+		mMaximumEvolutionPlot.update();
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class MainView extends JPanel implements IScalarFunction
 	 */
 	public final void updateBestExperiment(final IExperiment pExperiment, final double pValue)
 	{
-		this.mBestExperimentView.setText(getBestExperimentText(pExperiment, pValue));
+		mBestExperimentView.setText(getBestExperimentText(pExperiment, pValue));
 	}
 
 	/**
@@ -242,16 +242,16 @@ public class MainView extends JPanel implements IScalarFunction
 	 */
 	public final double[][] computePoints(final int pResolution)
 	{
-		final int lSize = this.mMaximumEvolutionList.size();
+		final int lSize = mMaximumEvolutionList.size();
 
 		double[][] lPlotArray;
-		if (this.mMaximumEvolutionList != null)
+		if (mMaximumEvolutionList != null)
 		{
 			lPlotArray = new double[lSize][2];
 			for (int i = 0; i < lSize; i++)
 			{
 				lPlotArray[i][0] = i;
-				lPlotArray[i][1] = ((Double) (this.mMaximumEvolutionList.get(i))).doubleValue();
+				lPlotArray[i][1] = ((Double) (mMaximumEvolutionList.get(i))).doubleValue();
 			}
 		}
 		else
@@ -292,7 +292,7 @@ public class MainView extends JPanel implements IScalarFunction
 	 */
 	public final double getInputMax(final int pIndex)
 	{
-		return this.mMaximumEvolutionList.size();
+		return mMaximumEvolutionList.size();
 	}
 
 	/**

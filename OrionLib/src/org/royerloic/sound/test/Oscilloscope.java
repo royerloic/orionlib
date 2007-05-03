@@ -43,7 +43,7 @@ public class Oscilloscope
 	 */
 	public Oscilloscope()
 	{
-		this.mOrionGraphics = new OrionGraphics("Oscilloscope", OrionGraphics.cLAST_DEVICE);
+		mOrionGraphics = new OrionGraphics("Oscilloscope", OrionGraphics.cLAST_DEVICE);
 	}
 
 	/**
@@ -52,38 +52,38 @@ public class Oscilloscope
 	 */
 	public void start(final int pWidth, final int pHeight)
 	{
-		this.mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
+		mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
 
-		this.mOrionGraphics.startGraphics();
+		mOrionGraphics.startGraphics();
 
-		this.mPixel = new int[pWidth * pHeight];
-		this.mWidth = pWidth;
-		this.mHeight = pHeight;
+		mPixel = new int[pWidth * pHeight];
+		mWidth = pWidth;
+		mHeight = pHeight;
 
-		this.mSoundBuffer = new byte[2 * pWidth];
+		mSoundBuffer = new byte[2 * pWidth];
 
-		this.mSoundRecorder = new OrionSoundIn();
-		this.mSoundRecorder.start();
+		mSoundRecorder = new OrionSoundIn();
+		mSoundRecorder.start();
 
-		this.mSoundPlayer = new OrionSoundOut();
-		this.mSoundPlayer.start();
+		mSoundPlayer = new OrionSoundOut();
+		mSoundPlayer.start();
 
-		while (!this.mOrionGraphics.mMouseRight)
+		while (!mOrionGraphics.mMouseRight)
 		{
-			final int lBytesRead = this.mSoundRecorder.record(this.mSoundBuffer);
+			final int lBytesRead = mSoundRecorder.record(mSoundBuffer);
 
-			this.mSoundPlayer.play(this.mSoundBuffer, lBytesRead);
+			mSoundPlayer.play(mSoundBuffer, lBytesRead);
 
 			// System.out.println(lBytesRead);
 
-			for (int i = 0; i < this.mWidth * this.mHeight; i++)
-				this.mPixel[i] = 0;
+			for (int i = 0; i < mWidth * mHeight; i++)
+				mPixel[i] = 0;
 
 			int lPreviousSignal = 0;
 			int lSignalLock = 0;
-			for (int i = 0; i < this.mWidth; i++)
+			for (int i = 0; i < mWidth; i++)
 			{
-				final int lSignal = (this.mSoundBuffer[2 * i] + 256 * this.mSoundBuffer[2 * i + 1]) / 256;
+				final int lSignal = (mSoundBuffer[2 * i] + 256 * mSoundBuffer[2 * i + 1]) / 256;
 
 				if ((lSignal < -64) && (lPreviousSignal > 64))
 				{
@@ -94,27 +94,27 @@ public class Oscilloscope
 				lPreviousSignal = lSignal;
 			}
 
-			for (int i = 0; i < this.mWidth; i++)
+			for (int i = 0; i < mWidth; i++)
 			{
 				int lIndex = 2 * (i + lSignalLock);
-				if (lIndex > 2 * this.mWidth - 2)
-					lIndex = 2 * this.mWidth - 2;
-				final int lSignal = this.mSoundBuffer[lIndex] + 256 * this.mSoundBuffer[lIndex + 1];
-				int lValue = (this.mHeight / 2 + lSignal / 128);
+				if (lIndex > 2 * mWidth - 2)
+					lIndex = 2 * mWidth - 2;
+				final int lSignal = mSoundBuffer[lIndex] + 256 * mSoundBuffer[lIndex + 1];
+				int lValue = (mHeight / 2 + lSignal / 128);
 				if (lValue < 0)
 					lValue = 0;
-				else if (lValue >= this.mHeight)
-					lValue = this.mHeight - 1;
-				this.mPixel[i + this.mWidth * lValue] = 255 + 256 * 255 + 256 * 256 * 255;
+				else if (lValue >= mHeight)
+					lValue = mHeight - 1;
+				mPixel[i + mWidth * lValue] = 255 + 256 * 255 + 256 * 256 * 255;
 			}
 
-			this.mOrionGraphics.update(this.mPixel);
-			this.mOrionGraphics.paintPixels();
-			this.mOrionGraphics.refresh(); /**/
+			mOrionGraphics.update(mPixel);
+			mOrionGraphics.paintPixels();
+			mOrionGraphics.refresh(); /**/
 		}
 
-		this.mSoundRecorder.stop();
-		this.mSoundPlayer.stop();
+		mSoundRecorder.stop();
+		mSoundPlayer.stop();
 
 		System.exit(0);
 	}

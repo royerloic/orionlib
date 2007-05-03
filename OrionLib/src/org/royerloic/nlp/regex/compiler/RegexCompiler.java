@@ -56,7 +56,7 @@ public class RegexCompiler
 				lRegex = "(?:" + lRegex + ")";
 
 				// Replace Sets
-				for (final Map.Entry<String, Set<String>> lEntry : this.mSetNameToNameSetMap.entrySet())
+				for (final Map.Entry<String, Set<String>> lEntry : mSetNameToNameSetMap.entrySet())
 				{
 					final String lSetNameUse = "@" + lEntry.getKey() + "@";
 					final String lSetReplacement = mergeRegexSetToRegex(lEntry.getValue());
@@ -64,14 +64,14 @@ public class RegexCompiler
 				}
 
 				// replace Regexes
-				for (final Map.Entry<String, String> lEntry : this.mRegexNameToRegexMap.entrySet())
+				for (final Map.Entry<String, String> lEntry : mRegexNameToRegexMap.entrySet())
 				{
 					final String lSetNameUse = "@" + lEntry.getKey() + "@";
 					final String lSetReplacement = lEntry.getValue();
 					lRegex = lRegex.replace(lSetNameUse, lSetReplacement);
 				}
 
-				this.mRegexNameToRegexMap.put(lName, lRegex);
+				mRegexNameToRegexMap.put(lName, lRegex);
 
 			}
 			else if (lList.size() == 1)
@@ -88,10 +88,10 @@ public class RegexCompiler
 					if (lString.startsWith("@") && lString.endsWith("@"))
 					{
 						final String lAddedSetName = lString.substring(1, lString.length() - 1);
-						this.mSetNameToNameSetMap.get(lSetName).addAll(this.mSetNameToNameSetMap.get(lAddedSetName));
+						mSetNameToNameSetMap.get(lSetName).addAll(mSetNameToNameSetMap.get(lAddedSetName));
 					}
 					else
-						this.mSetNameToNameSetMap.put(lSetName, lString);
+						mSetNameToNameSetMap.put(lSetName, lString);
 				}
 				else if (lString.startsWith("import:"))
 				{
@@ -111,7 +111,7 @@ public class RegexCompiler
 					lIsSet = true;
 					final String[] lStringArray = StringUtils.split(lString, ":\\s*", 0);
 					lSetName = lStringArray[1].trim();
-					this.mSetNameToNameSetMap.put(lSetName);
+					mSetNameToNameSetMap.put(lSetName);
 					continue;
 				}
 
@@ -132,7 +132,7 @@ public class RegexCompiler
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();
-			this.mSetNameToNameSetMap.put(pImportedSetName, "(?:" + lEntry + ")");
+			mSetNameToNameSetMap.put(pImportedSetName, "(?:" + lEntry + ")");
 		}
 	}
 
@@ -153,12 +153,12 @@ public class RegexCompiler
 
 	public String getRegex(final String pName)
 	{
-		return this.mRegexNameToRegexMap.get(pName);
+		return mRegexNameToRegexMap.get(pName);
 	}
 
 	public Pattern getPattern(final String pName)
 	{
-		return Pattern.compile(this.mRegexNameToRegexMap.get(pName));
+		return Pattern.compile(mRegexNameToRegexMap.get(pName));
 	}
 
 }

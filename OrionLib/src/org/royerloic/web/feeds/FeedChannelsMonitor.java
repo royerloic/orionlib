@@ -53,25 +53,25 @@ public class FeedChannelsMonitor
 	public FeedChannelsMonitor(final FeedListenerInterface<FeedItemInterface> pFeedListener)
 	{
 		super();
-		this.mFeedListener = pFeedListener;
-		this.mNumberOfThreads = 5;
-		this.mMonitoringInterval = 60; // 1 minute.
-		this.mChannelMap = new HashMap<ChannelIF, FeedChannelInterface>();
-		this.mFeedAnalysers = new HashMap<ChannelIF, FeedAnalyserInterface>();
-		this.mThreadPriority = Thread.MIN_PRIORITY;
+		mFeedListener = pFeedListener;
+		mNumberOfThreads = 5;
+		mMonitoringInterval = 60; // 1 minute.
+		mChannelMap = new HashMap<ChannelIF, FeedChannelInterface>();
+		mFeedAnalysers = new HashMap<ChannelIF, FeedAnalyserInterface>();
+		mThreadPriority = Thread.MIN_PRIORITY;
 	}
 
 	public void setNumberOfThreads(final int lNumberOfThreads)
 	{
-		this.mNumberOfThreads = lNumberOfThreads;
+		mNumberOfThreads = lNumberOfThreads;
 	}
 
 	public void startMonitoring()
 	{
-		this.mPoller = new Poller();
-		this.mPoller.setWorkerThreads(this.mNumberOfThreads);
+		mPoller = new Poller();
+		mPoller.setWorkerThreads(mNumberOfThreads);
 
-		this.mApprover = new PollerApproverIF()
+		mApprover = new PollerApproverIF()
 		{
 			public boolean canAddItem(final ItemIF pArg0, final ChannelIF pArg1)
 			{
@@ -80,20 +80,20 @@ public class FeedChannelsMonitor
 
 		};
 
-		this.mPoller.addApprover(this.mApprover);
+		mPoller.addApprover(mApprover);
 
 		// Create and register observer
-		this.mObserver = new PollerObserverIF()
+		mObserver = new PollerObserverIF()
 		{
 
 			public void itemFound(final ItemIF pItemIF, final ChannelIF pChannelIF)
 			{
 				try
 				{
-					Thread.currentThread().setPriority(FeedChannelsMonitor.this.mThreadPriority);
+					Thread.currentThread().setPriority(mThreadPriority);
 					pChannelIF.addItem(pItemIF);
 
-					final FeedAnalyserInterface lFeedAnalyser = FeedChannelsMonitor.this.mFeedAnalysers.get(pChannelIF);
+					final FeedAnalyserInterface lFeedAnalyser = mFeedAnalysers.get(pChannelIF);
 
 					final FeedItemInterface lFeedItem = lFeedAnalyser.newFeedItem();
 					lFeedItem.setTitle(pItemIF.getTitle());
@@ -124,7 +124,7 @@ public class FeedChannelsMonitor
 							lFeedItem.setDate(new Date());
 					}
 
-					final FeedChannelInterface lFeedChannel = FeedChannelsMonitor.this.mChannelMap.get(pChannelIF);
+					final FeedChannelInterface lFeedChannel = mChannelMap.get(pChannelIF);
 					lFeedItem.setChannel(lFeedChannel);
 
 					if (pChannelIF.getCopyright() != null)
@@ -137,7 +137,7 @@ public class FeedChannelsMonitor
 						lFeedItem.setSource(pChannelIF.getSite().getHost());
 
 					lFeedAnalyser.analyseItem(lFeedItem);
-					FeedChannelsMonitor.this.mFeedListener.onItemFound(lFeedItem);
+					mFeedListener.onItemFound(lFeedItem);
 				}
 				catch (final Throwable e)
 				{
@@ -149,7 +149,7 @@ public class FeedChannelsMonitor
 
 			public void channelErrored(final ChannelIF pChannelIF, final Exception pException)
 			{
-				FeedChannelsMonitor.this.mFeedListener.onError(pChannelIF.getLocation(), pException);
+				mFeedListener.onError(pChannelIF.getLocation(), pException);
 			}
 
 			public void channelChanged(final ChannelIF pChannelIF)
@@ -165,7 +165,7 @@ public class FeedChannelsMonitor
 
 			}
 		};
-		this.mPoller.addObserver(this.mObserver);
+		mPoller.addObserver(mObserver);
 
 	}
 
@@ -174,12 +174,12 @@ public class FeedChannelsMonitor
 															final int pFrequence) throws IOException, ParseException
 	{
 		final ChannelIF lChannelIF = FeedParser.parse(new ChannelBuilder(), pFeedURL);
-		this.mFeedAnalysers.put(lChannelIF, pFeedAnalyser);
+		mFeedAnalysers.put(lChannelIF, pFeedAnalyser);
 		final FeedChannel lFeedChannel = new FeedChannel(lChannelIF);
 		lFeedChannel.setFrequence(pFrequence);
-		this.mChannelMap.put(lChannelIF, lFeedChannel);
+		mChannelMap.put(lChannelIF, lFeedChannel);
 		lChannelIF.getItems().clear();
-		this.mPoller.registerChannel(lChannelIF, getMonitoringInterval() * 1000);
+		mPoller.registerChannel(lChannelIF, getMonitoringInterval() * 1000);
 	}
 
 	public void addFeedChannelFromListInFile(	final URL pURL,
@@ -257,55 +257,55 @@ public class FeedChannelsMonitor
 
 	public void removeFeedChannel(final URL pFeedURL)
 	{
-		for (final Iterator lIterator = this.mChannelMap.keySet().iterator(); lIterator.hasNext();)
+		for (final Iterator lIterator = mChannelMap.keySet().iterator(); lIterator.hasNext();)
 		{
 			final ChannelIF lChannelIF = (ChannelIF) lIterator.next();
 			final URL lUrl = lChannelIF.getLocation();
 			if (lUrl.equals(pFeedURL))
 			{
 				lIterator.remove();
-				this.mPoller.unregisterChannel(lChannelIF);
-				this.mFeedAnalysers.remove(lChannelIF);
+				mPoller.unregisterChannel(lChannelIF);
+				mFeedAnalysers.remove(lChannelIF);
 			}
 		}
 	}
 
 	public void stopMonitoring()
 	{
-		for (final ChannelIF lChannel : this.mChannelMap.keySet())
-			this.mPoller.unregisterChannel(lChannel);
-		this.mPoller.removeObserver(this.mObserver);
-		this.mPoller.removeApprover(this.mApprover);
+		for (final ChannelIF lChannel : mChannelMap.keySet())
+			mPoller.unregisterChannel(lChannel);
+		mPoller.removeObserver(mObserver);
+		mPoller.removeApprover(mApprover);
 	}
 
 	public int getMonitoringInterval()
 	{
-		return this.mMonitoringInterval;
+		return mMonitoringInterval;
 	}
 
 	public void setMonitoringInterval(final int pMonitoringInterval)
 	{
-		this.mMonitoringInterval = pMonitoringInterval;
+		mMonitoringInterval = pMonitoringInterval;
 	}
 
 	public FeedListenerInterface getFeedListener()
 	{
-		return this.mFeedListener;
+		return mFeedListener;
 	}
 
 	public void setFeedListener(final FeedListenerInterface<FeedItemInterface> pFeedListener)
 	{
-		this.mFeedListener = pFeedListener;
+		mFeedListener = pFeedListener;
 	}
 
 	public int getThreadPriority()
 	{
-		return this.mThreadPriority;
+		return mThreadPriority;
 	}
 
 	public void setThreadPriority(final int pThreadPriority)
 	{
-		this.mThreadPriority = pThreadPriority;
+		mThreadPriority = pThreadPriority;
 	}
 
 }

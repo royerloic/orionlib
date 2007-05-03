@@ -62,7 +62,7 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 	public PowerGraph<Node> load(final File pFile, final boolean pSpokeModel)
 	{
-		this.mSpokeModel = pSpokeModel;
+		mSpokeModel = pSpokeModel;
 		FileInputStream lFileInputStream;
 		try
 		{
@@ -81,7 +81,7 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 	public PowerGraph<Node> load(final InputStream pInputStream)
 	{
-		this.mPowerGraph = new PowerGraph<Node>();
+		mPowerGraph = new PowerGraph<Node>();
 
 		// Use an instance of ourselves as the SAX event handler
 		final DefaultHandler handler = this;
@@ -99,7 +99,7 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 			t.printStackTrace();
 		}
 
-		return this.mPowerGraph;
+		return mPowerGraph;
 	}
 
 	// ===========================================================
@@ -119,20 +119,20 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 	{
 		if (qName.equals("interactor") || qName.equals("proteinInteractor"))
 		{
-			this.mInteractorId = attrs.getValue("id");
-			this.mInteractorName = null;
+			mInteractorId = attrs.getValue("id");
+			mInteractorName = null;
 		}
 		else if (qName.equals("interaction"))
 			startInteraction();
 		else if (qName.equals("proteinInteractorRef"))
-			this.mInteractorId = attrs.getValue("ref");
+			mInteractorId = attrs.getValue("ref");
 
 	}
 
 	@Override
 	public void characters(final char buf[], final int offset, final int len) throws SAXException
 	{
-		this.mText = new String(buf, offset, len);
+		mText = new String(buf, offset, len);
 	}
 
 	@Override
@@ -143,57 +143,57 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 		if (qName.equals("interactor") || qName.equals("proteinInteractor"))
 		{
-			this.lIdToNameMap.put(this.mInteractorId, this.mInteractorName);
-			this.mPowerGraph.addNode(new Node(this.mInteractorName));
+			lIdToNameMap.put(mInteractorId, mInteractorName);
+			mPowerGraph.addNode(new Node(mInteractorName));
 		}
 		else if (qName.equals("interaction"))
 			endInteraction();
 		else if (qName.equals("interactorRef"))
 		{
-			if (this.mText != null)
-				this.mInteractorId = this.mText;
-			addInteractor(this.mInteractorId, this.lIdToNameMap.get(this.mInteractorId), this.mRole);
+			if (mText != null)
+				mInteractorId = mText;
+			addInteractor(mInteractorId, lIdToNameMap.get(mInteractorId), mRole);
 		}
 		else if (qName.equals("shortLabel"))
 		{
-			if (this.mInteractorName == null)
-				this.mInteractorName = this.mText;
+			if (mInteractorName == null)
+				mInteractorName = mText;
 		}
 		else if (qName.equals("role"))
 		{
-			this.mRole = this.mText;
-			addInteractor(this.mInteractorId, this.lIdToNameMap.get(this.mInteractorId), this.mRole);
+			mRole = mText;
+			addInteractor(mInteractorId, lIdToNameMap.get(mInteractorId), mRole);
 		}
 
 	}
 
 	private void startInteraction()
 	{
-		this.lInteractorsToRoleMap.clear();
+		lInteractorsToRoleMap.clear();
 	}
 
 	private void addInteractor(final String lInteractorId, final String pName, final String pRole)
 	{
-		this.lInteractorsToRoleMap.put(new Node(pName), pRole);
+		lInteractorsToRoleMap.put(new Node(pName), pRole);
 	}
 
 	private void endInteraction()
 	{
-		if (this.lInteractorsToRoleMap.size() == 1)
+		if (lInteractorsToRoleMap.size() == 1)
 		{
-			final Node lNode = this.lInteractorsToRoleMap.keySet().iterator().next();
+			final Node lNode = lInteractorsToRoleMap.keySet().iterator().next();
 			final Set<Node> lPowerNode = new HashSet<Node>();
 			lPowerNode.add(lNode);
-			this.mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+			mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
 		}
-		else if (!this.mSpokeModel)
-			this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(this.lInteractorsToRoleMap.keySet(),
-					this.lInteractorsToRoleMap.keySet()));
-		else if (this.mSpokeModel)
+		else if (!mSpokeModel)
+			mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lInteractorsToRoleMap.keySet(),
+					lInteractorsToRoleMap.keySet()));
+		else if (mSpokeModel)
 		{
 			Node lBait = null;
-			for (final Node lNode : this.lInteractorsToRoleMap.keySet())
-				if (this.lInteractorsToRoleMap.get(lNode).equals("bait"))
+			for (final Node lNode : lInteractorsToRoleMap.keySet())
+				if (lInteractorsToRoleMap.get(lNode).equals("bait"))
 				{
 					lBait = lNode;
 					break;
@@ -204,15 +204,15 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 				final Set<Node> lBaitPowerNode = new HashSet<Node>();
 				lBaitPowerNode.add(lBait);
 				final Set<Node> lPreysPowerNode = new HashSet<Node>();
-				lPreysPowerNode.addAll(this.lInteractorsToRoleMap.keySet());
+				lPreysPowerNode.addAll(lInteractorsToRoleMap.keySet());
 				lPreysPowerNode.removeAll(lBaitPowerNode);
 
-				this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode, lPreysPowerNode));
+				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode, lPreysPowerNode));
 			}
 			else
 			{
-				final Set<Node> lPowerNode = this.lInteractorsToRoleMap.keySet();
-				this.mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+				final Set<Node> lPowerNode = lInteractorsToRoleMap.keySet();
+				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
 			}
 
 		}
@@ -222,6 +222,6 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 	@Override
 	public void endDocument() throws SAXException
 	{
-		this.mPowerGraph.commitDelayedEdges();
+		mPowerGraph.commitDelayedEdges();
 	}
 }

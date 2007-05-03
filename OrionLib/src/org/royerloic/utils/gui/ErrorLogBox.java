@@ -14,7 +14,6 @@ package org.royerloic.utils.gui;
  * 
  */
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Frame;
 
@@ -41,7 +40,7 @@ public class ErrorLogBox extends IwuJFrame
 
 	public boolean getResult()
 	{
-		return this.mResult;
+		return mResult;
 	}
 
 	/**
@@ -57,13 +56,13 @@ public class ErrorLogBox extends IwuJFrame
 		super(pTitle);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
-		this.mMessage = pMessage;
+		mMessage = pMessage;
 
-		this.mJTextArea = new JTextArea();
-		this.mJTextArea.setEditable(false);
-		this.mJTextArea.setMinimumSize(new Dimension(400, 130));
+		mJTextArea = new JTextArea();
+		mJTextArea.setEditable(false);
+		mJTextArea.setMinimumSize(new Dimension(400, 130));
 
-		getContentPane().add("Center", new JScrollPane(this.mJTextArea));
+		getContentPane().add("Center", new JScrollPane(mJTextArea));
 
 		setResizable(true);
 		setTitle(pTitle);
@@ -76,8 +75,8 @@ public class ErrorLogBox extends IwuJFrame
 
 	public void addErrorLog(final String pString)
 	{
-		this.mMessage = this.mMessage + "-Error-\n" + pString + "\n\n";
-		this.mJTextArea.setText(this.mMessage);
+		mMessage = mMessage + "-Error-\n" + pString + "\n\n";
+		mJTextArea.setText(mMessage);
 		if (!isVisible())
 			setVisible(true);
 	}

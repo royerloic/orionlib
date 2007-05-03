@@ -169,35 +169,35 @@ public class Toy extends Applet
 		final Color c = colors[p.value + 3];
 
 		final Graphics window_gc = getGraphics();
-		this.buffer_gc.setColor(c);
-		this.buffer_gc.fillRect((int) (p.x * this.XLEN), (int) (p.y * this.YLEN), 4, 4);
+		buffer_gc.setColor(c);
+		buffer_gc.fillRect((int) (p.x * XLEN), (int) (p.y * YLEN), 4, 4);
 		window_gc.setColor(c);
-		window_gc.fillRect((int) (p.x * this.XLEN), (int) (p.y * this.YLEN), 4, 4);
+		window_gc.fillRect((int) (p.x * XLEN), (int) (p.y * YLEN), 4, 4);
 	}
 
 	void clear_all()
 	{
-		this.point_list.removeAllElements();
-		if (this.buffer != null)
+		point_list.removeAllElements();
+		if (buffer != null)
 		{
-			this.buffer_gc.setColor(colors[0]);
-			this.buffer_gc.fillRect(0, 0, this.XLEN, this.YLEN);
+			buffer_gc.setColor(colors[0]);
+			buffer_gc.fillRect(0, 0, XLEN, YLEN);
 		}
 		repaint();
 	}
 
 	void draw_all_points()
 	{
-		final int n = this.point_list.size();
+		final int n = point_list.size();
 		for (int i = 0; i < n; i++)
-			draw_point((point) this.point_list.elementAt(i));
+			draw_point((point) point_list.elementAt(i));
 	}
 
 	void button_change_clicked()
 	{
-		++this.current_value;
-		if (this.current_value > 3)
-			this.current_value = 1;
+		++current_value;
+		if (current_value > 3)
+			current_value = 1;
 	}
 
 	private static double atof(final String s)
@@ -213,7 +213,7 @@ public class Toy extends Applet
 	void button_run_clicked(final String args)
 	{
 		// guard
-		if (this.point_list.isEmpty())
+		if (point_list.isEmpty())
 			return;
 
 		final Parameter param = new Parameter();
@@ -304,7 +304,7 @@ public class Toy extends Applet
 
 		// build problem
 		final Problem prob = new Problem();
-		prob.mNumberOfVectors = this.point_list.size();
+		prob.mNumberOfVectors = point_list.size();
 		prob.mClass = new double[prob.mNumberOfVectors];
 
 		if ((param.svm_type == Parameter.EPSILON_SVR) || (param.svm_type == Parameter.NU_SVR))
@@ -314,7 +314,7 @@ public class Toy extends Applet
 			prob.mVectorsTable = new Node[prob.mNumberOfVectors][1];
 			for (int i = 0; i < prob.mNumberOfVectors; i++)
 			{
-				final point p = (point) this.point_list.elementAt(i);
+				final point p = (point) point_list.elementAt(i);
 				prob.mVectorsTable[i][0] = new Node();
 				prob.mVectorsTable[i][0].mIndex = 1;
 				prob.mVectorsTable[i][0].mValue = p.x;
@@ -326,43 +326,43 @@ public class Toy extends Applet
 			final Node[] x = new Node[1];
 			x[0] = new Node();
 			x[0].mIndex = 1;
-			final int[] j = new int[this.XLEN];
+			final int[] j = new int[XLEN];
 
 			final Graphics window_gc = getGraphics();
-			for (int i = 0; i < this.XLEN; i++)
+			for (int i = 0; i < XLEN; i++)
 			{
-				x[0].mValue = (double) i / this.XLEN;
-				j[i] = (int) (this.YLEN * SVM.svmPredict(model, x));
+				x[0].mValue = (double) i / XLEN;
+				j[i] = (int) (YLEN * SVM.svmPredict(model, x));
 			}
 
-			this.buffer_gc.setColor(colors[0]);
-			this.buffer_gc.drawLine(0, 0, 0, this.YLEN - 1);
+			buffer_gc.setColor(colors[0]);
+			buffer_gc.drawLine(0, 0, 0, YLEN - 1);
 			window_gc.setColor(colors[0]);
-			window_gc.drawLine(0, 0, 0, this.YLEN - 1);
+			window_gc.drawLine(0, 0, 0, YLEN - 1);
 
-			final int p = (int) (param.p * this.YLEN);
-			for (int i = 1; i < this.XLEN; i++)
+			final int p = (int) (param.p * YLEN);
+			for (int i = 1; i < XLEN; i++)
 			{
-				this.buffer_gc.setColor(colors[0]);
-				this.buffer_gc.drawLine(i, 0, i, this.YLEN - 1);
+				buffer_gc.setColor(colors[0]);
+				buffer_gc.drawLine(i, 0, i, YLEN - 1);
 				window_gc.setColor(colors[0]);
-				window_gc.drawLine(i, 0, i, this.YLEN - 1);
+				window_gc.drawLine(i, 0, i, YLEN - 1);
 
-				this.buffer_gc.setColor(colors[5]);
+				buffer_gc.setColor(colors[5]);
 				window_gc.setColor(colors[5]);
-				this.buffer_gc.drawLine(i - 1, j[i - 1], i, j[i]);
+				buffer_gc.drawLine(i - 1, j[i - 1], i, j[i]);
 				window_gc.drawLine(i - 1, j[i - 1], i, j[i]);
 
 				if (param.svm_type == Parameter.EPSILON_SVR)
 				{
-					this.buffer_gc.setColor(colors[2]);
+					buffer_gc.setColor(colors[2]);
 					window_gc.setColor(colors[2]);
-					this.buffer_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
+					buffer_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
 					window_gc.drawLine(i - 1, j[i - 1] + p, i, j[i] + p);
 
-					this.buffer_gc.setColor(colors[2]);
+					buffer_gc.setColor(colors[2]);
 					window_gc.setColor(colors[2]);
-					this.buffer_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
+					buffer_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
 					window_gc.drawLine(i - 1, j[i - 1] - p, i, j[i] - p);
 				}
 			}
@@ -374,7 +374,7 @@ public class Toy extends Applet
 			prob.mVectorsTable = new Node[prob.mNumberOfVectors][2];
 			for (int i = 0; i < prob.mNumberOfVectors; i++)
 			{
-				final point p = (point) this.point_list.elementAt(i);
+				final point p = (point) point_list.elementAt(i);
 				prob.mVectorsTable[i][0] = new Node();
 				prob.mVectorsTable[i][0].mIndex = 1;
 				prob.mVectorsTable[i][0].mValue = p.x;
@@ -393,17 +393,17 @@ public class Toy extends Applet
 			x[1].mIndex = 2;
 
 			final Graphics window_gc = getGraphics();
-			for (int i = 0; i < this.XLEN; i++)
-				for (int j = 0; j < this.YLEN; j++)
+			for (int i = 0; i < XLEN; i++)
+				for (int j = 0; j < YLEN; j++)
 				{
-					x[0].mValue = (double) i / this.XLEN;
-					x[1].mValue = (double) j / this.YLEN;
+					x[0].mValue = (double) i / XLEN;
+					x[1].mValue = (double) j / YLEN;
 					double d = SVM.svmPredict(model, x);
 					if ((param.svm_type == Parameter.ONE_CLASS) && (d < 0))
 						d = 2;
-					this.buffer_gc.setColor(colors[(int) d]);
+					buffer_gc.setColor(colors[(int) d]);
 					window_gc.setColor(colors[(int) d]);
-					this.buffer_gc.drawLine(i, j, i, j);
+					buffer_gc.drawLine(i, j, i, j);
 					window_gc.drawLine(i, j, i, j);
 				}
 		}
@@ -426,10 +426,10 @@ public class Toy extends Applet
 		try
 		{
 			final DataOutputStream fp = new DataOutputStream(new FileOutputStream(filename));
-			final int n = this.point_list.size();
+			final int n = point_list.size();
 			for (int i = 0; i < n; i++)
 			{
-				final point p = (point) this.point_list.elementAt(i);
+				final point p = (point) point_list.elementAt(i);
 				fp.writeBytes(p.value + " 1:" + p.x + " 2:" + p.y + "\n");
 			}
 			fp.close();
@@ -460,7 +460,7 @@ public class Toy extends Applet
 				final double x = atof(st.nextToken());
 				st.nextToken();
 				final double y = atof(st.nextToken());
-				this.point_list.addElement(new point(x, y, value));
+				point_list.addElement(new point(x, y, value));
 			}
 			fp.close();
 		}
@@ -476,10 +476,10 @@ public class Toy extends Applet
 	{
 		if (e.getID() == MouseEvent.MOUSE_PRESSED)
 		{
-			if ((e.getX() >= this.XLEN) || (e.getY() >= this.YLEN))
+			if ((e.getX() >= XLEN) || (e.getY() >= YLEN))
 				return;
-			final point p = new point((double) e.getX() / this.XLEN, (double) e.getY() / this.YLEN, this.current_value);
-			this.point_list.addElement(p);
+			final point p = new point((double) e.getX() / XLEN, (double) e.getY() / YLEN, current_value);
+			point_list.addElement(p);
 			draw_point(p);
 		}
 	}
@@ -488,20 +488,20 @@ public class Toy extends Applet
 	public void paint(final Graphics g)
 	{
 		// create buffer first time
-		if (this.buffer == null)
+		if (buffer == null)
 		{
-			this.buffer = this.createImage(this.XLEN, this.YLEN);
-			this.buffer_gc = this.buffer.getGraphics();
-			this.buffer_gc.setColor(colors[0]);
-			this.buffer_gc.fillRect(0, 0, this.XLEN, this.YLEN);
+			buffer = this.createImage(XLEN, YLEN);
+			buffer_gc = buffer.getGraphics();
+			buffer_gc.setColor(colors[0]);
+			buffer_gc.fillRect(0, 0, XLEN, YLEN);
 		}
-		g.drawImage(this.buffer, 0, 0, this);
+		g.drawImage(buffer, 0, 0, this);
 	}
 
 	@Override
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(this.XLEN, this.YLEN + 50);
+		return new Dimension(XLEN, YLEN + 50);
 	}
 
 	@Override
@@ -514,8 +514,8 @@ public class Toy extends Applet
 	public void resize(final int w, final int h)
 	{
 		super.resize(w, h);
-		this.XLEN = w;
-		this.YLEN = h - 50;
+		XLEN = w;
+		YLEN = h - 50;
 		clear_all();
 	}
 

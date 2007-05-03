@@ -36,30 +36,30 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	public SVMRegression(final double pGamma, final double pCost, final double pNu)
 	{
 		super();
-		this.mGamma = pGamma;
-		this.mCost = pCost;
-		this.mNu = pNu;
+		mGamma = pGamma;
+		mCost = pCost;
+		mNu = pNu;
 
-		this.mParameters = new Parameter();
+		mParameters = new Parameter();
 
-		this.mParameters.svm_type = Parameter.NU_SVR;
-		this.mParameters.kernel_type = Parameter.RBF;
-		this.mParameters.gamma = this.mGamma;
-		this.mParameters.C = this.mCost;
-		this.mParameters.nu = this.mNu;
+		mParameters.svm_type = Parameter.NU_SVR;
+		mParameters.kernel_type = Parameter.RBF;
+		mParameters.gamma = mGamma;
+		mParameters.C = mCost;
+		mParameters.nu = mNu;
 
 		// Other standard parameters:
-		this.mParameters.degree = 3;
-		this.mParameters.coef0 = 0;
-		this.mParameters.p = 0.1;
-		this.mParameters.cache_size = 40;
-		this.mParameters.eps = 1e-3;
-		this.mParameters.shrinking = 1;
-		this.mParameters.nr_weight = 0;
-		this.mParameters.weight_label = new int[0];
-		this.mParameters.weight = new double[0];
+		mParameters.degree = 3;
+		mParameters.coef0 = 0;
+		mParameters.p = 0.1;
+		mParameters.cache_size = 40;
+		mParameters.eps = 1e-3;
+		mParameters.shrinking = 1;
+		mParameters.nr_weight = 0;
+		mParameters.weight_label = new int[0];
+		mParameters.weight = new double[0];
 
-		this.mModel = null;
+		mModel = null;
 	}
 
 	/**
@@ -129,13 +129,13 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	{
 		if (pTrainingSet instanceof LabelledVectorSet)
 		{
-			this.mProblem = ((LabelledVectorSet) pTrainingSet).toProblem();
+			mProblem = ((LabelledVectorSet) pTrainingSet).toProblem();
 			/*************************************************************************
 			 * System.out.println("train: gamma="+mParameters.gamma +"
 			 * cost="+mParameters.C);/
 			 ************************************************************************/
 
-			this.mModel = SVM.svmTrain(this.mProblem, this.mParameters);
+			mModel = SVM.svmTrain(mProblem, mParameters);
 		}
 	}
 
@@ -149,7 +149,7 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 		for (int i = 0; i < pVector.getDimension(); i++)
 			lVector[i] = new Node(i, pVector.get(i));
 
-		return SVM.svmPredict(this.mModel, lVector);
+		return SVM.svmPredict(mModel, lVector);
 	}
 
 	/**
@@ -162,8 +162,8 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 		{
 			final SVMRegression lSVMRegression = (SVMRegression) super.clone();
 
-			lSVMRegression.mProblem = (Problem) this.mProblem.clone();
-			lSVMRegression.mParameters = (Parameter) this.mParameters.clone();
+			lSVMRegression.mProblem = (Problem) mProblem.clone();
+			lSVMRegression.mParameters = (Parameter) mParameters.clone();
 			/* lSVMRegression.mModel = (Model) mModel.clone();/* */
 
 			return lSVMRegression;

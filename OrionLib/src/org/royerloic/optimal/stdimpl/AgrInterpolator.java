@@ -39,7 +39,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	 */
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	 */
 	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		this.mExperimentDatabase = pExperimentDatabase;
+		mExperimentDatabase = pExperimentDatabase;
 
 	}
 
@@ -55,17 +55,17 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			this.mInputDimension = this.mExperimentDatabase.getBestExperiment().getInput().getDimension();
-			this.mRInterpolator = new RInterpolator(this.mInputDimension);
-			for (int i = 0; i < this.mExperimentDatabase.getNumberOfExperiments(); i++)
+			mInputDimension = mExperimentDatabase.getBestExperiment().getInput().getDimension();
+			mRInterpolator = new RInterpolator(mInputDimension);
+			for (int i = 0; i < mExperimentDatabase.getNumberOfExperiments(); i++)
 			{
-				final INumericalVector lInputVector = this.mExperimentDatabase.getExperiment(i).getInput();
-				final INumericalVector lOutputputVector = this.mExperimentDatabase.getExperiment(i).getOutput();
-				final double lValue = this.mObjectiveFunction.evaluate(lOutputputVector);
+				final INumericalVector lInputVector = mExperimentDatabase.getExperiment(i).getInput();
+				final INumericalVector lOutputputVector = mExperimentDatabase.getExperiment(i).getOutput();
+				final double lValue = mObjectiveFunction.evaluate(lOutputputVector);
 
-				this.mRInterpolator.addPointWithoutUpdate(lInputVector, lValue);
+				mRInterpolator.addPointWithoutUpdate(lInputVector, lValue);
 			}
-			this.mRInterpolator.update();
+			mRInterpolator.update();
 
 		}
 	}
@@ -77,7 +77,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			return this.mRInterpolator.evaluate(pVector);
+			return mRInterpolator.evaluate(pVector);
 		}
 	}
 
@@ -94,9 +94,9 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 			{
 				lAgrInterpolator = (AgrInterpolator) super.clone();
 
-				lAgrInterpolator.mObjectiveFunction = this.mObjectiveFunction;
-				lAgrInterpolator.mExperimentDatabase = this.mExperimentDatabase;
-				lAgrInterpolator.mRInterpolator = (RInterpolator) this.mRInterpolator.clone();
+				lAgrInterpolator.mObjectiveFunction = mObjectiveFunction;
+				lAgrInterpolator.mExperimentDatabase = mExperimentDatabase;
+				lAgrInterpolator.mRInterpolator = (RInterpolator) mRInterpolator.clone();
 
 				return lAgrInterpolator;
 			}
@@ -122,7 +122,7 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	 */
 	public int getInputDimension()
 	{
-		return this.mInputDimension;
+		return mInputDimension;
 	}
 
 	/**
@@ -141,16 +141,16 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			final int lSize = this.mExperimentDatabase.getNumberOfExperiments();
-			final double[][] lPoints = new double[lSize][this.mInputDimension + 1];
+			final int lSize = mExperimentDatabase.getNumberOfExperiments();
+			final double[][] lPoints = new double[lSize][mInputDimension + 1];
 
 			for (int i = 0; i < lSize; i++)
 			{
-				final IExperiment lExperiment = this.mExperimentDatabase.getExperiment(i);
+				final IExperiment lExperiment = mExperimentDatabase.getExperiment(i);
 				for (int k = 0; k < getInputDimension(); k++)
 					lPoints[i][k] = lExperiment.getInput().get(k);
 
-				lPoints[i][getInputDimension()] = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
+				lPoints[i][getInputDimension()] = mObjectiveFunction.evaluate(lExperiment.getOutput());
 			}
 
 			return lPoints;

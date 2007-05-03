@@ -29,22 +29,22 @@ public class MatrixFile
 
   private void allocate()
   {
-    this.mMVectorList = new Vector();
+    mMVectorList = new Vector();
   }
 
   private final void addVector(final NumericalVector pMVector)
   {
-    this.mMVectorList.add(pMVector);
+    mMVectorList.add(pMVector);
   }
 
   public final NumericalVector getVector(final int pIndex)
   {
-    return ((NumericalVector) this.mMVectorList.elementAt(pIndex));
+    return ((NumericalVector) mMVectorList.elementAt(pIndex));
   }
 
   public final int size()
   {
-    return this.mMVectorList.size();
+    return mMVectorList.size();
   }
 
   public MatrixFile(final File pFile)

@@ -24,8 +24,8 @@ public class DoubleTestFunctions implements IExperimentFunction
 	public DoubleTestFunctions(final int pFunctionIndex1, final int pFunctionIndex2)
 	{
 		super();
-		this.mFunctionIndex1 = pFunctionIndex1;
-		this.mFunctionIndex2 = pFunctionIndex2;
+		mFunctionIndex1 = pFunctionIndex1;
+		mFunctionIndex2 = pFunctionIndex2;
 	}
 
 	static double dist(final double x, final double y)
@@ -188,7 +188,7 @@ public class DoubleTestFunctions implements IExperimentFunction
 	 */
 	public INumericalVector evaluate(final INumericalVector pExperimentInputVector)
 	{
-		return evaluateFunction(this.mFunctionIndex1, this.mFunctionIndex2, pExperimentInputVector);
+		return evaluateFunction(mFunctionIndex1, mFunctionIndex2, pExperimentInputVector);
 	}
 
 	/**

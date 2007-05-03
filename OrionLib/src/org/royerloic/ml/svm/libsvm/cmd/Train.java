@@ -67,14 +67,14 @@ class Train
 		int total_correct = 0;
 		double total_error = 0;
 		double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
-		final double[] target = new double[this.prob.mNumberOfVectors];
+		final double[] target = new double[prob.mNumberOfVectors];
 
-		SVM.svmCrossValidation(this.prob, this.param, this.nr_fold, target);
-		if ((this.param.svm_type == Parameter.EPSILON_SVR) || (this.param.svm_type == Parameter.NU_SVR))
+		SVM.svmCrossValidation(prob, param, nr_fold, target);
+		if ((param.svm_type == Parameter.EPSILON_SVR) || (param.svm_type == Parameter.NU_SVR))
 		{
-			for (i = 0; i < this.prob.mNumberOfVectors; i++)
+			for (i = 0; i < prob.mNumberOfVectors; i++)
 			{
-				final double y = this.prob.mClass[i];
+				final double y = prob.mClass[i];
 				final double v = target[i];
 				total_error += (v - y) * (v - y);
 				sumv += v;
@@ -83,37 +83,37 @@ class Train
 				sumyy += y * y;
 				sumvy += v * y;
 			}
-			System.out.print("Cross Validation Mean squared error = " + total_error / this.prob.mNumberOfVectors + "\n");
+			System.out.print("Cross Validation Mean squared error = " + total_error / prob.mNumberOfVectors + "\n");
 			System.out.print("Cross Validation Squared correlation coefficient = "
-					+ ((this.prob.mNumberOfVectors * sumvy - sumv * sumy) * (this.prob.mNumberOfVectors * sumvy - sumv * sumy))
-					/ ((this.prob.mNumberOfVectors * sumvv - sumv * sumv) * (this.prob.mNumberOfVectors * sumyy - sumy * sumy))
+					+ ((prob.mNumberOfVectors * sumvy - sumv * sumy) * (prob.mNumberOfVectors * sumvy - sumv * sumy))
+					/ ((prob.mNumberOfVectors * sumvv - sumv * sumv) * (prob.mNumberOfVectors * sumyy - sumy * sumy))
 					+ "\n");
 		}
 		else
-			for (i = 0; i < this.prob.mNumberOfVectors; i++)
-				if (target[i] == this.prob.mClass[i])
+			for (i = 0; i < prob.mNumberOfVectors; i++)
+				if (target[i] == prob.mClass[i])
 					++total_correct;
-		System.out.print("Cross Validation Accuracy = " + 100.0 * total_correct / this.prob.mNumberOfVectors + "%\n");
+		System.out.print("Cross Validation Accuracy = " + 100.0 * total_correct / prob.mNumberOfVectors + "%\n");
 	}
 
 	private void run(final String argv[]) throws IOException
 	{
 		parse_command_line(argv);
 		read_problem();
-		this.error_msg = SVM.svmCheckParameter(this.prob, this.param);
+		error_msg = SVM.svmCheckParameter(prob, param);
 
-		if (this.error_msg != null)
+		if (error_msg != null)
 		{
-			System.err.print("Error: " + this.error_msg + "\n");
+			System.err.print("Error: " + error_msg + "\n");
 			System.exit(1);
 		}
 
-		if (this.cross_validation != 0)
+		if (cross_validation != 0)
 			do_cross_validation();
 		else
 		{
-			this.model = SVM.svmTrain(this.prob, this.param);
-			SVM.svmSaveModel(this.model_file_name, this.model);
+			model = SVM.svmTrain(prob, param);
+			SVM.svmSaveModel(model_file_name, model);
 		}
 	}
 
@@ -137,23 +137,23 @@ class Train
 	{
 		int i;
 
-		this.param = new Parameter();
+		param = new Parameter();
 		// default values
-		this.param.svm_type = Parameter.C_SVC;
-		this.param.kernel_type = Parameter.RBF;
-		this.param.degree = 3;
-		this.param.gamma = 0; // 1/k
-		this.param.coef0 = 0;
-		this.param.nu = 0.5;
-		this.param.cache_size = 40;
-		this.param.C = 1;
-		this.param.eps = 1e-3;
-		this.param.p = 0.1;
-		this.param.shrinking = 1;
-		this.param.probability = 0;
-		this.param.nr_weight = 0;
-		this.param.weight_label = new int[0];
-		this.param.weight = new double[0];
+		param.svm_type = Parameter.C_SVC;
+		param.kernel_type = Parameter.RBF;
+		param.degree = 3;
+		param.gamma = 0; // 1/k
+		param.coef0 = 0;
+		param.nu = 0.5;
+		param.cache_size = 40;
+		param.C = 1;
+		param.eps = 1e-3;
+		param.p = 0.1;
+		param.shrinking = 1;
+		param.probability = 0;
+		param.nr_weight = 0;
+		param.weight_label = new int[0];
+		param.weight = new double[0];
 
 		// parse options
 		for (i = 0; i < argv.length; i++)
@@ -164,66 +164,66 @@ class Train
 			switch (argv[i - 1].charAt(1))
 			{
 				case 's':
-					this.param.svm_type = atoi(argv[i]);
+					param.svm_type = atoi(argv[i]);
 					break;
 				case 't':
-					this.param.kernel_type = atoi(argv[i]);
+					param.kernel_type = atoi(argv[i]);
 					break;
 				case 'd':
-					this.param.degree = atof(argv[i]);
+					param.degree = atof(argv[i]);
 					break;
 				case 'g':
-					this.param.gamma = atof(argv[i]);
+					param.gamma = atof(argv[i]);
 					break;
 				case 'r':
-					this.param.coef0 = atof(argv[i]);
+					param.coef0 = atof(argv[i]);
 					break;
 				case 'n':
-					this.param.nu = atof(argv[i]);
+					param.nu = atof(argv[i]);
 					break;
 				case 'm':
-					this.param.cache_size = atof(argv[i]);
+					param.cache_size = atof(argv[i]);
 					break;
 				case 'c':
-					this.param.C = atof(argv[i]);
+					param.C = atof(argv[i]);
 					break;
 				case 'e':
-					this.param.eps = atof(argv[i]);
+					param.eps = atof(argv[i]);
 					break;
 				case 'p':
-					this.param.p = atof(argv[i]);
+					param.p = atof(argv[i]);
 					break;
 				case 'h':
-					this.param.shrinking = atoi(argv[i]);
+					param.shrinking = atoi(argv[i]);
 					break;
 				case 'b':
-					this.param.probability = atoi(argv[i]);
+					param.probability = atoi(argv[i]);
 					break;
 				case 'v':
-					this.cross_validation = 1;
-					this.nr_fold = atoi(argv[i]);
-					if (this.nr_fold < 2)
+					cross_validation = 1;
+					nr_fold = atoi(argv[i]);
+					if (nr_fold < 2)
 					{
 						System.err.print("n-fold cross validation: n must >= 2\n");
 						exit_with_help();
 					}
 					break;
 				case 'w':
-					++this.param.nr_weight;
+					++param.nr_weight;
 					{
-						final int[] old = this.param.weight_label;
-						this.param.weight_label = new int[this.param.nr_weight];
-						System.arraycopy(old, 0, this.param.weight_label, 0, this.param.nr_weight - 1);
+						final int[] old = param.weight_label;
+						param.weight_label = new int[param.nr_weight];
+						System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
 					}
 
 					{
-						final double[] old = this.param.weight;
-						this.param.weight = new double[this.param.nr_weight];
-						System.arraycopy(old, 0, this.param.weight, 0, this.param.nr_weight - 1);
+						final double[] old = param.weight;
+						param.weight = new double[param.nr_weight];
+						System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
 					}
 
-					this.param.weight_label[this.param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
-					this.param.weight[this.param.nr_weight - 1] = atof(argv[i]);
+					param.weight_label[param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
+					param.weight[param.nr_weight - 1] = atof(argv[i]);
 					break;
 				default:
 					System.err.print("unknown option\n");
@@ -236,15 +236,15 @@ class Train
 		if (i >= argv.length)
 			exit_with_help();
 
-		this.input_file_name = argv[i];
+		input_file_name = argv[i];
 
 		if (i < argv.length - 1)
-			this.model_file_name = argv[i + 1];
+			model_file_name = argv[i + 1];
 		else
 		{
 			int p = argv[i].lastIndexOf('/');
 			++p; // whew...
-			this.model_file_name = argv[i].substring(p) + ".model";
+			model_file_name = argv[i].substring(p) + ".model";
 		}
 	}
 
@@ -252,7 +252,7 @@ class Train
 
 	private void read_problem() throws IOException
 	{
-		final BufferedReader fp = new BufferedReader(new FileReader(this.input_file_name));
+		final BufferedReader fp = new BufferedReader(new FileReader(input_file_name));
 		final Vector vy = new Vector();
 		final Vector vx = new Vector();
 		int max_index = 0;
@@ -279,17 +279,17 @@ class Train
 			vx.addElement(x);
 		}
 
-		this.prob = new Problem();
-		this.prob.mNumberOfVectors = vy.size();
-		this.prob.mVectorsTable = new Node[this.prob.mNumberOfVectors][];
-		for (int i = 0; i < this.prob.mNumberOfVectors; i++)
-			this.prob.mVectorsTable[i] = (Node[]) vx.elementAt(i);
-		this.prob.mClass = new double[this.prob.mNumberOfVectors];
-		for (int i = 0; i < this.prob.mNumberOfVectors; i++)
-			this.prob.mClass[i] = atof((String) vy.elementAt(i));
+		prob = new Problem();
+		prob.mNumberOfVectors = vy.size();
+		prob.mVectorsTable = new Node[prob.mNumberOfVectors][];
+		for (int i = 0; i < prob.mNumberOfVectors; i++)
+			prob.mVectorsTable[i] = (Node[]) vx.elementAt(i);
+		prob.mClass = new double[prob.mNumberOfVectors];
+		for (int i = 0; i < prob.mNumberOfVectors; i++)
+			prob.mClass[i] = atof((String) vy.elementAt(i));
 
-		if (this.param.gamma == 0)
-			this.param.gamma = 1.0 / max_index;
+		if (param.gamma == 0)
+			param.gamma = 1.0 / max_index;
 
 		fp.close();
 	}

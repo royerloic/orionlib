@@ -39,22 +39,22 @@ public class ValuedIntegerStringBidiMap
 		public ValuedEntry(final int pInteger, final String pString, final double pValue)
 		{
 			super();
-			this.mInteger = pInteger;
-			this.mString = pString;
-			this.mValue = pValue;
+			mInteger = pInteger;
+			mString = pString;
+			mValue = pValue;
 		}
 
 		@Override
 		public String toString()
 		{
-			return "{value=" + this.mValue + ", integer=" + this.mInteger + ", string=" + this.mString + "}";
+			return "{value=" + mValue + ", integer=" + mInteger + ", string=" + mString + "}";
 		}
 	}
 
 	public ValuedIntegerStringBidiMap(final Connection pDatabaseConnection)
 	{
 		this(pDatabaseConnection, generateRandomName());
-		this.mTemp = true;
+		mTemp = true;
 	}
 
 	private static String generateRandomName()
@@ -72,44 +72,44 @@ public class ValuedIntegerStringBidiMap
 																		final int pMinStringSize,
 																		final int pMaxStringSize)
 	{
-		this.mDatabaseConnection = pDatabaseConnection;
-		this.mName = pName;
-		this.mMinStringSize = pMinStringSize;
-		this.mMaxStringSize = pMaxStringSize;
+		mDatabaseConnection = pDatabaseConnection;
+		mName = pName;
+		mMinStringSize = pMinStringSize;
+		mMaxStringSize = pMaxStringSize;
 		try
 		{
-			this.mDatabaseConnection.setAutoCommit(false);
-			this.mDatabaseConnection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
-			this.mDatabaseConnection.commit();
+			mDatabaseConnection.setAutoCommit(false);
+			mDatabaseConnection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+			mDatabaseConnection.commit();
 		}
 		catch (final SQLException e)
 		{
 			loginfo(e);
 		}
-		createTable(this.mDatabaseConnection, this.mName, this.mMinStringSize, this.mMaxStringSize);
-		createStatements(this.mDatabaseConnection, this.mName);
-		commit(this.mDatabaseConnection);
-		this.mCounter = 0;
+		createTable(mDatabaseConnection, mName, mMinStringSize, mMaxStringSize);
+		createStatements(mDatabaseConnection, mName);
+		commit(mDatabaseConnection);
+		mCounter = 0;
 	}
 
 	private void createStatements(final Connection pDatabaseConnection, final String pTableName)
 	{
 		try
 		{
-			this.mInsertStatement = this.mDatabaseConnection.prepareStatement("INSERT INTO " + this.mName
+			mInsertStatement = mDatabaseConnection.prepareStatement("INSERT INTO " + mName
 					+ " (fValue,fInteger,fString) VALUES(?,?,?)");
-			this.mStringQueryStatement = this.mDatabaseConnection
-					.prepareStatement("SELECT fInteger, fValue FROM " + this.mName + " WHERE fString=? AND fvalue>=?");
-			this.mIntegerQueryStatement = this.mDatabaseConnection
-					.prepareStatement("SELECT fString, fValue FROM " + this.mName + " WHERE fInteger=? AND fvalue>=?");
-			this.mStringDeleteStatement = this.mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ this.mName + " WHERE fString=?");
-			this.mIntegerDeleteStatement = this.mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ this.mName + " WHERE fInteger=?");
-			this.mIntegerStringDeleteStatement = this.mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ this.mName + " WHERE fInteger=? AND fString=?");
-			this.mSizeStatement = this.mDatabaseConnection
-					.prepareStatement("SELECT COUNT(*) AS Count FROM " + this.mName);
+			mStringQueryStatement = mDatabaseConnection
+					.prepareStatement("SELECT fInteger, fValue FROM " + mName + " WHERE fString=? AND fvalue>=?");
+			mIntegerQueryStatement = mDatabaseConnection
+					.prepareStatement("SELECT fString, fValue FROM " + mName + " WHERE fInteger=? AND fvalue>=?");
+			mStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
+					+ mName + " WHERE fString=?");
+			mIntegerDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
+					+ mName + " WHERE fInteger=?");
+			mIntegerStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
+					+ mName + " WHERE fInteger=? AND fString=?");
+			mSizeStatement = mDatabaseConnection
+					.prepareStatement("SELECT COUNT(*) AS Count FROM " + mName);
 		}
 		catch (final SQLException e)
 		{
@@ -158,13 +158,13 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mDatabaseConnection.commit();
+			mDatabaseConnection.commit();
 			pDatabaseConnection.createStatement().execute(
 					"CREATE INDEX " + pTableName + "INDEXINTEGER ON " + pTableName + " (fInteger ASC)");
-			this.mDatabaseConnection.commit();
+			mDatabaseConnection.commit();
 			pDatabaseConnection.createStatement().execute(
 					"CREATE INDEX " + pTableName + "INDEXSTRING ON " + pTableName + " (fString ASC)");
-			this.mDatabaseConnection.commit();
+			mDatabaseConnection.commit();
 			return true;
 		}
 		catch (final SQLException e)
@@ -176,13 +176,13 @@ public class ValuedIntegerStringBidiMap
 
 	public boolean optimize()
 	{
-		return createIndices(this.mDatabaseConnection, this.mName);
+		return createIndices(mDatabaseConnection, mName);
 	}
 
 	private void automaticCommit()
 	{
-		if (this.mCounter % this.mCommitPeriod == 0)
-			commit(this.mDatabaseConnection);
+		if (mCounter % mCommitPeriod == 0)
+			commit(mDatabaseConnection);
 	}
 
 	private boolean commit(final Connection pDatabaseConnection)
@@ -201,7 +201,7 @@ public class ValuedIntegerStringBidiMap
 
 	public boolean commitChanges()
 	{
-		return commit(this.mDatabaseConnection);
+		return commit(mDatabaseConnection);
 	}
 
 	private String getStringType(final int pMinStringSize, final int pMaxStringSize)
@@ -216,7 +216,7 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			final ResultSet lResultSet = this.mSizeStatement.executeQuery();
+			final ResultSet lResultSet = mSizeStatement.executeQuery();
 			while (lResultSet.next())
 			{
 				int lSize;
@@ -243,8 +243,8 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mStringQueryStatement.setString(1, pString);
-			final ResultSet lResultSet = this.mStringQueryStatement.executeQuery();
+			mStringQueryStatement.setString(1, pString);
+			final ResultSet lResultSet = mStringQueryStatement.executeQuery();
 			return lResultSet.first();
 		}
 		catch (final SQLException e)
@@ -258,8 +258,8 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mIntegerQueryStatement.setInt(1, pInteger);
-			final ResultSet lResultSet = this.mIntegerQueryStatement.executeQuery();
+			mIntegerQueryStatement.setInt(1, pInteger);
+			final ResultSet lResultSet = mIntegerQueryStatement.executeQuery();
 			final boolean lContainsInteger = lResultSet.first();
 			lResultSet.close();
 			return lContainsInteger;
@@ -282,12 +282,12 @@ public class ValuedIntegerStringBidiMap
 
 		try
 		{
-			this.mStringQueryStatement.setString(1, pString);
-			this.mStringQueryStatement.setDouble(2, pMinValue);
-			final ResultSet lResultSet = this.mStringQueryStatement.executeQuery();
+			mStringQueryStatement.setString(1, pString);
+			mStringQueryStatement.setDouble(2, pMinValue);
+			final ResultSet lResultSet = mStringQueryStatement.executeQuery();
 			int lCounter = 0;
 			while (lResultSet.next())
-				if (lCounter < this.mMaximumNuberOfResults)
+				if (lCounter < mMaximumNuberOfResults)
 				{
 					final int lInteger = lResultSet.getInt("fInteger");
 					final double lValue = lResultSet.getDouble("fValue");
@@ -316,12 +316,12 @@ public class ValuedIntegerStringBidiMap
 
 		try
 		{
-			this.mIntegerQueryStatement.setInt(1, pInteger);
-			this.mIntegerQueryStatement.setDouble(2, pMinValue);
-			final ResultSet lResultSet = this.mIntegerQueryStatement.executeQuery();
+			mIntegerQueryStatement.setInt(1, pInteger);
+			mIntegerQueryStatement.setDouble(2, pMinValue);
+			final ResultSet lResultSet = mIntegerQueryStatement.executeQuery();
 			int lCounter = 0;
 			while (lResultSet.next())
-				if (lCounter < this.mMaximumNuberOfResults)
+				if (lCounter < mMaximumNuberOfResults)
 				{
 					final String lString = lResultSet.getString("fString");
 					final double lValue = lResultSet.getDouble("fValue");
@@ -348,13 +348,13 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mInsertStatement.clearWarnings();
-			this.mInsertStatement.clearParameters();
-			this.mInsertStatement.setDouble(1, pValue);
-			this.mInsertStatement.setInt(2, pInteger);
-			this.mInsertStatement.setString(3, pString);
-			this.mInsertStatement.executeUpdate();
-			this.mCounter++;
+			mInsertStatement.clearWarnings();
+			mInsertStatement.clearParameters();
+			mInsertStatement.setDouble(1, pValue);
+			mInsertStatement.setInt(2, pInteger);
+			mInsertStatement.setString(3, pString);
+			mInsertStatement.executeUpdate();
+			mCounter++;
 			automaticCommit();
 			return true;
 		}
@@ -369,9 +369,9 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mStringDeleteStatement.setString(1, pString);
-			final int lDeletedRows = this.mStringDeleteStatement.executeUpdate();
-			this.mCounter += lDeletedRows;
+			mStringDeleteStatement.setString(1, pString);
+			final int lDeletedRows = mStringDeleteStatement.executeUpdate();
+			mCounter += lDeletedRows;
 			automaticCommit();
 			return lDeletedRows;
 		}
@@ -386,9 +386,9 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mIntegerDeleteStatement.setInt(1, pInteger);
-			final int lDeletedRows = this.mIntegerDeleteStatement.executeUpdate();
-			this.mCounter += lDeletedRows;
+			mIntegerDeleteStatement.setInt(1, pInteger);
+			final int lDeletedRows = mIntegerDeleteStatement.executeUpdate();
+			mCounter += lDeletedRows;
 			automaticCommit();
 			return lDeletedRows;
 		}
@@ -403,10 +403,10 @@ public class ValuedIntegerStringBidiMap
 	{
 		try
 		{
-			this.mIntegerStringDeleteStatement.setInt(1, pInteger);
-			this.mIntegerStringDeleteStatement.setString(2, pString);
-			final int lDeletedRows = this.mIntegerStringDeleteStatement.executeUpdate();
-			this.mCounter += lDeletedRows;
+			mIntegerStringDeleteStatement.setInt(1, pInteger);
+			mIntegerStringDeleteStatement.setString(2, pString);
+			final int lDeletedRows = mIntegerStringDeleteStatement.executeUpdate();
+			mCounter += lDeletedRows;
 			automaticCommit();
 			return lDeletedRows;
 		}
@@ -431,38 +431,38 @@ public class ValuedIntegerStringBidiMap
 
 	public void clear()
 	{
-		commit(this.mDatabaseConnection);
-		dropTable(this.mDatabaseConnection, this.mName);
-		commit(this.mDatabaseConnection);
-		createTable(this.mDatabaseConnection, this.mName, this.mMinStringSize, this.mMaxStringSize);
-		commit(this.mDatabaseConnection);
+		commit(mDatabaseConnection);
+		dropTable(mDatabaseConnection, mName);
+		commit(mDatabaseConnection);
+		createTable(mDatabaseConnection, mName, mMinStringSize, mMaxStringSize);
+		commit(mDatabaseConnection);
 	}
 
 	public int getCommitPeriod()
 	{
-		return this.mCommitPeriod;
+		return mCommitPeriod;
 	}
 
 	public void setCommitPeriod(final int commitPeriod)
 	{
-		this.mCommitPeriod = commitPeriod;
+		mCommitPeriod = commitPeriod;
 	}
 
 	public void close()
 	{
 		try
 		{
-			if (this.mTemp)
-				dropTable(this.mDatabaseConnection, this.mName);
+			if (mTemp)
+				dropTable(mDatabaseConnection, mName);
 			else
 				commitChanges();
-			this.mInsertStatement.close();
-			this.mIntegerDeleteStatement.close();
-			this.mIntegerQueryStatement.close();
-			this.mIntegerStringDeleteStatement.close();
-			this.mSizeStatement.close();
-			this.mStringDeleteStatement.close();
-			this.mStringQueryStatement.close();
+			mInsertStatement.close();
+			mIntegerDeleteStatement.close();
+			mIntegerQueryStatement.close();
+			mIntegerStringDeleteStatement.close();
+			mSizeStatement.close();
+			mStringDeleteStatement.close();
+			mStringQueryStatement.close();
 		}
 		catch (final SQLException e)
 		{
@@ -480,7 +480,7 @@ public class ValuedIntegerStringBidiMap
 	@Override
 	public String toString()
 	{
-		return "{" + this.mDatabaseConnection + ", " + this.mName + " action counter=" + this.mCounter + "}";
+		return "{" + mDatabaseConnection + ", " + mName + " action counter=" + mCounter + "}";
 	}
 
 	@Override

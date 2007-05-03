@@ -6,12 +6,10 @@ package org.royerloic.optimal.stdimpl.test;
 import java.util.List;
 
 import org.royerloic.optimal.Optimal;
-import org.royerloic.optimal.gui.OptimalEngineJFrame;
 import org.royerloic.optimal.interf.IExperiment;
 import org.royerloic.optimal.interf.IExperimentDatabase;
 import org.royerloic.optimal.interf.IExperimentFunction;
 import org.royerloic.optimal.interf.IExperimentFunctionStub;
-import org.royerloic.optimal.interf.IInterpolator;
 import org.royerloic.optimal.interf.IObjectiveFunction;
 import org.royerloic.optimal.interf.IOptimalEngine;
 import org.royerloic.optimal.interf.IOptimalEventListener;
@@ -57,37 +55,37 @@ class OptimizationTask implements IOptimalEventListener
 													final int pMaximumIterations)
 	{
 		super();
-		this.mOptimalEngine = pOptimalEngine;
-		this.mExperimentFunction = pExperimentFunction;
-		this.mMaximumIterations = pMaximumIterations;
+		mOptimalEngine = pOptimalEngine;
+		mExperimentFunction = pExperimentFunction;
+		mMaximumIterations = pMaximumIterations;
 	}
 
 	public void launchTest()
 	{
 
-		this.mDone = false;
+		mDone = false;
 
 		final Interpreter lInterpreter = new Optimal();
-		this.mOptimalEngine.setOptimalInterpreter(lInterpreter);
+		mOptimalEngine.setOptimalInterpreter(lInterpreter);
 
 		final IExperimentDatabase lExperimentdatabase = new ExperimentDatabase();
-		this.mOptimalEngine.setExperimentDatabase(lExperimentdatabase);
+		mOptimalEngine.setExperimentDatabase(lExperimentdatabase);
 
-		final IExperimentFunctionStub lExperimentFunctionStub1 = new ExperimentFunctionStub(this.mExperimentFunction);
-		this.mOptimalEngine.addExperimentFunctionStub(lExperimentFunctionStub1);
+		final IExperimentFunctionStub lExperimentFunctionStub1 = new ExperimentFunctionStub(mExperimentFunction);
+		mOptimalEngine.addExperimentFunctionStub(lExperimentFunctionStub1);
 
-		this.mObjectiveFunction = new ObjectiveFunction("(y0+y1)/2");
-		this.mOptimalEngine.setObjectiveFunction(this.mObjectiveFunction);
+		mObjectiveFunction = new ObjectiveFunction("(y0+y1)/2");
+		mOptimalEngine.setObjectiveFunction(mObjectiveFunction);
 
-		final UniformGrid lGridDefinition = new UniformGrid(this.mExperimentFunction.getInputDimension());
+		final UniformGrid lGridDefinition = new UniformGrid(mExperimentFunction.getInputDimension());
 		lGridDefinition.setNumberOfDivisions(2);
 
-		this.mOptimalEngine.setEventListener(this);
+		mOptimalEngine.setEventListener(this);
 
-		if (this.mOptimalEngine.validateEngine())
+		if (mOptimalEngine.validateEngine())
 		{
-			this.mOptimalEngine.pushGriddedExperiments(lGridDefinition);
-			this.mOptimalEngine.start();
+			mOptimalEngine.pushGriddedExperiments(lGridDefinition);
+			mOptimalEngine.start();
 		}
 		else
 			System.out.print("Optimal Engine not validated.");
@@ -101,19 +99,19 @@ class OptimizationTask implements IOptimalEventListener
 	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
 	{
 		// System.out.print(".");
-		if (this.mOptimalEngine.getIterations() >= this.mMaximumIterations + 1)
+		if (mOptimalEngine.getIterations() >= mMaximumIterations + 1)
 		{
-			this.mOptimalEngine.stop();
-			this.mResults = this.mOptimalEngine.getListOfBestExperimentValues();
-			this.mPerformance = computePerformance(this.mResults);
-			this.mMaxValue = ((Double) this.mResults.get(this.mResults.size() - 1)).doubleValue();
-			if (this.mMaxValue != 0)
-				this.mSpeed = this.mPerformance / this.mMaxValue;
+			mOptimalEngine.stop();
+			mResults = mOptimalEngine.getListOfBestExperimentValues();
+			mPerformance = computePerformance(mResults);
+			mMaxValue = ((Double) mResults.get(mResults.size() - 1)).doubleValue();
+			if (mMaxValue != 0)
+				mSpeed = mPerformance / mMaxValue;
 			else
-				this.mSpeed = 0;
+				mSpeed = 0;
 
-			final List lList = this.mOptimalEngine.getListOfBestExperiments();
-			this.mBestExperiment = (IExperiment) lList.get(lList.size() - 1);
+			final List lList = mOptimalEngine.getListOfBestExperiments();
+			mBestExperiment = (IExperiment) lList.get(lList.size() - 1);
 
 			/*************************************************************************
 			 * System.out.println(""); System.out.println("Peformance = " +
@@ -121,14 +119,14 @@ class OptimizationTask implements IOptimalEventListener
 			 ************************************************************************/
 			// System.out.println("Best value = " +
 			// ((Double)mResults.get(mResults.size()-1)).doubleValue());
-			this.mDone = true;
+			mDone = true;
 
 		}
 	}
 
 	public boolean isDone()
 	{
-		return this.mDone;
+		return mDone;
 	}
 
 	private double computePerformance(final List pValueList)
@@ -155,7 +153,7 @@ class OptimizationTask implements IOptimalEventListener
 	 */
 	public double getPerformance()
 	{
-		return this.mPerformance;
+		return mPerformance;
 	}
 
 	/**
@@ -163,7 +161,7 @@ class OptimizationTask implements IOptimalEventListener
 	 */
 	public double getSpeed()
 	{
-		return this.mSpeed;
+		return mSpeed;
 	}
 
 	/**
@@ -171,7 +169,7 @@ class OptimizationTask implements IOptimalEventListener
 	 */
 	public double getMaxValue()
 	{
-		return this.mMaxValue;
+		return mMaxValue;
 	}
 
 	/**
@@ -179,7 +177,7 @@ class OptimizationTask implements IOptimalEventListener
 	 */
 	public IExperiment getBestExperiment()
 	{
-		return this.mBestExperiment;
+		return mBestExperiment;
 	}
 
 }

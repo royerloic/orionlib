@@ -40,14 +40,14 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	public PiInterpolator(final Class pSubInterpolator)
 	{
 		super();
-		this.mSubInterpolator = pSubInterpolator;
+		mSubInterpolator = pSubInterpolator;
 
 	}
 
 	public PiInterpolator()
 	{
 		super();
-		this.mSubInterpolator = AgrInterpolator.class;
+		mSubInterpolator = AgrInterpolator.class;
 
 	}
 
@@ -56,7 +56,7 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	 */
 	public void setObjectiveFunction(final IObjectiveFunction pObjectiveFunction)
 	{
-		this.mObjectiveFunction = pObjectiveFunction;
+		mObjectiveFunction = pObjectiveFunction;
 	}
 
 	/**
@@ -64,25 +64,25 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	 */
 	public void setExperimentDatabase(final IExperimentDatabase pExperimentDatabase)
 	{
-		this.mExperimentDatabase = pExperimentDatabase;
+		mExperimentDatabase = pExperimentDatabase;
 	}
 
 	public void update()
 	{
 		synchronized (this)
 		{
-			if (this.mInterpolatorList == null)
+			if (mInterpolatorList == null)
 			{
-				this.mInterpolatorList = new ArrayList();
-				this.mInputDimension = this.mExperimentDatabase.getExperiment(0).getInput().getDimension();/**/
-				this.mOutputDimension = this.mExperimentDatabase.getExperiment(0).getOutput().getDimension();/**/
+				mInterpolatorList = new ArrayList();
+				mInputDimension = mExperimentDatabase.getExperiment(0).getInput().getDimension();/**/
+				mOutputDimension = mExperimentDatabase.getExperiment(0).getOutput().getDimension();/**/
 
-				for (int i = 0; i < this.mOutputDimension; i++)
+				for (int i = 0; i < mOutputDimension; i++)
 					try
 					{
 						IInterpolator lInterpolator;
-						lInterpolator = (IInterpolator) this.mSubInterpolator.newInstance();
-						lInterpolator.setExperimentDatabase(this.mExperimentDatabase);
+						lInterpolator = (IInterpolator) mSubInterpolator.newInstance();
+						lInterpolator.setExperimentDatabase(mExperimentDatabase);
 
 						final int lIndex = i;
 						final IObjectiveFunction lObjectiveFunction = new IObjectiveFunction()
@@ -91,7 +91,7 @@ public class PiInterpolator implements IInterpolator, Cloneable
 
 							public double evaluate(INumericalVector pVector)
 							{
-								return pVector.get(this.mIndex.intValue());
+								return pVector.get(mIndex.intValue());
 							}
 
 							public void setInterpreter(Interpreter pInterpreter)
@@ -104,7 +104,7 @@ public class PiInterpolator implements IInterpolator, Cloneable
 						};
 
 						lInterpolator.setObjectiveFunction(lObjectiveFunction);
-						this.mInterpolatorList.add(lInterpolator);
+						mInterpolatorList.add(lInterpolator);
 
 					}
 					catch (final InstantiationException e)
@@ -119,9 +119,9 @@ public class PiInterpolator implements IInterpolator, Cloneable
 					}
 			}
 
-			for (int i = 0; i < this.mOutputDimension; i++)
+			for (int i = 0; i < mOutputDimension; i++)
 			{
-				final IInterpolator lInterpolator = (IInterpolator) this.mInterpolatorList.get(i);
+				final IInterpolator lInterpolator = (IInterpolator) mInterpolatorList.get(i);
 				lInterpolator.update();
 			}
 		}
@@ -134,15 +134,15 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			final double[] lArray = new double[this.mOutputDimension];
-			for (int i = 0; i < this.mOutputDimension; i++)
+			final double[] lArray = new double[mOutputDimension];
+			for (int i = 0; i < mOutputDimension; i++)
 			{
-				final IInterpolator lInterpolator = (IInterpolator) this.mInterpolatorList.get(i);
+				final IInterpolator lInterpolator = (IInterpolator) mInterpolatorList.get(i);
 				final double lValue = lInterpolator.evaluate(pVector);
 				lArray[i] = lValue;
 			}
 			final INumericalVector lResultVector = new NumericalVector(lArray);
-			final double lObjectiveValue = this.mObjectiveFunction.evaluate(lResultVector);
+			final double lObjectiveValue = mObjectiveFunction.evaluate(lResultVector);
 			return lObjectiveValue;
 		}
 	}
@@ -158,10 +158,10 @@ public class PiInterpolator implements IInterpolator, Cloneable
 			try
 			{
 				final PiInterpolator lPiInterpolator = (PiInterpolator) super.clone();
-				final List lClonedInterpolatorList = (List) ((ArrayList) this.mInterpolatorList).clone();
-				for (int i = 0; i < this.mOutputDimension; i++)
+				final List lClonedInterpolatorList = (List) ((ArrayList) mInterpolatorList).clone();
+				for (int i = 0; i < mOutputDimension; i++)
 				{
-					final IInterpolator lInterpolator = (IInterpolator) ((IInterpolator) this.mInterpolatorList.get(i)).clone();
+					final IInterpolator lInterpolator = (IInterpolator) ((IInterpolator) mInterpolatorList.get(i)).clone();
 					lPiInterpolator.mInterpolatorList.set(i, lInterpolator);
 				}
 				return lPiInterpolator;
@@ -188,7 +188,7 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	 */
 	public int getInputDimension()
 	{
-		return this.mInputDimension;
+		return mInputDimension;
 	}
 
 	/**
@@ -207,16 +207,16 @@ public class PiInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			final int lSize = this.mExperimentDatabase.getNumberOfExperiments();
-			final double[][] lPoints = new double[lSize][this.mInputDimension + 1];
+			final int lSize = mExperimentDatabase.getNumberOfExperiments();
+			final double[][] lPoints = new double[lSize][mInputDimension + 1];
 
 			for (int i = 0; i < lSize; i++)
 			{
-				final IExperiment lExperiment = this.mExperimentDatabase.getExperiment(i);
+				final IExperiment lExperiment = mExperimentDatabase.getExperiment(i);
 				for (int k = 0; k < getInputDimension(); k++)
 					lPoints[i][k] = lExperiment.getInput().get(k);
 
-				lPoints[i][getInputDimension()] = this.mObjectiveFunction.evaluate(lExperiment.getOutput());
+				lPoints[i][getInputDimension()] = mObjectiveFunction.evaluate(lExperiment.getOutput());
 			}
 
 			return lPoints;
