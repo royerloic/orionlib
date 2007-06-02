@@ -1,0 +1,52 @@
+US state	latitude	longitude	code
+Alaska	61.385	-152.2683	AK
+Alabama	32.799	-86.8073	AL
+Arkansas	34.9513	-92.3809	AR
+Arizona	33.7712	-111.3877	AZ
+California	36.17	-119.7462	CA
+Colorado	39.0646	-105.3272	CO
+Connecticut	41.5834	-72.7622	CT
+District of Columbia	38.8964	-77.0262	DC
+Delaware	39.3498	-75.5148	DE
+Florida	27.8333	-81.717	FL
+Georgia	32.9866	-83.6487	GA
+Hawaii	21.1098	-157.5311	HI
+Iowa	42.0046	-93.214	IA
+Idaho	44.2394	-114.5103	ID
+Illinois	40.3363	-89.0022	IL
+Indiana	39.8647	-86.2604	IN
+Kansas	38.5111	-96.8005	KS
+Kentucky	37.669	-84.6514	KY
+Louisiana	31.1801	-91.8749	LA
+Massachusetts	42.2373	-71.5314	MA
+Maryland	39.0724	-76.7902	MD
+Maine	44.6074	-69.3977	ME
+Michigan	43.3504	-84.5603	MI
+Minnesota	45.7326	-93.9196	MN
+Missouri	38.4623	-92.302	MO
+Mississippi	32.7673	-89.6812	MS
+Montana	46.9048	-110.3261	MT
+North Carolina	35.6411	-79.8431	NC
+North Dakota	47.5362	-99.793	ND
+Nebraska	41.1289	-98.2883	NE
+New Hampshire	43.4108	-71.5653	NH
+New Jersey	40.314	-74.5089	NJ
+New Mexico	34.8375	-106.2371	NM
+Nevada	38.4199	-117.1219	NV
+New York	42.1497	-74.9384	NY
+Ohio	40.3736	-82.7755	OH
+Oklahoma	35.5376	-96.9247	OK
+Oregon	44.5672	-122.1269	OR
+Pennsylvania	40.5773	-77.264	PA
+Rhode Island	41.6772	-71.5101	RI
+South Carolina	33.8191	-80.9066	SC
+South Dakota	44.2853	-99.4632	SD
+Tennessee	35.7449	-86.7489	TN
+Texas	31.106	-97.6475	TX
+Utah	40.1135	-111.8535	UT
+Virginia	37.768	-78.2057	VA
+Washington	47.3917	-121.5708	WA
+Wisconsin	44.2563	-89.6385	WI
+Vermont	44.0407	-72.7093	VT
+West Virginia	38.468	-80.9696	WV
+Wyoming	42.7475	-107.2085	WY
