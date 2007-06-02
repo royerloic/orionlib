@@ -1,0 +1,2760 @@
+city	Latitude	Longitude	Country name	Population of city proper	Population of urban agglomeration	Latest available year of collection	"Census/estimate in the above year;  1=census. 2=estimate"	"Capital city or not; 0=all other cities. 1=capital"
+Banta	35.567	6.167	Algeria	102756	102756	1977	1	0
+Constantine	36.367	6.667	Algeria	344454	378668	1977	1	0
+Setif	36.183	5.4	Algeria	129754	129754	1977	1	0
+Luanda	-8.833	13.25	Angola	-9999	475328	1970	1	1
+Cotonou	6.4	2.517	Benin	383250	-9999	1981	2	0
+Bobo Dioulasso	11.183	-4.3	Burkina Faso	173925	-9999	1983	2	0
+Ouagadougou	12.333	-2.333	Burkina Faso	307937	-9999	1983	2	1
+Bujumbura	-3.367	29.317	Burundi	215243	-9999	1987	2	1
+Douala	4.067	9.717	Cameroon	1029731	-9999	1986	2	0
+Maraua	10.583	14.333	Cameroon	-9999	103653	1986	2	0
+Nkongsamba	4.983	9.883	Cameroon	-9999	123149	1986	2	0
+Yaounde	3.85	11.517	Cameroon	653670	-9999	1986	2	1
+Bangui	4.383	18.617	Central African Republic	473817	-9999	1984	2	1
+Ndjamena	12.167	14.983	Chad	179000	-9999	1972	2	1
+Moroni	-11.667	43.267	Comoros	17267	-9999	1980	1	1
+Brazzaville	-4.233	15.233	Congo	596200	-9999	1984	1	1
+Point Noire	-4.767	11.883	Congo	298014	-9999	1984	1	0
+Abidjan	5.317	-4.017	Cote d'lvoire	-9999	1423323	1979	2	1
+Bouake	7.7	-5	Cote d'lvoire	-9999	272640	1979	2	0
+Alexandria	31.217	29.917	Egypt	2893000	-9999	1986	2	0
+Assyut	27.233	31.117	Egypt	291000	-9999	1986	2	0
+Aswan	24.083	32.933	Egypt	196000	-9999	1986	2	0
+Beni-Suef	29.083	31.083	Egypt	163000	-9999	1986	2	0
+Cairo	30.05	31.25	Egypt	6052836	-9999	1986	1	1
+Damanhur	31.05	30.467	Egypt	226000	-9999	1986	2	0
+El-Mahalla El-Kubra	31	31	Egypt	385000	-9999	1986	2	0
+Faiyum	29.317	30.833	Egypt	227000	-9999	1986	2	0
+Giza	30.483	30.85	Egypt	1857508	-9999	1986	1	0
+Ismailia	30.6	32.25	Egypt	236000	-9999	1986	2	0
+Kafr-El-Dwar	31.133	30.133	Egypt	194000	-9999	1986	2	0
+Kena	26.133	32.7	Egypt	142000	-9999	1986	2	0
+Mansura	31.05	31.383	Egypt	358000	-9999	1986	2	0
+Shebin-El-Kom	30.55	31.017	Egypt	136000	-9999	1986	2	0
+Shubra-El-Khema	30.1	31.25	Egypt	710794	-9999	1986	1	0
+Sohag	26.55	31.7	Egypt	141000	-9999	1986	2	0
+Suez	29.983	32.55	Egypt	265000	-9999	1986	2	0
+Tanta	30.8	31	Egypt	374000	-9999	1986	2	0
+Zagazig	30.583	31.5	Egypt	274000	-9999	1986	2	0
+Addis Ababa	9.05	38.7	Ethiopia	1618600	-9999	1987	2	1
+Asmara	15.333	38.967	Ethiopia	307070	-9999	1987	2	0
+Diredawa	9.583	41.833	Ethiopia	112540	-9999	1987	2	0
+Libreville	0.5	9.417	Gabon	-9999	57000	1967	2	1
+Banjul	13.467	-16.65	Gambia	49181	109986	1980	2	1
+Accra	5.55	-0.25	Ghana	564194	738498	1970	1	1
+Kumasi	6.75	-1.583	Ghana	260286	345117	1970	1	0
+Sekondi-Takoradi	4.983	-1.717	Ghana	91874	160868	1970	1	0
+Bissau	11.867	-15.65	Guinea-Bissau	109214	-9999	1979	1	1
+Kisumu	-0.133	34.783	Kenya	152643	-9999	1979	1	0
+Nairobi	-1.283	36.833	Kenya	1162189	-9999	1985	2	1
+Maseru	-29.317	27.483	Lesotho	13312	29049	1985	2	1
+Monrovia	6.333	-10.767	Liberia	421058	-9999	1984	1	1
+Bengazi	32.117	20.083	Libyan Arab	282192	-9999	1973	1	1
+Blantyre-Limbe	-15.767	35	Malawi	331588	-9999	1987	1	0
+Lilongwe	-13.967	33.817	Malawi	233973	-9999	1987	1	1
+Bamako	12.667	-7.983	Mali	399869	419239	1976	1	1
+Agadir	30.5	-9.667	Morocco	-9999	245000	1981	2	0
+Beni-Mellal	32.367	-6.483	Morocco	-9999	204800	1981	2	0
+Fez	34.083	-5	Morocco	-9999	562000	1981	2	0
+Khemisset	33.833	-6.05	Morocco	-9999	100100	1981	2	0
+Khouribga	32.9	-6.95	Morocco	-9999	229600	1981	2	0
+Marrakech	31.817	-8	Morocco	-9999	548700	1981	2	0
+Meknes	33.883	-5.617	Morocco	-9999	486600	1981	2	0
+Nador	35.167	-3	Morocco	-9999	115300	1981	2	0
+Rabit-Sale	34.033	-6.85	Morocco	-9999	841800	1981	2	1
+Settat	33.067	-7.617	Morocco	-9999	167000	1981	2	0
+Taza	34.267	-4.017	Morocco	-9999	146500	1981	2	0
+Tetouan	35.567	-5.367	Morocco	-9999	371700	1981	2	0
+Beira	-19.817	34.867	Mozambique	264202	-9999	1986	2	0
+Napmpula	-15.15	39.233	Mozambique	182505	-9999	1986	2	0
+Windhoek	-22.567	17.1	Namibia	-9999	36051	1960	1	1
+Niamey	13.533	2.083	Niger	225314	-9999	1977	1	1
+Aba	5.1	7.35	Nigeria	177000	-9999	1975	2	0
+Abeokuta	7.167	3.433	Nigeria	253000	-9999	1975	2	0
+Ado-Ekiti	7.667	5.267	Nigeria	213000	-9999	1975	2	0
+Benin	6.317	5.683	Nigeria	136000	-9999	1975	2	0
+Calabar	4.933	8.367	Nigeria	103000	-9999	1975	2	0
+Ede	7.733	4.517	Nigeria	182000	-9999	1975	2	0
+Enugu	6.333	7.5	Nigeria	187000	-9999	1975	2	0
+Ibadan	7.383	3.933	Nigeria	847000	-9999	1975	2	0
+Ife	7.55	4.567	Nigeria	176000	-9999	1975	2	0
+Ikere-Ekiti	7.517	5.233	Nigeria	145000	-9999	1975	2	0
+Ila	8	4.9	Nigeria	155000	-9999	1975	2	0
+Ilesha	8.917	3.417	Nigeria	224000	-9999	1975	2	0
+Ilovin	8.5	4.533	Nigeria	282000	-9999	1975	2	0
+Iseyin	7.983	3.667	Nigeria	115083	-9999	1971	2	0
+Iwo	7.633	4.183	Nigeria	214000	-9999	1975	2	0
+Kaduna	10.467	7.417	Nigeria	202000	-9999	1975	2	0
+Kano	12	8.517	Nigeria	399000	-9999	1975	2	0
+Lagos	6.45	3.467	Nigeria	1060848	-9999	1975	2	1
+Maiduguri	11.883	13.267	Nigeria	189000	-9999	1975	2	0
+Mushin	6.533	3.367	Nigeria	197000	-9999	1975	2	0
+Ogbomosho	8.083	4.183	Nigeria	432000	-9999	1975	2	0
+Onitsha	6.167	6.783	Nigeria	220000	-9999	1975	2	0
+Oshogbo	7.833	4.583	Nigeria	282000	-9999	1975	2	0
+Oyo	7.833	3.917	Nigeria	152000	-9999	1975	2	0
+Port Harcourt	4.717	7.167	Nigeria	242000	-9999	1975	2	0
+Zaria	11.017	7.733	Nigeria	224000	-9999	1975	2	0
+Kigali	-1.933	30.067	Rwanda	116227	-9999	1978	1	1
+Jamestown	-15.917	-5.733	St. Helena	1576	-9999	1976	1	1
+Sao Tome	0.317	6.717	Sao Tome and Principe	5714	-9999	1960	1	1
+Kaolack	14.15	-16.133	Senegal	106899	-9999	1976	1	0
+Thies	14.817	-16.867	Senegal	117333	-9999	1976	1	0
+Port Victoria	-4.633	55.45	Seychelles	-9999	23012	1977	1	1
+Benoni	-26.2	28.3	S. Africa	151294	151294	1970	1	0
+Bloemfrontein	-29.117	26.233	S. Africa	104381	232984	1985	1	0
+Boksburg	-26.217	28.25	S.Africa	110832	-9999	1985	1	0
+Cape Town	-33.933	18.467	S.Africa	776617	1911521	1985	1	1
+Durban	-29.883	31	S.Africa	634301	982075	1985	1	0
+Germiston	-26.25	28.167	S. Africa	116718	-9999	1985	1	0
+Johannesburg	-26.167	28.033	S. Africa	632369	10609408	1985	1	0
+Katlehong	-26.333	28.15	S. Africa	137745	-9999	1985	1	0
+Mamelodi	-25.667	28.333	S. Africa	127033	-9999	1985	1	0
+Nyanga	-33.983	18.583	S. Africa	148882	-9999	1985	1	0
+Pietermaritzburg	-29.6	30.4	S. Africa	114822	160855	1970	1	0
+Port Elizabeth	-33.967	25.6	S. Africa	272844	651993	1985	1	0
+Pretoria	-25.75	28.2	S. Africa	443059	822925	1985	1	1
+Roodepoort	-26.167	27.883	S. Africa	141764	-9999	1985	1	0
+Sasolburg	-26.833	27.85	S. Africa	-9999	540142	1985	1	0
+Soweto	-26.283	27.833	S. Africa	521948	-9999	1985	1	0
+Springs	-26.267	28.433	S. Africa	142812	142812	1970	1	0
+Tembisa	-25.967	28.233	S. Africa	149282	-9999	1985	1	0
+Umlazi	-29.967	30.883	S. Africa	123495	123495	1970	1	0
+Vereeniging	-26.683	27.933	S. Africa	172549	172549	1970	1	0
+W. Rand	-26.117	27.75	S. Africa	-9999	647334	1985	1	0
+El Obied	13.183	30.167	Sudan	118000	-9999	1980	2	0
+Juba	4.833	31.583	Sudan	116000	-9999	1980	2	0
+Kassala	15.4	36.417	Sudan	149000	-9999	1980	2	0
+Khartoum	15.55	32.533	Sudan	561000	-9999	1980	2	1
+Khartoum N.	15.65	32.567	Sudan	249000	-9999	1980	2	0
+Wad Medani	14.4	33.7	Sudan	153000	-9999	1980	2	0
+Omdurman	15.617	32.483	Sudan	454000	-9999	1980	2	0
+Port Sudan	19.633	37.117	Sudan	205000	-9999	1980	2	0
+Wau	7.7	28	Sudan	116000	-9999	1980	2	0
+Mbabane	-26.333	31.133	Swaziland	23109	-9999	1976	1	1
+Lome	6.167	1.35	Togo	148156	-9999	1970	1	1
+Tunis	36.833	10.217	Tunisia	596654	-9999	1984	1	1
+Kampala	0.317	32.583	Uganda	-9999	330700	1969	1	1
+Dodoma	-6.167	35.667	Tanzania	85000	-9999	1985	2	1
+Mbeya	-8.9	33.483	Tanzania	194000	-9999	1985	2	0
+Mwanza	-2.517	32.933	Tanzania	252000	-9999	1985	2	0
+Tabora	-5.017	32.8	Tanzania	214000	-9999	1985	2	0
+Zanzibar	-6.167	39.2	Tanzania	133000	-9999	1985	2	0
+El Aaiun	27.15	-13.2	W. Sahara	20010	-9999	1974	2	1
+Kananga	-5.883	22.433	Zaire	290898	-9999	1984	1	0
+Kikwit	-5.033	18.85	Zaire	133206	-9999	1976	2	0
+Kisangani	0.55	25.233	Zaire	282650	-9999	1984	1	0
+Kolwezi	-10.75	25.417	Zaire	201382	-9999	1984	1	0
+Likasi	-10.967	26.783	Zaire	194465	-9999	1984	1	0
+Lubumbashi	-11.683	27.483	Zaire	543268	-9999	1984	1	0
+Luluabourg	-5.9	22.417	Zaire	506033	-9999	1972	2	0
+Matadi	-5.833	13.533	Zaire	144742	-9999	1984	1	0
+Mbandaka	0.05	18.467	Zaire	125263	-9999	1984	1	0
+Mbuji-Mayi	-6.167	23.65	Zaire	423363	-9999	1984	1	0
+Chingola	-12.517	27.883	Zambia	145993	-9999	1980	1	0
+Kabwe	-14.483	28.417	Zambia	136003	-9999	1980	1	0
+Luanshya	-13.15	28.4	Zambia	129589	-9999	1980	1	0
+Lusaka	-15.433	28.333	Zambia	535830	-9999	1980	1	1
+Mufulire	-12.5	28.2	Zambia	150069	-9999	1980	1	0
+Ndola	-13	28.65	Zambia	281315	-9999	1980	1	0
+Bulawayo	-20.167	28.717	Zimbabwe	429000	-9999	1983	2	0
+Chitungwiza	-18	31.133	Zimbabwe	202000	-9999	1983	2	0
+Harare	-17.833	31.05	Zimbabwe	681000	-9999	1983	2	1
+St. John City	17.1	-61.85	Antigua & B	21814	-9999	1970	1	1
+Nassau	25.05	-77.333	Bahamas	-9999	153620	1985	2	1
+Bridgetown	13.1	-59.617	Barbados	7466	-9999	1980	1	1
+Hamilton	32.3	-64.8	Bermuda	1669	-9999	1984	2	1
+Road Town	18.467	-64.65	Virgin Is.	891	-9999	1960	1	1
+Burlington	43.317	-79.8	Canada	114855	-9999	1981	1	0
+Burnaby	49.267	-122.917	Canada	136495	-9999	1981	1	0
+Calgary	51.083	-114.083	Canada	-9999	641900	1986	2	0
+Chicoutimi-Jong	48.433	-71.1	Canada	-9999	139400	1986	2	0
+E. York	43.717	-79.333	Canada	101975	-9999	1981	1	0
+Edmonton	53.567	-113.417	Canada	-9999	695800	1986	2	0
+Etobicoke	43.633	-79.5	Canada	298710	-9999	1981	1	0
+Halifax	44.633	-63.583	Canada	-9999	292700	1986	2	0
+Hamilton	43.25	-79.833	Canada	-9999	564000	1986	2	0
+Kitchener	43.45	-80.5	Canada	-9999	309300	1986	2	0
+Laval	45.567	-73.667	Canada	268335	-9999	1981	1	0
+#London	42.967	-81.25	Canada	-9999	296700	1986	2	0
+Longueuil	45.533	-73.517	Canada	124320	-9999	1981	1	0
+Mississauga	43.633	-79.6	Canada	315055	-9999	1981	1	0
+Montreal	45.517	-73.567	Canada	-9999	2906600	1986	2	0
+#N. York	43.733	-79.433	Canada	559520	-9999	1981	1	0
+Oshawa	43.883	-78.85	Canada	-9999	179300	1986	2	0
+Ottawa	45.417	-75.717	Canada	-9999	777700	1986	2	1
+Quebec	45.833	-71.25	Canada	-9999	600200	1986	2	0
+Regina	50.5	-104.633	Canada	-9999	175700	1986	2	0
+St. Catherines	45.4	-73.567	Canada	-9999	310300	1986	2	0
+Saint John	45.267	-66.05	Canada	-9999	117200	1986	2	0
+Saskatoon	52.167	-106.667	Canada	-9999	170300	1986	2	0
+Scarborough	43.733	-79.267	Canada	443355	-9999	1981	1	0
+Sudbury	46.5	-81.017	Canada	-9999	146300	1986	2	0
+Surrey	49.117	-122.767	Canada	147135	-9999	1981	1	0
+Thunder Bay	48.45	-89.2	Canada	-9999	123000	1986	2	0
+Toronto	43.7	-79.417	Canada	-9999	3274200	1986	2	0
+Trois-Rivieres	46.35	-72.567	Canada	-9999	114300	1986	2	0
+#Hong Kong	47.55	-82.533	Canada	-9999	246900	1986	2	0
+Windsor	42.3	-83.017	Canada	-9999	251600	1986	2	0
+Winnipeg	50.5	-97	Canada	-9999	617800	1986	2	0
+York	43.7	-79.45	Canada	134615	-9999	1981	1	0
+San Jose	9.983	-84.067	Costa Rica	274832	-9999	1983	2	1
+Bayamo	20.383	-76.65	Cuba	108716	-9999	1986	2	0
+Camaguey	21.417	-77.917	Cuba	265588	-9999	1986	2	0
+Guantanamo	20.15	-75.233	Cuba	179091	-9999	1986	2	0
+Holguin	20.9	-76.25	Cuba	199861	-9999	1986	2	0
+La Habana	23.133	-82.367	Cuba	2036799	-9999	1986	2	1
+Matanzas	23.067	-81.583	Cuba	106954	-9999	1986	2	0
+Pinar del Rio	22.4	-83.7	Cuba	108109	-9999	1986	2	0
+Santa Clara	22.417	-79.967	Cuba	182349	-9999	1986	2	0
+Santiago de Cuba	20	-75.817	Cuba	364554	-9999	1986	2	0
+Santiago de Los Caballeros	19.5	-70.667	Dominican Rep	155000	245165	1970	1	0
+Santo Domingo	18.5	-69.95	Dominican Rep	673470	817645	1970	1	1
+San Salvador	13.667	-89.167	El Salvador	335930	-9999	1971	1	1
+Godthab	64.25	-51.583	Greenland	8425	-9999	1976	1	1
+St. George's	12.067	-61.733	Grenada	7303	-9999	1970	1	1
+Ciudad de Guat	14.633	-90.367	Guatemala	754243	-9999	1981	1	1
+Port-au-Prince	18.55	-72.333	Haiti	461464	738342	1984	2	1
+San Pedro Sula	15.433	-88.017	Honduras	397201	-9999	1986	2	0
+Tegucigalpa	14.083	-87.233	Honduras	597512	-9999	1986	2	1
+Kingston	17.967	-76.8	Jamaica	104041	524638	1982	1	1
+Fort-de-France	14.6	-61.083	Martinique	97814	-9999	1982	1	1
+Acapulco	16.85	-99.933	Mexico	301902	-9999	1980	1	0
+Aguascalientes	21.85	-102.3	Mexico	293152	-9999	1980	1	0
+Apatzingan	19.083	-102.333	Mexico	100259	-9999	1979	2	0
+Campeche	19.833	-90.5	Mexico	128434	-9999	1979	2	0
+Celaya	20.533	-100.8	Mexico	141615	-9999	1979	2	0
+Chihuahua	28.667	-106.1	Mexico	385603	-9999	1979	2	0
+Ciudad Juarez	31.7	-106.483	Mexico	544496	-9999	1979	2	0
+Cuidad Madero	22.317	-97.833	Mexico	132444	-9999	1979	2	0
+Cuidad Obregon	27.467	-109.983	Mexico	165520	-9999	1979	2	0
+Cuidad Victoria	23.717	-99.167	Mexico	140161	-9999	1979	2	0
+Cordoba	18.917	-96.917	Mexico	121723	-9999	1979	2	0
+Cuernavaca	18.95	-99.25	Mexico	192770	-9999	1980	1	0
+Culiacan	24.833	-107.383	Mexico	304826	-9999	1980	1	0
+Durango	24.017	-104.667	Mexico	257915	-9999	1980	1	0
+Ecatepec	19.583	-99.067	Mexico	741821	-9999	1980	1	0
+Ensenada	31.867	-116.617	Mexico	120483	-9999	1980	1	0
+Gomez Palacio	25.65	-103.5	Mexico	116967	-9999	1980	1	0
+Guadalajara	20.667	-103.333	Mexico	1626152	-9999	1980	1	0
+Guadalupe	25.683	-100.25	Mexico	370524	-9999	1980	1	0
+Hermosillo	29.25	-110.983	Mexico	297175	-9999	1980	1	0
+Irapuato	20.667	-101.5	Mexico	170138	-9999	1980	1	0
+Jalapa	17.75	-92.8	Mexico	204594	-9999	1980	1	0
+Leon	21.167	-101.7	Mexico	593002	-9999	1980	1	0
+Los Mochis	25.8	-109	Mexico	122531	-9999	1980	1	0
+Matamoros	25.883	-97.5	Mexico	188745	-9999	1980	1	0
+Mazatlan	23.183	-106.417	Mexico	199830	-9999	1980	1	0
+Merida	20.983	-89.65	Mexico	400142	-9999	1980	1	0
+Mexicali	32.667	-115.483	Mexico	341559	-9999	1980	1	0
+Mexico	19.417	-99.167	Mexico	8831079	-9999	1980	1	1
+Minatitlan	17.983	-94.533	Mexico	106765	-9999	1980	1	0
+Monciova	26.9	-101.417	Mexico	115786	-9999	1980	1	0
+Monterrey	25.667	-100.333	Mexico	1084696	-9999	1980	1	0
+Morelia	19.667	-101.183	Mexico	297544	-9999	1980	1	0
+Naucalpan	19.467	-99.233	Mexico	723723	-9999	1980	1	0
+Netzahualcoyoti	17.7	-91.45	Mexico	1342230	-9999	1980	1	0
+Nuevo Laredo	27.5	-99.5	Mexico	201731	-9999	1980	1	0
+Oaxaca de Juarez	17.083	-96.683	Mexico	154223	-9999	1980	1	0
+Orizaba	18.85	-97.133	Mexico	114848	-9999	1980	1	0
+Pozo Rica de Hidalgo	20.55	-97.467	Mexico	166799	-9999	1980	1	0
+Puebla de Zaragoza	19.05	-98.2	Mexico	772908	-9999	1980	1	0
+Queretaro	20.633	-100.383	Mexico	215976	-9999	1980	1	0
+Reynosa	26.083	-98.3	Mexico	194693	-9999	1980	1	0
+Salamanca	20.567	-101.2	Mexico	105543	-9999	1979	2	0
+Saltillo	25.5	-101	Mexico	284937	-9999	1980	1	0
+San Luis Potosi	22.167	-101	Mexico	362371	-9999	1980	1	0
+San Nicolas de Los Garza	16.433	-98.517	Mexico	280696	-9999	1980	1	0
+Tampico	22.3	-97.867	Mexico	248369	389940	1979	2	0
+Tepic	21.5	-104.85	Mexico	145741	-9999	1980	1	0
+Tijuana	32.483	-117.167	Mexico	429500	-9999	1980	1	0
+Tlanepantla	19.567	-99.2	Mexico	778173	-9999	1980	1	0
+Tlaquepaque	20.65	-103.25	Mexico	133500	-9999	1980	1	0
+Toluca	19.333	-99.667	Mexico	199778	-9999	1980	1	0
+Torreon	25.567	-103.417	Mexico	328086	-9999	1980	1	0
+Tuxtlan Gutierrez	16.75	-93.15	Mexico	131096	-9999	1980	1	0
+Uruapan	19.433	-102.067	Mexico	122828	-9999	1980	1	0
+Veracruz Liave	19.183	-96.167	Mexico	284822	-9999	1980	1	0
+Villa Hermosa	18	-92.883	Mexico	158216	-9999	1980	1	0
+Zapopan	20.717	-103.4	Mexico	345390	-9999	1980	1	0
+Plymouth	16.733	-62.233	Montserrat	1478	-9999	1980	1	1
+Managua	12.1	-86.3	Nicaragua	608020	-9999	1979	2	1
+Panama	8.95	-79.5	Panama	434668	-9999	1986	2	1
+San Miguelito	9.033	-79.5	Panama	221512	-9999	1986	2	0
+Aguadilla	18.45	-67.133	Puerto Rico	-9999	155500	1984	2	0
+Caguas	18.233	-66.067	Puerto Rico	-9999	274600	1982	2	0
+Mayaguez	18.217	-67.15	Puerto Rico	-9999	209800	1984	2	0
+Ponce	18.017	-66.6	Puerto Rico	-9999	234500	1984	2	0
+Kingstown	13.2	-61.233	St. Vincent and the Grenadines	4308	-9999	1960	1	1
+Port-of-Spain	10.633	-61.517	Trinidad and Tobago	59649	-9999	1982	1	1
+Grand Turk	21.333	-71.333	Turks and Caicos Islands	3098	-9999	1980	1	1
+Abilene	32.367	-99.667	United States	112430	125500	1986	2	0
+Akron	32.867	-87.75	United States	222060	-9999	1986	2	0
+Albany (Ga.)	31.617	-84.167	United States	84950	117200	1986	2	0
+Albany (N.Y.)	42.667	-73.817	United States	97020	843600	1986	2	0
+Albuquerque	35.083	-106.633	United States	366750	474400	1986	2	0
+Alexandria (La.)	31.317	-92.483	United States	51400	139600	1986	2	0
+Alexandria (Va.)	38.817	-77.1	United States	107800	-9999	1986	2	0
+Allentown	40.6	-75.5	United States	104360	656800	1986	2	0
+Altoona	40.533	-78.4	United States	53160	132500	1986	2	0
+Amarillo	35.233	-101.833	United States	165850	195100	1986	2	0
+Anaheim	33.833	-117.933	United States	240730	-9999	1986	2	0
+Anchorage	61.167	-149.833	United States	235000	-9999	1986	2	0
+Anderson (In.)	40.083	-85.683	United States	61020	132700	1986	2	0
+Anderson (S.C.)	34.5	-82.65	United States	28680	140700	1986	2	0
+Ann Arbor	42.3	-83.717	United States	107800	-9999	1986	2	0
+Anniston	33.633	-85.833	United States	29370	123800	1986	2	0
+Appleton	44.283	-88.417	United States	64190	307500	1986	2	0
+Arlington (Tx)	32.733	-97.083	United States	249770	-9999	1986	2	0
+Asheville	33.817	-86.267	United States	60290	170000	1986	2	0
+Atlanta	33.833	-84.4	United States	421910	2560500	1986	2	0
+Augusta	33.467	-81.967	United States	45440	390000	1986	2	0
+Aurora	39.733	-104.867	United States	217990	-9999	1986	2	0
+Austin	30.333	-97.75	United States	466550	726300	1986	2	0
+Bakersfield	35.367	-119.017	United States	150400	494200	1986	2	0
+Baltimore	39.3	-76.617	United States	752800	2280000	1986	2	0
+Baton Rouge	30.5	-91.167	United States	241130	545700	1986	2	0
+Battle Creek	42.333	-85.167	United States	54080	136900	1986	2	0
+Beaumout	30.083	-94.133	United States	119900	375800	1986	2	0
+Bellingham	48.75	-122.45	United States	44960	113700	1986	2	0
+Benton Harbor	42.117	-86.45	United States	14160	163600	1986	2	0
+Berkeley	37.883	-122.283	United States	104110	-9999	1986	2	0
+Billings	45.717	-108.483	United States	80310	120100	1986	2	0
+Biloxi	30.4	-88.917	United States	47750	204100	1986	2	0
+Binghamton	42.1	-75.917	United States	52910	261800	1986	2	0
+Bloomington (Il.)	40.483	-89	United States	46250	122700	1986	2	0
+Bloomington (In.)	39.167	-86.517	United States	52500	101700	1986	2	0
+Boise City	36.733	-102.517	United States	108390	193800	1986	2	0
+Boston	42.333	-71	United States	573600	4058900	1986	2	0
+Bradenton	27.483	-82.55	United States	37450	177100	1986	2	0
+Bremerton	47.567	-122.667	United States	34100	169200	1986	2	0
+Bridgeport	41.183	-73.2	United States	141860	-9999	1986	2	0
+Bryan	30.667	-96.367	United States	62220	120800	1986	2	0
+Buffalo	42.883	-78.883	United States	324820	1181600	1986	2	0
+Burlington (N.C.)	36.117	-79.45	United States	36830	102400	1986	2	0
+Burlington (Vt.)	44.45	-73.233	United States	38310	124700	1986	2	0
+Canton	40.8	-81.383	United States	87110	400400	1986	2	0
+Cedar Rapids	42	-91.633	United States	108370	168800	1986	2	0
+Champaign	40.117	-88.233	United States	59180	171100	1986	2	0
+Charleston (W.Vg.)	38.383	-81.667	United States	57920	266400	1986	2	0
+Charlotte	35.217	-80.85	United States	352070	1065400	1986	2	0
+Charlottesville	38.033	-78.483	United States	41100	121400	1986	2	0
+Chattanooga	35.033	-85.283	United States	162170	425500	1986	2	0
+Chesapeake	36.833	-76.283	United States	134400	-9999	1986	2	0
+Chicago	41.833	-87.75	United States	3009530	8111000	1986	2	0
+Chico	39.75	-121.9	United States	32680	166700	1986	2	0
+Chula Vista	32.6	-117.083	United States	118840	-9999	1986	2	0
+Cincinnati	39.167	-84.433	United States	369750	1690100	1986	2	0
+Clarksville	36.533	-87.35	United States	60730	154400	1986	2	0
+Cleveland	41.467	-81.717	United States	535830	2765600	1986	2	0
+Colorado Springs	38.833	-104.833	United States	272660	380400	1986	2	0
+Columbia (Mo.)	38.967	-92.333	United States	63140	106500	1986	2	0
+Columbia (S.C.)	34	-81	United States	93020	444700	1986	2	0
+Columbus (Ga.)	32.467	-84.983	United States	180180	250500	1986	2	0
+Columbus (Oh.)	39.983	-83.05	United States	566030	1299400	1986	2	0
+Concord	37.983	-122.033	United States	105980	-9999	1986	2	0
+Cumberland	39.65	-78.767	United States	23230	102200	1986	2	0
+Dallas	32.833	-96.833	United States	1003520	3655100	1986	2	0
+Danville	36.6	-79.383	United States	44700	110300	1986	2	0
+Davenport	41.533	-90.583	United States	98750	371300	1986	2	0
+Dayton	39.75	-84.2	United States	178920	933500	1986	2	0
+Daytona Beach	29.183	-81.017	United States	58050	320900	1986	2	0
+Decatur (Il.)	39.85	-88.95	United States	90360	126700	1986	2	0
+Denver	39.75	-105	United States	505000	1847400	1986	2	0
+Des Moines	41.583	-93.617	United States	192060	381300	1986	2	0
+Detroit	42.333	-83.083	United States	1086220	4611300	1986	2	0
+Dothan	31.167	-85.417	United States	53310	129900	1986	2	0
+Durham	36	-78.917	United States	113890	-9999	1986	2	0
+Eau Claire	44.817	-91.5	United States	54580	136800	1986	2	0
+El Paso	40.733	-89.017	United States	491800	561500	1986	2	0
+Erie	42.167	-80.117	United States	115270	279200	1986	2	0
+Eugene	44.05	-123.067	United States	105410	263200	1986	2	0
+Evansville	37.967	-87.583	United States	129480	281200	1986	2	0
+Fargo	47	-97	United States	68020	145300	1986	2	0
+Fayetteville (N.C.)	33.433	-84.467	United States	75770	258500	1986	2	0
+Flint	43.05	-83.067	United States	145590	434900	1986	2	0
+Florence (Alab.)	34.8	-87.667	United States	36100	137700	1986	2	0
+Florence (S.C.)	34.2	-79.733	United States	31670	116000	1986	2	0
+Fort Collins	40.583	-105.083	United States	74140	174600	1986	2	0
+Fort Lauderdale	26.133	-80.133	United States	148620	-9999	1986	2	0
+Fort Myers	26.65	-81.85	United States	39530	279100	1986	2	0
+Fort Smith	35.367	-94.45	United States	74320	175200	1986	2	0
+Fort Walton Beach	30.45	-86.633	United States	22890	141300	1986	2	0
+Fort Wayne	41.083	-85.133	United States	172900	356100	1986	2	0
+Fort Worth	32.75	-97.333	United States	429550	-9999	1986	2	0
+Fresno	36.683	-119.783	United States	284660	587600	1986	2	0
+Fullerton	33.867	-117.933	United States	108750	-9999	1986	2	0
+Gadsden	34.017	-86.017	United States	45180	102300	1986	2	0
+Gainesville	29.667	-82.333	United States	85170	199800	1986	2	0
+Garden Grove	33.783	-117.967	United States	134850	-9999	1986	2	0
+Garland	41.783	-112.167	United States	176570	-9999	1986	2	0
+Gary	41.583	-87.333	United States	136790	-9999	1986	2	0
+Glendale (Az.)	33.567	-112.167	United States	125820	-9999	1986	2	0
+Glendale (Ca.)	34.15	-118.333	United States	153660	-9999	1986	2	0
+Glens Falls	43.283	-73.683	United States	16080	112400	1986	2	0
+Grand Rapids	42.967	-85.667	United States	186530	648800	1986	2	0
+Greely	40.417	-104.7	United States	56920	135000	1986	2	0
+Green Bay	44.533	-88	United States	93470	187200	1986	2	0
+Greensboro	36.067	-79.8	United States	176650	899500	1986	2	0
+Greenville	33.4	-91.067	United States	58370	606400	1986	2	0
+Hagerstown	39.65	-77.767	United States	33670	114100	1986	2	0
+Hampton	37.033	-76.35	United States	126000	-9999	1986	2	0
+Harrisburg	40.267	-76.883	United States	51530	577300	1986	2	0
+Hartford	41.767	-72.683	United States	137980	1043400	1986	2	0
+Hayward	46.033	-91.5	United States	101520	-9999	1986	2	0
+Hialeah	25.817	-80.283	United States	161760	-9999	1986	2	0
+Hickory	35.767	-81.283	United States	25750	217600	1986	2	0
+Hollywood (Fl.)	26.017	-80.15	United States	120910	-9999	1986	2	0
+Honolulu	21.317	-157.833	United States	372330	816700	1986	2	0
+Houma	29.583	-90.733	United States	35080	189100	1986	2	0
+Houston	29.833	-95.333	United States	1728910	3635000	1986	2	0
+Huntington	38.417	-82.45	United States	59310	328200	1986	2	0
+Huntsville	34.733	-86.583	United States	163420	233700	1986	2	0
+Independence	39.1	-94.417	United States	112950	-9999	1986	2	0
+Indianapolis	39.75	-86.167	United States	719820	1212600	1986	2	0
+Inglewood	33.967	-118.367	United States	102550	-9999	1986	2	0
+Irving	32.783	-96.95	United States	128530	-9999	1986	2	0
+Jackson (Mich.)	42.25	-84.4	United States	36970	144400	1986	2	0
+Jackson (Miss.)	32.333	-90.183	United States	208420	392000	1986	2	0
+Jacksonville (Fl.)	30.333	-81.667	United States	609860	852700	1986	2	0
+Jacksonville (N.C.)	34.75	-77.433	United States	28780	126600	1986	2	0
+Janesville	42.65	-89.017	United States	51790	137800	1986	2	0
+Johnson City	36.317	-82.35	United States	44700	443400	1986	2	0
+Johnstown	40.333	-78.917	United States	31840	254100	1986	2	0
+Joplin	37	-94.417	United States	40220	133000	1986	2	0
+Kalamazoo	42.283	-85.6	United States	77230	217700	1986	2	0
+Kansas City (Ka.)	39	-94.667	United States	162070	-9999	1986	2	0
+Kansas City (M0.)	39.05	-94.5	United States	441170	1517800	1986	2	0
+Killeen	31.133	-97.733	United States	59560	234600	1986	2	0
+Knoxville	35.967	-83.917	United States	173210	591100	1986	2	0
+Kokomo	40.5	-86.1	United States	45610	101400	1986	2	0
+Lafayette (Ind.)	40.417	-86.9	United States	44240	124400	1986	2	0
+Lafayette (La.)	30.2	-92.017	United States	89830	218000	1986	2	0
+Lake Charles	30.217	-93.217	United States	73400	173100	1986	2	0
+Lakeland  61890	28	-82	United States	61890	377200	1986	2	0
+Lancaster	40.033	-76.317	United States	57200	393500	1986	2	0
+Lansing	42.783	-84.533	United States	128980	424800	1986	2	0
+Laredo	27.533	-99.367	United States	117060	120800	1986	2	0
+Las Cruces	32.3	-106.783	United States	54090	123000	1986	2	0
+Las Vegas	35.583	-105.167	United States	191510	569500	1986	2	0
+Lawton	34.55	-98.417	United States	82630	120700	1986	2	0
+Lexington-Fayette	38.05	-84.5	United States	212900	332000	1986	2	0
+Lima	40.733	-84.1	United States	45990	154100	1986	2	0
+Lincoln	40.817	-96.683	United States	183050	206100	1986	2	0
+Little Rock	34.7	-92.283	United States	181030	505600	1986	2	0
+Livonia	42.383	-83.383	United States	100540	-9999	1986	2	0
+Longview	32.5	-94.733	United States	73870	170300	1986	2	0
+Los Angeles	34	-118.167	United States	3259340	13074800	1986	2	0
+Louisville	38.25	-85.767	United States	286470	962800	1986	2	0
+Lubbock	33.583	-101.883	United States	186400	224700	1986	2	0
+Lynchburg	37.383	-79.167	United States	68000	144200	1986	2	0
+Macon	32.85	-83.633	United States	118420	282100	1986	2	0
+Madison	43.083	-89.417	United States	175830	344900	1986	2	0
+Manchester	43	-71.467	United States	97280	143000	1986	2	0
+Mansfield	40.75	-82.517	United States	51340	128800	1986	2	0
+McAllen	26.217	-98.25	United States	83300	365900	1986	2	0
+Medford	42.417	-71.117	United States	43580	140000	1986	2	0
+Memphis	35.117	-90	United States	652640	959500	1986	2	0
+Merced	37.283	-120.483	United States	47020	163200	1986	2	0
+Mesa	33.333	-111.933	United States	251430	-9999	1986	2	0
+Miami	25.867	-80.25	United States	373940	2912000	1986	2	0
+Midland	32	-102.083	United States	98060	111300	1986	2	0
+Milwaukee	43.05	-87.933	United States	605090	1552000	1986	2	0
+Minneapolis	44.967	-93.333	United States	356840	2295200	1986	2	0
+Modesto	37.617	-121	United States	132940	316600	1986	2	0
+Monroe	32.5	-92.117	United States	56210	145900	1986	2	0
+Montgomery	32.383	-86.317	United States	194290	299000	1986	2	0
+Muncie	40.183	-85.367	United States	72600	120900	1986	2	0
+Muskegon	43.217	-86.25	United States	39810	158500	1986	2	0
+Nashville-Davidson	36.2	-86.767	United States	473670	930700	1986	2	0
+Newark	40.7	-74.167	United States	316240	-9999	1986	2	0
+New Bedford	41.633	-70.917	United States	96450	168800	1986	2	0
+New Haven	41.333	-72.9	United States	123450	513200	1986	2	0
+New London	41.367	-72.1	United States	28600	258300	1986	2	0
+New Orleans	30	-90.05	United States	554500	1334400	1986	2	0
+Norfolk	36.85	-76.283	United States	274800	1309500	1986	2	0
+Oakland	37.833	-122.3	United States	356960	-9999	1986	2	0
+Ocala	29.183	-82.15	United States	45120	171000	1986	2	0
+Odessa	31.867	-102.383	United States	101210	133100	1986	2	0
+Oklahoma City	35.467	-97.55	United States	446120	982900	1986	2	0
+Olympia	47.05	-122.883	United States	29710	146600	1986	2	0
+Omaha	41.25	-96	United States	349270	614300	1986	2	0
+Ontario	34.067	-117.65	United States	114320	-9999	1986	2	0
+Orlando	28.5	-81.417	United States	145900	898400	1986	2	0
+Oxnard	34.183	-119.167	United States	126980	122300	1986	2	0
+Parkersburg	39.3	-81.517	United States	38540	156200	1986	2	0
+Pasadena (Ca.)	34.167	-118.15	United States	129900	-9999	1986	2	0
+Pasadena (Tx.)	29.7	-95.233	United States	118050	-9999	1986	2	0
+Pascagoula	30.35	-88.533	United States	30860	128200	1986	2	0
+Paterson	40.917	-74.167	United States	139130	-9999	1986	2	0
+Pensacola	30.433	-87.2	United States	63820	337100	1986	2	0
+Peoria	40.7	-89.667	United States	110290	340400	1986	2	0
+Philadelphia	40	-75.167	United States	162900	5832600	1986	2	0
+Phoenix	33.5	-112.167	United States	894070	1885400	1986	2	0
+Portland (Me.)	43.683	-70.3	United States	62670	205500	1986	2	0
+Portland (Or.)	45.533	-122.667	United States	387870	1364100	1986	2	0
+Portsmouth (Nh.)	43.05	-70.783	United States	25970	210900	1986	2	0
+Portsmouth (Va.)	36.833	-76.333	United States	111000	-9999	1986	2	0
+Poughkeepsie	41.717	-73.933	United States	29990	256800	1986	2	0
+Provo	40.267	-111.617	United States	77480	240500	1986	2	0
+Pueblo	38.283	-104.633	United States	101240	127100	1986	2	0
+Raleigh	35.767	-78.633	United States	180430	650600	1986	2	0
+Reading	40.333	-75.883	United States	77620	321000	1986	2	0
+Redding	40.5	-122.417	United States	51490	133100	1986	2	0
+Reno	39.533	-119.817	United States	110430	224600	1986	2	0
+Richmond	37.55	-77.45	United States	217700	810200	1986	2	0
+Riverside	33.983	-117.367	United States	196750	-9999	1986	2	0
+Roanoke	37.267	-79.933	United States	101900	224900	1986	2	0
+Rochester	43.167	-77.617	United States	235970	980300	1986	2	0
+Rockford	42.333	-89	United States	135760	280330	1986	2	0
+Sacramento	38.65	-121.5	United States	323550	1291400	1986	2	0
+Saginaw	43.433	-83.917	United States	72479	403600	1986	2	0
+St. Cloud	28.25	-81.25	United States	42850	175100	1986	2	0
+St. Louis	38.617	-90.2	United States	426300	2438000	1986	2	0
+St. Paul	44.9	-93.083	United States	263680	-9999	1986	2	0
+Salem	42.517	-70.883	United States	93920	262100	1986	2	0
+Salinas	36.65	-121.667	United States	96960	339700	1986	2	0
+Salt Lake City	40.75	-111.917	United States	158440	1041400	1986	2	0
+San Antonio	29.5	-98.5	United States	914350	1275400	1986	2	0
+San Bernardino	34.117	-117.3	United States	138620	-9999	1986	2	0
+San Diego	32.833	-117.167	United States	1015190	2201300	1986	2	0
+San Francisco	37.75	-122.45	United States	749000	5877800	1986	2	0
+San Jose	37.333	-122	United States	712080	-9999	1986	2	0
+Santa Ana	33.733	-117.9	United States	236780	-9999	1986	2	0
+Santa Barbara	34.417	-119.683	United States	79290	339400	1986	2	0
+Santa Fe	35.667	-106	United States	55980	105800	1986	2	0
+Sarasota	27.333	-82.533	United States	51500	247600	1986	2	0
+Scottsdale	33.45	-111.983	United States	111140	-9999	1986	2	0
+Scranton	41.367	-75.683	United States	82260	725900	1986	2	0
+Seattle	47.583	-122.333	United States	486200	2284500	1986	2	0
+#Sharon	41.3	-80.5	United States	16150	123600	1986	2	0
+Sheboygan	43.767	-87.733	United States	47410	102700	1986	2	0
+Shreveport	32.5	-93.767	United States	220380	364600	1986	2	0
+Sioux City	42.5	-96.467	United States	79590	115900	1986	2	0
+Sioux Falls	43.567	-96.7	United States	97550	122700	1986	2	0
+Spokane	47.667	-117.417	United States	172890	356900	1986	2	0
+Springfield (Il.)	39.817	-89.65	United States	100290	190600	1986	2	0
+Springfield (Ma.)	42.117	-72.583	United States	149410	517500	1986	2	0
+Springfield (Mo.)	37.183	-93.317	United States	139360	225300	1986	2	0
+Stamford	41.05	-73.533	United States	101080	-9999	1986	2	0
+State College	40.8	-77.867	United States	34330	114600	1986	2	0
+Sterling Heights	44.033	-84.033	United States	111960	-9999	1986	2	0
+Stockton	37.967	-121.283	United States	183430	432700	1986	2	0
+Sunnyvale	37.383	-122.033	United States	112130	-9999	1986	2	0
+Syracuse	43.05	-76.15	United States	160750	649300	1986	2	0
+Tallahassee	30.433	-84.317	United States	119450	218000	1986	2	0
+Tempe	33.417	-111.917	United States	136480	-9999	1986	2	0
+Terre Haute	39.45	-87.4	United States	57920	134100	1986	2	0
+Texarkana	33.433	-94.05	United States	33130	119900	1986	2	0
+Topeka	39.05	-95.667	United States	118580	160800	1986	2	0
+Torrance	33.833	-118.333	United States	135570	-9999	1986	2	0
+Tucson	32.25	-110.95	United States	358850	594100	1986	2	0
+Tulsa	36.117	-95.967	United States	373750	733500	1986	2	0
+Tuscaloosa	33.2	-87.55	United States	73830	141300	1986	2	0
+Tyler	32.35	-95.3	United States	75440	152100	1986	2	0
+Utica	43.1	-75.233	United States	69440	315400	1986	2	0
+Virginia Beach	36.85	-75.983	United States	333400	-9999	1986	2	0
+Visalia	36.333	-119.3	United States	61550	287300	1986	2	0
+Waco	31.55	-97.083	United States	105220	187600	1986	2	0
+Warren	42.517	-83.033	United States	149800	-9999	1986	2	0
+Washington D.C.	38.867	-77	United States	626000	3563000	1986	2	1
+Waterbury	41.55	-73.05	United States	102300	211100	1986	2	0
+Waterloo	42.5	-92.35	United States	70010	151500	1986	2	0
+Wausau	44.967	-89.667	United States	32240	112500	1986	2	0
+W. Palm Beach	26.7	-80.083	United States	68570	755600	1986	2	0
+Wheeling	40.083	-80.717	United States	39980	175500	1986	2	0
+Wichita	37.717	-97.333	United States	288870	470000	1986	2	0
+Wichita Falls	33.917	-98.5	United States	99940	127100	1986	2	0
+Williamsport	41.3	-77.017	United States	31710	116300	1986	2	0
+Wilmington	34.233	-77.917	United States	54430	114100	1986	2	0
+Winston-Salem	36.083	-80.3	United States	148080	-9999	1986	2	0
+Worcester	42.267	-71.8	United States	157770	408200	1986	2	0
+Yakima	46.617	-120.5	United States	49370	183200	1986	2	0
+Yonkers	40.95	-73.85	United States	186080	-9999	1986	2	0
+Youngstown	41.1	-80.65	United States	104690	510000	1986	2	0
+Yuba City	39.15	-121.6	United States	21560	114200	1986	2	0
+Bahia Blanca	-38.75	-62.25	Argentina	-9999	242000	1985	2	0
+Buenos Aires	-34.667	-58.5	Argentina	-9999	10728000	1985	2	1
+Cordoba	-31.333	-64.167	Argentina	-9999	1055000	1985	2	0
+Corrientes	-27.5	-58.8	Argentina	197000	-9999	1985	2	0
+Mendoza	-32.8	-68.867	Argentina	-9999	668000	1985	2	0
+Parana	-31.75	-60.5	Argentina	178000	-9999	1985	2	0
+Posadas	-27.45	-55.833	Argentina	191000	-9999	1985	2	0
+Resistencia	-27.467	-59	Argentina	-9999	262000	1985	2	0
+Rio Cuarto	-33.133	-64.333	Argentina	118000	-9999	1985	2	0
+Rosario	-22.867	-66.683	Argentina	-9999	1016000	1985	2	0
+Salta	-24.767	-65.467	Argentina	302000	-9999	1985	2	0
+San Juan	-31.55	-68.517	Argentina	-9999	324000	1985	2	0
+San Miguel de Tucuman	-26.783	-65.25	Argentina	-9999	571000	1985	2	0
+San Salvador de Jujuy	-24.167	-65.8	Argentina	148000	-9999	1985	2	0
+Santa Fe	-31.583	-60.683	Argentina	310000	-9999	1985	2	0
+Santiago del Estero	-27.783	-64.25	Argentina	172000	-9999	1985	2	0
+Cochabamba	-17.433	-66.167	Bolivia	317251	-9999	1985	2	0
+La Paz	-16.5	-68.167	Bolivia	992592	-9999	1985	2	1
+Oruro	-17.983	-67.133	Bolivia	178693	-9999	1985	2	0
+Potosi	-19.567	-65.75	Bolivia	113380	-9999	1985	2	0
+Santa Cruz	-17.75	-63.233	Bolivia	441717	-9999	1985	2	0
+Sucre	-19.083	-65.25	Bolivia	86609	-9999	1985	2	1
+Alagoinhas	-12.15	-38.35	Brazil	117298	117298	1985	2	0
+Alvorada	-27.25	-48.383	Brazil	105787	105787	1985	2	0
+Americana	-22.733	-47.317	Brazil	156809	156809	1985	2	0
+Anapolis	-16.317	-48.967	Brazil	226890	226890	1985	2	0
+Aracaju	-10.9	-37.117	Brazil	361544	361544	1985	2	0
+Aracatuba	-21.2	-50.4	Brazil	142308	142308	1985	2	0
+Arapiraca	-9.75	-36.667	Brazil	148416	148416	1985	2	0
+Araraquara	-21.75	-48.133	Brazil	145430	145430	1985	2	0
+Ariquemes	-9.917	-63.1	Brazil	102117	102117	1985	2	0
+Bage	-31.367	-54.1	Brazil	106294	106294	1985	2	0
+Barra Mansa	-22.583	-44.2	Brazil	187891	187891	1985	2	0
+Bauru	-22.317	-49.117	Brazil	220871	220871	1985	2	0
+Belem	-1.45	-48.483	Brazil	1120777	1120777	1985	2	0
+Belo Horizonte	-2.617	-67.5	Brazil	2122073	2122073	1985	2	0
+Blumenou	-26.917	-49.117	Brazil	192871	192871	1985	2	0
+Braganca Paulista	-22.917	-46.567	Brazil	105462	105462	1985	2	0
+Brasilia DF	-15.917	-47.667	Brazil	1576657	-9999	1985	2	1
+Cabo	-8.267	-35	Brazil	121864	121864	1985	2	0
+Cacoeiro de Itapemirin	-12.5	-39	Brazil	138488	138488	1985	2	0
+Camacari	-12.733	-38.267	Brazil	108453	108453	1985	2	0
+Campina Grande	-7.25	-35.833	Brazil	280665	280665	1985	2	0
+Campinas	-22.9	-47.1	Brazil	845057	845057	1985	2	0
+Campo Grande	-8.733	-59.233	Brazil	386520	386520	1985	2	0
+Campos	-21.767	-41.35	Brazil	367134	367134	1985	2	0
+Carapicuiba	-23.517	-46.833	Brazil	267688	267688	1985	2	0
+Caratinga	-19.833	-42.1	Brazil	110205	110205	1985	2	0
+Cariacica	-20.25	-40.383	Brazil	243913	243913	1985	2	0
+Caruaru	-8.25	-35.917	Brazil	191212	191212	1985	2	0
+Cascavel	-24.983	-53.483	Brazil	201475	201475	1985	2	0
+Caucaia	-3.733	-38.75	Brazil	109254	109254	1985	2	0
+Caxias	-4.5	-71.283	Brazil	148750	148750	1985	2	0
+Caxias do Sul	-29.233	-51.167	Brazil	267869	267869	1985	2	0
+Chapeco	-27.233	-52.683	Brazil	101230	101230	1985	2	0
+Codo	-4.467	-43.85	Brazil	118946	118946	1985	2	0
+Colatina	-19.583	-40.617	Brazil	106345	106345	1985	2	0
+Contagem	-19.9	-44.1	Brazil	386272	386272	1985	2	0
+Criciuma	-28.75	-49.417	Brazil	128818	128818	1985	2	0
+Cuiaba	-15.533	-56.083	Brazil	283075	283075	1985	2	0
+Curitiba	-25.417	-49.417	Brazil	1285027	1285027	1985	2	0
+Diadema	-23.7	-46.617	Brazil	322283	322283	1985	2	0
+Divinapolis	-20.133	-44.917	Brazil	140458	140458	1985	2	0
+Dourados	-22.15	-54.833	Brazil	124241	124241	1985	2	0
+Duque de Caxias	-22.75	-43.317	Brazil	666128	666128	1985	2	0
+Embu	-23.65	-46.85	Brazil	120206	120206	1985	2	0
+Feira de Santana	-12.283	-38.883	Brazil	356660	356660	1985	2	0
+Florianopolis	-27.583	-48.517	Brazil	218853	218853	1985	2	0
+Fortaleza	-3.75	-38.583	Brazil	1588709	1588709	1985	2	0
+Foz do Iguacu	-25.55	-54.517	Brazil	183412	183412	1985	2	0
+Franca	-20.55	-47.45	Brazil	183595	183595	1985	2	0
+Goiania	-16.717	-49.3	Brazil	928046	928046	1985	2	0
+Governador Valedares	-18.85	-41.95	Brazil	217434	217434	1985	2	0
+Gravatai	-29.933	-51	Brazil	141806	141806	1985	2	0
+Guarapuava	-25.367	-51.467	Brazil	149394	149394	1985	2	0
+Guarulhos	-23.417	-46.583	Brazil	717723	717723	1985	2	0
+Ilheus	-14.833	-39.1	Brazil	146139	146139	1985	2	0
+Imperatriz	-15.5	-47.333	Brazil	236957	236957	1985	2	0
+Ipatinga	-19.533	-42.5	Brazil	214358	214358	1985	2	0
+Irece	-11.367	-41.85	Brazil	106943	106943	1985	2	0
+Itaborai	-22.75	-42.867	Brazil	144945	144945	1985	2	0
+Itabuna	-14.8	-39.3	Brazil	178733	178733	1985	2	0
+Itaguai	-22.867	-43.767	Brazil	106154	106154	1985	2	0
+Itajai	-26.833	-48.65	Brazil	104473	104473	1985	2	0
+Itapetininga	-23.6	-48.117	Brazil	105878	105878	1985	2	0
+Itapipoca	-3.483	-39.583	Brazil	109423	109423	1985	2	0
+Jaboatao	-8.083	-35	Brazil	411341	411341	1985	2	0
+Jacarei	-23.283	-45.95	Brazil	149824	149824	1985	2	0
+Jacobina	-11.217	-40.5	Brazil	121127	121127	1985	2	0
+Jequie	-13.867	-40.1	Brazil	127304	127304	1985	2	0
+Joao Pessoa	-7.1	-34.883	Brazil	397715	397715	1985	2	0
+Joinville	-26.333	-48.917	Brazil	304414	304414	1985	2	0
+Juazeiro	-9.417	-40.5	Brazil	153515	153515	1985	2	0
+Juazeiro do Norte	-7.167	-39.3	Brazil	160361	160361	1985	2	0
+Juiz de Fora	-21.783	-43.383	Brazil	350687	350687	1985	2	0
+Jundiai	-23.167	-46.9	Brazil	314909	314909	1985	2	0
+Lages	-27.817	-50.333	Brazil	143558	143558	1985	2	0
+Limeira	-22.567	-47.417	Brazil	187820	187820	1985	2	0
+Linhares	-19.367	-40.067	Brazil	122825	122825	1985	2	0
+Londrina	-23.3	-51.217	Brazil	347707	347707	1985	2	0
+Luzianig	-16.267	-47.95	Brazil	101077	101077	1985	2	0
+Macapa	0	-51.167	Brazil	169558	169558	1985	2	0
+Manaus	-3.1	-60	Brazil	834541	834541	1985	2	0
+Maraba	-5.383	-49.167	Brazil	133559	133559	1985	2	0
+Marilia	-22.217	-49.967	Brazil	136518	136518	1985	2	0
+Maringa	-23.433	-52.033	Brazil	197527	197527	1985	2	0
+Maua	-23.667	-46.433	Brazil	270777	270777	1985	2	0
+Mogi das Cruzes	-23.75	-46.333	Brazil	234937	234937	1985	2	0
+Montes Caros	-16.75	-43.867	Brazil	215323	215323	1985	2	0
+Mossoro	-5.167	-37.25	Brazil	159339	159339	1985	2	0
+Natal	-6.983	-60.267	Brazil	512241	512241	1985	2	0
+Nilopolis	-22.817	-43.417	Brazil	166324	166324	1985	2	0
+Niteroi	-22.9	-43.1	Brazil	442706	442706	1985	2	0
+Nova Friburgo	-22.267	-42.567	Brazil	143991	143991	1985	2	0
+Nova Iguacu	-22.75	-43.467	Brazil	1324639	1324639	1985	2	0
+Nova Hamburgo	-29.617	-51.117	Brazil	168460	168460	1985	2	0
+Olinda	-8	-34.85	Brazil	335889	335889	1985	2	0
+Osasco	-23.533	-46.767	Brazil	594249	594249	1985	2	0
+Parnaiba	-2.967	-41.767	Brazil	116527	116527	1985	2	0
+Passo Fundo	-28.267	-52.333	Brazil	138226	138226	1985	2	0
+Paulista	-7.933	-34.833	Brazil	161447	161447	1985	2	0
+Pelotas	-31.75	-52.333	Brazil	278427	278427	1985	2	0
+Petrolina	-2.6	-67.1	Brazil	131208	131208	1985	2	0
+Petropolis	-22.5	-43.1	Brazil	275076	275076	1985	2	0
+Piracicaba	-22.75	-47.667	Brazil	252945	252945	1985	2	0
+Pitanga	-24.75	-51.717	Brazil	100306	100306	1985	2	0
+Pocos de Caldas	-21.8	-46.55	Brazil	100414	100414	1985	2	0
+Ponta Grossa	-25.117	-50.15	Brazil	223989	223989	1985	2	0
+Porto Alegre	-30.05	-51.167	Brazil	1275483	1275483	1985	2	0
+Porto Velho	-8.75	-63.9	Brazil	202011	202011	1985	2	0
+Presidente Prudente	-22.15	-51.4	Brazil	156319	156319	1985	2	0
+Ribeirao Preto	-21.167	-47.833	Brazil	384604	384604	1985	2	0
+Rio Claro	-22.317	-47.583	Brazil	130309	130309	1985	2	0
+Rio de Janeiro	-22.883	-43.283	Brazil	5615149	5615149	1985	2	0
+Rondonopolis	-16.483	-54.617	Brazil	101642	101642	1985	2	0
+#Salvador	-12.967	-38.483	Brazil	1811367	1811367	1985	2	0
+Santa Cruz do Sul	-29.7	-52.417	Brazil	115350	115350	1985	2	0
+Santa Luzia	-6.8	-36.867	Brazil	117017	117017	1985	2	0
+Santa Maria	-29.667	-53.667	Brazil	197177	197177	1985	2	0
+Santarem	-2.433	-54.683	Brazil	227412	227412	1985	2	0
+Santo Andre	-23.65	-46.483	Brazil	637010	637010	1985	2	0
+Santo Angelo	-28.283	-54.25	Brazil	107616	107616	1985	2	0
+Sao Bernardo do Campo	-23.75	-46.567	Brazil	565620	565620	1985	2	0
+Sao Carlo	-22	-47.833	Brazil	140860	140860	1985	2	0
+Sao Goncalo	-22.8	-43.083	Brazil	731061	731061	1985	2	0
+Sao Joao de Meriti	-22.8	-43.367	Brazil	459103	459103	1985	2	0
+Sao Jose do Rio Preto	-20.833	-49.333	Brazil	230151	230151	1985	2	0
+Sao Jose dos Campos	-23.117	-45.867	Brazil	374526	374526	1985	2	0
+Sao Leopoldo	-29.75	-51.183	Brazil	114126	114126	1985	2	0
+Sao Luis	-2.65	-44.25	Brazil	564434	564434	1985	2	0
+Sao Paolo	-23.55	-46.633	Brazil	10199186	10199186	1985	2	0
+Serra	-20.1	-40.267	Brazil	101837	101837	1985	2	0
+Sete Lagoas	-19.483	-44.25	Brazil	121895	121895	1985	2	0
+Sobral	-9.167	-70.433	Brazil	127919	127919	1985	2	0
+Sorocaba	-23.5	-47.533	Brazil	328787	328787	1985	2	0
+Sumare	-22.833	-47.267	Brazil	151100	151100	1985	2	0
+Susano	-23.517	-46.3	Brazil	129562	129562	1985	2	0
+Taboao da Serra	-23.617	-46.783	Brazil	122534	122534	1985	2	0
+Taubate	-23	-45.6	Brazil	205941	205941	1985	2	0
+Teresina	-5.15	-42.767	Brazil	476102	476102	1985	2	0
+Teresopolis	-22.45	-42.983	Brazil	116252	116252	1985	2	0
+Uberaba	-19.783	-47.95	Brazil	245921	245921	1985	2	0
+Uberlandia	-18.95	-48.283	Brazil	313651	313651	1985	2	0
+Uruguaiana	-29.75	-57.083	Brazil	105919	105919	1985	2	0
+Varzea Grande	-6.533	-42.083	Brazil	102524	102524	1985	2	0
+Viamao	-30.083	-51	Brazil	149392	149392	1985	2	0
+Vila Velha	3.267	-51.233	Brazil	253203	253203	1985	2	0
+Vitoria	-2.867	-52	Brazil	254448	254448	1985	2	0
+Vitoria da Conquista	-14.883	-40.867	Brazil	198781	198781	1985	2	0
+Volta Redonda	-22.517	-44.083	Brazil	220084	220084	1985	2	0
+Antofagasta	-23.667	-70.383	Chile	203067	-9999	1985	2	0
+Chillan	-36.617	-72.167	Chile	126581	-9999	1985	2	0
+Concepcion	-36.833	-73.05	Chile	280713	-9999	1985	2	0
+Iquique	-20.25	-70.133	Chile	127491	-9999	1985	2	0
+Osorno	-40.583	-73.233	Chile	101948	-9999	1985	2	0
+Puente Alto	-33.533	-70.583	Chile	125297	-9999	1985	2	0
+Punta Arenas	-53.167	-70.933	Chile	107064	-9999	1985	2	0
+Rancagua	-34.167	-70.75	Chile	157209	-9999	1985	2	0
+San Bernardo	-33.617	-70.75	Chile	136224	-9999	1985	2	0
+Santiago	-33.5	-70.667	Chile	4099714	-9999	1985	2	1
+Talca	-35.467	-71.667	Chile	137621	-9999	1985	2	0
+Temuco	-38.75	-72.667	Chile	168120	-9999	1985	2	0
+Valdivia	-39.767	-73.25	Chile	104910	-9999	1985	2	0
+Valparaiso	-33.083	-71.667	Chile	273213	-9999	1985	2	0
+Armenia	4.533	-75.667	Colombia	-9999	192409	1985	1	0
+Barrancabermeja	7.1	-73.9	Colombia	-9999	141516	1985	1	0
+Barranquilla	11	-74.833	Colombia	-9999	917486	1985	1	0
+Bello	6.333	-75.683	Colombia	-9999	211203	1985	1	0
+Bogota	4.633	-74.083	Colombia	-9999	4176769	1985	1	1
+Bucaramanga	7.133	-73.167	Colombia	-9999	315687	1985	1	0
+Buenaventura	3.9	-77.033	Colombia	-9999	165829	1985	1	0
+Cali	3.4	-76.5	Colombia	-9999	1369331	1985	1	0
+Cartago	4.75	-75.917	Colombia	-9999	95650	1985	1	0
+Cienago	11.017	-74.25	Colombia	-9999	56164	1985	1	0
+Cucuta	7.917	-72.517	Colombia	-9999	383584	1985	1	0
+Dos Quebradas	4.85	-75.65	Colombia	-9999	97063	1985	1	0
+Floridablanca	7.067	-73.1	Colombia	-9999	142153	1985	1	0
+Ibague	4.417	-75.333	Colombia	-9999	280638	1985	1	0
+Itagui	6.167	-75.6	Colombia	-9999	139050	1985	1	0
+Manizales	5.05	-75.533	Colombia	-9999	283365	1985	1	0
+Medellin	6.25	-75.6	Colombia	-9999	1452392	1985	1	0
+Monteria	8.75	-75.083	Colombia	-9999	162056	1985	1	0
+Neiva	2.967	-75.25	Colombia	-9999	179908	1985	1	0
+Palmira	3.55	-76.283	Colombia	-9999	181157	1985	1	0
+Pasto	1.2	-77.283	Colombia	-9999	203742	1985	1	0
+Popayan	2.45	-76.533	Colombia	-9999	149019	1985	1	0
+Pereira	4.783	-75.767	Colombia	-9999	241927	1985	1	0
+Santa Marta	11.3	-74.167	Colombia	-9999	175687	1985	1	0
+Soacha	4.583	-74.217	Colombia	-9999	100691	1985	1	0
+Soledad	10.9	-74.8	Colombia	-9999	168291	1985	1	0
+Valledupar	10.517	-73.1	Colombia	-9999	150838	1985	1	0
+Villavicencio	4.15	-73.633	Colombia	-9999	162556	1985	1	0
+Quito	0.233	-78.5	Ecuador	918674	-9999	1986	2	1
+Georgetown	6.767	-58.167	Guyana	72049	187056	1976	2	1
+Asuncion	-25.25	-57.667	Paraguay	454881	718690	1982	1	1
+Arequipa	-16.417	-71.533	Peru	545165	-9999	1985	2	0
+Callao	-12.083	-77.133	Peru	515200	-9999	1985	2	0
+Chiclayo	-6.783	-79.783	Peru	349249	-9999	1985	2	0
+Chimbote	-9.067	-78.567	Peru	255078	-9999	1985	2	0
+Cuzco	-13.533	-71.95	Peru	235857	-9999	1985	2	0
+Huancayo	-12.083	-75.2	Peru	190226	-9999	1985	2	0
+Ica	-14.033	-75.8	Peru	128392	-9999	1985	2	0
+Iquitos	-3.85	-73.217	Peru	229557	-9999	1985	2	0
+Juliaca	-15.483	-70.15	Peru	106340	-9999	1985	2	0
+Lima	-12.1	-77.05	Peru	5008400	-9999	1985	2	1
+Piura	-5.25	-80.633	Peru	265866	-9999	1985	2	0
+Pucallpa	-8.35	-74.55	Peru	117755	-9999	1985	2	0
+Tacna	-18	-70.25	Peru	125345	-9999	1985	2	0
+Trujillo	-8.1	-79	Peru	421345	-9999	1985	2	0
+Paramaribo	5.867	-55.233	Suriname	110867	182100	1964	1	1
+Barcelona Pto. La Cruz	10.133	-64.717	Venezuela	156519	-9999	1981	1	0
+Barinas	8.6	-70.25	Venezuela	158309	166069	1987	2	0
+Barquisimeto	10.05	-69.3	Venezuela	661265	718195	1987	2	0
+Cabimas	10.433	-71.45	Venezuela	162097	213733	1987	2	0
+Cuidad Bolivar	8.1	-63.6	Venezuela	240954	259069	1987	2	0
+Cuidad Guayana	8.367	-62.617	Venezuela	458789	466448	1987	2	0
+Guarenas	10.467	-66.617	Venezuela	101464	-9999	1981	1	0
+Los Teques	10.417	-67.017	Venezuela	148602	159166	1987	2	0
+Maracay	10.333	-67.467	Venezuela	496662	857982	1987	2	0
+Maturin	9.75	-63.167	Venezuela	205076	252645	1987	2	0
+Merida	8.4	-71.133	Venezuela	188160	250442	1987	2	0
+San Cristobal	7.767	-72.25	Venezuela	234905	338188	1987	2	0
+Valencia	10.233	-67.983	Venezuela	856455	1134623	1987	2	0
+Balkh	36.7	67.1	Afghanistan	123900	-9999	1986	2	0
+Herat	34.333	62.167	Afghanistan	168200	-9999	1986	2	0
+Kandahar	31.6	65.783	Afghanistan	213900	-9999	1986	2	0
+Bavisal	22.5	90.333	Bangladesh	-9999	159298	1981	1	0
+Chittagong	22.333	91.8	Bangladesh	-9999	1388476	1981	1	0
+Comilla	23.467	91.167	Bangladesh	-9999	126130	1981	1	0
+Dacca	23.7	90.367	Bangladesh	-9999	3458602	1981	1	1
+Jessore	23.167	89.2	Bangladesh	-9999	149426	1981	1	0
+Khulna	22.817	89.567	Bangladesh	-9999	107863	1981	1	0
+Mymenshing	24.75	90.383	Bangladesh	-9999	101080	1981	1	0
+Pabna	24	89.25	Bangladesh	-9999	171600	1981	1	0
+Rajshahi	24.4	88.667	Bangladesh	-9999	155964	1981	1	0
+Rangpur	25.75	89.35	Bangladesh	-9999	128085	1981	1	0
+Saidpur	25.8	89	Bangladesh	-9999	104522	1981	1	0
+Sylhet	24.883	91.85	Bangladesh	-9999	166847	1981	1	0
+Thimphu	27.517	89.75	Bhutan	8922	-9999	1977	2	1
+Bandar Seribegawan	4.933	114.967	Brunei Daruissalam	49902	-9999	1981	1	1
+Bassein	16.767	94.75	Burma	144092	-9999	1983	1	0
+Moulmein	16.5	97.65	Burma	219991	-9999	1983	1	0
+Pegu	17.3	96.517	Burma	150447	-9999	1983	1	0
+Rangoon	16.783	96.167	Burma	2458712	-9999	1983	1	1
+Anqing	30.767	119.667	China	449310	-9999	1982	1	0
+Anshan	41.05	122.967	China	1195580	2517080	1982	1	0
+Anshun	26.033	105.95	China	200680	-9999	1982	1	0
+Baicheng	45.617	122.8	China	276420	-9999	1982	1	0
+Baoding	38.9	115.433	China	495140	-9999	1982	1	0
+Baoji	34.383	107.15	China	341240	3361600	1982	1	0
+Beihai	21.483	109.167	China	173740	-9999	1982	1	0
+Beijing	39.917	116.433	China	5531460	8179660	1982	1	1
+Bengbu	32.933	117.45	China	550360	-9999	1982	1	0
+Benxi	41.333	123.75	China	773730	1412120	1982	1	0
+Botou	38.05	117.55	China	1075920	1592940	1982	1	0
+Cangzhou	38.317	116.9	China	280250	-9999	1982	1	0
+Changchun	43.833	125.517	China	1747410	5705230	1982	1	0
+Changde	29.1	111.683	China	213890	-9999	1982	1	0
+Changzhi	36.183	113.1	China	450320	-9999	1982	1	0
+Changzhou	31.65	120.9	China	533940	-9999	1982	1	0
+Chaozhou	23.7	116.6	China	162280	-9999	1982	1	0
+Chengde	40.967	117.883	China	326910	-9999	1982	1	0
+Chenghwa	47.867	88.117	China	137236	137236	1970	2	0
+Chenzhou	25.8	113.033	China	165930	-9999	1982	1	0
+Chifeng	42.283	118.933	China	293460	-9999	1982	1	0
+Chongli	40.95	115.2	China	129952	129952	1970	2	0
+Chongqing	30.633	103.667	China	2673170	6511130	1982	1	0
+Dandong	40.133	124.4	China	545180	2574020	1982	1	0
+Daqing	46.617	124.983	China	758430	-9999	1982	1	0
+Datong	40.2	113.2	China	962470	-9999	1982	1	0
+Daxian	31.267	107.517	China	193490	-9999	1982	1	0
+Dezhou	37.483	116.183	China	258860	-9999	1982	1	0
+Dongshan	23.7	117.417	China	958360	-9999	1982	1	0
+Dukou	26.5	101.75	China	497330	795910	1982	1	0
+Duyun	26.983	107.533	China	102380	-9999	1982	1	0
+Echeng	30.383	114.867	China	119040	-9999	1982	1	0
+Fengcheng	28.183	115.783	China	995900	-9999	1982	1	0
+Fengshan	24.65	107.083	China	102109	102109	1970	2	0
+Foshan	23.05	113.133	China	273840	-9999	1982	1	0
+Fuxin	42.067	121.65	China	646580	1693380	1982	1	0
+Fuyang	32.933	115.85	China	177850	-9999	1982	1	0
+Fuzhou (Fujian Sheng)	26.15	119.283	China	1111550	1651500	1982	1	0
+Fuzhou (Jiangxi Sheng)	28.05	116.25	China	158300	-9999	1982	1	0
+Ganzhou	25.867	114.85	China	362880	-9999	1982	1	0
+Gejiu	23.417	103.083	China	352980	-9999	1982	1	0
+Guangzhou	23.133	113.333	China	3181510	5669640	1982	1	0
+Guilin	25.35	110.183	China	432410	686170	1982	1	0
+Guiyang	26.1	106.117	China	1350190	-9999	1982	1	0
+Handan	36.583	114.483	China	929530	-9999	1982	1	0
+Hangzhou	30.3	120.117	China	1171450	5234150	1982	1	0
+Hanzhong	33.15	107.05	China	374270	-9999	1982	1	0
+Hebi	35.95	114.133	China	336430	-9999	1982	1	0
+Hefei	31.917	117.3	China	795420	1541250	1982	1	0
+Hegang	47.6	130.5	China	592470	-9999	1982	1	0
+Hengyang	26.95	112.467	China	531730	-9999	1982	1	0
+Hohhoit	40.817	111.617	China	754120	1206290	1982	1	0
+Huaibei	34	116.8	China	444820	1308260	1982	1	0
+Huainan	32.683	117.1	China	1029220	1519420	1982	1	0
+Huangshi	30.217	115.083	China	375640	1068650	1982	1	0
+Huizhou	23.133	114.467	China	158380	-9999	1982	1	0
+Hunjiang	41.9	126.383	China	694160	-9999	1982	1	0
+Huzhou	30.6	120.067	China	952900	-9999	1982	1	0
+Llan	24.767	104.017	China	167550	-9999	1982	1	0
+Linchang	36.75	114.61	China	107970	313660	1982	1	0
+Jiamusi	46.983	130.433	China	540190	-9999	1982	1	0
+Jiaxing	30.85	120.867	China	655130	-9999	1982	1	0
+Jiayi	25.533	108.317	China	238713	238713	1970	2	0
+Jilin	43.883	126.583	China	1088420	3974260	1982	1	0
+Jilong	22.8	114.917	China	324040	324040	1970	2	0
+Jinan	36.683	117	China	1359130	3375830	1982	1	0
+Jingdezhen	29.283	117.2	China	611030	-9999	1982	1	0
+Jining (Shandong Sheng)	35.417	116.667	China	190420	-9999	1982	1	0
+Jining (Shanxi Sheng)	40.95	113.033	China	158570	-9999	1982	1	0
+Jinzhou	41.117	121.1	China	599490	4448460	1982	1	0
+Jiujiang	29.733	115.983	China	350910	-9999	1982	1	0
+Jixi	45.3	130.967	China	781800	-9999	1982	1	0
+Kaifeng	34.783	114.333	China	602230	-9999	1982	1	0
+Kaiyuan	42.667	124.5	China	223420	-9999	1982	1	0
+Karamay	45.8	84.5	China	156970	-9999	1982	1	0
+Korla	41.8	86.167	China	117690	-9999	1982	1	0
+Lanzhou	36.017	103.75	China	1364480	2339750	1982	1	0
+Laohekou	32.367	111.667	China	101500	-9999	1982	1	0
+Lengshuijiang	27.667	111.433	China	254590	-9999	1982	1	0
+Lianyungang	34.5	117.367	China	397090	-9999	1982	1	0
+Liaoyang	41.267	123.2	China	470020	1611850	1982	1	0
+Linchuan	27.933	116.267	China	619060	-9999	1982	1	0
+Linfen	36	111.5	China	208210	-9999	1982	1	0
+Liupanshui	26.55	104.867	China	2107100	-9999	1982	1	0
+Liuzhou	24.283	109.25	China	581980	-9999	1982	1	0
+Longyan	25.1	117.033	China	346700	-9999	1982	1	0
+Loudi	38.317	115.167	China	104500	-9999	1982	1	0
+Lu'an	31.8	116.5	China	145880	-9999	1982	1	0
+Luohe	33.55	114	China	157670	-9999	1982	1	0
+Luoyana	34.783	112.433	China	951610	-9999	1982	1	0
+Luzhou	28.917	105.417	China	305220	-9999	1982	1	0
+Ma'anshan	31.817	118.533	China	351880	-9999	1982	1	0
+Maoming	21.833	110.933	China	412540	-9999	1982	1	0
+Meizhou	23.85	117.3	China	111450	-9999	1982	1	0
+Mianyang	31.467	104.767	China	768500	-9999	1982	1	0
+Mudanjiang	44.583	129.6	China	581300	-9999	1982	1	0
+Nanchang	28.683	115.883	China	1075710	2471070	1982	1	0
+Nanchong	30.9	106.1	China	228340	-9999	1982	1	0
+Najiang	32.367	106.883	China	2091400	3682270	1982	1	0
+Nanning	22.833	108.083	China	889790	-9999	1982	1	0
+Nanping	38.1	116.683	China	407810	-9999	1982	1	0
+Nantong	32.083	120.85	China	402990	-9999	1982	1	0
+Nanyang	33.1	112.517	China	288300	-9999	1982	1	0
+Neijiang	29.533	105.05	China	270750	-9999	1982	1	0
+Ningbo	29.9	121.55	China	478940	943460	1982	1	0
+Pingdingshan	41.433	124.767	China	470330	-9999	1982	1	0
+Pingyang	27.75	120.417	China	510390	-9999	1982	1	0
+Pingxiang	27.1	113.133	China	1189030	-9999	1982	1	0
+Qingdao	36.067	120.317	China	1172370	4204840	1982	1	0
+Qingjiang	28.067	115.517	China	234750	-9999	1982	1	0
+Qinhuangdao	39.933	119.617	China	394210	-9999	1982	1	0
+Quzhou	36.817	114.917	China	981280	-9999	1982	1	0
+Sanmenxia	34.767	111.283	China	147050	-9999	1982	1	0
+Sanming	26.267	117.583	China	199230	-9999	1982	1	0
+Shanghai	31.25	121.5	China	6292960	11185100	1982	1	0
+Shangrao	28.433	117.967	China	664780	-9999	1982	1	0
+Shangqiu	34.45	115.117	China	186760	-9999	1982	1	0
+Shantou	23.383	116.65	China	717620	-9999	1982	1	0
+Shanzhong	36.4	110.95	China	235667	235667	1970	2	0
+Shaoguan	24.9	113.55	China	370550	696340	1982	1	0
+Shaoyang	27.033	111.417	China	396600	-9999	1982	1	0
+Shashi	30.267	112.333	China	238960	-9999	1982	1	0
+Shenyang	41.833	123.433	China	3944240	5054640	1982	1	0
+Shenzhen	22.517	114.133	China	98060	335150	1982	1	0
+Shijianzhuang	38.05	114.45	China	1068720	-9999	1982	1	0
+Shiyan	32.517	110.75	China	306830	-9999	1982	1	0
+Shizuishan	39.067	106.367	China	297790	543390	1982	1	0
+Siping	33.417	114.167	China	333850	-9999	1982	1	0
+Suizhou	29.133	118.75	China	142970	-9999	1982	1	0
+Suzhou	31.3	120.617	China	669940	-9999	1982	1	0
+Tai'an	36.333	117	China	1274770	-9999	1982	1	0
+Taipei	25.033	121.5	China	1769568	1769568	1970	2	0
+Taiyan	38	112.5	China	1745820	2176880	1982	1	0
+Taizhong	24.017	120.55	China	448140	448140	1970	2	0
+Taizhou	30	93.017	China	161200	-9999	1982	1	0
+Tangshan	39.617	118.083	China	1407840	-9999	1982	1	0
+Tansyuan	30.833	111.75	China	105841	105841	1970	2	0
+Tianjin	39.133	117.2	China	5152180	7790160	1982	1	0
+Tianshui	34.417	105.967	China	185230	-9999	1982	1	0
+Tiefa	42.067	123.083	China	145890	-9999	1982	1	0
+Tieling	42.317	123.867	China	220850	-9999	1982	1	0
+Tongchuan	35.083	109.033	China	353520	-9999	1982	1	0
+Tonghua	41.75	125.833	China	359960	-9999	1982	1	0
+Tongliao	43.617	122.25	China	213470	-9999	1982	1	0
+Tongling	30.95	117.667	China	184060	501430	1982	1	0
+Tunxi	29.717	118.333	China	103560	-9999	1982	1	0
+Wanxian	30.9	108.333	China	267060	-9999	1982	1	0
+Weifang	36.733	119.167	China	393410	-9999	1982	1	0
+Weihai	37.5	122.067	China	205010	-9999	1982	1	0
+Wenzhou	28.033	120.667	China	515650	5948130	1982	1	0
+Wuhan	30.583	114.317	China	3287720	4273080	1982	1	0
+Wuhu	31.35	118.5	China	449070	944150	1982	1	0
+Wuxi	31.583	120.317	China	798310	-9999	1982	1	0
+Wuzhou	23.5	111.35	China	242250	-9999	1982	1	0
+Xi'an	34.267	108.9	China	2185040	2911580	1982	1	0
+Xiamen	24.467	118.083	China	507390	961650	1982	1	0
+Xiangfan	32.083	112.05	China	323000	-9999	1982	1	0
+Xiangtan	27.85	112.9	China	492040	-9999	1982	1	0
+Xiangtan (Hebei Sheng)	39	116	China	334210	-9999	1982	1	0
+Xiaguan	25.55	100.15	China	117190	-9999	1982	1	0
+Xianyang	34.367	108.7	China	501810	-9999	1982	1	0
+Xichang	27.867	102.267	China	145840	-9999	1982	1	0
+Xining	36.583	101.917	China	566650	927290	1982	1	0
+Xinxiang	35.267	113.85	China	525280	-9999	1982	1	0
+Xinyang	27.133	112.983	China	240000	-9999	1982	1	0
+Xinzhou	38.417	112.75	China	208038	208038	1970	2	0
+Xuchang	34.05	113.8	China	218960	-9999	1982	1	0
+Xuzhou (Jiangsu Sheng)	34.283	117.3	China	776770	-9999	1982	1	0
+Xuzhou (Anhui Sheng)	32	117	China	191710	-9999	1982	1	0
+Yan'an	36.667	109.35	China	254420	-9999	1982	1	0
+Yangquan	37.867	113.483	China	477570	-9999	1982	1	0
+Yangzhou	32.367	119.367	China	302090	-9999	1982	1	0
+Yanji	42.867	129.533	China	176000	-9999	1982	1	0
+Yantai	37.5	121.367	China	385180	-9999	1982	1	0
+Yibin	28.833	104.583	China	245240	-9999	1982	1	0
+Yichang	35.517	111.75	China	365000	-9999	1982	1	0
+Yichun (Heilongjiang Sheng)	47.683	129.167	China	755830	1167020	1982	1	0
+Yichun (Jiangxi Sheng)	27.75	114.367	China	171720	-9999	1982	1	0
+Yinchuan	38.5	106.317	China	354100	658400	1982	1	0
+Yingkow	40.717	122.15	China	422590	2788690	1982	1	0
+Yining	43.833	81.467	China	257280	-9999	1982	1	0
+Yiyang	28.75	112.267	China	165040	-9999	1982	1	0
+Yuci	37.667	112.733	China	270890	-9999	1982	1	0
+Yueyang	29.383	113.05	China	971790	-9999	1982	1	0
+Zaozhuang	34.883	117.633	China	1244020	2703540	1982	1	0
+Zhangjiakou	40.85	114.983	China	617120	-9999	1982	1	0
+Zhangzhou	24.517	117.667	China	283490	-9999	1982	1	0
+Zhanjiang	21.167	110.333	China	853970	-9999	1982	1	0
+Zhaoqing	23.067	112.417	China	172080	-9999	1982	1	0
+Zhaotong	28.333	103.65	China	133080	-9999	1982	1	0
+Zhengzhou	34.75	113.633	China	1404050	1942970	1982	1	0
+Zhenjiang	32.133	119.5	China	345560	-9999	1982	1	0
+Zhoukou	31	106.067	China	213890	-9999	1982	1	0
+Zhuhai	22.283	113.5	China	131860	-9999	1982	1	0
+Zhumadian	32.983	114.017	China	150440	-9999	1982	1	0
+Zhuzhou	27.883	113.117	China	382950	-9999	1982	1	0
+Zibo	36.85	118.017	China	2197660	-9999	1982	1	0
+Zigong	29.417	104.783	China	866020	1673300	1982	1	0
+Zunyi	27.683	106.833	China	350670	-9999	1982	1	0
+Limasso	34.667	33.05	Cyprus	-9999	113600	1986	2	0
+Nicosia	35.15	33.35	Cyprus	-9999	163700	1986	2	1
+Phnom Penh	11.583	104.917	Democratic Kampuchea	393995	-9999	1962	1	1
+Aden	12.783	45.05	Democratic Yemen	271590	-9999	1977	2	1
+Adoni	15.633	77.267	India	108939	-9999	1981	1	0
+Agartala	23.817	91.25	India	132186	-9999	1981	1	0
+Agra	27.15	78	India	694191	747318	1981	1	0
+Ahmedabad	23	72.667	India	2059725	2548057	1981	1	0
+Ahmednagar	19.117	74.767	India	143937	181210	1981	1	0
+Ajmer	26.483	74.667	India	375593	-9999	1981	1	0
+Akola	20.667	77.083	India	225412	-9999	1981	1	0
+Aligarh	25.917	76.25	India	320861	-9999	1981	1	0
+Allahabad	25.417	81.967	India	616051	650070	1981	1	0
+Alleppey	9.5	76.367	India	169940	-9999	1981	1	0
+Alwar	27.533	76.583	India	145795	-9999	1981	1	0
+Ambala	30.317	76.817	India	104565	121203	1981	1	0
+Amravati (Amraoti)	20.917	77.75	India	261404	-9999	1981	1	0
+Amritsar	31.583	74.933	India	594844	-9999	1981	1	0
+Amroha	28.9	78.483	India	112682	-9999	1981	1	0
+Anantapur	14.7	77.083	India	119531	-9999	1981	1	0
+Arrah	25.567	84.667	India	125111	-9999	1981	1	0
+Asansol	23.667	87.017	India	183375	366424	1981	1	0
+Aurangabad	24.767	84.383	India	284607	316421	1981	1	0
+Baharampur	24.1	88.3	India	-9999	102311	1981	1	0
+Bally	22.65	88.333	India	147735	-9999	1981	1	0
+Bangalore	12.967	77.583	India	2628593	2921751	1981	1	0
+Baranagar	22.633	88.367	India	170343	-9999	1981	1	0
+Bareilly	28.333	79.4	India	386734	449425	1981	1	0
+Barrackpur	22.733	88.5	India	115516	-9999	1981	1	0
+Batala	31.8	75.283	India	-9999	101966	1981	1	0
+Bhatinda	30.167	74.967	India	124453	127363	1981	1	0
+Belgaum	15.9	74.6	India	274430	300372	1981	1	0
+Bellary	15.183	76.9	India	201579	-9999	1981	1	0
+Berhampur	19.35	84.85	India	162550	-9999	1981	1	0
+Bermo	23.567	85.133	India	-9999	101946	1981	1	0
+Bhadravati	13.9	75.633	India	53551	130606	1981	1	0
+Bhagalpur	25.233	86.983	India	225062	-9999	1981	1	0
+Bharatpur	27.25	77.5	India	105274	-9999	1981	1	0
+Bharuch	21.667	73.033	India	110070	112524	1981	1	0
+Bhatpara	22.85	88.517	India	265419	-9999	1981	1	0
+Bhavnagar	21.75	72.167	India	307121	308642	1981	1	0
+Bheemavaram	16.567	81.583	India	101894	-9999	1981	1	0
+Bhilwara	25.383	74.65	India	122625	-9999	1981	1	0
+Bhiwandi	19.35	73.133	India	115298	-9999	1981	1	0
+Bhiwani	28.833	76.167	India	101277	-9999	1981	1	0
+Bhopal	23.283	77.467	India	671018	-9999	1981	1	0
+Bhubaneswar	20.217	85.833	India	21921	-9999	1981	1	0
+Bhusawal	21.017	75.833	India	123133	132142	1981	1	0
+Bihar	25.217	85.517	India	151343	-9999	1981	1	0
+Bijapur	16.783	75.8	India	147313	-9999	1981	1	0
+Bikaner	28.017	73.367	India	253174	287712	1981	1	0
+Bokaro Steel City	23.767	85.917	India	224099	264480	1981	1	0
+Bulandshahr	28.5	77.817	India	103436	-9999	1981	1	0
+Burhanpur	21.3	76.133	India	140986	-9999	1981	1	0
+Calcutta	22.5	88.333	India	3305006	9194018	1981	1	0
+Calicut	11.25	75.75	India	394447	546058	1981	1	0
+Cannanore	11.883	75.383	India	60904	157797	1981	1	0
+Chandan Nagar	22.85	88.35	India	101925	-9999	1981	1	0
+Chandigarh	30.717	76.783	India	379660	422841	1981	1	0
+Chandrapur	19.967	79.35	India	115777	-9999	1981	1	0
+Chapra	25.8	84.833	India	111564	-9999	1981	1	0
+Coimbatore	11	76.95	India	704514	920355	1981	1	0
+Cuddalore	11.717	79.767	India	127625	-9999	1981	1	0
+Cuddapaph	14.5	78.833	India	103125	-9999	1981	1	0
+Cuttack	20.433	85.933	India	269950	327412	1981	1	0
+Darbhanga	26.167	85.9	India	176301	-9999	1981	1	0
+Davanagere	14.5	75.867	India	196621	-9999	1981	1	0
+Dehra Dun	30.317	78.05	India	211416	293010	1981	1	0
+Delhi	28.667	77.233	India	4884234	5729283	1981	1	0
+Dhanbad	23.783	86.533	India	120221	678069	1981	1	0
+Dindigul	10.383	78	India	164103	-9999	1981	1	0
+Durgapur	23.5	87.15	India	311798	-9999	1981	1	0
+Durg-Bhilai Nagar	21.2	81.333	India	-9999	490214	1981	1	0
+Eluru (Ellore)	16.75	81.167	India	168154	-9999	1981	1	0
+Erode	11.35	77.717	India	142252	275991	1981	1	0
+Etawah	26.8	79.1	India	112174	-9999	1981	1	0
+Faizabad-Ayodhya	26.75	82.167	India	101873	143167	1981	1	0
+Faridabad	28.4	77.3	India	330864	-9999	1981	1	0
+Farrukhabad-Fategarh	27.5	79.533	India	145793	160796	1981	1	0
+Firozabad	27.167	78.417	India	202338	-9999	1981	1	0
+Gadag-Betgeri	15.5	75.75	India	117368	-9999	1981	1	0
+Garden Reach	22.55	88.283	India	191107	-9999	1981	1	0
+Gaya	24.8	85	India	247075	-9999	1981	1	0
+Ghaziabad	28.65	77.433	India	271730	287170	1981	1	0
+Gondiya	21.5	80.167	India	100423	-9999	1981	1	0
+Gorakhpur	26.75	83.383	India	290814	307501	1981	1	0
+Gulbarga	17.367	76.783	India	221325	-9999	1981	1	0
+Guntur	16.333	80.45	India	367699	-9999	1981	1	0
+Gurgaon	28.45	77.017	India	-9999	100877	1981	1	0
+Gwalior	26.2	78.167	India	539015	555862	1981	1	0
+Hapur	28.717	77.783	India	102837	-9999	1981	1	0
+Hardwar	29.967	78.15	India	115513	145946	1981	1	0
+Hisar	29.167	75.75	India	131309	137369	1981	1	0
+Hospet	15.267	76.333	India	-9999	115351	1981	1	0
+Houghly-Chinsura	22.883	88.417	India	128918	-9999	1981	1	0
+Howrah	22.583	88.333	India	744429	-9999	1981	1	0
+Hubli	15.333	75.233	India	527108	-9999	1981	1	0
+Hyderabad	17.367	78.433	India	2093488	2545836	1981	1	0
+Ichalakaranji	16.667	74.55	India	133751	-9999	1981	1	0
+Imphal	24.783	93.917	India	156622	-9999	1981	1	0
+Indore	22.7	75.9	India	829327	-9999	1981	1	0
+Jabalpur	23.167	79.983	India	614162	757303	1981	1	0
+Jalgaon	21.017	75.65	India	145335	-9999	1981	1	0
+Jalna	19.833	75.967	India	122276	-9999	1981	1	0
+Jammu	32.717	74.9	India	206135	223361	1981	1	0
+Jamnagar	22.467	70.1	India	277615	317362	1981	1	0
+Jamshedpur	22.783	86.2	India	438385	669580	1981	1	0
+Jaunpur	25.733	82.683	India	105140	-9999	1981	1	0
+Jhansi	25.45	78.567	India	246172	284141	1981	1	0
+Jodhpur	26.3	73.133	India	506345	-9999	1981	1	0
+Jullundur	31.3	75.667	India	408196	-9999	1981	1	0
+Jungada	19.833	80.917	India	188646	120416	1981	1	0
+Kamarhati	22.75	88.35	India	234951	-9999	1981	1	0
+Kanchipuram	12.833	79.733	India	130926	145254	1981	1	0
+Kanpur	26.45	80.233	India	1481789	1639064	1981	1	0
+Karaikudi	10.067	78.767	India	-9999	100141	1981	1	0
+Karnal	29.683	76.967	India	132107	-9999	1981	1	0
+Khandwa	21.817	76.383	India	114725	-9999	1981	1	0
+Kharagpur	25.117	86.55	India	150475	232575	1981	1	0
+Kolar Gold Fields	12.9	78.267	India	77679	144385	1981	1	0
+Kolhapur	16.667	74.333	India	340625	351392	1981	1	0
+Kotah	25.183	75.967	India	358241	-9999	1981	1	0
+Kumbakonam	10.983	79.4	India	132832	141794	1981	1	0
+Kurnool	15.85	78.017	India	206362	-9999	1981	1	0
+Latur	18.4	76.567	India	111986	-9999	1981	1	0
+Lucknow	26.833	80.9	India	895721	1007604	1981	1	0
+Ludhiana	30.933	75.867	India	607052	-9999	1981	1	0
+Madurai	9.917	78.117	India	820891	907732	1981	1	0
+Malegaon	20.533	74.633	India	245883	-9999	1981	1	0
+Mandya	12.567	76.917	India	100285	-9999	1981	1	0
+Mangalore	12.9	74.85	India	172252	306078	1981	1	0
+Meerut	29	77.7	India	417395	536615	1981	1	0
+Mirzapur-cum-Vindhayachal	25.167	82.75	India	127787	-9999	1981	1	0
+Moradabad	28.083	78.75	India	330051	345350	1981	1	0
+Murwara	23.817	80.467	India	77862	123017	1981	1	0
+Muzaffarnagar	29.433	77.667	India	171816	-9999	1981	1	0
+Muzaffarpur	26.117	85.383	India	190416	-9999	1981	1	0
+Mysore	12.3	76.617	India	441754	479081	1981	1	0
+Nabadwip	23.4	88.383	India	109108	129800	1981	1	0
+Nadiad	22.7	72.917	India	142689	-9999	1981	1	0
+Nager Coil	8.183	77.5	India	171648	-9999	1981	1	0
+Nagpur	21.167	79.2	India	1219461	1302066	1981	1	0
+Naihati	22.9	88.433	India	114607	-9999	1981	1	0
+Nasik	20	73.867	India	262428	429034	1981	1	0
+Navasari	20.85	72.917	India	106793	129266	1981	1	0
+Nellore	14.483	80	India	237065	-9999	1981	1	0
+Nizamabad	18.667	78.083	India	183061	-9999	1981	1	0
+Onadal	23.6	87.2	India	14921	109209	1981	1	0
+Panihati	22.7	88.367	India	205718	-9999	1981	1	0
+Panipat	29.4	76.967	India	137927	-9999	1981	1	0
+Parbhani	19.267	76.85	India	109364	-9999	1981	1	0
+Pathankot	32.267	75.717	India	110039	-9999	1981	1	0
+Patiala	30.35	76.45	India	205141	206254	1981	1	0
+Pondicherri	11.983	79.833	India	162639	251420	1981	1	0
+Poona	18.567	73.967	India	1203351	1686109	1981	1	0
+Porbandar	21.667	69.667	India	115182	133307	1981	1	0
+Proddatur	14.75	78.567	India	107070	-9999	1981	1	0
+Puri	19.817	85.9	India	100942	-9999	1981	1	0
+Purnia	25.75	87.517	India	-9999	109875	1981	1	0
+Quilon	8.883	76.633	India	137943	167598	1981	1	0
+Raichur	16.25	77.333	India	124762	-9999	1981	1	0
+Raipur	21.283	81.75	India	338245	-9999	1981	1	0
+Rajkot	22.25	70.933	India	445076	-9999	1981	1	0
+Rohtak	28.917	76.717	India	166767	-9999	1981	1	0
+Rourkela	22.233	84.833	India	214521	322610	1981	1	0
+Salem	11.667	78.183	India	361394	518615	1981	1	0
+Sambal	21.467	84.067	India	108232	-9999	1981	1	0
+Serampore	22.733	88.35	India	127304	-9999	1981	1	0
+Shahjahanpur	27.883	79.917	India	185396	205095	1981	1	0
+Shillong	25.567	91.883	India	109244	174703	1981	1	0
+Shimoga	13.933	75.517	India	151783	-9999	1981	1	0
+Sholapur	17.717	75.933	India	511103	514860	1981	1	0
+Sikar	27.55	75.2	India	102970	-9999	1981	1	0
+Siliguri	26.7	88.5	India	154378	-9999	1981	1	0
+Sonipat	29	77.017	India	109369	-9999	1981	1	0
+South Dum Dum	22.65	88.433	India	230266	-9999	1981	1	0
+South Suburban	22.483	88.367	India	394775	606002	1981	1	0
+Srinagar	13.433	75.217	India	594775	913806	1981	1	0
+Surat	21.167	72.9	India	776583	913806	1981	1	0
+Tenali	16.217	80.6	India	119257	-9999	1981	1	0
+Thanjavur	10.767	79.15	India	184015	-9999	1981	1	0
+Thana	19.2	72.983	India	309897	389801	1981	1	0
+Tiruchirapalli	10.833	78.717	India	362045	609548	1981	1	0
+Tirunelveli	8.75	77.717	India	128850	323344	1981	1	0
+Tirupati	13.65	79.417	India	115292	-9999	1981	1	0
+Tiruppur	11.083	77.333	India	165223	215859	1981	1	0
+Titagarh	22.733	88.4	India	104534	-9999	1981	1	0
+Trichur	10.533	76.233	India	-9999	170122	1981	1	0
+Trivandrum	8.5	76.95	India	483086	520125	1981	1	0
+Tumkur	13.333	77.1	India	108670	-9999	1981	1	0
+Tuticorin	8.8	78.167	India	192949	250677	1981	1	0
+Udaipur	24.6	73.733	India	232588	-9999	1981	1	0
+Ujjain	23.183	75.833	India	273668	282203	1981	1	0
+Ulhasnagar	19.25	73.133	India	273668	648671	1981	1	0
+Vadodara (Baroda)	22.317	73.233	India	734473	744881	1981	1	0
+Valparai	10.317	76.967	India	115452	-9999	1981	1	0
+Varanasi	25.333	83	India	708647	797162	1981	1	0
+Vellore	12.933	79.15	India	174247	247041	1981	1	0
+Vijayawada	16.567	80.667	India	454577	543008	1981	1	0
+Visakhapatnam	17.75	83.333	India	565321	603630	1981	1	0
+Vizianagarm	18.117	83.5	India	114806	-9999	1981	1	0
+Wadhwan	22.733	71.717	India	-9999	130602	1981	1	0
+Warangal	18	79.583	India	335150	-9999	1981	1	0
+Yamunagar	30.117	77.283	India	109304	160424	1981	1	0
+Ambon	-3.683	128.167	Indonesia	208898	-9999	1980	1	0
+Balikpapan	-1.033	116.233	Indonesia	280675	-9999	1980	1	0
+Bandjarmasin	-3.333	114.583	Indonesia	381286	-9999	1980	1	0
+Bogor	-6.567	106.75	Indonesia	247409	-9999	1980	1	0
+Cirebon	-6.767	108.55	Indonesia	223776	-9999	1980	1	0
+Djambi	-1.633	103.5	Indonesia	230373	-9999	1980	1	0
+Jakarta	-6.133	106.75	Indonesia	6503449	-9999	1980	1	1
+Kediri	-7.75	112.017	Indonesia	221830	-9999	1980	1	0
+Madium	-7.617	111.55	Indonesia	150562	-9999	1980	1	0
+Magelang	-7.467	110.183	Indonesia	123484	-9999	1980	1	0
+Malang	-7.983	112.75	Indonesia	511780	-9999	1980	1	0
+Manado	1.533	124.917	Indonesia	217519	-9999	1980	1	0
+Medan	3.583	98.65	Indonesia	1378955	-9999	1980	1	0
+Padang	-1	100.35	Indonesia	480922	-9999	1980	1	0
+Pekalongan	-6.883	109.667	Indonesia	132558	-9999	1980	1	0
+Pekan Baru	0.5	101.25	Indonesia	186262	-9999	1980	1	0
+Palembang	-2.983	104.75	Indonesia	787187	-9999	1980	1	0
+Pematang Siantar	-6.883	109.383	Indonesia	150376	-9999	1980	1	0
+Pontianak	-0.083	109.267	Indonesia	304778	-9999	1980	1	0
+Probolinggo	-7.75	113.15	Indonesia	100296	-9999	1980	1	0
+Samarinda	-0.5	117.15	Indonesia	264718	-9999	1980	1	0
+Semarang	-6.967	110.483	Indonesia	1026671	-9999	1980	1	0
+Sukabumi	-6.917	106.833	Indonesia	109994	-9999	1980	1	0
+Surabaja	-7.233	112.75	Indonesia	12027913	-9999	1980	1	0
+Surakarta	-7.533	110.833	Indonesia	469888	-9999	1980	1	0
+Tanjung Karang	-5.367	105.3	Indonesia	284275	-9999	1980	1	0
+Tegal	-6.867	109.117	Indonesia	131728	-9999	1980	1	0
+Ujung Pandang	-5.15	119.467	Indonesia	709038	-9999	1980	1	0
+Yogyakarta	-7.8	110.4	Indonesia	398727	-9999	1980	1	0
+Abadan	30.333	48.25	Iran	-9999	308391	1976	1	0
+Ahwaz	31.283	48.717	Iran	471000	-9999	1982	2	0
+Arak	34.083	49.7	Iran	210000	-9999	1982	2	0
+Ardabil	38.25	48.3	Iran	222000	-9999	1982	2	0
+Bakhtaran	34.317	47.067	Iran	531000	-9999	1982	2	0
+Bandar-e-Abbas	27.25	56.25	Iran	175000	-9999	1982	2	0
+Borujerd	33.917	48.8	Iran	177000	-9999	1982	2	0
+Dezful	32.383	48.467	Iran	141000	-9999	1982	2	0
+Esfahan	32.683	51.683	Iran	927000	-9999	1982	2	0
+Gorgan	36.833	54.483	Iran	114000	-9999	1982	2	0
+Hamadan	34.767	48.583	Iran	234000	-9999	1982	2	0
+Karaj	35.8	50.967	Iran	526000	-9999	1982	2	0
+Kashan	33.983	51.583	Iran	110000	-9999	1982	2	0
+Kerman	30.3	57.083	Iran	239000	-9999	1982	2	0
+Kermanshah	34.383	47	Iran	-9999	336131	1976	1	0
+Khoramabad	33.483	48.35	Iran	199000	-9999	1982	2	0
+Khoramshahr	30.483	48.25	Iran	-9999	150736	1976	1	0
+Mashhad	36.267	59.567	Iran	1120000	-9999	1982	2	0
+Masjed Soleyman	31.983	49.3	Iran	117000	-9999	1982	2	0
+Najafabad	32.667	51.25	Iran	114000	-9999	1982	2	0
+Qazvin	36.267	50	Iran	244000	-9999	1982	2	0
+Qom	34.65	50.95	Iran	424000	-9999	1982	2	0
+Rasht	37.3	49.633	Iran	260000	-9999	1982	2	0
+Rezaiyeh	37.533	45.033	Iran	-9999	164419	1976	1	0
+Sabzewar	36.217	57.633	Iran	108000	-9999	1982	2	0
+Sanandai	35.3	47.017	Iran	172000	-9999	1982	2	0
+Sari	36.55	53.1	Iran	125000	-9999	1982	2	0
+Shiraz	29.633	52.567	Iran	800000	-9999	1982	2	0
+Tabriz	38.083	46.3	Iran	852000	-9999	1982	2	0
+Teheran	35.667	51.433	Iran	5734000	-9999	1982	2	1
+Yazd	31.917	54.367	Iran	193000	-9999	1982	2	0
+Zahedan	29.5	60.833	Iran	165000	-9999	1982	2	0
+Zanjan	36.667	48.5	Iran	176000	-9999	1982	2	0
+Arbil	36.2	44.017	Iraq	101779	-9999	1970	2	0
+Baghdad	33.333	44.433	Iraq	1984142	-9999	1970	2	1
+Basra	30.5	47.833	Iraq	333684	-9999	1970	2	0
+Hilla	32.467	44.483	Iraq	103544	-9999	1970	2	0
+Kirkuk	35.467	44.433	Iraq	191294	-9999	1970	2	0
+Mosul	36.35	43.133	Iraq	310313	-9999	1970	2	0
+Najaf	31.983	44.317	Iraq	147855	-9999	1970	2	0
+Bat Yam	32.017	34.75	Israel	131600	-9999	1986	2	0
+Be'er Sheva	31.25	34.833	Israel	115000	-9999	1986	2	0
+Ben Beraq	32.083	34.833	Israel	103600	-9999	1986	2	0
+Haifa	32.817	34.983	Israel	224000	392800	1986	2	0
+Jerusalem	31.783	35.217	Israel	463300	-9999	1986	2	1
+Netanya	32.333	34.85	Israel	110800	-9999	1986	2	0
+Petah Tiqwa	32.083	34.883	Israel	130000	-9999	1986	2	0
+Ramat Gan	32.067	34.8	Israel	115700	-9999	1986	2	0
+Rishon Leziyyon	31.967	34.8	Israel	114400	-9999	1986	2	0
+Tel Aviv-Yafo	32.083	34.767	Israel	321500	1615900	1986	2	0
+Ageo	35.967	139.6	Japan	181581	181581	1986	2	0
+Aizuwakamatsu	37.5	139.967	Japan	117104	117104	1986	2	0
+Akashi	34.65	135	Japan	260982	260982	1986	2	0
+Akita	39.733	140.083	Japan	296596	296596	1986	2	0
+Amagasaki	34.7	135.383	Japan	502270	502270	1986	2	0
+Anjo	34.933	137.083	Japan	134322	134322	1986	2	0
+Aomori	40.833	140.717	Japan	294726	294726	1986	2	0
+Asahikawa	43.767	142.383	Japan	365311	365311	1986	2	0
+Ashikaga	36.35	139.433	Japan	168778	168778	1986	2	0
+Atsugi	35.467	139.367	Japan	177036	177036	1986	2	0
+Chofu	35.65	139.55	Japan	189307	189307	1986	2	0
+Fuchu	34.583	133.2	Japan	200423	200423	1986	2	0
+Fuji	35.167	138.617	Japan	217596	217596	1986	2	0
+Fujieda	34.9	138.25	Japan	114488	114488	1986	2	0
+Fujinomiya	35.267	138.55	Japan	114551	114551	1986	2	0
+Fukui	36.067	136.2	Japan	248363	248363	1986	2	0
+Fukuoka	33.5	130.5	Japan	1175707	1175707	1986	2	0
+Fukushima	37.733	140.467	Japan	271436	271436	1986	2	0
+Fukuyama	34.583	133.333	Japan	362049	362049	1986	2	0
+Funabashi	35.7	139.983	Japan	507905	507905	1986	2	0
+Gifu	35.45	136.767	Japan	409469	409469	1986	2	0
+Hachinohe	40.5	141.5	Japan	243373	243373	1986	2	0
+Hachioji	35.667	139.333	Japan	424328	424328	1986	2	0
+Hadano	35.367	139.233	Japan	140452	140452	1986	2	0
+Hakodate	41.767	140.733	Japan	318315	318315	1986	2	0
+Hamamatsu	34.7	137.7	Japan	516826	516826	1986	2	0
+Himeji	34.833	134.667	Japan	451075	451075	1986	2	0
+Hino	35.683	139.417	Japan	156613	156613	1986	2	0
+Hirosaki	40.567	140.467	Japan	178065	178065	1986	2	0
+Hiroshima	34.383	132.45	Japan	1055176	1055176	1986	2	0
+Hofu	34.033	131.567	Japan	118394	118394	1986	2	0
+Ibaraki	36.167	140.167	Japan	249074	249074	1986	2	0
+Ichihara	35.533	140.067	Japan	241207	241207	1986	2	0
+Ichikawa	35.75	139.917	Japan	403458	403458	1986	2	0
+Ichinomiya	35.333	136.833	Japan	257167	257167	1986	2	0
+Irimi	34.217	131.233	Japan	121421	121421	1986	2	0
+Ise	34.483	136.683	Japan	106297	106297	1986	2	0
+Isezaki	36.317	139.183	Japan	112915	112915	1986	2	0
+Ishinomaki	38.417	141.3	Japan	123595	123595	1986	2	0
+Itami	34.8	135.4	Japan	180457	180457	1986	2	0
+Iwakuni	34.167	132.15	Japan	112467	112467	1986	2	0
+Iwatsuki	35.95	139.7	Japan	101265	101265	1986	2	0
+Kadoma	35.383	137.967	Japan	140406	140406	1986	2	0
+Kagoshima	31.617	130.533	Japan	529281	529281	1986	2	0
+Kakamigahara	35.4	136.9	Japan	125252	125252	1986	2	0
+Kamakura	35.317	139.55	Japan	177623	177623	1986	2	0
+Kanazawa	36.5	136.633	Japan	421994	421994	1986	2	0
+Kariya	35	137	Japan	113998	113998	1986	2	0
+Kashihara	34.467	135.767	Japan	112742	112742	1986	2	0
+Kasugai	35.25	136.95	Japan	256973	256973	1986	2	0
+Kasukabe	35.967	139.75	Japan	174855	174855	1986	2	0
+Katsuta	36.4	140.533	Japan	104568	104568	1986	2	0
+Kawagoe	35.917	139.5	Japan	283954	283954	1986	2	0
+Kawaguchi	35.783	139.7	Japan	406318	406318	1986	2	0
+Kawasaki	35.533	139.683	Japan	1106148	1106148	1986	2	0
+Kiryu	36.433	139.3	Japan	131623	131623	1986	2	0
+Kisarazu	35.383	139.95	Japan	120861	120861	1986	2	0
+Kishiwada	34.467	135.367	Japan	185718	185718	1986	2	0
+Kitakyushu	33.867	130.817	Japan	1053010	1053010	1986	2	0
+Kitami	43.85	143.9	Japan	107296	107296	1986	2	0
+Kodaira	35.717	139.5	Japan	155148	155148	1986	2	0
+Kofu	35.7	138.567	Japan	201172	201172	1986	2	0
+Komaki	35.283	136.917	Japan	114525	114525	1986	2	0
+Komatsu	36.417	136.45	Japan	107299	107299	1986	2	0
+Koriyama	37.383	140.367	Japan	302277	302277	1986	2	0
+Kumamoto	32.833	130.7	Japan	551376	551376	1986	2	0
+Kurashiki	34.6	133.717	Japan	416118	416118	1986	2	0
+Kurume	33.333	130.483	Japan	223148	223148	1986	2	0
+Kushiro	42.967	144.4	Japan	216012	216012	1986	2	0
+Kyoto	35.033	135.75	Japan	1480355	1480355	1986	2	0
+Machida	35.55	139.467	Japan	327046	327046	1986	2	0
+Maebashi	36.4	139.067	Japan	278997	278997	1986	2	0
+Matsue	35.483	133.067	Japan	138780	138780	1986	2	0
+Matsumoto	36.3	137.967	Japan	195243	195243	1986	2	0
+Matsusaka	34.55	136.517	Japan	116578	116578	1986	2	0
+Matsuyama	33.833	132.783	Japan	431372	431372	1986	2	0
+Mishima	35.133	138.9	Japan	100849	100849	1986	2	0
+Mitaka	35.7	139.567	Japan	162825	162825	1986	2	0
+Mito	36.367	140.483	Japan	229326	229326	1986	2	0
+Miyakonoojo	31.717	131.033	Japan	132664	132664	1986	2	0
+Miyazaki	31.933	131.45	Japan	281645	281645	1986	2	0
+Moriguchi	34.733	135.567	Japan	158028	158028	1986	2	0
+Morioka	39.717	141.133	Japan	235317	235317	1986	2	0
+Muroran	42.35	140.983	Japan	138397	138397	1986	2	0
+Musashino	35.717	139.583	Japan	136427	136427	1986	2	0
+Nagano	36.65	138.167	Japan	339471	339471	1986	2	0
+Nagaoka	37.45	138.833	Japan	183110	183110	1986	2	0
+Nagareyama	35.85	139.9	Japan	127147	127147	1986	2	0
+Nagasaki	32.75	129.867	Japan	449265	449265	1986	2	0
+Nagoya	35.133	136.883	Japan	2130632	2130632	1986	2	0
+Nara	34.683	135.817	Japan	330419	330419	1986	2	0
+Narashino	35.683	140.033	Japan	137415	137415	1986	2	0
+Niizu	37.8	139.117	Japan	413282	413282	1986	2	0
+Nishinomiya	34.733	135.367	Japan	139359	139359	1986	2	0
+Nobeoka	32.6	131.667	Japan	139359	139359	1986	2	0
+Numazu	35.133	138.833	Japan	212601	212601	1986	2	0
+Obihiro	42.933	143.167	Japan	163923	163923	1986	2	0
+Oggaki	35.367	136.6	Japan	145595	145595	1986	2	0
+Oita	33.25	131.6	Japan	390281	390281	1986	2	0
+Okayama	34.667	133.9	Japan	570796	570796	1986	2	0
+Okazaki	34.967	137.167	Japan	285699	285699	1986	2	0
+Ome	35.8	139.283	Japan	110828	110828	1986	2	0
+Omiya	35.9	139.65	Japan	376373	376373	1986	2	0
+Omuta	33	130.433	Japan	160132	160132	1986	2	0
+Ota	36.567	140.5	Japan	133219	133219	1986	2	0
+Otsu	35	135.833	Japan	234362	234362	1986	2	0
+Saga	33.25	130.333	Japan	166988	166988	1986	2	0
+Sakata	38.917	139.85	Japan	102030	102030	1986	2	0
+Sakura	35.717	140.217	Japan	125069	125069	1986	2	0
+Sapporo	43.083	141.35	Japan	1567724	1567724	1986	2	0
+Sasebo	33.167	129.7	Japan	251498	251498	1986	2	0
+Sendai	31.833	130.283	Japan	688881	688881	1986	2	0
+Shimizu	35	138.5	Japan	242680	242680	1986	2	0
+Shimonoseki	33.983	130.967	Japan	263550	263550	1986	2	0
+Shizuoka	34.983	138.4	Japan	468424	468424	1986	2	0
+Soka	35.833	139.817	Japan	193484	193484	1986	2	0
+Suita	34.75	135.533	Japan	344271	344271	1986	2	0
+Suzuka	34.867	136.617	Japan	165809	165809	1986	2	0
+Tachikawa	35.7	139.467	Japan	149712	149712	1986	2	0
+Takamatsu	34.333	134.017	Japan	327769	327769	1986	2	0
+Takaoka	36.667	137	Japan	177196	177196	1986	2	0
+Takasaki	36.333	139	Japan	233748	233748	1986	2	0
+Tokushima	34.05	134.567	Japan	256790	256790	1986	2	0
+Tokuyama	34.067	131.8	Japan	112014	112014	1986	2	0
+Tokyo	35.667	139.75	Japan	8379385	11906331	1986	2	1
+Tomakomai	42.65	141.55	Japan	158985	158985	1986	2	0
+Tondabayashi	34.5	135.6	Japan	103296	103296	1986	2	0
+Tottori	35.533	134.2	Japan	137150	137150	1986	2	0
+Toyama	36.7	137.233	Japan	313866	313866	1986	2	0
+Toyohashi	34.767	137.367	Japan	323276	323276	1986	2	0
+Toyokawa	34.783	137.4	Japan	108244	108244	1986	2	0
+Toyonaka	34.8	135.583	Japan	408245	408245	1986	2	0
+Toyota	35.083	137.15	Japan	309850	309850	1986	2	0
+Tsu	34.683	136.5	Japan	149016	149016	1986	2	0
+Tsuchuira	36.083	140.183	Japan	119956	119956	1986	2	0
+Tsuruoka	38.7	139.833	Japan	100840	100840	1986	2	0
+Ube	33.95	131.267	Japan	172654	172654	1986	2	0
+Ueda	36.45	138.217	Japan	117188	117188	1986	2	0
+Uji	34.9	135.8	Japan	165632	165632	1986	2	0
+Utsunomiya	36.55	139.867	Japan	411060	411060	1986	2	0
+Wakayama	34.2	135.167	Japan	403380	403380	1986	2	0
+Yamagata	38.267	140.317	Japan	242970	242970	1986	2	0
+Yamaguchi	34.167	131.467	Japan	121937	121937	1986	2	0
+Yamato	35.467	139.467	Japan	178161	178161	1986	2	0
+Yao	34.6	135.617	Japan	270178	270178	1986	2	0
+Yatsushiro	32.533	130.583	Japan	109992	109992	1986	2	0
+Yokkaichi	34.967	136.633	Japan	265299	265299	1986	2	0
+Yokohama	41.067	141.25	Japan	3049782	3049782	1986	2	0
+Yonago	35.45	133.333	Japan	131738	131738	1986	2	0
+Andong	36.617	128.733	Korea (Republic of)	114340	-9999	1985	1	0
+Anyang	39.65	125.333	Korea (Republic of)	361530	-9999	1985	1	0
+Chechon	37.083	128.15	Korea (Republic of)	102309	-9999	1985	1	0
+Chinju	35.167	128.1	Korea (Republic of)	227441	-9999	1985	1	0
+Chonchu	40.183	128.65	Korea (Republic of)	426498	-9999	1985	1	0
+Chuncheon	37.967	127.733	Korea (Republic of)	163217	-9999	1985	1	0
+Chungiu	36.983	127.883	Korea (Republic of)	113345	-9999	1985	1	0
+Iri	35.983	127	Korea (Republic of)	192275	-9999	1985	1	0
+Kunsan	35.95	126.7	Korea (Republic of)	185661	-9999	1985	1	0
+Kwang myong	40.1	127.967	Korea (Republic of)	219592	-9999	1985	1	0
+Kwangchu	35.167	126.75	Korea (Republic of)	906129	-9999	1985	1	0
+Kyong ju	35.117	126.867	Korea (Republic of)	127684	-9999	1985	1	0
+Masan	35.167	128.583	Korea (Republic of)	449247	-9999	1985	1	0
+Pusan	35.083	129.033	Korea (Republic of)	3516807	-9999	1985	1	0
+Seoul	37.5	127	Korea (Republic of)	9645932	-9999	1985	1	1
+Suncheon	34.933	127.467	Korea (Republic of)	121938	-9999	1985	1	0
+Suweon	37.267	126.983	Korea (Republic of)	430834	-9999	1985	1	0
+Taebaek	38.55	126	Korea (Republic of)	113993	-9999	1985	1	0
+Taegu	35.867	128.6	Korea (Republic of)	2030672	-9999	1985	1	0
+Kuwait City	29.333	48	Kuwait	78116	-9999	1975	1	1
+Vientaine	18.117	102.583	Lao People's Dem. Rep.	132253	-9999	1966	2	1
+Beirut	33.867	35.5	Lebanon	474870	938940	1970	1	1
+Ipoh	4.6	101.033	Malaysia	293849	-9999	1980	1	0
+Johore Bharu	1.483	103.733	Malaysia	246395	-9999	1980	1	0
+Klang	3.017	101.55	Malaysia	192080	-9999	1980	1	0
+Kota Bahru	6.117	102.233	Malaysia	167872	-9999	1980	1	0
+Kuala Lumpur	3.133	101.7	Malaysia	919610	-9999	1980	1	1
+Kuala Terengganu	5.333	103.117	Malaysia	180296	-9999	1980	1	0
+Kuantan	3.833	103.317	Malaysia	131547	-9999	1980	1	0
+Petaling Jaya	3.1	101.617	Malaysia	207805	-9999	1980	1	0
+Seremban	2.7	101.9	Malaysia	132911	-9999	1980	1	0
+Taiping	4.9	100.7	Malaysia	146002	-9999	1980	1	0
+Kuching	1.533	110.333	Sarawak	63525	-9999	1970	1	1
+#Male	4	73.467	Maldives	29522	-9999	1977	1	1
+Ulan Bator	48	107	Mongolia	515100	-9999	1987	2	1
+Kathmandu	27.7	85.317	Nepal	235160	-9999	1981	1	1
+Bahawalpur	29.4	71.783	Pakistan	-9999	180263	1981	1	0
+Faisalabad	31.417	73.15	Pakistan	-9999	1104209	1981	1	0
+Gujranwala	32.1	74.183	Pakistan	-9999	658753	1981	1	0
+Gujrat	32.583	74.1	Pakistan	-9999	155058	1981	1	0
+Hyderabad	25.383	68.4	Pakistan	-9999	751529	1981	1	0
+Karachi	24.85	67.033	Pakistan	-9999	5180562	1981	1	0
+Kasur	31.117	74.5	Pakistan	-9999	155523	1981	1	0
+Lahore	31.567	74.367	Pakistan	-9999	2952689	1981	1	0
+Mardan	34.233	72.083	Pakistan	-9999	147977	1981	1	0
+Multan	30.167	71.6	Pakistan	-9999	732070	1981	1	0
+Nawabshsh	26.25	68.433	Pakistan	-9999	102139	1981	1	0
+Okara	30.817	73.517	Pakistan	-9999	153483	1981	1	0
+Peshawar	34.017	71.667	Pakistan	-9999	566248	1981	1	0
+Quetta	30.25	67	Pakistan	-9999	285719	1981	1	0
+Rahimyar Khan	28.367	70.333	Pakistan	-9999	119036	1981	1	0
+Sheikhu Pura	31.7	74.133	Pakistan	-9999	141168	1981	1	0
+Sialkote	32.483	74.583	Pakistan	-9999	302009	1981	1	0
+#Angeles	15.15	120.55	Philippines	221304	-9999	1986	2	0
+Bacolod	10.633	122.967	Philippines	306472	-9999	1986	2	0
+Baguio	16.433	120.567	Philippines	142199	-9999	1986	2	0
+Batangas	13.767	121.017	Philippines	165210	-9999	1986	2	0
+Butuan	8.933	125.517	Philippines	202676	-9999	1986	2	0
+Cabanatuan	15.5	120.967	Philippines	159576	-9999	1986	2	0
+Calbayog	12.067	124.633	Philippines	111290	-9999	1986	2	0
+Caloocan	14.633	120.967	Philippines	558062	-9999	1986	2	0
+Dagupan	16.033	120.35	Philippines	1088800	-9999	1986	2	0
+General Santos	6.083	125.25	Philippines	179082	-9999	1986	2	0
+Iloilo	10.683	122.55	Philippines	273432	-9999	1986	2	0
+Legaspi	13.167	123.75	Philippines	114421	-9999	1986	2	0
+Lipa	13.95	121.167	Philippines	138989	-9999	1986	2	0
+Lucena City	13.95	121.6	Philippines	129965	-9999	1986	2	0
+Makati	14.567	121.017	Philippines	408991	-9999	1984	2	0
+Malabon	14.667	120.95	Philippines	212930	-9999	1984	2	0
+Manila	14.617	120.967	Philippines	1728441	6720050	1984	2	0
+Marikina	14.633	121.083	Philippines	248183	-9999	1984	2	0
+Naga	13.6	123.2	Philippines	105270	-9999	1986	2	0
+Olongapo	14.817	120.283	Philippines	183547	-9999	1986	2	0
+Ormoc	11.017	124.6	Philippines	117202	-9999	1986	2	0
+Pasay	14.55	121	Philippines	340418	-9999	1986	2	0
+Quezon City	14.65	121.033	Philippines	1420105	-9999	1986	2	1
+San Carlos	10.55	123.383	Philippines	112090	-9999	1986	2	0
+San Pablo	14.05	121.317	Philippines	152644	-9999	1986	2	0
+Tacloban	11.25	125.017	Philippines	114462	-9999	1986	2	0
+Valenzuela	14.733	120.95	Philippines	275725	-9999	1984	2	0
+Zamboanga	6.917	122.083	Philippines	403549	-9999	1986	2	0
+Dammam	26.417	50.1	Saudi Arabia	127844	-9999	1974	1	0
+Huful	25.333	49.567	Saudi Arabia	101271	-9999	1974	1	0
+Jeddah	21.5	39.167	Saudi Arabia	561104	-9999	1974	1	0
+Riyadh	24.65	46.767	Saudi Arabia	198186	-9999	1974	1	1
+Ta'if	21.25	40.35	Saudi Arabia	666840	-9999	1974	1	0
+Singapore	1.283	103.85	Singapore	2631000	-9999	1987	1	1
+Dehiwala-Mount Lavinig	6.867	79.867	Sri Lanka	191000	-9999	1986	2	0
+Jaffna	9.667	80.017	Sri Lanka	143000	-9999	1986	2	0
+Kandy	7.283	80.667	Sri Lanka	130000	-9999	1986	2	0
+Moratuwa	6.783	79.883	Sri Lanka	138000	-9999	1986	2	0
+Aleppo	36.233	37.167	Syrian Arab Republic	1216000	-9999	1987	2	0
+Al-Kamishli	37.033	41.233	Syrian Arab Republic	121000	-9999	1987	2	0
+Al-Rakka	35.933	39.017	Syrian Arab Republic	109000	-9999	1987	2	0
+Damascus	33.5	36.317	Syrian Arab Republic	1292000	-9999	1987	2	1
+Deir El-Zar	35.333	40.133	Syrian Arab Republic	109000	-9999	1987	2	0
+Hama	35.15	36.733	Syrian Arab Republic	214000	-9999	1987	2	0
+Homs	34.733	36.717	Syrian Arab Republic	431000	-9999	1987	2	0
+Lattakia	35.517	35.783	Syrian Arab Republic	241000	-9999	1987	2	0
+Bangkok	13.733	100.5	Thailand	4697071	-9999	1980	1	1
+Chiang Mai	18.8	98.983	Thailand	101594	-9999	1980	1	0
+Chon Buri	13.4	100.983	Thailand	115350	-9999	1980	1	0
+Nakhonsi Thammarat	8.4	99.967	Thailand	102123	-9999	1980	1	0
+Songkhia	7.2	100.583	Thailand	172604	-9999	1980	1	0
+Adana	37	35.317	Turkey	777554	-9999	1985	1	0
+Adapazari	40.75	30.383	Turkey	152291	-9999	1985	1	0
+Ankara	39.917	32.833	Turkey	2235035	-9999	1985	1	1
+Antalya	36.883	30.7	Turkey	261114	-9999	1985	1	0
+Balikesir	39.617	27.85	Turkey	149989	-9999	1985	1	0
+Bursa	40.2	29.067	Turkey	612510	-9999	1985	1	0
+Denizli	37.767	29.083	Turkey	169130	-9999	1985	1	0
+Diyarbakir	37.917	40.233	Turkey	305940	-9999	1985	1	0
+Elazig	38.683	39.233	Turkey	182296	-9999	1985	1	0
+Erzurum	39.95	41.283	Turkey	246053	-9999	1985	1	0
+Eskisehir	39.767	30.5	Turkey	366765	-9999	1985	1	0
+Gaziantep	37.067	37.35	Turkey	478635	-9999	1985	1	0
+Hatay	36.883	30.7	Turkey	110198	-9999	1980	1	0
+Icel	36.783	34.617	Turkey	279988	-9999	1980	1	0
+Isparta	37.767	30.533	Turkey	101215	-9999	1985	1	0
+Istanbul	41.033	28.95	Turkey	5475982	-9999	1985	1	0
+Izmir	38.417	27.167	Turkey	1489772	-9999	1985	1	0
+Kahramanmaras	37.567	36.9	Turkey	210371	-9999	1985	1	0
+Kayseri	38.7	35.467	Turkey	373937	-9999	1985	1	0
+Kocaeli	40.783	29.917	Turkey	211121	-9999	1980	1	0
+Konya	37.85	32.5	Turkey	439181	-9999	1985	1	0
+Kutahya	39.417	29.933	Turkey	118773	-9999	1985	1	0
+Malatya	38.367	38.3	Turkey	243138	-9999	1985	1	0
+Manisa	38.6	27.483	Turkey	127012	-9999	1985	1	0
+Mersin	36.783	34.617	Turkey	314350	-9999	1985	1	0
+Sakarya	40.75	30.383	Turkey	224414	-9999	1980	1	0
+Sivas	39.733	37.017	Turkey	198553	-9999	1985	1	0
+Urfa	37.133	38.75	Turkey	159194	-9999	1980	1	0
+Van	38.5	43.333	Turkey	110653	-9999	1985	1	0
+Zonguldak	41.433	31.783	Turkey	117879	-9999	1985	1	0
+Abu Dhabi	24.467	54.417	United Arab Emirates	242975	-9999	1980	1	1
+Ai-Ain	24.183	55.75	United Arab Emirates	101663	-9999	1980	1	0
+Dubai	25.233	55.283	United Arab Emirates	265702	-9999	1980	1	0
+Sharjah	25.333	55.433	United Arab Emirates	125149	-9999	1980	1	0
+Buonmathuot	13.3	108.617	Viet Nam	71815	176429	1979	1	0
+Bien Hao	10.967	106.833	Viet Nam	187254	245753	1979	1	0
+Cantho	10.05	105.767	Viet Nam	182856	246697	1979	1	0
+Da Nang	16.067	108.233	Viet Nam	318653	-9999	1979	1	0
+Haiphong	20.833	106.683	Viet Nam	385210	1279061	1979	1	0
+Hanoi	21.017	105.867	Viet Nam	897500	2570905	1979	1	1
+Ho Chi Minh	10.767	106.717	Viet Nam	2700849	3419978	1979	1	0
+Hon Gai	20.95	107.1	Viet Nam	114573	120264	1979	1	0
+Hue	16.467	107.583	Viet Nam	165710	210953	1979	1	0
+Longxuyen	10.383	105.417	Viet Nam	112485	185221	1979	1	0
+Minh Hai	21.55	105.017	Viet Nam	72517	103104	1979	1	0
+Mytho	10.35	106.35	Viet Nam	101493	135276	1979	1	0
+Namdinh	20.417	106.2	Viet Nam	160179	193278	1979	1	0
+Nhatrang	12.25	109.167	Viet Nam	172663	212488	1979	1	0
+Quang Nghia	15.15	108.833	Viet Nam	41119	220604	1979	1	0
+Qui Nhon	13.783	109.183	Viet Nam	127211	165540	1979	1	0
+Rach Gia	9.917	105.083	Viet Nam	81075	106675	1979	1	0
+Thanhhoa	19.817	105.8	Viet Nam	72646	114928	1979	1	0
+Viettri	21.333	105.433	Viet Nam	72108	112778	1979	1	0
+Vinh	18.7	105.683	Viet Nam	159753	207239	1979	1	0
+Sana	15.4	44.233	Yemen	140339	-9999	1975	2	1
+Tirana	41.333	19.817	Albania	223991	-9999	1986	2	1
+Andorra La Vella	42.5	1.5	Andorra	16151	-9999	1986	1	1
+Graz	47.083	15.367	Austria	243166	394981	1981	1	0
+Innsbruck	47.283	11.417	Austria	117287	234941	1981	1	0
+Klagenfurt	46.633	14.333	Austria	87321	138558	1981	1	0
+Linz	48.317	14.3	Austria	199910	434634	1981	1	0
+Salzburg	47.8	13.05	Austria	139426	267277	1981	1	0
+Wien	48.217	16.367	Austria	1481215	-9999	1986	2	1
+Anderlecht	50.833	4.3	Belgium	103796	-9999	1970	1	0
+Antwerpen	51.217	4.417	Belgium	483199	-9999	1986	2	0
+Bruges	51.217	3.233	Belgium	117799	-9999	1986	2	0
+Bruxelles	50.833	4.35	Belgium	-9999	976536	1986	2	1
+Charleroi	50.417	4.45	Belgium	210324	-9999	1986	2	0
+Gent	51.033	3.7	Belgium	234251	-9999	1986	2	0
+La Louviere	50.483	4.2	Belgium	-9999	113259	1971	2	0
+Liege	50.633	5.583	Belgium	201749	-9999	1986	2	0
+Namur	50.467	4.867	Belgium	102501	-9999	1986	2	0
+Schaerbeek	50.867	4.367	Belgium	106754	-9999	1981	1	0
+Choumen	43.283	26.917	Bulgaria	100116	-9999	1985	1	0
+Plevene	43.417	24.667	Bulgaria	129766	-9999	1985	1	0
+Plovdiv	42.133	24.75	Bulgaria	342131	-9999	1985	1	0
+Rousse	43.833	25.983	Bulgaria	183746	-9999	1985	1	0
+Slivene	42.667	26.317	Bulgaria	102423	-9999	1985	1	0
+Sofia	42.667	23.3	Bulgaria	1114759	-9999	1985	1	1
+Stara Zagora	42.417	25.617	Bulgaria	150803	-9999	1985	1	0
+Tolboukhin	43.567	27.85	Bulgaria	109066	-9999	1985	1	0
+St. Helier	49.2	-2.117	Channel Islands	27012	46329	1986	1	1
+Bratislava	48.167	17.167	Czechoslovakia	413002	-9999	1985	2	0
+Brno	49.217	16.667	Czechoslovakia	384554	-9999	1985	2	0
+Kosice	48.733	21.25	Czechoslovakia	220214	-9999	1985	2	0
+Liberec	50.8	15.083	Czechoslovakia	100694	-9999	1985	2	0
+Olomouc	49.633	17.25	Czechoslovakia	105906	-9999	1985	2	0
+Ostrava	49.833	18.25	Czechoslovakia	326810	-9999	1985	2	0
+Plzen	49.75	13.417	Czechoslovakia	175061	-9999	1985	2	0
+Praha	50.1	14.433	Czechoslovakia	1190576	-9999	1985	2	1
+Alborg	57.05	9.933	Denmark	-9999	113650	1986	2	0
+Arhus	56.167	10.217	Denmark	-9999	195152	1986	2	0
+Kobenhavn	55.717	12.567	Denmark	473000	1351999	1986	2	1
+Odense	55.4	10.417	Denmark	-9999	137286	1986	2	0
+Espoo	60.167	24.7	Finland	158592	-9999	1986	2	0
+Tampere	61.533	23.75	Finland	169510	255074	1986	2	0
+Turku	60.45	22.25	Finland	161293	259910	1986	2	0
+Vantaa	60.3	24.95	Finland	145134	-9999	1986	2	0
+Aix-en-Provence	43.517	5.45	France	119140	121000	1982	1	0
+Amiens	49.9	2.3	France	130880	153000	1982	1	0
+Angouleme	45.667	0.167	France	95000	102000	1982	1	0
+Annecy	45.9	6.117	France	-9999	110000	1982	1	0
+Avignon	43.933	4.8	France	-9999	173000	1982	1	0
+Besancon	47.233	6.033	France	114040	121000	1982	1	0
+Bethune	50.533	2.633	France	-9999	147000	1982	1	0
+Bordeaux	44.833	-0.567	France	205960	628000	1982	1	0
+Boulogne-Billancourt	50.7	1.6	France	101360	-9999	1982	1	0
+Bruay-en-Artois	50.483	2.55	France	-9999	109000	1982	1	0
+Calais	50.95	1.867	France	-9999	101000	1982	1	0
+Cannes	43.55	7	France	-9999	296000	1982	1	0
+Clermont-Ferrand	45.783	3.083	France	148040	256000	1982	1	0
+Dijon	47.333	5.033	France	140900	209000	1982	1	0
+Douai	50.367	3.083	France	-9999	202000	1982	1	0
+Dunkerque	51.033	2.383	France	-9999	196000	1982	1	0
+Grenoble	45.183	5.717	France	156440	392000	1982	1	0
+Hagondange-Briey	49.267	6.183	France	-9999	120000	1982	1	0
+La Rochelle	46.167	-1.167	France	-9999	100000	1982	1	0
+Le Havre	49.5	0.1	France	199120	255000	1982	1	0
+Le Mans	48	0.2	France	147140	191000	1982	1	0
+Lens	50.433	2.833	France	-9999	323000	1982	1	0
+Lille	50.65	3.083	France	164900	935000	1982	1	0
+Limoges	45.833	1.25	France	139320	172000	1982	1	0
+Lyon	45.767	4.833	France	408860	1170000	1982	1	0
+Mantes-la-Jolie	48.983	1.717	France	-9999	168000	1982	1	0
+Marseille	43.3	5.367	France	867260	1080000	1982	1	0
+Metz	49.117	6.183	France	-9999	128000	1982	1	0
+Montbeliard	47.517	6.8	France	-9999	221000	1982	1	0
+Montpellier	43.6	3.883	France	196860	221000	1982	1	0
+Mulhouse	47.75	7.35	France	107480	220000	1982	1	0
+Nancy	48.7	6.2	France	96000	278000	1982	1	0
+Nantes	47.233	-1.583	France	242340	465000	1982	1	0
+Nice	43.7	7.267	France	335240	449000	1982	1	0
+Nimes	43.833	4.35	France	126780	130000	1982	1	0
+Orleans	47.9	1.9	France	103660	220000	1982	1	0
+Paris	48.867	2.333	France	2188960	8510000	1982	1	1
+Pau	43.3	-0.367	France	-9999	131000	1982	1	0
+Perpigan	42.7	2.9	France	110540	130000	1982	1	0
+Reims	49.25	4.033	France	178380	199000	1982	1	0
+Rennes	48.1	-1.667	France	195260	234000	1982	1	0
+Roubaix	50.7	3.167	France	100820	-9999	1982	1	0
+Rouen	49.433	1.083	France	101700	380000	1982	1	0
+Saint-Etienne	45.433	4.383	France	204120	317000	1982	1	0
+Saint-Nazaire	47.283	-2.2	France	112000	121000	1982	1	0
+Strasbourg	48.583	7.75	France	248040	373000	1982	1	0
+Thionville	49.367	6.183	France	-9999	128000	1982	1	0
+Toulon	43.117	5.917	France	177920	410000	1982	1	0
+Toulouse	43.617	1.45	France	345780	523000	1982	1	0
+Tours	47.383	0.7	France	133580	255000	1982	1	0
+Trappes	48.783	2	France	-9999	142000	1982	1	0
+Trayes	48.3	4.083	France	-9999	125000	1982	1	0
+Valence	44.95	4.9	France	-9999	104000	1982	1	0
+Valenciennes	50.367	3.533	France	-9999	337000	1982	1	0
+Villeurbanne	45.767	4.9	France	116660	-9999	1982	1	0
+Berlin	52.533	13.417	Germany	1223309	-9999	1985	2	1
+Cottbus	51.717	14.35	Germany	125784	-9999	1985	2	0
+Dessau	51.85	12.25	Germany	103508	-9999	1985	2	0
+Dresden	51.05	13.75	Germany	519737	-9999	1985	2	0
+Halle	51.467	11.967	Germany	234768	-9999	1985	2	0
+Jena	50.933	11.583	Germany	107369	-9999	1985	2	0
+Chemnitz	50.833	12.917	Germany	314437	-9999	1985	2	0
+Leipzig	51.333	12.417	Germany	552133	-9999	1985	2	0
+Magdeburg	52.133	11.617	Germany	288798	-9999	1985	2	0
+Potsdam	52.4	13.067	Germany	140198	-9999	1985	2	0
+Rotstock	54.067	12.15	Germany	245606	-9999	1985	2	0
+Schwerin	53.633	11.417	Germany	127823	-9999	1985	2	0
+Zwickau	50.717	12.05	Germany	120573	-9999	1985	2	0
+Aachen	50.767	6.1	Germany	239170	-9999	1986	0	0
+Augsburg	48.35	10.9	Germany	245962	-9999	1986	0	0
+Bergisch Gladbach	50.983	7.167	Germany	101776	-9999	1986	0	0
+Bielefeld	52.033	8.533	Germany	299360	-9999	1986	0	0
+Bochum	51.467	7.183	Germany	381216	-9999	1986	0	0
+Bonn	50.733	7.1	Germany	291439	-9999	1986	0	1
+Bottrap	51.517	6.917	Germany	112256	-9999	1986	0	0
+Braunschweig	52.25	10.5	Germany	521976	-9999	1986	0	0
+Bremen	53.083	8.8	Germany	521976	-9999	1986	0	0
+Bremerhaven	53.55	8.583	Germany	132194	-9999	1986	0	0
+Dortmund	51.533	7.45	Germany	568164	-9999	1986	0	0
+Duisburg	51.433	6.75	Germany	514628	-9999	1986	0	0
+Dusseldorf	51.217	6.783	Germany	560572	-9999	1986	0	0
+Erlangen	49.6	11.033	Germany	100200	-9999	1986	0	0
+Essen	51.467	6.983	Germany	615412	-9999	1986	0	0
+Frankfurt am Main	50.1	8.683	Germany	592411	-9999	1986	0	0
+Gelsenkirchen	51.5	7.083	Germany	283560	-9999	1986	0	0
+Gottingen	51.517	9.917	Germany	133796	-9999	1986	0	0
+Hagen	51.35	7.483	Germany	206070	-9999	1986	0	0
+Hamburg	53.55	10	Germany	1571267	-9999	1986	0	0
+Hamm	51.667	7.817	Germany	165957	-9999	1986	0	0
+Hannover	52.23	9.733	Germany	505718	-9999	1986	0	0
+Heidelberg	49.417	8.7	Germany	136227	-9999	1986	0	0
+Heibronn	49.133	9.233	Germany	111713	-9999	1986	0	0
+Herne	51.533	7.2	Germany	171274	-9999	1986	0	0
+Hildesheim	52.15	9.967	Germany	100558	-9999	1986	0	0
+Karlsruhe	49	8.4	Germany	268309	-9999	1986	0	0
+Kassel	51.3	9.5	Germany	185370	-9999	1986	0	0
+Kiel	54.333	10.133	Germany	243626	-9999	1986	0	0
+Koblenz	50.35	7.6	Germany	110277	-9999	1986	0	0
+Koln	50.933	6.95	Germany	914336	-9999	1986	0	0
+Krefeld	51.333	6.533	Germany	216598	-9999	1986	0	0
+Leverkusen	51.033	6.983	Germany	154703	-9999	1986	0	0
+Lubeck	53.867	10.667	Germany	209159	-9999	1986	0	0
+Ludwigshafen am Rhein	49.483	8.45	Germany	152162	-9999	1986	0	0
+Mainz	50	8.267	Germany	189005	-9999	1986	0	0
+Mannheim	49.5	8.467	Germany	294648	-9999	1986	0	0
+Monchengladbach	51.2	6.417	Germany	255087	-9999	1986	0	0
+Mulheim a.d. Ruhr	51.417	6.833	Germany	170392	-9999	1986	0	0
+Munchen	48.133	11.583	Germany	1274716	-9999	1986	0	0
+Munster	51.967	7.617	Germany	267628	-9999	1986	0	0
+Neuss	51.2	6.7	Germany	143832	-9999	1986	0	0
+Nurnberg	49.45	11.083	Germany	467392	-9999	1986	0	0
+Oberhausen	51.467	6.833	Germany	221542	-9999	1986	0	0
+Offenbach am Main	50.1	8.767	Germany	107078	-9999	1986	0	0
+Oldenburg	53.133	8.217	Germany	139256	-9999	1986	0	0
+Osnabruck	52.283	8.05	Germany	153776	-9999	1986	0	0
+Paderborn	51.717	8.733	Germany	110296	-9999	1986	0	0
+Pforzheim	48.883	8.683	Germany	104452	-9999	1986	0	0
+Recklinghausen	51.617	7.183	Germany	117585	-9999	1986	0	0
+Regensburg	49.017	12.117	Germany	123821	-9999	1986	0	0
+Remscheid	51.167	7.183	Germany	121005	-9999	1986	0	0
+Saarbrucken	49.25	6.967	Germany	184353	-9999	1986	0	0
+Siegen	50.867	8.033	Germany	107319	-9999	1986	0	0
+Solingen	51.167	7.083	Germany	158401	-9999	1986	0	0
+Stuttgart	48.783	9.2	Germany	565486	-9999	1986	0	0
+Ulm	48.4	10	Germany	100745	-9999	1986	0	0
+Wiesbaden	50.083	8.25	Germany	266542	-9999	1986	0	0
+Witten	51.417	7.317	Germany	102232	-9999	1986	0	0
+Wolfsburg	52.45	10.817	Germany	121951	-9999	1986	0	0
+Wuppertal	51.25	7.167	Germany	374217	-9999	1986	0	0
+Wurzburg	49.8	9.95	Germany	127050	-9999	1986	0	0
+Berlin	52.533	13.417	Germany	1879225	-9999	1986	0	0
+Gibraltar	36.15	-5.35	Gibraltar	29692	-9999	1987	1	1
+Athinai	38	23.733	Greece	885737	3027331	1981	1	1
+Larissa	39.633	22.417	Greece	102048	102048	1981	1	0
+Patrai	38.233	21.733	Greece	141529	154596	1981	1	0
+Peristeri	39.667	21.133	Greece	140858	-9999	1981	1	0
+Piraievs	37.95	23.7	Greece	196389	-9999	1981	1	0
+Thessaloniki	40.633	22.967	Greece	406413	706180	1981	1	0
+Holy See	41.9	12.45	Holy See	752	-9999	1986	2	1
+Budapest	47.5	19.05	Hungary	2084739	-9999	1986	2	0
+Debrecen	47.5	21.617	Hungary	213330	-9999	1986	2	0
+Gyor	47.683	17.667	Hungary	129655	-9999	1986	2	0
+Kecskemet	46.933	19.717	Hungary	103417	-9999	1986	2	0
+Miskolc	48.117	20.783	Hungary	211408	-9999	1986	2	0
+Nyieregyhaza	47.95	21.717	Hungary	117481	-9999	1986	2	0
+Pecs	46.067	18.25	Hungary	178078	-9999	1986	2	0
+Szeged	46.25	20.15	Hungary	183848	-9999	1986	2	0
+Szekesfehervar	47.183	18.367	Hungary	112091	-9999	1986	2	0
+Cork	51.9	-8.467	Ireland	136269	149792	1981	1	0
+Allessandria	44.917	8.617	Italy	100523	-9999	1981	1	0
+Bari	41.117	16.867	Italy	368896	-9999	1984	2	0
+Bergamo	45.7	9.667	Italy	120512	-9999	1984	2	0
+Bologna	44.5	11.333	Italy	445139	-9999	1984	2	0
+Bolzano	46.5	11.367	Italy	102826	-9999	1984	2	0
+Brescia	45.55	10.217	Italy	203187	-9999	1984	2	0
+Cagliari	39.217	9.133	Italy	224508	-9999	1984	2	0
+Catanzaro	38.9	16.6	Italy	101964	-9999	1984	2	0
+Cosenza	39.283	16.267	Italy	106353	-9999	1984	2	0
+Ferrara	44.833	11.633	Italy	146735	-9999	1984	2	0
+Firenze	43.783	11.25	Italy	438304	-9999	1984	2	0
+Foggia	41.467	15.55	Italy	157595	-9999	1984	2	0
+Forli	44.217	12.033	Italy	110884	-9999	1984	2	0
+Genova	44.4	8.933	Italy	742442	-9999	1984	2	0
+La Spezia	44.133	9.833	Italy	111980	-9999	1984	2	0
+Livorno	43.55	10.3	Italy	176051	-9999	1984	2	0
+Messina	38.217	15.55	Italy	264848	-9999	1984	2	0
+Milano	45.467	9.2	Italy	1548580	-9999	1984	2	0
+Milan	45.467	9.2	Italy	1548580	-9999	1984	2	0
+Modena	44.65	10.917	Italy	1785657	-9999	1984	2	0
+Monza	45.583	9.267	Italy	122449	-9999	1984	2	0
+Napoli	40.833	14.25	Italy	1207750	-9999	1984	2	0
+Novara	45.45	8.617	Italy	102430	-9999	1984	2	0
+Padova	45.4	11.883	Italy	229950	-9999	1984	2	0
+Parma	44.8	10.317	Italy	177099	-9999	1984	2	0
+Perugia	43.117	12.383	Italy	144505	-9999	1984	2	0
+Pescara	42.45	14.217	Italy	131948	-9999	1984	2	0
+Piacenza	45.05	9.683	Italy	107312	-9999	1984	2	0
+Pisa	43.717	10.4	Italy	104054	-9999	1984	2	0
+Prato	43.883	11.1	Italy	162144	-9999	1984	2	0
+Reggio di Calabria	38.1	15.65	Italy	176442	-9999	1984	2	0
+Reggio nell'Emilia	44.7	10.617	Italy	130747	-9999	1984	2	0
+Rimini	44.05	12.567	Italy	129858	-9999	1984	2	0
+Roma	41.883	12.5	Italy	2828692	-9999	1984	2	1
+Salerno	40.667	14.767	Italy	156606	-9999	1984	2	0
+Sassari	40.717	8.567	Italy	119835	-9999	1984	2	0
+Siracusa	37.067	15.3	Italy	118966	-9999	1984	2	0
+Taranto	40.467	17.25	Italy	243777	-9999	1984	2	0
+Terni	42.567	12.65	Italy	111105	-9999	1984	2	0
+Torino	45.067	7.667	Italy	1059505	-9999	1984	2	0
+Trieste	45.65	13.783	Italy	244980	-9999	1984	2	0
+Udine	46.067	13.233	Italy	101068	-9999	1984	2	0
+Verona	45.433	11	Italy	261271	-9999	1984	2	0
+Vicenza	45.55	11.533	Italy	112246	-9999	1984	2	0
+Vaduz	47.133	9.533	Liechtenstein	4904	-9999	1982	2	1
+Luxembourg-Ville	49.617	6.133	Luxembourg	76130	-9999	1985	2	1
+Amsterdam	52.35	4.9	Netherlands	680921	977418	1986	2	1
+Apeldoorn	52.217	5.95	Netherlands	145734	-9999	1986	2	0
+Arnhem	52	5.883	Netherlands	127819	294732	1986	2	0
+Breda	51.583	4.767	Netherlands	119300	154809	1986	2	0
+Dordrecht	51.8	4.667	Netherlands	106977	200758	1986	2	0
+Eindhoven	51.433	5.5	Netherlands	190900	377216	1986	2	0
+Groningen	53.217	6.583	Netherlands	168012	206985	1986	2	0
+Haarlem	52.383	4.633	Netherlands	149437	214549	1986	2	0
+Leiden	52.167	4.5	Netherlands	106035	179913	1986	2	0
+Maastricht	50.85	5.7	Netherlands	114925	159273	1986	2	0
+Nijmegen	51.833	5.867	Netherlands	146910	238861	1986	2	0
+Rotterdam	51.917	4.483	Netherlands	572007	1028140	1986	2	0
+'S Gravenhage	52.083	4.267	Netherlands	444544	676360	1986	2	0
+Tilburg	51.567	5.083	Netherlands	153664	223546	1986	2	0
+Utrecht	52.1	5.117	Netherlands	229629	513629	1986	2	0
+Zaanstad	52.45	4.817	Netherlands	128318	140396	1986	2	0
+Bergen	60.383	5.333	Norway	209351	-9999	1987	2	0
+Oslo	59.933	10.75	Norway	451951	-9999	1987	2	1
+Sor-Trondelg	63	11	Norway	134920	-9999	1987	2	0
+Bialystok	53.15	23.167	Poland	253198	-9999	1986	2	0
+Bielsko-Biala	49.833	19	Poland	176392	-9999	1986	2	0
+Bydgoszcz	53.267	18	Poland	368152	-9999	1986	2	0
+Bytom	50.35	18.85	Poland	238985	-9999	1986	2	0
+Chorzow	50.317	18.933	Poland	141358	-9999	1986	2	0
+Czestochowa	50.817	19.117	Poland	249858	-9999	1986	2	0
+Dabrowa Gormicza	53.667	23.333	Poland	138524	-9999	1986	2	0
+Elblag	54.167	19.417	Poland	118897	-9999	1986	2	0
+Gdansk	54.367	18.683	Poland	468350	-9999	1986	2	0
+Gdynia	54.517	18.5	Poland	247491	-9999	1986	2	0
+Gliwice	50.333	18.667	Poland	210399	-9999	1986	2	0
+Gorzow Wielkopolski	52.7	15.2	Poland	116505	-9999	1986	2	0
+Jastrzebie	49.95	18.583	Poland	101056	-9999	1986	2	0
+Kalisz	53.283	15.917	Poland	104387	-9999	1986	2	0
+Katowice	50.25	18.983	Poland	365630	-9999	1986	2	0
+Kielce	50.85	20.65	Poland	204771	-9999	1986	2	0
+Koszalin	54.167	16.167	Poland	102307	-9999	1986	2	0
+Krakow	50.05	19.917	Poland	742428	-9999	1986	2	0
+Lodz	51.817	19.467	Poland	847338	-9999	1986	2	0
+Lublin	51.3	22.517	Poland	328042	-9999	1986	2	0
+Olsztym	53.8	20.483	Poland	151081	-9999	1986	2	0
+Opale	50.7	17.967	Poland	126731	-9999	1986	2	0
+Plock	52.533	19.667	Poland	115664	-9999	1986	2	0
+Poznan	52.417	16.883	Poland	576433	-9999	1986	2	0
+Radom	51.433	21.167	Poland	217752	-9999	1986	2	0
+Ruda Slaska	50.267	18.833	Poland	166901	-9999	1986	2	0
+Rybnik	50.117	18.5	Poland	138490	-9999	1986	2	0
+Rzeszow	50.067	22	Poland	143579	-9999	1986	2	0
+Sosnowiec	50.267	19.117	Poland	257519	-9999	1986	2	0
+Szczecin	53.417	14.533	Poland	393571	-9999	1986	2	0
+Tarnow	50.017	20.983	Poland	116816	-9999	1986	2	0
+Torun	53.017	18.583	Poland	193051	-9999	1986	2	0
+Tychy	50.133	18.933	Poland	184703	-9999	1986	2	0
+Walbrzych	50.8	16.317	Poland	138903	-9999	1986	2	0
+Warszawa	52.25	21	Poland	1661503	-9999	1986	2	1
+Wloclawek	51.55	23.517	Poland	117299	-9999	1986	2	0
+Wodzislaw Slaski	50.517	20.133	Poland	109662	-9999	1986	2	0
+Wroclaw	51.083	17	Poland	638346	-9999	1986	2	0
+Zabrze	50.3	18.783	Poland	198911	-9999	1986	2	0
+Zielona Gora	51.95	15.5	Poland	111609	-9999	1986	2	0
+Lisboa	38.733	-9.133	Portugal	807167	-9999	1981	1	1
+Porto	41.15	-8.617	Portugal	327368	-9999	1981	1	0
+Arad	46.167	21.317	Romania	185892	-9999	1985	2	0
+Bacau	46.55	26.967	Romania	175299	-9999	1985	2	0
+Baia Mare	47.65	23.6	Romania	135536	-9999	1985	2	0
+Botosani	47.733	26.683	Romania	104836	-9999	1985	2	0
+Braila	45.283	27.967	Romania	234600	-9999	1985	2	0
+Brasov	45.65	25.583	Romania	346640	-9999	1985	2	0
+Bucaresti	44.45	26.167	Romania	1975508	-9999	1985	2	1
+Buzau	45.15	26.817	Romania	132311	-9999	1985	2	0
+Cluj-Napoca	46.783	23.617	Romania	309843	-9999	1985	2	0
+Craiova	44.3	23.783	Romania	275098	-9999	1985	2	0
+Galati	45.45	28.033	Romania	292805	-9999	1985	2	0
+Iasi	47.15	27.633	Romania	314156	-9999	1985	2	0
+Oradea	47.05	21.917	Romania	208507	-9999	1985	2	0
+Piatra Neamt	46.883	26.383	Romania	107581	-9999	1985	2	0
+Pitesti	44.85	24.85	Romania	154112	-9999	1985	2	0
+Ploiesti	44.95	26.017	Romania	234021	-9999	1985	2	0
+Satu-Mare	47.8	22.867	Romania	128115	-9999	1985	2	0
+Sibiu	45.767	24.15	Romania	176928	-9999	1985	2	0
+Timisoara	45.75	21.25	Romania	318955	-9999	1985	2	0
+Tirgus-Mures	46.517	24.633	Romania	157411	-9999	1985	2	0
+San Marino	43.933	12.417	San Marino	2397	4179	1986	2	1
+Albacete	39	-1.867	Spain	126594	126594	1986	2	0
+Alcala de Henares	40.467	-3.367	Spain	144268	144268	1986	2	0
+Alcorcon	40.35	-3.833	Spain	137884	137884	1986	2	0
+Alicante	38.35	-0.483	Spain	258707	258707	1986	2	0
+Almeria	36.833	-2.433	Spain	154242	154242	1986	2	0
+Badajoz	38.883	-6.967	Spain	119220	119220	1986	2	0
+Badalona	41.45	2.25	Spain	225016	225016	1986	2	0
+Baracaldo	43.283	-2.983	Spain	114094	114094	1986	2	0
+Barcelona	41.417	2.167	Spain	1699231	1699231	1986	2	0
+Bilbao	43.25	-2.933	Spain	379106	379106	1986	2	0
+Burgos	42.35	-3.683	Spain	158610	158610	1986	2	0
+Cartagena	37.6	-0.983	Spain	168596	168596	1986	2	0
+Castellon	39.967	-0.05	Spain	127578	127578	1986	2	0
+Cordoba	37.883	-4.767	Spain	296074	296074	1986	2	0
+Elche	38.267	-0.683	Spain	175649	175649	1986	2	0
+Fuenlabrada	40.267	-3.817	Spain	119848	119848	1986	2	0
+Getafe	40.3	-3.733	Spain	131840	131840	1986	2	0
+Gijon	43.533	-5.667	Spain	258291	258291	1986	2	0
+Granada	37.167	-3.583	Spain	256528	256528	1986	2	0
+Hospitalet	41.35	2.1	Spain	279779	279779	1986	2	0
+Huelva	37.25	-6.933	Spain	135575	135575	1986	2	0
+Jaen	37.767	-3.8	Spain	103291	103291	1986	2	0
+Jerez de la Frontera	36.683	-6.133	Spain	179191	179191	1986	2	0
+La Coruna	43.333	-8.417	Spain	239504	239504	1986	2	0
+La Laguna	28.483	-16.317	Spain	107593	107593	1986	2	0
+Leganes	40.333	-3.767	Spain	167783	167783	1986	2	0
+Leon	42.583	-5.567	Spain	135013	135013	1986	2	0
+Lerida	41.617	0.633	Spain	107787	107787	1986	2	0
+Logrono	42.467	-2.433	Spain	115922	115922	1986	2	0
+Malaga	36.717	-4.417	Spain	566482	566482	1986	2	0
+Mataro	41.533	2.45	Spain	100021	100021	1986	2	0
+Mostoles	40.317	-3.883	Spain	175133	175133	1986	2	0
+Murcia	37.983	-1.133	Spain	304184	304184	1986	2	0
+Orense	42.333	-7.867	Spain	100430	100430	1986	2	0
+Oviedo	43.35	-5.833	Spain	185919	185919	1986	2	0
+Palma de Mallorca	39.583	2.65	Spain	295351	295351	1986	2	0
+Pamplona	42.817	-1.65	Spain	178452	178452	1986	2	0
+Sabadell	41.55	2.117	Spain	186115	186115	1986	2	0
+Salamanca	40.967	-5.667	Spain	152766	152766	1986	2	0
+San Sebastian	43.317	-1.983	Spain	175267	175267	1986	2	0
+Santa Coloma de Gramanet	41.467	2.233	Spain	135258	135258	1986	2	0
+Sevilla	37.4	-5.983	Spain	651298	651298	1986	2	0
+Tarragona	41.117	1.25	Spain	106360	106360	1986	2	0
+Tarrasa	41.567	2	Spain	160105	160105	1986	2	0
+Valencia	39.483	-0.4	Spain	728621	728621	1986	2	0
+Valladolid	41.65	-4.75	Spain	327785	327785	1986	2	0
+Vitoria	42.85	-2.667	Spain	199936	199936	1986	2	0
+Zaragoza	41.65	-0.9	Spain	573710	573710	1986	2	0
+Boras	57.733	12.917	Sweden	100251	-9999	1987	2	0
+Goteborg	57.75	12	Sweden	431362	713925	1987	2	0
+Helsingborg	56.083	12.75	Sweden	106749	-9999	1987	2	0
+Jonkoping	57.75	14.167	Sweden	108585	-9999	1987	2	0
+Linkoping	58.417	15.583	Sweden	118156	-9999	1987	2	0
+Malmo	55.583	13	Sweden	230670	461665	1987	2	0
+Norr Koping	58.583	16.167	Sweden	118920	-9999	1987	2	0
+Orebro	59.3	15.083	Sweden	118769	-9999	1987	2	0
+Stockholm	59.333	18.083	Sweden	665489	1456338	1987	2	1
+Uppsala	59.883	17.7	Sweden	158527	-9999	1987	2	0
+Vasteras	59.6	16.583	Sweden	117721	-9999	1987	2	0
+Bale	47.583	7.583	Switzerland	173884	361254	1986	2	0
+Berne	46.95	7.433	Switzerland	137853	298995	1986	2	1
+Geneve	46.217	6.15	Switzerland	160269	379171	1986	2	0
+Lausanne	46.533	6.65	Switzerland	124604	258959	1986	2	0
+Zurich	47.383	8.55	Switzerland	350546	834665	1986	2	0
+Beograd	44.833	20.5	Yugoslavia	1087915	-9999	1981	1	1
+Ljubiana	46.067	14.5	Yugoslavia	224817	-9999	1981	1	0
+Marebor	46.567	15.633	Yugoslavia	106113	-9999	1981	1	0
+Nis	43.333	21.9	Yugoslavia	161376	-9999	1981	1	0
+Novi Sad	45.25	19.85	Yugoslavia	170020	-9999	1981	1	0
+Osijek	45.55	18.683	Yugoslavia	104775	-9999	1981	1	0
+Pistina	42.65	21.167	Yugoslavia	108083	-9999	1981	1	0
+Rijeka	45.333	14.45	Yugoslavia	159433	-9999	1981	1	0
+Sarajevo	43.867	18.433	Yugoslavia	319017	-9999	1981	1	0
+Skoplje	42	21.467	Yugoslavia	408143	-9999	1981	1	0
+Split	43.517	16.467	Yugoslavia	169322	-9999	1981	1	0
+Subotica	46.067	19.683	Yugoslavia	100516	-9999	1981	1	0
+Zagreb	45.8	15.967	Yugoslavia	649586	-9999	1981	1	0
+Adelaide	-34.933	138.6	Australia	987100	-9999	1985	2	0
+Brisbane	-27.5	153	Australia	1157200	-9999	1985	2	0
+Canberra	-35.3	149.133	Australia	273600	-9999	1985	2	1
+Geelong	-38.167	144.433	Australia	147100	-9999	1985	2	0
+Gold Coast	-27.983	153.367	Australia	208100	-9999	1985	2	0
+Greater Wollongong	-34.417	150.867	Australia	236800	-9999	1985	2	0
+Hobart	-42.9	147.3	Australia	178100	-9999	1985	2	0
+Melbourne	-37.75	144.967	Australia	2916600	-9999	1985	2	0
+Newcastle	-32.917	151.767	Australia	423300	-9999	1985	2	0
+Perth	-31.967	115.817	Australia	1001000	-9999	1985	2	0
+Sydney	-33.917	151.167	Australia	3391660	-9999	1985	2	0
+Suva	-18.133	178.417	Fiji	69665	141273	1986	1	1
+Agana	13.467	144.75	Guam	896	-9999	1980	1	1
+Tarawa	1.5	173	Kiribati	-9999	17921	1978	1	1
+Noumea	-22.267	166.433	New Caledonia	60112	-9999	1983	1	1
+Christchurch	-43.55	172.667	New Zealand	167700	299400	1987	2	0
+Dunedin	-45.867	170.5	New Zealand	-9999	106600	1987	2	0
+Hamilton	-37.767	175.3	New Zealand	-9999	102300	1984	2	0
+Manukau	-36.983	174.883	New Zealand	181000	-9999	1987	2	0
+Wellington	-41.283	174.783	New Zealand	136000	324400	1987	2	1
+Port Moresby	-9.5	147.117	Papua New Guinea	141500	-9999	1986	1	1
+Adamstown	-25.067	-130.083	Pitcairn	-9999	60	1987	2	1
+Honiara	-9.467	159.95	Solomon Islands	14942	-9999	1976	1	1
+Nuku'alofa	-21.15	-175.233	Tonga	-9999	18312	1976	1	1
+Vila	-17.75	168.3	Vanuatu	13067	14184	1986	1	1
+Abakan	53.717	91.417	Russian Federation	148000	-9999	1986	2	0
+Achinsk	56.333	90.55	Russian Federation	120000	-9999	1986	2	0
+Aktyubinsk	50.267	57.217	Russian Federation	239000	-9999	1986	2	0
+Alma-Ata	43.317	76.917	Russian Federation	1088000	-9999	1986	2	0
+Almalyk	40.833	69.667	Russian Federation	117000	-9999	1986	2	0
+Almetevsk	54.833	52.367	Russian Federation	125000	-9999	1986	2	0
+Andizhan	41.167	72	Russian Federation	281000	-9999	1986	2	0
+Andropov	58.05	38.833	Russian Federation	252000	-9999	1986	2	0
+Angarsk	52.517	103.917	Russian Federation	259000	-9999	1986	2	0
+Angren	41.167	70.167	Russian Federation	126000	-9999	1986	2	0
+Anzhero-Sudzhensk	56.167	86.017	Russian Federation	111000	-9999	1986	2	0
+Arkhanglsk	64.667	41	Russian Federation	412000	-9999	1986	2	0
+Arzamas	55.4	43.8	Russian Federation	170000	-9999	1986	2	0
+Ashkhabad	37.967	58.4	Russian Federation	366000	-9999	1986	2	0
+Astrakhan	46.367	48.067	Russian Federation	503000	-9999	1986	2	0
+Baku	40.367	49.883	Russian Federation	1722000	-9999	1986	2	0
+Balakovo	52.067	47.767	Russian Federation	184000	-9999	1986	2	0
+Balashikha	55.783	37.983	Russian Federation	130000	-9999	1986	2	0
+Baranovichi	53.15	26	Russian Federation	152000	-9999	1986	2	0
+Barnaul	53.35	83.75	Russian Federation	586000	-9999	1986	2	0
+Belaya Tserkov	49.817	30.167	Russian Federation	194000	-9999	1987	2	0
+Belgorod	50.633	36.6	Russian Federation	286000	-9999	1986	2	0
+Beltsy	47.733	27.683	Russian Federation	151000	-9999	1986	2	0
+Bendery	46.833	29.483	Russian Federation	126000	-9999	1986	2	0
+Berdyansk	46.75	36.783	Russian Federation	133000	-9999	1987	2	0
+Berezniki	59.433	56.817	Russian Federation	198000	-9999	1986	2	0
+Biisk	52.583	85.267	Russian Federation	228000	-9999	1986	2	0
+Blagovershchensk	50.317	127.5	Russian Federation	199000	-9999	1986	2	0
+Bobruisk	53.133	29.167	Russian Federation	227000	-9999	1986	2	0
+Borisov	54.15	28.5	Russian Federation	136000	-9999	1986	2	0
+Bratsk	56.333	101.833	Russian Federation	245000	-9999	1986	2	0
+Brest	52.133	23.667	Russian Federation	230000	-9999	1986	2	0
+Breznev	55.7	52.317	Russian Federation	459000	-9999	1986	2	0
+Bryansk	53.25	34.15	Russian Federation	437000	-9999	1986	2	0
+Bukhara	39.783	64.433	Russian Federation	214000	-9999	1986	2	0
+Chardzhou	39.15	63.567	Russian Federation	162000	-9999	1986	2	0
+Cheboksary	56.133	47.2	Russian Federation	402000	-9999	1986	2	0
+Chelyabinsk	55.2	61.417	Russian Federation	1107000	-9999	1986	2	0
+Cherepovets	59.15	37.833	Russian Federation	309000	-9999	1986	2	0
+Cherkassy	49.45	32.067	Russian Federation	287000	-9999	1987	2	0
+Cherkessk	44.233	42.083	Russian Federation	105000	-9999	1986	2	0
+Chernigov	51.5	31.3	Russian Federation	291000	-9999	1987	2	0
+Chernovtsy	48.317	25.867	Russian Federation	254000	-9999	1987	2	0
+Chimkent	42.267	69.083	Russian Federation	379000	-9999	1986	2	0
+Chirchik	41.467	69.517	Russian Federation	156000	-9999	1986	2	0
+Chita	52.05	113.583	Russian Federation	342000	-9999	1986	2	0
+Daugavpils	55.867	26.517	Russian Federation	126000	-9999	1986	2	0
+Dneprodzerzhinsk	48.5	34.617	Russian Federation	279000	-9999	1987	2	0
+Dnepropetrovsk	48.483	35	Russian Federation	1182000	-9999	1987	2	0
+Donetsk	48	37.833	Russian Federation	1090000	-9999	1987	2	0
+Dushanbe	38.633	68.85	Russian Federation	567000	-9999	1986	2	0
+Dzhambul	43.167	71	Russian Federation	308000	-9999	1986	2	0
+Dzhezkazgan	47.8	67.4	Russian Federation	103000	-9999	1986	2	0
+Elektrostal	55.767	38.5	Russian Federation	149000	-9999	1986	2	0
+Elets	52.583	38.5	Russian Federation	117000	-9999	1986	2	0
+Enakievo	48.233	38.25	Russian Federation	117000	-9999	1987	2	0
+Engels	51.5	46.117	Russian Federation	180000	-9999	1986	2	0
+Erevan	40.167	44.517	Russian Federation	1148000	-9999	1986	2	0
+Evpatoriya	45.2	33.333	Russian Federation	106000	-9999	1987	2	0
+Fergana	40.383	71.317	Russian Federation	199000	-9999	1986	2	0
+Frunze	42.667	74.833	Russian Federation	617000	-9999	1986	2	0
+Gomel	52.417	31	Russian Federation	478000	-9999	1986	2	0
+Gorky	57.6	45.067	Russian Federation	1409000	-9999	1986	2	0
+Gorlovka	48.283	38.083	Russian Federation	345000	-9999	1987	2	0
+Grodno	53.667	23.833	Russian Federation	255000	-9999	1986	2	0
+Grozny	43.35	45.7	Russian Federation	399000	-9999	1986	2	0
+Guryev	47.133	51.983	Russian Federation	147000	-9999	1986	2	0
+Irkutsk	52.3	104.25	Russian Federation	601000	-9999	1986	2	0
+Ivano-Frankovsk	48.667	24.667	Russian Federation	225000	-9999	1987	2	0
+Kalinin	56.817	35.95	Russian Federation	442000	-9999	1986	2	0
+Kaluga	54.517	36.267	Russian Federation	302000	-9999	1986	2	0
+Kamensk-Uralsky	56.483	61.817	Russian Federation	202000	-9999	1986	2	0
+Kamyshin	50.083	45.4	Russian Federation	118000	-9999	1986	2	0
+Kansk	56.183	95.8	Russian Federation	106000	-9999	1986	2	0
+Karaganda	49.883	73.117	Russian Federation	624000	-9999	1986	2	0
+Karshi	38.883	65.75	Russian Federation	137000	-9999	1986	2	0
+Kaunas	54.867	23.917	Russian Federation	410000	-9999	1986	2	0
+Kazan	55.75	49.167	Russian Federation	1057000	-9999	1986	2	0
+Kemerovo	55.417	86.083	Russian Federation	514000	-9999	1986	2	0
+Kerch	45.367	36.45	Russian Federation	173000	-9999	1987	2	0
+Khabarovsk	48.533	135.133	Russian Federation	584000	-9999	1986	2	0
+Kharkov	50	36.25	Russian Federation	1587000	-9999	1987	2	0
+Kherson	46.65	32.633	Russian Federation	358000	-9999	1987	2	0
+Khimki	55.883	37.433	Russian Federation	127000	-9999	1986	2	0
+Khmelnitsky	49.417	26.983	Russian Federation	230000	-9999	1987	2	0
+Kiev	50.417	30.5	Russian Federation	2544000	-9999	1987	2	0
+Kineshma	57.467	42.133	Russian Federation	105000	-9999	1986	2	0
+Kirov	58.583	49.667	Russian Federation	415000	-9999	1986	2	0
+Kirovabad	40.75	46.167	Russian Federation	265000	-9999	1986	2	0
+Kirovakan	40.817	44.5	Russian Federation	167000	-9999	1986	2	0
+Kirovograd	48.517	32.25	Russian Federation	269000	-9999	1987	2	0
+Kiselevsk	54.017	86.683	Russian Federation	127000	-9999	1986	2	0
+Kishinev	47	28.833	Russian Federation	643000	-9999	1986	2	0
+Kislovodsk	43.933	42.733	Russian Federation	108000	-9999	1986	2	0
+Klaipeda	55.717	21.117	Russian Federation	197000	-9999	1986	2	0
+Kokand	40.55	70.917	Russian Federation	169000	-9999	1986	2	0
+Kokchetav	53.3	69.417	Russian Federation	123000	-9999	1986	2	0
+Kolomna	55.083	38.75	Russian Federation	158000	-9999	1986	2	0
+Kolpino	59.733	30.65	Russian Federation	131000	-9999	1986	2	0
+Kommunarsk	48.5	38.783	Russian Federation	126000	-9999	1987	2	0
+Komsomolsk-na-Amure	50.533	136.983	Russian Federation	309000	-9999	1986	2	0
+Konstantinovka	48.55	37.75	Russian Federation	115000	-9999	1987	2	0
+Kostroma	57.767	40.983	Russian Federation	273000	-9999	1986	2	0
+Kovrov	56.383	41.35	Russian Federation	155000	-9999	1986	2	0
+Kramatorsk	48.717	37.55	Russian Federation	198000	-9999	1987	2	0
+Krasni Luch	48.167	39	Russian Federation	112000	-9999	1987	2	0
+Krasnodar	45.033	39	Russian Federation	615000	-9999	1986	2	0
+Krasnoyarsk	56.083	92.767	Russian Federation	885000	-9999	1986	2	0
+Kremenchug	49.05	33.417	Russian Federation	230000	-9999	1987	2	0
+Krivoi Rog	47.917	33.4	Russian Federation	698000	-9999	1987	2	0
+Kuibyshev	53.167	50.167	Russian Federation	1267000	-9999	1986	2	0
+Kurgan	55.5	65.333	Russian Federation	348000	-9999	1986	2	0
+Kursk	51.75	36.233	Russian Federation	426000	-9999	1986	2	0
+Kustanai	53.25	63.667	Russian Federation	207000	-9999	1986	2	0
+Kutaisi	42.25	42.733	Russian Federation	217000	-9999	1986	2	0
+Kzyl-Orda	44.867	65.467	Russian Federation	185000	-9999	1986	2	0
+Leninabad	40.233	69.667	Russian Federation	153000	-9999	1986	2	0
+Leninakan	40.783	43.817	Russian Federation	226000	-9999	1986	2	0
+Leningrad	59.917	30.417	Russian Federation	4904000	-9999	1981	2	0
+Leninsk-Kuznetsky	54.733	86.217	Russian Federation	167000	-9999	1981	2	0
+Lipetsk	52.617	39.6	Russian Federation	456000	-9999	1981	2	0
+Lisichansk	48.883	38.417	Russian Federation	124000	-9999	1987	2	0
+Lutsk	50.7	25.25	Russian Federation	185000	-9999	1987	2	0
+Lyubertsy	55.633	37.967	Russian Federation	162000	-9999	1986	2	0
+Magadan	59.633	150.833	Russian Federation	145000	-9999	1986	2	0
+Magnitogorsk	53.467	59.1	Russian Federation	425000	-9999	1986	2	0
+Maikop	44.617	40.8	Russian Federation	142000	-9999	1986	2	0
+Makeyevka	48.017	38	Russian Federation	455000	-9999	1987	2	0
+Makhachkala	42.983	47.5	Russian Federation	311000	-9999	1986	2	0
+Melitopol	46.85	35.367	Russian Federation	174000	-9999	1987	2	0
+Miass	55	60.133	Russian Federation	162000	-9999	1986	2	0
+Michurinsk	52.9	40.5	Russian Federation	103000	-9999	1986	2	0
+Minsk	53.85	27.5	Russian Federation	1510000	-9999	1986	2	0
+Mogilev	53.9	30.333	Russian Federation	351000	-9999	1986	2	0
+Moskva	55.75	37.7	Russian Federation	8714000	-9999	1986	2	1
+Murmansk	68.983	33.133	Russian Federation	426000	-9999	1986	2	0
+Murom	55.567	42.067	Russian Federation	122000	-9999	1986	2	0
+Mytishchi	55.9	37.783	Russian Federation	151000	-9999	1986	2	0
+Nalchik	43.517	43.633	Russian Federation	231000	-9999	1986	2	0
+Navoi	40.067	65.333	Russian Federation	103000	-9999	1986	2	0
+Nevinnomyssk	44.633	41.983	Russian Federation	115000	-9999	1986	2	0
+Nikolaev	49.533	23.983	Russian Federation	501000	-9999	1987	2	0
+Nikopol	47.567	34.417	Russian Federation	157000	-9999	1987	2	0
+Nizhnekamsk	55.6	51.783	Russian Federation	177000	-9999	1986	2	0
+Nizenvartovsk	60.95	76.667	Russian Federation	200000	-9999	1986	2	0
+Nizhny Tagil	58	59.967	Russian Federation	423000	-9999	1986	2	0
+Noginsk	55.867	38.483	Russian Federation	121000	-9999	1986	2	0
+Norilsk	69.35	88.033	Russian Federation	181000	-9999	1986	2	0
+Novgorod	58.5	31.333	Russian Federation	224000	-9999	1986	2	0
+Novocheboksarsk	56.083	47.45	Russian Federation	106000	-9999	1986	2	0
+Novocherkassk	47.417	40.083	Russian Federation	187000	-9999	1986	2	0
+Novokuibyshevsk	53.083	49.983	Russian Federation	111000	-9999	1986	2	0
+Novokuznetsk	53.75	87.2	Russian Federation	583000	-9999	1986	2	0
+Novomoskovsk	48.55	35.283	Russian Federation	147000	-9999	1986	2	0
+Novorossiisk	44.733	37.767	Russian Federation	177000	-9999	1986	2	0
+Novoshakhinsk	47.767	39.917	Russian Federation	1405000	-9999	1986	2	0
+Novosibirsk	55.067	83.083	Russian Federation	104000	-9999	1986	2	0
+Nukus	42.467	59.117	Russian Federation	146000	-9999	1986	2	0
+Odintsovo	55.65	37.25	Russian Federation	118000	-9999	1986	2	0
+Oktyabrskii	54.5	53.5	Russian Federation	104000	-9999	1986	2	0
+Omsk	55	73.367	Russian Federation	1122000	-9999	1986	2	0
+Orekhovo-Zuevo	55.783	39	Russian Federation	138000	-9999	1986	2	0
+Orel	52.967	36.067	Russian Federation	331000	-9999	1986	2	0
+Orenburg	51.833	55	Russian Federation	527000	-9999	1986	2	0
+Orsk	51.217	58.583	Russian Federation	270000	-9999	1986	2	0
+Orsha	54.5	30.383	Russian Federation	120000	-9999	1986	2	0
+Osh	40.617	72.817	Russian Federation	204000	-9999	1986	2	0
+Panevezhis	55.733	24.4	Russian Federation	119000	-9999	1986	2	0
+Pavlodar	52.35	76.983	Russian Federation	322000	-9999	1986	2	0
+Pavlograd	48.567	35.833	Russian Federation	126000	-9999	1987	2	0
+Penza	53.183	45	Russian Federation	532000	-9999	1986	2	0
+Perm	58.017	56.167	Russian Federation	1065000	-9999	1986	2	0
+Pervouralsk	56.983	59.967	Russian Federation	138000	-9999	1986	2	0
+Petropavlovsk Kamchatsky	53.05	158.717	Russian Federation	248000	-9999	1986	2	0
+Petropavlovsk	54.883	69.217	Russian Federation	229000	-9999	1986	2	0
+Petrozavodsk	61.767	34.317	Russian Federation	259000	-9999	1986	2	0
+Pinsk	52.133	26.017	Russian Federation	113000	-9999	1986	2	0
+Podolsk	55.383	37.533	Russian Federation	208000	-9999	1986	2	0
+Poltava	49.583	34.583	Russian Federation	309000	-9999	1987	2	0
+Prokopyevsk	53.917	86.75	Russian Federation	276000	-9999	1986	2	0
+Pskov	57.8	28.433	Russian Federation	197000	-9999	1986	2	0
+Pyatigorsk	44.067	43.1	Russian Federation	120000	-9999	1986	2	0
+Riga	56.883	24.133	Russian Federation	890000	-9999	1986	2	0
+Rostov-na-Dona	47.25	39.75	Russian Federation	992000	-9999	1986	2	0
+Rovno	50.65	26.167	Russian Federation	233000	-9999	1987	2	0
+Rubtsovsk	51.567	81.183	Russian Federation	167000	-9999	1986	2	0
+Rudniy	50.817	44.583	Russian Federation	116000	-9999	1986	2	0
+Rustavi	41.567	45.05	Russian Federation	145000	-9999	1986	2	0
+Ryazan	54.617	39.717	Russian Federation	500000	-9999	1986	2	0
+Salavat	53.367	55.833	Russian Federation	157000	-9999	1986	2	0
+Samarkand	39.667	66.95	Russian Federation	380000	-9999	1986	2	0
+Saransk	54.2	45.167	Russian Federation	315000	-9999	1986	2	0
+Sarapul	64.25	60.967	Russian Federation	110000	-9999	1986	2	0
+Saratov	51.5	45.917	Russian Federation	907000	-9999	1986	2	0
+Semipalatinsk	50.433	80.267	Russian Federation	324000	-9999	1986	2	0
+Serov	59.7	60.533	Russian Federation	103000	-9999	1986	2	0
+Serpukhov	54.883	37.417	Russian Federation	142000	-9999	1986	2	0
+Sevastopol	44.6	33.517	Russian Federation	350000	-9999	1987	2	0
+Severodonetsk	48.967	38.483	Russian Federation	127000	-9999	1987	2	0
+Shakhy	48.45	58.5	Russian Federation	223000	-9999	1986	2	0
+Shchelkovo	55.933	38.083	Russian Federation	137000	-9999	1986	2	0
+Shevchenko	48.233	37.183	Russian Federation	106000	-9999	1986	2	0
+Simferopol	44.95	34.083	Russian Federation	338000	-9999	1987	2	0
+Slavyansk	48.85	37.6	Russian Federation	144000	-9999	1987	2	0
+Smolensk	54.817	32.067	Russian Federation	334000	-9999	1986	2	0
+Sochi	43.583	39.767	Russian Federation	313000	-9999	1986	2	0
+Solikamsk	59.667	56.75	Russian Federation	107000	-9999	1986	2	0
+Stakhanov	71.767	101.667	Russian Federation	112000	-9999	1987	2	0
+Stary Oskol	51.333	37.833	Russian Federation	161000	-9999	1986	2	0
+Stavropol	45.05	41.983	Russian Federation	299000	-9999	1986	2	0
+Sterlitamak	53.667	55.983	Russian Federation	245000	-9999	1986	2	0
+Sukhumi	43.017	41.017	Russian Federation	128000	-9999	1986	2	0
+Sumgait	40.583	49.633	Russian Federation	228000	-9999	1986	2	0
+Sumy	50.917	34.817	Russian Federation	268000	-9999	1987	2	0
+Surgut	61.217	73.333	Russian Federation	215000	-9999	1986	2	0
+Sverdlovsk	56.867	60.583	Russian Federation	1315000	-9999	1986	2	0
+Syktykar	61.7	50.75	Russian Federation	218000	-9999	1986	2	0
+Syzran	53.167	48.483	Russian Federation	173000	-9999	1986	2	0
+Taganrog	47.233	38.917	Russian Federation	291000	-9999	1986	2	0
+Taldi-Kurgan	45.033	78.383	Russian Federation	109000	-9999	1986	2	0
+Tallin	59.367	24.8	Russian Federation	472000	-9999	1986	2	0
+Tambov	52.733	41.467	Russian Federation	300000	-9999	1986	2	0
+Tartu	58.333	26.733	Russian Federation	111000	-9999	1986	2	0
+Tashauz	41.817	59.967	Russian Federation	107000	-9999	1986	2	0
+Tashkent	41.267	69.217	Russian Federation	2077000	-9999	1986	2	0
+Tbilisi	41.717	44.8	Russian Federation	1174000	-9999	1986	2	0
+Temirtau	50.083	72.917	Russian Federation	226000	-9999	1986	2	0
+Ternopol	49.583	25.65	Russian Federation	197000	-9999	1987	2	0
+Tiraspol	46.833	29.633	Russian Federation	166000	-9999	1986	2	0
+Tolyatti	53.533	49.4	Russian Federation	610000	-9999	1986	2	0
+Tomsk	56.5	85.083	Russian Federation	483000	-9999	1986	2	0
+Tselinograd	51.167	71.467	Russian Federation	269000	-9999	1986	2	0
+Tula	54.183	37.633	Russian Federation	534000	-9999	1986	2	0
+Tyumen	57.183	65.483	Russian Federation	440000	-9999	1986	2	0
+Ufa	54.75	55.967	Russian Federation	1077000	-9999	1986	2	0
+Uhta	63.55	53.733	Russian Federation	102000	-9999	1986	2	0
+Ulan-Ude	51.917	107.667	Russian Federation	342000	-9999	1986	2	0
+Ulyanovsk	54.317	48.367	Russian Federation	566000	-9999	1986	2	0
+Uralsk	51.317	51.333	Russian Federation	197000	-9999	1986	2	0
+Urgench	41.583	60.683	Russian Federation	120000	-9999	1986	2	0
+Usolye Sibirskoye	52.8	103.667	Russian Federation	109000	-9999	1986	2	0
+Ustinov	54.817	60	Russian Federation	620000	-9999	1986	2	0
+Ust-Ilimsk	58.05	102.65	Russian Federation	101000	-9999	1986	2	0
+Ust-Kamenogorsk	49.967	82.6	Russian Federation	313000	-9999	1986	2	0
+Uzgorod	48.633	22.25	Russian Federation	111000	-9999	1987	2	0
+Velikie Luky	56.317	30.517	Russian Federation	111000	-9999	1986	2	0
+Vilniius	54.667	25.317	Russian Federation	555000	-9999	1986	2	0
+Vinnitsa	49.183	28.5	Russian Federation	383000	-9999	1987	2	0
+Vitebsk	55.167	30.233	Russian Federation	340000	-9999	1986	2	0
+Valdimir	56.133	40.417	Russian Federation	336000	-9999	1986	2	0
+Vladivosok	43.15	131.883	Russian Federation	608000	-9999	1986	2	0
+Volgodonsk	47.583	42.133	Russian Federation	172000	-9999	1986	2	0
+Volgograd	48.75	44.5	Russian Federation	981000	-9999	1986	2	0
+Vologda	59.167	39.917	Russian Federation	273000	-9999	1986	2	0
+Volzhsky	46.65	47.85	Russian Federation	250000	-9999	1986	2	0
+Vorkuta	67.45	64	Russian Federation	110000	-9999	1986	2	0
+Voroshlovgrad	48.583	39.333	Russian Federation	509000	-9999	1987	2	0
+Votkinsk	57	54	Russian Federation	100000	-9999	1986	2	0
+Yakutsk	62.167	129.833	Russian Federation	184000	-9999	1986	2	0
+Yaroslavi	57.567	39.867	Russian Federation	630000	-9999	1986	2	0
+Yoshkar-Ola	56.633	47.867	Russian Federation	236000	-9999	1986	2	0
+Yuzhno-Sakhalinsk	46.967	142.75	Russian Federation	163000	-9999	1986	2	0
+Zagossk	56.333	38.167	Russian Federation	112000	-9999	1986	2	0
+Zaporozhye	47.833	35.167	Russian Federation	875000	-9999	1987	2	0
+Zelenograd	54.95	20.467	Russian Federation	144000	-9999	1986	2	0
+Zhdanov	47.083	37.567	Russian Federation	529000	-9999	1987	2	0
+Zhitomir	50.3	28.667	Russian Federation	287000	-9999	1987	2	0
+Zlatoust	55.167	59.633	Russian Federation	205000	-9999	1986	2	0
+Stanley	-51.75	-57.93	Falkland Islands	1079	-9999	1972	1	1
+Madrid	40.41	-3.71	Spain	-9999	-9999	0	0	1
+Rarotonga	-21.25	-159.75	Cook Islands	9530	-9999	1981	1	1
+Dili	-8.58	125.58	E. Timor	52158	-9999	1960	1	1
+Gaberone	-24.75	25.916	Botswana	107677	-9999	1987	2	1
+Kenitra	34.333	-6.566	Morocco	-9999	449700	1981	2	0
+Bukavu	-2.5	28.833	Zaire	171064	-9999	1984	1	0
+Kitwe	-12.833	28.183	Zambia	320320	-9999	1980	1	0
+Brampton	43.7	-79.767	Canada	149030	-9999	1981	1	0
+St. John's	45.25	-66.033	Canada	-9999	161100	1986	2	0
+Cienfuegos	22.167	-80.45	Cuba	112225	-9999	1986	2	0
+Pachuca	20.167	-98.733	Mexico	110351	-9999	1980	1	0
+Resende	-22.466	-44.45	Brazil	102865	102865	1985	2	0
+Rio Branco	-9.983	-67.817	Brazil	145948	145948	1985	2	0
+Sao Caetano do Sul	-23.617	-46.567	Brazil	171187	171187	1985	2	0
+Teofilo Otoni	-17.867	-41.517	Brazil	126207	126207	1985	2	0
+Sincelejo	9.283	-75.383	Colombia	-9999	122484	1985	1	0
+Tulua	4.083	-76.2	Colombia	-9999	103123	1985	1	0
+Ambato	-1.3	-78.65	Ecuador	106969	-9999	1986	2	0
+Cuenca	-2.9	-79	Ecuador	161516	-9999	1986	2	0
+Esmeraldas	0.933	-79.667	Ecuador	105153	-9999	1984	2	0
+Machala	-3.333	-79.95	Ecuador	111450	-9999	1986	2	0
+Manta	-0.983	-80.733	Ecuador	106087	-9999	1986	2	0
+Portoviejo	-1.117	-80.467	Ecuador	108325	-9999	1986	2	0
+Holon	32.017	34.767	Israel	139800	-9999	1986	2	0
+Angers	47.483	-0.533	France	137760	196000	1982	1	0
+Bayonne	43.5	-1.466	France	-9999	128000	1982	1	0
+Brest	48.383	-4.5	France	154020	187000	1982	1	0
+Erfurt	50.967	11.033	Germany	216646	-9999	1985	2	0
+Gera	50.85	12.183	Germany	132303	-9999	1985	2	0
+Darmstadt	49.867	8.65	Germany	133572	-9999	1986	0	0
+Salzgitter	52.217	10.333	Germany	105392	-9999	1986	0	0
+Dublin	53.333	-6.25	Ireland	525360	915115	1981	1	1
+Ravenna	44.417	12.02	Italy	137011	-9999	1984	2	0
+Enschede	52.217	6.917	Netherlands	144137	248442	1986	2	0
+Trondheim	63.6	10.383	Norway	134019	-9999	1985	2	0
+Palma de Gran Canaria	28.133	-15.45	Spain	356730	356730	1986	2	0
+Santa Cruz de Tenerife	28.467	-16.25	Spain	212524	212524	1986	2	0
+Belovo	54.45	86.317	Russian Federation	117000	-9999	1986	2	0
+Ivanovo	57	41.99	Russian Federation	476000	-9999	1986	2	0
+Lvov	49.833	24	Russian Federation	767000	-9999	1987	2	0
+Margelan	40.5	71.75	Russian Federation	124000	-9999	1986	2	0
+Mezhdurechensk	54.717	88.183	Russian Federation	103000	-9999	1986	2	0
+Nakhodka	71.167	-179.001	Russian Federation	152000	-9999	1986	2	0
+Manila	14.617	120.966	Philippines	1789860	-9999	1986	2	0
+Elizabeth	40.666	-74.25	United States	106540	-9999	1986	2	0
+Toledo	41.666	-83.583	United States	340680	611200	1986	2	0
+S. Bend	41.666	-86.25	United States	107190	241400	1986	2	0
+Elkhart	41.7	-85.933	United States	44180	146400	1986	2	0
+Savannah	32.001	-81.001	United States	146800	239700	1986	2	0
+Athens	33.95	-83.4	United States	43100	141500	1986	2	0
+Melbourne	28.001	-80.633	United States	56740	361200	1986	2	0
+Tampa	27.967	-82.633	United States	277580	1914300	1986	2	0
+Duluth	46.75	-92.166	United States	82380	243500	1986	2	0
+Richland	46.283	-119.283	United States	32580	149500	1986	2	0
+Fayetteville (Ark.)	36	-94.166	United States	40110	108000	1986	2	0
+Corpus Christi	28.001	-97.9	United States	263900	363300	1986	2	0
+Brownsville	25.9	-97.5	United States	102110	257300	1986	2	0
+Misato	26.317	127.783	Japan	109517	109517	1986	2	0
+Odawara	35.25	139.133	Japan	185909	185909	1986	2	0
+Onomichi	34.417	133.183	Japan	102210	102210	1986	2	0
+Sakai	34.583	135.467	Japan	811824	811824	1986	2	0
+Takatsuki	36	139.25	Japan	350043	350043	1986	2	0
+Tokorozawa	35.8	139.467	Japan	280728	280728	1986	2	0
+Urawa	35.867	139.667	Japan	381019	381019	1986	2	0
+Amman	31.95	35.625	Jordan	812500	-9999	1985	2	1
+Irbid	32.55	35.85	Jordan	141400	-9999	1985	2	0
+Zarqu	32.067	36.1	Jordan	276850	-9999	1985	2	0
+Kangnung	37.8	127.433	Korea (Republic of)	132995	-9999	1985	1	0
+Kwang myong	35.017	127.533	Korea (Republic of)	219592	-9999	1985	1	0
+Taejon	36.333	127.433	Korea (Republic of)	866695	-9999	1985	1	0
+Chiniot	31.667	73	Pakistan	-9999	105559	1981	1	0
+Islamabad	33.667	73.133	Pakistan	-9999	204364	1981	1	1
+Jhang	31	72	Pakistan	-9999	195558	1981	1	0
+Sargodha	32.017	72.667	Pakistan	-9999	291362	1981	1	0
+Mandaluyong	14.6	121.033	Philippines	226670	-9999	1984	2	0
+Pasig	14.567	121.067	Philippines	318853	-9999	1984	2	0
+Makkah	21.433	39.817	Saudi Arabia	366801	-9999	1974	1	0
+Nguyen	22.683	105.917	Viet Nam	138023	-9999	1979	1	0
+Ussuriisk	43.8	131.983	Russian Federation	157000	-9999	1986	2	0
+Kumagaya	36.15	139.367	Japan	143732	143732	1986	2	0
+Kochi	33.55	133.533	Japan	310519	310519	1986	2	0
+Kobe	34.667	135.2	Japan	1422922	1422922	1986	2	0
+Hiratsuka	35.333	139.317	Japan	230863	230863	1986	2	0
+Fujisawa	35.367	139.483	Japan	332218	332218	1986	2	0
+Chigasaki	35.333	139.4	Japan	188643	188643	1986	2	0
+Lingmen	28.333	121.383	China	110900	-9999	1982	1	0
+Kashi	39.483	76	China	256890	-9999	1982	1	0
+Kunming	25.001	102.683	China	1418640	1975820	1982	1	0
+Langfang	37.983	116.667	China	172440	-9999	1982	1	0
+Shuangyashan	46.7	131.333	China	400050	-9999	1982	1	0
+Tainan	36.25	117.167	China	474835	474835	1970	2	0
+Long Beach	33.783	-118.25	United States	396280	-9999	1986	2	0
+Fremont	41.5	-96.5	United States	153580	-9999	1986	2	0
+Orange	30.001	-93.717	United States	100740	-9999	1986	2	0
+Lakewood	41.483	-81.833	United States	122140	-9999	1986	2	0
+Pittsburg	40.433	-80	United States	387490	2316100	1986	2	0
+Steubenville	40.367	-80.65	United States	23580	154800	1986	2	0
+Charlotte Amalie	18.367	-64.933	United States Virgin Islands	11842	-9999	1980	1	1
+Mandalay	21.95	96.001	Burma	532895	-9999	1983	1	0
+Monywa	22.001	93.2	Burma	106873	-9999	1983	1	0
+Taunggyi	20.917	96.883	Burma	107907	-9999	1983	1	0
+Changsha	28.167	113	China	1066030	2459920	1982	1	0
+Chaoyang	23.283	116.55	China	206700	-9999	1982	1	0
+Fushun	37.517	121.233	China	1184940	2045150	1982	1	0
+Hailar	49.25	119.683	China	157490	-9999	1982	1	0
+Harbin	45.833	126.666	China	2519120	-9999	1982	1	0
+Hengshui	37.733	115.733	China	101260	-9999	1982	1	0
+Ulanhot	46	122	China	174050	-9999	1982	1	0
+Urumqi	43	87.083	China	960240	1084060	1982	1	0
+Yumen	39.9	97.717	China	195290	-9999	1982	1	0
+Bilaspur	22.033	82.25	India	147218	187104	1981	1	0
+Dhulia	20.967	74.833	India	210759	-9999	1981	1	0
+Ganganagar	29.933	73.933	India	123692	-9999	1981	1	0
+Katihar	25.567	87.6	India	122005	-9999	1981	1	0
+Mathura	27.5	77.8	India	147493	159498	1981	1	0
+Nanded	19.167	77.333	India	191269	-9999	1981	1	0
+Palghat	10.767	76.7	India	111245	117986	1981	1	0
+Patan	23.9	72.233	India	-9999	105307	1981	1	0
+Patna	25.583	85.3	India	776371	918903	1981	1	0
+Pollachi	10.583	77	India	-9999	114971	1981	1	0
+Rajahmundry	17	81.867	India	203358	268370	1981	1	0
+Rajapalayam	9.417	77.583	India	101640	-9999	1981	1	0
+Raniganj	23.666	87.25	India	48702	119101	1981	1	0
+Rewa	24.55	81.417	India	100641	-9999	1981	1	0
+Saharanpur	29.967	77.55	India	295355	-9999	1981	1	0
+Sambalpur	21.467	83.967	India	110282	162214	1981	1	0
+Sangli	16.917	74.55	India	152389	268988	1981	1	0
+Sitapur	27.633	80.75	India	101210	-9999	1981	1	0
+Saint-Denis	-20.923	55.45	Reunion	109068	-9999	1982	1	1
+Antananarivo	-16.433	49.805	Madagascar	347466	377600	1971	2	1
+Port-Louis	-20.167	57.528	Mauritius	137017	-9999	1986	2	1
+Kinshasa	-4.356	15.3	Zaire	2653558	-9999	1984	1	1
+Sfax	34.583	10.549	Tunisia	231911	-9999	1984	1	0
+Mogadishu	2.061	45.322	Somalia	230000	-9999	1972	2	1
+Freetown	8.472	-13.283	Sierra Leone	469776	-9999	1985	1	1
+Oujda	34.683	-1.834	Morocco	-9999	470500	1981	2	0
+Nouakchott	20.9	-17.045	Mauritania	-9999	134986	1976	1	1
+Tripoli	32.855	13.2	Libyan Arab	551477	-9999	1973	1	1
+Misurata	32.305	15.167	Libyan Arab	103302	-9999	1973	1	0
+Port Said	31.2	32.3	Egypt	382000	-9999	1986	2	0
+Annaba	36.917	7.755	Algeria	239975	246049	1977	1	0
+Alger	36.75	3	Algeria	1523000	1740461	1977	1	1
+Blida	36.416	2.833	Algeria	138240	158047	1977	1	0
+Oran	35.694	-0.6	Algeria	490788	543485	1977	1	0
+Sidi-bel-Abbes	35.194	-0.65	Algeria	112998	112998	1977	1	0
+Tanger	35.744	-5.833	Morocco	-9999	304000	1981	2	0
+Casablanca	33.594	-7.583	Morocco	-9999	2408600	1981	2	0
+El Jadida	33.211	-8.5	Morocco	-9999	164000	1981	2	0
+Safi	32.3	-9.277	Morocco	-9999	255700	1981	2	0
+Dakar	14.717	-17.478	Senegal	798792	-9999	1976	1	1
+Conakry	9.528	-13.689	Guinea	-9999	197267	1967	2	1
+Porto-Novo	6.5	2.672	Benin	144000	-9999	1981	2	1
+Malabo	3.722	8.8	Guinea	34980	-9999	1983	2	1
+E. London	-32.972	27.872	S. Africa	119727	124763	1970	1	0
+Maputo	-25.939	32.555	Mozambique	882601	-9999	1986	2	1
+Dar es Salaam	-6.878	39.3	Tanzania	1096000	-9999	1985	2	0
+Tanga	-5.095	39.1	Tanzania	172000	-9999	1985	2	0
+Mombasa	-4.039	39.695	Kenya	442369	-9999	1985	2	0
+Djibouti	11.527	43.155	Djibouti	-9999	62000	1970	2	1
+Apia	-13.935	-171.75	Samoa	-9999	32099	1976	1	1
+Paga Pago	-14.312	-170.717	American Samoa	3075	-9999	1980	1	1
+Papeete	-17.578	-149.567	French Polynesia	23496	-9999	1983	1	1
+Vancouver	49.238	-123	Canada	-9999	1368100	1986	2	0
+Tacoma	47.222	-122.5	United States	158950	-9999	1986	2	0
+Arica	-18.5	-70.288	Chile	158422	-9999	1985	2	0
+Vina del Mar	-33.033	-71.538	Chile	261118	-9999	1985	2	0
+Talcahuano	-36.666	-73.121	Chile	217660	-9999	1985	2	0
+Mar del Plata	-38	-57.578	Argentina	448000	-9999	1985	2	0
+La Plata	-34.912	-57.962	Argentina	-9999	611000	1985	2	0
+Montevideo	-34.872	-56.167	Uruguay	1247920	-9999	1985	1	1
+Rio Grande	-32.095	-52.133	Brazil	164636	164636	1985	2	0
+Guaruja	-23.91	-46.367	Brazil	186817	186817	1985	2	0
+Santos	-23.843	-46.367	Brazil	461096	461096	1985	2	0
+Camaragibe	-9.322	-35.483	Brazil	113062	113062	1985	2	0
+Maceio	-9.622	-35.733	Brazil	484094	484094	1985	2	0
+Recife	-8.055	-34.883	Brazil	1289627	1289627	1985	2	0
+Cayenne	4.872	-52.345	French Guiana	38093	-9999	1982	1	1
+Cumana	10.528	-64.2	Venezuela	218413	247051	1987	2	0
+Caracas	10.538	-66.933	Venezuela	1246677	3247498	1987	2	1
+Maracaibo	10.733	-71.662	Venezuela	1124432	1295421	1987	2	0
+Cartagena	10.4	-75.505	Colombia	-9999	513986	1985	1	0
+La Ceiba	15.705	-86.75	Honduras	103600	-9999	1985	2	0
+Belize City	17.483	-88.257	Belize	39041	-9999	1980	1	1
+Coatzacoalcos	18.121	-94.417	Mexico	127170	-9999	1979	2	0
+St. Petersburg	27.795	-82.667	United States	239410	-9999	1986	2	0
+Fort Pierce	27.467	-80.378	United States	36890	205600	1986	2	0
+Charleston (S.C.)	32.8	-80.012	United States	68900	485700	1986	2	0
+Newport News	36.938	-76.433	United States	161700	-9999	1986	2	0
+Atlantic City	39.417	-74.462	United States	35980	297400	1986	2	0
+Jersey City	40.717	-73.955	United States	219480	-9999	1986	2	0
+New York	40.75	-74	United States	7262700	17967900	1986	2	0
+Providence	41.728	-71.25	United States	157200	1109300	1986	2	0
+St. John's	46.817	-56.295	St. Pierre and Miquelon	5416	-9999	1982	1	1
+Arecibo	18.438	-66.733	Puerto Rico	-9999	163300	1984	2	0
+Baymon	18.355	-66.167	Puerto Rico	185087	-9999	1980	1	0
+Carolina	18.338	-65.95	Puerto Rico	147835	-9999	1980	1	0
+San Juan	18.438	-66.133	Puerto Rico	-9999	1816300	1984	2	1
+Basse-Terre	17.207	-62.717	St. Christopher and Nevis	14161	-9999	1980	1	1
+Point-a-Pitre	16.233	-61.443	Guadeloupe	29522	-9999	1967	1	1
+Roseau	15.3	-61.338	Dominica	10417	-9999	1960	1	1
+Castries	14.017	-60.938	St. Lucia	40451	-9999	1870	1	1
+Willemstad	12.2	-69.02	Neths. Anttilles	43546	94133	1960	1	1
+Georgetown	19.285	-81.335	Cayman Is	7617	-9999	1979	1	1
+Praia	14.928	-23.545	Cape Verde	57748	-9999	1980	1	1
+Guayaquil	-2.217	-79.915	Ecuador	1272014	-9999	1986	2	0
+Sittwe	20.135	92.878	Burma	107607	-9999	1983	1	0
+Manzhouli	49.543	117.467	China	104220	-9999	1982	1	0
+Bombay	18.978	72.85	India	8243405	-9999	1981	1	0
+Cochin	9.911	76.25	India	513249	685836	1981	1	0
+Galle	6.017	80.239	Sri Lanka	109000	-9999	1986	2	0
+Madras	13.083	80.278	India	3276622	4289347	1981	1	0
+Masulipatnam	16.2	81.178	India	138530	-9999	1981	1	0
+Kakinada	16.983	82.267	India	226409	-9999	1981	1	0
+George Town	5.395	100.295	Malaysia	248241	-9999	1980	1	0
+Bandung	0.539	103.25	Indonesia	1462637	-9999	1980	1	0
+Kota Kinabalu	5.983	116.111	Sabah	108725	-9999	1980	1	1
+Davao	7.105	125.633	Philippines	748211	-9999	1986	2	0
+Bago	10.567	122.855	Philippines	120159	-9999	1986	2	0
+Cadiz	10.928	123.3	Philippines	140241	-9999	1986	2	0
+Iligan	18.3	122.284	Philippines	205354	-9999	1986	2	0
+Matsubara	27.807	128.895	Japan	429413	429413	1986	2	0
+Cheju	33.472	126.483	Korea (Republic of)	203298	-9999	1985	1	0
+Haikou	20.017	110.417	China	263280	-9999	1982	1	0
+Victoria	22.245	114.217	Hong Kong	633138	674962	1961	1	1
+Macau	22.267	113.561	Macau	241413	-9999	1970	1	1
+Inchon	37.5	126.655	Korea (Republic of)	1387491	-9999	1985	1	0
+Chinhae	35.105	128.783	Korea (Republic of)	121406	-9999	1985	1	0
+Pohang	35.978	129.433	Korea (Republic of)	261256	-9999	1985	1	0
+Otaru	43.189	140.983	Japan	174558	174558	1986	2	0
+Niigata	37.9	139.077	Japan	468932	468932	1986	2	0
+Hitachi	36.605	140.645	Japan	205673	205673	1986	2	0
+Yaizu	34.889	138.333	Japan	110395	110395	1986	2	0
+Izumi (Osaka)	34.5	135.433	Japan	139660	139660	1986	2	0
+Kakogawa	34.694	134.867	Japan	229923	229923	1986	2	0
+Niihama	33.928	133.25	Japan	133921	133921	1986	2	0
+Imabari	34.045	132.983	Japan	125421	125421	1986	2	0
+Beppu	33.3	131.478	Japan	132352	132352	1986	2	0
+Habra	25.473	88.784	India	-9999	129610	1981	1	0
+Cagayan de Oro	8.451	124.667	Philippines	294844	-9999	1986	2	0
+Cebu	10.316	123.901	Philippines	571538	-9999	1986	2	0
+Lapu-Lapu	10.333	123.934	Philippines	114987	-9999	1986	2	0
+Townsville	-19.249	146.735	Australia	101700	-9999	1985	2	0
+Tripoli	34.417	35.866	Lebanon	127611	-9999	1964	2	0
+Muscat	23.562	58.579	Oman	5080	6208	1960	2	1
+Doha	25.217	51.535	Qatar	217294	-9999	1986	1	1
+Manama	26.2	50.568	Bahrain	108684	-9999	1981	1	1
+Bushehr	28.918	50.833	Iran	120000	-9999	1982	2	0
+Okinawa	26.633	128	Japan	104783	104783	1986	2	0
+Zama	35.498	139.384	Japan	100482	100482	1986	2	0
+Hawalli	29.333	47.965	Kuwait	130565	-9999	1975	1	0
+Rawalpindi	33.597	73.133	Pakistan	-9999	794843	1981	1	0
+Mandaue	13.833	120.611	Philippines	147599	-9999	1986	2	0
+Kotte	6.9	79.951	Sri Lanka	104000	-9999	1986	2	0
+Colombo	6.917	79.867	Sri Lanka	683000	-9999	1986	2	1
+Cean	49.183	-0.367	France	115180	182000	1982	1	0
+Cadiz	36.533	-6.247	Spain	155219	155219	1986	2	0
+Monaco	43.751	7.417	Monaco	27063	-9999	1982	1	1
+Torre del Greco	40.802	14.384	Italy	104866	-9999	1984	2	0
+Ancona	43.582	13.482	Italy	105562	-9999	1984	2	0
+Venezia	45.486	12.333	Italy	339272	-9999	1984	2	0
+Iraclion	35.316	25.2	Greece	101634	110958	1981	1	0
+Samsun	41.266	36.349	Turkey	240674	-9999	1985	1	0
+Trabzon	40.982	39.717	Turkey	142008	-9999	1985	1	0
+Bourgas	42.5	27.448	Bulgaria	182549	-9999	1985	1	0
+Varna	43.218	27.95	Bulgaria	302211	-9999	1985	1	0
+Constanta	44.2	28.632	Romania	323236	-9999	1985	2	0
+Odessa	46.5	30.749	Russian Federation	1141000	-9999	1987	2	0
+Ordzhonikidze	44.967	35.332	Russian Federation	308000	-9999	1986	2	0
+Batumi	41.599	41.635	Russian Federation	133000	-9999	1986	2	0
+Catania	37.534	15.116	Italy	379039	-9999	1984	2	0
+Valletta	35.9	14.498	Malta	9263	-9999	1986	2	1
+Palermo	38.098	13.383	Italy	714246	-9999	1984	2	0
+Vigo	42.215	-8.733	Spain	261878	261878	1986	2	0
+Santander	43.379	-3.8	Spain	186455	186455	1986	2	0
+Lorient	47.768	-3.35	France	-9999	104000	1982	1	0
+Liepaya	56.482	21.018	Russian Federation	113000	-9999	1981	2	0
+Helsinki	60.221	25	Finland	486658	959566	1986	2	1
+Severodvinsk	64.566	39.833	Russian Federation	234000	-9999	1986	2	0
+Thorshavn	62.033	-6.818	Faeroe Islands	10726	-9999	1970	1	1
+Reykjavik	64.132	-21.967	Iceland	-9999	130175	1984	2	1
+Calithea	37.968	23.7	Greece	117319	-9999	1981	1	0
+Belfast	54.596	-5.956	Northern Ireland	318600	-9999	1984	2	1
+Auckland	-36.917	174.605	New Zealand	148400	829200	1987	2	0
+Kaliningrad (Moskovskaya oblas	55.933	37.917	Russian Federation	144000	-9999	1986	2	0
+Kaliningrad (Kaliningradskaya	54.667	20.5	Russian Federation	389000	-9999	1986	2	0
+Namangan	41.391	71.683	Russian Federation	283000	-9999	1986	2	0
+Birmingham	33.5	-86.917	United States	277510	911000	1986	2	0
+Canoas	-28.917	-51.167	Brazil	262156	262156	1985	2	0
+Mage	-22.617	-43	Brazil	200100	200100	1985	2	0
+Vitoria de Santo Antao	-8.167	-35.233	Brazil	100617	100617	1985	2	0
+Kabul	34.5	69.167	Afghanistan	1297000	-9999	1986	2	0
+Monywa	22.001	95.2	Burma	106873	-9999	1983	1	0
+Chengdu	30.617	104.001	China	2499000	4025180	1982	1	0
+Dalian	38.883	121.617	China	1480240	4619060	1986	1	0
+Jinhua	29.001	119.667	China	869460	-9999	1982	1	0
+Lhasa	29.683	91.167	China	343240	-9999	1982	1	0
+Liaoyuan	42.883	125.167	China	771510	-9999	1982	1	0
+Qiqihar	47.383	124	China	1209180	-9999	1982	1	0
+Qitaihe	45.783	130.833	China	283420	-9999	1982	1	0
+Quanzhou	24.883	118.6	China	403180	-9999	1982	1	0
+Shaoxing	30	120.583	China	1091170	-9999	1982	1	0
+Shihezi	44.317	86.167	China	563740	-9999	1982	1	0
+Balurghat	25.2	88.833	India	104621	112621	1981	1	0
+Jaipur	26.883	75.833	India	977165	1015160	1981	1	0
+Munge	22.001	81.7	India	129260	-9999	1981	1	0
+New Delhi	28.617	77.217	India	273036	-9999	1981	1	0
+Rampur	28.8	79.001	India	204610	-9999	1981	1	0
+Ranchi	23.367	85.333	India	489626	502771	1981	1	0
+Ratlam	23.3	75.001	India	142319	155578	1981	1	0
+Sagar	23.833	78.733	India	160392	207479	1981	1	0
+Koganei	35.717	139.467	Japan	102190	102190	1986	2	0
+Yokosuka	35.3	139.65	Japan	430440	430440	1986	2	0
+Salmiya	29.001	48.001	Kuwait	113943	-9999	1975	1	0
+Freiburg im Breisgau	48	7.867	Germany	186156	-9999	1986	0	0
+Voronezh	51.666	39.217	Russian Federation	860000	-9999	1986	2	0
+Huntington Beach	33.694	-117.973	United States	183620	-9999	1986	2	0
+Sao Vicente	-23.95	-46.466	Brazil	240849	240849	1985	2	0
+Naha	26.167	127.674	Japan	309339	309339	1986	2	0
+Chiba	35.579	140.12	Japan	791799	791799	1986	2	0
+Kastisima	13	7.533	Nigeria	109424	-9999	1971	2	0
+Sao Jose	-27.583	-48.666	Brazil	106124	106124	1985	2	0
+Liangmen	22.666	113.001	China	212450	-9999	1982	1	0
+Liaozuo	35.233	113.217	China	484370	-9999	1982	1	0
+Kuytun	44.5	85	China	239870	-9999	1982	1	0
+Pingdong	22.666	120.5	China	165360	165360	1970	2	0
+Higashimurayama	35.75	139.5	Japan	126533	126533	1986	2	0
+Koshigaya	43.883	144.783	Japan	259937	259937	1986	2	0
+Minoo	35.567	136.933	Japan	114421	114421	1986	2	0
+Noda	40.001	141.833	Japan	106903	106903	1986	2	0
+Oyama	36.3	139.8	Japan	135559	135559	1986	2	0
+Sagamihara	35.583	139.333	Japan	486679	486679	1986	2	0
+Seto	35.233	137.001	Japan	122296	122296	1986	2	0
+Tama	35.65	139.45	Japan	125479	125479	1986	2	0
+Yachiyo	35.75	140.001	Japan	142402	142402	1986	2	0
+Uijong	37.8	127	Korea (Republic of)	162701	-9999	1985	1	0
+Ulsan	35.533	129.35	Korea (Republic of)	551320	-9999	1985	1	0
+Silay	10.75	122.983	Philippines	127685	-9999	1986	2	0
+Banya Luka	44.783	17.183	Yugoslavia	123937	-9999	1981	1	0
+Paranque	14.489	120.987	Philippines	252791	-9999	1984	2	0
+Las Pinas	14.474	120.974	Philippines	190364	-9999	1984	2	0
+Muntilupa	14.4	121.055	Philippines	172421	-9999	1984	2	0
+Gaoxiong	22.6	120.315	China	828191	828191	1970	2	0
+Iwaki	37.028	140.889	Japan	112467	112467	1986	2	0
+Kure	34.233	132.553	Japan	227602	227602	1986	2	0
+Menia	28.001	30.75	Egypt	203000	-9999	1986	2	0
+E. Rand	-26.25	28.333	S. Africa	-9999	1038108	1985	1	0
+Kayamnandi	-33.917	18.85	S. Africa	220548	-9999	1985	1	0
+Shitajkonj	24.45	89.7	Bangladesh	-9999	104522	1981	1	0
+Bangiao	26.183	103.933	China	114600	114600	1970	2	0
+Uhai	39.783	106.867	China	266620	-9999	1982	1	0
+Khoy	38.533	44.967	Iran	102000	-9999	1982	2	0
+Oroumich	37.533	45	Iran	262000	-9999	1982	2	0
+AlSulaimaniya	35.533	45.45	Iraq	103091	-9999	1970	2	0
+Abiko	35.867	140	Japan	113239	113239	1986	2	0
+Higashiosaka	34.667	135.583	Japan	503529	503529	1986	2	0
+Ikeda	34.867	135.383	Japan	100923	100923	1986	2	0
+Kashiwa	35.867	139.817	Japan	279339	279339	1986	2	0
+Changweon	35.267	128.617	Korea (Republic of)	173543	-9999	1985	1	0
+Cheonan	36.8	127.002	Korea (Republic of)	170088	-9999	1985	1	0
+Cheongju	36.65	127.45	Korea (Republic of)	350279	-9999	1985	1	0
+Kumi	36.001	128.333	Korea (Republic of)	142148	-9999	1985	1	0
+Puchon	37.517	126.75	Korea (Republic of)	456318	-9999	1985	1	0
+Seongnam	37.417	127.001	Korea (Republic of)	447839	-9999	1985	1	0
+Weoju	37.333	127.933	Korea (Republic of)	151372	-9999	1985	1	0
+D.G.Khan	30.001	70.733	Pakistan	-9999	102007	1981	1	0
+Taguig	14.533	121.001	Philippines	130719	-9999	1984	2	0
+Toledo	10.383	123.633	Philippines	104909	-9999	1986	2	0
+Dimitrovgrad	54.233	49.617	Russian Federation	119000	-9999	1986	2	0
+Zhivastuz	51.833	75.167	Russian Federation	130000	-9999	1986	2	0
+Jiaojing	28.608	121.392	China	150620	-9999	1982	1	0
+Mogpo	34.842	126.442	Korea (Republic of)	236078	-9999	1985	1	0
+Yeosu	34.733	127.675	Korea (Republic of)	171929	-9999	1985	1	0
+Navotas	14.708	121.008	Philippines	146899	-9999	1984	2	0
+Campha	21.037	107.317	Viet Nam	76697	108656	1979	1	0
+Douglas	54.15	-4.483	Isle of Man	20368	-9999	1986	1	1
+West Midlands	52.5	-1.833	United Kingdom	2355610	-9999	1981	2	0
+Blackburn	53.75	-2.483	United Kingdom	110254	-9999	1981	2	0
+Blackpool	53.833	-3.05	United Kingdom	149012	-9999	1981	2	0
+Brighton	50.833	-0.167	United Kingdom	137985	-9999	1981	2	0
+Cardiff	51.5	-3.217	United Kingdom	266267	-9999	1981	2	0
+Coventry	52.417	-1.5	United Kingdom	322573	-9999	1981	2	0
+Derby	52.917	-1.5	United Kingdom	220681	-9999	1981	2	0
+Doncaster	53.533	-1.117	United Kingdom	133178	-9999	1981	2	0
+Edinburgh	55.95	-3.217	United Kingdom	420169	-9999	1981	2	0
+Ipswich	52.067	1.167	United Kingdom	131131	-9999	1981	2	0
+Leicester	52.633	-1.083	United Kingdom	328835	-9999	1981	2	0
+Liverpool	53.417	-2.917	United Kingdom	544861	-9999	1981	2	0
+Greater London	51.5	-0.167	United Kingdom	7677719	-9999	1981	2	1
+Luton	51.883	-0.417	United Kingdom	164743	-9999	1981	2	0
+Greater Manchester	53.5	-2.25	United Kingdom	2338725	-9999	1981	2	0
+Mansfield	53.15	-1.183	United Kingdom	155466	-9999	1981	2	0
+Tyneside	54.983	-1.583	United Kingdom	782410	-9999	1981	2	0
+Newport	51.583	-3	United Kingdom	116658	-9999	1981	2	0
+Northampton	52.233	-0.9	United Kingdom	155694	-9999	1981	2	0
+Teesside	54.583	-1.333	United Kingdom	382690	-9999	1981	2	0
+Norwich	52.633	1.3	United Kingdom	173286	-9999	1981	2	0
+Nottingham	52.967	-1.167	United Kingdom	277203	-9999	1981	2	0
+Oxford	51.767	-1.25	United Kingdom	119909	-9999	1981	2	0
+Peterborough	52.583	-0.25	United Kingdom	114733	-9999	1981	2	0
+Plymouth	50.383	-4.167	United Kingdom	242560	-9999	1981	2	0
+Portsmouth	50.8	-1.083	United Kingdom	177905	-9999	1981	2	0
+Preston	53.767	-2.7	United Kingdom	168405	-9999	1981	2	0
+Reading	51.467	-0.983	United Kingdom	198341	-9999	1981	2	0
+The Medway towns	51.367	0.5	United Kingdom	216694	-9999	1981	2	0
+Rotherham	53.433	-1.333	United Kingdom	123312	-9999	1981	2	0
+St. Albans/Hatfield	51.767	-0.35	United Kingdom	110483	-9999	1981	2	0
+St. Helens	53.467	-2.733	United Kingdom	114822	-9999	1981	2	0
+Sheffield	53.383	-1.5	United Kingdom	477257	-9999	1981	2	0
+Southampton	50.917	-1.417	United Kingdom	214802	-9999	1981	2	0
+Southend on Sea	51.55	0.717	United Kingdom	156969	-9999	1981	2	0
+The Potteries	53	-2.167	United Kingdom	376764	-9999	1981	2	0
+Sunderland	54.917	-1.383	United Kingdom	195896	-9999	1981	2	0
+Swansea	51.633	-3.95	United Kingdom	175172	-9999	1981	2	0
+Thanet	51.367	1.25	United Kingdom	114564	-9999	1981	2	0
+Warrington	53.4	-2.617	United Kingdom	130333	-9999	1981	2	0
+Wigan	53.55	-2.633	United Kingdom	179078	-9999	1981	2	0
+Bristol	51.367	-2.833	United Kingdom	420234	-9999	1981	2	0
+York	53.967	-1.083	United Kingdom	126377	-9999	1981	2	0
+Dundee	56.467	-3	Scotland	174345	-9999	1981	2	0
+Glasgow	55.883	-4.25	Scotland	765030	-9999	1981	2	0
+Kingston upon Hull	53.75	-0.333	United Kingdom	325485	-9999	1981	2	0
+Aberdeen	57.167	-2.084	Scotland	190465	-9999	1981	2	0
+Poole	50.734	-1.983	United Kingdom	124974	-9999	1981	2	0
+Bournmouth	50.734	-1.9	United Kingdom	148382	-9999	1981	2	0
+Barnsley	53.55	-1.483	United Kingdom	128157	-9999	1981	2	0
+West Yorkshire	53.833	-1.583	United Kingdom	1478272	-9999	1981	2	0
+Aldershot	51.25	-0.783	United Kingdom	222157	-9999	1981	2	0
+Burnley	53.8	-2.233	United Kingdom	154209	-9999	1981	2	0
+Cambridge	52.2	0.001	United Kingdom	106673	-9999	1981	2	0
+Crawley	51.001	-0.2	United Kingdom	107201	-9999	1981	2	0
+Gloucester	51.883	-2.233	United Kingdom	108150	-9999	1981	2	0
+Grimsby/Cleethorpes	53.583	-0.001	United Kingdom	137647	-9999	1981	2	0
+Hastings/Bexhill	50.85	0.6	United Kingdom	112080	-9999	1981	2	0
+Grimsby	53.583	-0.001	United Kingdom	137647	-9999	1981	2	0
+Cleethorpes	53.583	-0.001	United Kingdom	137647	-9999	1981	2	0
+High Wycombe	51.633	-0.767	United Kingdom	107824	-9999	1981	2	0
+Slough	51.517	-0.6	United Kingdom	106882	-9999	1981	2	0
+Swindon	51.567	-1.783	United Kingdom	128492	-9999	1981	2	0
+Birkenhead	53.4	-3	United Kingdom	280521	-9999	1981	1	0

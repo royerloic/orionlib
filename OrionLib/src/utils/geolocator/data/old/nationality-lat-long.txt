@@ -1,0 +1,214 @@
+nationality	lat	long	code		country
+Afghan	33	65	AF	Afghans	Afghanistan
+Albanian	41	20	AL	Albanians	Albania
+Algerian	28	3	DZ	Algerians	Algeria
+American Samoan	-14.33	-170	AS	American Samoans	American Samoa
+Andorran	42.5	1.5	AD	Andorrans	Andorra
+Angolan	-12.5	18.5	AO	Angolans	Angola
+Anguillan	18.25	-63.17	AI	Anguillans	Anguilla
+Antiguan	-90	0	AQ	Antiguans	Antarctica
+Argentinian	-34	-64	AR	Argentinians or Argentines	Argentina
+Armenian	40	45	AM	Armenians	Armenia
+Australian	-27	133	AU	Australians	Australia
+Austrian	47.33	13.33	AT	Austrians	Austria
+Azerbaijani	40.5	47.5	AZ	Azerbaijanis	Azerbaijan
+Bahamian	24.25	-76	BS	Bahamians	Bahamas
+Bahraini	26	50.55	BH	Bahrainis	Bahrain
+Bangladeshi	24	90	BD	Bangladeshis	Bangladesh
+Barbadian	13.17	-59.53	BB	Barbadians or Bajans (colloquial)	Barbados
+Belarusian	53	28	BY	Belarusians	Belarus
+Belgian	50.83	4	BE	Belgians	Belgium
+Belizean	17.25	-88.75	BZ	Belizeans	Belize
+Beninese	9.5	2.25	BJ	Beninese or Beninois	Benin
+Bermudian	32.33	-64.75	BM	Bermudians	Bermuda
+Bhutanese	27.5	90.5	BT	Bhutanese	Bhutan
+Bolivian	-17	-65	BO	Bolivians	Bolivia
+Bosnian	44	18	BA	Bosnians	Bosnia and Herzegovina
+Herzegovinian	44	18	BA	Herzegovinians	Herzegovina
+Motswana	-22	24	BW	Motswana 	Botswana
+Brazilian	-10	-55	BR	Brazilians	Brazil
+British Virgin Islander	-6	71.5	IO	British Virgin Islanders	British Indian Ocean Territory
+Bruneian	4.5	114.67	BN	Bruneians	Brunei Darussalam
+Bulgarian	43	25	BG	Bulgarians	Bulgaria
+Burkinabe	13	-2	BF	Burkinabe	Burkina Faso
+Burundian	-3.5	30	BI	Burundians	Burundi
+Cambodian	13	105	KH	Cambodians	Cambodia
+Cameroonian	6	12	CM	Cameroonians	Cameroon
+Canadian	60	-95	CA	Canadians	Canada
+Cape Verdean	16	-24	CV	Cape Verdeans	Cape Verde
+Caymanian	19.5	-80.5	KY	Caymanians	Cayman Islands
+Central African	7	21	CF	Central Africans	Central African Republic
+Chadian	15	19	TD	Chadians	Chad
+Chilean	-30	-71	CL	Chileans	Chile
+Chinese	35	105	CN	Chinese	China
+Christmas Island	-10.5	105.67	CX	Christmas Islanders	Christmas Island
+Cocos Islander	-12.5	96.83	CC	Cocos Islanders	Cocos Islands
+Colombian	4	-72	CO	Colombians	Colombia
+Comoran	-12.17	44.25	KM	Comorans	Comoros
+Congolese	-1	15	CG	Congolese	Congo
+Cook Islander	-21.23	-159.77	CK	Cook Islanders	Cook Islands
+Costa Rican	10	-84	CR	Costa Ricans	Costa Rica
+Ivorian	8	-5	CI	Ivorians	Cote D'Ivoire
+Croatian	45.17	15.5	HR	Croatians or Croats	Croatia
+Cuban	21.5	-80	CU	Cubans	Cuba
+Cypriot	35	33	CY	Cypriots	Cyprus
+Czech	49.75	15.5	CZ	Czechs	Czech Republic
+Danish	56	10	DK	Danes	Denmark
+Dominican	15.42	-61.33	DM	Dominicans	Dominica
+Dominican	19	-70.67	DO	Dominicans	Dominican Republic
+Ecuadorian	-2	-77.5	EC	Ecuadorians	Ecuador
+Egyptian	27	30	EG	Egyptians	Egypt
+Salvadoran	13.83	-88.92	SV	Salvadorans	El Salvador
+Equatorial Guinean	2	10	GQ	Equatorial Guineans or Equatoguineans	Equatorial Guinea
+Eritrean	15	39	ER	Eritreans	Eritrea
+Estonian	59	26	EE	Estonians	Estonia
+Ethiopian	8	38	ET	Ethiopians	Ethiopia
+European	47	8	EU	Europeans	Europe
+Falkland Islanders	-51.75	-59	FK	Falkland Islanders	Falkland Islands
+Fijian	-18	175	FJ	Fijians	Fiji
+Finnish	64	26	FI	Finns	Finland
+French	46	2	FR	French	France
+French Guianese	4	-53	GF	French Guianese	French Guiana
+French Polynesian	-15	-140	PF	French Polynesian	French Polynesia
+Gabonese	-1	11.75	GA	Gabonese	Gabon
+Gambian	13.47	-16.57	GM	Gambians	Gambia
+Georgian	42	43.5	GE	Georgians	Georgia
+German	51	9	DE	Germans	Germany
+Ghanaian	8	-2	GH	Ghanaians	Ghana
+Gibraltar	36.18	-5.37	GI	Gibraltarians	Gibraltar
+Greek	39	22	GR	Greeks, Grecians (archaic)	Greece
+Greenlandic	72	-40	GL	Greenlanders	Greenland
+Grenadian	12.12	-61.67	GD	Grenadians	Grenada
+Guadeloupean	16.25	-61.58	GP	Guadeloupeans	Guadeloupe
+Guamanian	13.47	144.78	GU	Guamanians	Guam
+Guatemalan	15.5	-90.25	GT	Guatemalans	Guatemala
+Guinean	11	-10	GN	Guineans	Guinea
+Guinean	12	-15	GW	Guineans	Guinea-Bissau
+Guyanese	5	-59	GY	Guyanese	Guyana
+Haitian	19	-72.42	HT	Haitians	Haiti
+Honduran	15	-86.5	HN	Hondurans	Honduras
+Hungarian	47	20	HU	Hungarians	Hungary
+Icelandic	65	-18	IS	Icelanders	Iceland
+Indian	20	77	IN	Indians	India
+Indonesian	-5	120	ID	Indonesians	Indonesia
+Iranian	32	53	IR	Iranians	Iran
+Iraqi	33	44	IQ	Iraqis	Iraq
+Irish	53	-8	IE	"Irishman or Irishwoman ; Irish (collective)"	Ireland
+Israeli	31.5	34.75	IL	Israelis	Israel
+Italian	42.83	12.83	IT	Italians	Italy
+Jamaican	18.25	-77.5	JM	Jamaicans	Jamaica
+Japanese	36	138	JP	Japanese	Japan
+Jordanian	31	36	JO	Jordanians	Jordan
+Kazakhstani	48	68	KZ	Kazakhstanis	Kazakhstan
+Kenyan	1	38	KE	Kenyans	Kenya
+I-Kiribati	1.42	173	KI	I-Kiribati	Kiribati
+Kuwaiti	29.5	45.75	KW	Kuwaitis	Kuwait
+Kyrgyzstani	41	75	KG	Kyrgyzstanis	Kyrgyzstan
+Laotian	18	105	LA	Laotians or Laos	Lao
+Latvian	57	25	LV	Latvians	Latvia
+Lebanese	33.83	35.83	LB	Lebanese	Lebanon
+Liberian	6.5	-9.5	LR	Liberians	Liberia
+Libyan	25	17	LY	Libyans	Libyan Arab Jamahiriya
+Liechtenstein	47.17	9.53	LI	Liechtensteiners	Liechtenstein
+Lithuanian	56	24	LT	Lithuanians	Lithuania
+Chinese	22.17	113.55	MO	Chinese	Macau
+Macedonian	41.83	22	MK	Macedonians	Macedonia
+Malagasy	-20	47	MG	Malagasy	Madagascar
+Malawian	-13.5	34	MW	Malawians	Malawi
+Malaysian	2.5	112.5	MY	Malaysians	Malaysia
+Maldivian	3.25	73	MV	Maldivians	Maldives
+Malian	17	-4	ML	Malians	Mali
+Maltese	35.83	14.58	MT	Maltese	Malta
+Marshallese	9	168	MH	Marshallese	Marshall Islands
+Martiniquais	14.67	-61	MQ	Martiniquais	Martinique
+Mauritanian	20	-12	MR	Mauritanians	Mauritania
+Mauritian	-20.28	57.55	MU	Mauritians	Mauritius
+Mahoran	-12.83	45.17	YT	Mahorais	Mayotte
+Mexican	23	-102	MX	Mexicans	Mexico
+Micronesian	6.92	158.25	FM	Micronesians	Micronesia
+Moldovan	47	29	MD	Moldovans	Moldova
+Monegasque	43.73	7.4	MC	Monegasques or Monacans	Monaco
+Mongolian	46	105	MN	Mongolians	Mongolia
+Montserratian	16.75	-62.2	MS	Montserratians	Montserrat
+Moroccan	32	-5	MA	Moroccans	Morocco
+Mozambican	-18.25	35	MZ	Mozambicans	Mozambique
+Namibian	-22	17	NA	Namibians	Namibia
+Nepalese	28	84	NP	Nepalese	Nepal
+Dutch Antillean	52.5	5.75	NL	Dutch Antilleans	Netherlands
+Dutch	12.25	-68.75	AN	Dutch	Netherlands Antilles
+New Caledonian	-21.5	165.5	NC	New Caledonians	New Caledonia
+New Zealand	-41	174	NZ	New Zealanders or Kiwis (colloquial)	New Zealand
+Nicaraguan	13	-85	NI	Nicaraguans	Nicaragua
+Nigerien	16	8	NE	Nigeriens	Niger
+Nigerian	10	8	NG	Nigerians	Nigeria
+North Korean	40	127	KP	North Koreans	North Korea
+Norwegian	62	10	NO	Norwegian	Norway
+Omani	21	57	OM	Omanis	Oman
+Pakistani	30	70	PK	Pakistanis	Pakistan
+Palestinian	32	35.25	PS	Palestinians	Palestine
+Panamanian	9	-80	PA	Panamanians	Panama
+Papua	-6	147	PG	Papua New Guineans or Papuans	Papua New Guinea
+Paraguayan	-23	-58	PY	Paraguayans	Paraguay
+Peruvian	-10	-76	PE	Peruvians	Peru
+Philippine	13	122	PH	Filipinos	Philippines
+Polish	52	20	PL	Poles	Poland
+Portuguese	39.5	-8	PT	Portuguese	Portugal
+Puerto Rican	18.25	-66.5	PR	Puerto Ricans or Boricuas	Puerto Rico
+Qatari	25.5	51.25	QA	Qataris	Qatar
+Réunionese	-21.1	55.6	RE	Réunionese	Reunion
+Romanian	46	25	RO	Romanians	Romania
+Russian	60	100	RU	Russians	Russian Federation
+Rwandan	-2	30	RW	Rwandans	Rwanda
+Saint Helenian	-15.93	-5.7	SH	Saint Helenians	Saint Helena
+Kittitian	17.33	-62.75	KN	Kittitians	Saint Kitts and Nevis
+Saint Lucian	13.88	-61.13	LC	Saint Lucians	Saint Lucia
+Vincentian	46.83	-56.33	PM	Saint Vincentians or Vincentians	Saint Pierre and Miquelon
+Miquelonnais	13.25	-61.2	VC	Saint-Pierrais or Miquelonnais (singular same for each)	Saint Vincent and the Grenadines
+Samoan	-13.58	-172.33	WS	Samoans	Samoa
+Sammarinese	43.77	12.42	SM	Sammarinese	San Marino
+São Toméan	1	7	ST	São Toméans	Sao Tome and Principe
+Saudi	25	45	SA	Saudis or Saudi Arabians	Saudi Arabia
+Senegalese	14	-14	SN	Senegalese	Senegal
+Seychellois	-4.58	55.67	SC	Seychellois	Seychelles
+Sierra Leonean	8.5	-11.5	SL	Sierra Leoneans	Sierra Leone
+Singapore	1.37	103.8	SG	Singaporeans	Singapore
+Slovak	48.67	19.5	SK	Slovaks	Slovakia
+Slovenian	46	15	SI	Slovenes	Slovenia
+Solomon Islander	-8	159	SB	Solomon Islanders	Solomon Islands
+Somali	10	49	SO	Somalis	Somalia
+South African	-29	24	ZA	South Africans	South Africa
+South Korean	37	127.5	KR	South Koreans	South Korea
+Spanish	40	-4	ES	Spaniards	Spain
+Sri Lankan	7	81	LK	Sri Lankans	Sri Lanka
+Sudanese	15	30	SD	Sudanese	Sudan
+Surinamese	4	-56	SR	Surinamers	Suriname
+Swazi	-26.5	31.5	SZ	Swazis	Swaziland
+Swedish	62	15	SE	Swedes	Sweden
+Swiss	47	8	CH	Swiss	Switzerland
+Syrian	35	38	SY	Syrians	Syria
+Taiwanese	25.06	121.54	TW	Taiwanese	Taiwan
+Tajikistani	-9	-172	TJ	Tajikistanis	Tajikistan
+Tanzanian	-6.8	39.27	TZ	Tanzanians	Tanzania
+Thai	39	71	TH	Thai	Thailand
+Togolese	15	100	TG	Togolese	Togo
+Tongan	11	-61	TO	Tongans	Tonga
+Trinidadian	23.5	121	TT	Trinidadians or Tobagonians	Trinidad and Tobago
+Tunisian	39	35	TN	Tunisians	Tunisia
+Turkish	-8	178	TR	Turks	Turkey
+Turkmen	-20	-175	TM	Turkmens	Turkmenistan
+Tuvaluan	-6	35	TV	Tuvaluans	Tuvalu
+Ugandan	1	32	UG	Ugandans	Uganda
+Ukrainian	49	32	UA	Ukrainians	Ukraine
+Emirati	24	54	AE	Emiratis	United Arab Emirates
+British	54	-2	GB	Briton	United Kingdom
+American	38	-97	US	Americans 	United States
+Uruguayan	-33	-56	UY	Uruguayans	Uruguay
+Uzbekistani	41	64	UZ	Uzbekistanis	Uzbekistan
+Wallisian	-13.3	-176.2	WF	Wallisians, Futunans, or Wallis and Futuna Islanders	Wallis and Futuna
+Ni-Vanuatu	-16	167	VU	Ni-Vanuatu	Vanuatu
+Venezuelan	8	-66	VE	Venezuelans	Venezuela
+Vietnamese	16	106	VN	Vietnamese	Vietnam
+Virgin Islander	18.5	-64.5	VG	Virgin Islanders	Virgin Islands
+Yemeni	15	48	YE	Yemenis	Yemen
+Zambian	-15	30	ZM	Zambians	Zambia
+Zimbabwean	-20	30	ZW	Zimbabweans	Zimbabwe
