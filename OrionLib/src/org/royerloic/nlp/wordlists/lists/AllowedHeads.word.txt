@@ -1,8 +1,0 @@
-receptor
-#receptors
-protein
-#proteins
-kinase
-#kinases
-factor
-#factors
