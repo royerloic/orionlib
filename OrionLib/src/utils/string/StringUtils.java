@@ -29,13 +29,17 @@ public class StringUtils
 		{
 			final String[] lGroupArray = new String[lMatcher.groupCount()];
 			for (int i = 1; i <= lMatcher.groupCount(); i++)
+			{
 				lGroupArray[i - 1] = lMatcher.group(i);
+			}
 
 			return lGroupArray;
 		}
 		else
+		{
 			return new String[]
 			{};
+		}
 	}
 
 	public static final String[] split(final String pString, final String pRegex, final int pLimit)
@@ -62,7 +66,9 @@ public class StringUtils
 		final List<String> lMatchesList = new ArrayList<String>();
 
 		while (lMatcher.find())
+		{
 			lMatchesList.add(lMatcher.group());
+		}
 
 		return lMatchesList;
 	}
@@ -80,7 +86,9 @@ public class StringUtils
 		final List<String> lMatchesList = new ArrayList<String>();
 
 		while (lMatcher.find())
+		{
 			lMatchesList.add(lMatcher.group(pGroup));
+		}
 
 		return lMatchesList;
 	}
@@ -97,7 +105,9 @@ public class StringUtils
 
 		int lCount = 0;
 		while (lMatcher.find())
+		{
 			lCount++;
+		}
 
 		return lCount;
 	}
@@ -119,7 +129,7 @@ public class StringUtils
 		return matches(pString, ".*" + pRegex + ".*");
 	}
 
-	public static final String replaceAll(final String pString, final String pRegex, final String pReplacement)
+	public static final StringBuffer replaceAll(final CharSequence pString, final String pRegex, final String pReplacement)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -130,10 +140,12 @@ public class StringUtils
 		final StringBuffer myStringBuffer = new StringBuffer();
 		final Matcher lMatcher = lPattern.matcher(pString);
 		while (lMatcher.find())
+		{
 			lMatcher.appendReplacement(myStringBuffer, pReplacement);
+		}
 		lMatcher.appendTail(myStringBuffer);
 
-		return myStringBuffer.toString();
+		return myStringBuffer;
 	}
 
 	public static final String replaceAllInContextWithExceptions(	final String pString,
@@ -151,41 +163,46 @@ public class StringUtils
 		final StringBuffer myStringBuffer = new StringBuffer();
 		final Matcher lMatcher = lPattern.matcher(pString);
 		if (lMatcher.groupCount() != 2)
+		{
 			throw new RuntimeException("There must be at least two groups in the pattern");
+		}
 		while (lMatcher.find())
 		{
 			final String lLeftContext = lMatcher.group(1);
 			final String lRightContext = lMatcher.group(2);
 			if (pLeftExclusionSet.contains(lLeftContext) || pRightExclusionSet.contains(lRightContext))
+			{ // we don't replace, one of the contexts contains a forbidden word.
 				lMatcher.appendReplacement(myStringBuffer, lMatcher.group());
+			}
 			else
+			{
 				lMatcher.appendReplacement(myStringBuffer, lLeftContext + pReplacement + lRightContext);
+			}
 		}
 		lMatcher.appendTail(myStringBuffer);
 
 		return myStringBuffer.toString();
 	}
 
-	public static void cleanWhiteSpacesForAll(final Collection<String> pStringCollection)
+	public static void cleanWhiteSpacesForAll(final Collection<CharSequence> pStringCollection)
 	{
-		final List<String> lStringList = new ArrayList<String>(pStringCollection);
+		final List<CharSequence> lStringList = new ArrayList<CharSequence>(pStringCollection);
 		pStringCollection.clear();
 
-		for (String lString : lStringList)
+		for (CharSequence lString : lStringList)
 		{
 			lString = StringUtils.cleanPunctuationAround(lString);
 			pStringCollection.add(lString);
 		}
 	}
 
-	public static final String cleanWhiteSpaces(String pString)
+	public static final String cleanWhiteSpaces(CharSequence pString)
 	{
-		pString = replaceAll(pString, "\\s+", " ");
-		pString = pString.trim();
-		return pString;
+		StringBuffer lStringBuffer = replaceAll(pString, "\\s+", " ");
+		return lStringBuffer.toString().trim();
 	}
 
-	public static final String cleanPunctuationAround(String pString)
+	public static final CharSequence cleanPunctuationAround(CharSequence pString)
 	{
 		pString = replaceAll(pString, "\\W", " ");
 		pString = cleanWhiteSpaces(pString);
@@ -208,7 +225,9 @@ public class StringUtils
 		{
 			lStringBuffer.append(pStringList.get(i));
 			if (i != pStringList.size() - 1)
+			{
 				lStringBuffer.append(pSeparatorString);
+			}
 		}
 		return lStringBuffer.toString();
 	}
@@ -232,7 +251,9 @@ public class StringUtils
 		{
 			lStringBuffer.append(pStringArray[i]);
 			if (i != pStringArray.length - 1)
+			{
 				lStringBuffer.append(pSeparatorString);
+			}
 		}
 		return lStringBuffer.toString();
 	}
@@ -241,8 +262,12 @@ public class StringUtils
 	{
 		final StringBuffer lStringBuffer = new StringBuffer();
 		for (int i = 0; i < pText.length(); i++)
+		{
 			if (pMask.equals(pTransparentCaracter))
+			{
 				lStringBuffer.append(pText.charAt(i));
+			}
+		}
 
 		return lStringBuffer.toString();
 	}
@@ -257,9 +282,13 @@ public class StringUtils
 		{
 			final String lCharAt = new String() + pMask.charAt(i);
 			if (pTransparentCaracters.contains(lCharAt))
+			{
 				lStringBuffer.append(pText.charAt(i));
+			}
 			else
+			{
 				lStringBuffer.append(pReplaceCaracter);
+			}
 		}
 
 		return lStringBuffer.toString();
@@ -295,8 +324,10 @@ public class StringUtils
 
 		// If no match was found, return this
 		if (lIndex == 0)
+		{
 			lTokenArray = new String[]
 			{ pText };
+		}
 		else
 		{
 			// Add remaining segment
@@ -305,7 +336,9 @@ public class StringUtils
 			// Construct result
 			int resultSize = lMatchList.size();
 			while ((resultSize > 0) && lMatchList.get(resultSize - 1).equals(""))
+			{
 				resultSize--;
+			}
 			lTokenArray = new String[resultSize];
 			lTokenArray = lMatchList.subList(0, resultSize).toArray(lTokenArray);
 		}
@@ -331,7 +364,9 @@ public class StringUtils
 				final boolean lInside = (lCharacterIndex <= pCharacterIndex)
 						&& (pCharacterIndex <= lCharacterIndex + lToken.length());
 				if (lInside)
+				{
 					break;
+				}
 				lTokenIndex++;
 			}
 			lCharacterIndex += lToken.length();
@@ -356,7 +391,9 @@ public class StringUtils
 			{
 				final boolean lRightToken = (lTokenIndex == pTokenIndex);
 				if (lRightToken)
+				{
 					break;
+				}
 				lTokenIndex++;
 			}
 			lCharacterIndex += lToken.length();
@@ -369,7 +406,9 @@ public class StringUtils
 	{
 		int lCount = 0;
 		for (final Character lChar : pSynonym.toCharArray())
+		{
 			lCount += Character.isUpperCase(lChar) ? 1 : 0;
+		}
 
 		return lCount;
 	}
@@ -378,7 +417,9 @@ public class StringUtils
 	{
 		int lCount = 0;
 		for (final Character lChar : pSynonym.toCharArray())
+		{
 			lCount += Character.isLowerCase(lChar) ? 1 : 0;
+		}
 
 		return lCount;
 	}
@@ -424,7 +465,9 @@ public class StringUtils
 		{
 			final char[] lCharArray = new char[lMatchedString.length()];
 			for (int i = 0; i < lCharArray.length; i++)
+			{
 				lCharArray[i] = pErasureCharacter;
+			}
 			lString = lString.replace(lMatchedString, new String(lCharArray));
 		}
 
