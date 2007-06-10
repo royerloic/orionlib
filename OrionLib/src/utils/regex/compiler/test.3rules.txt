@@ -1,0 +1,55 @@
+//  builtin regexes:
+//		@S@    = \s*
+//		@W@    = \W*
+//		@P@    = \p{Punct}*
+//		@WORD@ = (?:[a-zA-z][a-z]+)
+
+
+
+
+importset: somewords.txt as somewords
+importregex: test.regex.txt
+
+set: letter
+a
+b
+c
+
+set: digit
+
+0
+1
+2
+3
+
+set: simpleregex
+[A-Z]+
+[0-9]+
+
+
+negative:
+
+@digit@ | @letter@ | @digit@
+
+positive:
+
+@simpleregex@ | @letter@ | @digit@
+@letter@ | @digit@ | @simpleregex@
+
+
+// for testing set imports:
+
+@letter@ | @somewords@ | @simpleregex@
+
+// for testing regex imports:
+
+a | regeximports | @regex2@
+b | regeximports | @regex5@
+c | regeximports | @regex6@
+
+// for testing builtins:
+
+@S@x | x | x@S@
+@W@y | y | y@W@
+@P@z | z | z@P@
+@WORD@ t | t | t @WORD@

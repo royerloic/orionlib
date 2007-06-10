@@ -1,0 +1,3 @@
+
+negative:
+(\\s[A-Z]|Dr|Drs|Prof|Profs|Mr|Mrs|Ms) | .* | .*
