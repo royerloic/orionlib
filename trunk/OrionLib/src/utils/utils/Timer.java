@@ -4,32 +4,29 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * A useful timer for java routines.
- * 
- * @version $Revision: 1.2 $ , $Date: 2005/03/16 17:20:51 $
- * @author Andreas Doms ( <A HREF="mailto:coding@adoms.de">coding@adoms.de </A>)
- * @author Mirko Seifert ( <A
- *         HREF="mailto:ms53@inf.tu-dresden.de">ms53@inf.tu-dresden.de </A>)
+ * A simple time measuring helper.
+ *
+ * @opt hide
  */
 public class Timer
 {
-	protected long				startTime;
-	protected long				endTime;
-	private NumberFormat	nf			= null;
-	private String				prefix	= "(";
-	private String				suffix	= ")";
+	protected long startTime;
+	protected long endTime;
+	private NumberFormat nf = null;
+	private String prefix = "(";
+	private String suffix = ")";
+	private final String name;
 
 	/**
 	 * @return Returns the prefix.
 	 */
 	public String getPrefix()
 	{
-		return prefix;
+		return name + ((!"".equals(name))?":":"") + prefix;
 	}
 
 	/**
-	 * @param prefix
-	 *          The prefix to set.
+	 * @param prefix The prefix to set.
 	 */
 	public void setPrefix(final String prefix)
 	{
@@ -45,8 +42,7 @@ public class Timer
 	}
 
 	/**
-	 * @param suffix
-	 *          The suffix to set.
+	 * @param suffix The suffix to set.
 	 */
 	public void setSuffix(final String suffix)
 	{
@@ -63,23 +59,22 @@ public class Timer
 
 	/**
 	 * Constructs a new Timer with the specified name.
-	 * 
-	 * @param name
-	 *          String
+	 *
+	 * @param name String
 	 */
 	public Timer(final String name)
 	{
 		super();
+		this.name = name;
 		nf = NumberFormat.getInstance(Locale.US);
 		nf.setMinimumIntegerDigits(2);
 	}
 
 	/**
 	 * Insert the method's description here.
-	 * 
+	 *
 	 * @return double
-	 * @param reference
-	 *          de.acid.util.Timer
+	 * @param reference de.acid.util.Timer
 	 */
 	public double getSpeedUp(final Timer reference)
 	{
@@ -88,7 +83,7 @@ public class Timer
 
 	/**
 	 * Formats the specified time into a string.
-	 * 
+	 *
 	 * @param time
 	 * @return timer string
 	 */
@@ -100,12 +95,12 @@ public class Timer
 		final long second = time / 1000 % 60;
 		final long tsecond = time % 1000;
 
-		return hour + ":" + minute + ":" + second + "." + tsecond;
+		return nf.format(hour)  + ":" + nf.format(minute) + ":" + nf.format(second) + "." + tsecond;
 	}
 
 	/**
 	 * Returns the time between starting the timer and now.
-	 * 
+	 *
 	 * @return long
 	 */
 	private long getTimeTillNow()
@@ -115,7 +110,7 @@ public class Timer
 
 	/**
 	 * Returns the time between starting and stopping the timer.
-	 * 
+	 *
 	 * @return long
 	 */
 	public long getTotalTime()
@@ -123,20 +118,15 @@ public class Timer
 		return endTime - startTime;
 	}
 
-	/**
-	 * 
-	 * @see de.tud.biotec.protein.helper.ProgressListener#notifyProgress(double)
-	 */
-	public void notifyProgress(final double pProgress)
+	public void notifyProgress(final double progress)
 	{
-		printEST(pProgress);
+		printEST(progress);
 	}
 
 	/**
 	 * Prints the estimed time.
-	 * 
-	 * @param percentFinished
-	 *          double
+	 *
+	 * @param percentFinished double
 	 */
 	public void printEST(final double percentFinished)
 	{
@@ -145,9 +135,9 @@ public class Timer
 
 	/**
 	 * Prints the estimed time.
-	 * 
-	 * @param percentFinished
-	 *          double
+	 *
+	 * @param percentFinished double
+	 * @return string
 	 */
 	public String getESTString(final double percentFinished)
 	{
@@ -156,7 +146,6 @@ public class Timer
 
 	/**
 	 * Prints the total time.
-	 * 
 	 */
 	public void printTime()
 	{
@@ -165,7 +154,7 @@ public class Timer
 
 	/**
 	 * Returns the total time.
-	 * 
+	 *
 	 * @return the total time.
 	 */
 	public String getTime()
@@ -207,7 +196,7 @@ public class Timer
 
 	/**
 	 * Stops the timer.
-	 * 
+	 *
 	 * @return timer reference
 	 */
 	public Timer stop()
@@ -229,11 +218,9 @@ public class Timer
 	}
 
 	/**
-	 * Calulates the percentage of time passed. This timer is assumed to be the
-	 * total time.
-	 * 
-	 * @param timer
-	 *          running timer
+	 * Calulates the percentage of time passed. This timer is assumed to be the total time.
+	 *
+	 * @param timer running timer
 	 * @return percentage of time of this timer that is passed on timer given.
 	 */
 	public double percentage(final Timer timer)

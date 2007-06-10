@@ -26,7 +26,7 @@ public class WeakSet<K> implements Set<K>
 		return this.mWeakHashMap.containsKey(o);
 	}
 
-	public Iterator iterator()
+	public Iterator<K> iterator()
 	{
 		return this.mWeakHashMap.keySet().iterator();
 	}
