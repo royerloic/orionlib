@@ -1,0 +1,161 @@
+// Numerical Quantities
+
+RomanNumbersUC  := I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII
+RomanNumbersLC  := i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii
+PositiveInteger := 0|(?:[0-9]*[1-9][0-9]*)
+PlusMinus		:= (?:(?:\-|\+|\+/\-|\+\\\-)\s{0,2})
+Integer			:= @PlusMinus@?@PositiveInteger@
+PositiveFloat   := [0-9]+[\.,][0-9]+
+Float			:= @PlusMinus@?@PositiveFloat@
+InEqual			:= <|>|<=|>=|=
+Real			:= @Float@|@Integer@
+
+StrictReal		:= [-+]?[0-9]*\.?[0-9]+
+
+																																	+ ")";
+set: DurationUnits
+[yY]ears?
+yr|months?
+w(?:k|eeks?)
+(d|D)ays?
+h(?:r|ours?)?
+min(?:utes?)?
+s(?:ec(?:onds?)?)?
+ms(?:ec)?
+times
+cycles
+episodes
+steps
+
+set: MassUnits
+[Kk](?:ilogram|g)
+milligram
+mg
+microg(?:rams?)?
+ng
+g
+\-?kDa?
+
+set: LengthUnits
+km
+nm
+mm
+cm
+microns?
+[åaAÅ](?:ngstr(o|ö)m(s?))?
+[Ff]ermi
+
+set: SurfaceUnits
+m2
+
+set: VolumeUnits
+[Ll](iter)?
+microliters
+m[lL]
+m3
+
+set: AdimensionalUnits
+[Mk]?[Hh]z
+\-?fold
+
+set: OtherUnits
+fold|percent|\%|mEq|pg|cmH2O|m?IU|sq|[M]?Bq
+
+set: ElectricalUnits
+V
+kV
+MeV
+mV
+
+set: ChemicalUnits
+ppm
+J
+kcal
+[pncm](?:M|mol)
+(micro|n)?(mol|M)
+M
+mmHg
+degrees?
+dl
+mEq
+d
+Nm
+pH
+
+set: ClinicalUnits
+[Cc]ases
+[Pp]atients
+[Mm]ales
+[Ff]emales
+[Aa]dults
+[Mm]en
+[Ww]omen
+[Cc]ontrols
+[Gg]irls
+[Bb]oys
+[Ss]ubjects
+[Ss]trains
+[Ii]njections
+trials
+doses
+deaths
+diagnosed
+groups
+individuals
+exposed
+non\-exposed
+inhabitants
+
+set: ProteomicUnits
+[Rr]esidues
+bp
+kilobases?
+sites
+amino acids
+subunits
+mutants
+daltons
+
+set: ComputingUnits
+[Pp]ixels
+[Bb]its
+[kK]b(?:ytes?)?
+MB
+M[Bb](?:ytes?)?
+
+set: AllUnits
+@DurationUnits@
+@MassUnits@
+@LengthUnits@
+@AdimensionalUnits@
+@OtherUnits@
+@ClinicalUnits@
+@VolumeUnits@
+@ChemicalUnits@
+@ProteomicUnits@
+@ComputingUnits@
+@ElectricalUnits@
+@SurfaceUnits@ 
+
+AllUnitsExp    := @AllUnits@(?:\-?[123])?
+AllRatio2Units := @AllUnitsExp@/@AllUnitsExp@
+AllRatio3Units := @AllUnitsExp@/@AllUnitsExp@/@AllUnitsExp@
+AllProd2Units  := @AllUnitsExp@@AllUnitsExp@
+
+PostFixedUnits := @AllRatio3Units@|@AllRatio2Units@|@AllProd2Units@|@AllUnitsExp@
+PreFixedUnits  := pH
+
+Units := @PostFixedUnits@|@PreFixedUnits@
+Units := @Units@
+
+QuantityUnitPostFixed	:= @Real@\s*@PostFixedUnits@
+QuantityUnitPreFixed    := @PreFixedUnits@\s*@Real@
+
+QuantityUnit            := @QuantityUnitPostFixed@|@QuantityUnitPreFixed@
+
+Inequality      := @InEqual@\s{0,2}(?:@QuantityUnit@|@Real@)
+
+Uncertainty     := (?:=\s{0,2})?@Real@\s{0,2}@PlusMinus@\s{0,2}@Real@\s{0,2}@PostFixedUnits@
+
+
+Range			:= @Real@\s{0,2}(?:\-)\s{0,2}@Real@@PostFixedUnits@
