@@ -15,7 +15,7 @@ public class QuantityRegexes
 	{
 		try
 		{
-			cRegexCompiler = new RegexCompiler("/helper/regex/compiler/nq.regex.txt");
+			cRegexCompiler = new RegexCompiler("/utils/regex/compiler/nq.regex.txt");
 		}
 		catch (final IOException e)
 		{
