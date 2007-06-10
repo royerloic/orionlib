@@ -14,7 +14,7 @@ public class ChromosomeRegexes
 	{
 		try
 		{
-			cRegexCompiler = new RegexCompiler("/helper/regex/compiler/chromosome.regex.txt");
+			cRegexCompiler = new RegexCompiler("/utils/regex/compiler/chromosome.regex.txt");
 		}
 		catch (final IOException e)
 		{
