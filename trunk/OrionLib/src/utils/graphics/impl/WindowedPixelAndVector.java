@@ -5,6 +5,7 @@ package utils.graphics.impl;
 
 import java.awt.BufferCapabilities;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.DisplayMode;
 import java.awt.Frame;
 import java.awt.Graphics2D;
@@ -557,6 +558,11 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	public void showGraphics()
 	{
 		show();	
+	}
+
+	public Component getComponent()
+	{
+		return mFrame;
 	}
 
 }
