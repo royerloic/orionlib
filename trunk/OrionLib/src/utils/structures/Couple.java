@@ -1,6 +1,8 @@
 package utils.structures;
 
-public class Couple<A, B>
+import java.io.Serializable;
+
+public class Couple<A, B> implements Serializable
 {
 	public A	mA;
 	public B	mB;

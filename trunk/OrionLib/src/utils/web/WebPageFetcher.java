@@ -135,9 +135,9 @@ public final class WebPageFetcher
 	 * 
 	 * @throws IOException
 	 */
-	public String getPageContent() throws IOException
+	public StringBuilder getPageContent() throws IOException
 	{
-		final StringBuffer result = new StringBuffer();
+		final StringBuilder result = new StringBuilder();
 		BufferedReader reader = null;
 		try
 		{
@@ -157,7 +157,7 @@ public final class WebPageFetcher
 		{
 			shutdown(reader);
 		}
-		return result.toString();
+		return result;
 	}
 
 	private void shutdown(final Reader aReader)

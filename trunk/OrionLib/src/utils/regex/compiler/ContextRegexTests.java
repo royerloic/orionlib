@@ -20,7 +20,7 @@ public class ContextRegexTests
 	@Test
 	public void testExample() throws IOException
 	{
-		InputStream lInputStream = ContextRegexTests.class.getResourceAsStream("/helper/regex/compiler/test.3rules.txt");
+		InputStream lInputStream = ContextRegexTests.class.getResourceAsStream("/utils/regex/compiler/test.3rules.txt");
 		mContextRegexFilter = new ContextRegex(lInputStream);
 
 		// raw match without left or right trailing characters
@@ -66,6 +66,8 @@ public class ContextRegexTests
 		
 		assertMatch("Elefant t","t","t more");
 		assertNoMatch("t","t","t");
+		
+		assertMatch("\nElefant t","t","t more");
 	}
 	
 	private void assertMatch(final CharSequence pPreFix,

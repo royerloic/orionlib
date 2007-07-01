@@ -12,7 +12,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 {
 
 	@SuppressWarnings("unused")
-	private static final Logger	cLogger	= Logger.getLogger(CountWordIdentifier.class);
+	//private static final Logger	cLogger	= Logger.getLogger(CountWordIdentifier.class);
 
 	private final boolean				mCaseSensitive;
 
@@ -27,7 +27,8 @@ public class CountWordIdentifier extends GenericWordIdentifier
 			}
 			catch (final IOException e)
 			{
-				cLogger.info(e);
+				e.printStackTrace();
+				//cLogger.info(e);
 			}
 	}
 
