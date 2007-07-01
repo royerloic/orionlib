@@ -42,7 +42,7 @@ public class StringUtils
 		}
 	}
 
-	public static final String[] split(final String pString, final String pRegex, final int pLimit)
+	public static final String[] split(final CharSequence pString, final String pRegex, final int pLimit)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -53,7 +53,7 @@ public class StringUtils
 		return lPattern.split(pString, pLimit);
 	}
 
-	public static final List<String> findAllmatches(final String pString, final String pRegex)
+	public static final List<String> findAllmatches(final CharSequence pString, final String pRegex)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -124,9 +124,9 @@ public class StringUtils
 		return lMatcher.matches();
 	}
 
-	public static final boolean submatches(final String pString, final String pRegex)
+	public static final boolean submatches(final CharSequence pCharSequence, final String pRegex)
 	{
-		return matches(pString, ".*" + pRegex + ".*");
+		return matches(pCharSequence, ".*" + pRegex + ".*");
 	}
 
 	public static final StringBuffer replaceAll(final CharSequence pString, final String pRegex, final String pReplacement)
@@ -402,12 +402,12 @@ public class StringUtils
 		return lCharacterIndex;
 	}
 
-	public static int countUpperCase(final String pSynonym)
+	public static int countUpperCase(final CharSequence pSynonym)
 	{
 		int lCount = 0;
-		for (final Character lChar : pSynonym.toCharArray())
+		for (int i=0; i<pSynonym.length(); i++)
 		{
-			lCount += Character.isUpperCase(lChar) ? 1 : 0;
+			lCount += Character.isUpperCase(pSynonym.charAt(i)) ? 1 : 0;
 		}
 
 		return lCount;
@@ -424,22 +424,23 @@ public class StringUtils
 		return lCount;
 	}
 
-	public static int countDigits(final String pSynonym)
+	public static int countDigits(final CharSequence pSynonym)
 	{
 		int lCount = 0;
-		for (final Character lChar : pSynonym.toCharArray())
+		for (int i=0; i<pSynonym.length(); i++)
 		{
 			boolean isDigit = false;
-			isDigit |= lChar.equals('0');
-			isDigit |= lChar.equals('1');
-			isDigit |= lChar.equals('2');
-			isDigit |= lChar.equals('3');
-			isDigit |= lChar.equals('4');
-			isDigit |= lChar.equals('5');
-			isDigit |= lChar.equals('6');
-			isDigit |= lChar.equals('7');
-			isDigit |= lChar.equals('8');
-			isDigit |= lChar.equals('9');
+			final char lChar = pSynonym.charAt(i);
+			isDigit |= lChar==('0');
+			isDigit |= lChar==('1');
+			isDigit |= lChar==('2');
+			isDigit |= lChar==('3');
+			isDigit |= lChar==('4');
+			isDigit |= lChar==('5');
+			isDigit |= lChar==('6');
+			isDigit |= lChar==('7');
+			isDigit |= lChar==('8');
+			isDigit |= lChar==('9');
 
 			lCount += isDigit ? 1 : 0;
 		}

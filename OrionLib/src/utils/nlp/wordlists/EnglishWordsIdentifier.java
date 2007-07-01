@@ -15,8 +15,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 {
 
 	@SuppressWarnings("unused")
-	private static final Logger						cLogger	= Logger.getLogger(EnglishWordsIdentifier.class);
-
+	
 	private static EnglishWordsIdentifier	cUniqueInstanceEnglishWordsIdentifier;
 
 	/**
@@ -28,7 +27,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 		{
 			cUniqueInstanceEnglishWordsIdentifier = new EnglishWordsIdentifier();
 			final InputStream lStream = EnglishWordsIdentifier.class.getClassLoader().getResourceAsStream(
-					"org/royerloic/nlp/wordlists/lists/EnglishWords.word.txt");
+					"utils/nlp/wordlists/lists/EnglishWords.word.txt");
 			final InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
 			final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 			try
@@ -37,7 +36,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 			}
 			catch (final IOException exception)
 			{
-				cLogger.error(exception);
+				exception.printStackTrace();
 			}
 		}
 		return cUniqueInstanceEnglishWordsIdentifier;
@@ -49,8 +48,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 	@Override
 	public String normalizeString(String pString)
 	{
-		pString = pString.trim();
-		return pString;
+		return pString.trim();
 	}
 
 	@Override

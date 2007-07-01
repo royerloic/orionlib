@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import utils.io.MatrixFile;
 import utils.string.StringUtils;
@@ -26,13 +27,13 @@ public class ContextRegex
 	{
 		public FilterRule(final String pPreRegex, final String pMatchRegex, final String pPostRegex)
 		{
-			mPreRegex = pPreRegex;
-			mMatchRegex = pMatchRegex;
-			mPostRegex = pPostRegex;
+			mPreRegex = Pattern.compile(pPreRegex,Pattern.DOTALL);
+			mMatchRegex = Pattern.compile(pMatchRegex,Pattern.DOTALL);
+			mPostRegex = Pattern.compile(pPostRegex,Pattern.DOTALL);
 		}
-		public String	mPreRegex;
-		public String	mMatchRegex;
-		public String	mPostRegex;
+		public Pattern	mPreRegex;
+		public Pattern	mMatchRegex;
+		public Pattern	mPostRegex;
 		@Override
 		public String toString()
 		{
@@ -200,9 +201,9 @@ public class ContextRegex
 
 		boolean isPositiveMatched = false;
 		for (final FilterRule lFilterRule : mPositiveFilterRuleList)
-			if (pPostFix.length()==0 || StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
-				if (pPreFix.length()==0 || StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
-					if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
+			if (pPostFix.length()==0 || lFilterRule.mPostRegex.matcher(pPostFix).matches())
+				if (pPreFix.length()==0 || lFilterRule.mPreRegex.matcher(pPreFix).matches())
+					if (lFilterRule.mMatchRegex.matcher(pMatch).matches())
 					{
 						isPositiveMatched = true;
 						break;
@@ -211,9 +212,9 @@ public class ContextRegex
 		boolean isNegativeMatched = false;
 		if (isPositiveMatched)
 			for (final FilterRule lFilterRule : mNegativeFilterRuleList)
-				if (pPostFix.length()==0 || StringUtils.matches(pPostFix, lFilterRule.mPostRegex))
-					if (pPreFix.length()==0 || StringUtils.matches(pPreFix, lFilterRule.mPreRegex))
-						if (StringUtils.matches(pMatch, lFilterRule.mMatchRegex))
+				if (pPostFix.length()==0 || lFilterRule.mPostRegex.matcher(pPostFix).matches())
+					if (pPreFix.length()==0 || lFilterRule.mPreRegex.matcher(pPreFix).matches())
+						if (lFilterRule.mMatchRegex.matcher(pMatch).matches())
 						{
 							isNegativeMatched = true;
 							break;

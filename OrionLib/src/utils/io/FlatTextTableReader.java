@@ -21,8 +21,6 @@ import org.apache.log4j.Logger;
  */
 public class FlatTextTableReader
 {
-	private static final Logger					cLogger						= Logger.getLogger(FlatTextTableReader.class);
-
 	private String											mColumnSplitRegex	= "\t";
 
 	private String											mSetSplitRegex		= "[|;]";
@@ -126,7 +124,7 @@ public class FlatTextTableReader
 		}
 		catch (final IOException exception)
 		{
-			cLogger.error(exception);
+			exception.printStackTrace();
 			throw exception;
 		}
 		finally
@@ -138,7 +136,7 @@ public class FlatTextTableReader
 				}
 				catch (final IOException exception)
 				{
-					cLogger.error(exception);
+					exception.printStackTrace();
 				}
 		}
 	}

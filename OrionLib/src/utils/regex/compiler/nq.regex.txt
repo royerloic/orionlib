@@ -108,10 +108,10 @@ inhabitants
 
 set: ProteomicUnits
 [Rr]esidues
-bp
+k?bp
 kilobases?
 sites
-amino acids
+amino\sacids?
 subunits
 mutants
 daltons
@@ -148,8 +148,8 @@ PreFixedUnits  := pH
 Units := @PostFixedUnits@|@PreFixedUnits@
 Units := @Units@
 
-QuantityUnitPostFixed	:= @Real@\s*@PostFixedUnits@
-QuantityUnitPreFixed    := @PreFixedUnits@\s*@Real@
+QuantityUnitPostFixed	:= @Real@(?:\s|\-)*@PostFixedUnits@
+QuantityUnitPreFixed    := @PreFixedUnits@(?:\s|\-)*@Real@
 
 QuantityUnit            := @QuantityUnitPostFixed@|@QuantityUnitPreFixed@
 

@@ -244,26 +244,41 @@ public class MatrixFile
 		return lInputStream;
 	}
 
+	public static final LineIterator getLines(final InputStream pInputStream, int pSkipLines) throws IOException
+	{
+		return new LineIterator(pInputStream,pSkipLines);
+	}
+	
 	public static final LineIterator getLines(final InputStream pInputStream) throws IOException
 	{
-		return new LineIterator(pInputStream);
+		return new LineIterator(pInputStream,0);
+	}
+	
+	public static final LineIterator getLines(final File pFile) throws IOException
+	{
+		return new LineIterator(new FileInputStream(pFile),0);
 	}
 
-	public final static class LineIterator implements Iterable, Iterator
+	public final static class LineIterator implements Iterable<String>, Iterator<String>
 	{
 		private BufferedReader	mBufferedReader	= null;
 		private String					mLineString			= null;
 
-		public LineIterator(InputStream pInputStream) throws IOException
+		public LineIterator(final InputStream pInputStream, final int pSkipLines) throws IOException
 		{
 			// We choose the buffer to be 10% of the file, therefore, a File will be
 			// block read in about 100 steps.
 			int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 			lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
 			mBufferedReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
+			for(int i=0; i<pSkipLines; i++)
+			{
+				final String lString = mBufferedReader.readLine();
+				System.out.println("##skipped: "+lString);
+			}
 		}
 
-		public Iterator iterator()
+		public Iterator<String> iterator()
 		{
 			return this;
 		}
@@ -282,19 +297,26 @@ public class MatrixFile
 					if (mLineString == null)
 					{
 						mBufferedReader.close();
+						return false;
+					}
+					else
+					{
+						return true;
 					}
 				}
 				catch (IOException e)
 				{
 					throw new RuntimeException(e);
 				}
-				return mLineString != null;
+				
 			}
 		}
 
-		public Object next()
+		public String next()
 		{
-			return mLineString;
+			final String lLineString = mLineString;
+			mLineString = null;
+			return lLineString;
 		}
 
 		public void remove()
@@ -304,5 +326,7 @@ public class MatrixFile
 		}
 
 	}
+
+
 
 }

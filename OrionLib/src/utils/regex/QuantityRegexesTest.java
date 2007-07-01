@@ -66,6 +66,11 @@ public class QuantityRegexesTest
 		assertTrue(QuantityRegexes.isQuantity("-130.1 L-1kg-1"));
 		assertTrue(QuantityRegexes.isQuantity("-130.1 L/mol2"));
 		assertTrue(QuantityRegexes.isQuantity("130.1 cycles/mol2"));
+		assertTrue(QuantityRegexes.isQuantity("153-residue"));
+		assertTrue(QuantityRegexes.isQuantity("359 amino acids"));
+		assertTrue(QuantityRegexes.isQuantity("2.1 kbp"));
+		
+		
 	}
 
 }
