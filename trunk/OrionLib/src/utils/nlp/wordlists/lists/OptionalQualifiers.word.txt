@@ -1,3 +1,6 @@
+
+set: OptionalTokens
+
 like
 related
 protein
@@ -12,3 +15,5 @@ element
 i
 alpha
 cell
+
+OptionalTokens := @OptionalTokens@
