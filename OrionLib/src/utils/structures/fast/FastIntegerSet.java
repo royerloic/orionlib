@@ -9,6 +9,13 @@ public final class FastIntegerSet
 
 	public static final int[] add(final int[] pArray, final int pInteger)
 	{
+		if(pArray.length==0)
+		{
+			int[] lNewArray = new int[1];
+			lNewArray[0] = pInteger;
+			return lNewArray;
+		}
+		
 		final int lInsertPosition = locate(pArray, pInteger);
     final int lInsertValue = pArray[lInsertPosition];  
 		if (lInsertValue==pInteger)
@@ -31,6 +38,8 @@ public final class FastIntegerSet
 
 	public static final int locate(final int[] pArray, final int pInt)
 	{
+		if(pArray.length==0)
+			return 0;
 		return locateRecursive(pArray, pInt, 0, pArray.length);
 	}
 
@@ -133,6 +142,23 @@ public final class FastIntegerSet
 	
 	public static final int[] union(final int[] pArray1, final int[] pArray2)
 	{
+		if (pArray1.length==0 && pArray2.length!=0)
+		{
+			final int[] lNewArray = new int[pArray2.length];
+			System.arraycopy(pArray2, 0, lNewArray, 0, pArray2.length);
+			return lNewArray;
+		}
+		if (pArray2.length==0 && pArray1.length!=0)
+		{
+			final int[] lNewArray = new int[pArray1.length];
+			System.arraycopy(pArray1, 0, lNewArray, 0, pArray1.length);
+			return lNewArray;
+		}
+		if(pArray2.length==0 && pArray1.length==0)
+		{
+			return new int[0];
+		}
+			
 		final int lMaximalSize = pArray1.length + pArray2.length;
 		final int[] lNewArray = new int[lMaximalSize];
 
@@ -208,6 +234,22 @@ public final class FastIntegerSet
 	 */
 	public static final int[] difference(final int[] pArray1, final int[] pArray2)
 	{
+		if(pArray1.length==0 && pArray2.length!=0)
+		{
+			return new int[0];
+		}
+		if(pArray1.length!=0 && pArray2.length==0)
+		{
+			final int[] lNewArray = new int[pArray1.length];
+			System.arraycopy(pArray1, 0, lNewArray, 0, pArray1.length);
+			return lNewArray;
+		}
+		if(pArray2.length==0 && pArray1.length==0)
+		{
+			return new int[0];
+		}
+		
+		
 		final int lMaximalSize = pArray1.length;
 		final int[] lNewArray = new int[lMaximalSize];
 

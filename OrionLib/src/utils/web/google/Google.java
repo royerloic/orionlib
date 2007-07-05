@@ -27,7 +27,7 @@ public class Google
 
 	private String							mHeader;
 
-	private String							mContent;
+	private StringBuilder							mContent;
 
 	private Pattern							mPattern;
 
@@ -126,7 +126,7 @@ public class Google
 		mLocalCode = pLocalCode;
 	}
 
-	public String getContent()
+	public StringBuilder getContent()
 	{
 		return mContent;
 	}

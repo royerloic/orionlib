@@ -243,6 +243,11 @@ public class MatrixFile
 		final InputStream lInputStream = pClass.getResourceAsStream(pRessourceName);
 		return lInputStream;
 	}
+	
+	public static final LineIterator getLines(String pString) throws IOException
+	{
+		return getLines(Object.class.getResourceAsStream(pString));
+	}
 
 	public static final LineIterator getLines(final InputStream pInputStream, int pSkipLines) throws IOException
 	{
@@ -326,6 +331,8 @@ public class MatrixFile
 		}
 
 	}
+
+
 
 
 
