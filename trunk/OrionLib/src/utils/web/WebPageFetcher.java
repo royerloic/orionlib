@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 
 /**
  * Fetches the HTML content of a web page as a String.
@@ -24,12 +25,14 @@ public final class WebPageFetcher
 
 	private static final String	cNEWLINE						= System.getProperty("line.separator");
 
-	public static final String	cUSERAGENT_FIREFOX	= "Mozilla/5.0 (Windows; U; Windows NT 5.0; de-DE; rv:1.7.6) Gecko/20050321 Firefox/1.0.2";
+	public static final String	cUSERAGENT_FIREFOX	= "Mozilla/5.0 (Windows; U; Windows NT 5.0; de-DE; rv:1.7.6) Gecko/20050321 Firefox/1.@version@.2";
 
-	public static final String	cUSERAGENT_IE				= "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)";
+	public static final String	cUSERAGENT_IE				= "Mozilla/4.0 (compatible; MSIE 5.@version@; Windows NT 5.0)";
 
-	public static final String	cUSERAGENT_NETSCAPE	= "Mozilla/5.0 (Windows; U; Win98; en-US; Localization; rv1.4) Gecko20030624 Netscape7.1 (ax)";
+	public static final String	cUSERAGENT_NETSCAPE	= "Mozilla/5.0 (Windows; U; Win98; en-US; Localization; rv1.4) Gecko20030624 Netscape7.@version@ (ax)";
 
+	public static final String[] cUserAgents  = new String[]{cUSERAGENT_FIREFOX,cUSERAGENT_IE,cUSERAGENT_NETSCAPE};
+	
 	private static final int		sBufferSize					= 1000000;
 
 	private String							mUserAgent;
@@ -55,7 +58,7 @@ public final class WebPageFetcher
 		if (!pURL.getProtocol().equals(cHTTP))
 			throw new IllegalArgumentException("URL is not for HTTP Protocol: " + pURL);
 		mURL = pURL;
-		mUserAgent = cUSERAGENT_FIREFOX;
+		mUserAgent = getRandomUserAgent();
 		mReferer = "";
 
 		mAccept = "text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
@@ -64,6 +67,14 @@ public final class WebPageFetcher
 		mAcceptCharset = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
 		mKeepAlive = "300";
 		mConnection = "keep-alive";
+	}
+
+	static Random lRandom = new Random();
+	private String getRandomUserAgent()
+	{
+		String lAgentString = cUserAgents[lRandom.nextInt(3)];
+		String lRandomVersionAgentString = lAgentString.replaceAll("@version@",Integer.toString(lRandom.nextInt(10)));
+		return lRandomVersionAgentString;
 	}
 
 	public WebPageFetcher(final String aUrlName) throws MalformedURLException
