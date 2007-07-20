@@ -1,5 +1,6 @@
 package utils.structures.fast;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
 
@@ -405,5 +406,10 @@ public final class FastIntegerSet
 	private static final int max(int a, int b)
 	{
 		return (a >= b) ? a : b;
+	}
+
+	public static void validate(int[] pReferenceSet)
+	{
+		Arrays.sort(pReferenceSet);
 	}
 }
