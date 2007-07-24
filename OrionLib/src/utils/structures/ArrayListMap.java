@@ -22,9 +22,9 @@ public class ArrayListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K
 	/**
 	 * @return
 	 */
-	public Set<V> valuesFromAllLists()
+	public List<V> valuesFromAllLists()
 	{
-		final Set<V> lAllValuesSet = new HashSet<V>();
+		final List<V> lAllValuesSet = new ArrayList<V>();
 		final Collection<List<V>> lValues = super.values();
 		for (final List<V> lSet : lValues)
 			lAllValuesSet.addAll(lSet);

@@ -13,7 +13,7 @@ import java.util.Set;
 public interface ListMap<K, V> extends Map<K, List<V>>
 {
 
-	public Set<V> valuesFromAllLists();
+	public List<V> valuesFromAllLists();
 
 	public List<V> put(K pKey, V pValue);
 
