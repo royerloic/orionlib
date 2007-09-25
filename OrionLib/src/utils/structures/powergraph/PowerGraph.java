@@ -12,24 +12,29 @@ import utils.structures.graph.UndirectedEdge;
 
 public class PowerGraph<N>
 {
-	private static class PowerEdgeComparator<N> implements Comparator<Edge<Set<N>>>
+	private static class PowerEdgeComparator<N> implements
+																							Comparator<Edge<Set<N>>>
 	{
-		public int compare(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+		public int compare(	final Edge<Set<N>> pPowerEdge1,
+												final Edge<Set<N>> pPowerEdge2)
 		{
-			final int lSize1 = pPowerEdge1.getFirstNode().size() * pPowerEdge1.getSecondNode().size();
-			final int lSize2 = pPowerEdge2.getFirstNode().size() * pPowerEdge2.getSecondNode().size();
+			final int lSize1 = pPowerEdge1.getFirstNode().size() * pPowerEdge1.getSecondNode()
+																																				.size();
+			final int lSize2 = pPowerEdge2.getFirstNode().size() * pPowerEdge2.getSecondNode()
+																																				.size();
 			return -(lSize1 - lSize2); // when sorting the result is in descending
 		}
 	}
-	private final PowerEdgeComparator<N>	cPowerEdgeComparator	= new PowerEdgeComparator<N>();
 
-	private Set<Set<N>>							mPowerNodeSet;
+	private final PowerEdgeComparator<N> cPowerEdgeComparator = new PowerEdgeComparator<N>();
 
-	private Set<Edge<Set<N>>>				mPowerEdgeSet;
+	private Set<Set<N>> mPowerNodeSet;
 
-	private Set<N>									mNodeSet;
+	private Set<Edge<Set<N>>> mPowerEdgeSet;
 
-	private Set<Set<N>>							mClusterSet;
+	private Set<N> mNodeSet;
+
+	private Set<Set<N>> mClusterSet;
 
 	public PowerGraph()
 	{
@@ -48,7 +53,8 @@ public class PowerGraph<N>
 	public void addPowerNode(final Set<N> pNodeSet)
 	{
 		this.mNodeSet.addAll(pNodeSet);
-		this.mPowerNodeSet.add(pNodeSet);
+		if (pNodeSet.size() > 1)
+			this.mPowerNodeSet.add(pNodeSet);
 	}
 
 	public void addCluster(final Set<N> pNodeSet)
@@ -57,7 +63,7 @@ public class PowerGraph<N>
 		this.mNodeSet.addAll(pNodeSet);
 	}
 
-	private final List<Edge<Set<N>>>	mDelayedPowerEdgeList	= new ArrayList<Edge<Set<N>>>();
+	private final List<Edge<Set<N>>> mDelayedPowerEdgeList = new ArrayList<Edge<Set<N>>>();
 
 	public void addPowerEdgeDelayed(final Edge<Set<N>> pPowerEdge)
 	{
@@ -66,7 +72,8 @@ public class PowerGraph<N>
 
 	public void commitDelayedEdges()
 	{
-		Collections.<Edge<Set<N>>> sort(this.mDelayedPowerEdgeList, this.cPowerEdgeComparator);
+		Collections.<Edge<Set<N>>> sort(this.mDelayedPowerEdgeList,
+																		this.cPowerEdgeComparator);
 		for (final Edge<Set<N>> lEdge : this.mDelayedPowerEdgeList)
 			if (!isIntersectingPowerEdgePresent(lEdge))
 				addPowerEdge(lEdge);
@@ -84,7 +91,11 @@ public class PowerGraph<N>
 		addPowerNode(lFirstPowerNode);
 		addPowerNode(lSecondPowerNode);
 
-		final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
+		final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(	lFirstPowerNode,
+																																lSecondPowerNode);
+		lPowerEdge.setConfidence(pPowerEdge.getConfidence());
+		lPowerEdge.setFirstNodeConfidence(pPowerEdge.getFirstNodeConfidence());
+		lPowerEdge.setSecondNodeConfidence(pPowerEdge.getSecondNodeConfidence());
 		this.mPowerEdgeSet.add(lPowerEdge);
 
 	}
@@ -101,7 +112,8 @@ public class PowerGraph<N>
 			this.mNodeSet.addAll(lNodeSet);
 	}
 
-	public boolean strictlyIncludedIn(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+	public boolean strictlyIncludedIn(final Edge<Set<N>> pPowerEdge1,
+																		final Edge<Set<N>> pPowerEdge2)
 	{
 		if (pPowerEdge1.equals(pPowerEdge2))
 			return false;
@@ -109,7 +121,8 @@ public class PowerGraph<N>
 			return includedIn(pPowerEdge1, pPowerEdge2);
 	}
 
-	public boolean includedIn(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+	public boolean includedIn(final Edge<Set<N>> pPowerEdge1,
+														final Edge<Set<N>> pPowerEdge2)
 	{
 		final Set<N> lF1 = pPowerEdge1.getFirstNode();
 		final Set<N> lS1 = pPowerEdge1.getSecondNode();
@@ -137,46 +150,56 @@ public class PowerGraph<N>
 		return false;
 	}
 
-	public static <N> boolean isIntersecting(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+	public static <N> boolean isIntersecting(	final Edge<Set<N>> pPowerEdge1,
+																						final Edge<Set<N>> pPowerEdge2)
 	{
 		final Set<N> lF1 = pPowerEdge1.getFirstNode();
 		final Set<N> lS1 = pPowerEdge1.getSecondNode();
 		final Set<N> lF2 = pPowerEdge2.getFirstNode();
 		final Set<N> lS2 = pPowerEdge2.getSecondNode();
 
-		return (setIntersects(lF1, lF2) && setIntersects(lS1, lS2))
-				|| (setIntersects(lF1, lS2) && setIntersects(lS1, lF2));
+		return (setIntersects(lF1, lF2) && setIntersects(lS1, lS2)) || (setIntersects(lF1,
+																																									lS2) && setIntersects(lS1,
+																																																				lF2));
 
 	}
 
-	public static <N> boolean isConnected(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+	public static <N> boolean isConnected(final Edge<Set<N>> pPowerEdge1,
+																				final Edge<Set<N>> pPowerEdge2)
 	{
 		final Set<N> lF1 = pPowerEdge1.getFirstNode();
 		final Set<N> lS1 = pPowerEdge1.getSecondNode();
 		final Set<N> lF2 = pPowerEdge2.getFirstNode();
 		final Set<N> lS2 = pPowerEdge2.getSecondNode();
 
-		return setIntersects(lF1, lF2) || setIntersects(lS1, lS2) || setIntersects(lF1, lS2)
-				|| setIntersects(lS1, lF2);
+		return setIntersects(lF1, lF2) || setIntersects(lS1, lS2)
+						|| setIntersects(lF1, lS2)
+						|| setIntersects(lS1, lF2);
 
 	}
 
-	public static <N> boolean isAdjacent(final Edge<Set<N>> pPowerEdge1, final Edge<Set<N>> pPowerEdge2)
+	public static <N> boolean isAdjacent(	final Edge<Set<N>> pPowerEdge1,
+																				final Edge<Set<N>> pPowerEdge2)
 	{
 		final Set<N> lF1 = pPowerEdge1.getFirstNode();
 		final Set<N> lS1 = pPowerEdge1.getSecondNode();
 		final Set<N> lF2 = pPowerEdge2.getFirstNode();
 		final Set<N> lS2 = pPowerEdge2.getSecondNode();
 
-		final boolean lA = setIntersects(lS1, lF2) && !setIntersects(lS1, lS2) && !setIntersects(lF1, lF2);
-		final boolean lB = setIntersects(lF1, lF2) && !setIntersects(lF1, lS2) && !setIntersects(lS1, lF2);
-		final boolean lC = setIntersects(lS1, lS2) && !setIntersects(lS1, lF2) && !setIntersects(lF1, lS2);
-		final boolean lD = setIntersects(lF1, lS2) && !setIntersects(lF1, lF2) && !setIntersects(lS1, lS2);
+		final boolean lA = setIntersects(lS1, lF2) && !setIntersects(lS1, lS2)
+												&& !setIntersects(lF1, lF2);
+		final boolean lB = setIntersects(lF1, lF2) && !setIntersects(lF1, lS2)
+												&& !setIntersects(lS1, lF2);
+		final boolean lC = setIntersects(lS1, lS2) && !setIntersects(lS1, lF2)
+												&& !setIntersects(lF1, lS2);
+		final boolean lD = setIntersects(lF1, lS2) && !setIntersects(lF1, lF2)
+												&& !setIntersects(lS1, lS2);
 
 		return lA || lB || lC || lD;
 	}
 
-	private static final <N> boolean setIntersects(final Set<N> pSet1, final Set<N> pSet2)
+	private static final <N> boolean setIntersects(	final Set<N> pSet1,
+																									final Set<N> pSet2)
 	{
 		return !Collections.disjoint(pSet1, pSet2);
 	}
@@ -194,7 +217,7 @@ public class PowerGraph<N>
 
 	public Integer getNumberOfPowerNodes()
 	{
-		return this.mPowerNodeSet.size();
+		return this.mPowerNodeSet.size() + this.mNodeSet.size();
 	}
 
 	public Integer getNumberOfPowerEdges()
@@ -224,8 +247,7 @@ public class PowerGraph<N>
 		{
 			final PowerGraph lGraph = (PowerGraph) pObj;
 
-			return (lGraph.getPowerEdgeSet().equals(getPowerEdgeSet()))
-					&& (lGraph.getPowerNodeSet().equals(getPowerNodeSet()));
+			return (lGraph.getPowerEdgeSet().equals(getPowerEdgeSet())) && (lGraph.getPowerNodeSet().equals(getPowerNodeSet()));
 		}
 		return false;
 	}
@@ -240,7 +262,9 @@ public class PowerGraph<N>
 	@Override
 	public String toString()
 	{
-		return "PowerNodeSet= " + this.mPowerNodeSet + " PowerEdgeSet= " + this.mPowerEdgeSet;
+		return "PowerNodeSet= " + this.mPowerNodeSet
+						+ " PowerEdgeSet= "
+						+ this.mPowerEdgeSet;
 	}
 
 	public Set<Set<N>> getClusterSet()
@@ -258,14 +282,16 @@ public class PowerGraph<N>
 				if (lEdge.getFirstNode().size() == 1)
 					lNumberOfEdges += 1;
 				else
-					lNumberOfEdges += ((lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1))) / 2;
+					lNumberOfEdges += ((lEdge.getFirstNode().size() * (lEdge.getFirstNode()
+																																	.size() - 1))) / 2;
 			}
 			else
-				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge.getSecondNode().size();
+				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge	.getSecondNode()
+																															.size();
 
 		return lNumberOfEdges;
 	}
-	
+
 	public double getNumberOfEdgesForEdgeReduction()
 	{
 		int lNumberOfEdges = 0;
@@ -276,10 +302,12 @@ public class PowerGraph<N>
 				if (lEdge.getFirstNode().size() == 1)
 					lNumberOfEdges += 0;
 				else
-					lNumberOfEdges += (lEdge.getFirstNode().size() * (lEdge.getFirstNode().size() - 1))/2;
+					lNumberOfEdges += (lEdge.getFirstNode().size() * (lEdge	.getFirstNode()
+																																	.size() - 1)) / 2;
 			}
 			else
-				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge.getSecondNode().size();
+				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge	.getSecondNode()
+																															.size();
 
 		return lNumberOfEdges;
 	}
@@ -289,11 +317,13 @@ public class PowerGraph<N>
 		int lMaxNumberOfEdges = 0;
 		for (final Edge<Set<N>> lEdge : this.mPowerEdgeSet)
 			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
-				lMaxNumberOfEdges = Math.max(lMaxNumberOfEdges, (lEdge.getFirstNode().size() * (lEdge.getFirstNode()
-						.size() - 1)) / 2);
+				lMaxNumberOfEdges = Math.max(	lMaxNumberOfEdges,
+																			(lEdge.getFirstNode().size() * (lEdge	.getFirstNode()
+																																						.size() - 1)) / 2);
 			else
-				lMaxNumberOfEdges = Math.max(lMaxNumberOfEdges, lEdge.getFirstNode().size()
-						* lEdge.getSecondNode().size());
+				lMaxNumberOfEdges = Math.max(	lMaxNumberOfEdges,
+																			lEdge.getFirstNode().size() * lEdge	.getSecondNode()
+																																					.size());
 
 		return lMaxNumberOfEdges;
 	}
@@ -315,19 +345,21 @@ public class PowerGraph<N>
 
 	public boolean isPowerEdge(final Set<N> pPowerNode1, final Set<N> pPowerNode2)
 	{
-		final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(pPowerNode1, pPowerNode2);
+		final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(	pPowerNode1,
+																																pPowerNode2);
 		final boolean isPowerEdge = this.mPowerEdgeSet.contains(lPowerEdge);
 		return isPowerEdge;
 	}
 
 	public Double getAverageDegree()
 	{
-		return ((double)2*getNumberOfEdges())/getNumberOfNodes();
+		return ((double) 2 * getNumberOfEdges()) / getNumberOfNodes();
 	}
-	
+
 	public Double getScaleFreeIndex()
 	{
-		return Math.log(getEdgeReduction())+(2.0/3.0)*Math.log(getAverageDegree());
+		return Math.log(getEdgeReduction()) + (2.0 / 3.0)
+						* Math.log(getAverageDegree());
 	}
 
 }

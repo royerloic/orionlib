@@ -20,5 +20,17 @@ public interface Edge<N>
 	public abstract String getName();
 
 	public boolean isSymetric();
+	
+	public void setConfidence(double pConfidence);
+	
+	public double getConfidence();
+
+	public void setFirstNodeConfidence(double pConfidence);
+
+	public void setSecondNodeConfidence(double pConfidence);
+
+	public double getFirstNodeConfidence();
+
+	public double getSecondNodeConfidence();
 
 }

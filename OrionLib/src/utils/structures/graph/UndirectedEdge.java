@@ -8,6 +8,10 @@ public class UndirectedEdge<N> implements Edge<N>
 
 	private String	mName;
 
+	private double mConfidence;
+	private double mFirstNodeConfidence;
+	private double mSecondNodeConfidence;
+
 	public UndirectedEdge(final N pFirstNode, final N pSecondNode, final String pName)
 	{
 		super();
@@ -111,6 +115,40 @@ public class UndirectedEdge<N> implements Edge<N>
 	public boolean isSymetric()
 	{
 		return true;
+	}
+
+	@Override
+	public double getConfidence()
+	{
+		return mConfidence;
+	}
+
+	@Override
+	public void setConfidence(double pConfidence)
+	{
+		mConfidence = pConfidence;		
+	}
+
+	public void setFirstNodeConfidence(double pFirstPowerNodeConfidence)
+	{
+		mFirstNodeConfidence = pFirstPowerNodeConfidence;		
+	}
+	
+	public void setSecondNodeConfidence(double pSecondPowerNodeConfidence)
+	{
+		mSecondNodeConfidence = pSecondPowerNodeConfidence;		
+	}
+
+	@Override
+	public double getFirstNodeConfidence()
+	{
+		return mFirstNodeConfidence;
+	}
+
+	@Override
+	public double getSecondNodeConfidence()
+	{
+		return mSecondNodeConfidence;
 	}
 
 }
