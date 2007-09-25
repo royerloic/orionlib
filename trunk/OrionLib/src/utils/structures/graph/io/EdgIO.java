@@ -33,13 +33,16 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException, IOException
+	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException,
+																															IOException
 	{
 		final HashGraph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 
 		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(pFile, false, "\\s+");
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	pFile,
+																																	false,
+																																	"\\s+");
 
 		int lFirstNodeIndex = 1;
 		int lSecondNodeIndex = 2;
@@ -81,7 +84,7 @@ public class EdgIO
 		for (final List<String> lStringList : lMatrix)
 		{
 			final String lLineType = lStringList.get(0);
-			if (lLineType.equalsIgnoreCase("NODEFILTER"))
+			if (lLineType.equalsIgnoreCase("NODESELECT"))
 			{
 				isNodeFilterDefined = true;
 				final String lName = lStringList.get(1);
@@ -112,6 +115,7 @@ public class EdgIO
 			{
 				final String lNodeName1 = lStringList.get(lFirstNodeIndex);
 				final String lNodeName2 = lStringList.get(lSecondNodeIndex);
+				
 
 				Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
 				Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
@@ -128,8 +132,7 @@ public class EdgIO
 					lStringIdToNodeMap.put(lNodeName2, lSecondNode);
 				}
 
-				if ((lFilteredNodesSet.contains(lFirstNode) && lFilteredNodesSet.contains(lSecondNode))
-						|| !isNodeFilterDefined)
+				if ((lFilteredNodesSet.contains(lFirstNode) && lFilteredNodesSet.contains(lSecondNode)) || !isNodeFilterDefined)
 				{
 					double lConfidenceValue = 1;
 					if (lConfidenceValueIndex != 0)
@@ -140,12 +143,15 @@ public class EdgIO
 
 					if (lConfidenceValue >= lConfidenceThreshold)
 					{
-						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
-						lGraph.addEdge(lEdge);
+						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode,
+																															lSecondNode);
+						lEdge.setConfidence(lConfidenceValue);
 						
-						for (final String lString : lStringList)
-							System.out.print(lString+"\t");
-						System.out.print("\n");
+						lGraph.addEdge(lEdge);
+
+						/*for (final String lString : lStringList)
+							System.out.print(lString + "\t");
+						System.out.print("\n");/**/
 					}
 				}
 			}
@@ -157,31 +163,35 @@ public class EdgIO
 			if (lLineType.equalsIgnoreCase("STAR"))
 			{
 				final String lNodeName1 = lStringList.get(1);
-				final List<String> lNodesInStarList = lStringList.subList(2, lStringList.size());
-
-				for (final String lString : lNodesInStarList)
+				if (!lNodeName1.isEmpty())
 				{
-					final String lNodeName2 = lString;
-					Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
-					if (lFirstNode == null)
-					{
-						lFirstNode = new Node(lNodeName1);
-						lStringIdToNodeMap.put(lNodeName1, lFirstNode);
-					}
-
-					if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2))
-							|| !isNodeFilterDefined)
-					{
-						Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
-						if (lSecondNode == null)
+					final List<String> lNodesInStarList = lStringList.subList(2,
+																																		lStringList.size());
+					for (final String lString : lNodesInStarList)
+						if (!lString.isEmpty())
 						{
-							lSecondNode = new Node(lNodeName2);
-							lStringIdToNodeMap.put(lNodeName2, lSecondNode);
-						}
+							final String lNodeName2 = lString;
+							Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
+							if (lFirstNode == null)
+							{
+								lFirstNode = new Node(lNodeName1);
+								lStringIdToNodeMap.put(lNodeName1, lFirstNode);
+							}
 
-						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
-						lGraph.addEdge(lEdge);
-					}
+							if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2)) || !isNodeFilterDefined)
+							{
+								Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
+								if (lSecondNode == null)
+								{
+									lSecondNode = new Node(lNodeName2);
+									lStringIdToNodeMap.put(lNodeName2, lSecondNode);
+								}
+
+								final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode,
+																																	lSecondNode);
+								lGraph.addEdge(lEdge);
+							}
+						}
 				}
 
 			}
@@ -190,7 +200,7 @@ public class EdgIO
 		for (final List<String> lStringList : lMatrix)
 		{
 			final String lLineType = lStringList.get(0);
-			if (lLineType.equalsIgnoreCase("SELECT"))
+			if (lLineType.equalsIgnoreCase("NODEFILTER"))
 			{
 				isNodeFilterDefined = true;
 				final String lNodeName = lStringList.get(1);
@@ -206,8 +216,6 @@ public class EdgIO
 			for (final Node lNode : new ArrayList<Node>(lGraph.getNodeSet()))
 				if (!lFilteredNodesSet.contains(lNode))
 					lGraph.removeNode(lNode);
-		
-
 
 		return lGraph;
 	}
@@ -219,7 +227,8 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static <N> void save(final Graph<N, Edge<N>> pGraph, final File pFile) throws FileNotFoundException, IOException
+	public static <N> void save(final Graph<N, Edge<N>> pGraph, final File pFile)	throws FileNotFoundException,
+																																								IOException
 	{
 		final List<List<String>> lStringListList = new ArrayList<List<String>>();
 		for (final N lNode : pGraph.getNodeSet())
@@ -247,7 +256,8 @@ public class EdgIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static void save(final PsiMiGraph pGraph, final File pFile) throws FileNotFoundException, IOException
+	public static void save(final PsiMiGraph pGraph, final File pFile) throws FileNotFoundException,
+																																		IOException
 	{
 		final List<List<String>> lStringListList = new ArrayList<List<String>>();
 		for (final PsiMiNode lNode : pGraph.getNodeSet())
