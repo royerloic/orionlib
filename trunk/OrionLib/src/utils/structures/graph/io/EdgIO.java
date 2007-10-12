@@ -1,8 +1,10 @@
 package utils.structures.graph.io;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,13 +38,25 @@ public class EdgIO
 	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException,
 																															IOException
 	{
+		return load(new FileInputStream(pFile));
+	}
+
+	/**
+	 * @param pFile
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static Graph<Node, Edge<Node>> load(final InputStream pInputStream) throws FileNotFoundException,
+																																						IOException
+	{
 		final HashGraph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 
 		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	pFile,
-																																	false,
-																																	"\\s+");
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(	pInputStream,
+																																		false,
+																																		"\\s+");
 
 		int lFirstNodeIndex = 1;
 		int lSecondNodeIndex = 2;
@@ -115,7 +129,6 @@ public class EdgIO
 			{
 				final String lNodeName1 = lStringList.get(lFirstNodeIndex);
 				final String lNodeName2 = lStringList.get(lSecondNodeIndex);
-				
 
 				Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);
 				Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
@@ -146,12 +159,13 @@ public class EdgIO
 						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode,
 																															lSecondNode);
 						lEdge.setConfidence(lConfidenceValue);
-						
+
 						lGraph.addEdge(lEdge);
 
-						/*for (final String lString : lStringList)
-							System.out.print(lString + "\t");
-						System.out.print("\n");/**/
+						/*******************************************************************
+						 * for (final String lString : lStringList) System.out.print(lString +
+						 * "\t"); System.out.print("\n");/
+						 ******************************************************************/
 					}
 				}
 			}

@@ -272,7 +272,7 @@ public class MatrixFile
 		public LineIterator(final InputStream pInputStream, final int pSkipLines) throws IOException
 		{
 			// We choose the buffer to be 10% of the file, therefore, a File will be
-			// block read in about 100 steps.
+			// block read in about 10 steps.
 			int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 			lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
 			mBufferedReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);

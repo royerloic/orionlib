@@ -356,7 +356,7 @@ public class PowerGraph<N>
 		return ((double) 2 * getNumberOfEdges()) / getNumberOfNodes();
 	}
 
-	public Double getScaleFreeIndex()
+	public Double getPowerGraphIndex()
 	{
 		return Math.log(getEdgeReduction()) + (2.0 / 3.0)
 						* Math.log(getAverageDegree());

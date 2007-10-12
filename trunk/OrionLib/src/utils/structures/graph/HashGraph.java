@@ -1,5 +1,6 @@
 package utils.structures.graph;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,7 +9,7 @@ import java.util.Set;
 import utils.structures.HashSetMap;
 import utils.structures.SetMap;
 
-public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>
+public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>, Serializable
 {
 	private Set<N>				mNodeSet;
 	private Set<E>				mEdgeSet;
