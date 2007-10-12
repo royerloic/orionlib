@@ -1,21 +1,42 @@
 package utils.bioinformatics.ontology;
 
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.
  * 
  */
-public class OboTerm
+public class OboTerm implements Serializable
 {
+	private static final Pattern cSeparatorPattern = Pattern.compile("\\:");
 
-	private Integer	mId;
-	private String	mName;
-	private String	mDefinition;
-	private String	mNameSpace;
+	private Integer mId;
+	private String mName;
+	private String mDefinition;
+	private String mNameSpace;
 
-	public OboTerm(final Integer pId)
+	public OboTerm(String pNameSpace, final Integer pId)
 	{
+		mNameSpace = pNameSpace;
 		mId = pId;
+	}
+
+	public OboTerm(String pOboTermString) throws Exception
+	{
+		final String[] lOboTermArray = cSeparatorPattern.split(pOboTermString, -1);
+		if (lOboTermArray.length == 2)
+		{
+			mNameSpace = lOboTermArray[0].toUpperCase();
+			mId = Integer.parseInt(lOboTermArray[1]);
+		}
+		else
+		{
+			throw new Exception("Incorrect format for OBO term: " + pOboTermString
+													+ "parsed as: "
+													+ Arrays.toString(lOboTermArray));
+		}
 	}
 
 	public String getDefinition()

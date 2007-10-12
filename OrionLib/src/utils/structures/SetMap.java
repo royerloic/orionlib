@@ -1,5 +1,6 @@
 package utils.structures;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
  * @param <K>
  * @param <V>
  */
-public interface SetMap<K, V> extends Map<K, Set<V>>
+public interface SetMap<K, V> extends Map<K, Set<V>>, Serializable
 {
 
 	public Set<V> valuesFromAllSets();

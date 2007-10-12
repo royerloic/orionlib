@@ -1,0 +1,49 @@
+// 
+// Brief Description of the Columns: 
+// 
+// A.) INTERACTOR_A			Unique ID for Interacting Partner A
+// B.) INTERACTOR_B			Unique ID for Interacting Partner B
+// C.) OFFICIAL_SYMBOL_FOR_A
+// D.) OFFICIAL_SYMBOL_FOR_B
+// E.) ALIASES_FOR_A			List of common names for geneA, separated by '|'
+// F.) ALIASES_FOR_B			List of common names for geneB, separated by '|'
+// G.) EXPERIMENTAL_SYSTEM			System in which the interaction was shown
+// H.) SOURCE				Author/s of the interaction
+// I.) PUBMED_ID				PubMed_ID of the paper, separated by ';'
+// J.) ORGANISM_A_ID				NCBI ID of Gene A Organism
+// K.) ORGANISM_B_ID				NCBI ID of Gene B Organism
+// 
+// ----------------------------------------------------------------------------------------------------
+// File Version: 2.0.32
+// ----------------------------------------------------------------------------------------------------
+// 
+// INTERACTOR_A	INTERACTOR_B	OFFICIAL_SYMBOL_A	OFFICIAL_SYMBOL_B	ALIASES_FOR_A	ALIASES_FOR_B	EXPERIMENTAL_SYSTEM	SOURCE	PUBMED_ID	ORGANISM_A_ID	ORGANISM_B_ID
+
+EDGE	YFL039C	YBR243C	ACT1	ALG7	ABY1|END7	TUR1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YAL002W	ACT1	ASK1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YPR105C	ACT1	COG4	ABY1|END7	COD1|SEC38|SGF1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YGR175C	ACT1	ERG1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YLR060W	ACT1	FRS1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YOL133W	ACT1	HRT1	ABY1|END7	HRT2|RBX1|ROC1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YER112W	ACT1	LSM4	ABY1|END7	SDB23|USS1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YDL148C	ACT1	NOP14	ABY1|END7	UTP2	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YHR118C	ACT1	ORC6	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YAL002W	ACT1	PNO1	ABY1|END7	DIM2|RRP20	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YAL001C	YER171W	ACT1	RAD3	ABY1|END7	REM1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YBL020W	ACT1	RFT1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YMR061W	ACT1	RNA14	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YDL111C	ACT1	RRP42	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YDL153C	ACT1	SAS10	ABY1|END7	UTP3	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YAL002W	YDR489W	ACT1	SLD5	ABY1|END7	CDC105	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YDR189W	ACT1	SLY1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YNL222W	ACT1	SSU72	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YAL002W	ACT1	SWP1	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YAL001C	ACT1	N/A	ABY1|END7	YPP1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YHR122W	ACT1	N/A	ABY1|END7	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YFL039C	YJL097W	ACT1	N/A	ABY1|END7	PHS1	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YPL051W	YML077W	ARL3	BET5	N/A	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YAL002W	YGR120C	ARL3	COG2	N/A	SEC35	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YAL001C	YOR103C	ARL3	OST2	N/A	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YPL051W	YAL002W	ARL3	TRS20	N/A	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YDL029W	YBR236C	ARP2	ABD1	ACT2	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932
+EDGE	YDL029W	YDL008W	ARP2	APC11	ACT2	N/A	Synthetic Lethality	Davierwala AP et al.	16155567	4932	4932

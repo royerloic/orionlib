@@ -1,6 +1,8 @@
 package utils.structures.graph;
 
-public class UndirectedEdge<N> implements Edge<N>
+import java.io.Serializable;
+
+public class UndirectedEdge<N> implements Edge<N>, Serializable
 {
 	private N				mFirstNode;
 

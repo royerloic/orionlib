@@ -1,6 +1,8 @@
 package utils.structures.graph;
 
-public class Node
+import java.io.Serializable;
+
+public class Node implements Serializable
 {
 	private String	mName;
 	private int			mHashCode;
