@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.io.MatrixFile;
@@ -15,21 +17,22 @@ public class FastaSet implements Serializable
 {
 	private static final Pattern lSplitCommaPattern = Pattern.compile("\\, ");
 	private static final Pattern lSplitSpacePattern = Pattern.compile("\\ ");
+	private static final Pattern lPipeSpacePattern = Pattern.compile("\\|");
+	private static final Pattern lTwoPointsSpacePattern = Pattern.compile("\\:");
 
 	protected HashMap<String, FastaSequence> mFastaSequencesMap = new HashMap<String, FastaSequence>();
 
-	
 	public FastaSet()
 	{
 		super();
 	}
-	
+
 	public FastaSet(InputStream pInputStream) throws IOException
 	{
 		super();
 		addSequencesFromStream(pInputStream);
 	}
-	
+
 	public FastaSet(File pFile) throws IOException
 	{
 		super();
@@ -56,6 +59,16 @@ public class FastaSet implements Serializable
 		mFastaSequencesMap.put(pSgdSystematicName, lFastaSequence);
 		return lFastaSequence;
 	}
+	
+	private FastaSequence newSwissProtSequence(	String pSwissProtId,
+																							String pCurrentFastaSequenceHeader)
+	{
+		final FastaSequence lFastaSequence = new FastaSequence(pSwissProtId);
+		lFastaSequence.put("Id", pSwissProtId);
+		lFastaSequence.put("Header", pCurrentFastaSequenceHeader);
+		mFastaSequencesMap.put(pSwissProtId, lFastaSequence);
+		return lFastaSequence;
+	}
 
 	public void addSequencesFromFile(File pFile) throws IOException
 	{
@@ -77,10 +90,11 @@ public class FastaSet implements Serializable
 			}
 			else if (lLine.startsWith(">"))
 			{
+				lCurrentFastaSequenceHeader = lLine.substring(1);
 				if (lLine.contains("SGDID"))
 				{
 					// We know that this is a SGD header...
-					lCurrentFastaSequenceHeader = lLine.substring(1);
+					
 
 					final String[] lHeaderArray = lSplitCommaPattern.split(	lCurrentFastaSequenceHeader,
 																																	-1);
@@ -95,6 +109,14 @@ public class FastaSet implements Serializable
 																									lName,
 																									lId,
 																									lCurrentFastaSequenceHeader);
+				}
+				else if (lLine.contains("SWISS-PROT"))
+				{
+					final String[] lHeaderArray = lPipeSpacePattern.split(lCurrentFastaSequenceHeader, -1);
+					final String lSwissProtId = lHeaderArray[0];
+					
+
+					lCurrentFastaSequence = newSwissProtSequence(	lSwissProtId, lCurrentFastaSequenceHeader);
 				}
 				else
 				{
@@ -111,6 +133,18 @@ public class FastaSet implements Serializable
 			}
 		}
 
+	}
+
+	
+
+	public Set<String> getIdSet()
+	{
+		return mFastaSequencesMap.keySet();
+	}
+
+	public Collection<FastaSequence> getFastaSequences()
+	{
+		return mFastaSequencesMap.values();
 	}
 
 	@Override

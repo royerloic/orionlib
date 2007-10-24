@@ -3,8 +3,10 @@ package utils.bioinformatics.proteome;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import utils.bioinformatics.genome.FastaSet;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.Genome;
 import utils.io.MatrixFile;
+import utils.io.SerializationUtils;
 import utils.structures.HashSetMap;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
@@ -31,12 +34,12 @@ public class Proteome implements Serializable
 	private static final Pattern lSplitSemicolonPattern = Pattern.compile("\\;");
 	private static final Pattern lSplitCommaPattern = Pattern.compile("\\,");
 
-	private final Genome mGenome;
+	private Genome mGenome = null;
 
 	private ProteinSet mProteinSet = new ProteinSet();
 	private FastaSet mFastaSet;
 	
-	private Graph<Node,Edge<Node>> mInteractionGraph = new HashGraph<Node,Edge<Node>>();
+		private Graph<Node, Edge<Node>> mInteractionGraph = new HashGraph<Node, Edge<Node>>();
 
 	public Proteome(Genome pGenome, FastaSet pFastaSet) throws IOException
 	{
@@ -46,11 +49,26 @@ public class Proteome implements Serializable
 		for (Gene lGene : mGenome.getGeneSet().getSet())
 		{
 			final String lId = lGene.getId();
-			
+
 			FastaSequence lFastaSequence = mFastaSet.getSequenceByName(lId);
 			if (lFastaSequence != null)
 			{
 				Protein lProtein = new Protein(lGene);
+				lProtein.setCorrespondingFastaSequence(lFastaSequence);
+				mProteinSet.add(lProtein);
+			}
+		}
+	}
+	
+	public Proteome(FastaSet pFastaSet) throws IOException
+	{
+		mFastaSet = pFastaSet;
+
+		for (FastaSequence lFastaSequence : mFastaSet.getFastaSequences())
+		{
+			if (lFastaSequence != null)
+			{
+				Protein lProtein = new Protein(lFastaSequence.getFastaName());
 				lProtein.setCorrespondingFastaSequence(lFastaSequence);
 				mProteinSet.add(lProtein);
 			}
@@ -66,13 +84,13 @@ public class Proteome implements Serializable
 	{
 		mInteractionGraph.addGraph(EdgIO.load(pInputStream));
 	}
-	
+
 	public ProteinSet getProteinSet()
 	{
 		return mProteinSet;
 	}
-	
-	public Graph<Node,Edge<Node>> getInteractionGraph()
+
+	public Graph<Node, Edge<Node>> getInteractionGraph()
 	{
 		return mInteractionGraph;
 	}
@@ -124,8 +142,23 @@ public class Proteome implements Serializable
 		return true;
 	}
 
-	
+	public final void write(File pProteomeCache) throws IOException
+	{
+		SerializationUtils.write(this, pProteomeCache);
+	}
 
-
+	public static final Proteome read(File pProteomeCache) throws IOException,
+																												ClassNotFoundException
+	{
+		if (!pProteomeCache.exists())
+		{
+			return null;
+		}
+		else
+		{
+			final Object lObject = SerializationUtils.read(pProteomeCache);
+			return (Proteome) lObject;
+		}
+	}
 
 }

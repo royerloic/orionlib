@@ -80,7 +80,7 @@ public class OboOntology extends HashLattice<OboTerm>
 					final String[] lGroupArray = StringUtils.captures(lIdString, ".*?([0-9]+)");
 					final String lIntegerString = lGroupArray[0];
 					lId = Integer.parseInt(lIntegerString);
-					lCurrentOboTerm = new OboTerm(lId);
+					lCurrentOboTerm = new OboTerm("",lId);
 					lOboTermMap.put(lCurrentOboTerm, lCurrentOboTerm);
 					addNode(lCurrentOboTerm);
 				}
@@ -100,7 +100,7 @@ public class OboOntology extends HashLattice<OboTerm>
 						final String[] lGroupArray = StringUtils.captures(lParentIdString, ".*?([0-9]+)");
 						final String lParentIntegerString = lGroupArray[0];
 						final Integer lParentId = Integer.parseInt(lParentIntegerString);
-						OboTerm lParentOboTerm = new OboTerm(lParentId);
+						OboTerm lParentOboTerm = new OboTerm("",lParentId);
 						final OboTerm lParentOboTermTemp = lOboTermMap.get(lParentOboTerm);
 						if (lParentOboTermTemp == null)
 							lOboTermMap.put(lParentOboTerm, lParentOboTerm);

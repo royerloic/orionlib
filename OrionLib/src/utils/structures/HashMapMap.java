@@ -37,15 +37,13 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements Ma
 				put(lEntry.getKey(), lEntry2.getKey(), lEntry2.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.royerloic.collections.MapMap#get(java.lang.Object,
-	 *      java.lang.Object)
-	 */
+
 	public V get(final K1 pKey1, final K2 pKey2)
 	{
-		return get(pKey1).get(pKey2);
+		Map<K2,V> lMap = get(pKey1);
+		if(lMap==null)
+			return null;
+		return lMap.get(pKey2);
 	}
 
 	public static class HashMapMapEntry<K1, K2, V> implements Entry<K1, K2, V>
