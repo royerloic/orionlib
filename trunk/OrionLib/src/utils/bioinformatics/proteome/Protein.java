@@ -18,24 +18,31 @@ public class Protein implements Serializable
 	protected String mId;
 	protected final String mName;
 
-	protected final HashSetMap<String, Domain> mIdToDomainsSetMap = new HashSetMap<String, Domain>();
+	protected final HashSetMap<String, Domain> mInterProIdToDomainsSetMap = new HashSetMap<String, Domain>();
 
 	protected HashSet<OboTerm> mOBOTermSet = new HashSet<OboTerm>();
 
 	protected FastaSequence mCorrespondingFastaSequence = null;
 	protected Gene mCorrespondingGene = null;
-	
+
+	public Protein(String pId)
+	{
+		super();
+		mId = pId;
+		mName = pId;
+	}
+
 	public Protein(String pId, String pName)
 	{
 		super();
 		mId = pId;
 		mName = pName;
 	}
-	
+
 	public Protein(Gene pGene)
 	{
 		super();
-		mCorrespondingGene  = pGene;
+		mCorrespondingGene = pGene;
 		mId = pGene.getId();
 		mName = pGene.getName();
 	}
@@ -51,10 +58,30 @@ public class Protein implements Serializable
 
 	public void addDomain(Domain pDomain)
 	{
-		mIdToDomainsSetMap.put(pDomain.getId(), pDomain);
+		mInterProIdToDomainsSetMap.put(pDomain.getInterproId(), pDomain);
+
+		final int lStart = Math.max(0, pDomain.mStart);
+		final int lEnd = Math.min(pDomain.mEnd,
+															mCorrespondingFastaSequence.length());
+
+		if (lStart < lEnd)
+		{
+			final FastaSequence lFastaSequence = mCorrespondingFastaSequence.subSequence(	lStart,
+																																										lEnd);
+			pDomain.setCorrespondingFastaSequence(lFastaSequence);
+		}
 	}
-	
-	
+
+	public Set<Domain> getDomainsByInterProId(String pInterProId)
+	{
+		return mInterProIdToDomainsSetMap.get(pInterProId);
+	}
+
+	public HashSetMap<String, Domain> getDomainMap()
+	{
+		return mInterProIdToDomainsSetMap;
+	}
+
 	public String getId()
 	{
 		return mId;
@@ -63,6 +90,21 @@ public class Protein implements Serializable
 	public void setId(String pId)
 	{
 		mId = pId;
+	}
+
+	public int getNumberOfDistinctDomains()
+	{
+		return mInterProIdToDomainsSetMap.size();
+	}
+
+	public FastaSequence getCorrespondingFastaSequence()
+	{
+		return mCorrespondingFastaSequence;
+	}
+
+	public void setCorrespondingFastaSequence(FastaSequence pCorrespondingFastaSequence)
+	{
+		mCorrespondingFastaSequence = pCorrespondingFastaSequence;
 	}
 
 	@Override
@@ -115,24 +157,14 @@ public class Protein implements Serializable
 		// lStringBuilder.append("# SequenceId \t Source \t Type \t Start \t End \t
 		// Score \t Strand \t Phase \t Attributes \n");
 
-		if (mCorrespondingFastaSequence != null)
-			lStringBuilder.append("# This gene is linked to sequence: " + mCorrespondingFastaSequence.getFastaName()
-														+ "\n");
-
 		lStringBuilder.append(mId + "\t");
 		lStringBuilder.append(mName + "\t");
 
+		if (mCorrespondingFastaSequence != null)
+			lStringBuilder.append("[s=" + mCorrespondingFastaSequence.getFastaName()
+														+ "]");
+
 		return lStringBuilder.toString();
-	}
-
-	public FastaSequence getCorrespondingFastaSequence()
-	{
-		return mCorrespondingFastaSequence;
-	}
-
-	public void setCorrespondingFastaSequence(FastaSequence pCorrespondingFastaSequence)
-	{
-		mCorrespondingFastaSequence = pCorrespondingFastaSequence;
 	}
 
 }

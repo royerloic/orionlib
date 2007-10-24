@@ -51,7 +51,7 @@ public class Genome implements Serializable
 			final String lSource = lTokenArray[2 - 1];
 			final String lType = lTokenArray[3 - 1];
 
-			if (lType.equalsIgnoreCase("gene"))
+			if (lType.contains("gene"))
 			{
 
 				final int lStart = Integer.parseInt(lTokenArray[4 - 1]) - 1; // gff is

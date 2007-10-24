@@ -56,7 +56,7 @@ public class EdgIO
 
 		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(	pInputStream,
 																																		false,
-																																		"\\s+");
+																																		"\\t+");
 
 		int lFirstNodeIndex = 1;
 		int lSecondNodeIndex = 2;

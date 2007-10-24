@@ -18,6 +18,12 @@ public class FastaSequence implements Serializable
 		mFastaName = pFastaName;
 	}
 
+	protected FastaSequence(String pFastaName, String pSequenceString)
+	{
+		mFastaName = pFastaName;
+		mSequence = pSequenceString;
+	}
+
 	public void append(String pString)
 	{
 		mSequence = mSequence + pString;
@@ -57,6 +63,23 @@ public class FastaSequence implements Serializable
 	public void put(String pKey, String pValue)
 	{
 		mHeaderMap.put(pKey, pValue);
+	}
+
+	public int length()
+	{
+		return mSequence.length();
+	}
+
+	public FastaSequence subSequence(int pStart, int pEnd)
+	{
+		final FastaSequence lFastaSequence = new FastaSequence(	mFastaName + "\t{SubSequence["
+																																+ pStart
+																																+ ","
+																																+ pEnd
+																																+ "[}",
+																														mSequence.substring(pStart,
+																																								pEnd));
+		return lFastaSequence;
 	}
 
 	@Override
