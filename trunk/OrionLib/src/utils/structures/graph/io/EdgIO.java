@@ -61,7 +61,8 @@ public class EdgIO
 		int lFirstNodeIndex = 1;
 		int lSecondNodeIndex = 2;
 		int lConfidenceValueIndex = 0;
-		double lConfidenceThreshold = Double.NEGATIVE_INFINITY;
+		double lConfidenceMin = Double.NEGATIVE_INFINITY;
+		double lConfidenceMax = Double.POSITIVE_INFINITY;
 
 		for (final List<String> lStringList : lMatrix)
 		{
@@ -85,10 +86,16 @@ public class EdgIO
 		for (final List<String> lStringList : lMatrix)
 		{
 			final String lLineType = lStringList.get(0);
-			if (lLineType.equalsIgnoreCase("CONFIDENCEVALUETHRESHOLD"))
+			if (lLineType.equalsIgnoreCase("CONFIDENCEVALUETHRESHOLD") || lLineType.equalsIgnoreCase("CONFIDENCEVALUEMIN"))
 			{
 				final String lThresholdString = lStringList.get(1);
-				lConfidenceThreshold = Double.parseDouble(lThresholdString);
+				lConfidenceMin = Double.parseDouble(lThresholdString);
+				break;
+			}
+			if (lLineType.equalsIgnoreCase("CONFIDENCEVALUEMAX"))
+			{
+				final String lThresholdString = lStringList.get(1);
+				lConfidenceMax = Double.parseDouble(lThresholdString);
 				break;
 			}
 		}
@@ -154,7 +161,7 @@ public class EdgIO
 						lConfidenceValue = Double.parseDouble(lConfidenceValueString);
 					}
 
-					if (lConfidenceValue >= lConfidenceThreshold)
+					if (lConfidenceValue >= lConfidenceMin && lConfidenceValue <= lConfidenceMax)
 					{
 						final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode,
 																															lSecondNode);
