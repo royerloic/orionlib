@@ -40,10 +40,10 @@ public class FileIndexTest
 		lFileIndex.buildIndex(1);
 		
 		lFileIndex.open();
-		assertEquals(lFileIndex.getLine("bla")[0],"1");
-		assertEquals(lFileIndex.getLine("blu")[0],"2");
-		assertEquals(lFileIndex.getLine("blublu")[0],"3");
-		assertEquals(lFileIndex.getLine("ohoh")[0],"4");
+		assertEquals(lFileIndex.getLineAndCache("bla")[0],"1");
+		assertEquals(lFileIndex.getLineAndCache("blu")[0],"2");
+		assertEquals(lFileIndex.getLineAndCache("blublu")[0],"3");
+		assertEquals(lFileIndex.getLineAndCache("ohoh")[0],"4");
 
 		lFileIndex.close();
 	}
