@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class ParetoRanking<O>
 {
@@ -57,6 +59,18 @@ public class ParetoRanking<O>
 		Vector lVector = new Vector();
 		lVector.mObject = pObject;
 		lVector.mValues = pValues;
+
+		mVectorMap.put(pObject, lVector);
+	}
+	
+	public final void addVector(O pObject, List<Double> pValues)
+	{
+		Vector lVector = new Vector();
+		lVector.mObject = pObject;
+		double[] lValues = new double[pValues.size()];
+		for(int i=0; i<pValues.size(); i++)
+			lValues[i] = pValues.get(i);
+		lVector.mValues = lValues;
 
 		mVectorMap.put(pObject, lVector);
 	}
@@ -138,6 +152,29 @@ public class ParetoRanking<O>
 	public String toString()
 	{
 		return mRankingMap.toString();
+	}
+	
+	public String toTabDel()
+	{
+		StringBuilder lStringBuilder = new StringBuilder();
+		for (Map.Entry<Vector,Double> lEntry : mRankingMap.entrySet())
+		{
+			Vector lVector = lEntry.getKey();
+			O lObject = lVector.mObject;
+			double[] lValues = lVector.mValues;
+			double lRank = lEntry.getValue();
+			lStringBuilder.append(lObject);
+			lStringBuilder.append("\t");
+			lStringBuilder.append(lRank);
+			lStringBuilder.append("\t");
+			for(double lValue : lValues)
+			{
+				lStringBuilder.append(lValue);
+				lStringBuilder.append("\t");
+			}			
+			lStringBuilder.append("\n");
+		}
+		return lStringBuilder.toString();
 	}
 	
 	private static final boolean dominate(double[] v1, double[] v2)
