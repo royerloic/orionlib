@@ -7,7 +7,7 @@ import java.util.List;
 
 import utils.bioinformatics.ids.GoIdConversion;
 import utils.bioinformatics.ids.InterproIdConversion;
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.structures.ArrayListMap;
 import utils.structures.ListMap;
 import utils.structures.Matrix;
@@ -24,10 +24,10 @@ public class InterproToGo
 	{
 		try
 		{
-			final InputStream lInputStream = MatrixFile.getInputStreamFromRessource(new InterproToGo().getClass(),
+			final InputStream lInputStream = LineReader.getInputStreamFromRessource(new InterproToGo().getClass(),
 					"InterproToGo.tab.txt");
 
-			final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(lInputStream);
+			final Matrix<String> lMatrix = LineReader.readMatrixFromStream(lInputStream);
 
 			for (final List<String> lList : lMatrix)
 			{

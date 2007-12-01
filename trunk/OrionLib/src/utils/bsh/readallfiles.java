@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.structures.ArrayMatrix;
 import utils.structures.Matrix;
 import bsh.CallStack;
@@ -37,7 +37,7 @@ public class readallfiles
 		for (final File lFile : lFolder.listFiles())
 			if (lFile.getName().matches(pFileNameRegex))
 			{
-				final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile, pHasHeader);
+				final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile, pHasHeader);
 				lAgregatedMatrix.addAll(lMatrix);
 			}
 

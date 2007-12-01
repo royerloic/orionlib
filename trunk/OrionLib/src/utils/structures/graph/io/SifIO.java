@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.structures.Matrix;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
@@ -34,7 +34,7 @@ public class SifIO
 
 		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(pFile, false, "\\t+");
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(pFile, false, "\\t+");
 
 
 		for (final List<String> lStringList : lMatrix)

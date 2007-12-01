@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import utils.structures.ArrayMatrix;
 import utils.structures.Matrix;
 
-public class MatrixFile
+public class LineReader
 {
 
 	public static <O> void writeMatrixToFile(final List<List<O>> pVectorList, final File pFile)

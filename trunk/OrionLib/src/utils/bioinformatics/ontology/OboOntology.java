@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.string.StringUtils;
 import utils.structures.graph.DirectedEdge;
 import utils.structures.lattice.HashLattice;
@@ -59,7 +59,7 @@ public class OboOntology extends HashLattice<OboTerm>
 	{
 		super();
 		{
-			final List<List<String>> lOboMatrix = MatrixFile.readMatrixFromStream(pInputStream, "(\\: )|( \\! )");
+			final List<List<String>> lOboMatrix = LineReader.readMatrixFromStream(pInputStream, "(\\: )|( \\! )");
 
 			final Map<OboTerm, OboTerm> lOboTermMap = new HashMap<OboTerm, OboTerm>();
 			final Set<DirectedEdge<OboTerm>> lEdgeSet = new HashSet<DirectedEdge<OboTerm>>();

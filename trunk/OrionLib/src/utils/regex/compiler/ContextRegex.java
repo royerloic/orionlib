@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.string.StringUtils;
 import utils.structures.HashSetMap;
 import utils.structures.Matrix;
@@ -74,7 +74,7 @@ public class ContextRegex
 
 	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
-		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
+		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
 
 		boolean lIsPositive = false;
 		boolean lIsNegative = false;
@@ -171,7 +171,7 @@ public class ContextRegex
 			throws FileNotFoundException, IOException
 	{
 		final InputStream lInputStream = getInputStreamFromName(pImportRegexFileName);
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(lInputStream, false);
+		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(lInputStream, false);
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();
