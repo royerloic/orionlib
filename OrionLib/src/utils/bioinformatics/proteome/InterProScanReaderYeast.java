@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.GeneSet;
 import utils.bioinformatics.genome.Genome;
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 
 public class InterProScanReaderYeast
 {
@@ -31,7 +31,7 @@ public class InterProScanReaderYeast
 	{
 
 		ProteinSet lProteinSet = pProteome.getProteinSet();
-		for (String lLine : MatrixFile.getLines(pInputStream))
+		for (String lLine : LineReader.getLines(pInputStream))
 			if (!lLine.isEmpty())
 			{
 				lLine = lLine.trim();

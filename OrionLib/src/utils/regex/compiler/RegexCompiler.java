@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.string.StringUtils;
 import utils.structures.HashSetMap;
 import utils.structures.Matrix;
@@ -46,7 +46,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 
 	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
-		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(pInputStream, false, "\\s+:=\\s+");
+		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(pInputStream, false, "\\s+:=\\s+");
 
 		boolean lIsSet = false;
 		String lSetName = null;
@@ -133,14 +133,14 @@ public class RegexCompiler implements Iterable<Pair<String>>
 	private void importRegexFile(final String pImportedSetName, final String pRessourceFileName)
 			throws FileNotFoundException, IOException
 	{
-		importRegexFile(pImportedSetName, MatrixFile.getInputStreamFromRessource(new RegexCompiler().getClass(),
+		importRegexFile(pImportedSetName, LineReader.getInputStreamFromRessource(new RegexCompiler().getClass(),
 				pRessourceFileName));
 	}
 
 	private void importRegexFile(final String pImportedSetName, final InputStream pImportRegexInputStream)
 			throws FileNotFoundException, IOException
 	{
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(pImportRegexInputStream, false);
+		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(pImportRegexInputStream, false);
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();

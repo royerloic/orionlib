@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.structures.HashSetMap;
 import utils.structures.SetMap;
 import utils.structures.graph.Edge;
@@ -83,14 +83,14 @@ public class PowerGraphIO
 			lBubbleFormat.add(lEdgeEntry);
 		}
 
-		MatrixFile.writeMatrixToFile(lBubbleFormat, pFile);
+		LineReader.writeMatrixToFile(lBubbleFormat, pFile);
 	}
 
 	public static PowerGraph<Node> loadPowerGraph(final File pFile)	throws FileNotFoundException,
 																																	IOException
 	{
 		final PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
-		final List<List<String>> lMatrix = MatrixFile.readMatrixFromFile(	pFile,
+		final List<List<String>> lMatrix = LineReader.readMatrixFromFile(	pFile,
 																																			false);
 
 		final HashMap<String, Node> lNodeNameToNodeMap = new HashMap<String, Node>();

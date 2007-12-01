@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.utils.Timer;
 
 public class SvmModel
@@ -141,7 +141,7 @@ public class SvmModel
 			final String lUniprot2GoFileName = pParameters.get("uniprot2go");
 			final File lUniprot2GoFile = new File(lUniprot2GoFileName);
 
-			final List<List<String>> lUniprot2GoMatrix = MatrixFile.readMatrixFromFile(lUniprot2GoFile, false);
+			final List<List<String>> lUniprot2GoMatrix = LineReader.readMatrixFromFile(lUniprot2GoFile, false);
 
 			for (final List<String> lList : lUniprot2GoMatrix)
 			{
@@ -162,7 +162,7 @@ public class SvmModel
 			final String lPairsFileName = pParameters.get("pairs");
 			final File lPairsFile = new File(lPairsFileName);
 
-			final List<List<String>> lPairsMatrix = MatrixFile.readMatrixFromFile(lPairsFile, false);
+			final List<List<String>> lPairsMatrix = LineReader.readMatrixFromFile(lPairsFile, false);
 
 			for (final List<String> lList : lPairsMatrix)
 			{
@@ -205,7 +205,7 @@ public class SvmModel
 			final String lGo2GoFileName = pParameters.get("go2go");
 			final File lGo2GoFile = new File(lGo2GoFileName);
 
-			final List<List<String>> lGo2GoMatrix = MatrixFile.readMatrixFromFile(lGo2GoFile, false);
+			final List<List<String>> lGo2GoMatrix = LineReader.readMatrixFromFile(lGo2GoFile, false);
 
 			for (final List<String> lList : lGo2GoMatrix)
 			{
@@ -324,7 +324,7 @@ public class SvmModel
 			lOutputMatrix.add(lLine);
 		}
 
-		MatrixFile.writeMatrixToFile(lOutputMatrix, lTrainingFile);
+		LineReader.writeMatrixToFile(lOutputMatrix, lTrainingFile);
 	}
 
 	private Integer getIndexForGoIdPair(final GoIdPair pGoIdPair)

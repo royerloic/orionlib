@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 
 public class FastaSet implements Serializable
 {
@@ -81,7 +81,7 @@ public class FastaSet implements Serializable
 		String lCurrentFastaSequenceHeader;
 		FastaSequence lCurrentFastaSequence = null;
 
-		for (String lLine : MatrixFile.getLines(pInputStream))
+		for (String lLine : LineReader.getLines(pInputStream))
 		{
 			lLine = lLine.trim();
 			if (lLine.startsWith("#") || lLine.isEmpty())

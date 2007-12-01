@@ -18,7 +18,7 @@ import utils.bioinformatics.genome.FastaSequence;
 import utils.bioinformatics.genome.FastaSet;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.Genome;
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.io.SerializationUtils;
 import utils.structures.HashSetMap;
 import utils.structures.graph.Edge;

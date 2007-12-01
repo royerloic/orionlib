@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import utils.io.MatrixFile;
+import utils.io.LineReader;
 import utils.nlp.annotation.Annotation;
 import utils.string.StringUtils;
 import utils.structures.HashSetMap;
@@ -64,12 +64,12 @@ public class AnnotationContextFilter
 
 	public void readRules(final String pRessource) throws FileNotFoundException, IOException
 	{
-		readRules(MatrixFile.getInputStreamFromRessource(new AnnotationContextFilter().getClass(), pRessource));
+		readRules(LineReader.getInputStreamFromRessource(new AnnotationContextFilter().getClass(), pRessource));
 	}
 
 	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
 	{
-		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
+		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
 
 		boolean lIsPositive = false;
 		boolean lIsNegative = false;
@@ -151,7 +151,7 @@ public class AnnotationContextFilter
 			throws FileNotFoundException, IOException
 	{
 		final File lFile = RessourceLocator.getFileFromName(pImportRegexFileName);
-		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile, false);
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile, false);
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();
