@@ -2,13 +2,16 @@ package utils.io.tabular;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 public class Column<O extends Comparable<O>>
 {
-	ArrayList<O>						mList						= new ArrayList<O>();
-	ArrayList<Double>				mPercentileList	= new ArrayList<Double>();
+	ArrayList<O> mList = new ArrayList<O>();
+	ArrayList<Double> mPercentileList = new ArrayList<Double>();
 
-	private final Class<O>	mClass;
+	private final Class<O> mClass;
 
 	public Column(Class<O> pClass)
 	{
@@ -83,7 +86,6 @@ public class Column<O extends Comparable<O>>
 				{
 					lBucketArray[i] /= lSum;
 				}
-				
 
 				for (int i = 0; i < mList.size(); i++)
 				{
@@ -111,6 +113,40 @@ public class Column<O extends Comparable<O>>
 			}
 
 		}
+		else if (mClass == String.class)
+		{
+			TreeSet<String> lSet = new TreeSet<String>();
+			for (Object lObject : mList)
+			{
+				lSet.add(lObject.toString());
+				if (lSet.size() > 256)
+					return;
+			}
+
+			ArrayList<String> lList = new ArrayList<String>(lSet);
+			HashMap<String, Double> lMap = new HashMap<String, Double>();
+
+			if (lSet.size() > 1)
+			{
+				final double lDelta = 1 / (((double) lSet.size()) - 1);
+				double lPercentileValue = 0;
+				for (String lItem : lList)
+				{
+					lMap.put(lItem, lPercentileValue);
+					lPercentileValue += lDelta;
+				}
+
+				for (int i = 0; i < mList.size(); i++)
+				{
+					String lValue = (String) mList.get(i);
+					double lPercentile = lMap.get(lValue);
+					lPercentile = lPercentile>1 ? 1 : lPercentile;
+					mPercentileList.add(lPercentile);
+				}
+			}
+
+		}
+
 	}
 
 	@Override
@@ -126,20 +162,27 @@ public class Column<O extends Comparable<O>>
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		final Column other = (Column) obj;
 		if (mClass == null)
 		{
-			if (other.mClass != null) return false;
+			if (other.mClass != null)
+				return false;
 		}
-		else if (!mClass.equals(other.mClass)) return false;
+		else if (!mClass.equals(other.mClass))
+			return false;
 		if (mList == null)
 		{
-			if (other.mList != null) return false;
+			if (other.mList != null)
+				return false;
 		}
-		else if (!mList.equals(other.mList)) return false;
+		else if (!mList.equals(other.mList))
+			return false;
 		return true;
 	}
 
