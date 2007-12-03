@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import utils.io.LineReader;
+import utils.structures.BijectiveBidiHashMap;
 import utils.structures.Matrix;
 
 public class TabularFile
@@ -22,23 +24,25 @@ public class TabularFile
 	private final InputStream	mInputStream;
 	
 	@SuppressWarnings("unchecked")
-	Map<String,Column> mNameToColumnMap = new HashMap<String,Column>();
+	Map<String,Column> mNameToColumnMap = new LinkedHashMap<String,Column>();
 	
 	@SuppressWarnings("unchecked")
-	Map<Integer,String> mIndexToNameMap = new HashMap<Integer,String>();
+	BijectiveBidiHashMap<Integer,String> mIndexToNameMap = new BijectiveBidiHashMap<Integer,String>();
 
 	private final boolean	mHasHeader;
+	private final String	mName;
 	
 
 	public TabularFile(File pFile, boolean pHasHeader) throws IOException
 	{
-		this(new FileInputStream(pFile), pHasHeader);
+		this(pFile.getName(), new FileInputStream(pFile), pHasHeader);
 	}
 
-	public TabularFile(InputStream pInputStream, boolean pHasHeader) throws FileNotFoundException,
+	public TabularFile(String pName, InputStream pInputStream, boolean pHasHeader) throws FileNotFoundException,
 																																	IOException
 	{
 		super();
+		mName = pName;
 		mInputStream = pInputStream;
 		mHasHeader = pHasHeader;
 			
@@ -92,6 +96,13 @@ public class TabularFile
 			{
 				mIndexToNameMap.put(index, lHeaderList.get(index));
 			}			
+		}
+		else
+		{
+			for (int index=0; index < lMaxColumns ; index++)
+			{
+				mIndexToNameMap.put(index, mName+"[col="+index+"]");
+			}
 		}
 				
 		for (int index=0; index<lMaxColumns; index++)
@@ -196,6 +207,16 @@ public class TabularFile
 		}
 		
 		return lStringBuilder.toString();
+	}
+
+	public int getNumberOfColumns()
+	{
+		return mNameToColumnMap.size();
+	}
+
+	public String getColumnNameForIndex(int pColumnIndex)
+	{
+		return mIndexToNameMap.get(pColumnIndex);
 	}
 
 	
