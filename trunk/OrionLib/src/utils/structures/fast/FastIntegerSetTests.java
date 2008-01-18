@@ -1,6 +1,7 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
 package utils.structures.fast;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -47,6 +48,38 @@ public class FastIntegerSetTests
 		assertSame(1, FastIntegerSet.locate(lSet2, 9));
 
 	}
+	
+	@Test
+	public void testContains()
+	{
+		int[] lSet0 = new int[]
+		{};
+
+		assertFalse(FastIntegerSet.contains(lSet0, 0));
+
+		int[] lSet1 = new int[]
+		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+		assertTrue(FastIntegerSet.contains(lSet1, 0));
+		assertTrue(FastIntegerSet.contains(lSet1, 1));
+		assertTrue(FastIntegerSet.contains(lSet1, 2));
+		assertTrue(FastIntegerSet.contains(lSet1, 3));
+		assertTrue(FastIntegerSet.contains(lSet1, 4));
+		assertTrue(FastIntegerSet.contains(lSet1, 5));
+		assertTrue(FastIntegerSet.contains(lSet1, 6));
+		assertTrue(FastIntegerSet.contains(lSet1, 7));
+		assertTrue(FastIntegerSet.contains(lSet1, 8));
+		assertTrue(FastIntegerSet.contains(lSet1, 9));
+
+		int[] lSet2 = new int[]
+		{ 5, 6 };
+
+		assertFalse(FastIntegerSet.contains(lSet2, 1));
+		assertFalse(FastIntegerSet.contains(lSet2, 4));
+		assertFalse(FastIntegerSet.contains(lSet2, 7));
+		assertFalse(FastIntegerSet.contains(lSet2, 9));
+
+	}
 
 	@Test
 	public void testAdd()
@@ -73,6 +106,39 @@ public class FastIntegerSetTests
 		lSet1 = FastIntegerSet.add(lSet1, 5);
 		assertSame(lSet1[4], 5);
 		assertSame(lSet1.length, 7);
+	}
+	
+	@Test
+	public void testDel()
+	{
+
+		int[] lSet0 = new int[]
+		{};
+
+		lSet0 = FastIntegerSet.del(lSet0, 4);
+		assertSame(lSet0.length, 0);
+
+		int[] lSet1 = new int[]
+		{ 1, 2, 6, 7 };
+
+		lSet1 = FastIntegerSet.del(lSet1, 2);
+		assertSame(lSet1[2], 7);
+		assertSame(lSet1.length, 3);
+
+		lSet1 = FastIntegerSet.del(lSet1, 6);
+		assertSame(lSet1[1], 7);
+		assertSame(lSet1.length, 2);
+
+		lSet1 = FastIntegerSet.del(lSet1, 10);
+		assertSame(lSet1[0], 1);
+		assertSame(lSet1.length, 2);
+		
+		lSet1 = FastIntegerSet.del(lSet1, 1);
+		assertSame(lSet1[0], 7);
+		assertSame(lSet1.length, 1);
+		
+		lSet1 = FastIntegerSet.del(lSet1, 7);
+		assertSame(lSet1.length, 0);
 	}
 
 	@Test

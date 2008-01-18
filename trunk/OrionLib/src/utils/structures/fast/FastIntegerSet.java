@@ -36,6 +36,27 @@ public final class FastIntegerSet
 		
 		return null;
 	}
+	
+	public static int[] del(int[] pArray, int pInt)
+	{
+		final int index = locate(pArray,pInt);
+		
+		if(contains(pArray,pInt))
+		{
+			final int[] lNewArray = new int[pArray.length-1];
+			
+			int numMoved = pArray.length - index - 1;
+			System.arraycopy(pArray, 0, lNewArray, 0, pArray.length-1);
+			if (numMoved > 0)
+				System.arraycopy(pArray, index + 1, lNewArray, index, numMoved);
+				
+			return lNewArray;
+		}
+		
+		return pArray;		
+	}
+	
+	
 
 	public static final int locate(final int[] pArray, final int pInt)
 	{
@@ -73,6 +94,12 @@ public final class FastIntegerSet
 		
 	}
 
+	public static final boolean contains(final int[] pArray, final int pInt)
+	{
+		final int index = locate(pArray,pInt);
+		return index<pArray.length && pArray[index]==pInt;
+	}
+	
 	public static final int[] insertAt(final int[] pArray, final int pInsertPosition, final int pI)
 	{
 		final int oldArrayLength = pArray.length;
@@ -412,4 +439,6 @@ public final class FastIntegerSet
 	{
 		Arrays.sort(pReferenceSet);
 	}
+
+
 }
