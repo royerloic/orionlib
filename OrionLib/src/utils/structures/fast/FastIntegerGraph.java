@@ -3,7 +3,7 @@ package utils.structures.fast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
+import java.util.Iterator;
 
 public class FastIntegerGraph
 {
@@ -111,6 +111,26 @@ public class FastIntegerGraph
 		for (int i = 0; i < mSparseMatrix.size(); i++)
 			lNodeSet[i] = i;
 		return lNodeSet;
+	}
+
+	public ArrayList<int[]> getEdgeSet()
+	{
+		//NOT OPTIMIZED: should use an iterator to avoid allocating data
+		ArrayList<int[]> lEdgeList = new ArrayList<int[]>();
+		boolean[] lVisited = new boolean[mSparseMatrix.size()];
+		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
+		{
+			int[] lNei = mSparseMatrix.get(node1);
+			for (int node2 : lNei)
+				if (!lVisited[node2])
+				{
+					lEdgeList.add(new int[]
+					{ node1, node2 });
+
+				}
+			lVisited[node1] = true;
+		}
+		return lEdgeList;
 	}
 
 	public int getNumberOfNodes()

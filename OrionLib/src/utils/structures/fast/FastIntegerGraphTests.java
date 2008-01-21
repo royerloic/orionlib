@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import org.junit.Ignore;
@@ -150,6 +151,41 @@ public class FastIntegerGraphTests
 																				12 },
 																			lFastIntegerGraph.getNodeSet()));
 	}
+	
+	@Test
+	public void testGetEdgeSet()
+	{
+		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+
+		lFastIntegerGraph.addEdge(0, 1);
+		lFastIntegerGraph.addEdge(0, 2);
+		lFastIntegerGraph.addEdge(0, 3);
+
+		lFastIntegerGraph.addEdge(1, 11);
+		lFastIntegerGraph.addEdge(1, 12);
+		lFastIntegerGraph.addEdge(1, 13);
+
+		lFastIntegerGraph.addEdge(2, 21);
+		lFastIntegerGraph.addEdge(2, 22);
+		lFastIntegerGraph.addEdge(2, 23);
+
+		lFastIntegerGraph.addEdge(3, 31);
+		lFastIntegerGraph.addEdge(3, 32);
+		lFastIntegerGraph.addEdge(3, 33);
+
+		lFastIntegerGraph.addNodesUpTo(10);
+		lFastIntegerGraph.addNodesUpTo(11);
+		lFastIntegerGraph.addNodesUpTo(12);
+
+		for(int[] lEdge : lFastIntegerGraph.getEdgeSet())
+		{
+			System.out.println(Arrays.toString(lEdge));
+		}
+
+		
+
+	}
+	
 
 	@Test
 	public void testGetNodeNeighbours()
@@ -304,4 +340,6 @@ public class FastIntegerGraphTests
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(6, lSubGraph.getNumberOfEdges());
 	}
+	
+	
 }
