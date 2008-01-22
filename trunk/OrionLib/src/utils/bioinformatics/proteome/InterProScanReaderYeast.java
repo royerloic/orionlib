@@ -5,14 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.bioinformatics.genome.Gene;
-import utils.bioinformatics.genome.GeneSet;
-import utils.bioinformatics.genome.Genome;
 import utils.io.LineReader;
 
 public class InterProScanReaderYeast

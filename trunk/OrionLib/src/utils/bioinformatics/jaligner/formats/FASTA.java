@@ -66,6 +66,7 @@ public class FASTA extends Format {
 	 * @param alignment
 	 * @return FASTA format of the input alignment
 	 */
+	@Override
 	public String format (Alignment alignment) {
 		StringBuffer buffer = new StringBuffer();
 		StringBuffer s1 = new StringBuffer();

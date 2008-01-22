@@ -23,19 +23,14 @@ import utils.bioinformatics.jaligner.Sequence;
 import utils.bioinformatics.jaligner.SmithWatermanGotoh;
 import utils.bioinformatics.jaligner.matrix.MatrixLoader;
 import utils.bioinformatics.jaligner.util.SequenceParser;
-import utils.bioinformatics.jaligner.util.SequenceParserException;
 import utils.bioinformatics.proteome.Domain;
 import utils.bioinformatics.proteome.InterProScanReaderYeast;
 import utils.bioinformatics.proteome.Protein;
 import utils.bioinformatics.proteome.Proteome;
 import utils.bioinformatics.proteome.test.DomainIndex;
-import utils.io.SerializationUtils;
 import utils.structures.HashMapMap;
 import utils.structures.HashSetMap;
-import utils.structures.graph.Edge;
-import utils.structures.graph.HashGraph;
 import utils.structures.graph.Node;
-import utils.structures.graph.UndirectedEdge;
 
 public class MainYeast
 {

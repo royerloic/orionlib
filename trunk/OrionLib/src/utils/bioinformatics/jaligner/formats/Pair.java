@@ -63,6 +63,7 @@ public class Pair extends Format {
 	 * @param alignment alignment object to be formated
 	 * @return string of the alignment pair-formatted
 	 */
+	@Override
 	public String format(Alignment alignment) {
 		char[] sequence1 = alignment.getSequence1();
 		char[] sequence2 = alignment.getSequence2();

@@ -1,11 +1,7 @@
 package utils.bioinformatics.proteome;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import utils.bioinformatics.genome.FastaSequence;

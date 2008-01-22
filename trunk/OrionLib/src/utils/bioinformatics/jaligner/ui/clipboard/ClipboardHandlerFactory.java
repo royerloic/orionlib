@@ -18,8 +18,6 @@
 
 package utils.bioinformatics.jaligner.ui.clipboard;
 
-import utils.bioinformatics.jaligner.util.Commons;
-
 /**
  * A factory for
  * {@link utils.bioinformatics.jaligner.ui.clipboard.ClipboardHandler}.

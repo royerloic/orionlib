@@ -1,9 +1,7 @@
 package utils.io.tabular;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.TreeSet;
 
 public class Column<O extends Comparable<O>>

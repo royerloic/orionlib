@@ -1,7 +1,6 @@
 package utils.bioinformatics.proteome.simcorr;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -17,26 +16,19 @@ import org.junit.Test;
 
 import utils.bioinformatics.genome.FastaSequence;
 import utils.bioinformatics.genome.FastaSet;
-import utils.bioinformatics.genome.Genome;
 import utils.bioinformatics.jaligner.Alignment;
 import utils.bioinformatics.jaligner.Sequence;
 import utils.bioinformatics.jaligner.SmithWatermanGotoh;
 import utils.bioinformatics.jaligner.matrix.MatrixLoader;
 import utils.bioinformatics.jaligner.util.SequenceParser;
-import utils.bioinformatics.jaligner.util.SequenceParserException;
 import utils.bioinformatics.proteome.Domain;
 import utils.bioinformatics.proteome.InterProReader;
-import utils.bioinformatics.proteome.InterProScanReaderYeast;
 import utils.bioinformatics.proteome.Protein;
 import utils.bioinformatics.proteome.Proteome;
 import utils.bioinformatics.proteome.test.DomainIndex;
-import utils.io.SerializationUtils;
 import utils.structures.HashMapMap;
 import utils.structures.HashSetMap;
-import utils.structures.graph.Edge;
-import utils.structures.graph.HashGraph;
 import utils.structures.graph.Node;
-import utils.structures.graph.UndirectedEdge;
 
 public class MainEColi
 {

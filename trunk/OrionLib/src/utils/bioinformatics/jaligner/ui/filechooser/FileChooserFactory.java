@@ -18,8 +18,6 @@
 
 package utils.bioinformatics.jaligner.ui.filechooser;
 
-import utils.bioinformatics.jaligner.util.Commons;
-
 /**
  * A factory for
  * {@link utils.bioinformatics.jaligner.ui.filechooser.FileChooser}.
