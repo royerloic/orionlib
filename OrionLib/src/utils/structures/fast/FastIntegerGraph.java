@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class FastIntegerGraph implements Serializable
@@ -126,7 +128,7 @@ public class FastIntegerGraph implements Serializable
 		return lNodeSet;
 	}
 
-	public ArrayList<int[]> getEdgeSet()
+	public ArrayList<int[]> getIntPairList()
 	{
 		//NOT OPTIMIZED: should use an iterator to avoid allocating data
 		ArrayList<int[]> lEdgeList = new ArrayList<int[]>();
@@ -139,6 +141,25 @@ public class FastIntegerGraph implements Serializable
 				{
 					lEdgeList.add(new int[]
 					{ node1, node2 });
+
+				}
+			lVisited[node1] = true;
+		}
+		return lEdgeList;
+	}
+	
+	public ArrayList<Edge<Integer>> getEdgeList()
+	{
+		//NOT OPTIMIZED: should use an iterator to avoid allocating data
+		ArrayList<Edge<Integer>> lEdgeList = new ArrayList<Edge<Integer>>();
+		boolean[] lVisited = new boolean[mSparseMatrix.size()];
+		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
+		{
+			int[] lNei = mSparseMatrix.get(node1);
+			for (int node2 : lNei)
+				if (!lVisited[node2])
+				{
+					lEdgeList.add(new Edge<Integer>( node1, node2 ));
 
 				}
 			lVisited[node1] = true;
@@ -287,7 +308,7 @@ public class FastIntegerGraph implements Serializable
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 
-		for (int[] lEdge : this.getEdgeSet())
+		for (int[] lEdge : this.getIntPairList())
 		{
 			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
 		}
@@ -316,4 +337,6 @@ public class FastIntegerGraph implements Serializable
 		}
 		
 	}
+
+
 }

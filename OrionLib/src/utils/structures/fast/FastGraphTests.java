@@ -74,6 +74,7 @@ public class FastGraphTests
 			lFastGraphReadFromFile = FastGraph.readEdgeFile(lFileInputStream);
 
 			assertTrue(lFastGraph.equals(lFastGraphReadFromFile));
+						
 		}
 		catch (RuntimeException e)
 		{
