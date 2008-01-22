@@ -207,6 +207,18 @@ public class FastGraph<N> implements Serializable
 		return true;
 	}
 
+	@Override
+	public String toString()
+	{
+		StringBuilder lStringBuilder = new StringBuilder();
+		for (Edge<N> lEdge : getEdgeSet())
+		{
+			lStringBuilder.append(lEdge.toString());
+			lStringBuilder.append("\n");
+		};
+		return lStringBuilder.toString();
+	}
+
 	
 	
 
