@@ -2,6 +2,8 @@ package utils.structures.fast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,7 +29,7 @@ public class FastIntegerGraph implements Serializable
 	int mAfterLastNodeIndex = 0;
 	int mEdgeCount = 0;
 
-	public FastIntegerGraph() 
+	public FastIntegerGraph()
 	{
 		super();
 		mSparseMatrix = new ArrayList<int[]>();
@@ -130,7 +132,7 @@ public class FastIntegerGraph implements Serializable
 
 	public ArrayList<int[]> getIntPairList()
 	{
-		//NOT OPTIMIZED: should use an iterator to avoid allocating data
+		// NOT OPTIMIZED: should use an iterator to avoid allocating data
 		ArrayList<int[]> lEdgeList = new ArrayList<int[]>();
 		boolean[] lVisited = new boolean[mSparseMatrix.size()];
 		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
@@ -147,10 +149,10 @@ public class FastIntegerGraph implements Serializable
 		}
 		return lEdgeList;
 	}
-	
+
 	public ArrayList<Edge<Integer>> getEdgeList()
 	{
-		//NOT OPTIMIZED: should use an iterator to avoid allocating data
+		// NOT OPTIMIZED: should use an iterator to avoid allocating data
 		ArrayList<Edge<Integer>> lEdgeList = new ArrayList<Edge<Integer>>();
 		boolean[] lVisited = new boolean[mSparseMatrix.size()];
 		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
@@ -159,7 +161,7 @@ public class FastIntegerGraph implements Serializable
 			for (int node2 : lNei)
 				if (!lVisited[node2])
 				{
-					lEdgeList.add(new Edge<Integer>( node1, node2 ));
+					lEdgeList.add(new Edge<Integer>(node1, node2));
 
 				}
 			lVisited[node1] = true;
@@ -303,40 +305,88 @@ public class FastIntegerGraph implements Serializable
 		return lStringBuilder.toString();
 	}
 
-	
+	public void writeEdgeFile(File pFile) throws IOException
+	{
+		writeEdgeFile(new FileOutputStream(pFile));
+	}
+
 	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 
-		for (int[] lEdge : this.getIntPairList())
+		for (int lNode : getNodeSet())
+		{
+			lWriter.append("NODE\t" + lNode + "\n");
+		}
+
+		for (int[] lEdge : getIntPairList())
 		{
 			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
 		}
 		lWriter.flush();
-		
+
 	}
 
 	public void readEdgeFile(InputStream pInputStream) throws IOException
 	{
 		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
-
 		Pattern lPattern = Pattern.compile("\t");
 
+		int nodeindex1 = 1;
+		int nodeindex2 = 2;
+		int confindex = -1;
+
+		double confmin = Double.NEGATIVE_INFINITY;
+		double confmax = Double.POSITIVE_INFINITY;
+
 		String lLine = null;
-		while((lLine = lBufferedReader.readLine()) != null)
-		{
-			if (lLine.startsWith("EDGE"))
+		while ((lLine = lBufferedReader.readLine()) != null)
+			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
-				final String lFirstNodeString = lArray[1];
-				final String lSecondNodeString = lArray[2];
-				final int node1 = Integer.parseInt(lFirstNodeString);
-				final int node2 = Integer.parseInt(lSecondNodeString);
-				this.addEdge(node1, node2);
-			}
-		}
-		
-	}
+				if (lLine.startsWith("EDGEFORMAT"))
+				{
+					nodeindex1 = Integer.parseInt(lArray[1]);
+					nodeindex2 = Integer.parseInt(lArray[2]);
+					if (lArray.length >= 4)
+					{
+						confindex = Integer.parseInt(lArray[3]);
+					}
+				}
+				else if (lLine.startsWith("CONFIDENCEVALUETHRESHOLD") || lLine.startsWith("CONFIDENCEVALUEMIN"))
+				{
+					confmin = Integer.parseInt(lArray[1]);
+				}
+				else if (lLine.startsWith("CONFIDENCEVALUEMAX"))
+				{
+					confmax = Integer.parseInt(lArray[1]);
+				}
+				else if (lLine.startsWith("NODE"))
+				{
+					final String lNodeString = lArray[1];
+					final int node = Integer.parseInt(lNodeString);
+					addNodesUpTo(node);
+				}
+				else if (lLine.startsWith("EDGE"))
+				{
+					final String lFirstNodeString = lArray[nodeindex1];
+					final String lSecondNodeString = lArray[nodeindex2];
+					double confvalue = 1;
+					if (confindex > 1)
+					{
+						confvalue = Double.parseDouble(lArray[confindex]);
+					}
 
+					if (confvalue >= confmin && confvalue <= confmax)
+					{
+						final int node1 = Integer.parseInt(lFirstNodeString);
+						final int node2 = Integer.parseInt(lSecondNodeString);
+						this.addEdge(node1, node2);
+					}
+				}
+
+			}
+
+	}
 
 }
