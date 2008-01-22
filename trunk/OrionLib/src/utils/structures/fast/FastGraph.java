@@ -2,6 +2,8 @@ package utils.structures.fast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -117,7 +119,7 @@ public class FastGraph<N> implements Serializable
 	{
 		final HashSet<Edge<N>> lEdgeSet = new HashSet<Edge<N>>(getNumberOfEdges());
 		
-		for (int[] lEdgeInts : mFastIntegerGraph.getEdgeSet())
+		for (int[] lEdgeInts : mFastIntegerGraph.getIntPairList())
 		{
 			final N lNodeName1 = mNodeToNameMap.get(lEdgeInts[0]);
 			final N lNodeName2 = mNodeToNameMap.get(lEdgeInts[1]);
@@ -145,6 +147,10 @@ public class FastGraph<N> implements Serializable
 		lWriter.flush();		
 	}
 
+	public static FastGraph<String> readEdgeFile(File pFile) throws IOException
+	{
+		return readEdgeFile(new FileInputStream(pFile));
+	}
 
 	public static FastGraph<String> readEdgeFile(InputStream pInputStream) throws IOException
 	{

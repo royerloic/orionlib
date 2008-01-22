@@ -155,7 +155,7 @@ public class FastIntegerGraphTests
 	}
 	
 	@Test
-	public void testGetEdgeSet()
+	public void testGetEdges()
 	{
 		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
@@ -179,11 +179,8 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addNodesUpTo(11);
 		lFastIntegerGraph.addNodesUpTo(12);
 
-		for(int[] lEdge : lFastIntegerGraph.getEdgeSet())
-		{
-			System.out.println(Arrays.toString(lEdge));
-		}
-
+		assertTrue(lFastIntegerGraph.getEdgeList().size()==12);
+		assertTrue(lFastIntegerGraph.getIntPairList().size()==12);
 		
 
 	}
