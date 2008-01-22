@@ -11,8 +11,6 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-import utils.structures.MapValueComparator;
-
 /**
  * TODO describe me
  */

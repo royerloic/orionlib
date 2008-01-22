@@ -3,9 +3,8 @@ package utils.structures;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.

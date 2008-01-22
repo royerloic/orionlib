@@ -8,8 +8,6 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import utils.regex.compiler.ContextRegex;
-
 /**
  */
 public class ContextRegexTests

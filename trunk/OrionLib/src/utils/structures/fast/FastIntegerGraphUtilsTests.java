@@ -1,21 +1,14 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
 package utils.structures.fast;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
-
-import utils.structures.fast.FastIntegerSet;
 
 /**
  */

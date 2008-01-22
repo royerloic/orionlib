@@ -8,8 +8,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import utils.regex.compiler.RegexCompiler;
-
 /**
  */
 public class RegexCompilerTests
