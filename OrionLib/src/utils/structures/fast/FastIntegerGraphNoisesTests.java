@@ -14,7 +14,7 @@ import utils.structures.fast.FastIntegerSet;
 
 /**
  */
-public class FastIntegerGraphUtilsTests
+public class FastIntegerGraphNoisesTests
 {
 
 	@Test
@@ -39,11 +39,11 @@ public class FastIntegerGraphUtilsTests
 		lFastIntegerGraph.addEdge(3, 33);
 		
 		Random lRandom = new Random();
-		assertTrue(FastIntegerGraphUtils.rewireOnce(lRandom, lFastIntegerGraph,10));
+		assertTrue(FastIntegerGraphNoises.rewireOnce(lRandom, lFastIntegerGraph,10));
 		
 		int times = 10000;
 		
-		int lNumberOfRewirings = FastIntegerGraphUtils.rewire(lRandom, lFastIntegerGraph,10,times);
+		int lNumberOfRewirings = FastIntegerGraphNoises.rewire(lRandom, lFastIntegerGraph,10,times);
 		
 		assertTrue(lNumberOfRewirings==times);
 		

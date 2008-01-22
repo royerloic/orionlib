@@ -1,84 +1,52 @@
 package utils.structures.fast;
 
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.regex.Pattern;
 
 public class FastIntegerGraphUtils
 {
 
-	public static boolean rewireOnce(	Random pRandom,
-																		FastIntegerGraph pIntegerGraph,
-																		int pTries)
+	public static void writeEdgeFile(	FastIntegerGraph pIntegerGraph,
+																		OutputStream pOutputStream) throws IOException
 	{
-		int[] lNodeSet = pIntegerGraph.getNodeSet();
+		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 
-		if (lNodeSet.length < 4)
-			return false;
-
-		int fefn = -1;
-		int fesn = -1;
-		int sefn = -1;
-		int sesn = -1;
-
-		boolean valid = false;
-		int tries = 0;
-		do
+		for (int[] lEdge : pIntegerGraph.getEdgeSet())
 		{
-
-			fefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			int[] fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
-			if (fefnNei.length < 1)
-				continue;
-			fesn = fefnNei[pRandom.nextInt(fefnNei.length)];
-
-			sefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			int[] sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
-			if (sefnNei.length < 1)
-				continue;
-			sesn = sefnNei[pRandom.nextInt(sefnNei.length)];
-
-			valid = fefn != fesn && sefn != sesn
-							&& fefn != sefn
-							&& fesn != sesn
-							&& fefn != sesn
-							&& fesn != sefn;
-
-			valid &= pIntegerGraph.isEdge(fefn, fesn) && pIntegerGraph.isEdge(sefn,
-																																				sesn);
-			tries++;
+			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
 		}
-		while (!valid && tries < pTries);
-
-		if (valid)
-		{
-			System.out.println("fefn: " + fefn
-													+ ", fesn: "
-													+ fesn
-													+ ", sefn: "
-													+ sefn
-													+ ", sesn: "
-													+ sesn);
-
-			pIntegerGraph.removeEdge(fefn, fesn);
-			pIntegerGraph.removeEdge(sefn, sesn);
-
-			pIntegerGraph.addEdge(fefn, sesn);
-			pIntegerGraph.addEdge(sefn, fesn);
-		}
-
-		return valid;
 	}
 
-	public static int rewire(	Random pRandom,
-														FastIntegerGraph pIntegerGraph,
-														int pTries,
-														int pRewireSteps)
+	public static FastIntegerGraph writeEdgeFile(	FastIntegerGraph pIntegerGraph,
+																								InputStream pInputStream) throws IOException
 	{
-		int lNumberofRewirings = 0;
-		for (int i = 1; i <= pRewireSteps; i++)
-			lNumberofRewirings += rewireOnce(pRandom, pIntegerGraph, pTries) ? 1 : 0;
-		return lNumberofRewirings;
-	}
+		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
 
-	
+		Pattern lPattern = Pattern.compile("\t");
+
+		for (int[] lEdge : pIntegerGraph.getEdgeSet())
+
+		{
+			final String lLine = lBufferedReader.readLine();
+			if (lLine.startsWith("EDGE"))
+			{
+				final String[] lArray = lPattern.split(lLine, -1);
+				final String lFirstNodeString = lArray[1];
+				final String lSecondNodeString = lArray[2];
+				final int node1 = Integer.parseInt(lFirstNodeString);
+				final int node2 = Integer.parseInt(lSecondNodeString);
+				pIntegerGraph.addEdge(node1, node2);
+			}
+		}
+		
+		return pIntegerGraph;
+	}
 
 }
