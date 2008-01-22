@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-
 public class FastGraph<N> implements Serializable
 {
 	/**
@@ -34,8 +33,8 @@ public class FastGraph<N> implements Serializable
 	{
 		super();
 	}
-	
-	public FastIntegerGraph getInderlyingfastIntegerGraph()
+
+	public FastIntegerGraph getUnderlyingFastIntegerGraph()
 	{
 		return mFastIntegerGraph;
 	}
@@ -49,11 +48,11 @@ public class FastGraph<N> implements Serializable
 			mNodeToNameMap.put(lNodeIndex, pNodeName);
 		}
 	}
-	
+
 	public boolean isNode(final N pNodeName)
 	{
-		Integer lNodeIndex=null;
-		return (lNodeIndex=mNameToNodeMap.get(pNodeName))!=null && (mFastIntegerGraph.isNode(lNodeIndex));
+		Integer lNodeIndex = null;
+		return (lNodeIndex = mNameToNodeMap.get(pNodeName)) != null && (mFastIntegerGraph.isNode(lNodeIndex));
 	}
 
 	public void addEdge(final N pNodeName1, final N pNodeName2)
@@ -96,7 +95,7 @@ public class FastGraph<N> implements Serializable
 
 		if (lNodeIndex1 == null || lNodeIndex2 == null)
 			return false;
-		
+
 		return mFastIntegerGraph.isEdge(lNodeIndex1, lNodeIndex2);
 	}
 
@@ -104,7 +103,7 @@ public class FastGraph<N> implements Serializable
 	{
 		return mFastIntegerGraph.getNumberOfNodes();
 	}
-	
+
 	public Set<N> getNodeSet()
 	{
 		return mNameToNodeMap.keySet();
@@ -114,23 +113,23 @@ public class FastGraph<N> implements Serializable
 	{
 		return mFastIntegerGraph.getNumberOfEdges();
 	}
-	
+
 	private HashSet<Edge<N>> getEdgeSet()
 	{
 		final HashSet<Edge<N>> lEdgeSet = new HashSet<Edge<N>>(getNumberOfEdges());
-		
+
 		for (int[] lEdgeInts : mFastIntegerGraph.getIntPairList())
 		{
 			final N lNodeName1 = mNodeToNameMap.get(lEdgeInts[0]);
 			final N lNodeName2 = mNodeToNameMap.get(lEdgeInts[1]);
-			
-			Edge<N> lEdge = new Edge<N>(lNodeName1,lNodeName2);
+
+			Edge<N> lEdge = new Edge<N>(lNodeName1, lNodeName2);
 			lEdgeSet.add(lEdge);
 		}
-		
+
 		return lEdgeSet;
 	}
-	
+
 	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
@@ -139,12 +138,15 @@ public class FastGraph<N> implements Serializable
 		{
 			lWriter.append("NODE\t" + lNodeName + "\n");
 		}
-		
+
 		for (Edge<N> lEdge : this.getEdgeSet())
 		{
-			lWriter.append("EDGE\t" + lEdge.getFirstNode() + "\t" + lEdge.getSecondNode() + "\n");
+			lWriter.append("EDGE\t" + lEdge.getFirstNode()
+											+ "\t"
+											+ lEdge.getSecondNode()
+											+ "\n");
 		}
-		lWriter.flush();		
+		lWriter.flush();
 	}
 
 	public static FastGraph<String> readEdgeFile(File pFile) throws IOException
@@ -156,29 +158,61 @@ public class FastGraph<N> implements Serializable
 	{
 		FastGraph<String> lFastGraph = new FastGraph<String>();
 		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
-
 		Pattern lPattern = Pattern.compile("\t");
 
+		int nodeindex1 = 1;
+		int nodeindex2 = 2;
+		int confindex = -1;
+
+		double confmin = Double.NEGATIVE_INFINITY;
+		double confmax = Double.POSITIVE_INFINITY;
+
 		String lLine = null;
-		while((lLine = lBufferedReader.readLine()) != null)
-		{
-			if (lLine.startsWith("NODE"))
+		while ((lLine = lBufferedReader.readLine()) != null)
+			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//") )
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
-				final String lNodeString = lArray[1];
-				lFastGraph.addNode(lNodeString);
+				if (lLine.startsWith("EDGEFORMAT"))
+				{
+					nodeindex1 = Integer.parseInt(lArray[1]);
+					nodeindex2 = Integer.parseInt(lArray[2]);
+					if (lArray.length >= 4)
+					{
+						confindex = Integer.parseInt(lArray[3]);
+					}
+				}
+				else if (lLine.startsWith("CONFIDENCEVALUETHRESHOLD") || lLine.startsWith("CONFIDENCEVALUEMIN"))
+				{
+					confmin = Integer.parseInt(lArray[1]);
+				}
+				else if (lLine.startsWith("CONFIDENCEVALUEMAX"))
+				{
+					confmax = Integer.parseInt(lArray[1]);
+				}
+				if (lLine.startsWith("NODE"))
+				{
+					final String lNodeString = lArray[1];
+					lFastGraph.addNode(lNodeString);
+				}
+				else if (lLine.startsWith("EDGE"))
+				{
+					final String lFirstNodeString = lArray[nodeindex1];
+					final String lSecondNodeString = lArray[nodeindex2];
+
+					double confvalue = 1;
+					if (confindex > 1)
+					{
+						confvalue = Double.parseDouble(lArray[confindex]);
+					}
+
+					if (confvalue >= confmin && confvalue <= confmax)
+					{
+						lFastGraph.addEdge(lFirstNodeString, lSecondNodeString);
+					}
+				}
 			}
-			else if (lLine.startsWith("EDGE"))
-			{
-				final String[] lArray = lPattern.split(lLine, -1);
-				final String lFirstNodeString = lArray[1];
-				final String lSecondNodeString = lArray[2];
-				
-				lFastGraph.addEdge(lFirstNodeString,lSecondNodeString);
-			}
-			
-		}
-		return lFastGraph;		
+		return lFastGraph;
+
 	}
 
 	@Override
@@ -204,7 +238,7 @@ public class FastGraph<N> implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		final FastGraph other = (FastGraph) obj;
-		
+
 		if (!mNameToNodeMap.keySet().equals(other.mNameToNodeMap.keySet()))
 			return false;
 		else if (!getEdgeSet().equals(other.getEdgeSet()))
@@ -221,11 +255,9 @@ public class FastGraph<N> implements Serializable
 		{
 			lStringBuilder.append(lEdge.toString());
 			lStringBuilder.append("\n");
-		};
+		}
+		;
 		return lStringBuilder.toString();
 	}
-
-	
-	
 
 }

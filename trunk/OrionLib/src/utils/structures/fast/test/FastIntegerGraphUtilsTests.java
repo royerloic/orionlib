@@ -1,5 +1,5 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
-package utils.structures.fast;
+package utils.structures.fast.test;
 
 import static org.junit.Assert.assertTrue;
 
