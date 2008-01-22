@@ -1,16 +1,31 @@
 package utils.structures.fast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
-public class FastIntegerGraph
+public class FastIntegerGraph implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7839093381557158850L;
+
 	ArrayList<int[]> mSparseMatrix;
 
 	int mAfterLastNodeIndex = 0;
 	int mEdgeCount = 0;
 
-	public FastIntegerGraph()
+	public FastIntegerGraph() 
 	{
 		super();
 		mSparseMatrix = new ArrayList<int[]>();
@@ -267,4 +282,38 @@ public class FastIntegerGraph
 		return lStringBuilder.toString();
 	}
 
+	
+	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
+	{
+		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+
+		for (int[] lEdge : this.getEdgeSet())
+		{
+			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
+		}
+		lWriter.flush();
+		
+	}
+
+	public void readEdgeFile(InputStream pInputStream) throws IOException
+	{
+		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
+
+		Pattern lPattern = Pattern.compile("\t");
+
+		String lLine = null;
+		while((lLine = lBufferedReader.readLine()) != null)
+		{
+			if (lLine.startsWith("EDGE"))
+			{
+				final String[] lArray = lPattern.split(lLine, -1);
+				final String lFirstNodeString = lArray[1];
+				final String lSecondNodeString = lArray[2];
+				final int node1 = Integer.parseInt(lFirstNodeString);
+				final int node2 = Integer.parseInt(lSecondNodeString);
+				this.addEdge(node1, node2);
+			}
+		}
+		
+	}
 }
