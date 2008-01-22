@@ -2,10 +2,6 @@ package utils.structures.fast;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.RandomAccess;
 
 public class FastIntegerList implements RandomAccess, java.io.Serializable

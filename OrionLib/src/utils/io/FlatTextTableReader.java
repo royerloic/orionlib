@@ -11,8 +11,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 /**
  * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 4, 2005 Reads a
  *         Flat Text File having a table structure (lines and arbitrarily

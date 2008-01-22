@@ -9,8 +9,6 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import utils.structures.fast.FastIntegerSet;
-
 /**
  */
 public class FastIntegerListTests
