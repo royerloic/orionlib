@@ -22,19 +22,20 @@ public class FastIntegerGraphUtils
 		{
 			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
 		}
+		lWriter.flush();
+		
 	}
 
-	public static FastIntegerGraph writeEdgeFile(	FastIntegerGraph pIntegerGraph,
+	public static FastIntegerGraph readEdgeFile(	FastIntegerGraph pIntegerGraph,
 																								InputStream pInputStream) throws IOException
 	{
 		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
 
 		Pattern lPattern = Pattern.compile("\t");
 
-		for (int[] lEdge : pIntegerGraph.getEdgeSet())
-
+		String lLine = null;
+		while((lLine = lBufferedReader.readLine()) != null)
 		{
-			final String lLine = lBufferedReader.readLine();
 			if (lLine.startsWith("EDGE"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
