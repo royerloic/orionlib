@@ -169,7 +169,7 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 		ensureCapacity(size + numNew); // Increments modCount
 		System.arraycopy(a, 0, elementData, size, numNew);
 		for (int i = 0; i < numNew; i++)
-			elementData[i] = (int) a[size + i];
+			elementData[i] = a[size + i];
 		size += numNew;
 		return numNew != 0;
 	}

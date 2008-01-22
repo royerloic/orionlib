@@ -60,6 +60,7 @@ public class ClipboardPoller extends Thread {
 	/**
 	 * Runs the thread
 	 */
+	@Override
 	public void run() {
 	    logger.info("Started");
 		while (running) {
@@ -78,6 +79,7 @@ public class ClipboardPoller extends Thread {
 	/**
 	 * Starts the thread
 	 */
+	@Override
 	public void start() {
 	    logger.info("Starting...");
 	    if (!running) {

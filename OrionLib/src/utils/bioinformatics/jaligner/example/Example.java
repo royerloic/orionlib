@@ -32,11 +32,6 @@ import utils.bioinformatics.jaligner.formats.Pair;
 import utils.bioinformatics.jaligner.matrix.MatrixLoader;
 import utils.bioinformatics.jaligner.util.SequenceParser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 /**
  * Example of using JAligner API to align P53 human aganist P53 mouse using
  * Smith-Waterman-Gotoh algorithm.

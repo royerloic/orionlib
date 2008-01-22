@@ -2,25 +2,16 @@ package utils.bioinformatics.proteome;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.bioinformatics.genome.FastaSequence;
 import utils.bioinformatics.genome.FastaSet;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.Genome;
-import utils.io.LineReader;
 import utils.io.SerializationUtils;
-import utils.structures.HashSetMap;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
 import utils.structures.graph.HashGraph;

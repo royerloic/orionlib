@@ -40,6 +40,7 @@ public class XmlStringUtils
 				
 				private boolean	mInTag;
 
+				@Override
 				public void characters(char[] pCh, int pStart, int pLength) throws SAXException
 				{
 					if(mInTag)
@@ -47,6 +48,7 @@ public class XmlStringUtils
 				}
 
 
+				@Override
 				public void startElement(String pUri, String pLocalName, String pName, Attributes pAtts)
 						throws SAXException
 				{
@@ -55,6 +57,7 @@ public class XmlStringUtils
 
 				}
 
+				@Override
 				public void endElement(String pUri, String pLocalName, String pName) throws SAXException
 				{
 					if(pLocalName.equals(pTag))

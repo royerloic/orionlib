@@ -65,7 +65,7 @@ public class AlignmentScoreChecker {
 
 				if (s1.length() > 0 && s2.length() > 0 && o >= e) {
 
-					Matrix matrix = (Matrix) MatrixLoader
+					Matrix matrix = MatrixLoader
 							.load((String) matrices.get(random
 									.nextInt(countOfMatrices)));
 					Sequence seq1 = new Sequence(s1);

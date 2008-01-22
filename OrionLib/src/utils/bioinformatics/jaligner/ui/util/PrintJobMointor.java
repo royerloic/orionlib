@@ -43,22 +43,26 @@ public class PrintJobMointor {
     PrintJobMointor(DocPrintJob job) {
         // Add a listener to the print job
         job.addPrintJobListener(new PrintJobAdapter() {
-            public void printJobCanceled(PrintJobEvent printJobEvent) {
+            @Override
+						public void printJobCanceled(PrintJobEvent printJobEvent) {
                 logger.info("Print job canceled");
             	allDone();
             }
             
-            public void printJobCompleted(PrintJobEvent printJobEvent) {
+            @Override
+						public void printJobCompleted(PrintJobEvent printJobEvent) {
             	logger.info("Print job completed");
                 allDone();
             }
             
-            public void printJobFailed(PrintJobEvent printJobEvent) {
+            @Override
+						public void printJobFailed(PrintJobEvent printJobEvent) {
             	logger.info("Print job failed");
                 allDone();
             }
 
-            public void printJobNoMoreEvents(PrintJobEvent printJobEvent) {
+            @Override
+						public void printJobNoMoreEvents(PrintJobEvent printJobEvent) {
                 allDone();
             }
 

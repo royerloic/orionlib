@@ -2,8 +2,6 @@ package utils.nlp.wordlists;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
-
 /**
  * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 21, 2005
  * 

@@ -43,6 +43,7 @@ public class FileChooserTrusted extends FileChooser {
 	 * @throws FileChooserException
 	 * @see NamedInputStream
 	 */
+	@Override
 	public NamedInputStream open() throws FileChooserException {
     	try {
 		    JFileChooser chooser = new JFileChooser( );
@@ -71,6 +72,7 @@ public class FileChooserTrusted extends FileChooser {
 	 * @return boolean
 	 * @throws FileChooserException
 	 */
+	@Override
 	public boolean save(InputStream is, String fileName) throws FileChooserException {
 		try {
 		    JFileChooser chooser = new JFileChooser( );

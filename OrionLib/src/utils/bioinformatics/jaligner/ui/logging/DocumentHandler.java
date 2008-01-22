@@ -70,19 +70,22 @@ public class DocumentHandler extends Handler {
     /**
      * 
      */
+	@Override
 	public void close() {
     }
 
     /**
      * 
      */
-    public void flush() {
+    @Override
+		public void flush() {
     }
     
     /**
      * 
      */
-    public void publish(LogRecord record) {
+    @Override
+		public void publish(LogRecord record) {
         if (!isLoggable(record)) {
             return;
         }

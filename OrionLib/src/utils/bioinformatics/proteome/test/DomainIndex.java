@@ -1,6 +1,5 @@
 package utils.bioinformatics.proteome.test;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 

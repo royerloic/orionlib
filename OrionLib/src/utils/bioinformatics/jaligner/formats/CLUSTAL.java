@@ -113,6 +113,7 @@ public class CLUSTAL extends Format {
 	 * @param alignment ({@link Alignment})
 	 * @return CLUSTAL format of the alignment 
 	 */
+	@Override
 	public String format (Alignment alignment) {
 		String[] sequences = {new String(alignment.getSequence1()), new String(alignment.getSequence2())};
 		String[] names = {alignment.getName1(), alignment.getName2()};
