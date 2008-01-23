@@ -1,5 +1,5 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
-package utils.structures.fast.test;
+package utils.structures.fast;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -9,11 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.junit.Test;
-
-import utils.structures.fast.FastGraph;
 
 
 /**
@@ -36,31 +33,6 @@ public class FastGraphTests
 		assertTrue(lFastGraph.isNode("you"));
 		assertTrue(lFastGraph.isNode("them"));
 		assertFalse(lFastGraph.isNode("aloa"));
-
-	}
-	
-	@Test
-	public void testReadEdgeFileWithDirectives() 
-	{
-
-		try
-		{
-			final InputStream lInputStream = FastGraphTests.class.getResourceAsStream("test1.edg");
-			FastGraph<String> lFastGraph = FastGraph.readEdgeFile(lInputStream);
-
-			assertTrue(lFastGraph.getNumberOfEdges()==2);
-						
-		}
-		catch (RuntimeException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 	
@@ -116,8 +88,5 @@ public class FastGraphTests
 		}
 
 	}
-	
-
-	
 
 }
