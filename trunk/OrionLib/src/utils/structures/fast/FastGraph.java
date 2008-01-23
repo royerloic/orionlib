@@ -172,7 +172,7 @@ public class FastGraph<N> implements Serializable
 			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//") )
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
-				if (lLine.startsWith("EDGEFORMAT"))
+				if (lLine.startsWith("EDGEFORMAT\t"))
 				{
 					nodeindex1 = Integer.parseInt(lArray[1]);
 					nodeindex2 = Integer.parseInt(lArray[2]);
@@ -181,20 +181,20 @@ public class FastGraph<N> implements Serializable
 						confindex = Integer.parseInt(lArray[3]);
 					}
 				}
-				else if (lLine.startsWith("CONFIDENCEVALUETHRESHOLD") || lLine.startsWith("CONFIDENCEVALUEMIN"))
+				else if (lLine.startsWith("CONFIDENCEVALUETHRESHOLD\t") || lLine.startsWith("CONFIDENCEVALUEMIN\t"))
 				{
-					confmin = Integer.parseInt(lArray[1]);
+					confmin = Double.parseDouble(lArray[1]);
 				}
-				else if (lLine.startsWith("CONFIDENCEVALUEMAX"))
+				else if (lLine.startsWith("CONFIDENCEVALUEMAX\t"))
 				{
-					confmax = Integer.parseInt(lArray[1]);
+					confmax = Double.parseDouble(lArray[1]);
 				}
-				if (lLine.startsWith("NODE"))
+				if (lLine.startsWith("NODE\t"))
 				{
 					final String lNodeString = lArray[1];
 					lFastGraph.addNode(lNodeString);
 				}
-				else if (lLine.startsWith("EDGE"))
+				else if (lLine.startsWith("EDGE\t"))
 				{
 					final String lFirstNodeString = lArray[nodeindex1];
 					final String lSecondNodeString = lArray[nodeindex2];
