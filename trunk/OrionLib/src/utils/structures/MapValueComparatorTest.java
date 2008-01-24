@@ -1,7 +1,3 @@
-/**
- * Copyrights Transinsight GmbH 2007
- * Author: waechter
- */
 package utils.structures;
 
 import static org.junit.Assert.assertEquals;

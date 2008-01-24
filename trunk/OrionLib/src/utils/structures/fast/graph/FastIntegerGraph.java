@@ -183,7 +183,7 @@ public class FastIntegerGraph implements Serializable
 	
 	public double getAverageDegree()
 	{
-		return 2*((double)getNumberOfEdges())/((double)getNumberOfNodes());
+		return ((double)2*getNumberOfEdges())/((double)getNumberOfNodes());
 	}
 	
 	public double getEdgeDensity()

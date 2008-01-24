@@ -1,6 +1,6 @@
-// ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
 package utils.structures.fast.graph.test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -393,5 +393,31 @@ public class FastIntegerGraphTests
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Test
+	public void testAverageDegreeAndEdgeDensity() 
+	{
+		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+
+		lFastIntegerGraph.addEdge(0, 1);
+		lFastIntegerGraph.addEdge(0, 2);
+		lFastIntegerGraph.addEdge(0, 3);
+
+		lFastIntegerGraph.addEdge(1, 4);
+		lFastIntegerGraph.addEdge(1, 5);
+		lFastIntegerGraph.addEdge(1, 6);
+
+		lFastIntegerGraph.addEdge(2, 7);
+		lFastIntegerGraph.addEdge(2, 8);
+		lFastIntegerGraph.addEdge(2, 9);
+
+		lFastIntegerGraph.addEdge(3, 10);
+		lFastIntegerGraph.addEdge(3, 11);
+		lFastIntegerGraph.addEdge(3, 12);
+		
+		assertEquals(lFastIntegerGraph.getAverageDegree(),(24d/13d));
+		assertEquals(lFastIntegerGraph.getEdgeDensity(),(2d/13d));
+		
 	}
 }
