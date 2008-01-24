@@ -1,5 +1,5 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
-package utils.structures.fast.test;
+package utils.structures.fast.set;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -10,7 +10,6 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import utils.structures.fast.FastIntegerSet;
 
 /**
  */

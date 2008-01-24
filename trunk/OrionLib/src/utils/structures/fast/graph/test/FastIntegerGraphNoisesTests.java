@@ -1,11 +1,14 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
-package utils.structures.fast;
+package utils.structures.fast.graph.test;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 
 import org.junit.Test;
+
+import utils.structures.fast.graph.FastIntegerGraph;
+import utils.structures.fast.graph.FastIntegerGraphNoises;
 
 /**
  */

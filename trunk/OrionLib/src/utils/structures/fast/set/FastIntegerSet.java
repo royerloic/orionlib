@@ -1,4 +1,4 @@
-package utils.structures.fast;
+package utils.structures.fast.set;
 
 import java.util.Arrays;
 import java.util.Collection;

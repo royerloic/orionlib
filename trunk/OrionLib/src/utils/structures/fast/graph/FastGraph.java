@@ -1,4 +1,4 @@
-package utils.structures.fast;
+package utils.structures.fast.graph;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
