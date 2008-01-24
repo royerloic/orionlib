@@ -180,6 +180,17 @@ public class FastIntegerGraph implements Serializable
 	{
 		return mEdgeCount;
 	}
+	
+	public double getAverageDegree()
+	{
+		return 2*((double)getNumberOfEdges())/((double)getNumberOfNodes());
+	}
+	
+	public double getEdgeDensity()
+	{
+		return ((double)getNumberOfEdges())/((double)(getNumberOfNodes()*(getNumberOfNodes()-1)/2));
+	}
+	
 
 	public int[] getNodeNeighbours(final int pNode)
 	{
