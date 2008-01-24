@@ -1,4 +1,3 @@
-// ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
 package utils.regex.compiler;
 
 import static org.junit.Assert.assertTrue;
