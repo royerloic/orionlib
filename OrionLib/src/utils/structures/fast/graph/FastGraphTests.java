@@ -1,5 +1,5 @@
 // ©2006 Transinsight GmbH - www.transinsight.com - All rights reserved.
-package utils.structures.fast;
+package utils.structures.fast.graph;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;

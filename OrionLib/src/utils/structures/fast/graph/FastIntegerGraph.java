@@ -1,4 +1,4 @@
-package utils.structures.fast;
+package utils.structures.fast.graph;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.regex.Pattern;
+
+import utils.structures.fast.set.FastIntegerSet;
 
 public class FastIntegerGraph implements Serializable
 {
