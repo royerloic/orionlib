@@ -17,13 +17,13 @@ import utils.optimal.interf.IObjectiveFunction;
  */
 public class AgrInterpolator implements IInterpolator, Cloneable
 {
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private IExperimentDatabase	mExperimentDatabase;
+	private IExperimentDatabase mExperimentDatabase;
 
-	private RInterpolator				mRInterpolator;
+	private RInterpolator mRInterpolator;
 
-	private int									mInputDimension;
+	private int mInputDimension;
 
 	/**
 	 * 
@@ -55,12 +55,16 @@ public class AgrInterpolator implements IInterpolator, Cloneable
 	{
 		synchronized (this)
 		{
-			mInputDimension = mExperimentDatabase.getBestExperiment().getInput().getDimension();
+			mInputDimension = mExperimentDatabase	.getBestExperiment()
+																						.getInput()
+																						.getDimension();
 			mRInterpolator = new RInterpolator(mInputDimension);
 			for (int i = 0; i < mExperimentDatabase.getNumberOfExperiments(); i++)
 			{
-				final INumericalVector lInputVector = mExperimentDatabase.getExperiment(i).getInput();
-				final INumericalVector lOutputputVector = mExperimentDatabase.getExperiment(i).getOutput();
+				final INumericalVector lInputVector = mExperimentDatabase	.getExperiment(i)
+																																	.getInput();
+				final INumericalVector lOutputputVector = mExperimentDatabase	.getExperiment(i)
+																																			.getOutput();
 				final double lValue = mObjectiveFunction.evaluate(lOutputputVector);
 
 				mRInterpolator.addPointWithoutUpdate(lInputVector, lValue);

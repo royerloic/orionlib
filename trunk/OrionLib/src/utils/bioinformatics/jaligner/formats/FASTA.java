@@ -27,38 +27,44 @@ import utils.bioinformatics.jaligner.Sequence;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class FASTA extends Format {
-	
+public class FASTA extends Format
+{
+
 	/**
 	 * Number of characters per line
 	 */
-    private static final int LINE_WIDTH = 60;
-	
-    /**
+	private static final int LINE_WIDTH = 60;
+
+	/**
 	 * Constructor for FASTA.
 	 */
-	public FASTA() {
-		super( );
+	public FASTA()
+	{
+		super();
 		setId("FASTA");
 	}
-	
+
 	/**
-	 * Returns the name, description and sequence combined in one string.
-	 * The length of each line in the sequence is FASTA.LINE_LENGTH
+	 * Returns the name, description and sequence combined in one string. The
+	 * length of each line in the sequence is FASTA.LINE_LENGTH
 	 * 
 	 * @return String
 	 */
-	public String format (Sequence sequence) {
-		StringBuffer buffer = new StringBuffer (">");
+	public String format(Sequence sequence)
+	{
+		StringBuffer buffer = new StringBuffer(">");
 		buffer.append(sequence.getId() == null ? "" : sequence.getId());
 		buffer.append("\n");
-        for (int i = 0, n = sequence.length(); i * LINE_WIDTH < n; i++) {
-        	for (int j = i * LINE_WIDTH, m = (i + 1) * LINE_WIDTH < n ? (i + 1) * LINE_WIDTH: n; j < m; j++) {
-        		buffer.append(sequence.subsequence(j, 1));
-        	}
-        	buffer.append("\n");
-        }
-		return buffer.toString( );
+		for (int i = 0, n = sequence.length(); i * LINE_WIDTH < n; i++)
+		{
+			for (int j = i * LINE_WIDTH, m = (i + 1) * LINE_WIDTH < n	? (i + 1) * LINE_WIDTH
+																																: n; j < m; j++)
+			{
+				buffer.append(sequence.subsequence(j, 1));
+			}
+			buffer.append("\n");
+		}
+		return buffer.toString();
 	}
 
 	/**
@@ -67,14 +73,21 @@ public class FASTA extends Format {
 	 * @return FASTA format of the input alignment
 	 */
 	@Override
-	public String format (Alignment alignment) {
+	public String format(Alignment alignment)
+	{
 		StringBuffer buffer = new StringBuffer();
 		StringBuffer s1 = new StringBuffer();
 		StringBuffer s2 = new StringBuffer();
 		s1.append(alignment.getSequence1());
 		s2.append(alignment.getSequence2());
-		buffer.append(format(new Sequence(s1.toString(), alignment.getName1(), "", Sequence.PROTEIN)));
-		buffer.append(format(new Sequence(s2.toString(), alignment.getName2(), "", Sequence.PROTEIN)));
+		buffer.append(format(new Sequence(s1.toString(),
+																			alignment.getName1(),
+																			"",
+																			Sequence.PROTEIN)));
+		buffer.append(format(new Sequence(s2.toString(),
+																			alignment.getName2(),
+																			"",
+																			Sequence.PROTEIN)));
 		return buffer.toString();
 	}
 }

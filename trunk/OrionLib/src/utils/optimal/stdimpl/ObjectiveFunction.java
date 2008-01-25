@@ -18,13 +18,13 @@ import bsh.Interpreter;
  */
 public class ObjectiveFunction implements IObjectiveFunction
 {
-	static Logger								mLogger	= Logger.getLogger(OptimalEngine.class);
+	static Logger mLogger = Logger.getLogger(OptimalEngine.class);
 
-	private Interpreter					mInterpreter;
+	private Interpreter mInterpreter;
 
-	private String							mFormula;
+	private String mFormula;
 
-	private IExperimentDatabase	mDatabase;
+	private IExperimentDatabase mDatabase;
 
 	public void setInterpreter(final Interpreter pInterpreter)
 	{

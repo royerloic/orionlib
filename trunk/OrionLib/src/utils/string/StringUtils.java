@@ -14,9 +14,10 @@ import java.util.regex.Pattern;
 public class StringUtils
 {
 
-	private static final Map<String, Pattern>	lStringToPatternMap	= new HashMap<String, Pattern>();
+	private static final Map<String, Pattern> lStringToPatternMap = new HashMap<String, Pattern>();
 
-	public static final String[] captures(final String pString, final String pRegex)
+	public static final String[] captures(final String pString,
+																				final String pRegex)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -37,12 +38,13 @@ public class StringUtils
 		}
 		else
 		{
-			return new String[]
-			{};
+			return new String[] {};
 		}
 	}
 
-	public static final String[] split(final CharSequence pString, final String pRegex, final int pLimit)
+	public static final String[] split(	final CharSequence pString,
+																			final String pRegex,
+																			final int pLimit)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -53,7 +55,8 @@ public class StringUtils
 		return lPattern.split(pString, pLimit);
 	}
 
-	public static final List<String> findAllmatches(final CharSequence pString, final String pRegex)
+	public static final List<String> findAllmatches(final CharSequence pString,
+																									final String pRegex)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -73,7 +76,9 @@ public class StringUtils
 		return lMatchesList;
 	}
 
-	public static final List<String> findAllmatches(final String pString, final String pRegex, final int pGroup)
+	public static final List<String> findAllmatches(final String pString,
+																									final String pRegex,
+																									final int pGroup)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -112,7 +117,8 @@ public class StringUtils
 		return lCount;
 	}
 
-	public static final boolean matches(final CharSequence pCharSequence, final String pRegex)
+	public static final boolean matches(final CharSequence pCharSequence,
+																			final String pRegex)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -124,12 +130,15 @@ public class StringUtils
 		return lMatcher.matches();
 	}
 
-	public static final boolean submatches(final CharSequence pCharSequence, final String pRegex)
+	public static final boolean submatches(	final CharSequence pCharSequence,
+																					final String pRegex)
 	{
 		return matches(pCharSequence, ".*" + pRegex + ".*");
 	}
 
-	public static final StringBuffer replaceAll(final CharSequence pString, final String pRegex, final String pReplacement)
+	public static final StringBuffer replaceAll(final CharSequence pString,
+																							final String pRegex,
+																							final String pReplacement)
 	{
 		Pattern lPattern = lStringToPatternMap.get(pRegex);
 		if (lPattern == null)
@@ -176,7 +185,8 @@ public class StringUtils
 			}
 			else
 			{
-				lMatcher.appendReplacement(myStringBuffer, lLeftContext + pReplacement + lRightContext);
+				lMatcher.appendReplacement(myStringBuffer, lLeftContext + pReplacement
+																										+ lRightContext);
 			}
 		}
 		lMatcher.appendTail(myStringBuffer);
@@ -218,7 +228,8 @@ public class StringUtils
 		return pString;
 	}
 
-	public static String merge(final List<String> pStringList, final String pSeparatorString)
+	public static String merge(	final List<String> pStringList,
+															final String pSeparatorString)
 	{
 		final StringBuffer lStringBuffer = new StringBuffer();
 		for (int i = 0; i < pStringList.size(); i++)
@@ -232,7 +243,9 @@ public class StringUtils
 		return lStringBuffer.toString();
 	}
 
-	public static String merge(final List<String> pStringList, final String pBefore, final String pAfter)
+	public static String merge(	final List<String> pStringList,
+															final String pBefore,
+															final String pAfter)
 	{
 		final StringBuffer lStringBuffer = new StringBuffer();
 		for (int i = 0; i < pStringList.size(); i++)
@@ -244,7 +257,8 @@ public class StringUtils
 		return lStringBuffer.toString();
 	}
 
-	public static String merge(final String[] pStringArray, final String pSeparatorString)
+	public static String merge(	final String[] pStringArray,
+															final String pSeparatorString)
 	{
 		final StringBuffer lStringBuffer = new StringBuffer();
 		for (int i = 0; i < pStringArray.length; i++)
@@ -258,7 +272,9 @@ public class StringUtils
 		return lStringBuffer.toString();
 	}
 
-	public static String maskDelete(final String pText, final String pMask, final String pTransparentCaracter)
+	public static String maskDelete(final String pText,
+																	final String pMask,
+																	final String pTransparentCaracter)
 	{
 		final StringBuffer lStringBuffer = new StringBuffer();
 		for (int i = 0; i < pText.length(); i++)
@@ -361,8 +377,7 @@ public class StringUtils
 		{
 			if (!StringUtils.matches(lToken, pSplitRegex))
 			{
-				final boolean lInside = (lCharacterIndex <= pCharacterIndex)
-						&& (pCharacterIndex <= lCharacterIndex + lToken.length());
+				final boolean lInside = (lCharacterIndex <= pCharacterIndex) && (pCharacterIndex <= lCharacterIndex + lToken.length());
 				if (lInside)
 				{
 					break;
@@ -405,7 +420,7 @@ public class StringUtils
 	public static int countUpperCase(final CharSequence pSynonym)
 	{
 		int lCount = 0;
-		for (int i=0; i<pSynonym.length(); i++)
+		for (int i = 0; i < pSynonym.length(); i++)
 		{
 			lCount += Character.isUpperCase(pSynonym.charAt(i)) ? 1 : 0;
 		}
@@ -427,20 +442,20 @@ public class StringUtils
 	public static int countDigits(final CharSequence pSynonym)
 	{
 		int lCount = 0;
-		for (int i=0; i<pSynonym.length(); i++)
+		for (int i = 0; i < pSynonym.length(); i++)
 		{
 			boolean isDigit = false;
 			final char lChar = pSynonym.charAt(i);
-			isDigit |= lChar==('0');
-			isDigit |= lChar==('1');
-			isDigit |= lChar==('2');
-			isDigit |= lChar==('3');
-			isDigit |= lChar==('4');
-			isDigit |= lChar==('5');
-			isDigit |= lChar==('6');
-			isDigit |= lChar==('7');
-			isDigit |= lChar==('8');
-			isDigit |= lChar==('9');
+			isDigit |= lChar == ('0');
+			isDigit |= lChar == ('1');
+			isDigit |= lChar == ('2');
+			isDigit |= lChar == ('3');
+			isDigit |= lChar == ('4');
+			isDigit |= lChar == ('5');
+			isDigit |= lChar == ('6');
+			isDigit |= lChar == ('7');
+			isDigit |= lChar == ('8');
+			isDigit |= lChar == ('9');
 
 			lCount += isDigit ? 1 : 0;
 		}
@@ -457,7 +472,9 @@ public class StringUtils
 		return result;
 	}
 
-	public static String erase(final String pString, final String pRegex, final char pErasureCharacter)
+	public static String erase(	final String pString,
+															final String pRegex,
+															final char pErasureCharacter)
 	{
 		String lString = pString;
 		final List<String> lStringList = StringUtils.findAllmatches(lString, pRegex);

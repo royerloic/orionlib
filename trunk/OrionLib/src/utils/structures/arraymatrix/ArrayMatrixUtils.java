@@ -2,7 +2,8 @@ package utils.structures.arraymatrix;
 
 public class ArrayMatrixUtils
 {
-	public static final byte[][] downSample(final byte[][] pMatrix, final int pFactor)
+	public static final byte[][] downSample(final byte[][] pMatrix,
+																					final int pFactor)
 	{
 		final int lLength = pMatrix.length;
 		final int lHeight = pMatrix[0].length;
@@ -16,7 +17,11 @@ public class ArrayMatrixUtils
 		{
 			for (int j = 0; j < lDownSampledLength; j++)
 			{
-				lDownSampledMatrix[i][j] = average(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
+				lDownSampledMatrix[i][j] = average(	pMatrix,
+																						pFactor * i,
+																						pFactor * j,
+																						pFactor,
+																						pFactor);
 			}
 		}
 
@@ -48,7 +53,8 @@ public class ArrayMatrixUtils
 		return (byte) lAverage;
 	}
 
-	public static final byte[][] downSampleNonZero(final byte[][] pMatrix, final int pFactor)
+	public static final byte[][] downSampleNonZero(	final byte[][] pMatrix,
+																									final int pFactor)
 	{
 		final int lLength = pMatrix.length;
 		final int lHeight = pMatrix[0].length;
@@ -62,7 +68,11 @@ public class ArrayMatrixUtils
 		{
 			for (int j = 0; j < lDownSampledLength; j++)
 			{
-				lDownSampledMatrix[i][j] = averageNonZero(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
+				lDownSampledMatrix[i][j] = averageNonZero(pMatrix,
+																									pFactor * i,
+																									pFactor * j,
+																									pFactor,
+																									pFactor);
 			}
 		}
 
@@ -107,8 +117,9 @@ public class ArrayMatrixUtils
 
 		return (byte) lAverage;
 	}
-	
-	public static final byte[][] downSampleMax(final byte[][] pMatrix, final int pFactor)
+
+	public static final byte[][] downSampleMax(	final byte[][] pMatrix,
+																							final int pFactor)
 	{
 		final int lLength = pMatrix.length;
 		final int lHeight = pMatrix[0].length;
@@ -122,18 +133,22 @@ public class ArrayMatrixUtils
 		{
 			for (int j = 0; j < lDownSampledLength; j++)
 			{
-				lDownSampledMatrix[i][j] = max(pMatrix, pFactor * i, pFactor * j, pFactor, pFactor);
+				lDownSampledMatrix[i][j] = max(	pMatrix,
+																				pFactor * i,
+																				pFactor * j,
+																				pFactor,
+																				pFactor);
 			}
 		}
 
 		return lDownSampledMatrix;
 	}
 
-	private static final byte max(	final byte[][] pMatrix,
-																						final int pX,
-																						final int pY,
-																						final int pL,
-																						final int pH)
+	private static final byte max(final byte[][] pMatrix,
+																final int pX,
+																final int pY,
+																final int pL,
+																final int pH)
 	{
 		final int lLength = pMatrix.length;
 		final int lHeight = pMatrix[0].length;

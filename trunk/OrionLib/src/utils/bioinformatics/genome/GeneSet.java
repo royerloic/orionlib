@@ -7,10 +7,8 @@ import java.util.HashMap;
 public class GeneSet implements Serializable
 {
 
-	protected HashMap<String,Gene> mIdToGeneMap = new HashMap<String,Gene>();
+	protected HashMap<String, Gene> mIdToGeneMap = new HashMap<String, Gene>();
 
-
-	
 	public GeneSet()
 	{
 		super();
@@ -18,7 +16,7 @@ public class GeneSet implements Serializable
 
 	public void add(Gene pGene)
 	{
-		mIdToGeneMap.put(pGene.getId(), pGene);		
+		mIdToGeneMap.put(pGene.getId(), pGene);
 	}
 
 	@Override
@@ -37,8 +35,6 @@ public class GeneSet implements Serializable
 	{
 		return mIdToGeneMap.size();
 	}
-
-	
 
 	@Override
 	public int hashCode()
@@ -70,7 +66,6 @@ public class GeneSet implements Serializable
 		return true;
 	}
 
-		
 	public Gene getGeneById(String pId)
 	{
 		return mIdToGeneMap.get(pId);
@@ -80,7 +75,5 @@ public class GeneSet implements Serializable
 	{
 		return mIdToGeneMap.values();
 	}
-	
-	
-	
+
 }

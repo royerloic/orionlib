@@ -32,11 +32,11 @@ public class ModelerView extends JPanel
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 6952366308707407816L;
+	private static final long serialVersionUID = 6952366308707407816L;
 
-	private IPlot	mModelPlot;
+	private IPlot mModelPlot;
 
-	private int		mResolution;
+	private int mResolution;
 
 	/**
 	 * Constucts a ModelerView given a Modeler.
@@ -65,7 +65,9 @@ public class ModelerView extends JPanel
 		{
 			try
 			{
-				mModelPlot = PlotScalarFuntionFactory.build(pModeler, mResolution, "Model");
+				mModelPlot = PlotScalarFuntionFactory.build(pModeler,
+																										mResolution,
+																										"Model");
 			}
 			catch (final Throwable e)
 			{

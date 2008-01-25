@@ -33,6 +33,7 @@ import utils.structures.graph.Node;
 public class MainEColi
 {
 
+	/*
 	@Test
 	public void main() throws IOException, ClassNotFoundException
 	{
@@ -46,7 +47,6 @@ public class MainEColi
 			if (lProteome == null)
 			{
 
-				
 				final File lYeastProteinSequencesFile = new File("G:/Projects/Prologome/EColi/swiss-prot.ECOLI.fasta");
 				FastaSet lFastaSet = new FastaSet(lYeastProteinSequencesFile);
 				lProteome = new Proteome(lFastaSet);
@@ -72,17 +72,12 @@ public class MainEColi
 			final FileWriter lFileWriter = new FileWriter("test.txt");
 			final PrintWriter lPrintWriter = new PrintWriter(lFileWriter);
 
-			/*************************************************************************
-			 * final String lSH2 = "IPR000980"; final String lSH3 = "IPR001452"; final
-			 * String lPDZ = "IPR001478"; collectFor(lProteome, lDomainIndex, lPDZ,
-			 * lPrintWriter);/
-			 ************************************************************************/
-
+	
 			Set<String> lDomainInterProIdSet = lDomainIndex.getDomainInterProIdSet();
 			for (String lInterProId : lDomainInterProIdSet)
 			{
 				collectFor(lProteome, lDomainIndex, lInterProId, lPrintWriter);
-			}/**/
+			}
 
 		}
 		catch (Throwable e)
@@ -252,5 +247,5 @@ public class MainEColi
 
 			}
 
-	}
+	}/**/
 }

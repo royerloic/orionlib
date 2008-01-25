@@ -12,7 +12,7 @@ public class CollectionUtils
 			lAverage += lDouble;
 		}
 		lAverage /= pCollection.size();
-		
+
 		return lAverage;
 	}
 
@@ -23,8 +23,8 @@ public class CollectionUtils
 		{
 			lMax = Math.max(lMax, lDouble);
 		}
-				
+
 		return lMax;
 	}
-	
+
 }

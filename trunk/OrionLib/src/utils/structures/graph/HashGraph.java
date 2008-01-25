@@ -9,13 +9,15 @@ import java.util.Set;
 import utils.structures.HashSetMap;
 import utils.structures.SetMap;
 
-public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>, Serializable
+public class HashGraph<N, E extends Edge<N>>	implements
+																							Graph<N, E>,
+																							Serializable
 {
-	private Set<N>				mNodeSet;
-	private Set<E>				mEdgeSet;
-	private SetMap<N, N>	mNodeToFrontNeighboursSetMap;
-	private SetMap<N, N>	mNodeToBackNeighboursSetMap;
-	private SetMap<N, E>	mNodeToEdgeSetMap;
+	private Set<N> mNodeSet;
+	private Set<E> mEdgeSet;
+	private SetMap<N, N> mNodeToFrontNeighboursSetMap;
+	private SetMap<N, N> mNodeToBackNeighboursSetMap;
+	private SetMap<N, E> mNodeToEdgeSetMap;
 
 	public HashGraph()
 	{
@@ -89,7 +91,8 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>, Serializabl
 			this.mNodeToBackNeighboursSetMap.remove(pNode);
 
 			Set<E> lDeletedEdgeSet = this.mNodeToEdgeSetMap.get(pNode);
-			lDeletedEdgeSet = lDeletedEdgeSet == null ? new HashSet<E>() : lDeletedEdgeSet;
+			lDeletedEdgeSet = lDeletedEdgeSet == null	? new HashSet<E>()
+																								: lDeletedEdgeSet;
 
 			this.mEdgeSet.removeAll(lDeletedEdgeSet);
 			this.mNodeToEdgeSetMap.clear(pNode);
@@ -106,7 +109,8 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>, Serializabl
 	{
 		final Set<E> lCandidateEdgeList = this.mNodeToEdgeSetMap.get(pFirstNode);
 		for (final E lEdge : lCandidateEdgeList)
-			if (lEdge.getFirstNode().equals(pFirstNode) && lEdge.getSecondNode().equals(pSecondNode))
+			if (lEdge.getFirstNode().equals(pFirstNode) && lEdge.getSecondNode()
+																													.equals(pSecondNode))
 			{
 				this.mEdgeSet.remove(lEdge);
 				final N lFirstNode = lEdge.getFirstNode();
@@ -277,7 +281,7 @@ public class HashGraph<N, E extends Edge<N>> implements Graph<N, E>, Serializabl
 
 	public Double getAverageDegree()
 	{
-		return ((double)2*getNumberOfEdges())/getNumberOfNodes();
+		return ((double) 2 * getNumberOfEdges()) / getNumberOfNodes();
 	}
 
 }

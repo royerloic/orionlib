@@ -71,7 +71,7 @@ public class GenomeTest
 		assertEquals(lLoadedGenome, lGenome);
 	}
 
-	@Test
+	/*@Test
 	public void testYeastGenome() throws IOException
 	{
 		Genome lGenome = null;
@@ -95,8 +95,6 @@ public class GenomeTest
 													.getGeneById("YAL065C")
 													.getCorrespondingFastaSequence());
 
-	}
-
-	
+	}/***/
 
 }

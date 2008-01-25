@@ -51,7 +51,6 @@ public class InterProReader
 							final int lStart = Integer.parseInt(lTokenArray[4]) - 1;
 							final int lEnd = Integer.parseInt(lTokenArray[5]) - 1 + 1;
 
-							
 							final Domain lDomain = new Domain(lId,
 																								lInterProId,
 																								lDescription,

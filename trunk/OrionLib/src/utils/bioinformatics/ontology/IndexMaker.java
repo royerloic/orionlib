@@ -9,9 +9,9 @@ import utils.structures.lattice.Lattice;
 
 public class IndexMaker<O>
 {
-	private Lattice<O>	mLattice	= null;
-	Map<O, Integer>			mIndexMap	= new HashMap<O, Integer>();
-	private int					mIndex		= 0;
+	private Lattice<O> mLattice = null;
+	Map<O, Integer> mIndexMap = new HashMap<O, Integer>();
+	private int mIndex = 0;
 
 	private IndexMaker()
 	{

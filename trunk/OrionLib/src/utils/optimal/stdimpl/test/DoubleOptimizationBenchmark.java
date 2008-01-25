@@ -19,7 +19,7 @@ import utils.optimal.stdimpl.test.functions.DoubleTestFunctions;
  */
 public class DoubleOptimizationBenchmark
 {
-	private IOptimalEngine		mOptimalEngine;
+	private IOptimalEngine mOptimalEngine;
 
 	// private IInterpolator mInterpolator;
 	//
@@ -27,32 +27,36 @@ public class DoubleOptimizationBenchmark
 	//
 	// private TestFunctions mTestFunction;
 
-	private OptimizationTask	mOptimizationTask;
+	private OptimizationTask mOptimizationTask;
 
-	private int								mMaximumIterations;
+	private int mMaximumIterations;
 
-	private int								mRepeats;
+	private int mRepeats;
 
-	private Class							mInterpolatorClass;
+	private Class mInterpolatorClass;
 
-	private Class							mDoeStrategyClass;
+	private Class mDoeStrategyClass;
 
 	class TestResult
 	{
-		public double				mSpeed;
+		public double mSpeed;
 
-		public double				mMaxValue;
+		public double mMaxValue;
 
-		public IExperiment	mBestExperiment;
+		public IExperiment mBestExperiment;
 	}
 
 	public static void main(final String[] args)
 	{
 
 		final DoubleOptimizationBenchmark lOptimalEngineTest1 = new DoubleOptimizationBenchmark(AgrInterpolator.class,
-				DoeStrategyClassic.class, 100, 10);
+																																														DoeStrategyClassic.class,
+																																														100,
+																																														10);
 		final DoubleOptimizationBenchmark lOptimalEngineTest2 = new DoubleOptimizationBenchmark(PiInterpolator.class,
-				DoeStrategyClassic.class, 100, 10);
+																																														DoeStrategyClassic.class,
+																																														100,
+																																														10);
 
 		lOptimalEngineTest1.launchBenchmark();
 		lOptimalEngineTest2.launchBenchmark();
@@ -89,7 +93,14 @@ public class DoubleOptimizationBenchmark
 
 					final TestResult lResults = launchTest(i1, i2);
 
-					System.out.println(i1 + "\t" + i2 + "\t" + j + "\t" + lResults.mMaxValue + "\t" + lResults.mSpeed);
+					System.out.println(i1 + "\t"
+															+ i2
+															+ "\t"
+															+ j
+															+ "\t"
+															+ lResults.mMaxValue
+															+ "\t"
+															+ lResults.mSpeed);
 				}
 	}
 
@@ -98,7 +109,8 @@ public class DoubleOptimizationBenchmark
 	 */
 	private TestResult launchTest(final int pIndex1, final int pIndex2)
 	{
-		final DoubleTestFunctions mTestFunction = new DoubleTestFunctions(pIndex1, pIndex2);
+		final DoubleTestFunctions mTestFunction = new DoubleTestFunctions(pIndex1,
+																																			pIndex2);
 
 		mOptimalEngine = new OptimalEngine();
 
@@ -120,7 +132,9 @@ public class DoubleOptimizationBenchmark
 			e1.printStackTrace();
 		}
 
-		mOptimizationTask = new OptimizationTask(mOptimalEngine, mTestFunction, mMaximumIterations);
+		mOptimizationTask = new OptimizationTask(	mOptimalEngine,
+																							mTestFunction,
+																							mMaximumIterations);
 
 		mOptimizationTask.launchTest();
 

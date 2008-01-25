@@ -16,18 +16,18 @@ package utils.ml.svm.libsvm;
 //
 abstract class Kernel
 {
-	private Node[][]				x;
+	private Node[][] x;
 
-	private final double[]	x_square;
+	private final double[] x_square;
 
 	// Parameter
-	private final int				kernel_type;
+	private final int kernel_type;
 
-	private final double		degree;
+	private final double degree;
 
-	private final double		gamma;
+	private final double gamma;
 
-	private final double		coef0;
+	private final double coef0;
 
 	abstract float[] get_Q(int column, int len);
 
@@ -60,16 +60,16 @@ abstract class Kernel
 	{
 		switch (kernel_type)
 		{
-			case Parameter.LINEAR:
-				return dot(x[i], x[j]);
-			case Parameter.POLY:
-				return Math.pow(gamma * dot(x[i], x[j]) + coef0, degree);
-			case Parameter.RBF:
-				return Math.exp(-gamma * (x_square[i] + x_square[j] - 2 * dot(x[i], x[j])));
-			case Parameter.SIGMOID:
-				return tanh(gamma * dot(x[i], x[j]) + coef0);
-			default:
-				return 0; // java
+		case Parameter.LINEAR:
+			return dot(x[i], x[j]);
+		case Parameter.POLY:
+			return Math.pow(gamma * dot(x[i], x[j]) + coef0, degree);
+		case Parameter.RBF:
+			return Math.exp(-gamma * (x_square[i] + x_square[j] - 2 * dot(x[i], x[j])));
+		case Parameter.SIGMOID:
+			return tanh(gamma * dot(x[i], x[j]) + coef0);
+		default:
+			return 0; // java
 		}
 	}
 
@@ -113,52 +113,52 @@ abstract class Kernel
 	{
 		switch (param.kernel_type)
 		{
-			case Parameter.LINEAR:
-				return dot(x, y);
-			case Parameter.POLY:
-				return Math.pow(param.gamma * dot(x, y) + param.coef0, param.degree);
-			case Parameter.RBF:
-			{
-				double sum = 0;
-				final int xlen = x.length;
-				final int ylen = y.length;
-				int i = 0;
-				int j = 0;
-				while ((i < xlen) && (j < ylen))
-					if (x[i].mIndex == y[j].mIndex)
-					{
-						final double d = x[i++].mValue - y[j++].mValue;
-						sum += d * d;
-					}
-					else if (x[i].mIndex > y[j].mIndex)
-					{
-						sum += y[j].mValue * y[j].mValue;
-						++j;
-					}
-					else
-					{
-						sum += x[i].mValue * x[i].mValue;
-						++i;
-					}
-
-				while (i < xlen)
+		case Parameter.LINEAR:
+			return dot(x, y);
+		case Parameter.POLY:
+			return Math.pow(param.gamma * dot(x, y) + param.coef0, param.degree);
+		case Parameter.RBF:
+		{
+			double sum = 0;
+			final int xlen = x.length;
+			final int ylen = y.length;
+			int i = 0;
+			int j = 0;
+			while ((i < xlen) && (j < ylen))
+				if (x[i].mIndex == y[j].mIndex)
+				{
+					final double d = x[i++].mValue - y[j++].mValue;
+					sum += d * d;
+				}
+				else if (x[i].mIndex > y[j].mIndex)
+				{
+					sum += y[j].mValue * y[j].mValue;
+					++j;
+				}
+				else
 				{
 					sum += x[i].mValue * x[i].mValue;
 					++i;
 				}
 
-				while (j < ylen)
-				{
-					sum += y[j].mValue * y[j].mValue;
-					++j;
-				}
-
-				return Math.exp(-param.gamma * sum);
+			while (i < xlen)
+			{
+				sum += x[i].mValue * x[i].mValue;
+				++i;
 			}
-			case Parameter.SIGMOID:
-				return tanh(param.gamma * dot(x, y) + param.coef0);
-			default:
-				return 0; // java
+
+			while (j < ylen)
+			{
+				sum += y[j].mValue * y[j].mValue;
+				++j;
+			}
+
+			return Math.exp(-param.gamma * sum);
+		}
+		case Parameter.SIGMOID:
+			return tanh(param.gamma * dot(x, y) + param.coef0);
+		default:
+			return 0; // java
 		}
 	}
 }

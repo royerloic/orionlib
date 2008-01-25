@@ -17,7 +17,8 @@ public class ClusteringCoefficient<N>
 		return lClusteringCoefficient;
 	}
 
-	public static <N> double computeClusteringCoefficient(final Graph<N, Edge<N>> pGraph, final N pNode)
+	public static <N> double computeClusteringCoefficient(final Graph<N, Edge<N>> pGraph,
+																												final N pNode)
 	{
 		int lEdgeCount = 0;
 		final List<N> lNodeNeighboursList = new ArrayList<N>(pGraph.getNodeNeighbours(pNode));

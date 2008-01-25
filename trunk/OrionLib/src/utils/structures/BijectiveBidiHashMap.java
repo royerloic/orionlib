@@ -10,14 +10,14 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class BijectiveBidiHashMap<K,V> extends HashMap<K, V>
+public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>
 {
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 3601651509551672409L;
-	
-	HashMap<V,K> mReverseHashMap = new HashMap<V,K>();
+	private static final long serialVersionUID = 3601651509551672409L;
+
+	HashMap<V, K> mReverseHashMap = new HashMap<V, K>();
 
 	@Override
 	public void clear()
@@ -29,8 +29,8 @@ public class BijectiveBidiHashMap<K,V> extends HashMap<K, V>
 	@Override
 	public Object clone()
 	{
-		BijectiveBidiHashMap<K,V> lMap = new BijectiveBidiHashMap<K, V>();
-		lMap.putAll(this);		
+		BijectiveBidiHashMap<K, V> lMap = new BijectiveBidiHashMap<K, V>();
+		lMap.putAll(this);
 		return lMap;
 	}
 
@@ -43,10 +43,10 @@ public class BijectiveBidiHashMap<K,V> extends HashMap<K, V>
 	@Override
 	public V put(K pKey, V pValue)
 	{
-		if(mReverseHashMap.containsValue(pValue))
+		if (mReverseHashMap.containsValue(pValue))
 		{
 			super.remove(pKey);
-		}			
+		}
 		mReverseHashMap.put(pValue, pKey);
 		return super.put(pKey, pValue);
 	}
@@ -56,8 +56,8 @@ public class BijectiveBidiHashMap<K,V> extends HashMap<K, V>
 	{
 		for (Map.Entry<? extends K, ? extends V> lEntry : pM.entrySet())
 		{
-			this.put(lEntry.getKey(),lEntry.getValue());
-		}		
+			this.put(lEntry.getKey(), lEntry.getValue());
+		}
 	}
 
 	@Override

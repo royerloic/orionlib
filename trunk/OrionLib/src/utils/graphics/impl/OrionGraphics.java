@@ -26,53 +26,56 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public class OrionGraphics extends JFrame implements ImageProducer, MouseListener, MouseMotionListener,
-		KeyListener
+public class OrionGraphics extends JFrame	implements
+																					ImageProducer,
+																					MouseListener,
+																					MouseMotionListener,
+																					KeyListener
 {
 
 	// Constants:
-	private static final long	serialVersionUID	= 1L;
+	private static final long serialVersionUID = 1L;
 
-	public static final int		cLAST_DEVICE			= -1;
+	public static final int cLAST_DEVICE = -1;
 
-	public static final int		cFIRST_DEVICE			= 0;
+	public static final int cFIRST_DEVICE = 0;
 
 	// Fields
-	private GraphicsDevice		mGraphicsDevice;
+	private GraphicsDevice mGraphicsDevice;
 
-	private boolean						mFullScreen				= true;
+	private boolean mFullScreen = true;
 
-	private int								mWidth;
+	private int mWidth;
 
-	private int								mHeight;
+	private int mHeight;
 
-	private Image							mImage;
+	private Image mImage;
 
-	private Graphics					mGraphics;
+	private Graphics mGraphics;
 
-	private ImageConsumer			mImageConsumer;
+	private ImageConsumer mImageConsumer;
 
-	private DirectColorModel	mColorModel;
+	private DirectColorModel mColorModel;
 
-	private List<DisplayMode>	mDisplayModeWishList;
+	private List<DisplayMode> mDisplayModeWishList;
 
-	private int								mScreenIndex;
+	private int mScreenIndex;
 
-	public volatile int				mMouseX;
+	public volatile int mMouseX;
 
-	public volatile int				mMouseY;
+	public volatile int mMouseY;
 
-	public boolean						mMouseLeft;
+	public boolean mMouseLeft;
 
-	public boolean						mMouseMiddle;
+	public boolean mMouseMiddle;
 
-	public boolean						mMouseRight;
+	public boolean mMouseRight;
 
-	private boolean						mTimerStarted;
+	private boolean mTimerStarted;
 
-	private long							mInitialTime;
+	private long mInitialTime;
 
-	private int								mFrameCounter;
+	private int mFrameCounter;
 
 	// methods:
 
@@ -126,8 +129,7 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		{
 			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
 			for (final DisplayMode element : modes)
-				if ((element.getWidth() == (mDisplayModeWishList.get(x)).getWidth())
-						&& (element.getHeight() == (mDisplayModeWishList.get(x)).getHeight())
+				if ((element.getWidth() == (mDisplayModeWishList.get(x)).getWidth()) && (element.getHeight() == (mDisplayModeWishList.get(x)).getHeight())
 						&& (element.getBitDepth() == (mDisplayModeWishList.get(x)).getBitDepth()))
 					return (mDisplayModeWishList.get(x));
 		}
@@ -245,7 +247,11 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 			mHeight = lComponentSize.height;
 
 			// setup color model
-			mColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+			mColorModel = new DirectColorModel(	32,
+																					0x00FF0000,
+																					0x0000FF00,
+																					0x000000FF,
+																					0);
 
 			// create image using default toolkit
 			mImage = Toolkit.getDefaultToolkit().createImage(this);
@@ -263,7 +269,14 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 		if (mImageConsumer != null)
 		{
 			// copy integer pixel data to image consumer
-			mImageConsumer.setPixels(0, 0, mWidth, mHeight, mColorModel, (int[]) pixels, 0, mWidth);
+			mImageConsumer.setPixels(	0,
+																0,
+																mWidth,
+																mHeight,
+																mColorModel,
+																(int[]) pixels,
+																0,
+																mWidth);
 
 			// done(); notify image consumer that the frame is done
 			mImageConsumer.imageComplete(ImageConsumer.SINGLEFRAMEDONE);
@@ -343,7 +356,8 @@ public class OrionGraphics extends JFrame implements ImageProducer, MouseListene
 
 		// set image consumer hints for speed
 		mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
-				| ImageConsumer.SINGLEPASS | ImageConsumer.SINGLEFRAME);
+														| ImageConsumer.SINGLEPASS
+														| ImageConsumer.SINGLEFRAME);
 
 		// set image color model
 		mImageConsumer.setColorModel(mColorModel);

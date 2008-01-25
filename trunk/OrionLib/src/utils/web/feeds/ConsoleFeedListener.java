@@ -7,7 +7,8 @@ package utils.web.feeds;
 
 import java.net.URL;
 
-public class ConsoleFeedListener implements FeedListenerInterface<FeedItemInterface>
+public class ConsoleFeedListener implements
+																FeedListenerInterface<FeedItemInterface>
 {
 
 	public void onItemFound(final FeedItemInterface pFeedItem)

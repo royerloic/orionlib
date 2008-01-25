@@ -1,6 +1,6 @@
 package utils.structures.fast.graph.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -9,13 +9,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.junit.Test;
 
 import utils.structures.fast.graph.FastIntegerGraph;
 import utils.structures.fast.set.FastIntegerSet;
-
 
 /**
  */
@@ -156,7 +154,7 @@ public class FastIntegerGraphTests
 																				12 },
 																			lFastIntegerGraph.getNodeSet()));
 	}
-	
+
 	@Test
 	public void testGetEdges()
 	{
@@ -182,12 +180,10 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addNodesUpTo(11);
 		lFastIntegerGraph.addNodesUpTo(12);
 
-		assertTrue(lFastIntegerGraph.getEdgeList().size()==12);
-		assertTrue(lFastIntegerGraph.getIntPairList().size()==12);
-		
+		assertTrue(lFastIntegerGraph.getEdgeList().size() == 12);
+		assertTrue(lFastIntegerGraph.getIntPairList().size() == 12);
 
 	}
-	
 
 	@Test
 	public void testGetNodeNeighbours()
@@ -289,7 +285,7 @@ public class FastIntegerGraphTests
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(0, lSubGraph.getNumberOfEdges());
 	}
-	
+
 	@Test
 	public void testExtractSubGraph()
 	{
@@ -342,9 +338,9 @@ public class FastIntegerGraphTests
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(6, lSubGraph.getNumberOfEdges());
 	}
-	
+
 	@Test
-	public void testReadWriteEdgeFile() 
+	public void testReadWriteEdgeFile()
 	{
 
 		try
@@ -394,9 +390,9 @@ public class FastIntegerGraphTests
 		}
 
 	}
-	
+
 	@Test
-	public void testAverageDegreeAndEdgeDensity() 
+	public void testAverageDegreeAndEdgeDensity()
 	{
 		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
@@ -415,9 +411,9 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addEdge(3, 10);
 		lFastIntegerGraph.addEdge(3, 11);
 		lFastIntegerGraph.addEdge(3, 12);
-		
-		assertEquals(lFastIntegerGraph.getAverageDegree(),(24d/13d));
-		assertEquals(lFastIntegerGraph.getEdgeDensity(),(2d/13d));
-		
+
+		assertEquals(lFastIntegerGraph.getAverageDegree(), (24d / 13d));
+		assertEquals(lFastIntegerGraph.getEdgeDensity(), (2d / 13d));
+
 	}
 }

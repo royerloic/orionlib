@@ -28,19 +28,21 @@ public class SifIO
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException, IOException
+	public static Graph<Node, Edge<Node>> load(final File pFile) throws FileNotFoundException,
+																															IOException
 	{
 		final HashGraph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 
 		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(pFile, false, "\\t+");
-
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	pFile,
+																																	false,
+																																	"\\t+");
 
 		for (final List<String> lStringList : lMatrix)
 		{
 			final String lLineType = lStringList.get(0);
-			if (lStringList.size()==3)
+			if (lStringList.size() == 3)
 			{
 				final String lNodeName1 = lStringList.get(0);
 				final String lNodeName2 = lStringList.get(2);
@@ -60,12 +62,12 @@ public class SifIO
 					lStringIdToNodeMap.put(lNodeName2, lSecondNode);
 				}
 
-				
-				final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode, lSecondNode);
-						lGraph.addEdge(lEdge);
+				final Edge<Node> lEdge = new UndirectedEdge<Node>(lFirstNode,
+																													lSecondNode);
+				lGraph.addEdge(lEdge);
 			}
 		}
-	
+
 		return lGraph;
 	}
 

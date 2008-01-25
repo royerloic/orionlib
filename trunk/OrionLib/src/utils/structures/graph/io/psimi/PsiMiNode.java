@@ -7,8 +7,8 @@ import utils.structures.graph.Node;
 
 public class PsiMiNode extends Node
 {
-	List<Integer>	mGoIdList				= new ArrayList<Integer>();
-	List<Integer>	mInterproIdList	= new ArrayList<Integer>();
+	List<Integer> mGoIdList = new ArrayList<Integer>();
+	List<Integer> mInterproIdList = new ArrayList<Integer>();
 
 	public PsiMiNode(final String pName)
 	{

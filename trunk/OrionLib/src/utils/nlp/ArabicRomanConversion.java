@@ -6,8 +6,8 @@ import java.util.Map;
 public class ArabicRomanConversion
 {
 
-	public static Map<Integer, String>	sArabicToRomanMap	= getArabicToRomanMap();
-	public static Map<String, Integer>	sRomanToArabicMap	= getRomanToArabicMap();
+	public static Map<Integer, String> sArabicToRomanMap = getArabicToRomanMap();
+	public static Map<String, Integer> sRomanToArabicMap = getRomanToArabicMap();
 
 	private static Map<Integer, String> getArabicToRomanMap()
 	{

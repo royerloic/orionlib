@@ -8,7 +8,8 @@ import utils.structures.graph.Graph;
 import utils.structures.graph.UndirectedEdge;
 import utils.structures.powergraph.PowerGraph;
 
-public class IdentityPowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
+public class IdentityPowerGraphExtractor<N> implements
+																						PowerGraphExtractorInterface<N>
 {
 	public IdentityPowerGraphExtractor()
 	{
@@ -34,13 +35,15 @@ public class IdentityPowerGraphExtractor<N> implements PowerGraphExtractorInterf
 			final Set<N> lSecondPowerNode = new HashSet<N>();
 			lSecondPowerNode.add(lEdge.getSecondNode());
 
-			final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(lFirstPowerNode, lSecondPowerNode);
+			final Edge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(	lFirstPowerNode,
+																																	lSecondPowerNode);
 			lPowerGraph.addPowerEdge(lPowerEdge);
 		}
 		return lPowerGraph;
 	}
 
-	public PowerGraph<N> extractPowerGraph(final Graph<N, Edge<N>> pGraph, final double pProbabilityThresold)
+	public PowerGraph<N> extractPowerGraph(	final Graph<N, Edge<N>> pGraph,
+																					final double pProbabilityThresold)
 	{
 		return extractPowerGraph(pGraph);
 	}

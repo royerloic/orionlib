@@ -19,15 +19,15 @@ import java.util.regex.Pattern;
  */
 public class FlatTextTableReader
 {
-	private String											mColumnSplitRegex	= "\t";
+	private String mColumnSplitRegex = "\t";
 
-	private String											mSetSplitRegex		= "[|;]";
+	private String mSetSplitRegex = "[|;]";
 
-	private String											mNullRegex				= "[-]";
+	private String mNullRegex = "[-]";
 
-	private Set<Integer>								mExcludedColumns;
+	private Set<Integer> mExcludedColumns;
 
-	private FlatTextTableReaderHandler	mHandler;
+	private FlatTextTableReaderHandler mHandler;
 
 	/**
 	 * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 8, 2005
@@ -46,7 +46,10 @@ public class FlatTextTableReader
 		 *          Cell string
 		 * @return TODO
 		 */
-		boolean handleCell(int pLineCounter, int pColumnCounter, int pSetCounter, String pCellString);
+		boolean handleCell(	int pLineCounter,
+												int pColumnCounter,
+												int pSetCounter,
+												String pCellString);
 
 		boolean handleEndOfCell(int pLineCounter);
 	}
@@ -83,9 +86,11 @@ public class FlatTextTableReader
 	 * @param pIntegerArray
 	 * @param pMaximumNumberOfColumns
 	 */
-	public void setIncludedColumns(final int[] pIntegerArray, int pMaximumNumberOfColumns)
+	public void setIncludedColumns(	final int[] pIntegerArray,
+																	int pMaximumNumberOfColumns)
 	{
-		pMaximumNumberOfColumns = Math.max(pMaximumNumberOfColumns, pIntegerArray.length);
+		pMaximumNumberOfColumns = Math.max(	pMaximumNumberOfColumns,
+																				pIntegerArray.length);
 		for (int i = 1; i < pMaximumNumberOfColumns; i++)
 			mExcludedColumns.add(i);
 		for (final int lI : pIntegerArray)
@@ -144,7 +149,8 @@ public class FlatTextTableReader
 	 * @param pFileHasHeader
 	 * @throws IOException
 	 */
-	public void readStream(final BufferedReader pBufferedReader, final boolean pFileHasHeader) throws IOException
+	public void readStream(	final BufferedReader pBufferedReader,
+													final boolean pFileHasHeader) throws IOException
 	{
 		final Pattern lColumnSplitPattern = Pattern.compile(mColumnSplitRegex);
 		final Pattern lSetSplitPattern = Pattern.compile(mSetSplitRegex);
@@ -157,21 +163,25 @@ public class FlatTextTableReader
 		lineloop: while ((lLineString = pBufferedReader.readLine()) != null)
 		{
 			lLineCounter++;
-			final String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
+			final String[] lColumnsStringArray = lColumnSplitPattern.split(	lLineString,
+																																			-1);
 			int lColumnCounter = 0;
 			for (final String lColumnsElementString : lColumnsStringArray)
 			{
 				if (!mExcludedColumns.contains(lColumnCounter))
 				{
-					final String[] lSetStringArray = lSetSplitPattern.split(lColumnsElementString, -1);
+					final String[] lSetStringArray = lSetSplitPattern.split(lColumnsElementString,
+																																	-1);
 					int lSetCounter = 0;
 					for (final String element : lSetStringArray)
 					{
 						final Matcher lMatcher = lNullPattern.matcher(element);
 						if (!lMatcher.matches())
 						{
-							final boolean lSkipCell = !mHandler.handleCell(lLineCounter, lColumnCounter, lSetCounter,
-									element);
+							final boolean lSkipCell = !mHandler.handleCell(	lLineCounter,
+																															lColumnCounter,
+																															lSetCounter,
+																															element);
 							if (lSkipCell)
 								continue lineloop;
 							lSetCounter++;
@@ -186,9 +196,12 @@ public class FlatTextTableReader
 		}
 	}
 
-	public void readRessource(final Class pClass, final String pRessourceName, final boolean pFileHasHeader) throws IOException
+	public void readRessource(final Class pClass,
+														final String pRessourceName,
+														final boolean pFileHasHeader) throws IOException
 	{
-		final InputStream lStream = pClass.getClassLoader().getResourceAsStream(pRessourceName);
+		final InputStream lStream = pClass.getClassLoader()
+																			.getResourceAsStream(pRessourceName);
 		final InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
 		final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 		readStream(lBufferedReader, pFileHasHeader);

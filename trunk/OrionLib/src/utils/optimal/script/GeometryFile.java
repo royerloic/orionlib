@@ -27,7 +27,7 @@ public class GeometryFile extends Vector
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 8942281402647660871L;
+	private static final long serialVersionUID = 8942281402647660871L;
 
 	/**
 	 * @author MSc. Ing. Loic Royer
@@ -38,7 +38,7 @@ public class GeometryFile extends Vector
 		/**
 		 * 
 		 */
-		private static final long	serialVersionUID	= -5576308834875882579L;
+		private static final long serialVersionUID = -5576308834875882579L;
 
 		public final void addCoordinate(final double pCoordinate)
 		{
@@ -60,7 +60,7 @@ public class GeometryFile extends Vector
 		/**
 		 * 
 		 */
-		private static final long	serialVersionUID	= -7603009795190553675L;
+		private static final long serialVersionUID = -7603009795190553675L;
 
 		public final void a(final double pCoordinate)
 		{
@@ -83,7 +83,7 @@ public class GeometryFile extends Vector
 		/**
 		 * 
 		 */
-		private static final long	serialVersionUID	= -8515498979768191062L;
+		private static final long serialVersionUID = -8515498979768191062L;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class GeometryFile extends Vector
 		/**
 		 * 
 		 */
-		private static final long	serialVersionUID	= 3127293181449195730L;
+		private static final long serialVersionUID = 3127293181449195730L;
 
 		/**
 		 * @param pPoint
@@ -114,7 +114,7 @@ public class GeometryFile extends Vector
 			return (Point) elementAt(pIndex);
 		}
 
-		private int	mPointPointer;
+		private int mPointPointer;
 
 		/**
 		 * @return

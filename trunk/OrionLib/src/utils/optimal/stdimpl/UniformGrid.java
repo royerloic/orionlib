@@ -18,10 +18,10 @@ import utils.optimal.interf.IGridDefinition;
  */
 public class UniformGrid implements IGridDefinition
 {
-	private double	mRounding;
-	private int			mDimension;
-	private int			mNumberOfDivisions;
-	private double	mPerturbation;
+	private double mRounding;
+	private int mDimension;
+	private int mNumberOfDivisions;
+	private double mPerturbation;
 
 	/**
 	 * 
@@ -83,7 +83,10 @@ public class UniformGrid implements IGridDefinition
 
 			for (int k = 0; k < mDimension; k++)
 			{
-				double lVal = lIndex[k] * lDelta[k] + ((Math.random() * 2) - 1) * (lDelta[k] / 2) * mPerturbation;
+				double lVal = lIndex[k] * lDelta[k]
+											+ ((Math.random() * 2) - 1)
+											* (lDelta[k] / 2)
+											* mPerturbation;
 
 				lVal = (lVal < 0 ? 0 : lVal);
 				lVal = (lVal > 1 ? 1 : lVal);

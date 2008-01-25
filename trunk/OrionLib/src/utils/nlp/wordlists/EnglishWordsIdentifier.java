@@ -13,8 +13,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 {
 
 	@SuppressWarnings("unused")
-	
-	private static EnglishWordsIdentifier	cUniqueInstanceEnglishWordsIdentifier;
+	private static EnglishWordsIdentifier cUniqueInstanceEnglishWordsIdentifier;
 
 	/**
 	 * @return An unique instance of EnglishWordsRecognizer.
@@ -24,8 +23,8 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 		if (cUniqueInstanceEnglishWordsIdentifier == null)
 		{
 			cUniqueInstanceEnglishWordsIdentifier = new EnglishWordsIdentifier();
-			final InputStream lStream = EnglishWordsIdentifier.class.getClassLoader().getResourceAsStream(
-					"utils/nlp/wordlists/lists/EnglishWords.word.txt");
+			final InputStream lStream = EnglishWordsIdentifier.class.getClassLoader()
+																															.getResourceAsStream("utils/nlp/wordlists/lists/EnglishWords.word.txt");
 			final InputStreamReader lInputStreamReader = new InputStreamReader(lStream);
 			final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 			try
@@ -56,7 +55,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 			return false;
 		final String lAfterFirstCaracterString = pToken.substring(1);
 		final boolean lCorrectCapitalization = lAfterFirstCaracterString.toLowerCase()
-				.equals(lAfterFirstCaracterString);
+																																		.equals(lAfterFirstCaracterString);
 		return lCorrectCapitalization && super.isEntity(pToken.toLowerCase());
 	}
 }

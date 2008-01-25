@@ -11,21 +11,26 @@ import java.util.Set;
 
 import utils.nlp.LevenshteinDistance;
 
-public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotation>
+public class Annotation<O>	implements
+														ExchangeAnnotation<O>,
+														Comparable<Annotation>
 {
-	public O										mAnnotationObject;
-	public String								mAnnotatedFragment;
-	public Integer							mStart;
-	public String								mText;
+	public O mAnnotationObject;
+	public String mAnnotatedFragment;
+	public Integer mStart;
+	public String mText;
 
-	public Double								mConfidence			= 1.0;
+	public Double mConfidence = 1.0;
 
 	// Fields not part of the identity of the object (not used in equals and
 	// hascode)
-	public Map<String, Double>	mCaracteristics	= new HashMap<String, Double>();
-	public String								mAnnotatorName;
+	public Map<String, Double> mCaracteristics = new HashMap<String, Double>();
+	public String mAnnotatorName;
 
-	public Annotation(final String pText, final O pAnnotationObject, final String pAnnotatedFragment, final Integer pStart)
+	public Annotation(final String pText,
+										final O pAnnotationObject,
+										final String pAnnotatedFragment,
+										final Integer pStart)
 	{
 		super();
 		this.mText = pText;
@@ -57,22 +62,37 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 	@Override
 	public int hashCode()
 	{
-		return this.mText.hashCode() + this.mAnnotatedFragment.hashCode() + this.mStart + this.mAnnotationObject.hashCode();// +
+		return this.mText.hashCode() + this.mAnnotatedFragment.hashCode()
+						+ this.mStart
+						+ this.mAnnotationObject.hashCode();// +
 		// mConfidence.hashCode();
 	}
 
 	@Override
 	public String toString()
 	{
-		return this.mAnnotationObject + "\t" + this.mAnnotatedFragment + "\t" + this.mConfidence + "\t" + this.mStart + "\t"
-				+ this.mAnnotatedFragment.length() + "\t" + this.mCaracteristics.toString() + "\t" + this.mAnnotatorName;
+		return this.mAnnotationObject + "\t"
+						+ this.mAnnotatedFragment
+						+ "\t"
+						+ this.mConfidence
+						+ "\t"
+						+ this.mStart
+						+ "\t"
+						+ this.mAnnotatedFragment.length()
+						+ "\t"
+						+ this.mCaracteristics.toString()
+						+ "\t"
+						+ this.mAnnotatorName;
 	}
 
 	public List<String> toList()
 	{
 		return Arrays.asList(new String[]
-		{ this.mAnnotationObject.toString(), this.mAnnotatedFragment, this.mConfidence.toString(), this.mStart.toString(),
-				Integer.toString(this.mAnnotatedFragment.length()) });
+		{ this.mAnnotationObject.toString(),
+			this.mAnnotatedFragment,
+			this.mConfidence.toString(),
+			this.mStart.toString(),
+			Integer.toString(this.mAnnotatedFragment.length()) });
 	}
 
 	public static Annotation fromList(final List<String> pList)
@@ -87,7 +107,10 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 
 		// String lAnnotatorName = pList.get(5);
 
-		final Annotation lAnnotation = new Annotation(lAnnotatedFragment, lEntrezIdInteger, lAnnotatedFragment, lStart);
+		final Annotation lAnnotation = new Annotation(lAnnotatedFragment,
+																									lEntrezIdInteger,
+																									lAnnotatedFragment,
+																									lStart);
 		lAnnotation.mConfidence = lConfidenceDouble;
 		// lAnnotation.mAnnotatorName = lAnnotatorName;
 		return lAnnotation;
@@ -136,7 +159,8 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 		return lAnnotationsList;
 	}
 
-	public static List<Annotation> filterAnnotations(final List<Annotation> pAnnotationsList, final double pThreshold)
+	public static List<Annotation> filterAnnotations(	final List<Annotation> pAnnotationsList,
+																										final double pThreshold)
 	{
 		final List<Annotation> lAnnotationsList = new ArrayList<Annotation>();
 		if (!pAnnotationsList.isEmpty())
@@ -146,13 +170,15 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 		return lAnnotationsList;
 	}
 
-	public static void addOffset(final Collection<Annotation> pAnnotationSet, final int pSentenceOffset)
+	public static void addOffset(	final Collection<Annotation> pAnnotationSet,
+																final int pSentenceOffset)
 	{
 		for (final Annotation lAnnotation : pAnnotationSet)
 			lAnnotation.mStart += pSentenceOffset;
 	}
 
-	public static void setTextForAll(final String pText, final Set<Annotation> pAnnotationSet)
+	public static void setTextForAll(	final String pText,
+																		final Set<Annotation> pAnnotationSet)
 	{
 		for (final Annotation lAnnotation : pAnnotationSet)
 			lAnnotation.mText = pText;
@@ -171,7 +197,8 @@ public class Annotation<O> implements ExchangeAnnotation<O>, Comparable<Annotati
 			double lMaxSimilarity = 0;
 			for (final String lSynonym : lSynonymSet)
 			{
-				final double lSimilarity = LevenshteinDistance.similarity(lSynonym, lAnnotationString);
+				final double lSimilarity = LevenshteinDistance.similarity(lSynonym,
+																																	lAnnotationString);
 				if (lSimilarity > lMaxSimilarity)
 					lMaxSimilarity = lSimilarity;
 			}

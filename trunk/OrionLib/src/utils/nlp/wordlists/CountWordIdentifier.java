@@ -10,11 +10,13 @@ public class CountWordIdentifier extends GenericWordIdentifier
 {
 
 	@SuppressWarnings("unused")
-	//private static final Logger	cLogger	= Logger.getLogger(CountWordIdentifier.class);
+	// private static final Logger cLogger =
+	// Logger.getLogger(CountWordIdentifier.class);
+	private final boolean mCaseSensitive;
 
-	private final boolean				mCaseSensitive;
-
-	public CountWordIdentifier(final Class pClass, final String[] pResourceArray, final boolean pCaseSensitive)
+	public CountWordIdentifier(	final Class pClass,
+															final String[] pResourceArray,
+															final boolean pCaseSensitive)
 	{
 		super();
 		mCaseSensitive = pCaseSensitive;
@@ -26,7 +28,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 			catch (final IOException e)
 			{
 				e.printStackTrace();
-				//cLogger.info(e);
+				// cLogger.info(e);
 			}
 	}
 

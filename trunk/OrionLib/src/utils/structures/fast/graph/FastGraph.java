@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -169,7 +168,7 @@ public class FastGraph<N> implements Serializable
 
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//") )
+			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("EDGEFORMAT\t"))

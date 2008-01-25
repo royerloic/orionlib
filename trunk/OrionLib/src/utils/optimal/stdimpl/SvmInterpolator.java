@@ -19,26 +19,28 @@ import utils.optimal.interf.IObjectiveFunction;
  */
 public class SvmInterpolator implements IInterpolator, Cloneable
 {
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private IExperimentDatabase	mExperimentDatabase;
+	private IExperimentDatabase mExperimentDatabase;
 
-	private SVMRegression				mSVMRegression;
+	private SVMRegression mSVMRegression;
 
-	private boolean							mParameterSearch;
+	private boolean mParameterSearch;
 
-	private double							mGamma;
+	private double mGamma;
 
-	private double							mCost;
+	private double mCost;
 
-	private double							mNu;
+	private double mNu;
 
-	private int									mInputDimension;
+	private int mInputDimension;
 
 	/**
 	 * 
 	 */
-	public SvmInterpolator(final double pGamma, final double pCost, final double pNu)
+	public SvmInterpolator(	final double pGamma,
+													final double pCost,
+													final double pNu)
 	{
 		super();
 
@@ -158,12 +160,16 @@ public class SvmInterpolator implements IInterpolator, Cloneable
 
 			final ILabelledVectorSet lLabelledVectorSet = new LabelledVectorSet();
 
-			mInputDimension = mExperimentDatabase.getExperiment(0).getInput().getDimension();
+			mInputDimension = mExperimentDatabase	.getExperiment(0)
+																						.getInput()
+																						.getDimension();
 
 			for (int i = 0; i < lNumberOfExperiments; i++)
 			{
-				final INumericalVector lInputVector = mExperimentDatabase.getExperiment(i).getInput();
-				final INumericalVector lOutputVector = mExperimentDatabase.getExperiment(i).getOutput();
+				final INumericalVector lInputVector = mExperimentDatabase	.getExperiment(i)
+																																	.getInput();
+				final INumericalVector lOutputVector = mExperimentDatabase.getExperiment(i)
+																																	.getOutput();
 
 				final double lValue = mObjectiveFunction.evaluate(lOutputVector);
 				lLabelledVectorSet.addVector(lInputVector, lValue);

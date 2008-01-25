@@ -7,10 +7,8 @@ import java.util.HashMap;
 public class ProteinSet implements Serializable
 {
 
-	protected HashMap<String,Protein> mIdToProteinMap = new HashMap<String,Protein>();
+	protected HashMap<String, Protein> mIdToProteinMap = new HashMap<String, Protein>();
 
-
-	
 	public ProteinSet()
 	{
 		super();
@@ -18,7 +16,7 @@ public class ProteinSet implements Serializable
 
 	public void add(Protein pProtein)
 	{
-		mIdToProteinMap.put(pProtein.getId(), pProtein);		
+		mIdToProteinMap.put(pProtein.getId(), pProtein);
 	}
 
 	@Override
@@ -48,9 +46,6 @@ public class ProteinSet implements Serializable
 		return mIdToProteinMap.values();
 	}
 
-	
-
-		
 	@Override
 	public int hashCode()
 	{
@@ -81,8 +76,4 @@ public class ProteinSet implements Serializable
 		return true;
 	}
 
-
-	
-	
-	
 }

@@ -34,7 +34,7 @@ import utils.structures.graph.Node;
 
 public class MainYeast
 {
-
+/*
 	@Test
 	public void main() throws IOException, ClassNotFoundException
 	{
@@ -82,17 +82,13 @@ public class MainYeast
 			final FileWriter lFileWriter = new FileWriter("test.txt");
 			final PrintWriter lPrintWriter = new PrintWriter(lFileWriter);
 
-			/*************************************************************************
-			 * final String lSH2 = "IPR000980"; final String lSH3 = "IPR001452"; final
-			 * String lPDZ = "IPR001478"; collectFor(lProteome, lDomainIndex, lPDZ,
-			 * lPrintWriter);/
-			 ************************************************************************/
+
 
 			Set<String> lDomainInterProIdSet = lDomainIndex.getDomainInterProIdSet();
 			for (String lInterProId : lDomainInterProIdSet)
 			{
 				collectFor(lProteome, lDomainIndex, lInterProId, lPrintWriter);
-			}/**/
+			}
 
 		}
 		catch (Throwable e)
@@ -100,7 +96,7 @@ public class MainYeast
 			e.printStackTrace();
 			fail("Exception: " + e);
 		}
-	}
+	}/**/
 
 	public void collectFor(	Proteome pProteome,
 													DomainIndex pDomainIndex,
@@ -262,5 +258,5 @@ public class MainYeast
 
 			}
 
-	}
+	}/**/
 }

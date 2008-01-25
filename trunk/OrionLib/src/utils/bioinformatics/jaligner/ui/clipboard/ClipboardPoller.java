@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 package utils.bioinformatics.jaligner.ui.clipboard;
 
 import java.util.logging.Level;
@@ -27,70 +27,86 @@ import java.util.logging.Logger;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class ClipboardPoller extends Thread {
+public class ClipboardPoller extends Thread
+{
 	/**
 	 * Sleeping interval
 	 */
 	private static final int SLEEPING_TIME_IN_MILLISECONDS = 1500;
-	
+
 	/**
 	 * Clipboard listener {@link ClipboardListener}
 	 */
 	private ClipboardListener listener = null;
-	
+
 	/**
 	 * Running flag
 	 */
 	private boolean running = false;
-	
+
 	/**
 	 * Logger
 	 */
 	private Logger logger = null;
-	
+
 	/**
 	 * Constructor
+	 * 
 	 * @param listener
 	 */
-	public ClipboardPoller(ClipboardListener listener) {
+	public ClipboardPoller(ClipboardListener listener)
+	{
 		logger = Logger.getLogger(this.getClass().getName());
-	    this.listener = listener;
+		this.listener = listener;
 	}
-	
+
 	/**
 	 * Runs the thread
 	 */
 	@Override
-	public void run() {
-	    logger.info("Started");
-		while (running) {
-			String contents = ClipboardHandlerFactory.getClipboardHandler().getContents();
+	public void run()
+	{
+		logger.info("Started");
+		while (running)
+		{
+			String contents = ClipboardHandlerFactory	.getClipboardHandler()
+																								.getContents();
 			listener.clipboardCheck(contents);
-			try {
+			try
+			{
 				Thread.sleep(SLEEPING_TIME_IN_MILLISECONDS);
-			} catch (Exception e){
-			    logger.log(Level.SEVERE, "Failed sleeping: " + e.getMessage(), e);
+			}
+			catch (Exception e)
+			{
+				logger.log(Level.SEVERE, "Failed sleeping: " + e.getMessage(), e);
 				running = false;
 			}
 		}
 		logger.info("Stopped");
 	}
-	
+
 	/**
 	 * Starts the thread
 	 */
 	@Override
-	public void start() {
-	    logger.info("Starting...");
-	    if (!running) {
-	        if (listener != null) {
-	            running = true;
-	        } else {
-	            logger.warning("No listener");
-	        }
-	    } else {
-	        logger.warning("Already started");
-	    }
-	    super.start();
+	public void start()
+	{
+		logger.info("Starting...");
+		if (!running)
+		{
+			if (listener != null)
+			{
+				running = true;
+			}
+			else
+			{
+				logger.warning("No listener");
+			}
+		}
+		else
+		{
+			logger.warning("Already started");
+		}
+		super.start();
 	}
 }

@@ -18,8 +18,8 @@ public class SvmModel
 
 	private static class UniProtPair
 	{
-		public String	mUniProt1;
-		public String	mUniProt2;
+		public String mUniProt1;
+		public String mUniProt2;
 
 		public UniProtPair(final String pUniProt1, final String pUniProt2)
 		{
@@ -35,14 +35,14 @@ public class SvmModel
 		}
 	}
 
-	List<UniProtPair>						mUniProtInteractionPairsList	= new ArrayList<UniProtPair>();
+	List<UniProtPair> mUniProtInteractionPairsList = new ArrayList<UniProtPair>();
 
-	Map<String, List<Integer>>	mUniprot2GoListMap						= new HashMap<String, List<Integer>>();
+	Map<String, List<Integer>> mUniprot2GoListMap = new HashMap<String, List<Integer>>();
 
 	private static class GoIdAndDistance
 	{
-		Integer	mGoId;
-		Integer	mDistance;
+		Integer mGoId;
+		Integer mDistance;
 
 		public GoIdAndDistance(final Integer pGoId, final Integer pDistance)
 		{
@@ -77,12 +77,12 @@ public class SvmModel
 		}
 	}
 
-	Map<Integer, Set<GoIdAndDistance>>	mGoIdToGoIdAndDistanceSetMap	= new HashMap<Integer, Set<GoIdAndDistance>>();
+	Map<Integer, Set<GoIdAndDistance>> mGoIdToGoIdAndDistanceSetMap = new HashMap<Integer, Set<GoIdAndDistance>>();
 
 	private static class GoIdPair
 	{
-		public int	mGoId1;
-		public int	mGoId2;
+		public int mGoId1;
+		public int mGoId2;
 
 		public GoIdPair(final Integer pGoId1, final Integer pGoId2)
 		{
@@ -95,8 +95,7 @@ public class SvmModel
 		public boolean equals(final Object pObj)
 		{
 			final GoIdPair lGoIdPair = (GoIdPair) pObj;
-			return ((mGoId1 == lGoIdPair.mGoId1) && (mGoId2 == lGoIdPair.mGoId2))
-					|| ((mGoId1 == lGoIdPair.mGoId2) && (mGoId2 == lGoIdPair.mGoId1));
+			return ((mGoId1 == lGoIdPair.mGoId1) && (mGoId2 == lGoIdPair.mGoId2)) || ((mGoId1 == lGoIdPair.mGoId2) && (mGoId2 == lGoIdPair.mGoId1));
 
 		}
 
@@ -113,13 +112,13 @@ public class SvmModel
 		}
 	}
 
-	Map<GoIdPair, Integer>	mGoIdPairToIndexMap	= new HashMap<GoIdPair, Integer>();
-	Integer									mNextFreeIndex			= 0;
+	Map<GoIdPair, Integer> mGoIdPairToIndexMap = new HashMap<GoIdPair, Integer>();
+	Integer mNextFreeIndex = 0;
 
 	private static class SparseVectorEntry
 	{
-		Integer	mIndex;
-		Double	mValue;
+		Integer mIndex;
+		Double mValue;
 
 		public SparseVectorEntry(final Integer pIndex, final Double pValue)
 		{
@@ -141,7 +140,8 @@ public class SvmModel
 			final String lUniprot2GoFileName = pParameters.get("uniprot2go");
 			final File lUniprot2GoFile = new File(lUniprot2GoFileName);
 
-			final List<List<String>> lUniprot2GoMatrix = LineReader.readMatrixFromFile(lUniprot2GoFile, false);
+			final List<List<String>> lUniprot2GoMatrix = LineReader.readMatrixFromFile(	lUniprot2GoFile,
+																																									false);
 
 			for (final List<String> lList : lUniprot2GoMatrix)
 			{
@@ -162,7 +162,8 @@ public class SvmModel
 			final String lPairsFileName = pParameters.get("pairs");
 			final File lPairsFile = new File(lPairsFileName);
 
-			final List<List<String>> lPairsMatrix = LineReader.readMatrixFromFile(lPairsFile, false);
+			final List<List<String>> lPairsMatrix = LineReader.readMatrixFromFile(lPairsFile,
+																																						false);
 
 			for (final List<String> lList : lPairsMatrix)
 			{
@@ -186,7 +187,8 @@ public class SvmModel
 						for (final String lUniProtId2 : lValidatedUniProtIdList)
 							if (!lUniProtId1.equals(lUniProtId2))
 							{
-								final UniProtPair lPair = new UniProtPair(lUniProtId1, lUniProtId2);
+								final UniProtPair lPair = new UniProtPair(lUniProtId1,
+																													lUniProtId2);
 								lPairSet.add(lPair);
 							}
 				}
@@ -205,7 +207,8 @@ public class SvmModel
 			final String lGo2GoFileName = pParameters.get("go2go");
 			final File lGo2GoFile = new File(lGo2GoFileName);
 
-			final List<List<String>> lGo2GoMatrix = LineReader.readMatrixFromFile(lGo2GoFile, false);
+			final List<List<String>> lGo2GoMatrix = LineReader.readMatrixFromFile(lGo2GoFile,
+																																						false);
 
 			for (final List<String> lList : lGo2GoMatrix)
 			{
@@ -224,7 +227,8 @@ public class SvmModel
 						lGoIdAndDistanceSet = new HashSet<GoIdAndDistance>();
 						mGoIdToGoIdAndDistanceSetMap.put(lGoChildId, lGoIdAndDistanceSet);
 					}
-					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(lGoParentId, -lDistance);
+					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(	lGoParentId,
+																																				-lDistance);
 					lGoIdAndDistanceSet.add(lGoIdAndDistance);
 				}
 
@@ -236,7 +240,8 @@ public class SvmModel
 						lGoIdAndDistanceSet = new HashSet<GoIdAndDistance>();
 						mGoIdToGoIdAndDistanceSetMap.put(lGoParentId, lGoIdAndDistanceSet);
 					}
-					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(lGoChildId, lDistance);
+					final GoIdAndDistance lGoIdAndDistance = new GoIdAndDistance(	lGoChildId,
+																																				lDistance);
 					lGoIdAndDistanceSet.add(lGoIdAndDistance);
 				}
 
@@ -296,7 +301,8 @@ public class SvmModel
 				final GoIdPair lGoIdPair = lEntry.getKey();
 				final Integer lIndex = getIndexForGoIdPair(lGoIdPair);
 				final Double lValue = lEntry.getValue();
-				final SparseVectorEntry lSparseVectorEntry = new SparseVectorEntry(lIndex, lValue);
+				final SparseVectorEntry lSparseVectorEntry = new SparseVectorEntry(	lIndex,
+																																						lValue);
 				lSparseVectorEntryList.add(lSparseVectorEntry);
 			}
 

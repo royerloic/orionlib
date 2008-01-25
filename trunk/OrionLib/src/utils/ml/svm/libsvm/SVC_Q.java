@@ -11,15 +11,16 @@ package utils.ml.svm.libsvm;
 //
 class SVC_Q extends Kernel
 {
-	private final byte[]	y;
+	private final byte[] y;
 
-	private final Cache		cache;
+	private final Cache cache;
 
 	SVC_Q(final Problem prob, final Parameter param, final byte[] y_)
 	{
 		super(prob.mNumberOfVectors, prob.mVectorsTable, param);
 		y = y_.clone();
-		cache = new Cache(prob.mNumberOfVectors, (int) (param.cache_size * (1 << 20)));
+		cache = new Cache(prob.mNumberOfVectors,
+											(int) (param.cache_size * (1 << 20)));
 	}
 
 	@Override

@@ -8,6 +8,7 @@ public interface PowerGraphExtractorInterface<N>
 {
 	public PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph);
 
-	public PowerGraph<N> extractPowerGraph(Graph<N, Edge<N>> pGraph, double pProbabilityThresold);
+	public PowerGraph<N> extractPowerGraph(	Graph<N, Edge<N>> pGraph,
+																					double pProbabilityThresold);
 
 }

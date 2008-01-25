@@ -5,13 +5,13 @@ public class Problem implements java.io.Serializable, Cloneable
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 3843718065256454215L;
+	private static final long serialVersionUID = 3843718065256454215L;
 
-	public int			mNumberOfVectors;
+	public int mNumberOfVectors;
 
-	public double[]	mClass;
+	public double[] mClass;
 
-	public Node[][]	mVectorsTable;
+	public Node[][] mVectorsTable;
 
 	/**
 	 * @see utils.java.IObject#clone()

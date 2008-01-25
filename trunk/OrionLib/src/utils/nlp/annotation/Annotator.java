@@ -6,5 +6,6 @@ public interface Annotator extends ExchangeAnnotator
 {
 	Collection<? extends Annotation> annotate(String pText);
 
-	Collection<? extends Annotation> annotate(String pSentence, int pSentenceOffset);
+	Collection<? extends Annotation> annotate(String pSentence,
+																						int pSentenceOffset);
 }

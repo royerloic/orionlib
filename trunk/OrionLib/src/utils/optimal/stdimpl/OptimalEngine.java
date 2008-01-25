@@ -41,27 +41,27 @@ import bsh.Interpreter;
 public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 {
 
-	static Logger									mLogger	= Logger.getLogger(OptimalEngine.class);
+	static Logger mLogger = Logger.getLogger(OptimalEngine.class);
 
-	private Interpreter						mInterpreter;
+	private Interpreter mInterpreter;
 
-	private IExperimentDatabase		mExperimentDatabase;
+	private IExperimentDatabase mExperimentDatabase;
 
-	private IObjectiveFunction		mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private IInterpolator					mInterpolator;
+	private IInterpolator mInterpolator;
 
-	private IDoeStrategy					mDoeStrategy;
+	private IDoeStrategy mDoeStrategy;
 
-	private IOptimalEventListener	mOptimalEventListener;
+	private IOptimalEventListener mOptimalEventListener;
 
-	private boolean								mEngineValidated;
+	private boolean mEngineValidated;
 
-	private boolean								mFeedExperimentFunctions;
+	private boolean mFeedExperimentFunctions;
 
-	List													mExperimentFunctionStubsList;
+	List mExperimentFunctionStubsList;
 
-	List													mExperimentQueue;
+	List mExperimentQueue;
 
 	/**
 	 * 
@@ -81,7 +81,8 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 		{
 			final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
 			final Date lDate = new Date();
-			final FileOutputStream output = new FileOutputStream("Optimal." + mDateFormat.format(lDate) + ".log.html");
+			final FileOutputStream output = new FileOutputStream("Optimal." + mDateFormat.format(lDate)
+																														+ ".log.html");
 			appender = new WriterAppender(layout, output);
 			mLogger.addAppender(appender);
 		}
@@ -250,7 +251,8 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 		{
 			lNewExperimentInputVector = mDoeStrategy.designNewExperiment();
 			if (lNewExperimentInputVector == null)
-				mLogger.error("The DOE strategy: " + mDoeStrategy + " could not design a new experiment.");
+				mLogger.error("The DOE strategy: " + mDoeStrategy
+											+ " could not design a new experiment.");
 		}
 		else
 			mLogger.error("call to designNewExperiment from a non validated OptimalEngine.");
@@ -358,7 +360,8 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#experimentDone(utils.optimal.interf.IExperimentFunctionStub,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
+	public void experimentDone(	final IExperimentFunctionStub pExperimentFunctionStub,
+															final IExperiment pExperiment)
 	{
 		mLogger.info("experiment finished: " + pExperiment);
 		final boolean lBetter = mExperimentDatabase.addExperiment(pExperiment);
@@ -380,7 +383,8 @@ public class OptimalEngine implements IOptimalEngine, IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#newBestExperiment(utils.optimal.interf.IExperimentDatabase,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment)
+	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase,
+																final IExperiment pExperiment)
 	{
 		mLogger.info("new best experiment: " + pExperiment);
 		mOptimalEventListener.newBestExperiment(pExperimentDatabase, pExperiment);

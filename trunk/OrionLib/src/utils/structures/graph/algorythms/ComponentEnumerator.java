@@ -8,9 +8,9 @@ import utils.structures.graph.Graph;
 
 public class ComponentEnumerator<N>
 {
-	Graph<N, Edge<N>>				mGraph;
+	Graph<N, Edge<N>> mGraph;
 
-	Set<Graph<N, Edge<N>>>	mComponentSet;
+	Set<Graph<N, Edge<N>>> mComponentSet;
 
 	public ComponentEnumerator(final Graph pGraphInterface)
 	{

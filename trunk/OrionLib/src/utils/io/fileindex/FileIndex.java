@@ -13,17 +13,16 @@ import java.util.regex.Pattern;
 
 public class FileIndex implements Serializable
 {
-	private final File																mFile;
-	private final String															mColumnSeparatorRegex;
-	private final Pattern															mColumnSeparatorPattern;
-	private HashMap<String, Long>											mIndexMap	= new HashMap<String, Long>();
+	private final File mFile;
+	private final String mColumnSeparatorRegex;
+	private final Pattern mColumnSeparatorPattern;
+	private HashMap<String, Long> mIndexMap = new HashMap<String, Long>();
 
-	private File																			IndexFile;
-	private RandomAccessFile													mRandomAccessFile;
+	private File IndexFile;
+	private RandomAccessFile mRandomAccessFile;
 
-	private HashMap<String, SoftReference<String[]>>	mCacheMap	= new HashMap<String, SoftReference<String[]>>();
-	
-	
+	private HashMap<String, SoftReference<String[]>> mCacheMap = new HashMap<String, SoftReference<String[]>>();
+
 	public FileIndex(File pFile, String pColumnSeparatorRegex)
 	{
 		super();
@@ -50,7 +49,7 @@ public class FileIndex implements Serializable
 			}
 			lPosition += nextLine.length() + lineSep.length();
 		}
-		if(mFile.length()!=lPosition)
+		if (mFile.length() != lPosition)
 			throw new RuntimeException("Line Separator of wrong size -> index corrupt");
 		lBufferedReader.close();
 	}
@@ -77,11 +76,11 @@ public class FileIndex implements Serializable
 	public final String[] getLineAndCache(final String pValue) throws IOException
 	{
 		SoftReference<String[]> lSoftRef = mCacheMap.get(pValue);
-		if(lSoftRef==null || lSoftRef.get()==null)
+		if (lSoftRef == null || lSoftRef.get() == null)
 		{
 			final String[] lColumnArray = getLine(pValue);
 			lSoftRef = new SoftReference<String[]>(lColumnArray);
-		}		
+		}
 		return lSoftRef.get();
 	}
 

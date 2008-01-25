@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Node implements Serializable
 {
-	private String	mName;
-	private int			mHashCode;
+	private String mName;
+	private int mHashCode;
 
 	public Node(final String pName)
 	{

@@ -91,7 +91,9 @@ public class DoeStrategyHelper
 		return lCenter;
 	}
 
-	static INumericalVector genetic(final IScalarFunction pFunction, final int pSteps, final int pSize)
+	static INumericalVector genetic(final IScalarFunction pFunction,
+																	final int pSteps,
+																	final int pSize)
 	{
 		final int lDimension = pFunction.getInputDimension();
 		final INumericalVector lCenter = new NumericalVector(lDimension);

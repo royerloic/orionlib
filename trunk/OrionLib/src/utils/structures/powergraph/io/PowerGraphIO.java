@@ -34,7 +34,7 @@ public class PowerGraphIO
 		final List<List<String>> lBubbleFormat = new ArrayList<List<String>>();
 
 		final Map<Set<N>, String> lPowerNodeToNameMap = new HashMap<Set<N>, String>();
-		
+
 		for (final N lNode : pPowerGraph.getNodeSet())
 		{
 			final List<String> lNodeEntry = new ArrayList<String>();
@@ -43,7 +43,7 @@ public class PowerGraphIO
 			lBubbleFormat.add(lNodeEntry);
 			lPowerNodeToNameMap.put(Collections.singleton(lNode), lNode.toString());
 		}
-		
+
 		int lPowerNodeCounter = 0;
 		for (final Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
 			if (lPowerNode.size() > 1)
@@ -137,8 +137,6 @@ public class PowerGraphIO
 				Set<Node> lPowerNode1 = lPowerNodeNameToSetMap.get(lNodeOrSetName1);
 				Set<Node> lPowerNode2 = lPowerNodeNameToSetMap.get(lNodeOrSetName2);
 
-				
-
 				if (lPowerNode1 == null)
 				{
 					lPowerNode1 = new HashSet<Node>();
@@ -155,7 +153,7 @@ public class PowerGraphIO
 
 				final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(	lPowerNode1,
 																																					lPowerNode2);
-				
+
 				if (lLine.size() == 4)
 				{
 					final String lConfidenceString = lLine.get(3);
@@ -166,7 +164,6 @@ public class PowerGraphIO
 				{
 					lPowerEdge.setConfidence(1);
 				}
-				
 
 				final Double lConfidence1 = lPowerNodeNameToConfidenceValueMap.get(lNodeOrSetName1);
 				if (lConfidence1 != null)

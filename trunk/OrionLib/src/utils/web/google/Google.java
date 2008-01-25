@@ -33,30 +33,30 @@ import utils.web.WebPageFetcher;
 
 public class Google implements Iterable<Google.GoogleResult>
 {
-	private String							mSearchString;
+	private String mSearchString;
 
-	private String							mGoogleServer;
+	private String mGoogleServer;
 
-	private String							mFileType;
+	private String mFileType;
 
-	private String							mLocalCode;
+	private String mLocalCode;
 
-	private static final String	cGOOGLE_MAIN_SERVER	= "www.google.com";
+	private static final String cGOOGLE_MAIN_SERVER = "www.google.com";
 
-	private WebPageFetcher			mWebPageFetcher;
+	private WebPageFetcher mWebPageFetcher;
 
-	private String							mHeader;
+	private String mHeader;
 
-	private StringBuilder				mContent;
+	private StringBuilder mContent;
 
-	private Pattern							mPattern;
+	private Pattern mPattern;
 
-	private Matcher							mMatcher;
+	private Matcher mMatcher;
 
 	public class GoogleResult
 	{
-		String	mSnippet;
-		String	mUrl;
+		String mSnippet;
+		String mUrl;
 	}
 
 	public Google()
@@ -82,26 +82,29 @@ public class Google implements Iterable<Google.GoogleResult>
 	}
 
 	static final Random cRandom = new Random(System.currentTimeMillis());
-	
+
 	public void doQuery() throws IOException
 	{
-		final String lQuery = buildGoogleQueryURL(mGoogleServer, mLocalCode, mSearchString, mFileType);
-		//System.out.println("Query:" + lQuery);
-		
+		final String lQuery = buildGoogleQueryURL(mGoogleServer,
+																							mLocalCode,
+																							mSearchString,
+																							mFileType);
+		// System.out.println("Query:" + lQuery);
+
 		try
 		{
-			Thread.sleep(cRandom.nextInt(30)+1);
+			Thread.sleep(cRandom.nextInt(30) + 1);
 		}
 		catch (InterruptedException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		mWebPageFetcher = new WebPageFetcher(lQuery);
 		mWebPageFetcher.setReferer(mGoogleServer);
 		mHeader = mWebPageFetcher.getPageHeader();
-		//System.out.println(mHeader);
+		// System.out.println(mHeader);
 		mContent = mWebPageFetcher.getPageContent();
 		if (mPattern != null)
 			mMatcher = mPattern.matcher(mContent);
@@ -118,8 +121,13 @@ public class Google implements Iterable<Google.GoogleResult>
 			lTypeString = "+filetype%3A" + pFileType;
 
 		final String lSearchString = pSearchString.trim().replaceAll("\\s+", "+");
-		final String lQueryUrl = "http://" + mGoogleServer + "/search?hl=" + pLocalCode + "&q=" + lSearchString
-				+ lTypeString + "&btnG=Search";
+		final String lQueryUrl = "http://" + mGoogleServer
+															+ "/search?hl="
+															+ pLocalCode
+															+ "&q="
+															+ lSearchString
+															+ lTypeString
+															+ "&btnG=Search";
 
 		return lQueryUrl;
 	}
@@ -131,29 +139,32 @@ public class Google implements Iterable<Google.GoogleResult>
 
 	public String[] tokenize()
 	{
-		String[] lStringArray = StringUtils.split(mContent, "(\\<\\!\\-\\-[a-z]\\-\\-\\>)|(\\<br\\>)", 0);
+		String[] lStringArray = StringUtils.split(mContent,
+																							"(\\<\\!\\-\\-[a-z]\\-\\-\\>)|(\\<br\\>)",
+																							0);
 		return lStringArray;
 	}
-	
-	
-	static Pattern cScorePattern = Pattern.compile("Results .*? of (?:about )?\\<b\\>([0-9\\,]+)\\<\\/b\\> for \\<b\\>",Pattern.MULTILINE);
-	static Pattern cNoMatchPattern = Pattern.compile("did not match any documents",Pattern.MULTILINE);
-	
+
+	static Pattern cScorePattern = Pattern.compile(	"Results .*? of (?:about )?\\<b\\>([0-9\\,]+)\\<\\/b\\> for \\<b\\>",
+																									Pattern.MULTILINE);
+	static Pattern cNoMatchPattern = Pattern.compile(	"did not match any documents",
+																										Pattern.MULTILINE);
+
 	public int getScore()
 	{
-		Matcher lMatcher =  cScorePattern.matcher(mContent);
-		if(lMatcher.find())
+		Matcher lMatcher = cScorePattern.matcher(mContent);
+		if (lMatcher.find())
 		{
 			final String lScoreString = lMatcher.group(1);
 			final String lScoreStringWithoutComma = lScoreString.replace(",", "");
 			final int lScore = Integer.parseInt(lScoreStringWithoutComma);
 			return lScore;
 		}
-		//System.out.println(mSearchString);
-		//System.out.println(mContent);
-		//throw new RuntimeException("cannot find score");
+		// System.out.println(mSearchString);
+		// System.out.println(mContent);
+		// throw new RuntimeException("cannot find score");
 		Matcher lMatcherNoMatch = cNoMatchPattern.matcher(mContent);
-		if(lMatcherNoMatch.find())
+		if (lMatcherNoMatch.find())
 		{
 			return 0;
 		}

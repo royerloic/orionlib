@@ -8,20 +8,19 @@ import utils.io.tabular.TabularFile;
 
 public class TabularFileTest
 {
-	
+
 	@Test
 	public void testFileIndexTest() throws IOException
 	{
 		File lCurrentFolder = new File(".");
 		System.out.println(lCurrentFolder.getAbsolutePath());
 		File lFile = new File("bin/utils/io/tabular/test/test.tab.txt");
-		TabularFile lTabularFile = new TabularFile(lFile,true);
-		
+		TabularFile lTabularFile = new TabularFile(lFile, true);
+
 		lTabularFile.read();
-		
+
 		System.out.println(lTabularFile);
-		
-		
+
 	}
-		
+
 }

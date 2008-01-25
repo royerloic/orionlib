@@ -5,13 +5,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>> implements Map3<K1, K2, K3, V>
+import utils.structures.Map3.Entry;
+
+public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	implements
+																																							Map3<K1, K2, K3, V>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 980678324126293752L;
+	private static final long serialVersionUID = 980678324126293752L;
 
 	/*
 	 * (non-Javadoc)
@@ -41,9 +44,13 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>> im
 	public void putAll(final Map3<K1, K2, K3, V> pMapMap)
 	{
 		for (final Map.Entry<K1, Map<K2, Map<K3, V>>> lEntry : pMapMap.entrySet())
-			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry.getValue().entrySet())
+			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry	.getValue()
+																														.entrySet())
 				for (final Map.Entry<K3, V> lEntry3 : lEntry2.getValue().entrySet())
-					put(lEntry.getKey(), lEntry2.getKey(), lEntry3.getKey(), lEntry3.getValue());
+					put(lEntry.getKey(),
+							lEntry2.getKey(),
+							lEntry3.getKey(),
+							lEntry3.getValue());
 	}
 
 	/*
@@ -57,14 +64,18 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>> im
 		return get(pKey1).get(pKey2).get(pKey3);
 	}
 
-	public static class HashMap3Entry<K1, K2, K3, V> implements Entry<K1, K2, K3, V>
+	public static class HashMap3Entry<K1, K2, K3, V>	implements
+																										Entry<K1, K2, K3, V>
 	{
-		private final K1	mKey1;
-		private final K2	mKey2;
-		private final K3	mKey3;
-		private final V		mValue;
+		private final K1 mKey1;
+		private final K2 mKey2;
+		private final K3 mKey3;
+		private final V mValue;
 
-		public HashMap3Entry(final K1 pKey1, final K2 pKey2, final K3 pKey3, final V pValue)
+		public HashMap3Entry(	final K1 pKey1,
+													final K2 pKey2,
+													final K3 pKey3,
+													final V pValue)
 		{
 			this.mKey1 = pKey1;
 			this.mKey2 = pKey2;
@@ -98,11 +109,14 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>> im
 	{
 		final Set<Entry<K1, K2, K3, V>> lEntrySet = new HashSet<Entry<K1, K2, K3, V>>();
 		for (final Map.Entry<K1, Map<K2, Map<K3, V>>> lEntry1 : entrySet())
-			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry1.getValue().entrySet())
+			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry1.getValue()
+																														.entrySet())
 				for (final Map.Entry<K3, V> lEntry3 : lEntry2.getValue().entrySet())
 				{
-					final Entry<K1, K2, K3, V> lAllKeyEntry = new HashMap3Entry<K1, K2, K3, V>(lEntry1.getKey(), lEntry2
-							.getKey(), lEntry3.getKey(), lEntry3.getValue());
+					final Entry<K1, K2, K3, V> lAllKeyEntry = new HashMap3Entry<K1, K2, K3, V>(	lEntry1.getKey(),
+																																											lEntry2.getKey(),
+																																											lEntry3.getKey(),
+																																											lEntry3.getValue());
 					lEntrySet.add(lAllKeyEntry);
 				}
 		return lEntrySet;

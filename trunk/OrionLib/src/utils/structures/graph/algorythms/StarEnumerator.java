@@ -17,13 +17,13 @@ import utils.structures.graph.Graph;
 
 public class StarEnumerator<N>
 {
-	Graph<N,Edge<N>>														mGraph;
+	Graph<N, Edge<N>> mGraph;
 
-	Set<Graph>											mStarSet;
+	Set<Graph> mStarSet;
 
-	SortedMap<Integer, Integer>			mConnectivityStatistics;
+	SortedMap<Integer, Integer> mConnectivityStatistics;
 
-	List<StarEnumerator<N>.Star<N>>	mStarList;
+	List<StarEnumerator<N>.Star<N>> mStarList;
 
 	/**
 	 * @author loic (<href>royer@biotec.tu-dresden.de</href>) Dec 5, 2005
@@ -31,13 +31,13 @@ public class StarEnumerator<N>
 	 */
 	public class Star<N> implements Comparable<Star<N>>
 	{
-		public Graph	mStarGraph;
+		public Graph mStarGraph;
 
-		public N			mStarNode;
+		public N mStarNode;
 
-		public Set<N>	mStarNodesSet;
+		public Set<N> mStarNodesSet;
 
-		public int		mConnectivity;
+		public int mConnectivity;
 
 		public int compareTo(final Star pO)
 		{
@@ -47,7 +47,10 @@ public class StarEnumerator<N>
 		@Override
 		public String toString()
 		{
-			return "Star(" + this.mStarNode + ", " + this.mStarGraph.getNodeSet() + ")";
+			return "Star(" + this.mStarNode
+							+ ", "
+							+ this.mStarGraph.getNodeSet()
+							+ ")";
 		}
 
 	}
@@ -55,7 +58,7 @@ public class StarEnumerator<N>
 	/**
 	 * @param pGraphInterface
 	 */
-	public StarEnumerator(final Graph<N,Edge<N>> pGraphInterface)
+	public StarEnumerator(final Graph<N, Edge<N>> pGraphInterface)
 	{
 		super();
 		this.mGraph = pGraphInterface;
@@ -80,11 +83,12 @@ public class StarEnumerator<N>
 				Integer lNumberOfNodesForConnectivity = this.mConnectivityStatistics.get(lNodeConnectivity);
 				if (lNumberOfNodesForConnectivity == null)
 					lNumberOfNodesForConnectivity = 0;
-				this.mConnectivityStatistics.put(lNodeConnectivity, lNumberOfNodesForConnectivity + 1);
+				this.mConnectivityStatistics.put(	lNodeConnectivity,
+																					lNumberOfNodesForConnectivity + 1);
 
 				final Set<N> lSingletonSet = new HashSet<N>(1);
 				lSingletonSet.add(lNode);
-				final Graph<N,Edge<N>> lSubGraph = this.mGraph.extractSubGraph(lSingletonSet);
+				final Graph<N, Edge<N>> lSubGraph = this.mGraph.extractSubGraph(lSingletonSet);
 
 				this.mStarSet.add(lSubGraph);
 
@@ -100,7 +104,7 @@ public class StarEnumerator<N>
 		Collections.sort(this.mStarList);
 	}
 
-	public void associateGraph(final Graph<N,Edge<N>> pGraph)
+	public void associateGraph(final Graph<N, Edge<N>> pGraph)
 	{
 		this.mGraph = pGraph;
 	}
@@ -215,21 +219,22 @@ public class StarEnumerator<N>
 			lSigmaXY += lLogK * lLogNK;
 		}
 
-		final double a = (((lSigmaY) * (lSigmaX2)) - ((lSigmaX) * (lSigmaXY)))
-				/ ((lN * (lSigmaX2)) - (Math.pow(lSigmaX, 2)));
-		double b = ((lN * lSigmaXY) - (lSigmaX * lSigmaY)) / ((lN * lSigmaX2) - (Math.pow(lSigmaX, 2)));
+		final double a = (((lSigmaY) * (lSigmaX2)) - ((lSigmaX) * (lSigmaXY))) / ((lN * (lSigmaX2)) - (Math.pow(lSigmaX,
+																																																						2)));
+		double b = ((lN * lSigmaXY) - (lSigmaX * lSigmaY)) / ((lN * lSigmaX2) - (Math.pow(lSigmaX,
+																																											2)));
 
 		final double gamma = -b;
-		
+
 		return gamma;
-		
-//		final double gammaprime =  getNewGamma();
-//		if(Math.abs(gammaprime-gamma)>0.01)
-//			throw new RuntimeException("Disagrement while calculating gamma!!");
-//		
-//		return (gamma+gammaprime)/2;
+
+		// final double gammaprime = getNewGamma();
+		// if(Math.abs(gammaprime-gamma)>0.01)
+		// throw new RuntimeException("Disagrement while calculating gamma!!");
+		//		
+		// return (gamma+gammaprime)/2;
 	}
-	
+
 	public double getNewGamma()
 	{
 		final Map<Integer, Integer> lConnectivity = getConnectivityStatistics();

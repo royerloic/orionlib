@@ -22,7 +22,8 @@ public class ZipExtract
 		doExtract(args[0], args[1]);
 	}
 
-	public static void doExtract(final String pZipFileName, final String pEntryFileName) throws IOException
+	public static void doExtract(	final String pZipFileName,
+																final String pEntryFileName) throws IOException
 	{
 		// Get the zip name and the entry name.
 

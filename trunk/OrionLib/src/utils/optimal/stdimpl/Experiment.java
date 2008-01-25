@@ -31,27 +31,27 @@ public class Experiment implements IExperiment
 	 * <code>mDateFormat</code> is the Date format used to format a date into a
 	 * String.
 	 */
-	private SimpleDateFormat	mDateFormat	= new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss");
+	private SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss");
 
 	/**
 	 * <code>mDate</code> is the Date of the Experiment.
 	 */
-	private Date							mDate;
+	private Date mDate;
 
 	/**
 	 * <code>mDuration</code> is the duration of the Experiment in milliseconds.
 	 */
-	private int								mDuration;
+	private int mDuration;
 
 	/**
 	 * <code>mInput</code> is the Experiment's input vector.
 	 */
-	private INumericalVector	mInput;
+	private INumericalVector mInput;
 
 	/**
 	 * <code>mOutput</code> is the Experiment's output vector.
 	 */
-	private INumericalVector	mOutput;
+	private INumericalVector mOutput;
 
 	/**
 	 * Constructs an Experiment given the couple of vectors (pInput,pOutput)
@@ -63,7 +63,8 @@ public class Experiment implements IExperiment
 	 * @param pOutput
 	 *          output vector
 	 */
-	public Experiment(final INumericalVector pInput, final INumericalVector pOutput)
+	public Experiment(final INumericalVector pInput,
+										final INumericalVector pOutput)
 	{
 		super();
 		mInput = pInput;
@@ -111,7 +112,8 @@ public class Experiment implements IExperiment
 	 * @param pOutput
 	 *          output vector.
 	 */
-	public final void set(final INumericalVector pInput, final INumericalVector pOutput)
+	public final void set(final INumericalVector pInput,
+												final INumericalVector pOutput)
 	{
 		mInput = pInput;
 		mOutput = pOutput;
@@ -167,8 +169,16 @@ public class Experiment implements IExperiment
 	@Override
 	public final String toString()
 	{
-		return " Date: " + mDate.toString() + "\n" + " Duration: " + mDuration + "\n" + " Input: "
-				+ mInput.toString() + "\n" + " Output: " + mOutput.toString();
+		return " Date: " + mDate.toString()
+						+ "\n"
+						+ " Duration: "
+						+ mDuration
+						+ "\n"
+						+ " Input: "
+						+ mInput.toString()
+						+ "\n"
+						+ " Output: "
+						+ mOutput.toString();
 	}
 
 	/**

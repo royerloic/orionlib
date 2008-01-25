@@ -40,54 +40,54 @@ public class MainView extends JPanel implements IScalarFunction
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -572313894039683950L;
+	private static final long serialVersionUID = -572313894039683950L;
 
 	/**
 	 * <code>cBEST_EXPERIMENT_VIEW_HEIGHT</code> is the constant height of the
 	 * Experiment View.
 	 */
-	private static final int	cBEST_EXPERIMENT_VIEW_HEIGHT	= 6;
+	private static final int cBEST_EXPERIMENT_VIEW_HEIGHT = 6;
 
 	/**
 	 * <code>cBEST_EXPERIMENT_VIEW_WIDTH</code> is the constant width of the
 	 * Experiment View.
 	 */
-	private static final int	cBEST_EXPERIMENT_VIEW_WIDTH		= 10;
+	private static final int cBEST_EXPERIMENT_VIEW_WIDTH = 10;
 
 	/**
 	 * <code>mBestExperimentView</code> is the best Experiment View.
 	 */
-	private JTextArea					mBestExperimentView;
+	private JTextArea mBestExperimentView;
 
 	/**
 	 * <code>mControlContainer</code> is the control Container.
 	 */
-	private Container					mControlContainer;
+	private Container mControlContainer;
 
 	/**
 	 * <code>mDatabaseSizeView</code> is the Database size View JTextField.
 	 */
-	private JTextField				mDatabaseSizeView;
+	private JTextField mDatabaseSizeView;
 
 	/**
 	 * <code>mMainContainer</code> is the main Container.
 	 */
-	private Container					mMainContainer;
+	private Container mMainContainer;
 
 	/**
 	 * <code>mMaximumEvolutionPlot</code> is the maximum evolution plot.
 	 */
-	private IPlot							mMaximumEvolutionPlot;
+	private IPlot mMaximumEvolutionPlot;
 
 	/**
 	 * <code>mStatusContainer</code> is the status Container.
 	 */
-	private Container					mStatusContainer;
+	private Container mStatusContainer;
 
 	/**
 	 * <code>mMaximumEvolutionList</code> is the maximum evolution Array.
 	 */
-	private List							mMaximumEvolutionList;
+	private List mMaximumEvolutionList;
 
 	/**
 	 * Initializes the main View.
@@ -103,7 +103,8 @@ public class MainView extends JPanel implements IScalarFunction
 		setLayout(new BorderLayout(5, 5));
 
 		mControlContainer = new JPanel();
-		mControlContainer.setLayout(new BoxLayout(mControlContainer, BoxLayout.X_AXIS));
+		mControlContainer.setLayout(new BoxLayout(mControlContainer,
+																							BoxLayout.X_AXIS));
 
 		mMainContainer = new JPanel();
 		mMainContainer.setLayout(new BoxLayout(mMainContainer, BoxLayout.Y_AXIS));
@@ -118,7 +119,8 @@ public class MainView extends JPanel implements IScalarFunction
 			e.printStackTrace(System.out);
 		}
 
-		mBestExperimentView = new JTextArea(cBEST_EXPERIMENT_VIEW_HEIGHT, cBEST_EXPERIMENT_VIEW_WIDTH);
+		mBestExperimentView = new JTextArea(cBEST_EXPERIMENT_VIEW_HEIGHT,
+																				cBEST_EXPERIMENT_VIEW_WIDTH);
 		mBestExperimentView.setEditable(false);
 		mMainContainer.add(new JScrollPane(mBestExperimentView));
 
@@ -147,12 +149,16 @@ public class MainView extends JPanel implements IScalarFunction
 	 *          the objective value of the best Experiment
 	 * @return string giving the best current experiment.
 	 */
-	private String getBestExperimentText(final IExperiment pExperiment, final double pValue)
+	private String getBestExperimentText(	final IExperiment pExperiment,
+																				final double pValue)
 	{
 		if (pExperiment == null)
 			return "No Experiment in Database yet.";
 		else
-			return "Best Experiment: \n" + " Value: " + pValue + "\n" + pExperiment.toString();
+			return "Best Experiment: \n" + " Value: "
+							+ pValue
+							+ "\n"
+							+ pExperiment.toString();
 
 	}
 
@@ -230,7 +236,8 @@ public class MainView extends JPanel implements IScalarFunction
 	 * @param pValue
 	 *          objective value of the new best Experiment
 	 */
-	public final void updateBestExperiment(final IExperiment pExperiment, final double pValue)
+	public final void updateBestExperiment(	final IExperiment pExperiment,
+																					final double pValue)
 	{
 		mBestExperimentView.setText(getBestExperimentText(pExperiment, pValue));
 	}

@@ -22,33 +22,31 @@ import java.util.Map;
 public class Graphics2DTextWriter
 {
 
-	private static final HashMap<Graphics2DTextWriter, SoftReference<Image>>	lWriterToImageMap	= new HashMap<Graphics2DTextWriter, SoftReference<Image>>();
+	private static final HashMap<Graphics2DTextWriter, SoftReference<Image>> lWriterToImageMap = new HashMap<Graphics2DTextWriter, SoftReference<Image>>();
 
-	public static boolean																								mCacheActivated		= false;
+	public static boolean mCacheActivated = false;
 
-	private boolean																											mMultiLine;
+	private boolean mMultiLine;
 
-	public boolean																											mAntialiasing			= true;
+	public boolean mAntialiasing = true;
 
-	public boolean																											mShadow						= true;
+	public boolean mShadow = true;
 
-	private String																											mString;
+	private String mString;
 
-	private Font																												mFont							= new Font(
-																																														"courrier",
-																																														Font.PLAIN, 16);
+	private Font mFont = new Font("courrier", Font.PLAIN, 16);
 
-	private Color																												mTextColor				= Color.BLACK;
+	private Color mTextColor = Color.BLACK;
 
-	private Color																												mBackgroundColor	= null;
+	private Color mBackgroundColor = null;
 
-	private double																											mWrappingWidth		= 100;
+	private double mWrappingWidth = 100;
 
-	private int																													mMinNumberOfLines	= 1;
+	private int mMinNumberOfLines = 1;
 
-	private int																													mMaxNumberOfLines	= 10;
+	private int mMaxNumberOfLines = 10;
 
-	private Image																												mImage;
+	private Image mImage;
 
 	@Override
 	public boolean equals(final Object pObj)
@@ -107,13 +105,18 @@ public class Graphics2DTextWriter
 		mFont = pFont;
 	}
 
-	public Graphics2DTextWriter(final String pString, final Font pFont, final Color pTextColor)
+	public Graphics2DTextWriter(final String pString,
+															final Font pFont,
+															final Color pTextColor)
 	{
 		this(pString, pFont);
 		mTextColor = pTextColor;
 	}
 
-	public Graphics2DTextWriter(final String pString, final Font pFont, final Color pTextColor, final Color pBackgroundColor)
+	public Graphics2DTextWriter(final String pString,
+															final Font pFont,
+															final Color pTextColor,
+															final Color pBackgroundColor)
 	{
 		this(pString, pFont, pTextColor);
 		mBackgroundColor = pBackgroundColor;
@@ -159,7 +162,8 @@ public class Graphics2DTextWriter
 		if (mCacheActivated)
 		{
 			lWriterToImageMap.put(this, new SoftReference<Image>(mImage));
-			System.out.println("Graphics2DTextWriter> cached image for text:  '" + mString + "'");
+			System.out.println("Graphics2DTextWriter> cached image for text:  '" + mString
+													+ "'");
 
 		}
 		displayAvailableVideoMemory();
@@ -176,11 +180,23 @@ public class Graphics2DTextWriter
 	{
 		Image lImage = null;
 		if (mMultiLine)
-			lImage = createMultiLineTextImage(mString, mFont, mTextColor, mBackgroundColor, mWrappingWidth,
-					mMinNumberOfLines, mMaxNumberOfLines, mAntialiasing, mShadow);
+			lImage = createMultiLineTextImage(mString,
+																				mFont,
+																				mTextColor,
+																				mBackgroundColor,
+																				mWrappingWidth,
+																				mMinNumberOfLines,
+																				mMaxNumberOfLines,
+																				mAntialiasing,
+																				mShadow);
 		else
-			lImage = createTextImage(pRecycledImage, mString, mFont, mTextColor, mBackgroundColor, mAntialiasing,
-					mShadow);
+			lImage = createTextImage(	pRecycledImage,
+																mString,
+																mFont,
+																mTextColor,
+																mBackgroundColor,
+																mAntialiasing,
+																mShadow);
 		return lImage;
 	}
 
@@ -199,7 +215,9 @@ public class Graphics2DTextWriter
 
 	private static void displayAvailableVideoMemory()
 	{
-		System.out.println("displayAvailableVideoMemory()=" + getAvailableVideoMemory() / 1024 + "K");
+		System.out.println("displayAvailableVideoMemory()=" + getAvailableVideoMemory()
+												/ 1024
+												+ "K");
 	}
 
 	public static int getAvailableVideoMemory()
@@ -222,8 +240,12 @@ public class Graphics2DTextWriter
 	{
 		final boolean isAntiAliased = pAntialiasing;
 		final boolean usesFractionalMetrics = true;
-		final FontRenderContext lFontRendererContext = new FontRenderContext(null, isAntiAliased, usesFractionalMetrics);
-		final TextLayout lTextLayout = new TextLayout(pText, pFont, lFontRendererContext);
+		final FontRenderContext lFontRendererContext = new FontRenderContext(	null,
+																																					isAntiAliased,
+																																					usesFractionalMetrics);
+		final TextLayout lTextLayout = new TextLayout(pText,
+																									pFont,
+																									lFontRendererContext);
 		final Rectangle2D lTextBounds = lTextLayout.getBounds();
 		final double lTopMargin = lTextLayout.getDescent();
 		final double lLeftMargin = lTopMargin;
@@ -233,7 +255,9 @@ public class Graphics2DTextWriter
 		BufferedImage image = pImage;
 		if ((pImage == null) || (!((pImage.getHeight() >= lTextHeight) && (pImage.getWidth() >= lTextWidth))))
 		{
-			image = new BufferedImage(lTextWidth, lTextHeight, BufferedImage.TYPE_INT_ARGB);
+			image = new BufferedImage(lTextWidth,
+																lTextHeight,
+																BufferedImage.TYPE_INT_ARGB);
 			System.out.println("Graphics2DTextWriter> created image for text: " + pText);
 		}
 
@@ -248,16 +272,20 @@ public class Graphics2DTextWriter
 
 		lGraphics.setFont(pFont);
 		final Object antiAliased = isAntiAliased ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON
-				: RenderingHints.VALUE_TEXT_ANTIALIAS_OFF;
-		lGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, antiAliased);
+																						: RenderingHints.VALUE_TEXT_ANTIALIAS_OFF;
+		lGraphics.setRenderingHint(	RenderingHints.KEY_TEXT_ANTIALIASING,
+																antiAliased);
 		final Object fractionalMetrics = usesFractionalMetrics ? RenderingHints.VALUE_FRACTIONALMETRICS_ON
-				: RenderingHints.VALUE_FRACTIONALMETRICS_OFF;
-		lGraphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, fractionalMetrics);
+																													: RenderingHints.VALUE_FRACTIONALMETRICS_OFF;
+		lGraphics.setRenderingHint(	RenderingHints.KEY_FRACTIONALMETRICS,
+																fractionalMetrics);
 		final float lTextX = (float) (-lTextBounds.getX() + lLeftMargin);
 		final float lTextY = (float) (-lTextBounds.getY() + lTopMargin);
 		if (pShadow)
 		{
-			final Color lShadowColor = new Color(pColor.getRed() / 8, pColor.getGreen() / 8, pColor.getBlue() / 8);
+			final Color lShadowColor = new Color(	pColor.getRed() / 8,
+																						pColor.getGreen() / 8,
+																						pColor.getBlue() / 8);
 			lGraphics.setColor(lShadowColor);
 			lGraphics.drawString(pText, lTextX + 1, lTextY + 1);
 		}
@@ -280,13 +308,16 @@ public class Graphics2DTextWriter
 		final boolean isAntiAliased = true;
 		final boolean usesFractionalMetrics = pAntialiasing;
 
-		final FontRenderContext lFontRenderContext = new FontRenderContext(null, isAntiAliased, usesFractionalMetrics);
+		final FontRenderContext lFontRenderContext = new FontRenderContext(	null,
+																																				isAntiAliased,
+																																				usesFractionalMetrics);
 		final Map<TextAttribute, Font> lAttribute = new HashMap<TextAttribute, Font>();
 		lAttribute.put(TextAttribute.FONT, pFont);
-		final AttributedString lAttributedString = new AttributedString(pText, lAttribute);
+		final AttributedString lAttributedString = new AttributedString(pText,
+																																		lAttribute);
 		AttributedCharacterIterator lAttributedCharacterIterator = lAttributedString.getIterator();
-		LineBreakMeasurer lLineBreakMeasurer = new LineBreakMeasurer(lAttributedCharacterIterator,
-				lFontRenderContext);
+		LineBreakMeasurer lLineBreakMeasurer = new LineBreakMeasurer(	lAttributedCharacterIterator,
+																																	lFontRenderContext);
 
 		pWrappingWidth -= 2 * pFont.getSize();
 
@@ -305,7 +336,8 @@ public class Graphics2DTextWriter
 				break;
 
 			lLineCounter++;
-			h += lTextLayout.getAscent() + lTextLayout.getDescent() + lTextLayout.getLeading();
+			h += lTextLayout.getAscent() + lTextLayout.getDescent()
+						+ lTextLayout.getLeading();
 
 		}
 		h += lTextLayout.getDescent() + lTextLayout.getLeading();
@@ -313,7 +345,9 @@ public class Graphics2DTextWriter
 		w += 2 * pFont.getSize(); // margin
 		h += 2 * pFont.getSize();
 
-		final BufferedImage image = new BufferedImage((int) w, (int) h, BufferedImage.TYPE_INT_ARGB);
+		final BufferedImage image = new BufferedImage((int) w,
+																									(int) h,
+																									BufferedImage.TYPE_INT_ARGB);
 		final Graphics2D lImageGraphics = image.createGraphics();
 		if (pBackgroundColor != null)
 		{
@@ -323,14 +357,17 @@ public class Graphics2DTextWriter
 
 		lImageGraphics.setFont(pFont);
 		final Object antiAliased = isAntiAliased ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON
-				: RenderingHints.VALUE_TEXT_ANTIALIAS_OFF;
-		lImageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, antiAliased);
+																						: RenderingHints.VALUE_TEXT_ANTIALIAS_OFF;
+		lImageGraphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+																		antiAliased);
 		final Object fractionalMetrics = usesFractionalMetrics ? RenderingHints.VALUE_FRACTIONALMETRICS_ON
-				: RenderingHints.VALUE_FRACTIONALMETRICS_OFF;
-		lImageGraphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, fractionalMetrics);
+																													: RenderingHints.VALUE_FRACTIONALMETRICS_OFF;
+		lImageGraphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+																		fractionalMetrics);
 
 		lAttributedCharacterIterator = lAttributedString.getIterator();
-		lLineBreakMeasurer = new LineBreakMeasurer(lAttributedCharacterIterator, lFontRenderContext);
+		lLineBreakMeasurer = new LineBreakMeasurer(	lAttributedCharacterIterator,
+																								lFontRenderContext);
 
 		final double pX = pFont.getSize();
 		double pY = pFont.getSize();
@@ -341,12 +378,14 @@ public class Graphics2DTextWriter
 			if (lTextLayout == null)
 				break;
 			// Rectangle2D bounds = lTextLayout.getBounds();
-			pY += lTextLayout.getAscent() + lTextLayout.getDescent() + lTextLayout.getLeading();
+			pY += lTextLayout.getAscent() + lTextLayout.getDescent()
+						+ lTextLayout.getLeading();
 
 			if (pShadow)
 			{
-				final Color lShadowColor = new Color(pTextColor.getRed() / 8, pTextColor.getGreen() / 8, pTextColor
-						.getBlue() / 8);
+				final Color lShadowColor = new Color(	pTextColor.getRed() / 8,
+																							pTextColor.getGreen() / 8,
+																							pTextColor.getBlue() / 8);
 				lImageGraphics.setColor(lShadowColor);
 				lTextLayout.draw(lImageGraphics, (float) (pX + 1), (float) (pY + 1));
 			}

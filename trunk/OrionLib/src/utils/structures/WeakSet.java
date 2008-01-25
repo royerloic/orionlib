@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 public class WeakSet<K> implements Set<K>
 {
 
-	WeakHashMap<K, Object>	mWeakHashMap	= new WeakHashMap<K, Object>();
+	WeakHashMap<K, Object> mWeakHashMap = new WeakHashMap<K, Object>();
 
 	public int size()
 	{

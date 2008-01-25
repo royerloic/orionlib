@@ -26,43 +26,43 @@ package utils.ml.svm.libsvm;
 //
 class Solver
 {
-	int									active_size;
+	int active_size;
 
-	byte[]							y;
+	byte[] y;
 
 	// gradient of objective function
-	double[]						G;
+	double[] G;
 
-	static final byte		LOWER_BOUND	= 0;
+	static final byte LOWER_BOUND = 0;
 
-	static final byte		UPPER_BOUND	= 1;
+	static final byte UPPER_BOUND = 1;
 
-	static final byte		FREE				= 2;
+	static final byte FREE = 2;
 
 	// LOWER_BOUND UPPER_BOUND FREE
-	byte[]							alpha_status;
+	byte[] alpha_status;
 
-	double[]						alpha;
+	double[] alpha;
 
-	Kernel							Q;
+	Kernel Q;
 
-	double							eps;
+	double eps;
 
-	double							Cp, Cn;
+	double Cp, Cn;
 
-	double[]						b;
+	double[] b;
 
-	int[]								active_set;
+	int[] active_set;
 
 	// gradient, if we treat free variables as 0
-	double[]						G_bar;
+	double[] G_bar;
 
-	int									l;
+	int l;
 
 	// XXX
-	boolean							unshrinked;
+	boolean unshrinked;
 
-	static final double	INF					= java.lang.Double.POSITIVE_INFINITY;
+	static final double INF = java.lang.Double.POSITIVE_INFINITY;
 
 	double get_C(final int i)
 	{
@@ -98,15 +98,15 @@ class Solver
 	// because we cannot return multiple values otherwise...
 	static class SolutionInfo
 	{
-		double	obj;
+		double obj;
 
-		double	rho;
+		double rho;
 
-		double	upper_bound_p;
+		double upper_bound_p;
 
-		double	upper_bound_n;
+		double upper_bound_n;
 
-		double	r;							// for Solver_NU
+		double r; // for Solver_NU
 	}
 
 	void swap_index(final int i, final int j)
@@ -293,7 +293,9 @@ class Solver
 
 			if (y[i] != y[j])
 			{
-				final double delta = (-G[i] - G[j]) / Math.max(Q_i[i] + Q_j[j] + 2 * Q_i[j], 0);
+				final double delta = (-G[i] - G[j]) / Math.max(Q_i[i] + Q_j[j]
+																												+ 2
+																												* Q_i[j], 0);
 				double diff = alpha[i] - alpha[j];
 				alpha[i] += delta;
 				alpha[j] += delta;
@@ -327,7 +329,9 @@ class Solver
 			}
 			else
 			{
-				final double delta = (G[i] - G[j]) / Math.max(Q_i[i] + Q_j[j] - 2 * Q_i[j], 0);
+				final double delta = (G[i] - G[j]) / Math.max(Q_i[i] + Q_j[j]
+																											- 2
+																											* Q_i[j], 0);
 				final double sum = alpha[i] + alpha[j];
 				alpha[i] -= delta;
 				alpha[j] += delta;

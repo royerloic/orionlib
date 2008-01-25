@@ -12,7 +12,8 @@ import utils.structures.powergraph.PowerGraph;
 
 public class PowerEdgeDump<N>
 {
-	public static <N> void dumpPowerEdges(final PowerGraph<N> pPowerGraph, final File pFile) throws IOException
+	public static <N> void dumpPowerEdges(final PowerGraph<N> pPowerGraph,
+																				final File pFile) throws IOException
 	{
 		{
 			if (pFile == null)

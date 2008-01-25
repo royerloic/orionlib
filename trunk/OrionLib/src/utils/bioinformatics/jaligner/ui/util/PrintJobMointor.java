@@ -31,63 +31,79 @@ import javax.print.event.PrintJobEvent;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class PrintJobMointor {
+public class PrintJobMointor
+{
 	/**
 	 * Logger
 	 */
 	private static final Logger logger = Logger.getLogger(TextComponentUtil.class.getName());
 
-    // True iff it is safe to close the print job's input stream
-    private boolean done = false;
-    
-    PrintJobMointor(DocPrintJob job) {
-        // Add a listener to the print job
-        job.addPrintJobListener(new PrintJobAdapter() {
-            @Override
-						public void printJobCanceled(PrintJobEvent printJobEvent) {
-                logger.info("Print job canceled");
-            	allDone();
-            }
-            
-            @Override
-						public void printJobCompleted(PrintJobEvent printJobEvent) {
-            	logger.info("Print job completed");
-                allDone();
-            }
-            
-            @Override
-						public void printJobFailed(PrintJobEvent printJobEvent) {
-            	logger.info("Print job failed");
-                allDone();
-            }
+	// True iff it is safe to close the print job's input stream
+	private boolean done = false;
 
-            @Override
-						public void printJobNoMoreEvents(PrintJobEvent printJobEvent) {
-                allDone();
-            }
+	PrintJobMointor(DocPrintJob job)
+	{
+		// Add a listener to the print job
+		job.addPrintJobListener(new PrintJobAdapter()
+		{
+			@Override
+			public void printJobCanceled(PrintJobEvent printJobEvent)
+			{
+				logger.info("Print job canceled");
+				allDone();
+			}
 
-            void allDone() {
-                synchronized (PrintJobMointor.this) {
-                    done = true;
-                    PrintJobMointor.this.notify();
-                }
-            }
-        });
-    }
+			@Override
+			public void printJobCompleted(PrintJobEvent printJobEvent)
+			{
+				logger.info("Print job completed");
+				allDone();
+			}
 
-    /**
-     * Waits for print job
-     *
-     */
-    public synchronized void waitForPrintJob() {
-        try {
-        	logger.info("Waiting for print job...");
-            while (!done) {
-                wait();
-            }
-            logger.info("Finished waiting for print");
-        } catch (InterruptedException e) {
-        	logger.log(Level.SEVERE, "Failed waiting for print job: " + e.getMessage(), e);
-        }
-    }
+			@Override
+			public void printJobFailed(PrintJobEvent printJobEvent)
+			{
+				logger.info("Print job failed");
+				allDone();
+			}
+
+			@Override
+			public void printJobNoMoreEvents(PrintJobEvent printJobEvent)
+			{
+				allDone();
+			}
+
+			void allDone()
+			{
+				synchronized (PrintJobMointor.this)
+				{
+					done = true;
+					PrintJobMointor.this.notify();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Waits for print job
+	 * 
+	 */
+	public synchronized void waitForPrintJob()
+	{
+		try
+		{
+			logger.info("Waiting for print job...");
+			while (!done)
+			{
+				wait();
+			}
+			logger.info("Finished waiting for print");
+		}
+		catch (InterruptedException e)
+		{
+			logger.log(	Level.SEVERE,
+									"Failed waiting for print job: " + e.getMessage(),
+									e);
+		}
+	}
 }

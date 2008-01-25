@@ -18,17 +18,17 @@ import utils.ml.svm.libsvm.SVM;
  */
 public class SVMRegression implements IRegression, IObject, Cloneable
 {
-	private Problem		mProblem;
+	private Problem mProblem;
 
-	private Parameter	mParameters;
+	private Parameter mParameters;
 
-	private Model			mModel;
+	private Model mModel;
 
-	private double		mGamma;
+	private double mGamma;
 
-	private double		mCost;
+	private double mCost;
 
-	private double		mNu;
+	private double mNu;
 
 	/**
 	 * 
@@ -65,7 +65,9 @@ public class SVMRegression implements IRegression, IObject, Cloneable
 	/**
 	 * @see utils.ml.svm.IRegression#crossValidation(utils.ml.svm.ILabelledVectorSet)
 	 */
-	public double crossValidation(final ILabelledVectorSet pSet, final int pFolds, final double pRatio)
+	public double crossValidation(final ILabelledVectorSet pSet,
+																final int pFolds,
+																final double pRatio)
 	{
 		double lError = Double.NEGATIVE_INFINITY;
 

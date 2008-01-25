@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.
  * 
  */
-public class HashListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K, V>
+public class HashListMap<K, V> extends HashMap<K, List<V>> implements
+																													ListMap<K, V>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 8584828916052243423L;
+	private static final long serialVersionUID = 8584828916052243423L;
 
 	/**
 	 * @return
@@ -71,7 +73,8 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K,
 		return lValueList;
 	}
 
-	public void addAll(final Collection<K> pKCollection, final Collection<V> pVCollection)
+	public void addAll(	final Collection<K> pKCollection,
+											final Collection<V> pVCollection)
 	{
 		for (final K lK : pKCollection)
 			this.putAll(lK, pVCollection);

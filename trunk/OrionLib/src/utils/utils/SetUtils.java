@@ -54,7 +54,7 @@ public class SetUtils<E>
 
 					cutFound = true;
 					break outer;
-					
+
 				}
 			}
 
@@ -62,7 +62,7 @@ public class SetUtils<E>
 			{
 				lResultSetList.remove(lSetA);
 				lResultSetList.remove(lSetB);
-				if (!lResultSetList.contains(lNodeSetAMB) )
+				if (!lResultSetList.contains(lNodeSetAMB))
 				{
 					lResultSetList.add(lNodeSetAMB);
 				}
@@ -74,14 +74,13 @@ public class SetUtils<E>
 				{
 					lResultSetList.add(lNodeSetAIB);
 				}
-				
+
 			}
-			//System.out.println(lResultSetList.size());
+			// System.out.println(lResultSetList.size());
 		}
 		while (cutFound);
 
 		return lResultSetList;
 	}
-	
-	
+
 }

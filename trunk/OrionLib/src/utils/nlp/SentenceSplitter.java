@@ -68,11 +68,10 @@ public class SentenceSplitter
 		// white space and an
 		// upper case letter, number, or enclosing marks (" ' ( [ { ); keep the
 		// puntucation
-		text = text.replaceAll("([\\.\\!\\?\\;\\:])\\s([A-Z0-9\"\''\\[\\(\\{])", "$1###SPLIT###$2");
-		text = text
-				.replaceAll(
-						"(\\.)(Conclusion|CONCLUSION|Result|RESULT|Motivation|MOTIVATION|Background|BACKGROUND|Method|METHOD|Setting|SETTING|Objective|OBJECTIVE)([A-Za-z0-9]*\\:*)\\s*",
-						"$1###SPLIT###$2$3###SPLIT###");
+		text = text.replaceAll(	"([\\.\\!\\?\\;\\:])\\s([A-Z0-9\"\''\\[\\(\\{])",
+														"$1###SPLIT###$2");
+		text = text.replaceAll(	"(\\.)(Conclusion|CONCLUSION|Result|RESULT|Motivation|MOTIVATION|Background|BACKGROUND|Method|METHOD|Setting|SETTING|Objective|OBJECTIVE)([A-Za-z0-9]*\\:*)\\s*",
+														"$1###SPLIT###$2$3###SPLIT###");
 
 		// now some false positive filtering
 		// all false marks <punct><mark> should be replaced by <punct><space>
@@ -81,7 +80,8 @@ public class SentenceSplitter
 		// single upper case letters (most time) belong to the following sentence
 		// part: .. D. mel, Trevor P. Jackson, Dr. P. Peng, ..
 		// same for Dr., Mr., Prof.
-		text = text.replaceAll("(\\s[A-Z]|Dr|Drs|Prof|Profs|Mr|Mrs|Ms)\\.###SPLIT###", "$1. ");
+		text = text.replaceAll(	"(\\s[A-Z]|Dr|Drs|Prof|Profs|Mr|Mrs|Ms)\\.###SPLIT###",
+														"$1. ");
 
 		// no sentence boundary within open brackets ( )
 		text = text.replaceAll("(\\([^\\)]*?[\\.\\!\\?\\;])###SPLIT###", "$1 ");

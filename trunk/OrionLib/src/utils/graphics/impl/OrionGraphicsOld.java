@@ -22,46 +22,52 @@ import java.awt.image.ImageProducer;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public abstract class OrionGraphicsOld extends JFrame implements Runnable, ImageProducer, MouseListener,
-		MouseMotionListener, KeyListener
+public abstract class OrionGraphicsOld extends JFrame	implements
+																											Runnable,
+																											ImageProducer,
+																											MouseListener,
+																											MouseMotionListener,
+																											KeyListener
 {
 
 	// data
-	private GraphicsDevice				mGraphicsDevice;
+	private GraphicsDevice mGraphicsDevice;
 
-	private final boolean								mFullScreen					= true;
+	private final boolean mFullScreen = true;
 
-	private int										mWidth;
+	private int mWidth;
 
-	private int										mHeight;
+	private int mHeight;
 
-	private Image									mImage;
+	private Image mImage;
 
-	private Thread								mThread;
+	private Thread mThread;
 
-	private Graphics							mGraphics;
+	private Graphics mGraphics;
 
-	private ImageConsumer					mImageConsumer;
+	private ImageConsumer mImageConsumer;
 
-	private DirectColorModel			mColorModel;
+	private DirectColorModel mColorModel;
 
-	private int										mScreenIndex;
+	private int mScreenIndex;
 
-	protected volatile int				mMouseX;
+	protected volatile int mMouseX;
 
-	protected volatile int				mMouseY;
+	protected volatile int mMouseY;
 
-	protected boolean							mMouseLeft;
+	protected boolean mMouseLeft;
 
-	protected boolean							mMouseMiddle;
+	protected boolean mMouseMiddle;
 
-	protected boolean							mMouseRight;
+	protected boolean mMouseRight;
 
-	private static final DisplayMode[]	BEST_DISPLAY_MODES	= new DisplayMode[]
-																										{ new DisplayMode(400, 300, 32, 0),
-			new DisplayMode(512, 384, 32, 0), new DisplayMode(640, 400, 32, 0), new DisplayMode(640, 480, 32, 0) };
+	private static final DisplayMode[] BEST_DISPLAY_MODES = new DisplayMode[]
+	{ new DisplayMode(400, 300, 32, 0),
+		new DisplayMode(512, 384, 32, 0),
+		new DisplayMode(640, 400, 32, 0),
+		new DisplayMode(640, 480, 32, 0) };
 
-	public static final int				cLAST_DEVICE				= -1;
+	public static final int cLAST_DEVICE = -1;
 
 	private static DisplayMode getBestDisplayMode(final GraphicsDevice pGraphicsDevice)
 	{
@@ -69,8 +75,7 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 		{
 			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
 			for (final DisplayMode element0 : modes)
-				if ((element0.getWidth() == element.getWidth())
-						&& (element0.getHeight() == element.getHeight())
+				if ((element0.getWidth() == element.getWidth()) && (element0.getHeight() == element.getHeight())
 						&& (element0.getBitDepth() == element.getBitDepth()))
 					return element;
 		}
@@ -93,7 +98,14 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 		if (mImageConsumer != null)
 		{
 			// copy integer pixel data to image consumer
-			mImageConsumer.setPixels(0, 0, mWidth, mHeight, mColorModel, (int[]) pixels, 0, mWidth);
+			mImageConsumer.setPixels(	0,
+																0,
+																mWidth,
+																mHeight,
+																mColorModel,
+																(int[]) pixels,
+																0,
+																mWidth);
 
 			done();
 		}
@@ -210,7 +222,11 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 			mHeight = lComponentSize.height;
 
 			// setup color model
-			mColorModel = new DirectColorModel(32, 0x00FF0000, 0x000FF00, 0x000000FF, 0);
+			mColorModel = new DirectColorModel(	32,
+																					0x00FF0000,
+																					0x000FF00,
+																					0x000000FF,
+																					0);
 
 			// create image using default toolkit
 			mImage = Toolkit.getDefaultToolkit().createImage(this);
@@ -261,7 +277,8 @@ public abstract class OrionGraphicsOld extends JFrame implements Runnable, Image
 
 		// set image consumer hints for speed
 		mImageConsumer.setHints(ImageConsumer.TOPDOWNLEFTRIGHT | ImageConsumer.COMPLETESCANLINES
-				| ImageConsumer.SINGLEPASS | ImageConsumer.SINGLEFRAME);
+														| ImageConsumer.SINGLEPASS
+														| ImageConsumer.SINGLEFRAME);
 
 		// set image color model
 		mImageConsumer.setColorModel(mColorModel);

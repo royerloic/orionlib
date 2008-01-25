@@ -21,7 +21,8 @@ import utils.structures.utils.CollectionUtils;
  * 
  * @param <N>
  */
-public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lattice<N>
+public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
+																																	Lattice<N>
 {
 
 	public Double getDepth(final N pN)
@@ -61,7 +62,8 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 	{
 		final IntegerMap<N> lChildrenMap = new IntegerHashMap<N>();
 		for (final Entry<N, Integer> lEntry : pMap.entrySet())
-			lChildrenMap.addAllWith(getPositiveNodeNeighbours(lEntry.getKey()), lEntry.getValue() + 1);
+			lChildrenMap.addAllWith(getPositiveNodeNeighbours(lEntry.getKey()),
+															lEntry.getValue() + 1);
 		return lChildrenMap;
 	}
 
@@ -100,7 +102,8 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 	{
 		final IntegerMap<N> lParentMap = new IntegerHashMap<N>();
 		for (final Entry<N, Integer> lEntry : pMap.entrySet())
-			lParentMap.addAllWith(getNegativeNodeNeighbours(lEntry.getKey()), lEntry.getValue() - 1);
+			lParentMap.addAllWith(getNegativeNodeNeighbours(lEntry.getKey()),
+														lEntry.getValue() - 1);
 		return lParentMap;
 	}
 
@@ -122,7 +125,8 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 		return lNodeToDepthMap;
 	}
 
-	private Triple<Set<N>, Integer, Integer> getLowerCommonAncestorsInternal(final N pN1, final N pN2)
+	private Triple<Set<N>, Integer, Integer> getLowerCommonAncestorsInternal(	final N pN1,
+																																						final N pN2)
 	{
 		final IntersectionMonitor<N> lIntersectionMonitor = new IntersectionMonitor<N>();
 
@@ -150,24 +154,29 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>> implements Lat
 		final Set<N> lIntersectionSet = lIntersectionMonitor.getIntersection();
 		final N lNode = lIntersectionSet.iterator().next();
 
-		return new Triple<Set<N>, Integer, Integer>(lIntersectionSet, lMap1.get(lNode), lMap2.get(lNode));
+		return new Triple<Set<N>, Integer, Integer>(lIntersectionSet,
+																								lMap1.get(lNode),
+																								lMap2.get(lNode));
 	}
 
 	public Set<N> getLowerCommonAncestors(final N pN1, final N pN2)
 	{
-		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(	pN1,
+																																											pN2);
 		return lTriple.mA;
 	}
 
 	public double getLowerCommonAncestorDistance(final N pN1, final N pN2)
 	{
-		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(	pN1,
+																																											pN2);
 		return lTriple.mB + lTriple.mC;
 	}
 
 	public double getSimilarity(final N pN1, final N pN2)
 	{
-		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(pN1, pN2);
+		final Triple<Set<N>, Integer, Integer> lTriple = getLowerCommonAncestorsInternal(	pN1,
+																																											pN2);
 
 		final Set<N> lLowerCommonAncestorsSet = lTriple.mA;
 

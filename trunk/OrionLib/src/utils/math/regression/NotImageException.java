@@ -23,28 +23,31 @@ import java.awt.Image;
 import java.io.IOException;
 
 /**
- * Exception thrown when a resource that was expected to be
- * an image is not.
+ * Exception thrown when a resource that was expected to be an image is not.
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class NotImageException extends IOException {
+public final class NotImageException extends IOException
+{
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -5137370763477649238L;
+	private static final long serialVersionUID = -5137370763477649238L;
 
-	public NotImageException(final Image image) {
-        super(image.toString());
-    }
-    
-    public NotImageException() {
-        super();
-    }
+	public NotImageException(final Image image)
+	{
+		super(image.toString());
+	}
 
-    public NotImageException(final String msg) {
-        super(msg);
-    }
+	public NotImageException()
+	{
+		super();
+	}
+
+	public NotImageException(final String msg)
+	{
+		super(msg);
+	}
 
 }

@@ -11,36 +11,54 @@ import bsh.Interpreter;
 
 public class readfile
 {
-	
-	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName) throws FileNotFoundException, IOException
+
+	public static Matrix<String> invoke(final Interpreter env,
+																			final CallStack callstack,
+																			final String pFileName)	throws FileNotFoundException,
+																															IOException
 	{
 		final File lFile = new File(pFileName);
 		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile);
-		return lMatrix;		
+		return lMatrix;
 	}
-	
-	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName, final boolean pHasHeader) throws FileNotFoundException, IOException
+
+	public static Matrix<String> invoke(final Interpreter env,
+																			final CallStack callstack,
+																			final String pFileName,
+																			final boolean pHasHeader)	throws FileNotFoundException,
+																																IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile,pHasHeader);
-		return lMatrix;		
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+																																	pHasHeader);
+		return lMatrix;
 	}
-	
-	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final Matrix<String> pMatrix, final String pFileName, final boolean pHasHeader) throws FileNotFoundException, IOException
+
+	public static Matrix<String> invoke(final Interpreter env,
+																			final CallStack callstack,
+																			final Matrix<String> pMatrix,
+																			final String pFileName,
+																			final boolean pHasHeader)	throws FileNotFoundException,
+																																IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile,pHasHeader);
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+																																	pHasHeader);
 		pMatrix.addAll(lMatrix);
-		return lMatrix;		
+		return lMatrix;
 	}
-	
-	public static Matrix<String> invoke(final Interpreter env, final CallStack callstack, final String pFileName, final String pSeparator ) throws FileNotFoundException, IOException
+
+	public static Matrix<String> invoke(final Interpreter env,
+																			final CallStack callstack,
+																			final String pFileName,
+																			final String pSeparator) throws FileNotFoundException,
+																															IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile,false,pSeparator);
-		return lMatrix;		
+		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+																																	false,
+																																	pSeparator);
+		return lMatrix;
 	}
-	
-	
 
 }

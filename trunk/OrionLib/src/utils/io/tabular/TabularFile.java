@@ -19,17 +19,16 @@ public class TabularFile
 	static final Pattern cDoublePattern = Pattern.compile("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?");
 	static final Pattern cIntegerPattern = Pattern.compile("[-+]?[0-9]+");
 
-	private final InputStream	mInputStream;
-	
-	@SuppressWarnings("unchecked")
-	Map<String,Column> mNameToColumnMap = new LinkedHashMap<String,Column>();
-	
-	@SuppressWarnings("unchecked")
-	BijectiveBidiHashMap<Integer,String> mIndexToNameMap = new BijectiveBidiHashMap<Integer,String>();
+	private final InputStream mInputStream;
 
-	private final boolean	mHasHeader;
-	private final String	mName;
-	
+	@SuppressWarnings("unchecked")
+	Map<String, Column> mNameToColumnMap = new LinkedHashMap<String, Column>();
+
+	@SuppressWarnings("unchecked")
+	BijectiveBidiHashMap<Integer, String> mIndexToNameMap = new BijectiveBidiHashMap<Integer, String>();
+
+	private final boolean mHasHeader;
+	private final String mName;
 
 	public TabularFile(File pFile, boolean pHasHeader) throws IOException
 	{
@@ -37,24 +36,24 @@ public class TabularFile
 	}
 
 	public TabularFile(String pName, InputStream pInputStream, boolean pHasHeader) throws FileNotFoundException,
-																																	IOException
+																																								IOException
 	{
 		super();
 		mName = pName;
 		mInputStream = pInputStream;
 		mHasHeader = pHasHeader;
-			
+
 	}
-		
+
 	public final void read() throws FileNotFoundException, IOException
 	{
 		Matrix<String> lMatrix = LineReader.readMatrixFromStream(mInputStream);
 
 		int lMaxColumns = 0;
 		int lMinColumns = Integer.MAX_VALUE;
-		for (int line=0 ; line < lMatrix.size(); line++)
+		for (int line = 0; line < lMatrix.size(); line++)
 		{
-			
+
 			int lNumberOfColumns = lMatrix.get(line).size();
 			if (lNumberOfColumns != 0)
 			{
@@ -62,8 +61,8 @@ public class TabularFile
 				lMinColumns = Math.min(lMinColumns, lNumberOfColumns);
 			}
 		}
-		
-		for (int line=0 ; line < lMatrix.size(); line++)
+
+		for (int line = 0; line < lMatrix.size(); line++)
 		{
 			int lNumberOfColumns = lMatrix.get(line).size();
 			if (lNumberOfColumns < lMaxColumns)
@@ -75,64 +74,63 @@ public class TabularFile
 			else
 			{
 				boolean isAllEmpty = true;
-				for (int index=0; index < lMatrix.get(line).size() ; index++)
+				for (int index = 0; index < lMatrix.get(line).size(); index++)
 				{
 					isAllEmpty &= lMatrix.get(line).get(index).isEmpty();
-				}	
-				if(isAllEmpty)
+				}
+				if (isAllEmpty)
 				{
 					lMatrix.remove(line);
 					line--;
 				}
 			}
 		}
-		
-		if(mHasHeader)
+
+		if (mHasHeader)
 		{
 			List<String> lHeaderList = lMatrix.get(0);
-			for (int index=0; index < lHeaderList.size() ; index++)
+			for (int index = 0; index < lHeaderList.size(); index++)
 			{
 				mIndexToNameMap.put(index, lHeaderList.get(index));
-			}			
+			}
 		}
 		else
 		{
-			for (int index=0; index < lMaxColumns ; index++)
+			for (int index = 0; index < lMaxColumns; index++)
 			{
-				mIndexToNameMap.put(index, mName+"[col="+index+"]");
+				mIndexToNameMap.put(index, mName + "[col=" + index + "]");
 			}
 		}
-				
-		for (int index=0; index<lMaxColumns; index++)
-			{
-				Column<?> lColumn = parseColumn(lMatrix,index);
-				final String lColumnName = mIndexToNameMap.get(index);
-				mNameToColumnMap.put(lColumnName, lColumn);
-			}			
-	}
 
+		for (int index = 0; index < lMaxColumns; index++)
+		{
+			Column<?> lColumn = parseColumn(lMatrix, index);
+			final String lColumnName = mIndexToNameMap.get(index);
+			mNameToColumnMap.put(lColumnName, lColumn);
+		}
+	}
 
 	private Column<?> parseColumn(final Matrix<String> pMatrix, final int pColumn)
 	{
-		final int lStartLine= mHasHeader ? 1 : 0;
-		
+		final int lStartLine = mHasHeader ? 1 : 0;
+
 		boolean isDouble = true;
 		boolean isInteger = true;
-		
-		for (int line=lStartLine; line <  pMatrix.size(); line++)
+
+		for (int line = lStartLine; line < pMatrix.size(); line++)
 		{
 			final String lItem = pMatrix.get(line).get(pColumn);
-			if(isDouble)
+			if (isDouble)
 				isDouble &= cDoublePattern.matcher(lItem).matches();
-			if(isInteger)
+			if (isInteger)
 				isInteger &= cIntegerPattern.matcher(lItem).matches();
-			
-			if(!isDouble && !isInteger)
-				break;			
+
+			if (!isDouble && !isInteger)
+				break;
 		}
-		
+
 		Column lColumn = null;
-		if(isDouble && !isInteger)
+		if (isDouble && !isInteger)
 		{
 			lColumn = new Column<Double>(Double.class);
 		}
@@ -144,12 +142,11 @@ public class TabularFile
 		{
 			lColumn = new Column<String>(String.class);
 		}
-		
-		
-		for (int line=lStartLine; line <  pMatrix.size(); line++)
+
+		for (int line = lStartLine; line < pMatrix.size(); line++)
 		{
 			final String lItem = pMatrix.get(line).get(pColumn);
-			if(isDouble && !isInteger)
+			if (isDouble && !isInteger)
 			{
 				final Double lDouble = Double.parseDouble(lItem);
 				lColumn.getList().add(lDouble);
@@ -164,46 +161,44 @@ public class TabularFile
 				lColumn.getList().add(lItem);
 			}
 		}
-				
+
 		lColumn.normalise();
-		
+
 		return lColumn;
 	}
-	
-	
+
 	public Column getColumnByIndex(final int pIndex)
 	{
 		final String lName = mIndexToNameMap.get(pIndex);
-		if(lName!=null)
+		if (lName != null)
 		{
 			return mNameToColumnMap.get(lName);
 		}
 		else
-			return null; 
+			return null;
 	}
-	
+
 	public Column getColumnByName(final String pName)
 	{
 		return mNameToColumnMap.get(pName);
 	}
 
-
 	@Override
 	public String toString()
 	{
 		StringBuilder lStringBuilder = new StringBuilder();
-		lStringBuilder.append("Number of columns"+mNameToColumnMap.size()+"\n");
+		lStringBuilder.append("Number of columns" + mNameToColumnMap.size() + "\n");
 		for (Map.Entry<String, Column> lEntry : mNameToColumnMap.entrySet())
 		{
 			final String lName = lEntry.getKey();
 			final Column lColumn = lEntry.getValue();
-			
-			lStringBuilder.append("name      : '"+lName+"'\n");
-			lStringBuilder.append("contents  : "+lColumn.getList()+"\n");
-			lStringBuilder.append("normalized: "+lColumn.getNormalisedList()+"\n");
+
+			lStringBuilder.append("name      : '" + lName + "'\n");
+			lStringBuilder.append("contents  : " + lColumn.getList() + "\n");
+			lStringBuilder.append("normalized: " + lColumn.getNormalisedList() + "\n");
 			lStringBuilder.append("\n");
 		}
-		
+
 		return lStringBuilder.toString();
 	}
 
@@ -217,6 +212,4 @@ public class TabularFile
 		return mIndexToNameMap.get(pColumnIndex);
 	}
 
-	
-	
 }

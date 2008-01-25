@@ -19,13 +19,14 @@
 package utils.bioinformatics.jaligner.ui.clipboard;
 
 /**
- * Abstract class to handle setting and getting "text" contents of
- * the system clipboard.
+ * Abstract class to handle setting and getting "text" contents of the system
+ * clipboard.
  * 
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public interface ClipboardHandler {
+public interface ClipboardHandler
+{
 	/**
 	 * Returns the contents of the system of the clipboard
 	 * 
@@ -36,7 +37,8 @@ public interface ClipboardHandler {
 	/**
 	 * Sets the contents of the system of the clipboard
 	 * 
-	 * @param s the clipboard contents to set
+	 * @param s
+	 *          the clipboard contents to set
 	 */
 	public void setContents(String s);
 }

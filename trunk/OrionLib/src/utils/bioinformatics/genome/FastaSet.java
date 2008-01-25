@@ -58,7 +58,7 @@ public class FastaSet implements Serializable
 		mFastaSequencesMap.put(pSgdSystematicName, lFastaSequence);
 		return lFastaSequence;
 	}
-	
+
 	private FastaSequence newSwissProtSequence(	String pSwissProtId,
 																							String pCurrentFastaSequenceHeader)
 	{
@@ -93,7 +93,6 @@ public class FastaSet implements Serializable
 				if (lLine.contains("SGDID"))
 				{
 					// We know that this is a SGD header...
-					
 
 					final String[] lHeaderArray = lSplitCommaPattern.split(	lCurrentFastaSequenceHeader,
 																																	-1);
@@ -111,11 +110,12 @@ public class FastaSet implements Serializable
 				}
 				else if (lLine.contains("SWISS-PROT"))
 				{
-					final String[] lHeaderArray = lPipeSpacePattern.split(lCurrentFastaSequenceHeader, -1);
+					final String[] lHeaderArray = lPipeSpacePattern.split(lCurrentFastaSequenceHeader,
+																																-1);
 					final String lSwissProtId = lHeaderArray[0];
-					
 
-					lCurrentFastaSequence = newSwissProtSequence(	lSwissProtId, lCurrentFastaSequenceHeader);
+					lCurrentFastaSequence = newSwissProtSequence(	lSwissProtId,
+																												lCurrentFastaSequenceHeader);
 				}
 				else
 				{
@@ -133,8 +133,6 @@ public class FastaSet implements Serializable
 		}
 
 	}
-
-	
 
 	public Set<String> getIdSet()
 	{

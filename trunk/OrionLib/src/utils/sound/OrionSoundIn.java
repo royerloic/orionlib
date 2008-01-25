@@ -7,9 +7,9 @@ import javax.sound.sampled.TargetDataLine;
 public class OrionSoundIn
 {
 
-	AudioFormat			audioFormat;
+	AudioFormat audioFormat;
 
-	TargetDataLine	targetDataLine;
+	TargetDataLine targetDataLine;
 
 	/**
 	 * @throws java.awt.HeadlessException
@@ -74,7 +74,11 @@ public class OrionSoundIn
 		// true,false
 		final boolean bigEndian = false;
 		// true,false
-		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+		return new AudioFormat(	sampleRate,
+														sampleSizeInBits,
+														channels,
+														signed,
+														bigEndian);
 	}
 
 }

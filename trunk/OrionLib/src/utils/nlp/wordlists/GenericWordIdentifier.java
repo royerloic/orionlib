@@ -13,15 +13,16 @@ import utils.io.FlatTextTableReader.FlatTextTableReaderHandler;
  * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 21, 2005
  * 
  */
-public abstract class GenericWordIdentifier implements FlatTextTableReaderHandler
+public abstract class GenericWordIdentifier	implements
+																						FlatTextTableReaderHandler
 {
 
-	private FlatTextTableReader		mFlatTextTableReader;
+	private FlatTextTableReader mFlatTextTableReader;
 
-	protected Map<String, String>	mWordMap;
-	protected Map<String, Double>	mWordToCountMap;
+	protected Map<String, String> mWordMap;
+	protected Map<String, Double> mWordToCountMap;
 
-	private String								mCurrentWord;
+	private String mCurrentWord;
 
 	/**
 	 */
@@ -54,7 +55,8 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 		mFlatTextTableReader.readStream(pBufferedReader, false);
 	}
 
-	public void compileIdentificationRulesFromRessource(final Class pClass, final String pRessourceName) throws IOException
+	public void compileIdentificationRulesFromRessource(final Class pClass,
+																											final String pRessourceName) throws IOException
 	{
 		mFlatTextTableReader.readRessource(pClass, pRessourceName, false);
 	}
@@ -69,33 +71,36 @@ public abstract class GenericWordIdentifier implements FlatTextTableReaderHandle
 	 * 
 	 */
 	@SuppressWarnings("unused")
-	public boolean handleCell(final int pLineCounter, final int pColumnCounter, final int pSetCounter, String pCellString)
+	public boolean handleCell(final int pLineCounter,
+														final int pColumnCounter,
+														final int pSetCounter,
+														String pCellString)
 	{
 		pCellString = pCellString.trim();
 		try
 		{
 			switch (pColumnCounter)
 			{
-				case (0):
-				{
-					if (pCellString.length() != 0)
-						if ((pCellString.charAt(0) != '#'))
-						{
-							final String lWord = normalizeString(pCellString);
-							mWordMap.put(lWord, lWord);
-							mCurrentWord = lWord;
-						}
-				}
-					break;
-
-				case (1):
-				{
-					if (pCellString.length() != 0)
+			case (0):
+			{
+				if (pCellString.length() != 0)
+					if ((pCellString.charAt(0) != '#'))
 					{
-						final double lValue = Double.parseDouble(pCellString);
-						mWordToCountMap.put(mCurrentWord, lValue);
+						final String lWord = normalizeString(pCellString);
+						mWordMap.put(lWord, lWord);
+						mCurrentWord = lWord;
 					}
+			}
+				break;
+
+			case (1):
+			{
+				if (pCellString.length() != 0)
+				{
+					final double lValue = Double.parseDouble(pCellString);
+					mWordToCountMap.put(mCurrentWord, lValue);
 				}
+			}
 
 			}
 		}

@@ -61,13 +61,13 @@ public class ParetoRanking<O>
 
 		mVectorMap.put(pObject, lVector);
 	}
-	
+
 	public final void addVector(O pObject, List<Double> pValues)
 	{
 		Vector lVector = new Vector();
 		lVector.mObject = pObject;
 		double[] lValues = new double[pValues.size()];
-		for(int i=0; i<pValues.size(); i++)
+		for (int i = 0; i < pValues.size(); i++)
 			lValues[i] = pValues.get(i);
 		lVector.mValues = lValues;
 
@@ -152,11 +152,11 @@ public class ParetoRanking<O>
 	{
 		return mRankingMap.toString();
 	}
-	
+
 	public String toTabDel()
 	{
 		StringBuilder lStringBuilder = new StringBuilder();
-		for (Map.Entry<Vector,Double> lEntry : mRankingMap.entrySet())
+		for (Map.Entry<Vector, Double> lEntry : mRankingMap.entrySet())
 		{
 			Vector lVector = lEntry.getKey();
 			O lObject = lVector.mObject;
@@ -166,23 +166,23 @@ public class ParetoRanking<O>
 			lStringBuilder.append("\t");
 			lStringBuilder.append(lRank);
 			lStringBuilder.append("\t");
-			for(double lValue : lValues)
+			for (double lValue : lValues)
 			{
 				lStringBuilder.append(lValue);
 				lStringBuilder.append("\t");
-			}			
+			}
 			lStringBuilder.append("\n");
 		}
 		return lStringBuilder.toString();
 	}
-	
+
 	private static final boolean dominate(double[] v1, double[] v2)
 	{
 		assert (v1.length == v2.length);
 
-		if(equal(v1,v2))
+		if (equal(v1, v2))
 			return false;
-		
+
 		for (int i = 0; i < v1.length; i++)
 			if (v1[i] < v2[i])
 				return false;
@@ -196,9 +196,7 @@ public class ParetoRanking<O>
 		boolean equal = true;
 		for (int i = 0; i < v1.length; i++)
 			equal &= v1[i] == v2[i];
-		return equal;		
+		return equal;
 	}
-	
-
 
 }

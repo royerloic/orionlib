@@ -4,7 +4,8 @@ import java.util.Comparator;
 import java.util.Map;
 
 /**
- * Comparator which orderes the elements accoring to the values in the give lookupMap in natural or reverse order.
+ * Comparator which orderes the elements accoring to the values in the give
+ * lookupMap in natural or reverse order.
  * 
  * @param <K>
  * @param <V>
@@ -30,7 +31,8 @@ public class MapValueComparator<K, V> implements Comparator<K>
 	 * @param lookupMap
 	 * @param reverseOrderOfValue
 	 */
-	public MapValueComparator(final Map<K, V> lookupMap, final boolean reverseOrderOfValue)
+	public MapValueComparator(final Map<K, V> lookupMap,
+														final boolean reverseOrderOfValue)
 	{
 		this.lookupMap = lookupMap;
 		this.reverseOrderOfValue2 = reverseOrderOfValue;
@@ -44,16 +46,19 @@ public class MapValueComparator<K, V> implements Comparator<K>
 		int i = 0;
 		V value1;
 		V value2;
-		if (reverseOrderOfValue2) {
+		if (reverseOrderOfValue2)
+		{
 			value1 = lookupMap.get(o2);
 			value2 = lookupMap.get(o1);
 		}
-		else {
+		else
+		{
 			value1 = lookupMap.get(o1);
 			value2 = lookupMap.get(o2);
 		}
 		i = compareObjects(value1, value2);
-		if (0 == i) {
+		if (0 == i)
+		{
 			i = compareObjects(o1, o2);
 		}
 		return i;
@@ -70,12 +75,14 @@ public class MapValueComparator<K, V> implements Comparator<K>
 	private int compareObjects(final Object o1, final Object o2)
 	{
 		int i = 0;
-		if (o1 instanceof String) {
+		if (o1 instanceof String)
+		{
 			final String str1 = (String) o1;
 			final String str2 = (String) o2;
 			i = str1.compareTo(str2);
 		}
-		else if (o1 instanceof Number) {
+		else if (o1 instanceof Number)
+		{
 			final Number number1 = (Number) o1;
 			final Number number2 = (Number) o2;
 			final double d1 = number1.doubleValue();
@@ -93,7 +100,8 @@ public class MapValueComparator<K, V> implements Comparator<K>
 				i = -1;
 			}
 		}
-		else {
+		else
+		{
 			final String str1 = o1.toString();
 			final String str2 = o2.toString();
 			i = str1.compareTo(str2);

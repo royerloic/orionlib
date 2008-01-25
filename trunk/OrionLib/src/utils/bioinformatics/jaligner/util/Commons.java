@@ -32,12 +32,12 @@ import java.util.logging.Logger;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public abstract class Commons {
+public abstract class Commons
+{
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(Commons.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(Commons.class.getName());
 
 	/**
 	 * Build timestamp attribute in the manifest in the jar
@@ -45,7 +45,7 @@ public abstract class Commons {
 	private static final String BUILD_TIMESTAMP = "Created-At";
 
 	/**
-	 *  
+	 * 
 	 */
 	private static final String currentRelease = getManifestBuildTimestamp();
 
@@ -68,12 +68,17 @@ public abstract class Commons {
 	 * User home directory
 	 */
 	private static String userDirectory = DEFAULT_USER_DIRECTORY;
-	static {
-		try {
+	static
+	{
+		try
+		{
 			userDirectory = System.getProperty("user.dir");
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "Failed getting user current directory: "
-					+ e.getMessage(), e);
+		}
+		catch (Exception e)
+		{
+			logger.log(	Level.WARNING,
+									"Failed getting user current directory: " + e.getMessage(),
+									e);
 		}
 	}
 
@@ -81,12 +86,17 @@ public abstract class Commons {
 	 * Line separator
 	 */
 	private static String fileSeparator = DEFAULT_FILE_SEPARATOR;
-	static {
-		try {
+	static
+	{
+		try
+		{
 			fileSeparator = System.getProperty("file.separator");
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "Failed getting system file separator: "
-					+ e.getMessage(), e);
+		}
+		catch (Exception e)
+		{
+			logger.log(	Level.WARNING,
+									"Failed getting system file separator: " + e.getMessage(),
+									e);
 		}
 	}
 
@@ -95,12 +105,17 @@ public abstract class Commons {
 	 */
 	private static String lineSeparator = DEFAULT_LINE_SEPARATOR;
 
-	static {
-		try {
+	static
+	{
+		try
+		{
 			lineSeparator = System.getProperty("line.separator");
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "Failed getting system line separator: "
-					+ e.getMessage(), e);
+		}
+		catch (Exception e)
+		{
+			logger.log(	Level.WARNING,
+									"Failed getting system line separator: " + e.getMessage(),
+									e);
 		}
 	}
 
@@ -108,12 +123,17 @@ public abstract class Commons {
 	 * JNLP enabled
 	 */
 	private static boolean jnlp = false;
-	static {
-		try {
+	static
+	{
+		try
+		{
 			jnlp = "true".equalsIgnoreCase(System.getProperty("jnlp.enabled"));
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "Failed getting jnlp enabled property: "
-					+ e.getMessage(), e);
+		}
+		catch (Exception e)
+		{
+			logger.log(	Level.WARNING,
+									"Failed getting jnlp enabled property: " + e.getMessage(),
+									e);
 		}
 		setJnlp(jnlp);
 	}
@@ -123,7 +143,8 @@ public abstract class Commons {
 	 * 
 	 * @return file separator
 	 */
-	public static String getFileSeparator() {
+	public static String getFileSeparator()
+	{
 		return fileSeparator;
 	}
 
@@ -132,7 +153,8 @@ public abstract class Commons {
 	 * 
 	 * @return line separator
 	 */
-	public static String getLineSeparator() {
+	public static String getLineSeparator()
+	{
 		return lineSeparator;
 	}
 
@@ -141,7 +163,8 @@ public abstract class Commons {
 	 * 
 	 * @return user's current directory
 	 */
-	public static String getUserDirectory() {
+	public static String getUserDirectory()
+	{
 		return userDirectory;
 	}
 
@@ -149,9 +172,10 @@ public abstract class Commons {
 	 * Sets the JNLP flag to true of false
 	 * 
 	 * @param jnlp
-	 *            true or false
+	 *          true or false
 	 */
-	public static void setJnlp(boolean jnlp) {
+	public static void setJnlp(boolean jnlp)
+	{
 		Commons.jnlp = jnlp;
 	}
 
@@ -160,7 +184,8 @@ public abstract class Commons {
 	 * 
 	 * @return true if jnlp is enabled, otherwise returns false
 	 */
-	public static boolean isJnlp() {
+	public static boolean isJnlp()
+	{
 		return jnlp;
 	}
 
@@ -169,11 +194,13 @@ public abstract class Commons {
 	 * 
 	 * @return build timestamp
 	 */
-	private static String getManifestBuildTimestamp() {
+	private static String getManifestBuildTimestamp()
+	{
 		JarURLConnection connection = null;
 		JarFile jarFile = null;
 		URL url = Commons.class.getClassLoader().getResource("jaligner");
-		try {
+		try
+		{
 			// Get jar connection
 			connection = (JarURLConnection) url.openConnection();
 
@@ -188,9 +215,10 @@ public abstract class Commons {
 
 			Attributes.Name name = new Attributes.Name(BUILD_TIMESTAMP);
 			return attributes.getValue(name);
-		} catch (Exception e) {
-			String message = "Failed getting the current release info: "
-					+ e.getMessage();
+		}
+		catch (Exception e)
+		{
+			String message = "Failed getting the current release info: " + e.getMessage();
 			logger.log(Level.WARNING, message);
 		}
 		return null;
@@ -201,7 +229,8 @@ public abstract class Commons {
 	 * 
 	 * @return current release
 	 */
-	public static String getCurrentRelease() {
+	public static String getCurrentRelease()
+	{
 		return currentRelease;
 	}
 
@@ -210,8 +239,9 @@ public abstract class Commons {
 	 * 
 	 * @return information about JAligner
 	 */
-	public static String getJAlignerInfo() {
+	public static String getJAlignerInfo()
+	{
 		return "JAligner - Build: " + getCurrentRelease()
-				+ " - By: Ahmed Moustafa (ahmed@users.sf.net)";
+						+ " - By: Ahmed Moustafa (ahmed@users.sf.net)";
 	}
 }

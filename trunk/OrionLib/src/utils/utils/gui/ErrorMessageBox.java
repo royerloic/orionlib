@@ -35,13 +35,13 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 7755620000168959195L;
+	private static final long serialVersionUID = 7755620000168959195L;
 
-	private boolean		mResult					= false;
+	private boolean mResult = false;
 
-	private Button		mButtonOk, mButtonCancel;
+	private Button mButtonOk, mButtonCancel;
 
-	private JTextArea	mJTextArea;
+	private JTextArea mJTextArea;
 
 	public boolean getResult()
 	{

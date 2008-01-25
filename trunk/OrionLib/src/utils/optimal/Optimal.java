@@ -32,7 +32,7 @@ public class Optimal extends Interpreter
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -5334339857551841098L;
+	private static final long serialVersionUID = -5334339857551841098L;
 
 	/**
 	 * @param arg0
@@ -78,7 +78,10 @@ public class Optimal extends Interpreter
 	 * @param arg2
 	 * @param arg3
 	 */
-	public Optimal(final Reader arg0, final PrintStream arg1, final PrintStream arg2, final boolean arg3)
+	public Optimal(	final Reader arg0,
+									final PrintStream arg1,
+									final PrintStream arg2,
+									final boolean arg3)
 	{
 		super(arg0, arg1, arg2, arg3);
 		initialize();

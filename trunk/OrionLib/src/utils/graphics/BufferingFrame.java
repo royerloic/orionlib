@@ -14,9 +14,9 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1787963798303348822L;
-	private Image	mImage;
-	
+	private static final long serialVersionUID = 1787963798303348822L;
+	private Image mImage;
+
 	public BufferingFrame() throws HeadlessException
 	{
 		super();
@@ -48,7 +48,6 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		paint(g);
 	}
 
-
 	// Buffering by painting into an offscreen image; the
 	// paintOffscreen method should be overridden.
 	@Override
@@ -70,17 +69,17 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		g.drawImage(mImage, 0, 0, null);
 	}
 
-	
 	public void paintOffscreen(final Graphics g)
 	{
-		System.out.println("paintOffscreen("+g);
+		System.out.println("paintOffscreen(" + g);
 	}
 
 	// True if the image has changed size
 	private boolean checkOffscreenImage()
 	{
 		final Dimension d = getSize();
-		if ((mImage == null) || (mImage.getWidth(null) != d.width) || (mImage.getHeight(null) != d.height))
+		if ((mImage == null) || (mImage.getWidth(null) != d.width)
+				|| (mImage.getHeight(null) != d.height))
 		{
 			mImage = createImage(d.width, d.height);
 			return true;

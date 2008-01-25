@@ -18,8 +18,7 @@ public class FastIntegerListTests
 	@Test
 	public void testLocate()
 	{
-		int[] lSet0 = new int[]
-		{};
+		int[] lSet0 = new int[] {};
 
 		assertSame(0, FastIntegerSet.locate(lSet0, 0));
 
@@ -51,8 +50,7 @@ public class FastIntegerListTests
 	public void testAdd()
 	{
 
-		int[] lSet0 = new int[]
-		{};
+		int[] lSet0 = new int[] {};
 
 		lSet0 = FastIntegerSet.add(lSet0, 4);
 		assertSame(lSet0[0], 4);
@@ -96,10 +94,8 @@ public class FastIntegerListTests
 	public void testIntersection()
 	{
 		{
-			int[] lSet0 = new int[]
-			{};
-			int[] lSet1 = new int[]
-			{};
+			int[] lSet0 = new int[] {};
+			int[] lSet1 = new int[] {};
 			int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
@@ -184,17 +180,14 @@ public class FastIntegerListTests
 	public void testUnion()
 	{
 		{
-			int[] lSet0 = new int[]
-			{};
-			int[] lSet1 = new int[]
-			{};
+			int[] lSet0 = new int[] {};
+			int[] lSet1 = new int[] {};
 			int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
 			int[] lSetUnion1 = FastIntegerSet.union(lSet0, lSet1);
 			assertSame(0, lSetUnion1.length);
-			assertTrue(FastIntegerSet.equals(lSetUnion1, new int[]
-			{}));
+			assertTrue(FastIntegerSet.equals(lSetUnion1, new int[] {}));
 
 			int[] lSetUnion2 = FastIntegerSet.union(lSet1, lSet2);
 			assertSame(3, lSetUnion2.length);
@@ -291,27 +284,23 @@ public class FastIntegerListTests
 	{
 
 		{
-			int[] lSet0 = new int[]
-			{};
-			int[] lSet1 = new int[]
-			{};
+			int[] lSet0 = new int[] {};
+			int[] lSet1 = new int[] {};
 			int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
 			int[] lSetDiff1 = FastIntegerSet.difference(lSet0, lSet1);
 			assertSame(0, lSetDiff1.length);
-			assertTrue(FastIntegerSet.equals(lSetDiff1, new int[]
-			{}));
+			assertTrue(FastIntegerSet.equals(lSetDiff1, new int[] {}));
 
 			int[] lSetDiff2 = FastIntegerSet.difference(lSet2, lSet1);
 			assertSame(3, lSetDiff2.length);
 			assertTrue(FastIntegerSet.equals(lSetDiff2, new int[]
 			{ 4, 5, 6 }));
-			
+
 			int[] lSetDiff3 = FastIntegerSet.difference(lSet1, lSet2);
 			assertSame(0, lSetDiff3.length);
-			assertTrue(FastIntegerSet.equals(lSetDiff3, new int[]
-			{}));
+			assertTrue(FastIntegerSet.equals(lSetDiff3, new int[] {}));
 		}
 
 		{
@@ -401,9 +390,9 @@ public class FastIntegerListTests
 		/**/
 	}
 
-	static final int	cDomainSize			= 1000000;
-	static final int	cNumberOfSets		= 20;
-	static final int	cNumberOfCycles	= 100;
+	static final int cDomainSize = 1000000;
+	static final int cNumberOfSets = 20;
+	static final int cNumberOfCycles = 100;
 
 	@Test
 	@Ignore
@@ -416,7 +405,9 @@ public class FastIntegerListTests
 		int[][] lList = new int[cNumberOfSets][];
 		for (int i = 0; i < cNumberOfSets; i++)
 		{
-			lList[i] = FastIntegerSet.random(lRandom, cDomainSize, lRandom.nextDouble() * 0.01);
+			lList[i] = FastIntegerSet.random(	lRandom,
+																				cDomainSize,
+																				lRandom.nextDouble() * 0.01);
 			// System.out.println(lList[i].length);
 		}
 
@@ -441,8 +432,7 @@ public class FastIntegerListTests
 			// System.out.println("End");
 			long lElapsedTime = lEndTime - lStartTime;
 
-			final double lUnionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets))
-					/ lElapsedTime;
+			final double lUnionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
 
 			System.out.println("Unions per Milliseconds = " + lUnionsPerMillisecond);
 			assertTrue(lUnionsPerMillisecond > 4);
@@ -469,8 +459,7 @@ public class FastIntegerListTests
 			// System.out.println("End");
 			long lElapsedTime = lEndTime - lStartTime;
 
-			final double lIntersectionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets))
-					/ lElapsedTime;
+			final double lIntersectionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
 
 			System.out.println("Intersections per Milliseconds = " + lIntersectionsPerMillisecond);
 
@@ -498,8 +487,7 @@ public class FastIntegerListTests
 			// System.out.println("End");
 			long lElapsedTime = lEndTime - lStartTime;
 
-			final double lDifferencesPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets))
-					/ lElapsedTime;
+			final double lDifferencesPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
 
 			System.out.println("Differences per Milliseconds = " + lDifferencesPerMillisecond);
 

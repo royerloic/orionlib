@@ -14,62 +14,65 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 public class XmlStringUtils
 {
-	public static final List<String> getTagsContentList(final String pXML, final String pTag)
+	public static final List<String> getTagsContentList(final String pXML,
+																											final String pTag)
 	{
 		final String lStartTag = "<" + pTag + ">";
 		final String lEndTag = "</" + pTag + ">";
 		final String lNoTagRegex = "[^<>]+";
 		final String lTagRegex = lStartTag + "(" + lNoTagRegex + ")" + lEndTag;
 
-		final List<String> lTagsContentList = StringUtils.findAllmatches(pXML, lTagRegex, 1);
-		
+		final List<String> lTagsContentList = StringUtils.findAllmatches(	pXML,
+																																			lTagRegex,
+																																			1);
+
 		return lTagsContentList;
 	}
 
-	public static final List<String> getTagsContentListSlow(final String pXML, final String pTag)
+	public static final List<String> getTagsContentListSlow(final String pXML,
+																													final String pTag)
 	{
 		XMLReader parser;
 		final StringBuilder lStringBuilder = new StringBuilder();
 		final ArrayList<String> lStringList = new ArrayList<String>();
-		
+
 		try
 		{
 			parser = XMLReaderFactory.createXMLReader();
 			ContentHandler lContentHandler = new DefaultHandler()
 			{
-				
-				private boolean	mInTag;
+
+				private boolean mInTag;
 
 				@Override
 				public void characters(char[] pCh, int pStart, int pLength) throws SAXException
 				{
-					if(mInTag)
-						lStringBuilder.append(pCh,pStart,pLength);
+					if (mInTag)
+						lStringBuilder.append(pCh, pStart, pLength);
 				}
 
-
 				@Override
-				public void startElement(String pUri, String pLocalName, String pName, Attributes pAtts)
-						throws SAXException
+				public void startElement(	String pUri,
+																	String pLocalName,
+																	String pName,
+																	Attributes pAtts) throws SAXException
 				{
-					if(pLocalName.equals(pTag))
-						mInTag=true;
+					if (pLocalName.equals(pTag))
+						mInTag = true;
 
 				}
 
 				@Override
 				public void endElement(String pUri, String pLocalName, String pName) throws SAXException
 				{
-					if(pLocalName.equals(pTag))
+					if (pLocalName.equals(pTag))
 					{
-						mInTag=false;
+						mInTag = false;
 						lStringList.add(lStringBuilder.toString());
 						lStringBuilder.setLength(0);
 					}
-					
 
 				}
-
 
 			};
 
@@ -77,7 +80,7 @@ public class XmlStringUtils
 			ByteArrayInputStream lByteArrayInputStream = new java.io.ByteArrayInputStream(pXML.getBytes());
 			InputSource lInputSource = new InputSource(lByteArrayInputStream);
 			parser.parse(lInputSource);
-			
+
 		}
 		catch (Exception e)
 		{

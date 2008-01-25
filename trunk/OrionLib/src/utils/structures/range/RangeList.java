@@ -6,14 +6,13 @@ import java.util.List;
 
 /**
  * Loic Royer (c)May 11, 2007.
- *
+ * 
  */
 public class RangeList
 {
-	private static final long	serialVersionUID	= -1996997948395271914L;
+	private static final long serialVersionUID = -1996997948395271914L;
 
-	List<Range>					mList;
-
+	List<Range> mList;
 
 	public RangeList()
 	{
@@ -47,7 +46,8 @@ public class RangeList
 	{
 		final Range firstRange = mList.get(0);
 		final Range lastRange = mList.get(mList.size() - 1);
-		return UnmodifiableRange.constructRangeWithStartEnd(firstRange.mRangeStart, lastRange.mRangeEnd);
+		return UnmodifiableRange.constructRangeWithStartEnd(firstRange.mRangeStart,
+																												lastRange.mRangeEnd);
 	}
 
 	public Range getGreaterRangeAt(final int pPosition)
@@ -74,64 +74,70 @@ public class RangeList
 		return getGreaterRangeIndexWithinIndices(pPosition, 0, mList.size());
 	}
 
-	
 	/**
-	 * Given a range of indices (begin inckusive, end _exclusive_) find the greatest
-	 * (in the sense of the natural ordering of Ranges) Range that contains a given position.
+	 * Given a range of indices (begin inckusive, end _exclusive_) find the
+	 * greatest (in the sense of the natural ordering of Ranges) Range that
+	 * contains a given position.
+	 * 
 	 * @param pPosition
-	 * @param pBeginIndex 
+	 * @param pBeginIndex
 	 * @param pEndIndex
 	 * @return
 	 */
-	public int getGreaterRangeIndexWithinIndices( final int pPosition,
-	                                              final int pBeginIndex,
-	                                              final int pEndIndex)
+	public int getGreaterRangeIndexWithinIndices(	final int pPosition,
+																								final int pBeginIndex,
+																								final int pEndIndex)
 	{
-		// There is just one element within pBeginIndex and pEndIndex, we return its index.
-		if(pEndIndex-pBeginIndex == 1)
+		// There is just one element within pBeginIndex and pEndIndex, we return its
+		// index.
+		if (pEndIndex - pBeginIndex == 1)
 		{
 			return pBeginIndex;
 		}
-			
+
 		// Computes the median index and the corresponding Range:
 		final int lMedianIndex = (pBeginIndex + pEndIndex) / 2;
 		final Range lMedianRange = mList.get(lMedianIndex);
 
-		
-		
-		if (pPosition<lMedianRange.mRangeStart)
+		if (pPosition < lMedianRange.mRangeStart)
 		{
-			return getGreaterRangeIndexWithinIndices(pPosition, pBeginIndex, lMedianIndex); 
+			return getGreaterRangeIndexWithinIndices(	pPosition,
+																								pBeginIndex,
+																								lMedianIndex);
 		}
-		else if (pPosition>=lMedianRange.mRangeEnd)
+		else if (pPosition >= lMedianRange.mRangeEnd)
 		{
-			return getGreaterRangeIndexWithinIndices(pPosition, lMedianIndex, pEndIndex); 
+			return getGreaterRangeIndexWithinIndices(	pPosition,
+																								lMedianIndex,
+																								pEndIndex);
 		}
 		else
 		{
-			final int lAfterMedianIndex = lMedianIndex+1;
-			final Range lAfterMedianRange = lAfterMedianIndex>=mList.size() ? null : mList.get(lAfterMedianIndex);
-			if(lAfterMedianRange==null  || !lAfterMedianRange.isInside(pPosition))
+			final int lAfterMedianIndex = lMedianIndex + 1;
+			final Range lAfterMedianRange = lAfterMedianIndex >= mList.size()	? null
+																																				: mList.get(lAfterMedianIndex);
+			if (lAfterMedianRange == null || !lAfterMedianRange.isInside(pPosition))
 			{
 				return lMedianIndex;
 			}
 			else
 			{
-				return getGreaterRangeIndexWithinIndices(pPosition, lMedianIndex, pEndIndex);
-			}			
+				return getGreaterRangeIndexWithinIndices(	pPosition,
+																									lMedianIndex,
+																									pEndIndex);
+			}
 		}
 	}
-	
-	
+
 	public RangeList flattenRangeSet()
 	{
-		//TODO: implement a flattening of a RangeSet
+		// TODO: implement a flattening of a RangeSet
 		return null;
 	}
-	
+
 	/**
-	 * Builds a list of ranges from a list of integer positions
-	 * NOTE: The list of positions must be sorted !!!!
+	 * Builds a list of ranges from a list of integer positions NOTE: The list of
+	 * positions must be sorted !!!!
 	 * 
 	 * @param Ids
 	 * @return a list of ranges constituted
@@ -162,7 +168,5 @@ public class RangeList
 		lRangeList.add(lCurrentRange);
 		return new RangeList(lRangeList);
 	}
-	
-	
 
 }

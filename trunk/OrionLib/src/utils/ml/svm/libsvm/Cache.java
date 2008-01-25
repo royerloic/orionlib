@@ -14,22 +14,22 @@ package utils.ml.svm.libsvm;
 //
 class Cache
 {
-	private final int	l;
+	private final int l;
 
-	private int				size;
+	private int size;
 
 	private final class head_t
 	{
-		head_t	prev, next; // a cicular list
+		head_t prev, next; // a cicular list
 
-		float[]	data;
+		float[] data;
 
-		int			len;				// data[0,len) is cached in this entry
+		int len; // data[0,len) is cached in this entry
 	}
 
-	private final head_t[]	head;
+	private final head_t[] head;
 
-	private head_t					lru_head;
+	private head_t lru_head;
 
 	Cache(final int l_, final int size_)
 	{

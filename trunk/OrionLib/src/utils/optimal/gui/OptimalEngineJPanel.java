@@ -30,28 +30,30 @@ import utils.optimal.stdimpl.Experiment;
  * 
  * @author MSc. Ing. Loic Royer
  */
-public class OptimalEngineJPanel extends JPanel implements ActionListener, IOptimalEngineView
+public class OptimalEngineJPanel extends JPanel	implements
+																								ActionListener,
+																								IOptimalEngineView
 {
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 2907702805084618887L;
+	private static final long serialVersionUID = 2907702805084618887L;
 
-	private IOptimalEngineControl	mIOptimalEngineControl;
+	private IOptimalEngineControl mIOptimalEngineControl;
 
-	private Container							mEngineControl;
+	private Container mEngineControl;
 
-	private JButton								mPauseResumeButton;
+	private JButton mPauseResumeButton;
 
-	private JSplitPane						mMainContainerView;
+	private JSplitPane mMainContainerView;
 
-	private ModelerView						mModelerView;
+	private ModelerView mModelerView;
 
-	private MainView							mMainView;
+	private MainView mMainView;
 
-	private Container							mEngineStatusView;
+	private Container mEngineStatusView;
 
-	private JTextField						mEngineStatusTextField;
+	private JTextField mEngineStatusTextField;
 
 	/**
 	 * Constructs an OptimalEngineJPanel given an OptimalEngine.
@@ -74,7 +76,8 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 		mEngineControl.add(mPauseResumeButton);
 
 		mEngineStatusView = new JPanel();
-		mEngineStatusView.setLayout(new BoxLayout(mEngineStatusView, BoxLayout.X_AXIS));
+		mEngineStatusView.setLayout(new BoxLayout(mEngineStatusView,
+																							BoxLayout.X_AXIS));
 
 		mEngineStatusTextField = new JTextField();
 		mEngineStatusTextField.setEditable(false);
@@ -82,7 +85,9 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 
 		mMainView = new MainView();
 		mModelerView = new ModelerView();
-		mMainContainerView = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mModelerView, mMainView);
+		mMainContainerView = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+																				mModelerView,
+																				mMainView);
 		mMainContainerView.setOneTouchExpandable(true);
 		mMainContainerView.setResizeWeight(0.75);
 
@@ -100,7 +105,7 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	{
 
 		mEngineStatusTextField.setText("The Optimal Engine as performed " + Integer.toString(mIterations)
-				+ " iterations.");
+																		+ " iterations.");
 
 		mEngineStatusTextField.repaint();
 
@@ -154,7 +159,8 @@ public class OptimalEngineJPanel extends JPanel implements ActionListener, IOpti
 	/**
 	 * @see IOptimalEngineView#updateBestExperiment(Experiment, double)
 	 */
-	public void updateBestExperiment(final IExperiment pExperiment, final double pValue)
+	public void updateBestExperiment(	final IExperiment pExperiment,
+																		final double pValue)
 	{
 
 		mMainView.updateBestExperiment(pExperiment, pValue);

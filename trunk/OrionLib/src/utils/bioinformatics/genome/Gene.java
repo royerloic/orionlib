@@ -16,7 +16,7 @@ public class Gene implements Serializable
 	protected int mEnd;
 	protected String mStrand;
 	protected int mPhase;
-	
+
 	protected HashSet<OboTerm> mOBOTermSet = new HashSet<OboTerm>();
 
 	protected FastaSequence mCorrespondingFastaSequence = null;
@@ -40,9 +40,6 @@ public class Gene implements Serializable
 		mStrand = pStrand;
 		mPhase = pPhase;
 	}
-	
-
-
 
 	public void addAllOboTerms(Set<String> pOboTermStringSet) throws Exception
 	{
@@ -50,10 +47,8 @@ public class Gene implements Serializable
 		{
 			OboTerm lOboTerm = new OboTerm(lOboTermString);
 			mOBOTermSet.add(lOboTerm);
-		}		
+		}
 	}
-
-	
 
 	public String getId()
 	{
@@ -64,7 +59,7 @@ public class Gene implements Serializable
 	{
 		mId = pId;
 	}
-	
+
 	public String getName()
 	{
 		return mName;
@@ -109,8 +104,6 @@ public class Gene implements Serializable
 	{
 		mPhase = pPhase;
 	}
-
-
 
 	@Override
 	public int hashCode()
@@ -184,10 +177,8 @@ public class Gene implements Serializable
 
 		lStringBuilder.append(mStrand + "\t");
 		lStringBuilder.append(mPhase + "\t");
-				
+
 		lStringBuilder.append(mNote + "\t");
-		
-		
 
 		return lStringBuilder.toString();
 	}
@@ -201,12 +192,5 @@ public class Gene implements Serializable
 	{
 		mCorrespondingFastaSequence = pCorrespondingFastaSequence;
 	}
-
-
-
-
-	
-
-
 
 }

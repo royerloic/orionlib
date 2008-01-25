@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class GenericIterable<T> implements Iterable<T>
 {
 	private Iterator<T> mIterator;
-	
+
 	public GenericIterable(final Iterator<T> pIterator)
 	{
 		super();
@@ -13,8 +13,8 @@ public class GenericIterable<T> implements Iterable<T>
 	}
 
 	public final Iterator<T> iterator()
-	{		
-		if (mIterator==null)
+	{
+		if (mIterator == null)
 		{
 			throw new UnsupportedOperationException("this is a _single use_ Iterable !!");
 		}

@@ -5,7 +5,9 @@ public interface RawGraphInterface<ElementLabel>
 
 	void setNodeArrays(ElementLabel[] pNodeLabelArray);
 
-	void setEdgeArrays(int[] pFirstStartNodeArray, int[] pSecondNodeArray, ElementLabel[] pEdgeLabelArray);
+	void setEdgeArrays(	int[] pFirstStartNodeArray,
+											int[] pSecondNodeArray,
+											ElementLabel[] pEdgeLabelArray);
 
 	int getNumberOfNodes();
 

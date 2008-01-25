@@ -30,129 +30,144 @@ import javax.vecmath.MismatchedSizeException;
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class Matrices {
-    
-    private final static Random RAND = new Random();
+public final class Matrices
+{
 
-    private Matrices() {}
-    
-    /**
-     * Returns the distance between the two specified vectors:
-     * <blockquote>
-     * &#8741;x1 - x2&#8741;
- 	 * </blockquote>
- 	 * 
- 	 * @throws MismatchedSizeException if vectors have different sizes
-     */
-    public static double distance(final GVector x1, final GVector x2) {
-        return Math.sqrt(distanceSquared(x1, x2));
-    }
-    
-    /**
-     * Returns the squared distance between the two specified vectors:
-     * <blockquote>
-     * &#8741;x1 - x2&#8741;&sup2
- 	 * </blockquote>
- 	 * 
- 	 * @throws MismatchedSizeException if vectors have different sizes
-     */
-    public static double distanceSquared(final GVector x1, final GVector x2) {
-        if (x1.getSize() != x2.getSize())
-					throw new MismatchedSizeException("x1 size: " + x1.getSize() +
-					                                  "; x2 size: " + x2.getSize());
-        
-        double distSquared = 0;
-        for(int i = 0; i < x1.getSize(); i++) {
-            final double diff = x1.getElement(i) - x2.getElement(i);
-            distSquared += diff * diff;
-        }
-        return distSquared;
-    }
-    
-    /**
-     * Maps the given function to each column in the points
-     * matrix and returns the vector of values.
-     */
-    public static GVector mapCols(final Function fun, final GMatrix points) {
-        if (fun == null)  throw new NullPointerException("fun");        
-        final int rows = points.getNumRow();
-        final int cols = points.getNumCol();
-        final GVector values = new GVector(cols);
-        
-        for(int i = 0; i < cols; i++) {
-            final GVector x = new GVector(rows);
-            points.getColumn(i, x);
-            values.setElement(i, fun.eval(x));
-        }
-        
-        return values;
-    }
+	private final static Random RAND = new Random();
 
-    /**
-     * Maps the given function to each row in the points
-     * matrix and returns the vector of values.
-     */
-    public static GVector mapRows(final Function fun, final GMatrix points) {
-        if (fun == null)  throw new NullPointerException("fun");        
-        final int rows = points.getNumRow();
-        final int cols = points.getNumCol();
-        final GVector values = new GVector(rows);
-        
-        for(int i = 0; i < rows; i++) {
-            final GVector x = new GVector(cols);
-            points.getRow(i, x);
-            values.setElement(i, fun.eval(x));
-        }
-        
-        return values;
-    }
-    
-    /**
-     * Returns a matrix with the specified number of rows and columns
-     * where each element is randomly chosen from a uniform distribution
-     * on the interval [0, 1].
-     */
-    public static GMatrix randomUniformMatrix(final int rows, final int cols) {
-        final GMatrix m = new GMatrix(rows, cols);
-        for(int i = 0; i < rows; i++)
-					for(int j = 0; j < cols; j++)
-						m.setElement(i, j, RAND.nextDouble());
-        return m;
-    }
-    
-    /**
-     * Returns a matrix with the specified number of rows and columns
-     * where each element is randomly chosen from a Gaussian ("normal")
-     * distribution with mean 0.0 and standard deviation 1.0.
-     */
-    public static GMatrix randomGaussianMatrix(final int rows, final int cols) {
-        final GMatrix m = new GMatrix(rows, cols);
-        for(int i = 0; i < rows; i++)
-					for(int j = 0; j < cols; j++)
-						m.setElement(i, j, RAND.nextGaussian());
-        return m;
-    }
+	private Matrices()
+	{
+	}
 
-    /**
-     * Returns a vector of the given size where each element is randomly
-     * chosen from a uniform distribution on the interval [0, 1].
-     */
-    public static GVector randomUniformVector(final int size) {
-        final GVector v = new GVector(size);
-        for(int i = 0; i < size; i++)
-					v.setElement(i, RAND.nextDouble());
-        return v;
-    }
-    
-    /**
-     * Returns a vector of the given size where each element is randomly
-     * chosen from a Gaussian ("normal") distribution with mean 0.0 and
-     * standard deviation 1.0.
-     */
-    public static GVector randomGaussianVector(final int size) {
-        final GVector v = new GVector(size);
-        for(int i = 0; i < size; i++)
-					v.setElement(i, RAND.nextGaussian());
-        return v;
-    }
+	/**
+	 * Returns the distance between the two specified vectors: <blockquote>
+	 * &#8741;x1 - x2&#8741; </blockquote>
+	 * 
+	 * @throws MismatchedSizeException
+	 *           if vectors have different sizes
+	 */
+	public static double distance(final GVector x1, final GVector x2)
+	{
+		return Math.sqrt(distanceSquared(x1, x2));
+	}
+
+	/**
+	 * Returns the squared distance between the two specified vectors:
+	 * <blockquote> &#8741;x1 - x2&#8741;&sup2 </blockquote>
+	 * 
+	 * @throws MismatchedSizeException
+	 *           if vectors have different sizes
+	 */
+	public static double distanceSquared(final GVector x1, final GVector x2)
+	{
+		if (x1.getSize() != x2.getSize())
+			throw new MismatchedSizeException("x1 size: " + x1.getSize()
+																				+ "; x2 size: "
+																				+ x2.getSize());
+
+		double distSquared = 0;
+		for (int i = 0; i < x1.getSize(); i++)
+		{
+			final double diff = x1.getElement(i) - x2.getElement(i);
+			distSquared += diff * diff;
+		}
+		return distSquared;
+	}
+
+	/**
+	 * Maps the given function to each column in the points matrix and returns the
+	 * vector of values.
+	 */
+	public static GVector mapCols(final Function fun, final GMatrix points)
+	{
+		if (fun == null)
+			throw new NullPointerException("fun");
+		final int rows = points.getNumRow();
+		final int cols = points.getNumCol();
+		final GVector values = new GVector(cols);
+
+		for (int i = 0; i < cols; i++)
+		{
+			final GVector x = new GVector(rows);
+			points.getColumn(i, x);
+			values.setElement(i, fun.eval(x));
+		}
+
+		return values;
+	}
+
+	/**
+	 * Maps the given function to each row in the points matrix and returns the
+	 * vector of values.
+	 */
+	public static GVector mapRows(final Function fun, final GMatrix points)
+	{
+		if (fun == null)
+			throw new NullPointerException("fun");
+		final int rows = points.getNumRow();
+		final int cols = points.getNumCol();
+		final GVector values = new GVector(rows);
+
+		for (int i = 0; i < rows; i++)
+		{
+			final GVector x = new GVector(cols);
+			points.getRow(i, x);
+			values.setElement(i, fun.eval(x));
+		}
+
+		return values;
+	}
+
+	/**
+	 * Returns a matrix with the specified number of rows and columns where each
+	 * element is randomly chosen from a uniform distribution on the interval [0,
+	 * 1].
+	 */
+	public static GMatrix randomUniformMatrix(final int rows, final int cols)
+	{
+		final GMatrix m = new GMatrix(rows, cols);
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)
+				m.setElement(i, j, RAND.nextDouble());
+		return m;
+	}
+
+	/**
+	 * Returns a matrix with the specified number of rows and columns where each
+	 * element is randomly chosen from a Gaussian ("normal") distribution with
+	 * mean 0.0 and standard deviation 1.0.
+	 */
+	public static GMatrix randomGaussianMatrix(final int rows, final int cols)
+	{
+		final GMatrix m = new GMatrix(rows, cols);
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)
+				m.setElement(i, j, RAND.nextGaussian());
+		return m;
+	}
+
+	/**
+	 * Returns a vector of the given size where each element is randomly chosen
+	 * from a uniform distribution on the interval [0, 1].
+	 */
+	public static GVector randomUniformVector(final int size)
+	{
+		final GVector v = new GVector(size);
+		for (int i = 0; i < size; i++)
+			v.setElement(i, RAND.nextDouble());
+		return v;
+	}
+
+	/**
+	 * Returns a vector of the given size where each element is randomly chosen
+	 * from a Gaussian ("normal") distribution with mean 0.0 and standard
+	 * deviation 1.0.
+	 */
+	public static GVector randomGaussianVector(final int size)
+	{
+		final GVector v = new GVector(size);
+		for (int i = 0; i < size; i++)
+			v.setElement(i, RAND.nextGaussian());
+		return v;
+	}
 }

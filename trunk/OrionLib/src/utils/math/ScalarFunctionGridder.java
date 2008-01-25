@@ -13,7 +13,7 @@ import utils.math.stdimpl.NumericalVector;
 
 /**
  * @author MSc. Ing. Loic Royer
- *  
+ * 
  */
 public class ScalarFunctionGridder
 {
@@ -47,8 +47,7 @@ public class ScalarFunctionGridder
 		for (int i = 0; i < lDimension; i++)
 		{
 			lRes[i] = pResolution;
-			lDelta[i] =
-				(mFunction.getInputMax(i) - mFunction.getInputMin(i)) / lRes[i];
+			lDelta[i] = (mFunction.getInputMax(i) - mFunction.getInputMin(i)) / lRes[i];
 			lTotal = lTotal * (lRes[i] + 1);
 			lIndex[i] = 0;
 		}
@@ -66,8 +65,8 @@ public class ScalarFunctionGridder
 
 			for (int j = 0; j < lDimension; j++)
 			{
-				lComputedPoints[i][j] =
-					mFunction.getInputMin(j) + lIndex[j] * lDelta[j];
+				lComputedPoints[i][j] = mFunction.getInputMin(j) + lIndex[j]
+																* lDelta[j];
 				lInputArray[j] = lComputedPoints[i][j];
 			}
 

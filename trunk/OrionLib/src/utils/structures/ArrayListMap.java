@@ -9,13 +9,14 @@ import java.util.List;
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.
  * 
  */
-public class ArrayListMap<K, V> extends HashMap<K, List<V>> implements ListMap<K, V>
+public class ArrayListMap<K, V> extends HashMap<K, List<V>>	implements
+																														ListMap<K, V>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 2439064125823640434L;
+	private static final long serialVersionUID = 2439064125823640434L;
 
 	/**
 	 * @return

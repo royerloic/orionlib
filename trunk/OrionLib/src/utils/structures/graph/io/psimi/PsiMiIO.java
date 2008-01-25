@@ -55,20 +55,21 @@ public class PsiMiIO
 
 	private static final class PsiMiHandler extends DefaultHandler
 	{
-		public PsiMiGraph									mGraph;
+		public PsiMiGraph mGraph;
 
-		private String										mConfidenceFilter;
-		private boolean										mSpokeModel;
-		private boolean										mIsInteractorDefinition;
-		private String										mText;
-		private String										mInteractorId;
-		private PsiMiNode									mInteractorNode;
-		private String										mRole;
-		private String										mInteractionConfidence;
-		private final Map<PsiMiNode, String>		lInteractorsToRoleMap	= new HashMap<PsiMiNode, String>();
-		private final Map<PsiMiNode, PsiMiNode>	lPsiMiNodeMap					= new HashMap<PsiMiNode, PsiMiNode>();
+		private String mConfidenceFilter;
+		private boolean mSpokeModel;
+		private boolean mIsInteractorDefinition;
+		private String mText;
+		private String mInteractorId;
+		private PsiMiNode mInteractorNode;
+		private String mRole;
+		private String mInteractionConfidence;
+		private final Map<PsiMiNode, String> lInteractorsToRoleMap = new HashMap<PsiMiNode, String>();
+		private final Map<PsiMiNode, PsiMiNode> lPsiMiNodeMap = new HashMap<PsiMiNode, PsiMiNode>();
 
-		public PsiMiHandler(final boolean pSpokeModel, final String pConfidenceFilter)
+		public PsiMiHandler(final boolean pSpokeModel,
+												final String pConfidenceFilter)
 		{
 			super();
 			mConfidenceFilter = pConfidenceFilter;
@@ -95,7 +96,8 @@ public class PsiMiIO
 		 */
 		@Override
 		@SuppressWarnings("unused")
-		public void startElement(final String namespaceURI, final String lName, // local name
+		public void startElement(final String namespaceURI, final String lName, // local
+																																						// name
 															final String qName, // qualified name
 															final Attributes attrs) throws SAXException
 		{
@@ -149,7 +151,8 @@ public class PsiMiIO
 		 */
 		@Override
 		@SuppressWarnings("unused")
-		public void endElement(final String namespaceURI, final String sName, // simple name
+		public void endElement(final String namespaceURI, final String sName, // simple
+																																					// name
 														final String qName // qualified name
 		) throws SAXException
 		{
@@ -173,19 +176,22 @@ public class PsiMiIO
 			lInteractorsToRoleMap.clear();
 		}
 
-		private void addInteractor(final PsiMiNode pInteractorNode, final String pRole)
+		private void addInteractor(	final PsiMiNode pInteractorNode,
+																final String pRole)
 		{
 			lInteractorsToRoleMap.put(pInteractorNode, pRole);
 		}
 
 		private void endInteraction()
 		{
-			if ((mConfidenceFilter == null) || mInteractionConfidence.matches(mConfidenceFilter) )
+			if ((mConfidenceFilter == null) || mInteractionConfidence.matches(mConfidenceFilter))
 			{
-				System.out.println("Interaction confidence: "+mInteractionConfidence);
+				System.out.println("Interaction confidence: " + mInteractionConfidence);
 				if (lInteractorsToRoleMap.size() == 1)
 				{
-					final PsiMiNode lNode = lInteractorsToRoleMap.keySet().iterator().next();
+					final PsiMiNode lNode = lInteractorsToRoleMap	.keySet()
+																												.iterator()
+																												.next();
 					mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode, lNode));
 				}
 				else if (!mSpokeModel)
@@ -202,12 +208,14 @@ public class PsiMiIO
 							{
 								final String lRole1 = lInteractorsToRoleMap.get(lNode1);
 								final String lRole2 = lInteractorsToRoleMap.get(lNode2);
-								final boolean lIsInteraction = /*(lRole1.equals("neutral") && lRole2.equals("neutral"))
-										||/**/ (lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
-										|| lRole2.equals("unspecified");
+								final boolean lIsInteraction = /*******************************
+																								 * (lRole1.equals("neutral") &&
+																								 * lRole2.equals("neutral")) ||/
+																								 ******************************/(lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
+																|| lRole2.equals("unspecified");
 
-								if (!(lRole1.equals("bait") || lRole1.equals("prey") || lRole1.equals("neutral") || lRole1
-										.equals("unspecified")))
+								if (!(lRole1.equals("bait") || lRole1.equals("prey")
+											|| lRole1.equals("neutral") || lRole1.equals("unspecified")))
 									System.out.println("Something strange here:" + lRole1);
 
 								if (lIsInteraction)
@@ -219,13 +227,17 @@ public class PsiMiIO
 		}
 	}
 
-	public static final PsiMiGraph load(final File pFile, final boolean pSpokeModel, final String pConfidenceFilter)
+	public static final PsiMiGraph load(final File pFile,
+																			final boolean pSpokeModel,
+																			final String pConfidenceFilter)
 	{
 		FileInputStream lFileInputStream;
 		try
 		{
 			lFileInputStream = new FileInputStream(pFile);
-			final PsiMiGraph lGraph = load(lFileInputStream, pSpokeModel,pConfidenceFilter);
+			final PsiMiGraph lGraph = load(	lFileInputStream,
+																			pSpokeModel,
+																			pConfidenceFilter);
 
 			try
 			{
@@ -247,14 +259,18 @@ public class PsiMiIO
 		return null;
 	}
 
-	public static final PsiMiGraph load(final File pFile, final boolean pSpokeModel)
+	public static final PsiMiGraph load(final File pFile,
+																			final boolean pSpokeModel)
 	{
 		return load(pFile, pSpokeModel, null);
 	}
 
-	public static final PsiMiGraph load(final InputStream pInputStream, final boolean pSpokeModel, final String pConfidenceFilter)
+	public static final PsiMiGraph load(final InputStream pInputStream,
+																			final boolean pSpokeModel,
+																			final String pConfidenceFilter)
 	{
-		final PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel, pConfidenceFilter);
+		final PsiMiHandler lPsiMiHandler = new PsiMiHandler(pSpokeModel,
+																												pConfidenceFilter);
 		final DefaultHandler handler = lPsiMiHandler;
 		final SAXParserFactory factory = SAXParserFactory.newInstance();
 		try
@@ -272,7 +288,8 @@ public class PsiMiIO
 		return lPsiMiHandler.mGraph;
 	}
 
-	public static final PsiMiGraph load(final InputStream pInputStream, final boolean pSpokeModel)
+	public static final PsiMiGraph load(final InputStream pInputStream,
+																			final boolean pSpokeModel)
 	{
 		return load(pInputStream, pSpokeModel, null);
 	}

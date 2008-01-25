@@ -23,7 +23,7 @@ import utils.structures.lattice.HashLattice;
 public class OboOntology extends HashLattice<OboTerm>
 {
 
-	private final Map<Integer, OboTerm>	mIdToOboTermMap	= new HashMap<Integer, OboTerm>();
+	private final Map<Integer, OboTerm> mIdToOboTermMap = new HashMap<Integer, OboTerm>();
 
 	@Override
 	public void addNode(final OboTerm pNode)
@@ -55,11 +55,13 @@ public class OboOntology extends HashLattice<OboTerm>
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public OboOntology(final InputStream pInputStream) throws FileNotFoundException, IOException
+	public OboOntology(final InputStream pInputStream) throws FileNotFoundException,
+																										IOException
 	{
 		super();
 		{
-			final List<List<String>> lOboMatrix = LineReader.readMatrixFromStream(pInputStream, "(\\: )|( \\! )");
+			final List<List<String>> lOboMatrix = LineReader.readMatrixFromStream(pInputStream,
+																																						"(\\: )|( \\! )");
 
 			final Map<OboTerm, OboTerm> lOboTermMap = new HashMap<OboTerm, OboTerm>();
 			final Set<DirectedEdge<OboTerm>> lEdgeSet = new HashSet<DirectedEdge<OboTerm>>();
@@ -77,10 +79,11 @@ public class OboOntology extends HashLattice<OboTerm>
 				{
 					lIdString = lList.get(1);
 					// System.out.println(lIdString);
-					final String[] lGroupArray = StringUtils.captures(lIdString, ".*?([0-9]+)");
+					final String[] lGroupArray = StringUtils.captures(lIdString,
+																														".*?([0-9]+)");
 					final String lIntegerString = lGroupArray[0];
 					lId = Integer.parseInt(lIntegerString);
-					lCurrentOboTerm = new OboTerm("",lId);
+					lCurrentOboTerm = new OboTerm("", lId);
 					lOboTermMap.put(lCurrentOboTerm, lCurrentOboTerm);
 					addNode(lCurrentOboTerm);
 				}
@@ -94,20 +97,23 @@ public class OboOntology extends HashLattice<OboTerm>
 						lCurrentOboTerm.setDefinition(lList.get(1));
 					else if (lList.get(0).equals("namespace"))
 						lCurrentOboTerm.setNameSpace(lList.get(1));
-					else if (lList.get(0).equals("is_a") || lList.get(0).equals("relationship"))
+					else if (lList.get(0).equals("is_a") || lList	.get(0)
+																												.equals("relationship"))
 					{
 						final String lParentIdString = lList.get(1);
-						final String[] lGroupArray = StringUtils.captures(lParentIdString, ".*?([0-9]+)");
+						final String[] lGroupArray = StringUtils.captures(lParentIdString,
+																															".*?([0-9]+)");
 						final String lParentIntegerString = lGroupArray[0];
 						final Integer lParentId = Integer.parseInt(lParentIntegerString);
-						OboTerm lParentOboTerm = new OboTerm("",lParentId);
+						OboTerm lParentOboTerm = new OboTerm("", lParentId);
 						final OboTerm lParentOboTermTemp = lOboTermMap.get(lParentOboTerm);
 						if (lParentOboTermTemp == null)
 							lOboTermMap.put(lParentOboTerm, lParentOboTerm);
 						else
 							lParentOboTerm = lParentOboTermTemp;
 
-						final DirectedEdge<OboTerm> lEdge = new DirectedEdge(lParentOboTerm, lCurrentOboTerm);
+						final DirectedEdge<OboTerm> lEdge = new DirectedEdge(	lParentOboTerm,
+																																	lCurrentOboTerm);
 						lEdgeSet.add(lEdge);
 					}
 

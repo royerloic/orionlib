@@ -24,17 +24,19 @@ package utils.bioinformatics.jaligner.ui.filechooser;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class FileChooserException extends Exception {
+public class FileChooserException extends Exception
+{
 
 	/**
-     * 
-     */
-    private static final long serialVersionUID = 3258408434931086648L;
+	 * 
+	 */
+	private static final long serialVersionUID = 3258408434931086648L;
 
-    /**
+	/**
 	 * @param message
 	 */
-	public FileChooserException(String message) {
+	public FileChooserException(String message)
+	{
 		super(message);
 	}
 }

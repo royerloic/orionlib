@@ -8,43 +8,43 @@ public class Model implements java.io.Serializable, Cloneable
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 2711592896037300561L;
+	private static final long serialVersionUID = 2711592896037300561L;
 
-	Parameter		mParameter;											// parameter
+	Parameter mParameter; // parameter
 
-	int					mNumberOfClasses;								// number of classes, = 2 in
+	int mNumberOfClasses; // number of classes, = 2 in
 
 	// regression/one class SVM
 
-	int					mNumberOfSupportVectors;					// total #mSupportVectorsTable
+	int mNumberOfSupportVectors; // total #mSupportVectorsTable
 
-	Node[][]		mSupportVectorsTable;						// SVs
+	Node[][] mSupportVectorsTable; // SVs
 
 	// (mSupportVectorsTable[mNumberOfSupportVectors])
 
-	double[][]	mSupportVectorCoeficientsTable;	// coefficients for SVs in
-																							// decision
+	double[][] mSupportVectorCoeficientsTable; // coefficients for SVs in
+	// decision
 
 	// functions
 
 	// (mSupportVectorCoeficientsTable[n-1][mNumberOfSupportVectors])
 
-	double[]		mRho;														// constants in decision functions
+	double[] mRho; // constants in decision functions
 
 	// (mRho[n*(n-1)/2])
 
-	double[]		mPairwiseProbability;						// pariwise probability
-																							// information
+	double[] mPairwiseProbability; // pariwise probability
+	// information
 
-	double[]		probB;
+	double[] probB;
 
 	// for classification only
 
-	int[]				mSVCLabelsTable;									// mSVCLabelsTable of each class
+	int[] mSVCLabelsTable; // mSVCLabelsTable of each class
 
 	// (mSVCLabelsTable[n])
 
-	int[]				mNumberOfSupportVectorsPerClass;	// number of SVs for each class
+	int[] mNumberOfSupportVectorsPerClass; // number of SVs for each class
 
 	// (mNumberOfSupportVectorsPerClass[n])
 	// mNumberOfSupportVectorsPerClass[0] + mNumberOfSupportVectorsPerClass[1] +

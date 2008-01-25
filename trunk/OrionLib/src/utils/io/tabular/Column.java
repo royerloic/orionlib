@@ -138,7 +138,7 @@ public class Column<O extends Comparable<O>>
 				{
 					String lValue = (String) mList.get(i);
 					double lPercentile = lMap.get(lValue);
-					lPercentile = lPercentile>1 ? 1 : lPercentile;
+					lPercentile = lPercentile > 1 ? 1 : lPercentile;
 					mPercentileList.add(lPercentile);
 				}
 			}

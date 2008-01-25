@@ -6,14 +6,17 @@ import java.util.Iterator;
 /**
  * Denotes a range of integer numbers
  */
-public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
+public class Range implements
+									Comparable<Range>,
+									Iterable<Integer>,
+									Serializable
 {
 	// because in Java int are signed, we need to restrict the length of ranges
 	// otherwise overflows happen.
-	public static final int	cMaxRangeLength	= Integer.MAX_VALUE / 2;
+	public static final int cMaxRangeLength = Integer.MAX_VALUE / 2;
 
-	protected int						mRangeStart;
-	protected int						mRangeEnd;
+	protected int mRangeStart;
+	protected int mRangeEnd;
 
 	/**
 	 * Creates a range of length one.
@@ -27,8 +30,8 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	}
 
 	/**
-	 * Create a range given the begin and the length. 
-	 * Please use instead the two static methods: Range.constructRangeWithStartEnd and
+	 * Create a range given the begin and the length. Please use instead the two
+	 * static methods: Range.constructRangeWithStartEnd and
 	 * range.constructRangeWithStartLength which are more explicit. (better for
 	 * avoiding confusion between end and length..)
 	 * 
@@ -38,7 +41,7 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	 * @param start
 	 * @param length
 	 */
-	//@Deprecated
+	// @Deprecated
 	public Range(final int start, final int length)
 	{
 		if (length < 0)
@@ -81,7 +84,8 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	 * @param start
 	 * @param end
 	 */
-	public static Range constructRangeWithStartLength(final int start, final int length)
+	public static Range constructRangeWithStartLength(final int start,
+																										final int length)
 	{
 		return new Range(start, length);
 	}
@@ -194,9 +198,8 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	{
 		final int otherStart = otherRange.getStart();
 		final int otherEnd = otherRange.getEnd();
-		return ((mRangeStart <= otherStart) && (otherStart < mRangeEnd))
-				|| ((mRangeStart < otherEnd) && (otherEnd <= mRangeEnd))
-				|| ((otherStart < mRangeStart) && (mRangeEnd < otherEnd));
+		return ((mRangeStart <= otherStart) && (otherStart < mRangeEnd)) || ((mRangeStart < otherEnd) && (otherEnd <= mRangeEnd))
+						|| ((otherStart < mRangeStart) && (mRangeEnd < otherEnd));
 	}
 
 	/**
@@ -316,7 +319,7 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	{
 		return (mRangeStart == pAbsoluteStart) && (mRangeEnd == pAbsoluteEnd);
 	}
-	
+
 	/**
 	 * @param range
 	 * @return true if start and end are equal
@@ -376,8 +379,8 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 
 	private static final class RangeIterator implements Iterator<Integer>
 	{
-		final Range	range;
-		int					index;
+		final Range range;
+		int index;
 
 		public RangeIterator(final Range pRange)
 		{
@@ -408,7 +411,5 @@ public class Range implements Comparable<Range>, Iterable<Integer>, Serializable
 	{
 		return new RangeIterator(this);
 	}
-
-
 
 }

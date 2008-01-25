@@ -53,17 +53,17 @@ public class DateUtils
 		else if (lDays > 0)
 			switch ((int) lDays)
 			{
-				case 1:
-					lString = "one day ago";
-					break;
+			case 1:
+				lString = "one day ago";
+				break;
 
-				case 2:
-					lString = "two days ago";
-					break;
+			case 2:
+				lString = "two days ago";
+				break;
 
-				case 3:
-					lString = "three days ago";
-					break;
+			case 3:
+				lString = "three days ago";
+				break;
 
 			}
 		else if (lHours > 3)
@@ -71,17 +71,17 @@ public class DateUtils
 		else if (lHours > 0)
 			switch ((int) lHours)
 			{
-				case 1:
-					lString = "one hour ago";
-					break;
+			case 1:
+				lString = "one hour ago";
+				break;
 
-				case 2:
-					lString = "two hours ago";
-					break;
+			case 2:
+				lString = "two hours ago";
+				break;
 
-				case 3:
-					lString = "three hours ago";
-					break;
+			case 3:
+				lString = "three hours ago";
+				break;
 
 			}
 		else if (lMinutes > 3)
@@ -89,17 +89,17 @@ public class DateUtils
 		else if (lMinutes > 0)
 			switch ((int) lMinutes)
 			{
-				case 1:
-					lString = "one minute ago";
-					break;
+			case 1:
+				lString = "one minute ago";
+				break;
 
-				case 2:
-					lString = "two minutes ago";
-					break;
+			case 2:
+				lString = "two minutes ago";
+				break;
 
-				case 3:
-					lString = "three minutes ago";
-					break;
+			case 3:
+				lString = "three minutes ago";
+				break;
 
 			}
 		else if (lSeconds > 1)

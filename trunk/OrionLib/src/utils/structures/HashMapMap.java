@@ -5,13 +5,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements MapMap<K1, K2, V>
+import utils.structures.MapMap.Entry;
+
+public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements
+																																	MapMap<K1, K2, V>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 3031690841057866903L;
+	private static final long serialVersionUID = 3031690841057866903L;
 
 	/*
 	 * (non-Javadoc)
@@ -37,20 +40,19 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements Ma
 				put(lEntry.getKey(), lEntry2.getKey(), lEntry2.getValue());
 	}
 
-
 	public V get(final K1 pKey1, final K2 pKey2)
 	{
-		Map<K2,V> lMap = get(pKey1);
-		if(lMap==null)
+		Map<K2, V> lMap = get(pKey1);
+		if (lMap == null)
 			return null;
 		return lMap.get(pKey2);
 	}
 
 	public static class HashMapMapEntry<K1, K2, V> implements Entry<K1, K2, V>
 	{
-		private final K1	mKey1;
-		private final K2	mKey2;
-		private final V		mValue;
+		private final K1 mKey1;
+		private final K2 mKey2;
+		private final V mValue;
 
 		public HashMapMapEntry(final K1 pKey1, final K2 pKey2, final V pValue)
 		{
@@ -82,8 +84,9 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements Ma
 		for (final Map.Entry<K1, Map<K2, V>> lEntry : entrySet())
 			for (final Map.Entry<K2, V> lEntry2 : lEntry.getValue().entrySet())
 			{
-				final Entry<K1, K2, V> lAllKeyEntry = new HashMapMapEntry<K1, K2, V>(lEntry.getKey(), lEntry2.getKey(),
-						lEntry2.getValue());
+				final Entry<K1, K2, V> lAllKeyEntry = new HashMapMapEntry<K1, K2, V>(	lEntry.getKey(),
+																																							lEntry2.getKey(),
+																																							lEntry2.getValue());
 				lEntrySet.add(lAllKeyEntry);
 			}
 		return lEntrySet;

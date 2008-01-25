@@ -12,9 +12,9 @@ import java.util.Set;
  */
 public class IntersectionMonitor<E>
 {
-	private final HashSet<E>	mSetA						= new HashSet<E>();
-	private final HashSet<E>	mSetB						= new HashSet<E>();
-	private boolean			mIsIntersecting	= false;
+	private final HashSet<E> mSetA = new HashSet<E>();
+	private final HashSet<E> mSetB = new HashSet<E>();
+	private boolean mIsIntersecting = false;
 
 	/**
 	 * @param pCollection

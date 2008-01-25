@@ -32,17 +32,17 @@ import utils.optimal.interf.IObjectiveFunction;
 public class ExperimentDatabase implements IExperimentDatabase
 {
 
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private List								mExperimentList;
+	private List mExperimentList;
 
-	private List								mBestExperimentList;
+	private List mBestExperimentList;
 
-	private List								mBestExperimentValuesList;
+	private List mBestExperimentValuesList;
 
-	private INumericalVector		mMinimumValuesVector;
+	private INumericalVector mMinimumValuesVector;
 
-	private INumericalVector		mMaximumValuesVector;
+	private INumericalVector mMaximumValuesVector;
 
 	/**
 	 * 
