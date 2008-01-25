@@ -9,8 +9,9 @@ import java.util.List;
 public class FileUtils
 {
 
-	public static File[] listFilesAsArray(final File directory, final FilenameFilter filter,
-			final boolean recurse)
+	public static File[] listFilesAsArray(final File directory,
+																				final FilenameFilter filter,
+																				final boolean recurse)
 	{
 		final Collection<File> files = listFiles(directory, filter, recurse);
 
@@ -36,7 +37,9 @@ public class FileUtils
 		return files;
 	}
 
-	public static List<File> listFiles(final File directory, final FilenameFilter filter, final boolean recurse)
+	public static List<File> listFiles(	final File directory,
+																			final FilenameFilter filter,
+																			final boolean recurse)
 	{
 		// List of files / directories
 		final List<File> files = new ArrayList<File>();

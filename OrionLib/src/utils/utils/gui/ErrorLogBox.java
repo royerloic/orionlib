@@ -30,13 +30,13 @@ public class ErrorLogBox extends IwuJFrame
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 7832967664116855037L;
+	private static final long serialVersionUID = 7832967664116855037L;
 
-	private final boolean		mResult					= false;
+	private final boolean mResult = false;
 
-	private String		mMessage;
+	private String mMessage;
 
-	private JTextArea	mJTextArea;
+	private JTextArea mJTextArea;
 
 	public boolean getResult()
 	{

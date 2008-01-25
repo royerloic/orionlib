@@ -24,38 +24,40 @@ import javax.vecmath.GVector;
 /**
  * A polymonial {@link com.gregdennis.drej.Kernel kernel} of the following form:<br>
  * 
- * <blockquote>
- * K(x1, x2) = (x1 &middot; x2 + 1)<sup>d</sup>
- * </blockquote>
+ * <blockquote> K(x1, x2) = (x1 &middot; x2 + 1)<sup>d</sup> </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu).
  */
-public final class PolynomialKernel implements Kernel {
-    
-    private final int degree;
-    
-    /** Polynomial kernel of degree 2. */
-    public static final PolynomialKernel QUADRATIC_KERNEL = new PolynomialKernel(2);
-    
-    /** Polynomial kernel of degree 3. */
-    public static final PolynomialKernel CUBIC_KERNEL = new PolynomialKernel(3);
+public final class PolynomialKernel implements Kernel
+{
 
-    /**
-     * Construct a polynomial kernel with the specified degree.
-     */
-    public PolynomialKernel(final int degree) {
-        this.degree = degree;
-    }
-    
-    /**
-     * Returns the degree of this polynomial kernel.
-     */
-    public int degree() {
-        return degree;
-    }
+	private final int degree;
 
-    public double eval(final GVector x1, final GVector x2) {
-        return Math.pow(1 + x1.dot(x2), degree);
-    }
+	/** Polynomial kernel of degree 2. */
+	public static final PolynomialKernel QUADRATIC_KERNEL = new PolynomialKernel(2);
+
+	/** Polynomial kernel of degree 3. */
+	public static final PolynomialKernel CUBIC_KERNEL = new PolynomialKernel(3);
+
+	/**
+	 * Construct a polynomial kernel with the specified degree.
+	 */
+	public PolynomialKernel(final int degree)
+	{
+		this.degree = degree;
+	}
+
+	/**
+	 * Returns the degree of this polynomial kernel.
+	 */
+	public int degree()
+	{
+		return degree;
+	}
+
+	public double eval(final GVector x1, final GVector x2)
+	{
+		return Math.pow(1 + x1.dot(x2), degree);
+	}
 
 }

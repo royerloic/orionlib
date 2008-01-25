@@ -1,6 +1,5 @@
 package utils.regex.compiler;
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,8 +21,8 @@ import utils.structures.SetMap;
 public class RegexCompiler implements Iterable<Pair<String>>
 {
 
-	private final Map<String, String>			mRegexNameToRegexMap	= new HashMap<String, String>();
-	private final SetMap<String, String>	mSetNameToNameSetMap	= new HashSetMap<String, String>();
+	private final Map<String, String> mRegexNameToRegexMap = new HashMap<String, String>();
+	private final SetMap<String, String> mSetNameToNameSetMap = new HashSetMap<String, String>();
 
 	private RegexCompiler()
 	{
@@ -39,14 +38,18 @@ public class RegexCompiler implements Iterable<Pair<String>>
 		readRules(pInputStream);
 	}
 
-	public void readRules(final String pRessource) throws FileNotFoundException, IOException
+	public void readRules(final String pRessource) throws FileNotFoundException,
+																								IOException
 	{
 		readRules(RegexCompiler.class.getResourceAsStream(pRessource));
 	}
 
-	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
+	public void readRules(final InputStream pInputStream)	throws FileNotFoundException,
+																												IOException
 	{
-		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(pInputStream, false, "\\s+:=\\s+");
+		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(	pInputStream,
+																																				false,
+																																				"\\s+:=\\s+");
 
 		boolean lIsSet = false;
 		String lSetName = null;
@@ -58,7 +61,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 			{
 				final String lName = lList.get(0).trim();
 				String lRegex = lList.get(1).trim();
-				
+
 				// Replace Sets
 				for (final Map.Entry<String, Set<String>> lEntry : mSetNameToNameSetMap.entrySet())
 				{
@@ -74,7 +77,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 					final String lSetReplacement = lEntry.getValue();
 					lRegex = lRegex.replace(lSetNameUse, lSetReplacement);
 				}
-				
+
 				lRegex = wrapAroundGroup(lRegex);
 
 				mRegexNameToRegexMap.put(lName, lRegex);
@@ -83,7 +86,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 			else if (lList.size() == 1)
 			{
 				final String lString = lList.get(0).trim();
-				if (lString.length()==0)
+				if (lString.length() == 0)
 				{
 					lIsSet = false;
 				}
@@ -95,8 +98,10 @@ public class RegexCompiler implements Iterable<Pair<String>>
 				{
 					if (lString.startsWith("@") && lString.endsWith("@"))
 					{
-						final String lAddedSetName = lString.substring(1, lString.length()-1);
-						mSetNameToNameSetMap.get(lSetName).addAll(mSetNameToNameSetMap.get(lAddedSetName));
+						final String lAddedSetName = lString.substring(	1,
+																														lString.length() - 1);
+						mSetNameToNameSetMap.get(lSetName)
+																.addAll(mSetNameToNameSetMap.get(lAddedSetName));
 					}
 					else
 					{
@@ -105,13 +110,17 @@ public class RegexCompiler implements Iterable<Pair<String>>
 				}
 				else if (lString.startsWith("import:"))
 				{
-					final String[] lStringArray = StringUtils.split(lList.get(0), "\\s*:\\s*", 0);
+					final String[] lStringArray = StringUtils.split(lList.get(0),
+																													"\\s*:\\s*",
+																													0);
 					final String lImportRulesFileName = lStringArray[1].trim();
 					readRules(lImportRulesFileName);
 				}
 				else if (lString.startsWith("importset:"))
 				{
-					final String[] lStringArray = StringUtils.split(lString, ":\\s*|\\s+as\\s+", 0);
+					final String[] lStringArray = StringUtils.split(lString,
+																													":\\s*|\\s+as\\s+",
+																													0);
 					final String lImportSetFileName = lStringArray[1].trim();
 					final String lImportedSetName = lStringArray[2].trim();
 					importRegexFile(lImportedSetName, lImportSetFileName);
@@ -130,17 +139,21 @@ public class RegexCompiler implements Iterable<Pair<String>>
 		}
 	}
 
-	private void importRegexFile(final String pImportedSetName, final String pRessourceFileName)
-			throws FileNotFoundException, IOException
+	private void importRegexFile(	final String pImportedSetName,
+																final String pRessourceFileName) throws FileNotFoundException,
+																																IOException
 	{
-		importRegexFile(pImportedSetName, LineReader.getInputStreamFromRessource(new RegexCompiler().getClass(),
-				pRessourceFileName));
+		importRegexFile(pImportedSetName,
+										LineReader.getInputStreamFromRessource(	new RegexCompiler().getClass(),
+																														pRessourceFileName));
 	}
 
-	private void importRegexFile(final String pImportedSetName, final InputStream pImportRegexInputStream)
-			throws FileNotFoundException, IOException
+	private void importRegexFile(	final String pImportedSetName,
+																final InputStream pImportRegexInputStream) throws FileNotFoundException,
+																																					IOException
 	{
-		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(pImportRegexInputStream, false);
+		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(	pImportRegexInputStream,
+																																		false);
 		for (final List<String> lList : lMatrix)
 		{
 			final String lEntry = lList.get(0).trim();
@@ -174,28 +187,32 @@ public class RegexCompiler implements Iterable<Pair<String>>
 	{
 		return Pattern.compile(mRegexNameToRegexMap.get(pName));
 	}
-	
+
 	public Pattern getWordPattern(final String pName)
 	{
-		return Pattern.compile("(?:\\W|^)"+mRegexNameToRegexMap.get(pName)+"(?:\\W|$)");
+		return Pattern.compile("(?:\\W|^)" + mRegexNameToRegexMap.get(pName)
+														+ "(?:\\W|$)");
 	}
-	
-	private String wrapAroundGroup( String pRegex)
+
+	private String wrapAroundGroup(String pRegex)
 	{
-		/*if(!(pRegex.startsWith("(?:") && pRegex.endsWith("")))
-		{/**/
-			return "(?:" + pRegex + ")";
-		/*}
-		else
-			return pRegex;/**/
+		/***************************************************************************
+		 * if(!(pRegex.startsWith("(?:") && pRegex.endsWith(""))) {/
+		 **************************************************************************/
+		return "(?:" + pRegex + ")";
+		/***************************************************************************
+		 * } else return pRegex;/
+		 **************************************************************************/
 	}
 
 	public Iterator<Pair<String>> iterator()
 	{
-		return new Iterator<Pair<String>>(){
+		return new Iterator<Pair<String>>()
+		{
 
-			Iterator<Map.Entry<String, String>> mIterator = mRegexNameToRegexMap.entrySet().iterator();
-				
+			Iterator<Map.Entry<String, String>> mIterator = mRegexNameToRegexMap.entrySet()
+																																					.iterator();
+
 			public boolean hasNext()
 			{
 				return mIterator.hasNext();
@@ -204,13 +221,14 @@ public class RegexCompiler implements Iterable<Pair<String>>
 			public Pair<String> next()
 			{
 				Map.Entry<String, String> lEntry = mIterator.next();
-				return new Pair<String>(lEntry.getKey(),lEntry.getValue());
+				return new Pair<String>(lEntry.getKey(), lEntry.getValue());
 			}
 
 			public void remove()
 			{
-				throw new UnsupportedOperationException("cannot remove from this iterator");				
-			}};
+				throw new UnsupportedOperationException("cannot remove from this iterator");
+			}
+		};
 	}
 
 }

@@ -26,14 +26,15 @@ import java.io.InputStream;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public abstract class FileChooser {
+public abstract class FileChooser
+{
 	/**
-	 * Buffer size while reading from or write to a file (4 KB) 
+	 * Buffer size while reading from or write to a file (4 KB)
 	 */
 	public static final int BUFFER_SIZE = 4096;
-	
+
 	private String userDir = null;
-	
+
 	/**
 	 * Shows a dialog to select a file
 	 * 
@@ -51,23 +52,29 @@ public abstract class FileChooser {
 	 * @throws FileChooserException
 	 */
 	public abstract boolean save(InputStream is, String fileName) throws FileChooserException;
-	
+
 	/**
 	 * Gets the current user working directory
+	 * 
 	 * @return current working directory
 	 */
-	public String getUserDirectory ( ) {
-	    if (userDir == null) {
-	        userDir = System.getProperty("user.home"); 
-	    }
+	public String getUserDirectory()
+	{
+		if (userDir == null)
+		{
+			userDir = System.getProperty("user.home");
+		}
 		return userDir;
 	}
-	
+
 	/**
 	 * Sets the user working directory
-	 * @param userDir The user directory to set
+	 * 
+	 * @param userDir
+	 *          The user directory to set
 	 */
-	public void setUserDirectory (String userDir) {
-	    this.userDir = userDir;
+	public void setUserDirectory(String userDir)
+	{
+		this.userDir = userDir;
 	}
 }

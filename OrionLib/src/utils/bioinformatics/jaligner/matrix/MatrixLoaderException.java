@@ -23,17 +23,19 @@ package utils.bioinformatics.jaligner.matrix;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class MatrixLoaderException extends Exception {
+public class MatrixLoaderException extends Exception
+{
 
 	/**
-     * 
-     */
-    private static final long serialVersionUID = 3906364935142586680L;
+	 * 
+	 */
+	private static final long serialVersionUID = 3906364935142586680L;
 
-    /**
+	/**
 	 * @param message
 	 */
-	public MatrixLoaderException(String message) {
+	public MatrixLoaderException(String message)
+	{
 		super(message);
 	}
 }

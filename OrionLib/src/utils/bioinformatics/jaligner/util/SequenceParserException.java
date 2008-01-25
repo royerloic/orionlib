@@ -23,16 +23,18 @@ package utils.bioinformatics.jaligner.util;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class SequenceParserException extends Exception {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3258417248288191543L;
+public class SequenceParserException extends Exception
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3258417248288191543L;
 
-    /**
-     * @param message
-     */
-    public SequenceParserException(String message) {
-        super(message);
-    }
+	/**
+	 * @param message
+	 */
+	public SequenceParserException(String message)
+	{
+		super(message);
+	}
 }

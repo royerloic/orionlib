@@ -11,10 +11,9 @@ package utils.math.plot;
 
 import utils.math.IScalarFunction;
 
-
 /**
  * @author MSc. Ing. Loic Royer
- *
+ * 
  */
 public interface IPlot
 {
@@ -72,5 +71,5 @@ public interface IPlot
 	 * 
 	 */
 	void hide();
-	
+
 }

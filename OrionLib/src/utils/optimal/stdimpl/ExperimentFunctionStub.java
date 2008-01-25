@@ -13,14 +13,16 @@ import utils.optimal.interf.IOptimalEventListener;
  * @author Dipl.-Inf. MSc. Ing. Loic Royer
  * 
  */
-public class ExperimentFunctionStub implements IExperimentFunctionStub, Runnable
+public class ExperimentFunctionStub	implements
+																		IExperimentFunctionStub,
+																		Runnable
 {
 
-	private INumericalVector			mExperimentInputVector;
-	private IExperimentFunction		mExperimentFunction;
-	private IOptimalEventListener	mTerminationListener;
+	private INumericalVector mExperimentInputVector;
+	private IExperimentFunction mExperimentFunction;
+	private IOptimalEventListener mTerminationListener;
 
-	private Thread								mThread;
+	private Thread mThread;
 
 	/**
 	 * @param pExperimentFunction

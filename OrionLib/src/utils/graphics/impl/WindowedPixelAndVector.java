@@ -39,61 +39,61 @@ import utils.graphics.OrionGraphicsFactory;
 public class WindowedPixelAndVector implements IOrionGraphics
 {
 
-	private static GraphicsEnvironment	mGraphicsEnvironment;
+	private static GraphicsEnvironment mGraphicsEnvironment;
 
-	private static GraphicsDevice				mGraphicsDevice;
+	private static GraphicsDevice mGraphicsDevice;
 
-	private DisplayMode									mDisplayMode;
+	private DisplayMode mDisplayMode;
 
-	private MemoryImageSource						mMemoryImageSource;
+	private MemoryImageSource mMemoryImageSource;
 
-	private Image												mPixelOffscreen;
+	private Image mPixelOffscreen;
 
-	private int													mWidth;
+	private int mWidth;
 
-	private int													mHeight;
+	private int mHeight;
 
-	private boolean											mTimerStarted;
+	private boolean mTimerStarted;
 
-	private long												mInitialTime;
+	private long mInitialTime;
 
-	private int													mFrameCounter;
+	private int mFrameCounter;
 
-	private boolean											mDisplayFramerate;
+	private boolean mDisplayFramerate;
 
-	private int													mNumberOfBuffers;
+	private int mNumberOfBuffers;
 
-	private double											mFrameRate;
+	private double mFrameRate;
 
-	private int													mMaxFramesForFrameRate;
+	private int mMaxFramesForFrameRate;
 
-	private IOrionGraphicsMouseListener	mOrionGraphicsMouseListener;
+	private IOrionGraphicsMouseListener mOrionGraphicsMouseListener;
 
-	private MouseAdapter								mMouseListenerAdapter;
+	private MouseAdapter mMouseListenerAdapter;
 
-	private MouseMotionAdapter					mMouseMotionListenerAdapter;
+	private MouseMotionAdapter mMouseMotionListenerAdapter;
 
-	private MouseWheelListener					mMouseWheelListenerAdapter;
+	private MouseWheelListener mMouseWheelListenerAdapter;
 
 	public class MyMouseInfo implements IMouseInfo
 	{
-		protected boolean	mMouseLeft;
+		protected boolean mMouseLeft;
 
-		protected boolean	mMouseMiddle;
+		protected boolean mMouseMiddle;
 
-		protected boolean	mMouseRight;
+		protected boolean mMouseRight;
 
-		protected int			mMouseX;
+		protected int mMouseX;
 
-		protected int			mMouseY;
+		protected int mMouseY;
 
-		protected int			mMouseDeltaZ;
+		protected int mMouseDeltaZ;
 
-		protected boolean	mShift;
+		protected boolean mShift;
 
-		protected boolean	mCtrl;
+		protected boolean mCtrl;
 
-		protected boolean	mAlt;
+		protected boolean mAlt;
 
 		public int getMouseX()
 		{
@@ -142,17 +142,18 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	};
 
-	private MyMouseInfo			mMouseInfo;
+	private MyMouseInfo mMouseInfo;
 
-	private String					mIconFileName;
+	private String mIconFileName;
 
-	private Frame						mFrame;
+	private Frame mFrame;
 
-	private BufferStrategy	mStrategy;
+	private BufferStrategy mStrategy;
 
-	private KeyAdapter			mKeyListenerAdapter;
+	private KeyAdapter mKeyListenerAdapter;
 
-	public WindowedPixelAndVector(final int pDevice, final DisplayMode pDisplayMode)
+	public WindowedPixelAndVector(final int pDevice,
+																final DisplayMode pDisplayMode)
 	{
 		super();
 		mIconFileName = null;
@@ -197,7 +198,8 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 			mFrame.setSize(mWidth, mHeight);
 
-			final Rectangle lRectangle = mGraphicsDevice.getDefaultConfiguration().getBounds();
+			final Rectangle lRectangle = mGraphicsDevice.getDefaultConfiguration()
+																									.getBounds();
 			mFrame.setBounds(lRectangle);
 
 			mFrame.setIgnoreRepaint(true);
@@ -213,13 +215,15 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			System.out.println("isMultiBufferAvailable: " + lBufferCapablities.isMultiBufferAvailable());
 			System.out.println("isPageFlipping: " + lBufferCapablities.isPageFlipping());
 
-			System.out.println("Available video memory after starting: "
-					+ mGraphicsDevice.getAvailableAcceleratedMemory() / (1024 * 1024) + "MB");
+			System.out.println("Available video memory after starting: " + mGraphicsDevice.getAvailableAcceleratedMemory()
+													/ (1024 * 1024)
+													+ "MB");
 
 			doSetIconImage();
 
-			System.out.println("Available video memory before starting: "
-					+ mGraphicsDevice.getAvailableAcceleratedMemory() / (1024 * 1024) + " MB");
+			System.out.println("Available video memory before starting: " + mGraphicsDevice.getAvailableAcceleratedMemory()
+													/ (1024 * 1024)
+													+ " MB");
 			System.out.println("isfullscreen supported:" + mGraphicsDevice.isFullScreenSupported());
 
 			//
@@ -253,20 +257,31 @@ public class WindowedPixelAndVector implements IOrionGraphics
 		mFrame.dispose();
 	}
 
-	public void setPixelArray(final int[] pPixelArray, final int pOffset, final int pScan)
+	public void setPixelArray(final int[] pPixelArray,
+														final int pOffset,
+														final int pScan)
 	{
 		final int lScreenWidth = mFrame.getWidth();
 		final int lScreenHeight = mFrame.getHeight();
 
 		if (lScreenWidth * lScreenHeight != pPixelArray.length)
 			throw new IllegalArgumentException("Wrong dimension for the Pixel Array.");
-		final DirectColorModel lColorModel = new DirectColorModel(32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
-		mMemoryImageSource = new MemoryImageSource(lScreenWidth, lScreenHeight, lColorModel, pPixelArray,
-				pOffset, pScan);
+		final DirectColorModel lColorModel = new DirectColorModel(32,
+																															0x00FF0000,
+																															0x0000FF00,
+																															0x000000FF,
+																															0);
+		mMemoryImageSource = new MemoryImageSource(	lScreenWidth,
+																								lScreenHeight,
+																								lColorModel,
+																								pPixelArray,
+																								pOffset,
+																								pScan);
 
 		mMemoryImageSource.setAnimated(true);
 
-		mPixelOffscreen = Toolkit.getDefaultToolkit().createImage(mMemoryImageSource);
+		mPixelOffscreen = Toolkit	.getDefaultToolkit()
+															.createImage(mMemoryImageSource);
 	}
 
 	public void updateAllPixels()
@@ -274,7 +289,10 @@ public class WindowedPixelAndVector implements IOrionGraphics
 		mMemoryImageSource.newPixels();
 	}
 
-	public void updatePixelArea(final int pX, final int pY, final int pW, final int pH)
+	public void updatePixelArea(final int pX,
+															final int pY,
+															final int pW,
+															final int pH)
 	{
 		mMemoryImageSource.newPixels(pX, pY, pW, pH);
 	}
@@ -557,7 +575,7 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	public void showGraphics()
 	{
-		show();	
+		show();
 	}
 
 	public Component getComponent()

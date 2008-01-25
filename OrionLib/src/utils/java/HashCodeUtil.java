@@ -27,7 +27,7 @@ public final class HashCodeUtil
 	 * contributions from fields. Using a non-zero value decreases collisons of
 	 * <code>hashCode</code> values.
 	 */
-	public static final int	SEED	= 23;
+	public static final int SEED = 23;
 
 	/**
 	 * booleans.
@@ -141,7 +141,7 @@ public final class HashCodeUtil
 	}
 
 	// / PRIVATE ///
-	private static final int	fODD_PRIME_NUMBER	= 37;
+	private static final int fODD_PRIME_NUMBER = 37;
 
 	private static int firstTerm(final int aSeed)
 	{

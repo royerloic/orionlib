@@ -29,45 +29,48 @@ import java.util.logging.LogRecord;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class RecordFormatter extends Formatter {
-	
-    /**
-     * This method is called for every log records
-     * 
-     * @param record
-     */
+public class RecordFormatter extends Formatter
+{
+
+	/**
+	 * This method is called for every log records
+	 * 
+	 * @param record
+	 */
 	@Override
-	public String format(LogRecord record) {
-		StringBuffer buffer = new StringBuffer( );
-		buffer.append ( new Date().toString() );
-		buffer.append ( " " );
-		buffer.append ( record.getLevel() );
-		buffer.append ( "\t" );
-		buffer.append ( record.getMessage() );
-		buffer.append ( "\n" );
-		
+	public String format(LogRecord record)
+	{
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(new Date().toString());
+		buffer.append(" ");
+		buffer.append(record.getLevel());
+		buffer.append("\t");
+		buffer.append(record.getMessage());
+		buffer.append("\n");
+
 		return buffer.toString();
 	}
-	
+
 	/**
-	 * This method is called just after the handler using this
-	 * formatter is created
+	 * This method is called just after the handler using this formatter is
+	 * created
 	 * 
 	 * @param handler
 	 */
 	@Override
-	public String getHead(Handler handler) {
+	public String getHead(Handler handler)
+	{
 		return "";
 	}
-    
+
 	/**
-	 * This method is called just after the handler using this
-	 * formatter is closed
+	 * This method is called just after the handler using this formatter is closed
 	 * 
 	 * @param handler
 	 */
 	@Override
-	public String getTail(Handler handler) {
+	public String getTail(Handler handler)
+	{
 		return "\n";
 	}
 }

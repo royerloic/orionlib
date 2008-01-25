@@ -37,25 +37,30 @@ public class Toy extends Applet
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1549842888476096352L;
+	private static final long serialVersionUID = 1549842888476096352L;
 
-	static final String	DEFAULT_PARAM	= "-t 2 -c 100";
+	static final String DEFAULT_PARAM = "-t 2 -c 100";
 
-	int									XLEN;
+	int XLEN;
 
-	int									YLEN;
+	int YLEN;
 
 	// off-screen buffer
 
-	Image								buffer;
+	Image buffer;
 
-	Graphics						buffer_gc;
+	Graphics buffer_gc;
 
 	// pre-allocated colors
 
-	final static Color	colors[]			=
-																		{ new Color(0, 0, 0), new Color(0, 120, 120), new Color(120, 120, 0),
-			new Color(120, 0, 120), new Color(0, 200, 200), new Color(200, 200, 0), new Color(200, 0, 200) };
+	final static Color colors[] =
+	{ new Color(0, 0, 0),
+		new Color(0, 120, 120),
+		new Color(120, 120, 0),
+		new Color(120, 0, 120),
+		new Color(0, 200, 200),
+		new Color(200, 200, 0),
+		new Color(200, 0, 200) };
 
 	class point
 	{
@@ -66,14 +71,14 @@ public class Toy extends Applet
 			this.value = value;
 		}
 
-		double	x, y;
+		double x, y;
 
-		byte		value;
+		byte value;
 	}
 
-	Vector	point_list		= new Vector();
+	Vector point_list = new Vector();
 
-	byte		current_value	= 1;
+	byte current_value = 1;
 
 	@Override
 	public void init()
@@ -247,58 +252,58 @@ public class Toy extends Applet
 			++i;
 			switch (argv[i - 1].charAt(1))
 			{
-				case 's':
-					param.svm_type = atoi(argv[i]);
-					break;
-				case 't':
-					param.kernel_type = atoi(argv[i]);
-					break;
-				case 'd':
-					param.degree = atof(argv[i]);
-					break;
-				case 'g':
-					param.gamma = atof(argv[i]);
-					break;
-				case 'r':
-					param.coef0 = atof(argv[i]);
-					break;
-				case 'n':
-					param.nu = atof(argv[i]);
-					break;
-				case 'm':
-					param.cache_size = atof(argv[i]);
-					break;
-				case 'c':
-					param.C = atof(argv[i]);
-					break;
-				case 'e':
-					param.eps = atof(argv[i]);
-					break;
-				case 'p':
-					param.p = atof(argv[i]);
-					break;
-				case 'h':
-					param.shrinking = atoi(argv[i]);
-					break;
-				case 'w':
-					++param.nr_weight;
-					{
-						final int[] old = param.weight_label;
-						param.weight_label = new int[param.nr_weight];
-						System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
-					}
+			case 's':
+				param.svm_type = atoi(argv[i]);
+				break;
+			case 't':
+				param.kernel_type = atoi(argv[i]);
+				break;
+			case 'd':
+				param.degree = atof(argv[i]);
+				break;
+			case 'g':
+				param.gamma = atof(argv[i]);
+				break;
+			case 'r':
+				param.coef0 = atof(argv[i]);
+				break;
+			case 'n':
+				param.nu = atof(argv[i]);
+				break;
+			case 'm':
+				param.cache_size = atof(argv[i]);
+				break;
+			case 'c':
+				param.C = atof(argv[i]);
+				break;
+			case 'e':
+				param.eps = atof(argv[i]);
+				break;
+			case 'p':
+				param.p = atof(argv[i]);
+				break;
+			case 'h':
+				param.shrinking = atoi(argv[i]);
+				break;
+			case 'w':
+				++param.nr_weight;
+				{
+					final int[] old = param.weight_label;
+					param.weight_label = new int[param.nr_weight];
+					System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
+				}
 
-					{
-						final double[] old = param.weight;
-						param.weight = new double[param.nr_weight];
-						System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
-					}
+				{
+					final double[] old = param.weight;
+					param.weight = new double[param.nr_weight];
+					System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
+				}
 
-					param.weight_label[param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
-					param.weight[param.nr_weight - 1] = atof(argv[i]);
-					break;
-				default:
-					System.err.print("unknown option\n");
+				param.weight_label[param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
+				param.weight[param.nr_weight - 1] = atof(argv[i]);
+				break;
+			default:
+				System.err.print("unknown option\n");
 			}
 		}
 
@@ -418,7 +423,9 @@ public class Toy extends Applet
 
 	void button_save_clicked()
 	{
-		final FileDialog dialog = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
+		final FileDialog dialog = new FileDialog(	new Frame(),
+																							"Save",
+																							FileDialog.SAVE);
 		dialog.setVisible(true);
 		final String filename = dialog.getFile();
 		if (filename == null)
@@ -442,7 +449,9 @@ public class Toy extends Applet
 
 	void button_load_clicked()
 	{
-		final FileDialog dialog = new FileDialog(new Frame(), "Load", FileDialog.LOAD);
+		final FileDialog dialog = new FileDialog(	new Frame(),
+																							"Load",
+																							FileDialog.LOAD);
 		dialog.setVisible(true);
 		final String filename = dialog.getFile();
 		if (filename == null)
@@ -478,7 +487,9 @@ public class Toy extends Applet
 		{
 			if ((e.getX() >= XLEN) || (e.getY() >= YLEN))
 				return;
-			final point p = new point((double) e.getX() / XLEN, (double) e.getY() / YLEN, current_value);
+			final point p = new point((double) e.getX() / XLEN,
+																(double) e.getY() / YLEN,
+																current_value);
 			point_list.addElement(p);
 			draw_point(p);
 		}
@@ -530,9 +541,12 @@ class AppletFrame extends Frame
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -5168173625514849854L;
+	private static final long serialVersionUID = -5168173625514849854L;
 
-	AppletFrame(final String title, final Applet applet, final int width, final int height)
+	AppletFrame(final String title,
+							final Applet applet,
+							final int width,
+							final int height)
 	{
 		super(title);
 		applet.init();

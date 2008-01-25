@@ -14,7 +14,8 @@ public class MapValueComparatorTest
 {
 
 	/**
-	 * Test method for {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
+	 * Test method for
+	 * {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
 	 */
 	@Test
 	public void testCompareStringInteger()
@@ -35,14 +36,16 @@ public class MapValueComparatorTest
 		set1.add("d");
 		set1.add("3");
 		String resultString = "";
-		for (final String string : set1) {
+		for (final String string : set1)
+		{
 			resultString += string;
 		}
 		assertEquals("b3cad", resultString);
 	}
 
 	/**
-	 * Test method for {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
+	 * Test method for
+	 * {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
 	 */
 	@Test
 	public void testCompareStringString()
@@ -64,7 +67,8 @@ public class MapValueComparatorTest
 		set2.add("d");
 		set2.add("f");
 		String resultString = "";
-		for (final String string : set2) {
+		for (final String string : set2)
+		{
 			resultString += string;
 		}
 		assertEquals("bdfca", resultString);

@@ -8,7 +8,9 @@ import utils.math.IVectorArray;
  */
 public interface IRegression
 {
-	public double crossValidation(final ILabelledVectorSet pTrainingSet, int pFolds, double pRatio);
+	public double crossValidation(final ILabelledVectorSet pTrainingSet,
+																int pFolds,
+																double pRatio);
 
 	public double checkExactness(final ILabelledVectorSet pTrainingSet);
 

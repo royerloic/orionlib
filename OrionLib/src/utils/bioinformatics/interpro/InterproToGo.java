@@ -18,14 +18,14 @@ import utils.structures.Matrix;
  */
 public class InterproToGo
 {
-	private static final ListMap<Integer, Integer>	InterproToGoSetMap	= new ArrayListMap<Integer, Integer>();
+	private static final ListMap<Integer, Integer> InterproToGoSetMap = new ArrayListMap<Integer, Integer>();
 
 	static
 	{
 		try
 		{
 			final InputStream lInputStream = LineReader.getInputStreamFromRessource(new InterproToGo().getClass(),
-					"InterproToGo.tab.txt");
+																																							"InterproToGo.tab.txt");
 
 			final Matrix<String> lMatrix = LineReader.readMatrixFromStream(lInputStream);
 

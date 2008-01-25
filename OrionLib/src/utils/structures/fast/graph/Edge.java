@@ -5,15 +5,14 @@ import java.io.Serializable;
 public class Edge<N> implements Serializable
 {
 
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6961498773004173049L;
 
-	private N				mFirstNode;
+	private N mFirstNode;
 
-	private N				mSecondNode;
+	private N mSecondNode;
 
 	public Edge(final N pFirstNode, final N pSecondNode)
 	{
@@ -21,7 +20,6 @@ public class Edge<N> implements Serializable
 		this.mFirstNode = pFirstNode;
 		this.mSecondNode = pSecondNode;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -72,9 +70,7 @@ public class Edge<N> implements Serializable
 		else
 		{
 			final Edge<N> lEdge = (Edge<N>) pObject;
-			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge
-					.getSecondNode())))
-					|| ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
+			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge.getSecondNode()))) || ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
 			return lEquals;
 		}
 	}

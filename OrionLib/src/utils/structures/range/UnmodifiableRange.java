@@ -5,9 +5,9 @@ public class UnmodifiableRange extends Range
 
 	public UnmodifiableRange(Range pRange)
 	{
-		super(pRange);		
+		super(pRange);
 	}
-		
+
 	public UnmodifiableRange(int pStart, int pLength)
 	{
 		super(pStart, pLength);
@@ -20,7 +20,8 @@ public class UnmodifiableRange extends Range
 	 * @param start
 	 * @param end
 	 */
-	public static UnmodifiableRange constructRangeWithStartEnd(final int start, final int end)
+	public static UnmodifiableRange constructRangeWithStartEnd(	final int start,
+																															final int end)
 	{
 		if (end < start)
 		{
@@ -28,7 +29,7 @@ public class UnmodifiableRange extends Range
 		}
 		return new UnmodifiableRange(start, end - start);
 	}
-	
+
 	/**
 	 * Create a range given the start and end indices. NOTE: the end index is
 	 * _exclusive_ following the Java convention!!!
@@ -36,7 +37,8 @@ public class UnmodifiableRange extends Range
 	 * @param start
 	 * @param end
 	 */
-	public static UnmodifiableRange constructRangeWithStartLength(final int start, final int length)
+	public static UnmodifiableRange constructRangeWithStartLength(final int start,
+																																final int length)
 	{
 		if (length < 0)
 		{
@@ -44,7 +46,6 @@ public class UnmodifiableRange extends Range
 		}
 		return new UnmodifiableRange(start, length);
 	}
-	
 
 	@Override
 	public void convexUnion(Range pOtherRange)
@@ -75,8 +76,5 @@ public class UnmodifiableRange extends Range
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}
-	
-	
-	
 
 }

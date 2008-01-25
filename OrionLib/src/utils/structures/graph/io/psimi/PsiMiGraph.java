@@ -19,10 +19,10 @@ public class PsiMiGraph extends HashGraph<PsiMiNode, Edge<PsiMiNode>>
 				final List<Integer> lGoIdList = InterproToGo.getGoIdsForInterproId(lInterproDomainId);
 				for (final Integer lNewGoId : lGoIdList)
 					lNode.addGoId(lNewGoId);
-					/*********************************************************************
-					 * if (!getGoIdSet(lNode).contains(lNewGoId))
-					 * System.out.println("added goid: "+lNewGoId);/
-					 ********************************************************************/
+				/***********************************************************************
+				 * if (!getGoIdSet(lNode).contains(lNewGoId)) System.out.println("added
+				 * goid: "+lNewGoId);/
+				 **********************************************************************/
 			}
 		}
 

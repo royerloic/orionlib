@@ -19,7 +19,7 @@ import utils.optimal.stdimpl.test.functions.TestFunctions;
  */
 public class OptimizationBenchmark
 {
-	private IOptimalEngine		mOptimalEngine;
+	private IOptimalEngine mOptimalEngine;
 
 	// private IInterpolator mInterpolator;
 	//
@@ -27,29 +27,33 @@ public class OptimizationBenchmark
 	//
 	// private TestFunctions mTestFunction;
 
-	private OptimizationTask	mOptimizationTask;
+	private OptimizationTask mOptimizationTask;
 
-	private int								mMaximumIterations;
+	private int mMaximumIterations;
 
-	private int								mRepeats;
+	private int mRepeats;
 
-	private Class							mInterpolatorClass;
+	private Class mInterpolatorClass;
 
-	private Class							mDoeStrategyClass;
+	private Class mDoeStrategyClass;
 
 	class TestResult
 	{
-		public double				mSpeed;
-		public double				mMaxValue;
-		public IExperiment	mBestExperiment;
+		public double mSpeed;
+		public double mMaxValue;
+		public IExperiment mBestExperiment;
 	}
 
 	public static void main(final String[] args)
 	{
 		final OptimizationBenchmark lOptimalEngineTest1 = new OptimizationBenchmark(AgrInterpolator.class,
-				DoeStrategyClassic.class, 200, 50);
+																																								DoeStrategyClassic.class,
+																																								200,
+																																								50);
 		final OptimizationBenchmark lOptimalEngineTest2 = new OptimizationBenchmark(SvmInterpolator.class,
-				DoeStrategyClassic.class, 200, 50);
+																																								DoeStrategyClassic.class,
+																																								200,
+																																								50);
 
 		lOptimalEngineTest1.launchBenchmark();
 		lOptimalEngineTest2.launchBenchmark();
@@ -85,7 +89,12 @@ public class OptimizationBenchmark
 
 				final TestResult lResults = launchTest(i);
 
-				System.out.println(i + "\t" + j + "\t" + lResults.mMaxValue + "\t" + lResults.mSpeed);
+				System.out.println(i + "\t"
+														+ j
+														+ "\t"
+														+ lResults.mMaxValue
+														+ "\t"
+														+ lResults.mSpeed);
 			}
 	}
 
@@ -116,7 +125,9 @@ public class OptimizationBenchmark
 			e1.printStackTrace();
 		}
 
-		mOptimizationTask = new OptimizationTask(mOptimalEngine, mTestFunction, mMaximumIterations);
+		mOptimizationTask = new OptimizationTask(	mOptimalEngine,
+																							mTestFunction,
+																							mMaximumIterations);
 
 		mOptimizationTask.launchTest();
 

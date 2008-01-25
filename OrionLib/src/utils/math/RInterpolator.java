@@ -15,7 +15,7 @@ import utils.math.stdimpl.NumericalVector;
 
 /**
  * @author MSc. Ing. Loic Royer
- *
+ * 
  */
 public class RInterpolator implements IScalarFunction
 {
@@ -25,8 +25,8 @@ public class RInterpolator implements IScalarFunction
 	private int mInputDimension;
 
 	/**
-	 * Class Step is used to package the information
-	 * about one point in the interpolation.
+	 * Class Step is used to package the information about one point in the
+	 * interpolation.
 	 */
 	class Point
 	{
@@ -35,6 +35,7 @@ public class RInterpolator implements IScalarFunction
 			mVector = pVector;
 			mValue = pValue;
 		}
+
 		public INumericalVector mVector;
 		public double mValue;
 		public INumericalVector mGradient;
@@ -73,15 +74,19 @@ public class RInterpolator implements IScalarFunction
 		return ((Point) mPointList.elementAt(pIndex)).mGradient;
 	}
 
-	private final void setGradient(final int pIndex, final INumericalVector pGradient)
+	private final void setGradient(	final int pIndex,
+																	final INumericalVector pGradient)
 	{
 		((Point) mPointList.elementAt(pIndex)).mGradient = pGradient;
 	}
 
 	/**
-	 * Constructs an RInterpolator given a function <code>pInterpolatedFunction</code> 
-	 * implementing the IScalarFunction interface.
-	 * @param pInterpolatedFunction function to interpolate.
+	 * Constructs an RInterpolator given a function
+	 * <code>pInterpolatedFunction</code> implementing the IScalarFunction
+	 * interface.
+	 * 
+	 * @param pInterpolatedFunction
+	 *          function to interpolate.
 	 */
 	public RInterpolator(final int pInputDimension)
 	{
@@ -90,13 +95,16 @@ public class RInterpolator implements IScalarFunction
 	}
 
 	/**
-	 * Adds a couple (vector,value) to the interpolator, without performing an update.
-	 * @param pVector vector.
-	 * @param pValue value.
+	 * Adds a couple (vector,value) to the interpolator, without performing an
+	 * update.
+	 * 
+	 * @param pVector
+	 *          vector.
+	 * @param pValue
+	 *          value.
 	 */
-	public final void addPointWithoutUpdate(
-		final INumericalVector pVector,
-		final double pValue)
+	public final void addPointWithoutUpdate(final INumericalVector pVector,
+																					final double pValue)
 	{
 		final Point lPoint = new Point(pVector, pValue);
 		mPointList.addElement(lPoint);
@@ -104,8 +112,11 @@ public class RInterpolator implements IScalarFunction
 
 	/**
 	 * Adds a couple (vector,value) to the interpolator.
-	 * @param pVector vector.
-	 * @param pValue value.
+	 * 
+	 * @param pVector
+	 *          vector.
+	 * @param pValue
+	 *          value.
 	 */
 	public final void addPoint(final INumericalVector pVector, final double pValue)
 	{
@@ -115,8 +126,7 @@ public class RInterpolator implements IScalarFunction
 	}
 
 	/**
-	 * Updates this interpolator.
-	 * Typically after adding a point.
+	 * Updates this interpolator. Typically after adding a point.
 	 */
 	public final void update()
 	{
@@ -134,7 +144,9 @@ public class RInterpolator implements IScalarFunction
 
 	/**
 	 * Computes the gradient of the point of index <code>pIndex</code>.
-	 * @param pIndex index of point from which we want to compute the gradient.
+	 * 
+	 * @param pIndex
+	 *          index of point from which we want to compute the gradient.
 	 * @return gradient vector.
 	 */
 	private final INumericalVector computeGradientOf(final int pIndex)
@@ -156,9 +168,7 @@ public class RInterpolator implements IScalarFunction
 				{
 					final double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
 					lSumCoeficients += lCoeficient;
-					final double lAlpha =
-						(lCoeficient * (getValue(i) - getValue(pIndex)))
-							/ (lDistance * lDistance);
+					final double lAlpha = (lCoeficient * (getValue(i) - getValue(pIndex))) / (lDistance * lDistance);
 					final INumericalVector lGradientContribution = lCurrentVector.minus(lVector);
 					lGradientContribution.timesEquals(lAlpha);
 
@@ -225,7 +235,9 @@ public class RInterpolator implements IScalarFunction
 		return lClosestPoint;
 	}
 
-	/** (non-Javadoc)
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see de.fhg.iwu.utils.math.IScalarFunction#evaluate(de.fhg.iwu.utils.math.MVector)
 	 */
 	public double evaluate(final INumericalVector pVector)
@@ -255,7 +267,7 @@ public class RInterpolator implements IScalarFunction
 					final double lCoeficient = Math.pow(cBASE, 1 - lNormalizedDistance);
 					lSumCoeficients += lCoeficient;
 					final INumericalVector lPointVector = pVector.minus(lCurrentVector);
-					double lValueContribution =	getValue(i) + lPointVector.times(getGradient(i));
+					double lValueContribution = getValue(i) + lPointVector.times(getGradient(i));
 					lValueContribution *= lCoeficient;
 					lValue += lValueContribution;
 				}
@@ -273,8 +285,8 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public double[][] computePoints(final int pResolution)
 	{
-	  throw new RuntimeException(""); 
-	  
+		throw new RuntimeException("");
+
 	}
 
 	/**
@@ -322,10 +334,10 @@ public class RInterpolator implements IScalarFunction
 	 */
 	public void normalizeInputVector(final INumericalVector pVector)
 	{
-		
+
 	}
 
-	/** 
+	/**
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
@@ -338,7 +350,7 @@ public class RInterpolator implements IScalarFunction
 		return lClonedInterpolator;
 	}
 
-	/** 
+	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -347,7 +359,7 @@ public class RInterpolator implements IScalarFunction
 		return super.equals(pInterpolator);
 	}
 
-	/** 
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -357,7 +369,7 @@ public class RInterpolator implements IScalarFunction
 		return super.toString();
 	}
 
-	/** 
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

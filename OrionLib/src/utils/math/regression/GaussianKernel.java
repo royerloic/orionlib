@@ -24,33 +24,36 @@ import javax.vecmath.GVector;
 /**
  * A Gaussian {@link com.gregdennis.drej.Kernel kernel} of the following form:<br>
  * 
- * <blockquote>
- * K(x1, x2) = exp(&#8210;&gamma;&sup2; &middot;  &#8741;x1 - x2&#8741;&sup2;)
- * </blockquote>
+ * <blockquote> K(x1, x2) = exp(&#8210;&gamma;&sup2; &middot; &#8741;x1 -
+ * x2&#8741;&sup2;) </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public class GaussianKernel implements Kernel {
-    
-    private final double gamma, a;
+public class GaussianKernel implements Kernel
+{
 
-    /**
-     * Construct a Gaussian kernel with the specified value for &gamma;.
-     */
-    public GaussianKernel(double gamma) {
-        this.gamma = gamma;
-        a = -gamma * gamma;
-    }
-    
-    /**
-     * Returns the value of &gamma;.
-     */
-    public double gamma() {
-        return gamma;
-    }
-    
-    public double eval(final GVector x1, final GVector x2) {
-        return Math.exp(a * Matrices.distanceSquared(x1, x2));
-    }
+	private final double gamma, a;
+
+	/**
+	 * Construct a Gaussian kernel with the specified value for &gamma;.
+	 */
+	public GaussianKernel(double gamma)
+	{
+		this.gamma = gamma;
+		a = -gamma * gamma;
+	}
+
+	/**
+	 * Returns the value of &gamma;.
+	 */
+	public double gamma()
+	{
+		return gamma;
+	}
+
+	public double eval(final GVector x1, final GVector x2)
+	{
+		return Math.exp(a * Matrices.distanceSquared(x1, x2));
+	}
 
 }

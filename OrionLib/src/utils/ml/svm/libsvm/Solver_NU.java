@@ -13,7 +13,7 @@ package utils.ml.svm.libsvm;
 //
 final class Solver_NU extends Solver
 {
-	private SolutionInfo	si;
+	private SolutionInfo si;
 
 	@Override
 	void Solve(	final int l1,

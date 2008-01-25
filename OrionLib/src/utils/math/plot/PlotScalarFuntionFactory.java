@@ -14,7 +14,7 @@ import utils.utils.Plugin;
 
 /**
  * @author MSc. Ing. Loic Royer
- *
+ * 
  */
 public class PlotScalarFuntionFactory
 {
@@ -34,18 +34,13 @@ public class PlotScalarFuntionFactory
 	 * @param pName
 	 * @return
 	 */
-	public static final IPlot build(
-		final IScalarFunction pFunction,
-		final int pResolution,
-		final String pName)
-		throws Exception
+	public static final IPlot build(final IScalarFunction pFunction,
+																	final int pResolution,
+																	final String pName) throws Exception
 	{
 		if (pFunction.getInputDimension() <= 2)
 		{
-			final IPlot lIPlot =
-				(IPlot) Plugin.load(
-					"org.royerloic.math.plot.PlotScalarFuntion"
-						+ Integer.toString(pFunction.getInputDimension() + 1));
+			final IPlot lIPlot = (IPlot) Plugin.load("org.royerloic.math.plot.PlotScalarFuntion" + Integer.toString(pFunction.getInputDimension() + 1));
 			lIPlot.setFuntion(pFunction);
 			lIPlot.setResolution(pResolution);
 			lIPlot.setPlotName(pName);

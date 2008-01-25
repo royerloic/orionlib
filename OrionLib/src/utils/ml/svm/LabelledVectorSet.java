@@ -17,13 +17,13 @@ import utils.ml.svm.libsvm.Problem;
  */
 public class LabelledVectorSet implements ILabelledVectorSet
 {
-	List							mVectorList;
+	List mVectorList;
 
-	List							mClassList;
+	List mClassList;
 
-	LabelledVectorSet	mTrainSubset;
+	LabelledVectorSet mTrainSubset;
 
-	LabelledVectorSet	mTestSubset;
+	LabelledVectorSet mTestSubset;
 
 	/**
 	 * 

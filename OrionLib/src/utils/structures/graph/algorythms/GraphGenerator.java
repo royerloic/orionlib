@@ -32,7 +32,8 @@ public class GraphGenerator
 		final Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 		final List<Node> lNodeList = new ArrayList<Node>();
 		final List<Set<Node>> lDomainList = new ArrayList<Set<Node>>();
-		final double pDomainProbability = pAverageNumberOfDomains / pDomainGraph.getNodeSet().size();
+		final double pDomainProbability = pAverageNumberOfDomains / pDomainGraph.getNodeSet()
+																																						.size();
 		for (int i = 0; i < pNumberOfNodes; i++)
 		{
 			lNodeList.add(new Node("node" + i));
@@ -100,10 +101,13 @@ public class GraphGenerator
 
 		for (int i = 0; i < lNumberOfEdgesToRemove; i++)
 		{
-			final Edge<Node> lEdgeToRemove = RandomUtils.randomElement(pRandom, lEdgeList);
+			final Edge<Node> lEdgeToRemove = RandomUtils.randomElement(	pRandom,
+																																	lEdgeList);
 			lEdgeList.remove(lEdgeToRemove);
-			lGraph.removeEdge(lEdgeToRemove.getFirstNode(), lEdgeToRemove.getSecondNode());
-			lGraph.removeEdge(lEdgeToRemove.getSecondNode(), lEdgeToRemove.getFirstNode());
+			lGraph.removeEdge(lEdgeToRemove.getFirstNode(),
+												lEdgeToRemove.getSecondNode());
+			lGraph.removeEdge(lEdgeToRemove.getSecondNode(),
+												lEdgeToRemove.getFirstNode());
 		}
 
 		for (int i = 0; i < lNumberOfEdgesToAdd; i++)
@@ -122,8 +126,7 @@ public class GraphGenerator
 		}
 
 		if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
-			throw new RuntimeException("Not Average Degree invariant!"
-					+ (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
+			throw new RuntimeException("Not Average Degree invariant!" + (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
 
 		return lGraph;
 	}
@@ -139,7 +142,9 @@ public class GraphGenerator
 		int lCounter = 0;
 		do
 		{
-			final List<Node> lBaitList = RandomUtils.randomSample(pRandom, pBaitProportion, lNodeList);
+			final List<Node> lBaitList = RandomUtils.randomSample(pRandom,
+																														pBaitProportion,
+																														lNodeList);
 
 			for (final Node lBait : lBaitList)
 			{
@@ -149,8 +154,9 @@ public class GraphGenerator
 					final Set<Node> lNeighboursSet2 = lGraph.getNodeNeighbours(lNeighbour);
 					lNeighboursSet2.remove(lBait);
 					lNeighboursSet2.removeAll(lNeighboursSet);
-					final List<Node> lReconnectionList = RandomUtils.randomSample(pRandom, pReconnectionProbability,
-							lNeighboursSet2);
+					final List<Node> lReconnectionList = RandomUtils.randomSample(pRandom,
+																																				pReconnectionProbability,
+																																				lNeighboursSet2);
 					for (final Node lReconnectedNode : lReconnectionList)
 						if (!lGraph.isEdge(lBait, lReconnectedNode))
 						{
@@ -164,8 +170,7 @@ public class GraphGenerator
 			}
 
 			if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
-				throw new RuntimeException("Not Average Degree invariant! :"
-						+ (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
+				throw new RuntimeException("Not Average Degree invariant! :" + (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
 
 			if (lGraph.equals(pGraph))
 				System.out.println("Graph was not changed!");
@@ -180,8 +185,7 @@ public class GraphGenerator
 		lSet.addAll(pGraph.getEdgeSet());
 		lSet.retainAll(lGraph.getEdgeSet());
 
-		final double lNoiseLevel = (double) (pGraph.getNumberOfEdges() - lSet.size())
-				/ (double) pGraph.getNumberOfEdges();
+		final double lNoiseLevel = (double) (pGraph.getNumberOfEdges() - lSet.size()) / (double) pGraph.getNumberOfEdges();
 
 		return new Couple<Graph<Node, Edge<Node>>, Double>(lGraph, lNoiseLevel);
 	}
@@ -226,7 +230,11 @@ public class GraphGenerator
 			lGraph.addNode(lFirstNode);
 
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
-				addNodePreferentialAttachement(pRandom, lGraph, lCounter++, pAverageDegree / 2, pExponent);
+				addNodePreferentialAttachement(	pRandom,
+																				lGraph,
+																				lCounter++,
+																				pAverageDegree / 2,
+																				pExponent);
 
 		}
 		return lGraph;
@@ -249,7 +257,8 @@ public class GraphGenerator
 
 		if (lTotal == 0)
 		{
-			final Edge<Node> lEdge = new UndirectedEdge<Node>(lNewNode, lNodeList.get(pRandom.nextInt(lNodeList.size())));
+			final Edge<Node> lEdge = new UndirectedEdge<Node>(lNewNode,
+																												lNodeList.get(pRandom.nextInt(lNodeList.size())));
 			pGraph.addEdge(lEdge);
 		}
 		else
@@ -271,7 +280,9 @@ public class GraphGenerator
 				e.printStackTrace();
 			}
 
-			long lNumberOfEdges = RandomUtils.longGaussian(pRandom, pNumberOfNewEdges, 0.5);
+			long lNumberOfEdges = RandomUtils.longGaussian(	pRandom,
+																											pNumberOfNewEdges,
+																											0.5);
 			lNumberOfEdges = (long) Math.min(lNumberOfEdges, 2 * pNumberOfNewEdges);
 			for (int i = 0; i < lNumberOfEdges; i++)
 			{
@@ -283,7 +294,8 @@ public class GraphGenerator
 
 	}
 
-	public static Graph<Node, Edge<Node>> generateScaleFreeTree(final Random pRandom, final int pNumberOfNodes)
+	public static Graph<Node, Edge<Node>> generateScaleFreeTree(final Random pRandom,
+																															final int pNumberOfNodes)
 	{
 		final Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
 		int lCounter = 0;
@@ -304,7 +316,9 @@ public class GraphGenerator
 		return lGraph;
 	}
 
-	static Node oneStep(final Random pRandom, final Graph<Node, Edge<Node>> pGraph, final Node pNode)
+	static Node oneStep(final Random pRandom,
+											final Graph<Node, Edge<Node>> pGraph,
+											final Node pNode)
 	{
 		final Set<Node> lNodeSet = pGraph.getNodeNeighbours(pNode);
 		if (lNodeSet.isEmpty())
@@ -316,7 +330,9 @@ public class GraphGenerator
 		}
 	}
 
-	static void addNodeAndConnect(final Graph<Node, Edge<Node>> pGraph, final Node pNode, final int pCounter)
+	static void addNodeAndConnect(final Graph<Node, Edge<Node>> pGraph,
+																final Node pNode,
+																final int pCounter)
 	{
 		final Node lNewNode = new Node("node" + pCounter);
 		final Edge<Node> lEdge = new UndirectedEdge(pNode, lNewNode);
@@ -413,32 +429,30 @@ public class GraphGenerator
 	}
 
 	public static Graph<Node, Edge<Node>> generateRandomGeometric2d(final Random pRandom,
-																																final int pNumberOfNodes,
-																																final double pDegree)
+																																	final int pNumberOfNodes,
+																																	final double pDegree)
 	{
 		final double lRadius = Math.sqrt(pDegree / (Math.PI * pNumberOfNodes));
 		final Random lRandom = new Random(System.currentTimeMillis());
-		
+
 		final Graph<Node, Edge<Node>> lGraph = new HashGraph<Node, Edge<Node>>();
-		final Map<Integer,Node> lIndexToNodeMap = new HashMap<Integer,Node>();
+		final Map<Integer, Node> lIndexToNodeMap = new HashMap<Integer, Node>();
 		final double[][] lVectorArray = new double[pNumberOfNodes][];
-		for (int i=0; i<pNumberOfNodes; i++)
+		for (int i = 0; i < pNumberOfNodes; i++)
 		{
-			lVectorArray[i] = randomVector(lRandom,2);
+			lVectorArray[i] = randomVector(lRandom, 2);
 			final Node lNode = new Node("node " + i);
 			lGraph.addNode(lNode);
 			lIndexToNodeMap.put(i, lNode);
 		}
-		
-		
-		
-		for(int i=0; i<pNumberOfNodes; i++)
-			for(int j=0; j<i; j++)
+
+		for (int i = 0; i < pNumberOfNodes; i++)
+			for (int j = 0; j < i; j++)
 			{
-				final double[] lVector1 =  lVectorArray[i];
-				final double[] lVector2 =  lVectorArray[j];
+				final double[] lVector1 = lVectorArray[i];
+				final double[] lVector2 = lVectorArray[j];
 				final double lDistance = euclideanDistance(lVector1, lVector2);
-				if (lDistance<=lRadius)
+				if (lDistance <= lRadius)
 				{
 					final Node lNode1 = lIndexToNodeMap.get(i);
 					final Node lNode2 = lIndexToNodeMap.get(j);
@@ -446,48 +460,32 @@ public class GraphGenerator
 					lGraph.addEdge(lEdge);
 				}
 			}
-				
+
 		return lGraph;
 	}
 
-	private static double[] randomVector(final Random pRandom, final int pDimension)
+	private static double[] randomVector(	final Random pRandom,
+																				final int pDimension)
 	{
 		final double[] lVector = new double[pDimension];
-		for(int i=0;i<pDimension;i++)
-			lVector[i]=pRandom.nextDouble();			
+		for (int i = 0; i < pDimension; i++)
+			lVector[i] = pRandom.nextDouble();
 		return lVector;
 	}
-	
-	private static double euclideanDistance(final double[] pVector1, final double[] pVector2)
+
+	private static double euclideanDistance(final double[] pVector1,
+																					final double[] pVector2)
 	{
-		final int lLength = Math.max(pVector1.length,pVector2.length);
-		double lSum=0;
-		for(int i=0; i<lLength; i++)
+		final int lLength = Math.max(pVector1.length, pVector2.length);
+		double lSum = 0;
+		for (int i = 0; i < lLength; i++)
 		{
-			final double lFirst = (i<pVector1.length)?pVector1[i]:0;
-			final double lSecond = (i<pVector2.length)?pVector2[i]:0;
-			lSum+= (lFirst-lSecond)*(lFirst-lSecond);
+			final double lFirst = (i < pVector1.length) ? pVector1[i] : 0;
+			final double lSecond = (i < pVector2.length) ? pVector2[i] : 0;
+			lSum += (lFirst - lSecond) * (lFirst - lSecond);
 		}
 		final double lDistance = Math.sqrt(lSum);
-		return lDistance;		
+		return lDistance;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

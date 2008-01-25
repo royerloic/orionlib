@@ -11,8 +11,12 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.pareto"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.regex"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.set"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.list"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph.generators"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph.test"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.regex"/>
     </selectedElements>
 </jardesc>

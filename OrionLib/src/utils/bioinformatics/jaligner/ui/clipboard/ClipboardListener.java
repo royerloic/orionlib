@@ -24,12 +24,15 @@ package utils.bioinformatics.jaligner.ui.clipboard;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public interface ClipboardListener {
-	
+public interface ClipboardListener
+{
+
 	/**
 	 * Notifies the listener with the current contents of the clipboard.
-	 * @param contents The current contents of the clipboard
+	 * 
+	 * @param contents
+	 *          The current contents of the clipboard
 	 */
-	public void clipboardCheck (String contents);
+	public void clipboardCheck(String contents);
 
 }

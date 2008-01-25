@@ -8,13 +8,14 @@ import java.util.HashMap;
  * @param <K>
  * @param <V>
  */
-public class HashDoubleMap<K> extends HashMap<K, Double> implements DoubleMap<K>
+public class HashDoubleMap<K> extends HashMap<K, Double> implements
+																												DoubleMap<K>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -4035713289800645393L;
+	private static final long serialVersionUID = -4035713289800645393L;
 
 	/*
 	 * (non-Javadoc)

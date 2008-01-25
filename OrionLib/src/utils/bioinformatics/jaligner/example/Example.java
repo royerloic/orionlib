@@ -57,7 +57,6 @@ public class Example
 	 */
 	private static final Logger logger = Logger.getLogger(Example.class.getName());
 
-
 	@Test
 	public void test()
 	{

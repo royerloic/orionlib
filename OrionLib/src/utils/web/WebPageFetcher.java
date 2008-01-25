@@ -19,39 +19,40 @@ import java.util.Random;
 public final class WebPageFetcher
 {
 
-	private URL									mURL;
+	private URL mURL;
 
-	private static final String	cHTTP								= "http";
+	private static final String cHTTP = "http";
 
-	private static final String	cNEWLINE						= System.getProperty("line.separator");
+	private static final String cNEWLINE = System.getProperty("line.separator");
 
-	public static final String	cUSERAGENT_FIREFOX	= "Mozilla/5.0 (Windows; U; Windows NT 5.0; de-DE; rv:1.7.6) Gecko/20050321 Firefox/1.@version@.2";
+	public static final String cUSERAGENT_FIREFOX = "Mozilla/5.0 (Windows; U; Windows NT 5.0; de-DE; rv:1.7.6) Gecko/20050321 Firefox/1.@version@.2";
 
-	public static final String	cUSERAGENT_IE				= "Mozilla/4.0 (compatible; MSIE 5.@version@; Windows NT 5.0)";
+	public static final String cUSERAGENT_IE = "Mozilla/4.0 (compatible; MSIE 5.@version@; Windows NT 5.0)";
 
-	public static final String	cUSERAGENT_NETSCAPE	= "Mozilla/5.0 (Windows; U; Win98; en-US; Localization; rv1.4) Gecko20030624 Netscape7.@version@ (ax)";
+	public static final String cUSERAGENT_NETSCAPE = "Mozilla/5.0 (Windows; U; Win98; en-US; Localization; rv1.4) Gecko20030624 Netscape7.@version@ (ax)";
 
-	public static final String[] cUserAgents  = new String[]{cUSERAGENT_FIREFOX,cUSERAGENT_IE,cUSERAGENT_NETSCAPE};
-	
-	private static final int		sBufferSize					= 1000000;
+	public static final String[] cUserAgents = new String[]
+	{ cUSERAGENT_FIREFOX, cUSERAGENT_IE, cUSERAGENT_NETSCAPE };
 
-	private String							mUserAgent;
+	private static final int sBufferSize = 1000000;
 
-	private String							mReferer;
+	private String mUserAgent;
 
-	private String							mAccept;
+	private String mReferer;
 
-	private String							mAcceptLanguage;
+	private String mAccept;
 
-	private String							mAcceptEncoding;
+	private String mAcceptLanguage;
 
-	private String							mAcceptCharset;
+	private String mAcceptEncoding;
 
-	private String							mKeepAlive;
+	private String mAcceptCharset;
 
-	private String							mConnection;
+	private String mKeepAlive;
 
-	private URLConnection				mURLConnection;
+	private String mConnection;
+
+	private URLConnection mURLConnection;
 
 	public WebPageFetcher(final URL pURL)
 	{
@@ -70,10 +71,12 @@ public final class WebPageFetcher
 	}
 
 	static Random lRandom = new Random();
+
 	private String getRandomUserAgent()
 	{
 		String lAgentString = cUserAgents[lRandom.nextInt(3)];
-		String lRandomVersionAgentString = lAgentString.replaceAll("@version@",Integer.toString(lRandom.nextInt(10)));
+		String lRandomVersionAgentString = lAgentString.replaceAll(	"@version@",
+																																Integer.toString(lRandom.nextInt(10)));
 		return lRandomVersionAgentString;
 	}
 
@@ -152,7 +155,8 @@ public final class WebPageFetcher
 		BufferedReader reader = null;
 		try
 		{
-			reader = new BufferedReader(new InputStreamReader(mURLConnection.getInputStream()), sBufferSize);
+			reader = new BufferedReader(new InputStreamReader(mURLConnection.getInputStream()),
+																	sBufferSize);
 			String line = null;
 			while ((line = reader.readLine()) != null)
 			{
@@ -162,7 +166,9 @@ public final class WebPageFetcher
 		}
 		catch (final IOException ex)
 		{
-			throw new IOException("Cannot retrieve contents of: " + mURL + "\n" + ex.getMessage());
+			throw new IOException("Cannot retrieve contents of: " + mURL
+														+ "\n"
+														+ ex.getMessage());
 		}
 		finally
 		{

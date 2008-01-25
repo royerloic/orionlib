@@ -42,7 +42,7 @@ public class Domain implements Serializable
 	{
 		return mId;
 	}
-	
+
 	public String getSource()
 	{
 		return mSource;
@@ -52,7 +52,7 @@ public class Domain implements Serializable
 	{
 		return mInterProId;
 	}
-	
+
 	public double getEValue()
 	{
 		return mEValue;
@@ -80,7 +80,8 @@ public class Domain implements Serializable
 		lStringBuilder.append(mEnd + "\t");
 		lStringBuilder.append(mEValue + "\t");
 		if (mCorrespondingFastaSequence != null)
-			lStringBuilder.append("[s=" + mCorrespondingFastaSequence.getFastaName()+ "]");
+			lStringBuilder.append("[s=" + mCorrespondingFastaSequence.getFastaName()
+														+ "]");
 
 		return lStringBuilder.toString();
 	}
@@ -120,9 +121,5 @@ public class Domain implements Serializable
 			return false;
 		return true;
 	}
-
-
-
-	
 
 }

@@ -35,87 +35,110 @@ import javax.swing.text.StyledDocument;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class DocumentHandler extends Handler {
+public class DocumentHandler extends Handler
+{
 	/**
 	 * Maximum document size
 	 */
 	private static final int MAXIMUM_DOCUMENT_SIZE = 524288; // 0.5 MB
-	
+
 	private JTextPane textPane = null;
 	private Style infoStyle = null;
 	private Style severStyle = null;
 
 	/**
 	 * Constructor
+	 * 
 	 * @param textPane
 	 */
-	public DocumentHandler(JTextPane textPane) {
-        this.textPane = textPane;
-       	setFormatter(new RecordFormatter());
+	public DocumentHandler(JTextPane textPane)
+	{
+		this.textPane = textPane;
+		setFormatter(new RecordFormatter());
 
-       	StyledDocument document = (StyledDocument) this.textPane.getDocument();
-        
-       	infoStyle = document.addStyle("INFO", null);
-        StyleConstants.setFontFamily(infoStyle,"Monospaced");
-        StyleConstants.setBackground(infoStyle, Color.white);
+		StyledDocument document = (StyledDocument) this.textPane.getDocument();
+
+		infoStyle = document.addStyle("INFO", null);
+		StyleConstants.setFontFamily(infoStyle, "Monospaced");
+		StyleConstants.setBackground(infoStyle, Color.white);
 		StyleConstants.setForeground(infoStyle, Color.blue);
-        
+
 		severStyle = document.addStyle("SEVER", null);
-        StyleConstants.setFontFamily(severStyle,"Monospaced");
-        StyleConstants.setBackground(severStyle, Color.white);
+		StyleConstants.setFontFamily(severStyle, "Monospaced");
+		StyleConstants.setBackground(severStyle, Color.white);
 		StyleConstants.setForeground(severStyle, Color.red);
-    }
+	}
 
-	
-    /**
-     * 
-     */
+	/**
+	 * 
+	 */
 	@Override
-	public void close() {
-    }
+	public void close()
+	{
+	}
 
-    /**
-     * 
-     */
-    @Override
-		public void flush() {
-    }
-    
-    /**
-     * 
-     */
-    @Override
-		public void publish(LogRecord record) {
-        if (!isLoggable(record)) {
-            return;
-        }
-        
-        String message;
-        
-        try {
-        	message = getFormatter().format(record);
-        } catch (Exception exception) {
-            reportError(null, exception, ErrorManager.FORMAT_FAILURE);
-            return;
-        }
-        
-        synchronized(textPane) {
-        	if (textPane.getDocument().getLength() >= MAXIMUM_DOCUMENT_SIZE) {
-        		// Delete the contents of the text pane.
-        		textPane.setText("");
-        	}
-        	
-        	try {
-       	        if (record.getLevel() == Level.SEVERE) {
-       	        	textPane.getDocument().insertString(textPane.getDocument().getLength(), message, severStyle);
-        		} else {
-        			textPane.getDocument().insertString(textPane.getDocument().getLength(), message, infoStyle);
-        		}
-       	        textPane.setCaretPosition(textPane.getDocument().getLength());
-        	} catch (Exception ex) {
-        		reportError(null, ex, ErrorManager.WRITE_FAILURE);
-        	}
-        }
-        
+	/**
+	 * 
+	 */
+	@Override
+	public void flush()
+	{
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void publish(LogRecord record)
+	{
+		if (!isLoggable(record))
+		{
+			return;
+		}
+
+		String message;
+
+		try
+		{
+			message = getFormatter().format(record);
+		}
+		catch (Exception exception)
+		{
+			reportError(null, exception, ErrorManager.FORMAT_FAILURE);
+			return;
+		}
+
+		synchronized (textPane)
+		{
+			if (textPane.getDocument().getLength() >= MAXIMUM_DOCUMENT_SIZE)
+			{
+				// Delete the contents of the text pane.
+				textPane.setText("");
+			}
+
+			try
+			{
+				if (record.getLevel() == Level.SEVERE)
+				{
+					textPane.getDocument().insertString(textPane.getDocument()
+																											.getLength(),
+																							message,
+																							severStyle);
+				}
+				else
+				{
+					textPane.getDocument().insertString(textPane.getDocument()
+																											.getLength(),
+																							message,
+																							infoStyle);
+				}
+				textPane.setCaretPosition(textPane.getDocument().getLength());
+			}
+			catch (Exception ex)
+			{
+				reportError(null, ex, ErrorManager.WRITE_FAILURE);
+			}
+		}
+
 	}
 }

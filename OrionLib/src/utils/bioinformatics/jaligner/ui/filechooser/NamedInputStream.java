@@ -26,42 +26,46 @@ import java.io.Serializable;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class NamedInputStream extends Object implements Serializable {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3256441404384686387L;
+public class NamedInputStream extends Object implements Serializable
+{
 
-    /**
-     * Name.
-     */
-    private String name = null;
-    
-    /**
-     * Input stream.
-     */
-    private InputStream inputStream = null;
-    
-    /**
-     * 
-     */
-    public NamedInputStream(String name, InputStream inputStream) {
-        this.name = name;
-        this.inputStream = inputStream;
-    }
-    
-    /**
-     * @return Returns the inputStream.
-     */
-    public InputStream getInputStream() {
-        return this.inputStream;
-    }
-    
-    /**
-     * @return Returns the name.
-     */
-    public String getName() {
-        return this.name;
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3256441404384686387L;
+
+	/**
+	 * Name.
+	 */
+	private String name = null;
+
+	/**
+	 * Input stream.
+	 */
+	private InputStream inputStream = null;
+
+	/**
+	 * 
+	 */
+	public NamedInputStream(String name, InputStream inputStream)
+	{
+		this.name = name;
+		this.inputStream = inputStream;
+	}
+
+	/**
+	 * @return Returns the inputStream.
+	 */
+	public InputStream getInputStream()
+	{
+		return this.inputStream;
+	}
+
+	/**
+	 * @return Returns the name.
+	 */
+	public String getName()
+	{
+		return this.name;
+	}
 }

@@ -10,7 +10,9 @@ package utils.optimal.interf;
  */
 public interface IOptimalEventListener
 {
-	void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment);
+	void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub,
+											final IExperiment pExperiment);
 
-	void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment);
+	void newBestExperiment(	final IExperimentDatabase pExperimentDatabase,
+													final IExperiment pExperiment);
 }

@@ -10,10 +10,11 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class HashIntegerMap<K> extends HashMap<K, Integer> implements IntegerMap<K>
+public class HashIntegerMap<K> extends HashMap<K, Integer> implements
+																													IntegerMap<K>
 {
 
-    private static final long serialVersionUID = 2807897144550596770L;
+	private static final long serialVersionUID = 2807897144550596770L;
 
 	/*
 	 * (non-Javadoc)
@@ -36,7 +37,8 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements IntegerMap
 		return put(pKey, lValue);
 	}
 
-	public IntegerMap<K> addAllWith(final Collection<K> pCollection, final Integer pValue)
+	public IntegerMap<K> addAllWith(final Collection<K> pCollection,
+																	final Integer pValue)
 	{
 		for (final K lK : pCollection)
 		{

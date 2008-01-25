@@ -22,16 +22,17 @@ package utils.math.regression;
 import javax.vecmath.GVector;
 
 /**
- * A Mercer kernel function. Every implementation should be a
- * continuous and positive-definite function.
+ * A Mercer kernel function. Every implementation should be a continuous and
+ * positive-definite function.
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public interface Kernel {
+public interface Kernel
+{
 
-    /**
-     * Evaluates the kernel function at the specified points.
-     */
-    public double eval(GVector x1, GVector x2);
-    
+	/**
+	 * Evaluates the kernel function at the specified points.
+	 */
+	public double eval(GVector x1, GVector x2);
+
 }

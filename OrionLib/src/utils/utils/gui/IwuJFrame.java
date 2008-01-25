@@ -26,8 +26,8 @@ public class IwuJFrame extends JFrame
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 6366703561353850978L;
-	private Image	mWindowIcon;
+	private static final long serialVersionUID = 6366703561353850978L;
+	private Image mWindowIcon;
 
 	/**
 	 * 
@@ -75,7 +75,8 @@ public class IwuJFrame extends JFrame
 	 * @param arg0
 	 * @param arg1
 	 */
-	public IwuJFrame(final String pString, final GraphicsConfiguration pGraphicsConfiguration)
+	public IwuJFrame(	final String pString,
+										final GraphicsConfiguration pGraphicsConfiguration)
 	{
 		super(pString, pGraphicsConfiguration);
 		customize();

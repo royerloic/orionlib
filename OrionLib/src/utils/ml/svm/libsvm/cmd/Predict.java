@@ -42,9 +42,8 @@ class Predict
 
 		if (predict_probability == 1)
 			if ((svm_type == Parameter.EPSILON_SVR) || (svm_type == Parameter.NU_SVR))
-				System.out
-						.print("Prob. model for test data: target mValue = predicted mValue + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma="
-								+ SVM.svmGetSvrProbability(model) + "\n");
+				System.out.print("Prob. model for test data: target mValue = predicted mValue + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=" + SVM.svmGetSvrProbability(model)
+													+ "\n");
 			else
 			{
 				SVM.svmGetLabels(model, labels);
@@ -97,20 +96,26 @@ class Predict
 			sumvy += v * target;
 			++total;
 		}
-		System.out.print("Accuracy = " + (double) correct / total * 100 + "% (" + correct + "/" + total
-				+ ") (classification)\n");
-		System.out.print("Mean squared error = " + error / total + " (regression)\n");
-		System.out.print("Squared correlation coefficient = "
-				+ ((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy))
-				/ ((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy)) + " (regression)\n");
+		System.out.print("Accuracy = " + (double) correct
+											/ total
+											* 100
+											+ "% ("
+											+ correct
+											+ "/"
+											+ total
+											+ ") (classification)\n");
+		System.out.print("Mean squared error = " + error
+											/ total
+											+ " (regression)\n");
+		System.out.print("Squared correlation coefficient = " + ((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy))
+											/ ((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy))
+											+ " (regression)\n");
 	}
 
 	private static void exit_with_help()
 	{
-		System.err
-				.print("usage: Predict [options] test_file model_file output_file\n"
-						+ "options:\n"
-						+ "-b probability_estimates: whether to predict probability estimates, 0 or 1 (default 0); one-class SVM not supported yet\n");
+		System.err.print("usage: Predict [options] test_file model_file output_file\n" + "options:\n"
+											+ "-b probability_estimates: whether to predict probability estimates, 0 or 1 (default 0); one-class SVM not supported yet\n");
 		System.exit(1);
 	}
 
@@ -126,12 +131,12 @@ class Predict
 			++i;
 			switch (argv[i - 1].charAt(1))
 			{
-				case 'b':
-					predict_probability = atoi(argv[i]);
-					break;
-				default:
-					System.err.print("unknown option\n");
-					exit_with_help();
+			case 'b':
+				predict_probability = atoi(argv[i]);
+				break;
+			default:
+				System.err.print("unknown option\n");
+				exit_with_help();
 			}
 		}
 		if (i >= argv.length)

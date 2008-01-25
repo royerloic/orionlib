@@ -8,12 +8,13 @@ package utils.ml.svm.libsvm;
 
 class ONE_CLASS_Q extends Kernel
 {
-	private final Cache	cache;
+	private final Cache cache;
 
 	ONE_CLASS_Q(final Problem prob, final Parameter param)
 	{
 		super(prob.mNumberOfVectors, prob.mVectorsTable, param);
-		cache = new Cache(prob.mNumberOfVectors, (int) (param.cache_size * (1 << 20)));
+		cache = new Cache(prob.mNumberOfVectors,
+											(int) (param.cache_size * (1 << 20)));
 	}
 
 	@Override

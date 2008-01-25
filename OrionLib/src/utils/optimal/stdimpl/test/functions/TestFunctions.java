@@ -15,7 +15,7 @@ import utils.optimal.interf.IExperimentFunction;
 public class TestFunctions implements IExperimentFunction
 {
 
-	private int			mFunctionIndex;
+	private int mFunctionIndex;
 
 	/**
 	 * 
@@ -33,7 +33,8 @@ public class TestFunctions implements IExperimentFunction
 
 	static double sync(final double x, final double y)
 	{
-		return (1 / 9.9998) * Math.sin(10 * dist(x, y)) / (dist(x, y) + 0.0000000001);
+		return (1 / 9.9998) * Math.sin(10 * dist(x, y))
+						/ (dist(x, y) + 0.0000000001);
 	}
 
 	static double simplequad(final double x, final double y)
@@ -53,38 +54,44 @@ public class TestFunctions implements IExperimentFunction
 
 	static double flattop(final double x, final double y)
 	{
-		return 0.05 * (Math.cos(10 * x) * Math.cos(10 * y)) + 0.95 / (1 + Math.pow(2 * dist(x, y), 20));
+		return 0.05 * (Math.cos(10 * x) * Math.cos(10 * y))
+						+ 0.95
+						/ (1 + Math.pow(2 * dist(x, y), 20));
 	}
 
 	static double multiquad(final double x, final double y)
 	{
-		return (1 / 1.1439)
-				* (simplequad(x - 0.5, y - 0.8) + 0.8 * simplequad(x + 0.7, y + 0.2) + 0.5 * simplequad(x + 0.7,
-						y - 0.4));
+		return (1 / 1.1439) * (simplequad(x - 0.5, y - 0.8) + 0.8
+														* simplequad(x + 0.7, y + 0.2) + 0.5 * simplequad(x + 0.7,
+																																							y - 0.4));
 	}
 
 	static double multispike(final double x, final double y)
 	{
-		return (1 / 0.7378)
-				* (spike(x - 0.5, y - 0.8) + 0.8 * spike(x + 0.7, y + 0.2) + 0.5 * spike(x + 0.7, y - 0.4));
+		return (1 / 0.7378) * (spike(x - 0.5, y - 0.8) + 0.8
+														* spike(x + 0.7, y + 0.2) + 0.5 * spike(x + 0.7,
+																																		y - 0.4));
 	}
 
 	static double multisync(final double x, final double y)
 	{
-		return (1 / 1.0081)
-				* (sync(x - 0.5, y - 0.8) + 0.8 * sync(x + 0.7, y + 0.2) + 0.5 * sync(x + 0.7, y - 0.4));
+		return (1 / 1.0081) * (sync(x - 0.5, y - 0.8) + 0.8
+														* sync(x + 0.7, y + 0.2) + 0.5 * sync(x + 0.7,
+																																	y - 0.4));
 	}
 
 	static double multigridspike(final double x, final double y)
 	{
-		return (1 / 1.7153)
-				* (gridspike(x - 0.5, y - 0.8) + 0.8 * gridspike(x + 0.7, y + 0.2) + 0.5 * gridspike(x + 0.7, y - 0.4));
+		return (1 / 1.7153) * (gridspike(x - 0.5, y - 0.8) + 0.8
+														* gridspike(x + 0.7, y + 0.2) + 0.5 * gridspike(x + 0.7,
+																																						y - 0.4));
 	}
 
 	static double multiflattop(final double x, final double y)
 	{
-		return (1 / 1.2675)
-				* (flattop(x - 0.5, y - 0.8) + 0.8 * flattop(x + 0.7, y + 0.2) + 0.5 * flattop(x + 0.7, y - 0.4));
+		return (1 / 1.2675) * (flattop(x - 0.5, y - 0.8) + 0.8
+														* flattop(x + 0.7, y + 0.2) + 0.5 * flattop(x + 0.7,
+																																				y - 0.4));
 	}
 
 	/**
@@ -111,65 +118,65 @@ public class TestFunctions implements IExperimentFunction
 
 		switch (mFunctionIndex)
 		{
-			case 1:
-			{
-				z = simplequad(x, y);
-			}
-				break;
+		case 1:
+		{
+			z = simplequad(x, y);
+		}
+			break;
 
-			case 2:
-			{
-				z = spike(x, y);
-			}
-				break;
+		case 2:
+		{
+			z = spike(x, y);
+		}
+			break;
 
-			case 3:
-			{
-				z = sync(x, y);
-			}
-				break;
+		case 3:
+		{
+			z = sync(x, y);
+		}
+			break;
 
-			case 4:
-			{
-				z = gridspike(x, y);
-			}
-				break;
+		case 4:
+		{
+			z = gridspike(x, y);
+		}
+			break;
 
-			case 5:
-			{
-				z = flattop(x, y);
-			}
-				break;
+		case 5:
+		{
+			z = flattop(x, y);
+		}
+			break;
 
-			case 6:
-			{
-				z = multiquad(x, y);
-			}
-				break;
+		case 6:
+		{
+			z = multiquad(x, y);
+		}
+			break;
 
-			case 7:
-			{
-				z = multispike(x, y);
-			}
-				break;
+		case 7:
+		{
+			z = multispike(x, y);
+		}
+			break;
 
-			case 8:
-			{
-				z = multisync(x, y);
-			}
-				break;
+		case 8:
+		{
+			z = multisync(x, y);
+		}
+			break;
 
-			case 9:
-			{
-				z = multigridspike(x, y);
-			}
-				break;
+		case 9:
+		{
+			z = multigridspike(x, y);
+		}
+			break;
 
-			case 10:
-			{
-				z = multiflattop(x, y);
-			}
-				break;
+		case 10:
+		{
+			z = multiflattop(x, y);
+		}
+			break;
 
 		}
 

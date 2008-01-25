@@ -5,9 +5,9 @@ public class Node implements java.io.Serializable
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -3731797707743471399L;
-	public int		mIndex;
-	public double	mValue;
+	private static final long serialVersionUID = -3731797707743471399L;
+	public int mIndex;
+	public double mValue;
 
 	/**
 	 * @param pIndex

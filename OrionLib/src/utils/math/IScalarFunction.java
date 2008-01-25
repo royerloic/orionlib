@@ -11,7 +11,7 @@ package utils.math;
 
 /**
  * @author MSc. Ing. Loic Royer
- *
+ * 
  */
 public interface IScalarFunction extends IFunction
 {

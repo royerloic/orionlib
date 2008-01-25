@@ -35,103 +35,141 @@ import javax.vecmath.GVector;
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class Images {
-    
-    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
+public final class Images
+{
 
-    private Images() {}
-    
-    /**
-     * Returns the image located at the specified path.
-     * 
-     * @throws FileNotFoundException if file does not exist at path
-     * @throws IOException if error reading from file
-     * @throws NotImageException if file is not an image
-     */
-    public static Image imageFromFile(final String path)
-    		throws FileNotFoundException, IOException, NotImageException {
-        final File imageFile = new File(path);
-        if (!imageFile.exists())
-					throw new FileNotFoundException("file " + path + " does not exist");
-				else if (!imageFile.canRead())
-					throw new IOException("error reading file");
-        
-        final Image image = TOOLKIT.getImage(path);
-        ensureImage(image);
-        return image;
-    }
-    
-    /**
-     * Returns the image located at the specified URL.
-     * 
-     * @throws IOException if error reading from URL
-     * @throws NotImageException if URL does not reference an image
-     */
-    public static Image imageFromURL(final URL url)
-    		throws IOException, NotImageException {
-        url.openStream().close(); // throws IOException if url bad
-        final Image image = TOOLKIT.getImage(url);
-        ensureImage(image);
-        return image;
-    }
+	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 
-    /**
-     * Returns a vector of data from the specified image. The returned vector is
-     * of length (width * height * 3). The intensity of red in pixel (i, j) is
-     * located at index p = (3 * (i + j * width)) in the vector. The intensity
-     * of green is at index p + 1 and blue is at p + 2.
-     * 
-     * @throws NotImageException if image is empty
-     */
-    public static GVector imageData(final Image image)
-    		throws NotImageException {
-        ensureImage(image);
-        return getData(image, 0, 0, image.getWidth(null), image.getHeight(null));
-    }
-    
-    /**
-     * Returns a vector of data from the (x, y, width, height) rectangular
-     * section of the specified image. The returned vector is of length
-     * (width * height * 3). The intensity of red in pixel (i, j) is located
-     * at index p = (3 * ((i - x) + (j - y) * width)) in the vector.
-     * The intensity of green is at index p + 1 and blue is at p + 2.
-     * 
-     * @throws NotImageException if image is empty
-     */
-    public static GVector imageData(final Image image, final int x, final int y, final int width, final int height)
-    		throws NotImageException {
-        ensureImage(image);
-        return getData(image, x, y, width, height);
-    }
-    
-    /**
-     * Returns a vector of the data in the given image.
-     */
-    private static GVector getData(final Image image, final int x, final int y, final int width, final int height) {
-        final int[] pixels = new int[width * height];
-        final PixelGrabber pg = new PixelGrabber(image, x, y, width, height, pixels, 0, width);
-        try { pg.grabPixels(); }
-        catch(final InterruptedException e) { throw new RuntimeException(e); }
-        
-        final GVector data = new GVector(3 * pixels.length);
-        for(int i = 0; i < pixels.length; i++) {
-            final int red   = (pixels[i] >> 16) & 0xff;
-            final int green = (pixels[i] >>  8) & 0xff;
-            final int blue  = (pixels[i]      ) & 0xff;
-            data.setElement(3 * i    , red);
-            data.setElement(3 * i + 1, green);
-            data.setElement(3 * i + 2, blue);
-        }
-        
-        return data;
-    }
-    
-    /**
-     * Ensures that the image has been loaded and that it is non-empty.
-     */
-    private static void ensureImage(final Image image) throws NotImageException {
-        new ImageIcon(image);
-        if (image.getWidth(null) < 0) throw new NotImageException(image);
-    }
+	private Images()
+	{
+	}
+
+	/**
+	 * Returns the image located at the specified path.
+	 * 
+	 * @throws FileNotFoundException
+	 *           if file does not exist at path
+	 * @throws IOException
+	 *           if error reading from file
+	 * @throws NotImageException
+	 *           if file is not an image
+	 */
+	public static Image imageFromFile(final String path) throws FileNotFoundException,
+																											IOException,
+																											NotImageException
+	{
+		final File imageFile = new File(path);
+		if (!imageFile.exists())
+			throw new FileNotFoundException("file " + path + " does not exist");
+		else if (!imageFile.canRead())
+			throw new IOException("error reading file");
+
+		final Image image = TOOLKIT.getImage(path);
+		ensureImage(image);
+		return image;
+	}
+
+	/**
+	 * Returns the image located at the specified URL.
+	 * 
+	 * @throws IOException
+	 *           if error reading from URL
+	 * @throws NotImageException
+	 *           if URL does not reference an image
+	 */
+	public static Image imageFromURL(final URL url)	throws IOException,
+																									NotImageException
+	{
+		url.openStream().close(); // throws IOException if url bad
+		final Image image = TOOLKIT.getImage(url);
+		ensureImage(image);
+		return image;
+	}
+
+	/**
+	 * Returns a vector of data from the specified image. The returned vector is
+	 * of length (width * height * 3). The intensity of red in pixel (i, j) is
+	 * located at index p = (3 * (i + j * width)) in the vector. The intensity of
+	 * green is at index p + 1 and blue is at p + 2.
+	 * 
+	 * @throws NotImageException
+	 *           if image is empty
+	 */
+	public static GVector imageData(final Image image) throws NotImageException
+	{
+		ensureImage(image);
+		return getData(image, 0, 0, image.getWidth(null), image.getHeight(null));
+	}
+
+	/**
+	 * Returns a vector of data from the (x, y, width, height) rectangular section
+	 * of the specified image. The returned vector is of length (width * height *
+	 * 3). The intensity of red in pixel (i, j) is located at index p = (3 * ((i -
+	 * x) + (j - y) * width)) in the vector. The intensity of green is at index p +
+	 * 1 and blue is at p + 2.
+	 * 
+	 * @throws NotImageException
+	 *           if image is empty
+	 */
+	public static GVector imageData(final Image image,
+																	final int x,
+																	final int y,
+																	final int width,
+																	final int height) throws NotImageException
+	{
+		ensureImage(image);
+		return getData(image, x, y, width, height);
+	}
+
+	/**
+	 * Returns a vector of the data in the given image.
+	 */
+	private static GVector getData(	final Image image,
+																	final int x,
+																	final int y,
+																	final int width,
+																	final int height)
+	{
+		final int[] pixels = new int[width * height];
+		final PixelGrabber pg = new PixelGrabber(	image,
+																							x,
+																							y,
+																							width,
+																							height,
+																							pixels,
+																							0,
+																							width);
+		try
+		{
+			pg.grabPixels();
+		}
+		catch (final InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		final GVector data = new GVector(3 * pixels.length);
+		for (int i = 0; i < pixels.length; i++)
+		{
+			final int red = (pixels[i] >> 16) & 0xff;
+			final int green = (pixels[i] >> 8) & 0xff;
+			final int blue = (pixels[i]) & 0xff;
+			data.setElement(3 * i, red);
+			data.setElement(3 * i + 1, green);
+			data.setElement(3 * i + 2, blue);
+		}
+
+		return data;
+	}
+
+	/**
+	 * Ensures that the image has been loaded and that it is non-empty.
+	 */
+	private static void ensureImage(final Image image) throws NotImageException
+	{
+		new ImageIcon(image);
+		if (image.getWidth(null) < 0)
+			throw new NotImageException(image);
+	}
 
 }

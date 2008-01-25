@@ -27,58 +27,71 @@ import java.util.HashMap;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public class FormatFactory {
-    /**
-     * Instance of {@link FormatFactory}
-     */
+public class FormatFactory
+{
+	/**
+	 * Instance of {@link FormatFactory}
+	 */
 	private static FormatFactory instance = null;
-    
-    /**
-     * {@link HashMap} of {@link Format}
-     */
+
+	/**
+	 * {@link HashMap} of {@link Format}
+	 */
 	private HashMap formats = new HashMap();
-	
+
 	/**
 	 * Hidden constructor
-	 *
+	 * 
 	 */
-	private FormatFactory ( ) {
+	private FormatFactory()
+	{
 		super();
 	}
-	
+
 	/**
-     * Returns an instance for {@link FormatFactory}.
-     * @return {@link FormatFactory}
-     */
-    public static FormatFactory getInstance() {
-    	if (instance == null) {
-    		instance = new FormatFactory();
-    	}
-    	return instance;
-    }
-    
-    /**
-     * Registers format.
-     * @param format instance of format
-     */
-    public void registerFormat(Format format) {
-    	formats.put(format.getId(), format);
-    }
-    
-    /**
-     * Returns an instance of {@link Format}.
-     * @param id format id
-     * @return {@link Format} or null if id not found
-     */
-    public Format getFormat(String id) {
-    	return (Format) formats.get(id);
-    }
-    
-    /**
-     * Returns a list of registered formats
-     * @return {@link Collection}
-     */
-    public Collection getFormats( ) {
-    	return formats.keySet();
-    }
+	 * Returns an instance for {@link FormatFactory}.
+	 * 
+	 * @return {@link FormatFactory}
+	 */
+	public static FormatFactory getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new FormatFactory();
+		}
+		return instance;
+	}
+
+	/**
+	 * Registers format.
+	 * 
+	 * @param format
+	 *          instance of format
+	 */
+	public void registerFormat(Format format)
+	{
+		formats.put(format.getId(), format);
+	}
+
+	/**
+	 * Returns an instance of {@link Format}.
+	 * 
+	 * @param id
+	 *          format id
+	 * @return {@link Format} or null if id not found
+	 */
+	public Format getFormat(String id)
+	{
+		return (Format) formats.get(id);
+	}
+
+	/**
+	 * Returns a list of registered formats
+	 * 
+	 * @return {@link Collection}
+	 */
+	public Collection getFormats()
+	{
+		return formats.keySet();
+	}
 }

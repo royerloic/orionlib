@@ -24,21 +24,23 @@ import javax.vecmath.GVector;
 /**
  * A linear {@link com.gregdennis.drej.Kernel kernel} of the following form:<br>
  * 
- * <blockquote>
- * K(x1, x2) = x1 &middot; x2
- * </blockquote>
+ * <blockquote> K(x1, x2) = x1 &middot; x2 </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class LinearKernel implements Kernel {
-    
-    /** Singleton linear kernel.*/
-    public final static LinearKernel KERNEL = new LinearKernel();
+public final class LinearKernel implements Kernel
+{
 
-    private LinearKernel() {}
+	/** Singleton linear kernel. */
+	public final static LinearKernel KERNEL = new LinearKernel();
 
-    public double eval(final GVector x1, final GVector x2) {
-        return x1.dot(x2);
-    }
+	private LinearKernel()
+	{
+	}
+
+	public double eval(final GVector x1, final GVector x2)
+	{
+		return x1.dot(x2);
+	}
 
 }

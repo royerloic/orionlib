@@ -22,36 +22,40 @@ package utils.math.regression;
 import javax.vecmath.GVector;
 
 /**
- * A multiquadric {@link com.gregdennis.drej.Kernel kernel} of the following form: <br>
+ * A multiquadric {@link com.gregdennis.drej.Kernel kernel} of the following
+ * form: <br>
  * 
- * <blockquote>
- * K(x1, x2) = 1 / &radic;(&#8741;x1 - x2&#8741;&sup2; + &gamma;&sup2;)
- * </blockquote>
+ * <blockquote> K(x1, x2) = 1 / &radic;(&#8741;x1 - x2&#8741;&sup2; +
+ * &gamma;&sup2;) </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class InverseMultiquadricKernel implements Kernel {
+public final class InverseMultiquadricKernel implements Kernel
+{
 
-    private final double gamma, a;
-    
-    /**
-     * Constructs an inverse multiquadric kernel with the
-     * specified value for &gamma;.
-     */
-    public InverseMultiquadricKernel(final double gamma) {
-        this.gamma = gamma;
-        a = gamma * gamma;
-    }
-    
-    /**
-     * Returns the value of &gamma;.
-     */
-    public double gamma() {
-        return gamma;
-    }
+	private final double gamma, a;
 
-    public double eval(final GVector x1, final GVector x2) {
-        return 1 / Math.sqrt(Matrices.distanceSquared(x1, x2) + a);
-    }
+	/**
+	 * Constructs an inverse multiquadric kernel with the specified value for
+	 * &gamma;.
+	 */
+	public InverseMultiquadricKernel(final double gamma)
+	{
+		this.gamma = gamma;
+		a = gamma * gamma;
+	}
+
+	/**
+	 * Returns the value of &gamma;.
+	 */
+	public double gamma()
+	{
+		return gamma;
+	}
+
+	public double eval(final GVector x1, final GVector x2)
+	{
+		return 1 / Math.sqrt(Matrices.distanceSquared(x1, x2) + a);
+	}
 
 }

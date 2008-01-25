@@ -28,26 +28,26 @@ import de.nava.informa.utils.poller.PollerObserverIF;
 
 public class FeedChannelsMonitor
 {
-	int																								mMonitoringInterval;					// in
+	int mMonitoringInterval; // in
 	// seconds
 
-	private Poller																		mPoller;
+	private Poller mPoller;
 
-	Map<ChannelIF, FeedChannelInterface>							mChannelMap;
+	Map<ChannelIF, FeedChannelInterface> mChannelMap;
 
-	Map<ChannelIF, FeedAnalyserInterface>							mFeedAnalysers;
+	Map<ChannelIF, FeedAnalyserInterface> mFeedAnalysers;
 
-	private PollerApproverIF													mApprover;
+	private PollerApproverIF mApprover;
 
-	private PollerObserverIF													mObserver;
+	private PollerObserverIF mObserver;
 
-	private FeedListenerInterface<FeedItemInterface>	mFeedListener;
+	private FeedListenerInterface<FeedItemInterface> mFeedListener;
 
-	private int																				mNumberOfThreads;
+	private int mNumberOfThreads;
 
-	private int																				mThreadPriority;
+	private int mThreadPriority;
 
-	protected static final int												mDescriptionSizeLimit	= 200;
+	protected static final int mDescriptionSizeLimit = 200;
 
 	public FeedChannelsMonitor(final FeedListenerInterface<FeedItemInterface> pFeedListener)
 	{
@@ -146,7 +146,8 @@ public class FeedChannelsMonitor
 
 			}
 
-			public void channelErrored(final ChannelIF pChannelIF, final Exception pException)
+			public void channelErrored(	final ChannelIF pChannelIF,
+																	final Exception pException)
 			{
 				mFeedListener.onError(pChannelIF.getLocation(), pException);
 			}
@@ -170,9 +171,11 @@ public class FeedChannelsMonitor
 
 	public void addFeedChannel(	final URL pFeedURL,
 															final FeedAnalyserInterface pFeedAnalyser,
-															final int pFrequence) throws IOException, ParseException
+															final int pFrequence)	throws IOException,
+																										ParseException
 	{
-		final ChannelIF lChannelIF = FeedParser.parse(new ChannelBuilder(), pFeedURL);
+		final ChannelIF lChannelIF = FeedParser.parse(new ChannelBuilder(),
+																									pFeedURL);
 		mFeedAnalysers.put(lChannelIF, pFeedAnalyser);
 		final FeedChannel lFeedChannel = new FeedChannel(lChannelIF);
 		lFeedChannel.setFrequence(pFrequence);

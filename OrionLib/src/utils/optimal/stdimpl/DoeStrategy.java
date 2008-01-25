@@ -16,13 +16,13 @@ import utils.optimal.interf.IObjectiveFunction;
  */
 public class DoeStrategy implements IDoeStrategy
 {
-	IExperimentDatabase	mExperimentDatabase;
+	IExperimentDatabase mExperimentDatabase;
 
-	IObjectiveFunction	mObjectiveFunction;
+	IObjectiveFunction mObjectiveFunction;
 
-	IInterpolator				mInterpolator;
+	IInterpolator mInterpolator;
 
-	double							mRewardThreshold;
+	double mRewardThreshold;
 
 	/**
 	 * 
@@ -69,7 +69,9 @@ public class DoeStrategy implements IDoeStrategy
 			 * INumericalVector lNewVector =
 			 * DoeStrategyHelper.multiStepsStochmax(mInterpolator,4,3000);/
 			 ************************************************************************/
-			final INumericalVector lNewVector = DoeStrategyHelper.genetic(mInterpolator, 4, 3000);
+			final INumericalVector lNewVector = DoeStrategyHelper.genetic(mInterpolator,
+																																		4,
+																																		3000);
 
 			final double lEstimatedValue = mInterpolator.evaluate(lNewVector);
 			final double lCurrentBestValue = getCurrentBestValue();
@@ -93,7 +95,8 @@ public class DoeStrategy implements IDoeStrategy
 		for (int i = 0; i < mExperimentDatabase.getNumberOfExperiments(); i++)
 		{
 			final IExperiment lExperiment = mExperimentDatabase.getExperiment(i);
-			lValue = Math.max(lValue, mObjectiveFunction.evaluate(lExperiment.getOutput()));
+			lValue = Math.max(lValue,
+												mObjectiveFunction.evaluate(lExperiment.getOutput()));
 		}
 		return lValue;
 	}

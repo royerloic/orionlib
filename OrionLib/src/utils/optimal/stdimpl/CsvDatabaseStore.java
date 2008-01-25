@@ -23,11 +23,11 @@ import utils.optimal.interf.IObjectiveFunction;
 public class CsvDatabaseStore implements IExperimentDatabaseStore
 {
 
-	private File								mCsvFile;
+	private File mCsvFile;
 
-	private IExperimentDatabase	mExperimentDatabase;
+	private IExperimentDatabase mExperimentDatabase;
 
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
 	/**
 	 * 

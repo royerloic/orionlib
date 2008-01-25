@@ -7,9 +7,9 @@ import javax.sound.sampled.SourceDataLine;
 public class OrionSoundOut
 {
 
-	AudioFormat			audioFormat;
+	AudioFormat audioFormat;
 
-	SourceDataLine	sourceDataLine;
+	SourceDataLine sourceDataLine;
 
 	public OrionSoundOut()
 	{
@@ -67,7 +67,8 @@ public class OrionSoundOut
 		sourceDataLine.write(pBuffer, 0, lLength);
 	}
 
-	public static byte[] intArrayToByte(final int[] pIntArray, final byte[] pByteArray)
+	public static byte[] intArrayToByte(final int[] pIntArray,
+																			final byte[] pByteArray)
 	{
 		if (2 * pIntArray.length > pByteArray.length)
 			return null;
@@ -92,7 +93,11 @@ public class OrionSoundOut
 		// true,false
 		final boolean bigEndian = false;
 		// true,false
-		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+		return new AudioFormat(	sampleRate,
+														sampleSizeInBits,
+														channels,
+														signed,
+														bigEndian);
 	}
 
 }

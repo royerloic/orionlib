@@ -10,5 +10,4 @@ public class Interaction<T> extends UndirectedEdge<Protein>
 		super(pFirstNode, pSecondNode);
 	}
 
-
 }

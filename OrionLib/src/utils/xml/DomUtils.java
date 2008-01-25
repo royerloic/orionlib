@@ -55,8 +55,7 @@ public final class DomUtils
 	public static final Node getSubNodeByName(final Node pNode, final String pName)
 	{
 		Node lNProjectPart = null;
-		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart
-				.getNextSibling())
+		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart.getNextSibling())
 			if (lNProjectPart.getNodeName().equalsIgnoreCase(pName))
 				break;
 
@@ -70,13 +69,13 @@ public final class DomUtils
 	 * @param pName
 	 * @return list of DOM Nodes
 	 */
-	public static final List<Node> getAllSubNodeByName(final Node pNode, final String pName)
+	public static final List<Node> getAllSubNodeByName(	final Node pNode,
+																											final String pName)
 	{
 		final List<Node> lSubNodeList = new ArrayList<Node>();
 
 		Node lNProjectPart = null;
-		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart
-				.getNextSibling())
+		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart.getNextSibling())
 			if (lNProjectPart.getNodeName().equalsIgnoreCase(pName))
 				lSubNodeList.add(lNProjectPart);
 
@@ -90,7 +89,8 @@ public final class DomUtils
 	 * @param pName
 	 * @return list of DOM Nodes
 	 */
-	public static final List<Node> getAllSubNodeByNameRecursive(final Node pNode, final String pName)
+	public static final List<Node> getAllSubNodeByNameRecursive(final Node pNode,
+																															final String pName)
 	{
 		final List<Node> lSubNodeList = new ArrayList<Node>();
 
@@ -111,7 +111,8 @@ public final class DomUtils
 	 * @return value associated to attribute name.
 	 * @throws Exception
 	 */
-	public static final String getAttributeValueByName(final Node pNode, final String pName) throws Exception
+	public static final String getAttributeValueByName(	final Node pNode,
+																											final String pName) throws Exception
 	{
 		final NamedNodeMap lMap = pNode.getAttributes();
 		String lResult = null;
@@ -153,7 +154,8 @@ public final class DomUtils
 	 * @param pName
 	 * @return Node created by its name.
 	 */
-	public static final Node createNodeByName(final Document pDoc, final String pName)
+	public static final Node createNodeByName(final Document pDoc,
+																						final String pName)
 	{
 		final Node lChildNode = pDoc.createElement(pName);
 		return lChildNode;
@@ -177,7 +179,8 @@ public final class DomUtils
 	 * @param pDoc
 	 * @param pFileName
 	 */
-	public static final void writeDOMtoXML(final Document pDoc, final String pFileName)
+	public static final void writeDOMtoXML(	final Document pDoc,
+																					final String pFileName)
 	{
 		final File lXmlFile = new File(pFileName);
 

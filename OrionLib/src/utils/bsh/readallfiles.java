@@ -17,10 +17,16 @@ public class readallfiles
 																			final CallStack callstack,
 																			final String pFolderName,
 																			final String pFileNameRegex,
-																			final boolean pHasHeader) throws FileNotFoundException, IOException
+																			final boolean pHasHeader)	throws FileNotFoundException,
+																																IOException
 	{
 		final Matrix<String> lAgregatedMatrix = new ArrayMatrix<String>();
-		invoke(env,callstack,lAgregatedMatrix,pFolderName,pFileNameRegex,pHasHeader);
+		invoke(	env,
+						callstack,
+						lAgregatedMatrix,
+						pFolderName,
+						pFileNameRegex,
+						pHasHeader);
 
 		return lAgregatedMatrix;
 	}
@@ -30,14 +36,16 @@ public class readallfiles
 																			final Matrix<String> pMatrix,
 																			final String pFolderName,
 																			final String pFileNameRegex,
-																			final boolean pHasHeader) throws FileNotFoundException, IOException
+																			final boolean pHasHeader)	throws FileNotFoundException,
+																																IOException
 	{
 		final Matrix<String> lAgregatedMatrix = pMatrix;
 		final File lFolder = new File(pFolderName);
 		for (final File lFile : lFolder.listFiles())
 			if (lFile.getName().matches(pFileNameRegex))
 			{
-				final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile, pHasHeader);
+				final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+																																			pHasHeader);
 				lAgregatedMatrix.addAll(lMatrix);
 			}
 

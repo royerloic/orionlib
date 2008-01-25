@@ -9,14 +9,14 @@ package utils.bioinformatics.pubmed;
 public class DatabaseConstants
 {
 
-	public static final String	dbAccessDriver				= "com.mysql.jdbc.Driver";
-	public static final String	dbAccessUrlYggdrasil	= "jdbc:mysql://yggdrasil:3306/";
-	public static final String	dbAccessUrlMyserver		= "jdbc:mysql://myserver:3306/";
-	public static final String	dbAccessUrlUserJoerg	= dbAccessUrlMyserver + "user_joerg";
-	public static final String	dbAccessUser					= "joerg";
-	public static final String	dbAccessPassY					= "lola03";
-	public static final String	dbAccessPassM					= "lola03";
-	public static final String	dbAccessPass					= "lola03";
+	public static final String dbAccessDriver = "com.mysql.jdbc.Driver";
+	public static final String dbAccessUrlYggdrasil = "jdbc:mysql://yggdrasil:3306/";
+	public static final String dbAccessUrlMyserver = "jdbc:mysql://myserver:3306/";
+	public static final String dbAccessUrlUserJoerg = dbAccessUrlMyserver + "user_joerg";
+	public static final String dbAccessUser = "joerg";
+	public static final String dbAccessPassY = "lola03";
+	public static final String dbAccessPassM = "lola03";
+	public static final String dbAccessPass = "lola03";
 
 }
 

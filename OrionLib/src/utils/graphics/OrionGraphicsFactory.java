@@ -12,13 +12,13 @@ import utils.graphics.impl.WindowedPixelAndVector;
 
 public class OrionGraphicsFactory
 {
-	public static final int	PIXEL					= 1;
+	public static final int PIXEL = 1;
 
-	public static final int	VECTOR				= 2;
+	public static final int VECTOR = 2;
 
-	public static final int	cLAST_DEVICE	= Integer.MAX_VALUE;
+	public static final int cLAST_DEVICE = Integer.MAX_VALUE;
 
-	public static final int	cFIRST_DEVICE	= 0;
+	public static final int cFIRST_DEVICE = 0;
 
 	private OrionGraphicsFactory()
 	{
@@ -55,11 +55,11 @@ public class OrionGraphicsFactory
 	{
 		switch (pType)
 		{
-			// case VECTOR:
-			// return new FullScreenVectorOnly(pDevice, pDisplayMode);
+		// case VECTOR:
+		// return new FullScreenVectorOnly(pDevice, pDisplayMode);
 
-			default:
-				return new FullScreenPixelAndVector(pDevice, pDisplayMode);
+		default:
+			return new FullScreenPixelAndVector(pDevice, pDisplayMode);
 		}
 	}
 
@@ -70,8 +70,8 @@ public class OrionGraphicsFactory
 		switch (pType)
 		{
 
-			default:
-				return new WindowedPixelAndVector(pDevice, pDisplayMode);
+		default:
+			return new WindowedPixelAndVector(pDevice, pDisplayMode);
 
 		}
 	}

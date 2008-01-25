@@ -3,13 +3,13 @@ package utils.geolocator;
 public class GeoLocator implements Locator
 {
 
-	LocationDatabase					mCountryDatabase;
+	LocationDatabase mCountryDatabase;
 
-	private LocationDatabase	mBigCityDatabase;
+	private LocationDatabase mBigCityDatabase;
 
-	private LocationDatabase	mAllCityDatabase;
+	private LocationDatabase mAllCityDatabase;
 
-	private LocationDatabase	mUSSDatabase;
+	private LocationDatabase mUSSDatabase;
 
 	public GeoLocator()
 	{

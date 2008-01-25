@@ -24,29 +24,34 @@ public class AnnotationContextFilter
 
 	private static class FilterRule
 	{
-		public FilterRule(final String pPreRegex, final String pMatchRegex, final String pPostRegex)
+		public FilterRule(final String pPreRegex,
+											final String pMatchRegex,
+											final String pPostRegex)
 		{
 			mPreRegex = pPreRegex;
 			mMatchRegex = pMatchRegex;
 			mPostRegex = pPostRegex;
 		}
-		public String	mPreRegex;
-		public String	mMatchRegex;
-		public String	mPostRegex;
+
+		public String mPreRegex;
+		public String mMatchRegex;
+		public String mPostRegex;
 	}
 
-	private final SetMap<String, String>	mSetNameToNameSetMap		= new HashSetMap<String, String>();
+	private final SetMap<String, String> mSetNameToNameSetMap = new HashSetMap<String, String>();
 	{
 		mSetNameToNameSetMap.put("S", Collections.singleton("\\s*"));
 		mSetNameToNameSetMap.put("W", Collections.singleton("\\W*"));
 		mSetNameToNameSetMap.put("P", Collections.singleton("\\p{Punct}*"));
-		mSetNameToNameSetMap.put("WORD", Collections.singleton("(?:[a-zA-z][a-z]+)"));
-		mSetNameToNameSetMap.put("ASE", Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
+		mSetNameToNameSetMap.put(	"WORD",
+															Collections.singleton("(?:[a-zA-z][a-z]+)"));
+		mSetNameToNameSetMap.put(	"ASE",
+															Collections.singleton("(?:[A-Za-z][a-z]*[a-df-z]ase)"));
 	}
 
-	private final List<FilterRule>				mPositiveFilterRuleList	= new ArrayList<FilterRule>();
-	private final List<FilterRule>				mNegativeFilterRuleList	= new ArrayList<FilterRule>();
-	private FilterRule							mResponsibleFilterRule;
+	private final List<FilterRule> mPositiveFilterRuleList = new ArrayList<FilterRule>();
+	private final List<FilterRule> mNegativeFilterRuleList = new ArrayList<FilterRule>();
+	private FilterRule mResponsibleFilterRule;
 
 	private AnnotationContextFilter() throws IOException
 	{
@@ -62,14 +67,19 @@ public class AnnotationContextFilter
 		readRules(pInputStream);
 	}
 
-	public void readRules(final String pRessource) throws FileNotFoundException, IOException
+	public void readRules(final String pRessource) throws FileNotFoundException,
+																								IOException
 	{
-		readRules(LineReader.getInputStreamFromRessource(new AnnotationContextFilter().getClass(), pRessource));
+		readRules(LineReader.getInputStreamFromRessource(	new AnnotationContextFilter().getClass(),
+																											pRessource));
 	}
 
-	public void readRules(final InputStream pInputStream) throws FileNotFoundException, IOException
+	public void readRules(final InputStream pInputStream)	throws FileNotFoundException,
+																												IOException
 	{
-		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(pInputStream, false, "\\s+\\|\\s+");
+		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(	pInputStream,
+																																				false,
+																																				"\\s+\\|\\s+");
 
 		boolean lIsPositive = false;
 		boolean lIsNegative = false;
@@ -83,7 +93,9 @@ public class AnnotationContextFilter
 				continue;
 			else if (lFirstString.startsWith("importset:"))
 			{
-				final String[] lStringArray = StringUtils.split(lFirstString, ":|\\s+as\\s+", 0);
+				final String[] lStringArray = StringUtils.split(lFirstString,
+																												":|\\s+as\\s+",
+																												0);
 				final String lImportSetFileName = lStringArray[1].trim().toLowerCase();
 				final String lImportedSetName = lStringArray[2].trim().toLowerCase();
 				importRegexFile(lImportedSetName, lImportSetFileName);
@@ -92,7 +104,8 @@ public class AnnotationContextFilter
 			else if (lFirstString.startsWith("importrules:"))
 			{
 				final String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
-				final String lImportRulesFileName = lStringArray[1].trim().toLowerCase();
+				final String lImportRulesFileName = lStringArray[1]	.trim()
+																														.toLowerCase();
 				readRules(lImportRulesFileName);
 				continue;
 			}
@@ -124,7 +137,8 @@ public class AnnotationContextFilter
 			{
 				String lPreFixRegex = (lList.get(0).startsWith(".*") ? "" : ".*@W@") + lList.get(0);
 				String lMatchRegex = lList.get(1);
-				String lPostFixRegex = lList.get(2) + (lList.get(2).endsWith(".*") ? "" : "@W@.*");
+				String lPostFixRegex = lList.get(2) + (lList.get(2).endsWith(".*") ? ""
+																																					: "@W@.*");
 
 				for (final Map.Entry<String, Set<String>> lEntry : mSetNameToNameSetMap.entrySet())
 				{
@@ -135,7 +149,9 @@ public class AnnotationContextFilter
 					lPostFixRegex = lPostFixRegex.replace(lSetNameUse, lSetReplacement);
 				}
 
-				final FilterRule lFilterRule = new FilterRule(lPreFixRegex, lMatchRegex, lPostFixRegex);
+				final FilterRule lFilterRule = new FilterRule(lPreFixRegex,
+																											lMatchRegex,
+																											lPostFixRegex);
 				if (lIsPositive)
 					mPositiveFilterRuleList.add(lFilterRule);
 				else if (lIsNegative)
@@ -147,8 +163,9 @@ public class AnnotationContextFilter
 		}
 	}
 
-	private void importRegexFile(final String pImportedSetName, final String pImportRegexFileName)
-			throws FileNotFoundException, IOException
+	private void importRegexFile(	final String pImportedSetName,
+																final String pImportRegexFileName) throws FileNotFoundException,
+																																	IOException
 	{
 		final File lFile = RessourceLocator.getFileFromName(pImportRegexFileName);
 		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile, false);
@@ -174,7 +191,8 @@ public class AnnotationContextFilter
 		return "";
 	}
 
-	public void filter(final Set<Annotation> pAnnotationSetForAbstract, final int pSentenceOffset)
+	public void filter(	final Set<Annotation> pAnnotationSetForAbstract,
+											final int pSentenceOffset)
 	{
 		final List<Annotation> lAnnotationList = new ArrayList<Annotation>(pAnnotationSetForAbstract);
 		for (final Annotation lAnnotation : lAnnotationList)
@@ -184,7 +202,8 @@ public class AnnotationContextFilter
 			final String lMatch = lAnnotation.mAnnotatedFragment;
 
 			int lEnd = lText.length();
-			int lStart = lAnnotation.mStart + lAnnotation.getLength() - pSentenceOffset;
+			int lStart = lAnnotation.mStart + lAnnotation.getLength()
+										- pSentenceOffset;
 			lStart = Math.min(lStart, lEnd);
 			final String lPostFix = lText.substring(lStart, lEnd);
 
@@ -198,7 +217,9 @@ public class AnnotationContextFilter
 
 			if (lFiltered)
 			{
-				System.out.println("REMOVING: " + lAnnotation + "\n because of: " + mResponsibleFilterRule);
+				System.out.println("REMOVING: " + lAnnotation
+														+ "\n because of: "
+														+ mResponsibleFilterRule);
 				pAnnotationSetForAbstract.remove(lAnnotation);
 			}
 

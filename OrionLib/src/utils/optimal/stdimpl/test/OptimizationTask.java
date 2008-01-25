@@ -25,25 +25,25 @@ import bsh.Interpreter;
  */
 class OptimizationTask implements IOptimalEventListener
 {
-	private IOptimalEngine			mOptimalEngine;
+	private IOptimalEngine mOptimalEngine;
 
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private IExperimentFunction	mExperimentFunction;
+	private IExperimentFunction mExperimentFunction;
 
-	private List								mResults;
+	private List mResults;
 
-	private double							mPerformance;
+	private double mPerformance;
 
-	private boolean							mDone;
+	private boolean mDone;
 
-	private int									mMaximumIterations;
+	private int mMaximumIterations;
 
-	private double							mMaxValue;
+	private double mMaxValue;
 
-	private double							mSpeed;
+	private double mSpeed;
 
-	private IExperiment					mBestExperiment;
+	private IExperiment mBestExperiment;
 
 	/**
 	 * @param pExperimentFunction
@@ -95,7 +95,8 @@ class OptimizationTask implements IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#experimentDone(utils.optimal.interf.IExperimentFunctionStub,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
+	public void experimentDone(	final IExperimentFunctionStub pExperimentFunctionStub,
+															final IExperiment pExperiment)
 	{
 		// System.out.print(".");
 		if (mOptimalEngine.getIterations() >= mMaximumIterations + 1)
@@ -143,7 +144,8 @@ class OptimizationTask implements IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#newBestExperiment(utils.optimal.interf.IExperimentDatabase,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment)
+	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase,
+																final IExperiment pExperiment)
 	{
 	}
 

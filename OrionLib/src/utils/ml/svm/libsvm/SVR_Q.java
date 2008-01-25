@@ -8,17 +8,17 @@ package utils.ml.svm.libsvm;
 
 class SVR_Q extends Kernel
 {
-	private final int			l;
+	private final int l;
 
-	private final Cache		cache;
+	private final Cache cache;
 
-	private final byte[]	sign;
+	private final byte[] sign;
 
-	private final int[]		index;
+	private final int[] index;
 
-	private int						next_buffer;
+	private int next_buffer;
 
-	private float[][]			buffer;
+	private float[][] buffer;
 
 	SVR_Q(final Problem prob, final Parameter param)
 	{

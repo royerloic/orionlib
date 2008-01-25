@@ -6,11 +6,12 @@ import java.util.List;
 
 public class SortUtils
 {
-	public static final class ListComparator<O extends Comparable<O>> implements Comparator<List<O>>
+	public static final class ListComparator<O extends Comparable<O>> implements
+																																		Comparator<List<O>>
 	{
 
-		private final int	mColumn;
-		private final boolean	mAscendingOrder;
+		private final int mColumn;
+		private final boolean mAscendingOrder;
 
 		public ListComparator(final int pColumn, final boolean pAscendingOrder)
 		{
@@ -24,17 +25,20 @@ public class SortUtils
 		{
 			final O lComparable1 = pO1.get(mColumn);
 			final O lComparable2 = pO2.get(mColumn);
-			return (mAscendingOrder ? 1 : -1)*lComparable1.compareTo(lComparable2);
+			return (mAscendingOrder ? 1 : -1) * lComparable1.compareTo(lComparable2);
 		}
 	}
-	
-	public static <O extends Comparable<O>>void sortMatrix(final List<List<O>> pMatrix, final int pColumn, final boolean pAscendingOrder)
+
+	public static <O extends Comparable<O>> void sortMatrix(final List<List<O>> pMatrix,
+																													final int pColumn,
+																													final boolean pAscendingOrder)
 	{
-		Collections.sort(pMatrix, new ListComparator<O>(pColumn, pAscendingOrder));		
+		Collections.sort(pMatrix, new ListComparator<O>(pColumn, pAscendingOrder));
 	}
-	
-	public static <O>void sortMatrix(final Comparator<List<O>> pListComprarator, final List<List<O>> pMatrix)
+
+	public static <O> void sortMatrix(final Comparator<List<O>> pListComprarator,
+																		final List<List<O>> pMatrix)
 	{
-		Collections.sort(pMatrix, pListComprarator);		
+		Collections.sort(pMatrix, pListComprarator);
 	}
 }

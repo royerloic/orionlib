@@ -18,7 +18,7 @@ package utils.bioinformatics;
  The purpose of accession numbers is to provide a stable way of identifying entries from release to release. 
  It is sometimes necessary for reasons of consistency to change the names of the entries, 
  for example, to ensure that related entries have similar names. 
- 
+
  However, an accession number is always conserved, and therefore allows unambiguous citation of entries.
  Researchers who wish to cite entries in their publications should always cite the first accession number. 
  This is commonly referred to as the 'primary accession number'. 'Secondary accession numbers' 
@@ -61,7 +61,8 @@ public class UniProtIdConverter
 	{
 		int lUniProtIntegerId = 0;
 		for (int i = 0; i < 6; i++)
-			lUniProtIntegerId = lUniProtIntegerId * 36 + decodeLetter(pUniProtId.charAt(i));
+			lUniProtIntegerId = lUniProtIntegerId * 36
+													+ decodeLetter(pUniProtId.charAt(i));
 		return lUniProtIntegerId;
 	}
 

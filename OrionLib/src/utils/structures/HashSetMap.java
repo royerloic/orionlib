@@ -4,18 +4,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.
  * 
  */
-public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements SetMap<K, V>
+public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
+																												SetMap<K, V>
 {
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 8584828916052243423L;
+	private static final long serialVersionUID = 8584828916052243423L;
 
 	/**
 	 * @return

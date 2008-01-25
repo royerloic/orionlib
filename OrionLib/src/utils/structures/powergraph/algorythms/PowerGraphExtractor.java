@@ -68,7 +68,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 															ConfidenceMethod.Threshold);
 	}
 
-	public final PowerGraph<N> extractPowerGraph(	final Graph<N, Edge<N>> pGraph, 
+	public final PowerGraph<N> extractPowerGraph(	final Graph<N, Edge<N>> pGraph,
 																								final double pProbabilityThreshold)
 	{
 		return extractPowerGraph(	pGraph,
@@ -130,27 +130,26 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 								if (isPowerEdge)
 								{
-									
-									final double lFirstPowerNodeConfidence = computePowerNodeConfidence(	pGraph,
-									                                                                    	lFirstPowerNode,
-									                                                                    	pPowerNodeConfidenceMethod);
-									
+
+									final double lFirstPowerNodeConfidence = computePowerNodeConfidence(pGraph,
+																																											lFirstPowerNode,
+																																											pPowerNodeConfidenceMethod);
+
 									final double lSecondPowerNodeConfidence = computePowerNodeConfidence(	pGraph,
-									                                                                     	lSecondPowerNode,
-									                                                                     	pPowerNodeConfidenceMethod);
-									
+																																												lSecondPowerNode,
+																																												pPowerNodeConfidenceMethod);
+
 									final UndirectedEdge<Set<N>> lPowerEdge = new UndirectedEdge<Set<N>>(	lFirstPowerNode,
 																																												lSecondPowerNode);
 
 									lPowerEdge.setFirstNodeConfidence(lFirstPowerNodeConfidence);
 									lPowerEdge.setSecondNodeConfidence(lSecondPowerNodeConfidence);
-									
+
 									final double lPowerEdgeConfidence = computePowerEdgeConfidence(	pGraph,
 																																									lPowerEdge,
 																																									pPowerEdgeConfidenceMethod);
 
 									lPowerEdge.setConfidence(lPowerEdgeConfidence);
-
 
 									lPowerEdgeList.add(lPowerEdge);
 								}
@@ -199,7 +198,6 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 		return lPowerGraph;
 	}
-
 
 	private void mergeSimilarSets(final List<Set<N>> pNodeSetList)
 	{
@@ -294,19 +292,22 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 	{
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Threshold)
 		{
-			return Math.min(pPowerEdge.getFirstNode().size(), pPowerEdge.getSecondNode().size()) > 4 ? 1 : 0;
-		}		
-		
+			return Math.min(pPowerEdge.getFirstNode().size(),
+											pPowerEdge.getSecondNode().size()) > 4 ? 1 : 0;
+		}
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.MinPowerNodeSize)
 		{
-			return Math.min(pPowerEdge.getFirstNode().size(), pPowerEdge.getSecondNode().size());
-		}		
-		
+			return Math.min(pPowerEdge.getFirstNode().size(),
+											pPowerEdge.getSecondNode().size());
+		}
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.AvgPowerNodeSize)
 		{
-			return (pPowerEdge.getFirstNode().size() + pPowerEdge.getSecondNode().size())/2;
-		}	
-		
+			return (pPowerEdge.getFirstNode().size() + pPowerEdge	.getSecondNode()
+																														.size()) / 2;
+		}
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.SqrtSum)
 		{
 			final Set<N> lSet1 = pPowerEdge.getFirstNode();
@@ -327,8 +328,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 			return Math.sqrt(lSum);
 		}
-		
-		
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Avg)
 		{
 			final Set<N> lSet1 = pPowerEdge.getFirstNode();
@@ -347,10 +347,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 					}
 			}
 
-			return lSum/lCount;
+			return lSum / lCount;
 		}
-		
-		
+
 		else if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Min)
 		{
 			final Set<N> lSet1 = pPowerEdge.getFirstNode();
@@ -385,28 +384,26 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			}
 			return lMax;
 		}
-		
-		throw new UnsupportedOperationException("Wrong PowerEdgeConfidenceMethod"+pPowerEdgeConfidenceMethod);
+
+		throw new UnsupportedOperationException("Wrong PowerEdgeConfidenceMethod" + pPowerEdgeConfidenceMethod);
 
 	}
-	
-	
 
 	private double computePowerNodeConfidence(Graph<N, Edge<N>> pGraph,
 																						Set<N> pPowerNode,
 																						ConfidenceMethod pPowerEdgeConfidenceMethod)
 	{
-		
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Zero)
 		{
 			return 0;
 		}
-		
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.MinPowerNodeSize)
 		{
 			return pPowerNode.size();
 		}
-		
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.SqrtSum)
 		{
 			double lSum = 0;
@@ -424,7 +421,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 			return Math.sqrt(lSum);
 		}
-		
+
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Avg)
 		{
 
@@ -441,7 +438,7 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 					}
 			}
 
-			return lSum/lCount;
+			return lSum / lCount;
 		}
 		else if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Min)
 		{
@@ -471,9 +468,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			}
 			return lMax;
 		}
-		
-		throw new UnsupportedOperationException("Wrong PowerNodeConfidenceMethod"+pPowerEdgeConfidenceMethod);
+
+		throw new UnsupportedOperationException("Wrong PowerNodeConfidenceMethod" + pPowerEdgeConfidenceMethod);
 
 	}
-	
+
 }

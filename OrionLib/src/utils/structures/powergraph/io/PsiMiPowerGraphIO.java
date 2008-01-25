@@ -52,14 +52,14 @@ import utils.structures.powergraph.PowerGraph;
 
 public class PsiMiPowerGraphIO extends DefaultHandler
 {
-	private boolean							mSpokeModel;
-	private String							mText;
-	private String							mInteractorId;
-	private String							mInteractorName;
-	private String							mRole;
-	private final Map<String, String>	lIdToNameMap					= new HashMap<String, String>();
-	private final Map<Node, String>		lInteractorsToRoleMap	= new HashMap<Node, String>();
-	private PowerGraph<Node>		mPowerGraph;
+	private boolean mSpokeModel;
+	private String mText;
+	private String mInteractorId;
+	private String mInteractorName;
+	private String mRole;
+	private final Map<String, String> lIdToNameMap = new HashMap<String, String>();
+	private final Map<Node, String> lInteractorsToRoleMap = new HashMap<Node, String>();
+	private PowerGraph<Node> mPowerGraph;
 
 	public PowerGraph<Node> load(final File pFile, final boolean pSpokeModel)
 	{
@@ -114,7 +114,8 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 	}
 
 	@Override
-	public void startElement(final String namespaceURI, final String lName, // local name
+	public void startElement(final String namespaceURI, final String lName, // local
+																																					// name
 														final String qName, // qualified name
 														final Attributes attrs) throws SAXException
 	{
@@ -137,7 +138,8 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 	}
 
 	@Override
-	public void endElement(final String namespaceURI, final String sName, // simple name
+	public void endElement(final String namespaceURI, final String sName, // simple
+																																				// name
 													final String qName // qualified name
 	) throws SAXException
 	{
@@ -173,7 +175,9 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 		lInteractorsToRoleMap.clear();
 	}
 
-	private void addInteractor(final String lInteractorId, final String pName, final String pRole)
+	private void addInteractor(	final String lInteractorId,
+															final String pName,
+															final String pRole)
 	{
 		lInteractorsToRoleMap.put(new Node(pName), pRole);
 	}
@@ -185,11 +189,12 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 			final Node lNode = lInteractorsToRoleMap.keySet().iterator().next();
 			final Set<Node> lPowerNode = new HashSet<Node>();
 			lPowerNode.add(lNode);
-			mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+			mPowerGraph.addPowerEdge(new UndirectedEdge<Set<Node>>(	lPowerNode,
+																															lPowerNode));
 		}
 		else if (!mSpokeModel)
 			mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lInteractorsToRoleMap.keySet(),
-					lInteractorsToRoleMap.keySet()));
+																																		lInteractorsToRoleMap.keySet()));
 		else if (mSpokeModel)
 		{
 			Node lBait = null;
@@ -208,12 +213,14 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 				lPreysPowerNode.addAll(lInteractorsToRoleMap.keySet());
 				lPreysPowerNode.removeAll(lBaitPowerNode);
 
-				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode, lPreysPowerNode));
+				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lBaitPowerNode,
+																																			lPreysPowerNode));
 			}
 			else
 			{
 				final Set<Node> lPowerNode = lInteractorsToRoleMap.keySet();
-				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode, lPowerNode));
+				mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lPowerNode,
+																																			lPowerNode));
 			}
 
 		}

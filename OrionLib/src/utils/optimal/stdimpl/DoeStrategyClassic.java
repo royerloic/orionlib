@@ -17,90 +17,90 @@ import utils.optimal.interf.IObjectiveFunction;
  */
 public class DoeStrategyClassic implements IDoeStrategy
 {
-	IExperimentDatabase				mExperimentDatabase;
+	IExperimentDatabase mExperimentDatabase;
 
-	IObjectiveFunction				mObjectiveFunction;
+	IObjectiveFunction mObjectiveFunction;
 
 	/**
 	 * <code>mProxyFunction</code> is the proxy function used to hide the fact
 	 * that we use the difference between the interpolated function (modeler) and
 	 * the reference (or base) function.
 	 */
-	public IScalarFunction		mProxyFunction;
+	public IScalarFunction mProxyFunction;
 
 	/**
 	 * <code>mModelerFunction</code> is the function which interpolates the
 	 * objective function.
 	 */
-	private IInterpolator			mInterpolator;
+	private IInterpolator mInterpolator;
 
-	private IScalarFunction		mStochFillFunction;
+	private IScalarFunction mStochFillFunction;
 
 	/**
 	 * <code>mBaseFunction</code> is the function used to "remenber" which
 	 * maxima we have allready found.
 	 */
-	private IScalarFunction		mBaseFunction;
+	private IScalarFunction mBaseFunction;
 
-	private int								mStochMaxIterationsMinimum;
+	private int mStochMaxIterationsMinimum;
 
-	private int								mStochMaxIterationsMaximum;
+	private int mStochMaxIterationsMaximum;
 
-	private int								mStagnationStart;
+	private int mStagnationStart;
 
-	private int								mStagnationLatency;
+	private int mStagnationLatency;
 
-	private int								mStochFillIterationsMinimum;
+	private int mStochFillIterationsMinimum;
 
-	private int								mStochFillIterationsMaximum;
+	private int mStochFillIterationsMaximum;
 
-	private double						mStochMaxActivationThreshold;
+	private double mStochMaxActivationThreshold;
 
-	private double						mLastMaximumValue;
+	private double mLastMaximumValue;
 
-	private double						mLastValue;
+	private double mLastValue;
 
 	/**
 	 * <code>cMODE_START</code> is the constant representing the Designer in
 	 * start mode.
 	 */
-	private static final int	cMODE_START			= 0;
+	private static final int cMODE_START = 0;
 
 	/**
 	 * <code>cMODE_STOCHMAX</code> is the constant representing the Designer in
 	 * Stochastic Search Mode.
 	 */
-	private static final int	cMODE_STOCHMAX	= 1;
+	private static final int cMODE_STOCHMAX = 1;
 
 	/**
 	 * <code>cMODE_STOCHFILL</code> is the constant representing the Designer in
 	 * Stochastic Fill Mode.
 	 */
-	private static final int	cMODE_STOCHFILL	= 2;
+	private static final int cMODE_STOCHFILL = 2;
 
 	/**
 	 * <code>mMode</code> stores the current mode of the Designer.
 	 */
-	private int								mMode;
+	private int mMode;
 
 	/**
 	 * <code>mModeCounter</code> stores the counter value of the Designer. The
 	 * counter is used to keep track of how many iterations have elapsed since the
 	 * last change of Designer´s mode.
 	 */
-	private int								mModeCounter;
+	private int mModeCounter;
 
 	/**
 	 * <code>mResetTime</code> stores the Reset Counter Period value.
 	 */
-	private int								mResetTime;
+	private int mResetTime;
 
 	/**
 	 * <code>mResetCounter</code> stores the counter value that is decremented
 	 * since the Designer was in Start Mode. This counter is used to reset the
 	 * Designer every <code>mResetCounterPeriod</code> iterations.
 	 */
-	private int								mResetCounter;
+	private int mResetCounter;
 
 	/**
 	 * 
@@ -179,8 +179,8 @@ public class DoeStrategyClassic implements IDoeStrategy
 				mMode = cMODE_STOCHMAX;
 				mStagnationStart = mExperimentDatabase.getNumberOfExperiments();
 			}
-			else if ((mMode == cMODE_STOCHMAX)
-					&& ((mExperimentDatabase.stagnating(mStagnationStart, mStagnationLatency) && (mModeCounter > mStochMaxIterationsMinimum)) || (mModeCounter > mStochMaxIterationsMaximum)))
+			else if ((mMode == cMODE_STOCHMAX) && ((mExperimentDatabase.stagnating(	mStagnationStart,
+																																							mStagnationLatency) && (mModeCounter > mStochMaxIterationsMinimum)) || (mModeCounter > mStochMaxIterationsMaximum)))
 			{
 				/**
 				 * The Database is stagnating we switch to StochFill mode.
@@ -192,8 +192,7 @@ public class DoeStrategyClassic implements IDoeStrategy
 				mLastValue = 0;
 
 			}
-			else if ((mMode == cMODE_STOCHFILL)
-					&& (((mLastValue > mStochMaxActivationThreshold * mLastMaximumValue) && (mModeCounter > mStochFillIterationsMinimum)) || (mModeCounter > mStochFillIterationsMaximum)))
+			else if ((mMode == cMODE_STOCHFILL) && (((mLastValue > mStochMaxActivationThreshold * mLastMaximumValue) && (mModeCounter > mStochFillIterationsMinimum)) || (mModeCounter > mStochFillIterationsMaximum)))
 			{
 				mMode = cMODE_STOCHMAX;
 				mModeCounter = 0;
@@ -208,7 +207,9 @@ public class DoeStrategyClassic implements IDoeStrategy
 				/**
 				 * We are in StochFill Mode.
 				 */
-				lVector = DoeStrategyHelper.multiStepsStochmax(mStochFillFunction, 1, 100);
+				lVector = DoeStrategyHelper.multiStepsStochmax(	mStochFillFunction,
+																												1,
+																												100);
 
 			// System.out.println("DOE Mode: " + mMode);
 			mLastValue = mProxyFunction.evaluate(lVector);
@@ -275,7 +276,8 @@ public class DoeStrategyClassic implements IDoeStrategy
 			 */
 			public final double evaluate(final INumericalVector pVector)
 			{
-				final INumericalVector lNVector = mExperimentDatabase.getNeighboor(pVector).getInput();
+				final INumericalVector lNVector = mExperimentDatabase	.getNeighboor(pVector)
+																															.getInput();
 				final double lDistance = lNVector.euclideanDistanceTo(pVector);
 				return lDistance;
 			}

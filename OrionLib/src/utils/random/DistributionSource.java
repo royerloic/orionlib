@@ -11,9 +11,9 @@ import java.util.Map.Entry;
 
 public class DistributionSource<O>
 {
-	private Map<O, Double>	mObjectToProbabilityMap	= new HashMap<O, Double>();
-	private List<O>					mHitList;
-	private boolean					mIsPrepared							= false;
+	private Map<O, Double> mObjectToProbabilityMap = new HashMap<O, Double>();
+	private List<O> mHitList;
+	private boolean mIsPrepared = false;
 
 	public DistributionSource()
 	{
@@ -52,12 +52,14 @@ public class DistributionSource<O>
 		if (pDistorsionMax < Double.POSITIVE_INFINITY)
 		{
 			final Map<O, Double> lNewMap = computeMapFromList(this.mHitList);
-			lMaxProbabilityDistorsion = computeMaxDistorion(this.mObjectToProbabilityMap, lNewMap);
+			lMaxProbabilityDistorsion = computeMaxDistorion(this.mObjectToProbabilityMap,
+																											lNewMap);
 			// System.out.println("lMaxProbabilityDistorsion =
 			// "+lMaxProbabilityDistorsion);
 			if (lMaxProbabilityDistorsion >= pDistorsionMax)
-				throw new Exception("probability Distribution Distorsion is higher that the specified limit: "
-						+ lMaxProbabilityDistorsion + " >= " + pDistorsionMax);
+				throw new Exception("probability Distribution Distorsion is higher that the specified limit: " + lMaxProbabilityDistorsion
+														+ " >= "
+														+ pDistorsionMax);
 		}
 
 		this.mIsPrepared = true;
@@ -115,7 +117,8 @@ public class DistributionSource<O>
 		return mNewProbabilityToObjectMap;
 	}
 
-	private double computeMaxDistorion(final Map<O, Double> pMap1, final Map<O, Double> pMap2)
+	private double computeMaxDistorion(	final Map<O, Double> pMap1,
+																			final Map<O, Double> pMap2)
 	{
 		double lMaxDistorsion = 0;
 

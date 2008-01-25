@@ -26,15 +26,15 @@ public abstract class EnhancedThread extends Thread
 
 	public abstract boolean terminate();
 
-	private boolean	mSuspendRequested	= false;
+	private boolean mSuspendRequested = false;
 
-	private boolean	mStopRequested		= false;
+	private boolean mStopRequested = false;
 
-	private boolean	mStarted					= false;
+	private boolean mStarted = false;
 
-	private boolean	mStopped					= false;
+	private boolean mStopped = false;
 
-	private final Object	mLock							= new Object();
+	private final Object mLock = new Object();
 
 	public void joinWhenStarted(final int pWaitTime)
 	{

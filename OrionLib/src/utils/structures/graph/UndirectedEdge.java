@@ -4,17 +4,19 @@ import java.io.Serializable;
 
 public class UndirectedEdge<N> implements Edge<N>, Serializable
 {
-	private N				mFirstNode;
+	private N mFirstNode;
 
-	private N				mSecondNode;
+	private N mSecondNode;
 
-	private String	mName;
+	private String mName;
 
 	private double mConfidence;
 	private double mFirstNodeConfidence;
 	private double mSecondNodeConfidence;
 
-	public UndirectedEdge(final N pFirstNode, final N pSecondNode, final String pName)
+	public UndirectedEdge(final N pFirstNode,
+												final N pSecondNode,
+												final String pName)
 	{
 		super();
 		this.mFirstNode = pFirstNode;
@@ -24,7 +26,8 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 
 	public UndirectedEdge(final N pFirstNode, final N pSecondNode)
 	{
-		this(pFirstNode, pSecondNode, pFirstNode.toString() + "-" + pSecondNode.toString());
+		this(pFirstNode, pSecondNode, pFirstNode.toString() + "-"
+																	+ pSecondNode.toString());
 	}
 
 	/*
@@ -75,9 +78,7 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 		else
 		{
 			final Edge<N> lEdge = (Edge<N>) pObject;
-			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge
-					.getSecondNode())))
-					|| ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
+			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge.getSecondNode()))) || ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
 			return lEquals;
 		}
 	}
@@ -128,17 +129,17 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 	@Override
 	public void setConfidence(double pConfidence)
 	{
-		mConfidence = pConfidence;		
+		mConfidence = pConfidence;
 	}
 
 	public void setFirstNodeConfidence(double pFirstPowerNodeConfidence)
 	{
-		mFirstNodeConfidence = pFirstPowerNodeConfidence;		
+		mFirstNodeConfidence = pFirstPowerNodeConfidence;
 	}
-	
+
 	public void setSecondNodeConfidence(double pSecondPowerNodeConfidence)
 	{
-		mSecondNodeConfidence = pSecondPowerNodeConfidence;		
+		mSecondNodeConfidence = pSecondPowerNodeConfidence;
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public final class EvalTags
 		// TODO Auto-generated constructor stub
 	}
 
-	private static final Pattern	sPattern	= Pattern.compile("##([^#]+)##");
+	private static final Pattern sPattern = Pattern.compile("##([^#]+)##");
 
 	private static String evalTagsInLine(	final Interpreter pInterpreter,
 																				final Pattern pPattern,
@@ -130,7 +130,9 @@ public final class EvalTags
 			{
 				while ((lLineString = lBufferedReader.readLine()) != null)
 				{
-					lProcessedLineString = evalTagsInLine(pInterpreter, sPattern, lLineString);
+					lProcessedLineString = evalTagsInLine(pInterpreter,
+																								sPattern,
+																								lLineString);
 					lBufferedWriter.write(lProcessedLineString);
 					lBufferedWriter.newLine();
 				}

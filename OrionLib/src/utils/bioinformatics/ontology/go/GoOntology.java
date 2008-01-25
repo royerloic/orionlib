@@ -10,9 +10,10 @@ import utils.structures.IntegerMap;
 public class GoOntology extends OboOntology
 {
 
-	private static GoOntology	sGoOntology	= null;
+	private static GoOntology sGoOntology = null;
 
-	public static final GoOntology getUniqueInstance() throws FileNotFoundException, IOException
+	public static final GoOntology getUniqueInstance() throws FileNotFoundException,
+																										IOException
 	{
 		if (sGoOntology == null)
 		{
@@ -22,7 +23,8 @@ public class GoOntology extends OboOntology
 		return sGoOntology;
 	}
 
-	public GoOntology(final InputStream pInputStream) throws FileNotFoundException, IOException
+	public GoOntology(final InputStream pInputStream)	throws FileNotFoundException,
+																										IOException
 	{
 		super(pInputStream);
 	}

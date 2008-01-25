@@ -5,19 +5,19 @@ package utils.geolocator;
 
 public class Location
 {
-	String					mType;
+	String mType;
 
-	String					mName;
+	String mName;
 
-	double					mLatitude;
+	double mLatitude;
 
-	double					mLongitude;
+	double mLongitude;
 
-	String					mCountry;
+	String mCountry;
 
-	String					mSourceString;
+	String mSourceString;
 
-	private String	mPlaceName;
+	private String mPlaceName;
 
 	@Override
 	public String toString()
@@ -25,7 +25,11 @@ public class Location
 		String lString = new String();
 		if ((mType != null) && mType.equalsIgnoreCase("city"))
 			lString = mName + ", ";
-		lString += mCountry + ", Coordinates: (" + mLatitude + ", " + mLongitude + ")";
+		lString += mCountry + ", Coordinates: ("
+								+ mLatitude
+								+ ", "
+								+ mLongitude
+								+ ")";
 		if (mSourceString != null)
 			lString += "\n '" + mSourceString + "' \n";
 		return lString;
@@ -37,7 +41,11 @@ public class Location
 		// TODO Auto-generated constructor stub
 	}
 
-	public Location(final String pType, final String pName, final double pLatitude, final double pLongitude, final String pCountry)
+	public Location(final String pType,
+									final String pName,
+									final double pLatitude,
+									final double pLongitude,
+									final String pCountry)
 	{
 		super();
 		mType = pType;
@@ -75,7 +83,9 @@ public class Location
 	{
 		final double lLatDiff = mLatitude - pLocation.mLatitude;
 		final double lLongDiff = mLongitude - pLocation.mLongitude;
-		final double lDistance = Math.sqrt(lLatDiff * lLatDiff + lLongDiff * lLongDiff);
+		final double lDistance = Math.sqrt(lLatDiff * lLatDiff
+																				+ lLongDiff
+																				* lLongDiff);
 		return lDistance;
 	}
 
@@ -151,7 +161,11 @@ public class Location
 
 	public String getPlaceNameCountryAndCoordinates()
 	{
-		final String lString = getPlaceNameAndCountry() + ", (" + mLatitude + "," + mLongitude + ")";
+		final String lString = getPlaceNameAndCountry() + ", ("
+														+ mLatitude
+														+ ","
+														+ mLongitude
+														+ ")";
 
 		return lString;
 	}

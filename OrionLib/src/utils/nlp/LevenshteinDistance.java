@@ -3,7 +3,9 @@ package utils.nlp;
 public class LevenshteinDistance
 {
 
-	private static final double minimum(final double a, final double b, final double c)
+	private static final double minimum(final double a,
+																			final double b,
+																			final double c)
 	{
 		if ((a <= b) && (a <= c))
 			return a;
@@ -19,7 +21,8 @@ public class LevenshteinDistance
 
 	public static final double similarity(final String str1, final String str2)
 	{
-		final double lLevenshteinDistance = distance(str1.toCharArray(), str2.toCharArray());
+		final double lLevenshteinDistance = distance(	str1.toCharArray(),
+																									str2.toCharArray());
 		final double lMaxLength = max(str1.length(), str2.length());
 		final double lLevenshteinSimilarity = (lMaxLength - lLevenshteinDistance) / lMaxLength;
 
@@ -45,8 +48,10 @@ public class LevenshteinDistance
 
 		for (int i = 1; i <= str1.length; i++)
 			for (int j = 1; j <= str2.length; j++)
-				distance[i][j] = minimum(distance[i - 1][j] + deletion(str1[i - 1]), distance[i][j - 1]
-						+ insertion(str2[j - 1]), distance[i - 1][j - 1] + (substitution(str1[i - 1], str2[j - 1])));
+				distance[i][j] = minimum(	distance[i - 1][j] + deletion(str1[i - 1]),
+																	distance[i][j - 1] + insertion(str2[j - 1]),
+																	distance[i - 1][j - 1] + (substitution(	str1[i - 1],
+																																					str2[j - 1])));
 
 		return distance[str1.length][str2.length];
 	}

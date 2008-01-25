@@ -10,19 +10,18 @@ import java.util.List;
  */
 public class RangeMap<O> implements Serializable
 {
-	private static final long	serialVersionUID	= -1996997948395271914L;
+	private static final long serialVersionUID = -1996997948395271914L;
 
-	
 	/**
-	 * MapItem(s) are used to store the mapping information.
-	 * A mapping Range is defined by a MapItem to its left and a transition to another item (possibly null)
-	 * at its right 
-	 *
+	 * MapItem(s) are used to store the mapping information. A mapping Range is
+	 * defined by a MapItem to its left and a transition to another item (possibly
+	 * null) at its right
+	 * 
 	 */
 	private static class MapItem<O> implements Serializable
 	{
-		int	mPosition;
-		O		mObject;
+		int mPosition;
+		O mObject;
 
 		public MapItem(final int pPosition, final O pObject)
 		{
@@ -32,7 +31,7 @@ public class RangeMap<O> implements Serializable
 		}
 
 		@Override
-        public String toString()
+		public String toString()
 		{
 			return "[" + mPosition + "->" + mObject + "]";
 		}
@@ -69,14 +68,14 @@ public class RangeMap<O> implements Serializable
 			return true;
 		}
 	}
-	
-	/**
-	 * This lists holds MapItems and must be read from Left To Right, each mapItem signiofies a transition
-	 * from one mapped value to another. (In essence this map stores mapping using run length compression)
-	 */
-	List<MapItem<O>>	mList;
 
-	
+	/**
+	 * This lists holds MapItems and must be read from Left To Right, each mapItem
+	 * signiofies a transition from one mapped value to another. (In essence this
+	 * map stores mapping using run length compression)
+	 */
+	List<MapItem<O>> mList;
+
 	/**
 	 * Creates an empty RangeMap
 	 */
@@ -89,11 +88,14 @@ public class RangeMap<O> implements Serializable
 
 	public RangeMap(int pInitialCapacity)
 	{
-		mList = new ArrayList<MapItem<O>>(pInitialCapacity<2?2:pInitialCapacity);
+		mList = new ArrayList<MapItem<O>>(pInitialCapacity < 2 ? 2
+																													: pInitialCapacity);
 		clear();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#clear()
 	 */
 	public void clear()
@@ -104,7 +106,9 @@ public class RangeMap<O> implements Serializable
 		mList.add(new MapItem<O>(Integer.MAX_VALUE, null));/**/
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#put(range.Range, O)
 	 */
 	public final void put(final Range pRange, final O pObject)
@@ -119,8 +123,8 @@ public class RangeMap<O> implements Serializable
 		final MapItem<O> lBeforeEndItem = mList.get(lBeforeEndItemIndex);
 		int lAfterEndItemIndex = lBeforeEndItemIndex + 1; // getLowestIndexHigherThan(lEnd);
 
-		
-		// We need to determine which will be the mapping just after the given Range.
+		// We need to determine which will be the mapping just after the given
+		// Range.
 		final O lObjectAfterEnd;
 		// If we are overwriting at at the same boundary than an existing Range, we
 		if (lBeforeEndItem.mPosition == lStart)
@@ -136,11 +140,14 @@ public class RangeMap<O> implements Serializable
 		}
 
 		// if there are items in between, we remove them:
-		// Note: a performance issue is the succesive removal of items in a list which is not batched !
+		// Note: a performance issue is the succesive removal of items in a list
+		// which is not batched !
 		{
 			if (lAfterEndItemIndex - lBeforeStartItemIndex > 1)
 			{
-				final int lNumberOfItemsRemoved = removeRange(mList, lBeforeStartItemIndex + 1, lAfterEndItemIndex);
+				final int lNumberOfItemsRemoved = removeRange(mList,
+																											lBeforeStartItemIndex + 1,
+																											lAfterEndItemIndex);
 				lAfterEndItemIndex -= lNumberOfItemsRemoved;
 			}
 		}
@@ -205,8 +212,9 @@ public class RangeMap<O> implements Serializable
 
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#get(int)
 	 */
 	public final O get(final int pPosition)
@@ -216,10 +224,10 @@ public class RangeMap<O> implements Serializable
 		return lObject;
 	}
 
-	
-	
 	/**
-	 * Returns the highest index in the MapItem List for which the MapItem position is lower than pPosition 
+	 * Returns the highest index in the MapItem List for which the MapItem
+	 * position is lower than pPosition
+	 * 
 	 * @param pPosition
 	 * @return
 	 */
@@ -236,9 +244,9 @@ public class RangeMap<O> implements Serializable
 	 * @param pEndIndex
 	 * @return
 	 */
-	private final int getGreaterIndexLowerThanAndWithinIndices(final int pPosition,
-																														final int pBeginIndex,
-																														final int pEndIndex)
+	private final int getGreaterIndexLowerThanAndWithinIndices(	final int pPosition,
+																															final int pBeginIndex,
+																															final int pEndIndex)
 	{
 		// There is just one element within pBeginIndex and pEndIndex, we return its
 		// index.
@@ -253,16 +261,22 @@ public class RangeMap<O> implements Serializable
 
 		if (pPosition < lMedianMapItem.mPosition)
 		{
-			return getGreaterIndexLowerThanAndWithinIndices(pPosition, pBeginIndex, lMedianIndex);
+			return getGreaterIndexLowerThanAndWithinIndices(pPosition,
+																											pBeginIndex,
+																											lMedianIndex);
 		}
 		else
 		{
-			return getGreaterIndexLowerThanAndWithinIndices(pPosition, lMedianIndex, pEndIndex);
+			return getGreaterIndexLowerThanAndWithinIndices(pPosition,
+																											lMedianIndex,
+																											pEndIndex);
 		}
 	}
 
 	/**
-	 * Returns the Lowest index in the MapItem List for which the MapItem position is higher than pPosition 
+	 * Returns the Lowest index in the MapItem List for which the MapItem position
+	 * is higher than pPosition
+	 * 
 	 * @param pPosition
 	 * @return
 	 */
@@ -279,9 +293,9 @@ public class RangeMap<O> implements Serializable
 	 * @param pEndIndex
 	 * @return
 	 */
-	private final int getLowestIndexHigherThanAndWithinIndices(final int pPosition,
-																														final int pBeginIndex,
-																														final int pEndIndex)
+	private final int getLowestIndexHigherThanAndWithinIndices(	final int pPosition,
+																															final int pBeginIndex,
+																															final int pEndIndex)
 	{
 		// There is just one element within pBeginIndex and pEndIndex, we return its
 		// index.
@@ -296,80 +310,91 @@ public class RangeMap<O> implements Serializable
 
 		if (pPosition <= lMedianMapItem.mPosition)
 		{
-			return getLowestIndexHigherThanAndWithinIndices(pPosition, pBeginIndex, lMedianIndex);
+			return getLowestIndexHigherThanAndWithinIndices(pPosition,
+																											pBeginIndex,
+																											lMedianIndex);
 		}
 		else
 		{
-			return getLowestIndexHigherThanAndWithinIndices(pPosition, lMedianIndex, pEndIndex);
+			return getLowestIndexHigherThanAndWithinIndices(pPosition,
+																											lMedianIndex,
+																											pEndIndex);
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#getFirst()
 	 */
 	public O getFirst()
 	{
-		for ( MapItem<O> lMapItem : mList)
+		for (MapItem<O> lMapItem : mList)
 		{
 			final O lO = lMapItem.mObject;
-			if(lO!=null)
+			if (lO != null)
 				return lO;
 		}
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#getLast()
 	 */
 	public O getLast()
 	{
-		for (int i=mList.size()-1; i>=0; i--)
+		for (int i = mList.size() - 1; i >= 0; i--)
 		{
 			final O lO = mList.get(i).mObject;
-			if(lO!=null)
+			if (lO != null)
 				return lO;
 		}
 		return null;
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see range.RangeMapInterface#translate(int)
 	 */
 	public void translate(int pOffset)
 	{
-		for (int i=1; i<mList.size()-1; i++)
+		for (int i = 1; i < mList.size() - 1; i++)
 		{
 			mList.get(i).mPosition += pOffset;
 		}
 	}
-	
+
 	/**
-	 * Returns the number of non null range spans.
-	 * Note: If two non contiguous ranges have the same object mapped, this counts for two !!!
-	 * [[1-2]->o1, [4-5]->o1] --> 2 non null ranges.
+	 * Returns the number of non null range spans. Note: If two non contiguous
+	 * ranges have the same object mapped, this counts for two !!! [[1-2]->o1,
+	 * [4-5]->o1] --> 2 non null ranges.
+	 * 
 	 * @return Number of non null range spans
 	 */
 	public int getNumberOfNonNullRangeSpans()
 	{
-		int lNumber=0;
-		for ( MapItem<O> lMapItem : mList)
+		int lNumber = 0;
+		for (MapItem<O> lMapItem : mList)
 		{
 			final O lO = lMapItem.mObject;
-			if(lO!=null)
+			if (lO != null)
 				lNumber++;
 		}
 		return lNumber;
 	}
 
-	
-	/** (non-Javadoc)
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-    public String toString()
+	public String toString()
 	{
-		return mList.subList(1, mList.size()-1).toString();
+		return mList.subList(1, mList.size() - 1).toString();
 	}
 
 	@Override
@@ -401,7 +426,9 @@ public class RangeMap<O> implements Serializable
 		return true;
 	}
 
-	private static final <Obj> int removeRange(final List<Obj> pList, final int pStart, final int pEnd)
+	private static final <Obj> int removeRange(	final List<Obj> pList,
+																							final int pStart,
+																							final int pEnd)
 	{
 		final int lEnd = pEnd >= pList.size() ? pList.size() - 1 : pEnd;
 		final int lStart = pStart <= 0 ? 1 : pStart;
@@ -413,10 +440,10 @@ public class RangeMap<O> implements Serializable
 		return lNumberOfTimes;
 	}
 
-	
 	/**
-	 * Do not use this method unless you really know what it is for!
-	 * does not return what you really expect, 
+	 * Do not use this method unless you really know what it is for! does not
+	 * return what you really expect,
+	 * 
 	 * @deprectated
 	 * @return
 	 */
@@ -424,8 +451,5 @@ public class RangeMap<O> implements Serializable
 	{
 		return mList.size();
 	}
-
-	
-
 
 }

@@ -16,14 +16,15 @@ import utils.graphics.impl.OrionGraphics;
 public class ArtefactWater
 {
 
-	private OrionGraphics	mOrionGraphics;
+	private OrionGraphics mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
 	 */
 	public ArtefactWater() throws HeadlessException
 	{
-		mOrionGraphics = new OrionGraphics("ArtefactWater", OrionGraphics.cFIRST_DEVICE);
+		mOrionGraphics = new OrionGraphics(	"ArtefactWater",
+																				OrionGraphics.cFIRST_DEVICE);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -45,10 +46,17 @@ public class ArtefactWater
 		try
 		{
 			lRobot = new Robot();
-			final BufferedImage lBufferedimage = lRobot.createScreenCapture(new Rectangle(pWidth, pHeight));
+			final BufferedImage lBufferedimage = lRobot.createScreenCapture(new Rectangle(pWidth,
+																																										pHeight));
 
-			final PixelGrabber lPixelGrabber = new PixelGrabber(lBufferedimage, 0, 0, pWidth, pHeight, lMoonMapBuffer, 0,
-					pWidth);
+			final PixelGrabber lPixelGrabber = new PixelGrabber(lBufferedimage,
+																													0,
+																													0,
+																													pWidth,
+																													pHeight,
+																													lMoonMapBuffer,
+																													0,
+																													pWidth);
 			try
 			{
 				lPixelGrabber.grabPixels();
@@ -103,7 +111,9 @@ public class ArtefactWater
 			for (int ly = -10; ly < 10; ly++)
 				for (int lx = -10; lx < 10; lx++)
 				{
-					int lIndex = mOrionGraphics.mMouseX + lx + pWidth * (mOrionGraphics.mMouseY + ly);
+					int lIndex = mOrionGraphics.mMouseX + lx
+												+ pWidth
+												* (mOrionGraphics.mMouseY + ly);
 					if (lIndex < 0)
 						lIndex = 0;
 					else if (lIndex >= lSize)
@@ -116,10 +126,11 @@ public class ArtefactWater
 			for (int index = 3 * pWidth; index < (lSize - 3 * pWidth); index++)
 			{
 				lHeightMatrix2[index] = (lHeightMatrix1[index + 3] + lHeightMatrix1[index - 3]
-						+ lHeightMatrix1[index - 3 * pWidth] + lHeightMatrix1[index + 3 * pWidth] + 1
+																	+ lHeightMatrix1[index - 3 * pWidth]
+																	+ lHeightMatrix1[index + 3 * pWidth] + 1
 
-				)
-						/ 2 - lHeightMatrix2[index];
+				)												/ 2
+																- lHeightMatrix2[index];
 
 				final int gX = lHeightMatrix1[index + 1] - lHeightMatrix1[index - 1];
 				final int gY = lHeightMatrix1[index + pWidth] - lHeightMatrix1[index - pWidth];
@@ -135,11 +146,13 @@ public class ArtefactWater
 
 			for (int index = 3 * pWidth; index < (lSize - 3 * pWidth); index++)
 				lHeightMatrix2[index] = (+lHeightMatrix2[index - 1] + lHeightMatrix2[index + 1]
-						+ lHeightMatrix2[index - 1 * pWidth] + lHeightMatrix2[index + 1 * pWidth]
+																	+ lHeightMatrix2[index - 1 * pWidth]
+																	+ lHeightMatrix2[index + 1 * pWidth]
 				/***********************************************************************
 				 * + lHeightMatrix2[index - 2] + lHeightMatrix2[index + 2] +
 				 * lHeightMatrix2[index - 2*pWidth] + lHeightMatrix2[index + 2*pWidth] /
-				 **********************************************************************/+ 1) / 4;
+				 **********************************************************************/
+				+ 1) / 4;
 
 			lHeightMatrixTemp = lHeightMatrix1;
 			lHeightMatrix1 = lHeightMatrix2;

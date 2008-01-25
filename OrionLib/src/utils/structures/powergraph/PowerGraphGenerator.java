@@ -67,7 +67,8 @@ public class PowerGraphGenerator
 
 		for (final Pair<Set<Node>> lPair : lPairList)
 		{
-			final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(lPair.mA, lPair.mB);
+			final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(	lPair.mA,
+																																				lPair.mB);
 			lPowerGraph.addPowerEdge(lPowerEdge);
 		}
 
@@ -101,7 +102,8 @@ public class PowerGraphGenerator
 				lNode1Set.add(lNode1);
 				lNode2Set.add(lNode2);
 
-				final Edge<Set<Node>> lEdge = new UndirectedEdge<Set<Node>>(lNode1Set, lNode2Set);
+				final Edge<Set<Node>> lEdge = new UndirectedEdge<Set<Node>>(lNode1Set,
+																																		lNode2Set);
 				lPowerGraph.addPowerEdge(lEdge);
 
 				lUsedNodeSet.add(lNode1);
@@ -122,25 +124,35 @@ public class PowerGraphGenerator
 	{
 
 		if (pDepth == 0)
-			return generateOptimalPowerGraph(pRandom, pNumberOfMotifs, pMinMotifSize, pMaxMotifSize,
-					pProportionOfLinks);
+			return generateOptimalPowerGraph(	pRandom,
+																				pNumberOfMotifs,
+																				pMinMotifSize,
+																				pMaxMotifSize,
+																				pProportionOfLinks);
 
 		final PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
-		
+
 		final int lNumberOfLinks = (int) (pNumberOfMotifs * pProportionOfLinks);
 
 		final List<Pair<Set<Node>>> lPairList = new ArrayList<Pair<Set<Node>>>();
 		for (int i = 0; i < pNumberOfMotifs / 2; i++)
 		{
 
-			final PowerGraph<Node> lPowerGraph1 = generateHierarchicalOptimalPowerGraph(pRandom, pNumberOfMotifs/4,
-					pMinMotifSize, pMaxMotifSize, pProportionOfLinks, pDepth-1);
+			final PowerGraph<Node> lPowerGraph1 = generateHierarchicalOptimalPowerGraph(pRandom,
+																																									pNumberOfMotifs / 4,
+																																									pMinMotifSize,
+																																									pMaxMotifSize,
+																																									pProportionOfLinks,
+																																									pDepth - 1);
 			lPowerGraph.addPowerGraph(lPowerGraph1);
 			final Set<Node> lNodeSet1 = lPowerGraph1.getNodeSet();
 
-			
-			final PowerGraph<Node> lPowerGraph2 = generateHierarchicalOptimalPowerGraph(pRandom, pNumberOfMotifs/4,
-					pMinMotifSize, pMaxMotifSize, pProportionOfLinks, pDepth-1);
+			final PowerGraph<Node> lPowerGraph2 = generateHierarchicalOptimalPowerGraph(pRandom,
+																																									pNumberOfMotifs / 4,
+																																									pMinMotifSize,
+																																									pMaxMotifSize,
+																																									pProportionOfLinks,
+																																									pDepth - 1);
 			lPowerGraph.addPowerGraph(lPowerGraph2);
 			final Set<Node> lNodeSet2 = lPowerGraph2.getNodeSet();
 
@@ -162,11 +174,10 @@ public class PowerGraphGenerator
 			lPairList.add(lPair);
 		}
 
-		
-
 		for (final Pair<Set<Node>> lPair : lPairList)
 		{
-			final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(lPair.mA, lPair.mB);
+			final Edge<Set<Node>> lPowerEdge = new UndirectedEdge<Set<Node>>(	lPair.mA,
+																																				lPair.mB);
 			lPowerGraph.addPowerEdge(lPowerEdge);
 		}
 
@@ -200,7 +211,8 @@ public class PowerGraphGenerator
 				lNode1Set.add(lNode1);
 				lNode2Set.add(lNode2);
 
-				final Edge<Set<Node>> lEdge = new UndirectedEdge<Set<Node>>(lNode1Set, lNode2Set);
+				final Edge<Set<Node>> lEdge = new UndirectedEdge<Set<Node>>(lNode1Set,
+																																		lNode2Set);
 				lPowerGraph.addPowerEdge(lEdge);
 
 				lUsedNodeSet.add(lNode1);
@@ -212,7 +224,8 @@ public class PowerGraphGenerator
 		return lPowerGraph;
 	}
 
-	private static final Node chooseNodeInPair(final Random pRandom, final Pair<Set<Node>> pPair)
+	private static final Node chooseNodeInPair(	final Random pRandom,
+																							final Pair<Set<Node>> pPair)
 	{
 		Set<Node> lSet;
 		if (pRandom.nextBoolean())
@@ -226,7 +239,7 @@ public class PowerGraphGenerator
 		return lNode;
 	}
 
-	private static int	mNodeCounter	= 0;
+	private static int mNodeCounter = 0;
 
 	private static final Node newNode()
 	{

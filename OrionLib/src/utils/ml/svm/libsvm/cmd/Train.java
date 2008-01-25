@@ -14,50 +14,48 @@ import utils.ml.svm.libsvm.SVM;
 
 class Train
 {
-	private Parameter	param;									// set by parse_command_line
+	private Parameter param; // set by parse_command_line
 
-	private Problem		prob;									// set by read_problem
+	private Problem prob; // set by read_problem
 
-	private Model			model;
+	private Model model;
 
-	private String		input_file_name;				// set by parse_command_line
+	private String input_file_name; // set by parse_command_line
 
-	private String		model_file_name;				// set by parse_command_line
+	private String model_file_name; // set by parse_command_line
 
-	private String		error_msg;
+	private String error_msg;
 
-	private int				cross_validation	= 0;
+	private int cross_validation = 0;
 
-	private int				nr_fold;
+	private int nr_fold;
 
 	private static void exit_with_help()
 	{
-		System.out
-				.print("Usage: Train [options] training_set_file [model_file]\n"
-						+ "options:\n"
-						+ "-s svm_type : set type of SVM (default 0)\n"
-						+ "	0 -- C-SVC\n"
-						+ "	1 -- nu-SVC\n"
-						+ "	2 -- one-class SVM\n"
-						+ "	3 -- epsilon-SVR\n"
-						+ "	4 -- nu-SVR\n"
-						+ "-t kernel_type : set type of kernel function (default 2)\n"
-						+ "	0 -- linear: u'*v\n"
-						+ "	1 -- polynomial: (gamma*u'*v + coef0)^degree\n"
-						+ "	2 -- radial basis function: exp(-gamma*|u-v|^2)\n"
-						+ "	3 -- sigmoid: tanh(gamma*u'*v + coef0)\n"
-						+ "-d degree : set degree in kernel function (default 3)\n"
-						+ "-g gamma : set gamma in kernel function (default 1/k)\n"
-						+ "-r coef0 : set coef0 in kernel function (default 0)\n"
-						+ "-c cost : set the parameter C of C-SVC, epsilon-SVR, and nu-SVR (default 1)\n"
-						+ "-n nu : set the parameter nu of nu-SVC, one-class SVM, and nu-SVR (default 0.5)\n"
-						+ "-p epsilon : set the epsilon in loss function of epsilon-SVR (default 0.1)\n"
-						+ "-m cachesize : set cache memory size in MB (default 40)\n"
-						+ "-e epsilon : set tolerance of termination criterion (default 0.001)\n"
-						+ "-h shrinking: whether to use the shrinking heuristics, 0 or 1 (default 1)\n"
-						+ "-b probability_estimates: whether to train a SVC or SVR model for probability estimates, 0 or 1 (default 0)\n"
-						+ "-wi weight: set the parameter C of class i to weight*C, for C-SVC (default 1)\n"
-						+ "-v n: n-fold cross validation mode\n");
+		System.out.print("Usage: Train [options] training_set_file [model_file]\n" + "options:\n"
+											+ "-s svm_type : set type of SVM (default 0)\n"
+											+ "	0 -- C-SVC\n"
+											+ "	1 -- nu-SVC\n"
+											+ "	2 -- one-class SVM\n"
+											+ "	3 -- epsilon-SVR\n"
+											+ "	4 -- nu-SVR\n"
+											+ "-t kernel_type : set type of kernel function (default 2)\n"
+											+ "	0 -- linear: u'*v\n"
+											+ "	1 -- polynomial: (gamma*u'*v + coef0)^degree\n"
+											+ "	2 -- radial basis function: exp(-gamma*|u-v|^2)\n"
+											+ "	3 -- sigmoid: tanh(gamma*u'*v + coef0)\n"
+											+ "-d degree : set degree in kernel function (default 3)\n"
+											+ "-g gamma : set gamma in kernel function (default 1/k)\n"
+											+ "-r coef0 : set coef0 in kernel function (default 0)\n"
+											+ "-c cost : set the parameter C of C-SVC, epsilon-SVR, and nu-SVR (default 1)\n"
+											+ "-n nu : set the parameter nu of nu-SVC, one-class SVM, and nu-SVR (default 0.5)\n"
+											+ "-p epsilon : set the epsilon in loss function of epsilon-SVR (default 0.1)\n"
+											+ "-m cachesize : set cache memory size in MB (default 40)\n"
+											+ "-e epsilon : set tolerance of termination criterion (default 0.001)\n"
+											+ "-h shrinking: whether to use the shrinking heuristics, 0 or 1 (default 1)\n"
+											+ "-b probability_estimates: whether to train a SVC or SVR model for probability estimates, 0 or 1 (default 0)\n"
+											+ "-wi weight: set the parameter C of class i to weight*C, for C-SVC (default 1)\n"
+											+ "-v n: n-fold cross validation mode\n");
 		System.exit(1);
 	}
 
@@ -83,17 +81,21 @@ class Train
 				sumyy += y * y;
 				sumvy += v * y;
 			}
-			System.out.print("Cross Validation Mean squared error = " + total_error / prob.mNumberOfVectors + "\n");
-			System.out.print("Cross Validation Squared correlation coefficient = "
-					+ ((prob.mNumberOfVectors * sumvy - sumv * sumy) * (prob.mNumberOfVectors * sumvy - sumv * sumy))
-					/ ((prob.mNumberOfVectors * sumvv - sumv * sumv) * (prob.mNumberOfVectors * sumyy - sumy * sumy))
-					+ "\n");
+			System.out.print("Cross Validation Mean squared error = " + total_error
+												/ prob.mNumberOfVectors
+												+ "\n");
+			System.out.print("Cross Validation Squared correlation coefficient = " + ((prob.mNumberOfVectors * sumvy - sumv * sumy) * (prob.mNumberOfVectors * sumvy - sumv * sumy))
+												/ ((prob.mNumberOfVectors * sumvv - sumv * sumv) * (prob.mNumberOfVectors * sumyy - sumy * sumy))
+												+ "\n");
 		}
 		else
 			for (i = 0; i < prob.mNumberOfVectors; i++)
 				if (target[i] == prob.mClass[i])
 					++total_correct;
-		System.out.print("Cross Validation Accuracy = " + 100.0 * total_correct / prob.mNumberOfVectors + "%\n");
+		System.out.print("Cross Validation Accuracy = " + 100.0
+											* total_correct
+											/ prob.mNumberOfVectors
+											+ "%\n");
 	}
 
 	private void run(final String argv[]) throws IOException
@@ -163,71 +165,71 @@ class Train
 			++i;
 			switch (argv[i - 1].charAt(1))
 			{
-				case 's':
-					param.svm_type = atoi(argv[i]);
-					break;
-				case 't':
-					param.kernel_type = atoi(argv[i]);
-					break;
-				case 'd':
-					param.degree = atof(argv[i]);
-					break;
-				case 'g':
-					param.gamma = atof(argv[i]);
-					break;
-				case 'r':
-					param.coef0 = atof(argv[i]);
-					break;
-				case 'n':
-					param.nu = atof(argv[i]);
-					break;
-				case 'm':
-					param.cache_size = atof(argv[i]);
-					break;
-				case 'c':
-					param.C = atof(argv[i]);
-					break;
-				case 'e':
-					param.eps = atof(argv[i]);
-					break;
-				case 'p':
-					param.p = atof(argv[i]);
-					break;
-				case 'h':
-					param.shrinking = atoi(argv[i]);
-					break;
-				case 'b':
-					param.probability = atoi(argv[i]);
-					break;
-				case 'v':
-					cross_validation = 1;
-					nr_fold = atoi(argv[i]);
-					if (nr_fold < 2)
-					{
-						System.err.print("n-fold cross validation: n must >= 2\n");
-						exit_with_help();
-					}
-					break;
-				case 'w':
-					++param.nr_weight;
-					{
-						final int[] old = param.weight_label;
-						param.weight_label = new int[param.nr_weight];
-						System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
-					}
-
-					{
-						final double[] old = param.weight;
-						param.weight = new double[param.nr_weight];
-						System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
-					}
-
-					param.weight_label[param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
-					param.weight[param.nr_weight - 1] = atof(argv[i]);
-					break;
-				default:
-					System.err.print("unknown option\n");
+			case 's':
+				param.svm_type = atoi(argv[i]);
+				break;
+			case 't':
+				param.kernel_type = atoi(argv[i]);
+				break;
+			case 'd':
+				param.degree = atof(argv[i]);
+				break;
+			case 'g':
+				param.gamma = atof(argv[i]);
+				break;
+			case 'r':
+				param.coef0 = atof(argv[i]);
+				break;
+			case 'n':
+				param.nu = atof(argv[i]);
+				break;
+			case 'm':
+				param.cache_size = atof(argv[i]);
+				break;
+			case 'c':
+				param.C = atof(argv[i]);
+				break;
+			case 'e':
+				param.eps = atof(argv[i]);
+				break;
+			case 'p':
+				param.p = atof(argv[i]);
+				break;
+			case 'h':
+				param.shrinking = atoi(argv[i]);
+				break;
+			case 'b':
+				param.probability = atoi(argv[i]);
+				break;
+			case 'v':
+				cross_validation = 1;
+				nr_fold = atoi(argv[i]);
+				if (nr_fold < 2)
+				{
+					System.err.print("n-fold cross validation: n must >= 2\n");
 					exit_with_help();
+				}
+				break;
+			case 'w':
+				++param.nr_weight;
+				{
+					final int[] old = param.weight_label;
+					param.weight_label = new int[param.nr_weight];
+					System.arraycopy(old, 0, param.weight_label, 0, param.nr_weight - 1);
+				}
+
+				{
+					final double[] old = param.weight;
+					param.weight = new double[param.nr_weight];
+					System.arraycopy(old, 0, param.weight, 0, param.nr_weight - 1);
+				}
+
+				param.weight_label[param.nr_weight - 1] = atoi(argv[i - 1].substring(2));
+				param.weight[param.nr_weight - 1] = atof(argv[i]);
+				break;
+			default:
+				System.err.print("unknown option\n");
+				exit_with_help();
 			}
 		}
 

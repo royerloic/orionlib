@@ -26,50 +26,79 @@ import java.util.Random;
  * @author Bram Minnaert
  */
 
-public class RandomSequenceGenerator {
-    
-    /**
-     * All possible characters
-     */
-    private static final char[] CHARS = {
-    	'A', 'R', 'N', 'D', 'C', 'Q', 'E',
-		'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P',
-		'S', 'T', 'W', 'Y', 'V', 'B', 'Z', 'X'};    
-    
-    /**
-     * Number of possible characters
-     */
-    private static final int NUMBER_OF_CHARS = CHARS.length;
-    
-    /**
-     * Random generator
-     */
-    private static Random random = new Random();
-    
-    /**
-     * Returns random sequence
-     * @param length Size of the sequence
-     * @return Random sequence
-     */
-    public static String generate(int length) {
-        StringBuffer buffer = new StringBuffer();
-        char randomChar;
-        int  randomInt;
-        for (int i = 0; i < length ; i++) {
-            randomInt = random.nextInt(NUMBER_OF_CHARS);
-            randomChar = CHARS[randomInt];
-            buffer.append(randomChar);
-        }
-        return buffer.toString();
-    }
+public class RandomSequenceGenerator
+{
 
-    /**
-     * Displays 10 random protein sequences with length 50.
-     * @param args no args
-     */
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-        	System.out.println("S" + i + " = " + generate(50));
-        }
-    }
+	/**
+	 * All possible characters
+	 */
+	private static final char[] CHARS =
+	{ 'A',
+		'R',
+		'N',
+		'D',
+		'C',
+		'Q',
+		'E',
+		'G',
+		'H',
+		'I',
+		'L',
+		'K',
+		'M',
+		'F',
+		'P',
+		'S',
+		'T',
+		'W',
+		'Y',
+		'V',
+		'B',
+		'Z',
+		'X' };
+
+	/**
+	 * Number of possible characters
+	 */
+	private static final int NUMBER_OF_CHARS = CHARS.length;
+
+	/**
+	 * Random generator
+	 */
+	private static Random random = new Random();
+
+	/**
+	 * Returns random sequence
+	 * 
+	 * @param length
+	 *          Size of the sequence
+	 * @return Random sequence
+	 */
+	public static String generate(int length)
+	{
+		StringBuffer buffer = new StringBuffer();
+		char randomChar;
+		int randomInt;
+		for (int i = 0; i < length; i++)
+		{
+			randomInt = random.nextInt(NUMBER_OF_CHARS);
+			randomChar = CHARS[randomInt];
+			buffer.append(randomChar);
+		}
+		return buffer.toString();
+	}
+
+	/**
+	 * Displays 10 random protein sequences with length 50.
+	 * 
+	 * @param args
+	 *          no args
+	 */
+	public static void main(String[] args)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			System.out.println("S" + i + " = " + generate(50));
+		}
+	}
 }

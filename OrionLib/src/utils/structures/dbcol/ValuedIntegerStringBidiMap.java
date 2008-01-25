@@ -12,31 +12,33 @@ import org.apache.log4j.Logger;
 
 public class ValuedIntegerStringBidiMap
 {
-	private static final Logger	cLogger									= Logger.getLogger(ValuedIntegerStringBidiMap.class);
+	private static final Logger cLogger = Logger.getLogger(ValuedIntegerStringBidiMap.class);
 
-	private boolean							mTemp;
-	private Connection					mDatabaseConnection;
-	private PreparedStatement		mInsertStatement;
-	private PreparedStatement		mStringQueryStatement;
-	private PreparedStatement		mIntegerQueryStatement;
-	private PreparedStatement		mStringDeleteStatement;
-	private PreparedStatement		mIntegerDeleteStatement;
-	private PreparedStatement		mIntegerStringDeleteStatement;
-	private PreparedStatement		mSizeStatement;
-	private String							mName;
-	private int									mMinStringSize;
-	private int									mMaxStringSize;
-	private int									mCounter								= 0;
-	private int									mCommitPeriod						= 10000;
-	private final int									mMaximumNuberOfResults	= Integer.MAX_VALUE;
+	private boolean mTemp;
+	private Connection mDatabaseConnection;
+	private PreparedStatement mInsertStatement;
+	private PreparedStatement mStringQueryStatement;
+	private PreparedStatement mIntegerQueryStatement;
+	private PreparedStatement mStringDeleteStatement;
+	private PreparedStatement mIntegerDeleteStatement;
+	private PreparedStatement mIntegerStringDeleteStatement;
+	private PreparedStatement mSizeStatement;
+	private String mName;
+	private int mMinStringSize;
+	private int mMaxStringSize;
+	private int mCounter = 0;
+	private int mCommitPeriod = 10000;
+	private final int mMaximumNuberOfResults = Integer.MAX_VALUE;
 
 	public class ValuedEntry
 	{
-		public int		mInteger;
-		public String	mString;
-		public double	mValue;
+		public int mInteger;
+		public String mString;
+		public double mValue;
 
-		public ValuedEntry(final int pInteger, final String pString, final double pValue)
+		public ValuedEntry(	final int pInteger,
+												final String pString,
+												final double pValue)
 		{
 			super();
 			mInteger = pInteger;
@@ -47,7 +49,12 @@ public class ValuedIntegerStringBidiMap
 		@Override
 		public String toString()
 		{
-			return "{value=" + mValue + ", integer=" + mInteger + ", string=" + mString + "}";
+			return "{value=" + mValue
+							+ ", integer="
+							+ mInteger
+							+ ", string="
+							+ mString
+							+ "}";
 		}
 	}
 
@@ -59,10 +66,13 @@ public class ValuedIntegerStringBidiMap
 
 	private static String generateRandomName()
 	{
-		return ValuedIntegerStringBidiMap.class.getSimpleName() + "(" + Math.random() + ")";
+		return ValuedIntegerStringBidiMap.class.getSimpleName() + "("
+						+ Math.random()
+						+ ")";
 	}
 
-	public ValuedIntegerStringBidiMap(final Connection pDatabaseConnection, final String pName)
+	public ValuedIntegerStringBidiMap(final Connection pDatabaseConnection,
+																		final String pName)
 	{
 		this(pDatabaseConnection, pName, 0, 250);
 	}
@@ -92,24 +102,24 @@ public class ValuedIntegerStringBidiMap
 		mCounter = 0;
 	}
 
-	private void createStatements(final Connection pDatabaseConnection, final String pTableName)
+	private void createStatements(final Connection pDatabaseConnection,
+																final String pTableName)
 	{
 		try
 		{
 			mInsertStatement = mDatabaseConnection.prepareStatement("INSERT INTO " + mName
-					+ " (fValue,fInteger,fString) VALUES(?,?,?)");
-			mStringQueryStatement = mDatabaseConnection
-					.prepareStatement("SELECT fInteger, fValue FROM " + mName + " WHERE fString=? AND fvalue>=?");
-			mIntegerQueryStatement = mDatabaseConnection
-					.prepareStatement("SELECT fString, fValue FROM " + mName + " WHERE fInteger=? AND fvalue>=?");
-			mStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ mName + " WHERE fString=?");
-			mIntegerDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ mName + " WHERE fInteger=?");
-			mIntegerStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM "
-					+ mName + " WHERE fInteger=? AND fString=?");
-			mSizeStatement = mDatabaseConnection
-					.prepareStatement("SELECT COUNT(*) AS Count FROM " + mName);
+																															+ " (fValue,fInteger,fString) VALUES(?,?,?)");
+			mStringQueryStatement = mDatabaseConnection.prepareStatement("SELECT fInteger, fValue FROM " + mName
+																																		+ " WHERE fString=? AND fvalue>=?");
+			mIntegerQueryStatement = mDatabaseConnection.prepareStatement("SELECT fString, fValue FROM " + mName
+																																		+ " WHERE fInteger=? AND fvalue>=?");
+			mStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM " + mName
+																																		+ " WHERE fString=?");
+			mIntegerDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM " + mName
+																																			+ " WHERE fInteger=?");
+			mIntegerStringDeleteStatement = mDatabaseConnection.prepareStatement("DELETE FROM " + mName
+																																						+ " WHERE fInteger=? AND fString=?");
+			mSizeStatement = mDatabaseConnection.prepareStatement("SELECT COUNT(*) AS Count FROM " + mName);
 		}
 		catch (final SQLException e)
 		{
@@ -125,9 +135,13 @@ public class ValuedIntegerStringBidiMap
 		try
 		{
 			final String lSql = "CREATE TABLE " + pTableName
-					+ " ( fId INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0,INCREMENT BY 1), "
-					+ " fValue DOUBLE, " + " fInteger INTEGER, " + " fString "
-					+ getStringType(pMinStringSize, MaxStringSize) + ", " + " PRIMARY KEY (fId))";
+													+ " ( fId INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0,INCREMENT BY 1), "
+													+ " fValue DOUBLE, "
+													+ " fInteger INTEGER, "
+													+ " fString "
+													+ getStringType(pMinStringSize, MaxStringSize)
+													+ ", "
+													+ " PRIMARY KEY (fId))";
 			// System.out.println(lSql);
 			pDatabaseConnection.createStatement().execute(lSql);
 			return true;
@@ -140,7 +154,8 @@ public class ValuedIntegerStringBidiMap
 		}
 	}
 
-	private boolean dropTable(final Connection pDatabaseConnection, final String pTableName)
+	private boolean dropTable(final Connection pDatabaseConnection,
+														final String pTableName)
 	{
 		try
 		{
@@ -154,16 +169,23 @@ public class ValuedIntegerStringBidiMap
 		}
 	}
 
-	private boolean createIndices(final Connection pDatabaseConnection, final String pTableName)
+	private boolean createIndices(final Connection pDatabaseConnection,
+																final String pTableName)
 	{
 		try
 		{
 			mDatabaseConnection.commit();
-			pDatabaseConnection.createStatement().execute(
-					"CREATE INDEX " + pTableName + "INDEXINTEGER ON " + pTableName + " (fInteger ASC)");
+			pDatabaseConnection	.createStatement()
+													.execute("CREATE INDEX " + pTableName
+																		+ "INDEXINTEGER ON "
+																		+ pTableName
+																		+ " (fInteger ASC)");
 			mDatabaseConnection.commit();
-			pDatabaseConnection.createStatement().execute(
-					"CREATE INDEX " + pTableName + "INDEXSTRING ON " + pTableName + " (fString ASC)");
+			pDatabaseConnection	.createStatement()
+													.execute("CREATE INDEX " + pTableName
+																		+ "INDEXSTRING ON "
+																		+ pTableName
+																		+ " (fString ASC)");
 			mDatabaseConnection.commit();
 			return true;
 		}
@@ -204,7 +226,8 @@ public class ValuedIntegerStringBidiMap
 		return commit(mDatabaseConnection);
 	}
 
-	private String getStringType(final int pMinStringSize, final int pMaxStringSize)
+	private String getStringType(	final int pMinStringSize,
+																final int pMaxStringSize)
 	{
 		if (pMinStringSize == pMaxStringSize)
 			return "CHAR(" + pMinStringSize + ")";
@@ -276,7 +299,8 @@ public class ValuedIntegerStringBidiMap
 		return getIntegers(pString, 0);
 	}
 
-	public List<ValuedEntry> getIntegers(final String pString, final double pMinValue)
+	public List<ValuedEntry> getIntegers(	final String pString,
+																				final double pMinValue)
 	{
 		final ArrayList<ValuedEntry> lValuedEntryList = new ArrayList<ValuedEntry>();
 
@@ -291,7 +315,9 @@ public class ValuedIntegerStringBidiMap
 				{
 					final int lInteger = lResultSet.getInt("fInteger");
 					final double lValue = lResultSet.getDouble("fValue");
-					final ValuedEntry lValuedEntry = new ValuedEntry(lInteger, pString, lValue);
+					final ValuedEntry lValuedEntry = new ValuedEntry(	lInteger,
+																														pString,
+																														lValue);
 					lValuedEntryList.add(lValuedEntry);
 					lCounter++;
 				}
@@ -325,7 +351,9 @@ public class ValuedIntegerStringBidiMap
 				{
 					final String lString = lResultSet.getString("fString");
 					final double lValue = lResultSet.getDouble("fValue");
-					final ValuedEntry lValuedEntry = new ValuedEntry(pInteger, lString, lValue);
+					final ValuedEntry lValuedEntry = new ValuedEntry(	pInteger,
+																														lString,
+																														lValue);
 					lValuedEntryList.add(lValuedEntry);
 					lCounter++;
 				}
@@ -344,7 +372,9 @@ public class ValuedIntegerStringBidiMap
 		return put(pInteger, pString, 0.0);
 	}
 
-	public boolean put(final Integer pInteger, final String pString, final double pValue)
+	public boolean put(	final Integer pInteger,
+											final String pString,
+											final double pValue)
 	{
 		try
 		{
@@ -417,7 +447,8 @@ public class ValuedIntegerStringBidiMap
 		}
 	}
 
-	public void putAllIntegers(final String pString, final Set<Integer> pIntegerSet)
+	public void putAllIntegers(	final String pString,
+															final Set<Integer> pIntegerSet)
 	{
 		for (final Integer lInteger : pIntegerSet)
 			put(lInteger, pString);
@@ -480,7 +511,12 @@ public class ValuedIntegerStringBidiMap
 	@Override
 	public String toString()
 	{
-		return "{" + mDatabaseConnection + ", " + mName + " action counter=" + mCounter + "}";
+		return "{" + mDatabaseConnection
+						+ ", "
+						+ mName
+						+ " action counter="
+						+ mCounter
+						+ "}";
 	}
 
 	@Override

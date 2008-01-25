@@ -24,60 +24,66 @@ import javax.vecmath.GVector;
 import javax.vecmath.MismatchedSizeException;
 
 /**
- * A representer function with a kernel K(x1, x2), a set of training
- * data points (d1, d2, &#133;, dn), and a vector (c1, c2, &#133;, cn)
- * of coefficients.
+ * A representer function with a kernel K(x1, x2), a set of training data points
+ * (d1, d2, &#133;, dn), and a vector (c1, c2, &#133;, cn) of coefficients.
  * 
- * <blockquote>
- * &fnof;(x) = &sum; c<sub>i</sub>K(d<sub>i</sub>, x)
+ * <blockquote> &fnof;(x) = &sum; c<sub>i</sub>K(d<sub>i</sub>, x)
  * </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */
-public final class Representer implements Function {
-    
-    private final Kernel kernel;
-    private final GVector[] points;
-    private final GVector coeffs;
-    /** for returning to avoid rep exposure. */
-    private final GVector copyCoeffs;
+public final class Representer implements Function
+{
 
-    /**
-     * Constructs a new representer with the specified kernel,
-     * data matrix, and coefficients. The data matrix is expected
-     * to contain one data point in each column.
-     * 
-     * @throws MismatchedSizeException
-     *   if number of data columns differs from number of coefficients.
-     */
-    public Representer(final Kernel kernel, final GMatrix data, final GVector coeffs) {
-        if (kernel == null) throw new NullPointerException("kernel");
-        if (data.getNumCol() != coeffs.getSize())
-					throw new MismatchedSizeException();
-        
-        this.kernel = kernel;
-        points = new GVector[data.getNumCol()];
-        this.coeffs = new GVector(coeffs);
-        copyCoeffs = new GVector(coeffs);
-        
-        for(int i = 0; i < data.getNumCol(); i++) {
-            points[i] = new GVector(data.getNumRow());
-            data.getColumn(i, points[i]);
-        }
-    }
-    
-    /**
-     * Returns a copy of the vector of coefficients.
-     */
-    public GVector coeffs() {
-        return copyCoeffs;
-    }
-    
-    public double eval(final GVector x) {
-        double sum = 0;
-        for(int i = 0; i < coeffs.getSize(); i++)
-					sum += coeffs.getElement(i) * kernel.eval(points[i], x);
-        return sum;
-    }
+	private final Kernel kernel;
+	private final GVector[] points;
+	private final GVector coeffs;
+	/** for returning to avoid rep exposure. */
+	private final GVector copyCoeffs;
+
+	/**
+	 * Constructs a new representer with the specified kernel, data matrix, and
+	 * coefficients. The data matrix is expected to contain one data point in each
+	 * column.
+	 * 
+	 * @throws MismatchedSizeException
+	 *           if number of data columns differs from number of coefficients.
+	 */
+	public Representer(	final Kernel kernel,
+											final GMatrix data,
+											final GVector coeffs)
+	{
+		if (kernel == null)
+			throw new NullPointerException("kernel");
+		if (data.getNumCol() != coeffs.getSize())
+			throw new MismatchedSizeException();
+
+		this.kernel = kernel;
+		points = new GVector[data.getNumCol()];
+		this.coeffs = new GVector(coeffs);
+		copyCoeffs = new GVector(coeffs);
+
+		for (int i = 0; i < data.getNumCol(); i++)
+		{
+			points[i] = new GVector(data.getNumRow());
+			data.getColumn(i, points[i]);
+		}
+	}
+
+	/**
+	 * Returns a copy of the vector of coefficients.
+	 */
+	public GVector coeffs()
+	{
+		return copyCoeffs;
+	}
+
+	public double eval(final GVector x)
+	{
+		double sum = 0;
+		for (int i = 0; i < coeffs.getSize(); i++)
+			sum += coeffs.getElement(i) * kernel.eval(points[i], x);
+		return sum;
+	}
 
 }

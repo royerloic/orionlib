@@ -29,8 +29,8 @@ public class Proteome implements Serializable
 
 	private ProteinSet mProteinSet = new ProteinSet();
 	private FastaSet mFastaSet;
-	
-		private Graph<Node, Edge<Node>> mInteractionGraph = new HashGraph<Node, Edge<Node>>();
+
+	private Graph<Node, Edge<Node>> mInteractionGraph = new HashGraph<Node, Edge<Node>>();
 
 	public Proteome(Genome pGenome, FastaSet pFastaSet) throws IOException
 	{
@@ -50,7 +50,7 @@ public class Proteome implements Serializable
 			}
 		}
 	}
-	
+
 	public Proteome(FastaSet pFastaSet) throws IOException
 	{
 		mFastaSet = pFastaSet;

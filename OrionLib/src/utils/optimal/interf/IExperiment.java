@@ -69,5 +69,6 @@ public interface IExperiment extends IObject
 	 * @param pOutput
 	 *          output vector.
 	 */
-	public abstract void set(final INumericalVector pInput, final INumericalVector pOutput);
+	public abstract void set(	final INumericalVector pInput,
+														final INumericalVector pOutput);
 }

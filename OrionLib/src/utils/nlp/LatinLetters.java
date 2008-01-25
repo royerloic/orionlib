@@ -6,7 +6,7 @@ import java.util.Map;
 public class LatinLetters
 {
 
-	public static Map<String, String>	sLatinRegexMap	= getLatinRegexMap();
+	public static Map<String, String> sLatinRegexMap = getLatinRegexMap();
 
 	private static Map<String, String> getLatinRegexMap()
 	{

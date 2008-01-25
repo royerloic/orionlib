@@ -36,8 +36,8 @@ public class ProteomeTest
 
 			lProteome.addInteractions(ProteomeTest.class.getResourceAsStream("./test.int.tab.txt"));
 
-			InterProScanReaderYeast.addDomainsTo(lProteome,
-																			ProteomeTest.class.getResourceAsStream("./test.interpro.tab.txt"));
+			InterProScanReaderYeast.addDomainsTo(	lProteome,
+																						ProteomeTest.class.getResourceAsStream("./test.interpro.tab.txt"));
 
 			System.out.println(lProteome);
 
@@ -53,16 +53,14 @@ public class ProteomeTest
 		assertNotNull(lProteome	.getProteinSet()
 														.getProteinById("YAL002W")
 														.getCorrespondingFastaSequence());
-		
+
 		DomainIndex lDomainIndex = new DomainIndex(lProteome);
 		lDomainIndex.index();
-		Set<Protein> lProteinSet =  lDomainIndex.getProteinByDomainInterproId("IPR001023");
-		
-		
-		
+		Set<Protein> lProteinSet = lDomainIndex.getProteinByDomainInterproId("IPR001023");
+
 		assertNotNull(lProteinSet);
 		System.out.println(lProteinSet);
-		
+
 	}
 
 	@Test
@@ -94,7 +92,5 @@ public class ProteomeTest
 
 		assertEquals(lLoadedProteome, lProteome);
 	}
-
-	
 
 }

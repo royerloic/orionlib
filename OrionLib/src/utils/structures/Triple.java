@@ -2,9 +2,9 @@ package utils.structures;
 
 public class Triple<A, B, C>
 {
-	public A	mA;
-	public B	mB;
-	public C	mC;
+	public A mA;
+	public B mB;
+	public C mC;
 
 	public Triple(final A pA, final B pB, final C pC)
 	{
@@ -31,6 +31,11 @@ public class Triple<A, B, C>
 	@Override
 	public String toString()
 	{
-		return "(" + this.mA.toString() + "," + this.mB.toString() + "," + this.mC.toString() + ")";
+		return "(" + this.mA.toString()
+						+ ","
+						+ this.mB.toString()
+						+ ","
+						+ this.mC.toString()
+						+ ")";
 	}
 }

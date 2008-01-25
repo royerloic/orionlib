@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class IterableToCollection
 {
-	public static final<T> ArrayList<T> iterableToList(final Iterable<T> pIterable)
+	public static final <T> ArrayList<T> iterableToList(final Iterable<T> pIterable)
 	{
 		final ArrayList<T> lArrayList = new ArrayList<T>();
 		for (final T lT : pIterable)
@@ -15,7 +15,7 @@ public class IterableToCollection
 		return lArrayList;
 	}
 
-	public static final<T> HashSet<T> iterableToSet(final Iterable<T> pIterable)
+	public static final <T> HashSet<T> iterableToSet(final Iterable<T> pIterable)
 	{
 		final HashSet<T> lHashSet = new HashSet<T>();
 		for (final T lT : pIterable)

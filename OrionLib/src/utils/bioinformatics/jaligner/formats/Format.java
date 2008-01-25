@@ -26,34 +26,41 @@ import utils.bioinformatics.jaligner.Alignment;
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */
 
-public abstract class Format {
-	
+public abstract class Format
+{
+
 	/**
 	 * Format id
 	 */
 	private String id = null;
-	
+
 	/**
 	 * Formats alignment
+	 * 
 	 * @param alignment
 	 * @return formatted alignment
 	 * @see Alignment
 	 */
 	public abstract String format(Alignment alignment);
-	
+
 	/**
 	 * Sets format id
-	 * @param id to set
+	 * 
+	 * @param id
+	 *          to set
 	 */
-	public void setId (String id) {
-		this.id =  id;
+	public void setId(String id)
+	{
+		this.id = id;
 	}
-	
+
 	/**
 	 * Returns format id
+	 * 
 	 * @return id
 	 */
-	public String getId ( ) {
+	public String getId()
+	{
 		return this.id == null ? this.getClass().getName() : this.id;
 	}
 }

@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class Attach<O, V>
 {
-	O	mO;
-	V	mV;
+	O mO;
+	V mV;
 
 	/**
 	 * @return
@@ -80,7 +80,8 @@ public class Attach<O, V>
 		return this.mO.toString() + "(" + this.mV.toString() + ")";
 	}
 
-	public static final <O, V> Set<Attach<O, V>> attachValueToAll(final Set<O> pOSet, final V pValue)
+	public static final <O, V> Set<Attach<O, V>> attachValueToAll(final Set<O> pOSet,
+																																final V pValue)
 	{
 		final Set<Attach<O, V>> lAttachedValueSet = new HashSet<Attach<O, V>>();
 		for (final O lO : pOSet)

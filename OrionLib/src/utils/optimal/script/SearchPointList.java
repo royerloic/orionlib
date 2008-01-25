@@ -24,9 +24,9 @@ public class SearchPointList
 		boolean conditionOnPointAfter(GeometryFile.Point pPoint);
 	}
 
-	private GeometryFile.PointList	mGeometryObject;
+	private GeometryFile.PointList mGeometryObject;
 
-	private boolean									mPositiveDirection	= true;
+	private boolean mPositiveDirection = true;
 
 	GeometryFile.PointList getPointList()
 	{
@@ -81,9 +81,8 @@ public class SearchPointList
 			// System.out.println("lPointCurrent= "+lPointCurrent);
 			// System.out.println("lPointAfter= "+lPointAfter);
 
-			lFound = lPointPattern.conditionOnPointBefore(lPointBefore)
-					&& lPointPattern.conditionOnPointCurrent(lPointCurrent)
-					&& lPointPattern.conditionOnPointAfter(lPointAfter);
+			lFound = lPointPattern.conditionOnPointBefore(lPointBefore) && lPointPattern.conditionOnPointCurrent(lPointCurrent)
+								&& lPointPattern.conditionOnPointAfter(lPointAfter);
 
 			// System.out.println("lFound= "+lFound);
 
@@ -103,7 +102,9 @@ public class SearchPointList
 		return lFoundIndex;
 	}
 
-	public static final boolean isEqualTol(final double pVal1, final double pVal2, final double pTol)
+	public static final boolean isEqualTol(	final double pVal1,
+																					final double pVal2,
+																					final double pTol)
 	{
 		if (Math.abs(pVal1 - pVal2) < pTol)
 			return true;
@@ -111,7 +112,9 @@ public class SearchPointList
 			return false;
 	}
 
-	public static final boolean isGreaterTol(final double pVal1, final double pVal2, final double pTol)
+	public static final boolean isGreaterTol(	final double pVal1,
+																						final double pVal2,
+																						final double pTol)
 	{
 		if (pVal1 > pVal2 + pTol)
 			return true;

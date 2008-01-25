@@ -20,9 +20,9 @@ import utils.structures.powergraph.PowerGraph;
 public class PowerGraphToConfidence<N>
 {
 
-	final PowerGraph<N>	mPowerGraph;
-	private int					mTotalNumberOfEdges;
-	private int					mMaximalPowerEdgeSize;
+	final PowerGraph<N> mPowerGraph;
+	private int mTotalNumberOfEdges;
+	private int mMaximalPowerEdgeSize;
 
 	public PowerGraphToConfidence(final PowerGraph<N> pPowerGraph)
 	{
@@ -53,7 +53,7 @@ public class PowerGraphToConfidence<N>
 
 		return lConfidence;
 	}
-	
+
 	public final double getConfidence(final N pFirstNode, final N pSecondNode)
 	{
 		final List<Set<N>> lSetList1 = this.mPowerGraph.getAllPowerNodeContaining(pFirstNode);
@@ -62,7 +62,7 @@ public class PowerGraphToConfidence<N>
 		final double lSize = 0;
 		for (final Set<N> lSet1 : lSetList1)
 		{
-			
+
 		}
 
 		final double lConfidence = lSize / this.mMaximalPowerEdgeSize;
@@ -70,7 +70,8 @@ public class PowerGraphToConfidence<N>
 		return lConfidence;
 	}
 
-	public final void dumpEdgeConfidenceToFile(final File pFile) throws FileNotFoundException, IOException
+	public final void dumpEdgeConfidenceToFile(final File pFile) throws FileNotFoundException,
+																															IOException
 	{
 		final Matrix<String> lMatrix = new ArrayMatrix<String>();
 
@@ -95,10 +96,13 @@ public class PowerGraphToConfidence<N>
 																				final int[] pIndices1,
 																				final File pFile2,
 																				final int[] pIndices2,
-																				final File pResultFile) throws FileNotFoundException, IOException
+																				final File pResultFile)	throws FileNotFoundException,
+																																IOException
 	{
-		final Matrix<String> lMatrix1 = LineReader.readMatrixFromFile(pFile1, "\\s+");
-		final Matrix<String> lMatrix2 = LineReader.readMatrixFromFile(pFile2, "\\s+");
+		final Matrix<String> lMatrix1 = LineReader.readMatrixFromFile(pFile1,
+																																	"\\s+");
+		final Matrix<String> lMatrix2 = LineReader.readMatrixFromFile(pFile2,
+																																	"\\s+");
 
 		final Map<Edge<String>, Double> lMap1 = new HashMap<Edge<String>, Double>();
 		final Map<Edge<String>, Double> lMap2 = new HashMap<Edge<String>, Double>();
@@ -148,7 +152,7 @@ public class PowerGraphToConfidence<N>
 				lList.add(lConfidence2.toString());
 				lResultMatrix.add(lList);
 			}
-			
+
 		}
 
 		LineReader.writeMatrixToFile(lResultMatrix, pResultFile);

@@ -25,7 +25,7 @@ public final class NeedMemory
 	 * Environment variable to check for recursive re-launching
 	 * (->'needMemory()').
 	 */
-	private final static String	launchToken	= "RELAUNCHEDFORHEAP";
+	private final static String launchToken = "RELAUNCHEDFORHEAP";
 
 	/**
 	 * Checks if enough memory is available to the VM for this application and
@@ -62,7 +62,8 @@ public final class NeedMemory
 		if ((available = toMegaBytes(Runtime.getRuntime().maxMemory())) < needed)
 		{
 			if (needed > 1500)
-				throw new Exception("IMPOSSIBLE TO MEET REQUEST FOR " + needed + " Mb MEMORY.");
+				throw new Exception("IMPOSSIBLE TO MEET REQUEST FOR " + needed
+														+ " Mb MEMORY.");
 			if (System.getProperty(launchToken) != null)
 				throw new Exception("FATAL RECURSION IN RE-LAUNCH");
 
@@ -145,8 +146,12 @@ public final class NeedMemory
 					s = commandVector[0];
 				else
 					s += " " + commandVector[i];
-			System.out.println("+++ Re-launch, heap=" + available + "Mb, requested=" + needed
-					+ "Mb, from directory " + directory.getAbsolutePath() + ", commandline=");
+			System.out.println("+++ Re-launch, heap=" + available
+													+ "Mb, requested="
+													+ needed
+													+ "Mb, from directory "
+													+ directory.getAbsolutePath()
+													+ ", commandline=");
 			System.out.println(s);
 
 			// Re-launch :

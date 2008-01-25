@@ -8,7 +8,9 @@ public class TextUtils
 		return pString.replaceAll("<[\\p{Alpha}]*[^>]*>", " ");
 	}
 
-	public static String getFirstSentence(final String pString, final int pMinimalSentenceSize, final int pMaxSentenceSize)
+	public static String getFirstSentence(final String pString,
+																				final int pMinimalSentenceSize,
+																				final int pMaxSentenceSize)
 	{
 		String lFirstSentence = pString;
 		final int lFirstPoint = pString.indexOf('.');
@@ -43,7 +45,8 @@ public class TextUtils
 	}
 
 	// lower quality extraction of sentences...
-	public static String getFirstSentences(final String pString, final int pNumberOfSentences)
+	public static String getFirstSentences(	final String pString,
+																					final int pNumberOfSentences)
 	{
 		String lFirstSentences = "";
 

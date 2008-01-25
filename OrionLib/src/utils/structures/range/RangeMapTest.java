@@ -6,18 +6,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import utils.structures.range.Range;
-import utils.structures.range.RangeMap;
-
 /**
  * Tests the range object.
  */
 public class RangeMapTest
 {
 
-	private Range							r1, r12, r2, r3, r123, r4, rall;
-	private RangeMap<String>	rangemap;
-	private RangeMap<Integer>	rangemapinteger;
+	private Range r1, r12, r2, r3, r123, r4, rall;
+	private RangeMap<String> rangemap;
+	private RangeMap<Integer> rangemapinteger;
 
 	/**
 	 * Setup
@@ -324,7 +321,7 @@ public class RangeMapTest
 		}
 
 	}
-	
+
 	@Test
 	public void testGetFirstGetLast()
 	{
@@ -337,84 +334,84 @@ public class RangeMapTest
 	}
 
 	/**
-	 * This test is about checking any leaks of the tests.
-	 * (Missing cases not covered in the tests)
-	 * It generates a random maping and stores it in two ways, using
-	 * an array and using the RangeMap. Any discrepancy is detected.
+	 * This test is about checking any leaks of the tests. (Missing cases not
+	 * covered in the tests) It generates a random maping and stores it in two
+	 * ways, using an array and using the RangeMap. Any discrepancy is detected.
 	 */
-	@Test	
+	@Test
 	public void testBruteForce()
 	{
 		Random lRandom = new Random(System.currentTimeMillis());
-		
+
 		final int lNumberOfCycles = 100000;
 		final int lDomain = 10000;
 		final int lMaxlength = 100;
-		
-		final Integer[] lArray= new Integer[lDomain+lMaxlength];
-		
 
-		for(int i=0; i<lNumberOfCycles; i++)
+		final Integer[] lArray = new Integer[lDomain + lMaxlength];
+
+		for (int i = 0; i < lNumberOfCycles; i++)
 		{
-			final Range lRange = Range.constructRangeWithStartLength(lRandom.nextInt(lDomain), lRandom.nextInt(lMaxlength));
+			final Range lRange = Range.constructRangeWithStartLength(	lRandom.nextInt(lDomain),
+																																lRandom.nextInt(lMaxlength));
 			final Integer lInteger = lRandom.nextInt();
 			rangemapinteger.put(lRange, lInteger);
-			for(int j=lRange.mRangeStart; j<lRange.mRangeEnd;j++)
-				{
-				 lArray[j]=lInteger;				
-				}
+			for (int j = lRange.mRangeStart; j < lRange.mRangeEnd; j++)
+			{
+				lArray[j] = lInteger;
+			}
 		}
 
-		for(int i=0; i<lDomain; i++)
+		for (int i = 0; i < lDomain; i++)
 		{
-			Assert.assertTrue(lArray[i]==rangemapinteger.get(i));
+			Assert.assertTrue(lArray[i] == rangemapinteger.get(i));
 		}
-		
-	}	
-	
+
+	}
+
 	@Test
 	public void testPutPerformance()
 	{
 		Random lRandom = new Random();
-		
+
 		final int lNumberOfCycles = 1000000;
 		final int lDomain = 1000;
 		final int lMaxlength = 1000;
-		
+
 		final long lStartTime = System.currentTimeMillis();
-		for(int i=0; i<lNumberOfCycles; i++)
+		for (int i = 0; i < lNumberOfCycles; i++)
 		{
-			final Range lRange = Range.constructRangeWithStartLength(lRandom.nextInt(lDomain), lRandom.nextInt(lMaxlength));
+			final Range lRange = Range.constructRangeWithStartLength(	lRandom.nextInt(lDomain),
+																																lRandom.nextInt(lMaxlength));
 			rangemap.put(lRange, Integer.toString(lRandom.nextInt()));
 		}
 		final long lEndTime = System.currentTimeMillis();
-		
-		final long lElapsedTime = lEndTime-lStartTime;
-		final double lPutsPerMilliseconds = ((double)lNumberOfCycles)/lElapsedTime;
-		//System.out.println("Puts per millisecond: "+lPutsPerMilliseconds);
-		Assert.assertTrue(lPutsPerMilliseconds>500);
+
+		final long lElapsedTime = lEndTime - lStartTime;
+		final double lPutsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
+		// System.out.println("Puts per millisecond: "+lPutsPerMilliseconds);
+		Assert.assertTrue(lPutsPerMilliseconds > 500);
 	}
-	
+
 	@Test
 	public void testGetPerformance()
 	{
 		Random lRandom = new Random();
 		testPutPerformance();
-		
+
 		final int lNumberOfCycles = 1000000;
 		final int lDomain = 1000;
-		
+
 		final long lStartTime = System.currentTimeMillis();
-		for(int i=0; i<lNumberOfCycles; i++)
+		for (int i = 0; i < lNumberOfCycles; i++)
 		{
 			rangemap.get(lRandom.nextInt(lDomain));
 		}
 		final long lEndTime = System.currentTimeMillis();
-		
-		final long lElapsedTime = lEndTime-lStartTime;
-		final double lGetsPerMilliseconds = ((double)lNumberOfCycles)/lElapsedTime;
-		//System.out.println("Gets per milliseconds: "+lGetsPerMilliseconds);
-		
-		Assert.assertTrue(lGetsPerMilliseconds>2500);
+
+		final long lElapsedTime = lEndTime - lStartTime;
+		final double lGetsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
+		// System.out.println("Gets per milliseconds: "+lGetsPerMilliseconds);
+
+		Assert.assertTrue(lGetsPerMilliseconds > 2500);
 	}
 }

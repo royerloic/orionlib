@@ -14,21 +14,21 @@ package utils.math;
  */
 public interface IVectorArray
 {
-  /**
-   * @return
-   */
-  public int getDimension();
+	/**
+	 * @return
+	 */
+	public int getDimension();
 
-  /**
-   * @param pIndex
-   * @param pValue
-   */
-  public void set(final int pIndex, final double pValue);
+	/**
+	 * @param pIndex
+	 * @param pValue
+	 */
+	public void set(final int pIndex, final double pValue);
 
-  /**
-   * @param pIndex
-   * @return
-   */
-  public double get(final int pIndex);
+	/**
+	 * @param pIndex
+	 * @return
+	 */
+	public double get(final int pIndex);
 
 }

@@ -24,20 +24,22 @@ import utils.utils.gui.IwuJFrame;
  * 
  * @author MSc. Ing. Loic Royer
  */
-public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IOptimalEngineView
+public class OptimalEngineJFrame extends IwuJFrame implements
+																									WindowListener,
+																									IOptimalEngineView
 {
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1016157805708654249L;
-	private static final int			cOPTIMAL_ENGINE_FRAME_HEIGHT	= 600;
-	private static final int			cOPTIMAL_ENGINE_FRAME_WIDTH		= 900;
+	private static final long serialVersionUID = 1016157805708654249L;
+	private static final int cOPTIMAL_ENGINE_FRAME_HEIGHT = 600;
+	private static final int cOPTIMAL_ENGINE_FRAME_WIDTH = 900;
 
-	private ErrorLogBox						mErrorLogBox;
+	private ErrorLogBox mErrorLogBox;
 
-	private OptimalEngineJPanel		mOptimalEngineJPanel;
+	private OptimalEngineJPanel mOptimalEngineJPanel;
 
-	private IOptimalEngineControl	mIOptimalEngineControl;
+	private IOptimalEngineControl mIOptimalEngineControl;
 
 	public OptimalEngineJFrame()
 	{
@@ -105,7 +107,8 @@ public class OptimalEngineJFrame extends IwuJFrame implements WindowListener, IO
 	/**
 	 * @see IOptimalEngineView#updateBestExperiment(Experiment, double)
 	 */
-	public void updateBestExperiment(final IExperiment pExperiment, final double pValue)
+	public void updateBestExperiment(	final IExperiment pExperiment,
+																		final double pValue)
 	{
 		mOptimalEngineJPanel.updateBestExperiment(pExperiment, pValue);
 	}

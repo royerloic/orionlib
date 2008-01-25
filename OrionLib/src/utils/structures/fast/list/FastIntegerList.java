@@ -161,7 +161,6 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 		size = 0;
 	}
 
-
 	public boolean addAll(Collection<? extends Integer> c)
 	{
 		Integer[] a = (Integer[]) c.toArray();

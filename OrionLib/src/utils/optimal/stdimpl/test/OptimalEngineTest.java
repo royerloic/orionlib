@@ -36,12 +36,12 @@ import bsh.Interpreter;
 public class OptimalEngineTest implements IOptimalEventListener
 {
 
-	private OptimalEngineJFrame				mOptimalEngineGui;
-	private IOptimalEngine						mOptimalEngine;
-	private IObjectiveFunction				mObjectiveFunction;
-	private IInterpolator							mInterpolator;
-	private DoeStrategyClassic				mDoeStrategy;
-	private IExperimentDatabaseStore	mCsvDatabaseStore;
+	private OptimalEngineJFrame mOptimalEngineGui;
+	private IOptimalEngine mOptimalEngine;
+	private IObjectiveFunction mObjectiveFunction;
+	private IInterpolator mInterpolator;
+	private DoeStrategyClassic mDoeStrategy;
+	private IExperimentDatabaseStore mCsvDatabaseStore;
 
 	public static void main(final String[] args)
 	{
@@ -114,7 +114,8 @@ public class OptimalEngineTest implements IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#experimentDone(utils.optimal.interf.IExperimentFunctionStub,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void experimentDone(final IExperimentFunctionStub pExperimentFunctionStub, final IExperiment pExperiment)
+	public void experimentDone(	final IExperimentFunctionStub pExperimentFunctionStub,
+															final IExperiment pExperiment)
 	{
 		mOptimalEngineGui.updateIterations(mOptimalEngine.getIterations());
 		mOptimalEngineGui.updateDesignerStatus("Designer Status");
@@ -129,10 +130,12 @@ public class OptimalEngineTest implements IOptimalEventListener
 	 * @see utils.optimal.interf.IOptimalEventListener#newBestExperiment(utils.optimal.interf.IExperimentDatabase,
 	 *      utils.optimal.interf.IExperiment)
 	 */
-	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase, final IExperiment pExperiment)
+	public void newBestExperiment(final IExperimentDatabase pExperimentDatabase,
+																final IExperiment pExperiment)
 	{
 		System.out.println(pExperiment);
-		mOptimalEngineGui.updateBestExperiment(pExperiment, mObjectiveFunction.evaluate(pExperiment.getOutput()));
+		mOptimalEngineGui.updateBestExperiment(	pExperiment,
+																						mObjectiveFunction.evaluate(pExperiment.getOutput()));
 
 	}
 

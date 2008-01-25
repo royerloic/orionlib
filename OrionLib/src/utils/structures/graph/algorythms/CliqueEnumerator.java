@@ -11,9 +11,9 @@ import utils.structures.graph.HashGraph;
 
 public class CliqueEnumerator<N>
 {
-	Graph<N, Edge<N>>				mGraphInterface;
+	Graph<N, Edge<N>> mGraphInterface;
 
-	Set<Graph<N, Edge<N>>>	mCliqueSet;
+	Set<Graph<N, Edge<N>>> mCliqueSet;
 
 	public CliqueEnumerator(final Graph<N, Edge<N>> pGraphInterface)
 	{
@@ -30,11 +30,15 @@ public class CliqueEnumerator<N>
 		final Set<N> lInitialPotentialSet = this.mGraphInterface.getNodeSet();
 		final Set<N> lInitialExcludedSet = new HashSet<N>(this.mGraphInterface.getNumberOfNodes());
 
-		BronKerboschRecursive(lInitialReachableSet, lInitialPotentialSet, lInitialExcludedSet);
+		BronKerboschRecursive(lInitialReachableSet,
+													lInitialPotentialSet,
+													lInitialExcludedSet);
 	}
 
 	@SuppressWarnings("unchecked")
-	private void BronKerboschRecursive(final Set<N> pReachable, final Set<N> pPotential, final Set<N> pExcluded)
+	private void BronKerboschRecursive(	final Set<N> pReachable,
+																			final Set<N> pPotential,
+																			final Set<N> pExcluded)
 	{
 		if (pPotential.isEmpty() && pExcluded.isEmpty())
 			this.mCliqueSet.add(this.mGraphInterface.extractStrictSubGraph(pReachable));

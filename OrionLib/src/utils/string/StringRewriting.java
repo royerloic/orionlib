@@ -22,19 +22,19 @@ import utils.io.FlatTextTableReader.FlatTextTableReaderHandler;
  */
 public class StringRewriting implements FlatTextTableReaderHandler
 {
-	private static final Logger		cLogger	= Logger.getLogger(StringRewriting.class);
+	private static final Logger cLogger = Logger.getLogger(StringRewriting.class);
 
-	private FlatTextTableReader		mFlatTextTableReader;
+	private FlatTextTableReader mFlatTextTableReader;
 
-	private List<Pattern>					mPatternList;
+	private List<Pattern> mPatternList;
 
-	private Map<Pattern, String>	mSubstitutionMap;
+	private Map<Pattern, String> mSubstitutionMap;
 
-	private List<String>					mCurrentRegexList;
+	private List<String> mCurrentRegexList;
 
-	private Pattern								mCurrentPattern;
+	private Pattern mCurrentPattern;
 
-	private String								mCurrentSubstitutionString;
+	private String mCurrentSubstitutionString;
 
 	/**
 	 * @param pString
@@ -48,8 +48,11 @@ public class StringRewriting implements FlatTextTableReaderHandler
 		try
 		{
 			lStringRewriting = new StringRewriting();
-			final String lPackagePrefix = StringRewriting.class.getPackage().getName();
-			final String lRessourceName = lPackagePrefix.replace('.', '/') + "/" + pString + ".rewriting.txt";
+			final String lPackagePrefix = StringRewriting.class	.getPackage()
+																													.getName();
+			final String lRessourceName = lPackagePrefix.replace('.', '/') + "/"
+																		+ pString
+																		+ ".rewriting.txt";
 			lInputStream = ClassLoader.getSystemResource(lRessourceName).openStream();
 			final InputStreamReader lInputStreamReader = new InputStreamReader(lInputStream);
 			final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
@@ -103,7 +106,10 @@ public class StringRewriting implements FlatTextTableReaderHandler
 	 *      int, int, java.lang.String)
 	 */
 	@SuppressWarnings("unused")
-	public boolean handleCell(final int pLineCounter, final int pColumnCounter, final int pSetCounter, String pCellString)
+	public boolean handleCell(final int pLineCounter,
+														final int pColumnCounter,
+														final int pSetCounter,
+														String pCellString)
 	{
 		pCellString = pCellString.trim();
 		try
@@ -111,21 +117,21 @@ public class StringRewriting implements FlatTextTableReaderHandler
 			pCellString = pCellString.substring(1, pCellString.length() - 1);
 			switch (pColumnCounter)
 			{
-				case (0):
-					if ((pCellString.charAt(0) != '#'))
-						mCurrentRegexList.add(pCellString);
-					break;
+			case (0):
+				if ((pCellString.charAt(0) != '#'))
+					mCurrentRegexList.add(pCellString);
+				break;
 
-				case (2):
-					for (final String lRegex : mCurrentRegexList)
-					{
-						mCurrentSubstitutionString = pCellString;
-						mCurrentPattern = Pattern.compile(lRegex);
-						mPatternList.add(mCurrentPattern);
-						mSubstitutionMap.put(mCurrentPattern, mCurrentSubstitutionString);
-					}
-					mCurrentRegexList.clear();
-					break;
+			case (2):
+				for (final String lRegex : mCurrentRegexList)
+				{
+					mCurrentSubstitutionString = pCellString;
+					mCurrentPattern = Pattern.compile(lRegex);
+					mPatternList.add(mCurrentPattern);
+					mSubstitutionMap.put(mCurrentPattern, mCurrentSubstitutionString);
+				}
+				mCurrentRegexList.clear();
+				break;
 			}
 		}
 		catch (final Throwable exception)

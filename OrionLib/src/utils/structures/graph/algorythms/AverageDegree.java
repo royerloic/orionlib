@@ -7,7 +7,7 @@ public class AverageDegree
 {
 	public static <N> double computeAverageDegree(final Graph<N, Edge<N>> pGraph)
 	{
-		final double lAverageDegree = ((double)(2 * pGraph.getNumberOfEdges())) / pGraph.getNumberOfNodes();
+		final double lAverageDegree = ((double) (2 * pGraph.getNumberOfEdges())) / pGraph.getNumberOfNodes();
 		return lAverageDegree;
 	}
 

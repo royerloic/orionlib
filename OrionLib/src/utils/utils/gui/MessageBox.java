@@ -34,11 +34,11 @@ public class MessageBox extends JDialog implements ActionListener
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -1959586325540923937L;
+	private static final long serialVersionUID = -1959586325540923937L;
 
-	private boolean	mResult					= false;
+	private boolean mResult = false;
 
-	private Button	mButtonOk, mButtonCancel;
+	private Button mButtonOk, mButtonCancel;
 
 	public boolean getResult()
 	{

@@ -17,7 +17,7 @@ import utils.ml.svm.SVMRegression;
  */
 public class SVMRegressionTest extends TestCase
 {
-	SVMRegression	mSVMRegression;
+	SVMRegression mSVMRegression;
 
 	/**
 	 * 

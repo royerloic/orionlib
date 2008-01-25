@@ -13,9 +13,7 @@ import utils.structures.graph.UndirectedEdge;
 public class GraphClustering<N>
 {
 
-	private final boolean	mCentralityWeigting;
-
-
+	private final boolean mCentralityWeigting;
 
 	final Double computeSetDistance(final Set<N> pSet1, final Set<N> pSet2)
 	{
@@ -36,7 +34,8 @@ public class GraphClustering<N>
 		return lSize;
 	}
 
-	final Double computeWeightedSetSimilarity(final Map<N, Double> pWeightedSet1, final Map<N, Double> pWeightedSet2)
+	final Double computeWeightedSetSimilarity(final Map<N, Double> pWeightedSet1,
+																						final Map<N, Double> pWeightedSet2)
 	{
 		final Double lSize1 = computeWeightedSize(pWeightedSet1);
 		final Double lSize2 = computeWeightedSize(pWeightedSet2);
@@ -55,8 +54,8 @@ public class GraphClustering<N>
 
 	public class Cluster
 	{
-		Set<N>					mNodeSet								= new HashSet<N>();
-		Map<N, Double>	mNodeToConnectivityMap	= new HashMap<N, Double>();
+		Set<N> mNodeSet = new HashSet<N>();
+		Map<N, Double> mNodeToConnectivityMap = new HashMap<N, Double>();
 
 		Set<N> getNodesInCluster()
 		{
@@ -73,10 +72,9 @@ public class GraphClustering<N>
 				// System.out.println(lConnectivity);
 				this.mNodeToConnectivityMap.put(lNode, lConnectivity);
 			}
-			/*for (N lNode : mNodeSet)
-			{
-				mNodeToConnectivityMap.remove(lNode);
-			}/**/
+			/*************************************************************************
+			 * for (N lNode : mNodeSet) { mNodeToConnectivityMap.remove(lNode); }/
+			 ************************************************************************/
 			// filter(mNodeToConnectivityMap, mThreshold);
 		}
 
@@ -97,7 +95,7 @@ public class GraphClustering<N>
 		Double similarityToCluster(final Cluster pCluster)
 		{
 			final Double lDistance = computeWeightedSetSimilarity(this.mNodeToConnectivityMap,
-					pCluster.mNodeToConnectivityMap);
+																														pCluster.mNodeToConnectivityMap);
 			// if (!Double.isInfinite(lDistance)) System.out.println(lDistance);
 			return lDistance;
 		}
@@ -141,9 +139,9 @@ public class GraphClustering<N>
 		this.mCentralityWeigting = pCentralityWeigting;
 	}
 
-	
-
-	public final Set<Set<N>> cluster(final Graph<N, Edge<N>> pGraph, final double pCutOff, final int pMaxIterations)
+	public final Set<Set<N>> cluster(	final Graph<N, Edge<N>> pGraph,
+																		final double pCutOff,
+																		final int pMaxIterations)
 	{
 		final Graph<Cluster, Edge<Cluster>> lClusterGraph = new HashGraph<Cluster, Edge<Cluster>>();
 		{
@@ -184,22 +182,25 @@ public class GraphClustering<N>
 		int lIterationCount = 0;
 		while (pClusterGraph.getNumberOfNodes() > 1)
 		{
-			
-			//System.out.print(".");
+
+			// System.out.print(".");
 			double lMaximalSimilarity = -1;
 
 			lMaximalSimilarityClusterSet.clear();
 
 			for (final Cluster lCluster1 : pClusterGraph.getNodeSet())
 			{
-				final Set<Cluster> lNeighboursSet = pClusterGraph.getNodeNeighbours(lCluster1, 2);
+				final Set<Cluster> lNeighboursSet = pClusterGraph.getNodeNeighbours(lCluster1,
+																																						2);
 
 				double lMaximalSimilarityForCluster = -1;
 				for (final Cluster lCluster2 : lNeighboursSet)
 				{
 					final Double lSimilarity = lCluster1.similarityToCluster(lCluster2);
-					//System.out.println("s( "+lCluster1+" , "+lCluster2+" ) \n = "+lSimilarity+"\n");
-					lMaximalSimilarityForCluster = Math.max(lMaximalSimilarityForCluster, lSimilarity);
+					// System.out.println("s( "+lCluster1+" , "+lCluster2+" ) \n =
+					// "+lSimilarity+"\n");
+					lMaximalSimilarityForCluster = Math.max(lMaximalSimilarityForCluster,
+																									lSimilarity);
 				}
 
 				if (lMaximalSimilarityForCluster > lMaximalSimilarity)
@@ -211,14 +212,16 @@ public class GraphClustering<N>
 				if (lMaximalSimilarityForCluster == lMaximalSimilarity)
 					lMaximalSimilarityClusterSet.add(lCluster1);
 			}
-			
+
 			System.out.println("lMaximalSimilarityClusterSet.size()=" + lMaximalSimilarityClusterSet.size());
 			System.out.println("lMaximalSimilarity=" + lMaximalSimilarity);
 
 			while (!lMaximalSimilarityClusterSet.isEmpty())
 			{
-				final Cluster lCluster1 = lMaximalSimilarityClusterSet.iterator().next();
-				final Set<Cluster> lNeighboursSet = pClusterGraph.getNodeNeighbours(lCluster1, 2);
+				final Cluster lCluster1 = lMaximalSimilarityClusterSet.iterator()
+																															.next();
+				final Set<Cluster> lNeighboursSet = pClusterGraph.getNodeNeighbours(lCluster1,
+																																						2);
 				final Set<Cluster> lClusterSet = new HashSet<Cluster>();
 				for (final Cluster lCluster2 : lNeighboursSet)
 				{
@@ -237,7 +240,8 @@ public class GraphClustering<N>
 				pClusterGraph.addNode(lNewCluster);
 
 				for (final Cluster lNeighbourCluster : lClusterNeighbours)
-					pClusterGraph.addEdge(new UndirectedEdge<Cluster>(lNewCluster, lNeighbourCluster));
+					pClusterGraph.addEdge(new UndirectedEdge<Cluster>(lNewCluster,
+																														lNeighbourCluster));
 
 				lMaximalSimilarityClusterSet.removeAll(lClusterSet);
 			}
@@ -246,7 +250,7 @@ public class GraphClustering<N>
 				lFinalClusterSet.add(lCluster.copy());
 			lIterationCount++;
 
-			if ((lMaximalSimilarity < pMinSimilarity) || (lIterationCount >= pMaxIterations) )
+			if ((lMaximalSimilarity < pMinSimilarity) || (lIterationCount >= pMaxIterations))
 				break;
 		}
 

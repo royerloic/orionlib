@@ -15,10 +15,10 @@ import java.util.Random;
 
 public class PubMedAccess
 {
-	public static final Integer	cMaxPubMedId	= 17000000;
-	public static final Random	cRandom				= new Random(System.currentTimeMillis());
-	static String								dbAccessUrl		= DatabaseConstants.dbAccessUrlMyserver + "yggDoc_Medline";
-	static String								dbTable				= "`medline_citation`";
+	public static final Integer cMaxPubMedId = 17000000;
+	public static final Random cRandom = new Random(System.currentTimeMillis());
+	static String dbAccessUrl = DatabaseConstants.dbAccessUrlMyserver + "yggDoc_Medline";
+	static String dbTable = "`medline_citation`";
 
 	static
 	{
@@ -33,13 +33,14 @@ public class PubMedAccess
 		}
 	}
 
-	static Connection						connection;
+	static Connection connection;
 	static
 	{
 		try
 		{
-			connection = DriverManager.getConnection(dbAccessUrl, DatabaseConstants.dbAccessUser,
-					DatabaseConstants.dbAccessPass);
+			connection = DriverManager.getConnection(	dbAccessUrl,
+																								DatabaseConstants.dbAccessUser,
+																								DatabaseConstants.dbAccessPass);
 		}
 		catch (final SQLException e)
 		{
@@ -48,13 +49,14 @@ public class PubMedAccess
 		}
 	}
 
-	static PreparedStatement		statement;
+	static PreparedStatement statement;
 	static
 	{
 		final String table = dbTable;
 		try
 		{
-			statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE pmid=?");
+			statement = connection.prepareStatement("SELECT * FROM " + table
+																							+ " WHERE pmid=?");
 		}
 		catch (final SQLException e)
 		{

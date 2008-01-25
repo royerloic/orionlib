@@ -16,11 +16,11 @@ import java.util.StringTokenizer;
 
 public class LocationDatabase
 {
-	Map<String, Location>				mLocationList;
+	Map<String, Location> mLocationList;
 
-	private static final String	cDELIMITERS	= "\t";
+	private static final String cDELIMITERS = "\t";
 
-	boolean											mDebug;
+	boolean mDebug;
 
 	public LocationDatabase()
 	{
@@ -50,14 +50,18 @@ public class LocationDatabase
 			try
 			{
 				final String lFirstLine = lBufferedReader.readLine();
-				final StringTokenizer lFirstLineTokenizer = new StringTokenizer(lFirstLine, cDELIMITERS, false);
+				final StringTokenizer lFirstLineTokenizer = new StringTokenizer(lFirstLine,
+																																				cDELIMITERS,
+																																				false);
 				final String lType = lFirstLineTokenizer.nextToken();
 
 				String lLineString;
 				while ((lLineString = lBufferedReader.readLine()) != null)
 					if (!lLineString.matches("#.*"))
 					{
-						final StringTokenizer lStringTokenizer = new StringTokenizer(lLineString, cDELIMITERS, false);
+						final StringTokenizer lStringTokenizer = new StringTokenizer(	lLineString,
+																																					cDELIMITERS,
+																																					false);
 						String lName = lStringTokenizer.nextToken();
 						lName = lName.trim();
 						lName = lName.replace('_', ' ');
@@ -69,7 +73,11 @@ public class LocationDatabase
 						final double lLatitude = (Double.valueOf(lLatitudeString)).doubleValue();
 						final double lLongitude = (Double.valueOf(lLongitudeString)).doubleValue();
 
-						final Location lLocation = new Location(lType, lName, lLatitude, lLongitude, lCountry);
+						final Location lLocation = new Location(lType,
+																										lName,
+																										lLatitude,
+																										lLongitude,
+																										lCountry);
 						if (isDebug())
 							lLocation.setSourceString(lLineString);
 
@@ -164,7 +172,8 @@ public class LocationDatabase
 		return lLocationFound;
 	}
 
-	public Location findLocationByCoordinates(final double pLong, final double pLat)
+	public Location findLocationByCoordinates(final double pLong,
+																						final double pLat)
 	{
 		Location lLocationFound = null;
 		try
@@ -181,7 +190,9 @@ public class LocationDatabase
 				final double lDifferenceLong = lLong - pLong;
 				final double lDifferenceLat = lLat - pLat;
 
-				final double lDistance = Math.sqrt(lDifferenceLong * lDifferenceLong + lDifferenceLat * lDifferenceLat);
+				final double lDistance = Math.sqrt(lDifferenceLong * lDifferenceLong
+																						+ lDifferenceLat
+																						* lDifferenceLat);
 
 				if (lDistance < lMinDistance)
 				{

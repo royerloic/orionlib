@@ -9,13 +9,13 @@ public class ArrayMatrix<O> extends ArrayList<List<O>> implements Matrix<O>
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= -2464738472120882612L;
+	private static final long serialVersionUID = -2464738472120882612L;
 
 	public ArrayMatrix()
 	{
 		super();
 	}
-	
+
 	public ArrayMatrix(final Matrix<O> pMatrix)
 	{
 		super();

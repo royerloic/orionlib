@@ -24,26 +24,27 @@ import utils.sound.OrionSoundOut;
 public class Oscilloscope
 {
 
-	OrionSoundIn					mSoundRecorder;
+	OrionSoundIn mSoundRecorder;
 
-	OrionSoundOut					mSoundPlayer;
+	OrionSoundOut mSoundPlayer;
 
-	public int						mWidth;
+	public int mWidth;
 
-	public int						mHeight;
+	public int mHeight;
 
-	private int[]					mPixel;
+	private int[] mPixel;
 
-	private byte[]				mSoundBuffer;
+	private byte[] mSoundBuffer;
 
-	private OrionGraphics	mOrionGraphics;
+	private OrionGraphics mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
 	 */
 	public Oscilloscope()
 	{
-		mOrionGraphics = new OrionGraphics("Oscilloscope", OrionGraphics.cLAST_DEVICE);
+		mOrionGraphics = new OrionGraphics(	"Oscilloscope",
+																				OrionGraphics.cLAST_DEVICE);
 	}
 
 	/**
@@ -99,7 +100,8 @@ public class Oscilloscope
 				int lIndex = 2 * (i + lSignalLock);
 				if (lIndex > 2 * mWidth - 2)
 					lIndex = 2 * mWidth - 2;
-				final int lSignal = mSoundBuffer[lIndex] + 256 * mSoundBuffer[lIndex + 1];
+				final int lSignal = mSoundBuffer[lIndex] + 256
+														* mSoundBuffer[lIndex + 1];
 				int lValue = (mHeight / 2 + lSignal / 128);
 				if (lValue < 0)
 					lValue = 0;

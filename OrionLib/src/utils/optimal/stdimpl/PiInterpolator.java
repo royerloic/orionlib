@@ -21,17 +21,17 @@ import bsh.Interpreter;
  */
 public class PiInterpolator implements IInterpolator, Cloneable
 {
-	private IObjectiveFunction	mObjectiveFunction;
+	private IObjectiveFunction mObjectiveFunction;
 
-	private IExperimentDatabase	mExperimentDatabase;
+	private IExperimentDatabase mExperimentDatabase;
 
-	private int									mInputDimension;
+	private int mInputDimension;
 
-	private int									mOutputDimension;
+	private int mOutputDimension;
 
-	private List								mInterpolatorList;
+	private List mInterpolatorList;
 
-	private Class								mSubInterpolator;
+	private Class mSubInterpolator;
 
 	/**
 	 * 
@@ -73,8 +73,12 @@ public class PiInterpolator implements IInterpolator, Cloneable
 			if (mInterpolatorList == null)
 			{
 				mInterpolatorList = new ArrayList();
-				mInputDimension = mExperimentDatabase.getExperiment(0).getInput().getDimension();/**/
-				mOutputDimension = mExperimentDatabase.getExperiment(0).getOutput().getDimension();/**/
+				mInputDimension = mExperimentDatabase	.getExperiment(0)
+																							.getInput()
+																							.getDimension();/**/
+				mOutputDimension = mExperimentDatabase.getExperiment(0)
+																							.getOutput()
+																							.getDimension();/**/
 
 				for (int i = 0; i < mOutputDimension; i++)
 					try
@@ -86,7 +90,7 @@ public class PiInterpolator implements IInterpolator, Cloneable
 						final int lIndex = i;
 						final IObjectiveFunction lObjectiveFunction = new IObjectiveFunction()
 						{
-							private final Integer	mIndex	= new Integer(lIndex);
+							private final Integer mIndex = new Integer(lIndex);
 
 							public double evaluate(INumericalVector pVector)
 							{

@@ -23,8 +23,9 @@ import utils.structures.Matrix;
 public class LineReader
 {
 
-	public static <O> void writeMatrixToFile(final List<List<O>> pVectorList, final File pFile)
-			throws FileNotFoundException, IOException
+	public static <O> void writeMatrixToFile(	final List<List<O>> pVectorList,
+																						final File pFile)	throws FileNotFoundException,
+																															IOException
 	{
 		writeMatrixToFile(pVectorList, pFile, "\t");
 	}
@@ -32,7 +33,7 @@ public class LineReader
 	public static <O> void writeMatrixToFile(	final List<List<O>> pVectorList,
 																						final File pFile,
 																						final String lSeparator) throws FileNotFoundException,
-			IOException
+																																		IOException
 	{
 		writeMatrixToStream(pVectorList, new FileOutputStream(pFile), lSeparator);
 	}
@@ -40,7 +41,7 @@ public class LineReader
 	public static <O> void writeMatrixToStream(	final List<List<O>> pVectorList,
 																							final OutputStream pOutputStream,
 																							final String pSeparator) throws FileNotFoundException,
-			IOException
+																																			IOException
 	{
 		{
 			if (pOutputStream == null)
@@ -79,7 +80,8 @@ public class LineReader
 		// use buffering
 		// FileWriter always assumes default encoding is OK!
 		final int lBufferSize = 10000000;
-		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream), lBufferSize);
+		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream),
+																							lBufferSize);
 		return lWriter;
 	}
 
@@ -109,19 +111,22 @@ public class LineReader
 		}
 	}
 
-	public static Matrix<String> readMatrixFromFile(final File pFile) throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromFile(final File pFile)	throws FileNotFoundException,
+																																		IOException
 	{
 		return readMatrixFromFile(pFile, false, "\\t");
 	}
 
-	public static Matrix<String> readMatrixFromFile(final File pFile, final boolean pFileHasHeader)
-			throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromFile(final File pFile,
+																									final boolean pFileHasHeader)	throws FileNotFoundException,
+																																								IOException
 	{
 		return readMatrixFromFile(pFile, pFileHasHeader, "\\t");
 	}
 
-	public static Matrix<String> readMatrixFromFile(final File pFile, final String pSeparator)
-			throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromFile(final File pFile,
+																									final String pSeparator) throws FileNotFoundException,
+																																					IOException
 	{
 		return readMatrixFromStream(new FileInputStream(pFile), false, pSeparator);
 	}
@@ -129,34 +134,39 @@ public class LineReader
 	public static Matrix<String> readMatrixFromFile(final File pFile,
 																									final boolean pFileHasHeader,
 																									final String pSeparator) throws FileNotFoundException,
-			IOException
+																																					IOException
 	{
-		return readMatrixFromStream(new FileInputStream(pFile), pFileHasHeader, pSeparator);
+		return readMatrixFromStream(new FileInputStream(pFile),
+																pFileHasHeader,
+																pSeparator);
 	}
 
 	public static Matrix<String> readMatrixFromZipFile(	final File pFile,
 																											final boolean pFileHasHeader,
 																											final String pSeparator) throws FileNotFoundException,
-			IOException
+																																							IOException
 	{
-		return readMatrixFromStream(new FileInputStream(pFile), pFileHasHeader, pSeparator);
+		return readMatrixFromStream(new FileInputStream(pFile),
+																pFileHasHeader,
+																pSeparator);
 	}
 
-	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream)
-			throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream)	throws FileNotFoundException,
+																																										IOException
 	{
 		return readMatrixFromStream(pInputStream, "\\t");
 	}
 
-	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream, final String pSeparator)
-			throws FileNotFoundException, IOException
+	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream,
+																										final String pSeparator) throws FileNotFoundException,
+																																						IOException
 	{
 		return readMatrixFromStream(pInputStream, false, pSeparator);
 	}
 
 	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream,
-																										final boolean pFileHasHeader)
-			throws FileNotFoundException, IOException
+																										final boolean pFileHasHeader)	throws FileNotFoundException,
+																																									IOException
 	{
 		return readMatrixFromStream(pInputStream, pFileHasHeader, "\\t");
 	}
@@ -164,7 +174,7 @@ public class LineReader
 	public static Matrix<String> readMatrixFromStream(final InputStream pInputStream,
 																										final boolean pFileHasHeader,
 																										final String pSeparator) throws FileNotFoundException,
-			IOException
+																																						IOException
 	{
 		final Matrix<String> lMatrix = new ArrayMatrix<String>();
 		BufferedReader lBufferedReader = null;
@@ -174,7 +184,8 @@ public class LineReader
 			// block read in about 100 steps.
 			int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 			lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
-			lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
+			lBufferedReader = new BufferedReader(	new InputStreamReader(pInputStream),
+																						lBufferSize);
 			final Pattern lColumnSplitPattern = Pattern.compile(pSeparator);
 
 			String lLineString;
@@ -185,7 +196,8 @@ public class LineReader
 
 			while ((lLineString = lBufferedReader.readLine()) != null)
 			{
-				final String[] lColumnsStringArray = lColumnSplitPattern.split(lLineString, -1);
+				final String[] lColumnsStringArray = lColumnSplitPattern.split(	lLineString,
+																																				-1);
 				final List<String> lColumnsStringList = Arrays.asList(lColumnsStringArray);
 				lMatrix.add(lColumnsStringList);
 			}
@@ -216,7 +228,8 @@ public class LineReader
 	public static final BufferedReader getBufferedReaderFromStream(final InputStream pInputStream)
 	{
 		final int lBufferSize = 10000000;
-		final BufferedReader lReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
+		final BufferedReader lReader = new BufferedReader(new InputStreamReader(pInputStream),
+																											lBufferSize);
 		return lReader;
 	}
 
@@ -238,36 +251,40 @@ public class LineReader
 		return null;
 	}
 
-	public static InputStream getInputStreamFromRessource(final Class pClass, final String pRessourceName)
+	public static InputStream getInputStreamFromRessource(final Class pClass,
+																												final String pRessourceName)
 	{
 		final InputStream lInputStream = pClass.getResourceAsStream(pRessourceName);
 		return lInputStream;
 	}
-	
+
 	public static final LineIterator getLines(String pString) throws IOException
 	{
 		return getLines(Object.class.getResourceAsStream(pString));
 	}
 
-	public static final LineIterator getLines(final InputStream pInputStream, int pSkipLines) throws IOException
+	public static final LineIterator getLines(final InputStream pInputStream,
+																						int pSkipLines) throws IOException
 	{
-		return new LineIterator(pInputStream,pSkipLines);
-	}
-	
-	public static final LineIterator getLines(final InputStream pInputStream) throws IOException
-	{
-		return new LineIterator(pInputStream,0);
-	}
-	
-	public static final LineIterator getLines(final File pFile) throws IOException
-	{
-		return new LineIterator(new FileInputStream(pFile),0);
+		return new LineIterator(pInputStream, pSkipLines);
 	}
 
-	public final static class LineIterator implements Iterable<String>, Iterator<String>
+	public static final LineIterator getLines(final InputStream pInputStream) throws IOException
 	{
-		private BufferedReader	mBufferedReader	= null;
-		private String					mLineString			= null;
+		return new LineIterator(pInputStream, 0);
+	}
+
+	public static final LineIterator getLines(final File pFile) throws IOException
+	{
+		return new LineIterator(new FileInputStream(pFile), 0);
+	}
+
+	public final static class LineIterator implements
+																				Iterable<String>,
+																				Iterator<String>
+	{
+		private BufferedReader mBufferedReader = null;
+		private String mLineString = null;
 
 		public LineIterator(final InputStream pInputStream, final int pSkipLines) throws IOException
 		{
@@ -275,11 +292,12 @@ public class LineReader
 			// block read in about 10 steps.
 			int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 			lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
-			mBufferedReader = new BufferedReader(new InputStreamReader(pInputStream), lBufferSize);
-			for(int i=0; i<pSkipLines; i++)
+			mBufferedReader = new BufferedReader(	new InputStreamReader(pInputStream),
+																						lBufferSize);
+			for (int i = 0; i < pSkipLines; i++)
 			{
 				final String lString = mBufferedReader.readLine();
-				System.out.println("##skipped: "+lString);
+				System.out.println("##skipped: " + lString);
 			}
 		}
 
@@ -313,7 +331,7 @@ public class LineReader
 				{
 					throw new RuntimeException(e);
 				}
-				
+
 			}
 		}
 
@@ -331,9 +349,5 @@ public class LineReader
 		}
 
 	}
-
-
-
-
 
 }
