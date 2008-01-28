@@ -14,9 +14,10 @@
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.set"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.random"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.list"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph.generators"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph.test"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.regex"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast.graph.test"/>
     </selectedElements>
 </jardesc>

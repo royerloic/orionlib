@@ -5,6 +5,7 @@ import java.util.Random;
 import utils.random.DistributionSource;
 import utils.random.RandomUtils;
 import utils.structures.fast.graph.FastIntegerGraph;
+import utils.structures.fast.set.FastIntegerSet;
 
 public class GraphGenerator
 {
@@ -47,7 +48,7 @@ public class GraphGenerator
 
 			lFastIntegerGraph.addNode();
 
-			int m = (int) ((pTargetDensity * (pNumberOfNodes - 1)));
+			int m = (int) ((pTargetDensity * (pNumberOfNodes - 1))*(3d/4d));
 
 			while (lFastIntegerGraph.getNumberOfNodes() < pNumberOfNodes)
 				addNodePreferentialAttachement(pRandom, lFastIntegerGraph, m);
@@ -64,7 +65,7 @@ public class GraphGenerator
 	{
 		final int newnode = pGraph.addNode();
 
-		final int[] nodelist = pGraph.getNodeSet();
+		int[] nodelist = pGraph.getNodeSet();
 
 		double lTotal = 0;
 		for (final int node : nodelist)
@@ -93,15 +94,23 @@ public class GraphGenerator
 			}
 
 			long lNumberOfEdges = RandomUtils.doubleToInteger(pRandom, pNewEdges);
-			lNumberOfEdges = Math.min(	lNumberOfEdges,
-																				pGraph.getNumberOfNodes());
+			lNumberOfEdges = Math.min(lNumberOfEdges, pGraph.getNumberOfNodes());
 			for (int i = 0; i < lNumberOfEdges; i++)
 			{
-				final int node = lDistributionSource.getObject(pRandom);
-				pGraph.addEdge(newnode, node);
+				int node = -1;
+				do
+				{
+					node = lDistributionSource.getObject(pRandom);
+				}
+				while (nodelist.length > 0 && !FastIntegerSet.contains(nodelist, node));
+
+				if (node != -1)
+				{
+					pGraph.addEdge(newnode, node);
+					nodelist = FastIntegerSet.del(nodelist, node);
+				}
 			}
 		}
 
 	}
-
 }
