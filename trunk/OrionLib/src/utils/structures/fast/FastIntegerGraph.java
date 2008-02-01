@@ -1,9 +1,8 @@
-package utils.structures.fast.graph;
+package utils.structures.fast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,9 +13,9 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.regex.Pattern;
-
-import utils.structures.fast.set.FastIntegerSet;
 
 public class FastIntegerGraph implements Serializable
 {
@@ -180,16 +179,6 @@ public class FastIntegerGraph implements Serializable
 		return mEdgeCount;
 	}
 
-	public double getAverageDegree()
-	{
-		return ((double) 2 * getNumberOfEdges()) / (getNumberOfNodes());
-	}
-
-	public double getEdgeDensity()
-	{
-		return ((double) getNumberOfEdges()) / ((double) (getNumberOfNodes() * (getNumberOfNodes() - 1) / 2));
-	}
-
 	public int[] getNodeNeighbours(final int pNode)
 	{
 		return mSparseMatrix.get(pNode);
@@ -338,11 +327,6 @@ public class FastIntegerGraph implements Serializable
 
 	}
 
-	public void readEdgeFile(File pFile) throws IOException
-	{
-		readEdgeFile(new FileInputStream(pFile));
-	}
-
 	public void readEdgeFile(InputStream pInputStream) throws IOException
 	{
 		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
@@ -364,7 +348,7 @@ public class FastIntegerGraph implements Serializable
 				{
 					nodeindex1 = Integer.parseInt(lArray[1]);
 					nodeindex2 = Integer.parseInt(lArray[2]);
-					if (lArray.length >= 4 && !lArray[3].isEmpty())
+					if (lArray.length >= 4)
 					{
 						confindex = Integer.parseInt(lArray[3]);
 					}

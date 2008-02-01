@@ -193,10 +193,11 @@ public class ParetoRanking<O>
 	{
 		assert (v1.length == v2.length);
 
-		boolean equal = true;
 		for (int i = 0; i < v1.length; i++)
-			equal &= v1[i] == v2[i];
-		return equal;
+			if(v1[i] != v2[i])
+				return false;
+			
+		return true;
 	}
 
 }
