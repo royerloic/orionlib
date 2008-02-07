@@ -20,6 +20,13 @@ public class PowerGraphSpectrumTests
 	{
 		try
 		{
+			
+			{
+				InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("hprd.bbl");
+				System.out.println("hprd.bbl");
+				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
+			}
+			
 			{
 				InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.bbl");
 				InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.rewired.bbl");
