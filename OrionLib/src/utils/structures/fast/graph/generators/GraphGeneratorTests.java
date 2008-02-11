@@ -73,9 +73,9 @@ public class GraphGeneratorTests
 	@Test
 	public void testBarabasiAlbertDensityFidelity()
 	{
-		for (double i = 0.; i <= 1; i+=0.05)
+		for (double i = 0.; i <= 1; i += 0.05)
 		{
-			double lTargetDensity =  i;//mRandom.nextDouble();
+			double lTargetDensity = i;// mRandom.nextDouble();
 			FastIntegerGraph graph = GraphGenerator.generateBarabasiAlbertGraph(mRandom,
 																																					100,
 																																					lTargetDensity);
@@ -84,7 +84,7 @@ public class GraphGeneratorTests
 			System.out.println("lTargetDensity=" + lTargetDensity);
 			System.out.println("lEffectiveDensity=" + lEffectiveDensity);
 			System.out.println(lError);
-			//assertTrue(lError<0.95);
+			// assertTrue(lError<0.95);
 		}
 	}
 

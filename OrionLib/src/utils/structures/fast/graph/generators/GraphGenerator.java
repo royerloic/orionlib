@@ -48,7 +48,7 @@ public class GraphGenerator
 
 			lFastIntegerGraph.addNode();
 
-			int m = (int) ((pTargetDensity * (pNumberOfNodes - 1))*(3d/4d));
+			int m = (int) ((pTargetDensity * (pNumberOfNodes - 1)) * (3d / 4d));
 
 			while (lFastIntegerGraph.getNumberOfNodes() < pNumberOfNodes)
 				addNodePreferentialAttachement(pRandom, lFastIntegerGraph, m);

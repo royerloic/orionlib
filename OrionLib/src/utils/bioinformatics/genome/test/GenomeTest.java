@@ -71,30 +71,22 @@ public class GenomeTest
 		assertEquals(lLoadedGenome, lGenome);
 	}
 
-	/*@Test
-	public void testYeastGenome() throws IOException
-	{
-		Genome lGenome = null;
-		try
-		{
-			final File lGenomeFile = new File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
-			lGenome = new Genome(lGenomeFile);
-
-			final File lGeneSequencesFile = new File("G:/Projects/PowerGraphs/Data/Yeast/orf_coding_all.fasta");
-			lGenome.addSequencesFromFile(lGeneSequencesFile);
-			// System.out.println(lGenome);
-		}
-		catch (Throwable e)
-		{
-			e.printStackTrace();
-			fail("Exception: " + e);
-		}
-
-		assertTrue(lGenome.getGeneSet().getNumberOfGenes() == 6609);
-		assertNotNull(lGenome	.getGeneSet()
-													.getGeneById("YAL065C")
-													.getCorrespondingFastaSequence());
-
-	}/***/
+	/*****************************************************************************
+	 * @Test public void testYeastGenome() throws IOException { Genome lGenome =
+	 * null; try { final File lGenomeFile = new
+	 * File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
+	 * lGenome = new Genome(lGenomeFile);
+	 * 
+	 * final File lGeneSequencesFile = new
+	 * File("G:/Projects/PowerGraphs/Data/Yeast/orf_coding_all.fasta");
+	 * lGenome.addSequencesFromFile(lGeneSequencesFile); //
+	 * System.out.println(lGenome); } catch (Throwable e) { e.printStackTrace();
+	 * fail("Exception: " + e); }
+	 * 
+	 * assertTrue(lGenome.getGeneSet().getNumberOfGenes() == 6609);
+	 * assertNotNull(lGenome .getGeneSet() .getGeneById("YAL065C")
+	 * .getCorrespondingFastaSequence());
+	 *  }/
+	 ****************************************************************************/
 
 }

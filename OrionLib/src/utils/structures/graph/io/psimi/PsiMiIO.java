@@ -97,7 +97,7 @@ public class PsiMiIO
 		@Override
 		@SuppressWarnings("unused")
 		public void startElement(final String namespaceURI, final String lName, // local
-																																						// name
+															// name
 															final String qName, // qualified name
 															final Attributes attrs) throws SAXException
 		{
@@ -152,7 +152,7 @@ public class PsiMiIO
 		@Override
 		@SuppressWarnings("unused")
 		public void endElement(final String namespaceURI, final String sName, // simple
-																																					// name
+														// name
 														final String qName // qualified name
 		) throws SAXException
 		{
@@ -211,8 +211,9 @@ public class PsiMiIO
 								final boolean lIsInteraction = /*******************************
 																								 * (lRole1.equals("neutral") &&
 																								 * lRole2.equals("neutral")) ||/
-																								 ******************************/(lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
-																|| lRole2.equals("unspecified");
+																								 ******************************/
+								(lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
+										|| lRole2.equals("unspecified");
 
 								if (!(lRole1.equals("bait") || lRole1.equals("prey")
 											|| lRole1.equals("neutral") || lRole1.equals("unspecified")))

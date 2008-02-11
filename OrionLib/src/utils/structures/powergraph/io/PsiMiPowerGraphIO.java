@@ -115,7 +115,7 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 	@Override
 	public void startElement(final String namespaceURI, final String lName, // local
-																																					// name
+														// name
 														final String qName, // qualified name
 														final Attributes attrs) throws SAXException
 	{
@@ -139,7 +139,7 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 
 	@Override
 	public void endElement(final String namespaceURI, final String sName, // simple
-																																				// name
+													// name
 													final String qName // qualified name
 	) throws SAXException
 	{

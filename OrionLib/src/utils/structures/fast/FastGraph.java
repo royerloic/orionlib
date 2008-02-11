@@ -169,7 +169,7 @@ public class FastGraph<N> implements Serializable
 
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//") )
+			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("EDGEFORMAT\t"))
