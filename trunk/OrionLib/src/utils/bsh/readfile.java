@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.structures.Matrix;
 import bsh.CallStack;
 import bsh.Interpreter;
@@ -18,7 +19,7 @@ public class readfile
 																															IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(lFile);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(lFile);
 		return lMatrix;
 	}
 
@@ -29,7 +30,7 @@ public class readfile
 																																IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	lFile,
 																																	pHasHeader);
 		return lMatrix;
 	}
@@ -42,7 +43,7 @@ public class readfile
 																																IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	lFile,
 																																	pHasHeader);
 		pMatrix.addAll(lMatrix);
 		return lMatrix;
@@ -55,7 +56,7 @@ public class readfile
 																															IOException
 	{
 		final File lFile = new File(pFileName);
-		final Matrix<String> lMatrix = LineReader.readMatrixFromFile(	lFile,
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	lFile,
 																																	false,
 																																	pSeparator);
 		return lMatrix;

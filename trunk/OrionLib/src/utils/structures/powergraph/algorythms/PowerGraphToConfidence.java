@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.structures.ArrayMatrix;
 import utils.structures.Matrix;
 import utils.structures.graph.Edge;
@@ -89,7 +90,7 @@ public class PowerGraphToConfidence<N>
 						lMatrix.add(lList);
 					}
 
-		LineReader.writeMatrixToFile(lMatrix, pFile);
+		MatrixFile.writeMatrixToFile(lMatrix, pFile);
 	}
 
 	public final void joinConfidenceFiles(final File pFile1,
@@ -99,9 +100,9 @@ public class PowerGraphToConfidence<N>
 																				final File pResultFile)	throws FileNotFoundException,
 																																IOException
 	{
-		final Matrix<String> lMatrix1 = LineReader.readMatrixFromFile(pFile1,
+		final Matrix<String> lMatrix1 = MatrixFile.readMatrixFromFile(pFile1,
 																																	"\\s+");
-		final Matrix<String> lMatrix2 = LineReader.readMatrixFromFile(pFile2,
+		final Matrix<String> lMatrix2 = MatrixFile.readMatrixFromFile(pFile2,
 																																	"\\s+");
 
 		final Map<Edge<String>, Double> lMap1 = new HashMap<Edge<String>, Double>();
@@ -155,7 +156,7 @@ public class PowerGraphToConfidence<N>
 
 		}
 
-		LineReader.writeMatrixToFile(lResultMatrix, pResultFile);
+		MatrixFile.writeMatrixToFile(lResultMatrix, pResultFile);
 	}
 
 }

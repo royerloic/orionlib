@@ -194,9 +194,9 @@ public class ParetoRanking<O>
 		assert (v1.length == v2.length);
 
 		for (int i = 0; i < v1.length; i++)
-			if(v1[i] != v2[i])
+			if (v1[i] != v2[i])
 				return false;
-			
+
 		return true;
 	}
 

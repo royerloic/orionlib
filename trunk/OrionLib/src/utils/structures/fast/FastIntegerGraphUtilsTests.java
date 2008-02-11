@@ -15,6 +15,4 @@ import org.junit.Test;
 public class FastIntegerGraphUtilsTests
 {
 
-	
-
 }

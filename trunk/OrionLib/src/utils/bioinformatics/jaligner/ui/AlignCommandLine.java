@@ -63,7 +63,7 @@ public class AlignCommandLine
 					String f1 = args[0]; // file name of sequence #1
 					String f2 = args[1]; // file name of sequence #1
 					String m = args[2]; // scoring matrix id or file name user-defined
-															// scoring matrix
+					// scoring matrix
 					float o = Float.parseFloat(args[3]); // open gap penalty
 					float e = Float.parseFloat(args[4]); // extend gap penalty
 

@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.structures.BijectiveBidiHashMap;
 import utils.structures.Matrix;
 
@@ -47,7 +48,7 @@ public class TabularFile
 
 	public final void read() throws FileNotFoundException, IOException
 	{
-		Matrix<String> lMatrix = LineReader.readMatrixFromStream(mInputStream);
+		Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(mInputStream);
 
 		int lMaxColumns = 0;
 		int lMinColumns = Integer.MAX_VALUE;

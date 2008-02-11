@@ -54,13 +54,10 @@ public class FastIntegerGraphNoises
 
 		if (valid)
 		{
-			/*System.out.println("fefn: " + fefn
-													+ ", fesn: "
-													+ fesn
-													+ ", sefn: "
-													+ sefn
-													+ ", sesn: "
-													+ sesn);/***/
+			/*************************************************************************
+			 * System.out.println("fefn: " + fefn + ", fesn: " + fesn + ", sefn: " +
+			 * sefn + ", sesn: " + sesn);/
+			 ************************************************************************/
 
 			pIntegerGraph.removeEdge(fefn, fesn);
 			pIntegerGraph.removeEdge(sefn, sesn);

@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.string.StringUtils;
 import utils.structures.HashSetMap;
 import utils.structures.Matrix;
@@ -47,7 +48,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 	public void readRules(final InputStream pInputStream)	throws FileNotFoundException,
 																												IOException
 	{
-		final List<List<String>> lMatrix = LineReader.readMatrixFromStream(	pInputStream,
+		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(	pInputStream,
 																																				false,
 																																				"\\s+:=\\s+");
 
@@ -152,7 +153,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 																final InputStream pImportRegexInputStream) throws FileNotFoundException,
 																																					IOException
 	{
-		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(	pImportRegexInputStream,
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(	pImportRegexInputStream,
 																																		false);
 		for (final List<String> lList : lMatrix)
 		{

@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-
 /**
  */
 public class FastGraphTests
@@ -35,9 +34,9 @@ public class FastGraphTests
 		assertFalse(lFastGraph.isNode("aloa"));
 
 	}
-	
+
 	@Test
-	public void testReadWriteEdgeFile() 
+	public void testReadWriteEdgeFile()
 	{
 
 		try
@@ -74,7 +73,7 @@ public class FastGraphTests
 			lFastGraphReadFromFile = FastGraph.readEdgeFile(lFileInputStream);
 
 			assertTrue(lFastGraph.equals(lFastGraphReadFromFile));
-						
+
 		}
 		catch (RuntimeException e)
 		{

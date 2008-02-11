@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-
 /**
  */
 public class FastIntegerGraphTests
@@ -153,7 +152,7 @@ public class FastIntegerGraphTests
 																				12 },
 																			lFastIntegerGraph.getNodeSet()));
 	}
-	
+
 	@Test
 	public void testGetEdges()
 	{
@@ -179,12 +178,10 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addNodesUpTo(11);
 		lFastIntegerGraph.addNodesUpTo(12);
 
-		assertTrue(lFastIntegerGraph.getEdgeList().size()==12);
-		assertTrue(lFastIntegerGraph.getIntPairList().size()==12);
-		
+		assertTrue(lFastIntegerGraph.getEdgeList().size() == 12);
+		assertTrue(lFastIntegerGraph.getIntPairList().size() == 12);
 
 	}
-	
 
 	@Test
 	public void testGetNodeNeighbours()
@@ -286,7 +283,7 @@ public class FastIntegerGraphTests
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(0, lSubGraph.getNumberOfEdges());
 	}
-	
+
 	@Test
 	public void testExtractSubGraph()
 	{
@@ -339,9 +336,9 @@ public class FastIntegerGraphTests
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(6, lSubGraph.getNumberOfEdges());
 	}
-	
+
 	@Test
-	public void testReadWriteEdgeFile() 
+	public void testReadWriteEdgeFile()
 	{
 
 		try

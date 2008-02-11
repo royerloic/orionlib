@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.structures.Matrix;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
@@ -54,7 +55,7 @@ public class EdgIO
 
 		final Map<String, Node> lStringIdToNodeMap = new HashMap<String, Node>();
 
-		final Matrix<String> lMatrix = LineReader.readMatrixFromStream(	pInputStream,
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(	pInputStream,
 																																		false,
 																																		"\\t+");
 
@@ -267,7 +268,7 @@ public class EdgIO
 			lEdgeList.add(lEdge.getSecondNode().toString());
 			lStringListList.add(lEdgeList);
 		}
-		LineReader.writeMatrixToFile(lStringListList, pFile);
+		MatrixFile.writeMatrixToFile(lStringListList, pFile);
 	}
 
 	/**
@@ -313,7 +314,7 @@ public class EdgIO
 			lEdgeList.add(lEdge.getSecondNode().toString());
 			lStringListList.add(lEdgeList);
 		}
-		LineReader.writeMatrixToFile(lStringListList, pFile);
+		MatrixFile.writeMatrixToFile(lStringListList, pFile);
 	}
 
 }

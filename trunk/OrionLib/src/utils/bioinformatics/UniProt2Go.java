@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import utils.io.LineReader;
+import utils.io.MatrixFile;
 import utils.structures.ArrayListMap;
 import utils.structures.ListMap;
 
@@ -19,7 +20,7 @@ public class UniProt2Go
 		super();
 
 		{
-			final List<List<String>> lUniprot2GoMatrix = LineReader.readMatrixFromFile(	pUniprot2GoFile,
+			final List<List<String>> lUniprot2GoMatrix = MatrixFile.readMatrixFromFile(	pUniprot2GoFile,
 																																									false);
 
 			for (final List<String> lList : lUniprot2GoMatrix)
