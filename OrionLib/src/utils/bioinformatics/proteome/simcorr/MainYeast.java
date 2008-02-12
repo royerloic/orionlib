@@ -1,11 +1,8 @@
 package utils.bioinformatics.proteome.simcorr;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,18 +10,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
-
 import utils.bioinformatics.genome.FastaSequence;
-import utils.bioinformatics.genome.FastaSet;
-import utils.bioinformatics.genome.Genome;
 import utils.bioinformatics.jaligner.Alignment;
 import utils.bioinformatics.jaligner.Sequence;
 import utils.bioinformatics.jaligner.SmithWatermanGotoh;
 import utils.bioinformatics.jaligner.matrix.MatrixLoader;
 import utils.bioinformatics.jaligner.util.SequenceParser;
 import utils.bioinformatics.proteome.Domain;
-import utils.bioinformatics.proteome.InterProScanReaderYeast;
 import utils.bioinformatics.proteome.Protein;
 import utils.bioinformatics.proteome.Proteome;
 import utils.bioinformatics.proteome.test.DomainIndex;
@@ -59,9 +51,7 @@ public class MainYeast
 	 * File("G:/Projects/PowerGraphs/Data/Yeast/domains.tab");
 	 * InterProScanReaderYeast.addDomainsTo(lProteome, lInterProScanFile);
 	 * 
-	 * lProteome.write(lProteomeCache);
-	 *  // System.out.println(lProteome);
-	 *  }
+	 * lProteome.write(lProteomeCache); // System.out.println(lProteome); }
 	 * 
 	 * assertTrue(lProteome.getProteinSet().getNumberOfProteins() == 6719);
 	 * assertNotNull(lProteome .getProteinSet() .getProteinById("YAL065C")
@@ -80,8 +70,8 @@ public class MainYeast
 	 * 
 	 * Set<String> lDomainInterProIdSet = lDomainIndex.getDomainInterProIdSet();
 	 * for (String lInterProId : lDomainInterProIdSet) { collectFor(lProteome,
-	 * lDomainIndex, lInterProId, lPrintWriter); }
-	 *  } catch (Throwable e) { e.printStackTrace(); fail("Exception: " + e); } }/
+	 * lDomainIndex, lInterProId, lPrintWriter); } } catch (Throwable e) {
+	 * e.printStackTrace(); fail("Exception: " + e); } }/
 	 ****************************************************************************/
 
 	public void collectFor(	Proteome pProteome,

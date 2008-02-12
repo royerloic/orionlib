@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import utils.structures.Map3.Entry;
-
 public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	implements
 																																							Map3<K1, K2, K3, V>
 {

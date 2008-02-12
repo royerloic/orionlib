@@ -8,25 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.io.LineReader;
-import utils.structures.HashSetMap;
 import utils.structures.IntegerHashMap;
-import utils.structures.IntegerMap;
-import utils.structures.SetMap;
-import utils.structures.fast.graph.FastGraph;
-import utils.structures.graph.Edge;
-import utils.structures.graph.Node;
-import utils.structures.graph.UndirectedEdge;
-import utils.structures.powergraph.PowerGraph;
 
 public class PowerGraphSpectrum
 {

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.structures.BijectiveBidiHashMap;
 import utils.structures.Matrix;

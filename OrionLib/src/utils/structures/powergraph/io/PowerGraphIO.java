@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.structures.HashSetMap;
 import utils.structures.SetMap;

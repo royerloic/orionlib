@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.string.StringUtils;
 import utils.structures.HashSetMap;

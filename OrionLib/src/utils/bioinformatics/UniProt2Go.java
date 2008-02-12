@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.structures.ArrayListMap;
 import utils.structures.ListMap;
