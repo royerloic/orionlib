@@ -1,7 +1,7 @@
 /*
  * Created on Apr 15, 2007
  */
-package utils.math.distlib;
+package utils.math.distlib.test;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

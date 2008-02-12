@@ -1,4 +1,4 @@
-package utils.math.distlib;
+package utils.math.distlib.test;
 
 /**
  * Test Wilcox rank-sum distribution functions.
@@ -14,6 +14,7 @@ package utils.math.distlib;
  * @version 18 May 02
  */
 
+import utils.math.distlib.wilcox;
 import junit.framework.TestCase;
 
 public class TestWilcox extends TestCase

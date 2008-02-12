@@ -1,12 +1,13 @@
 /*
  * Created on Apr 16, 2007
  */
-package utils.math.distlib;
+package utils.math.distlib.test;
 
 import junit.framework.TestCase;
 
 import org.apache.log4j.BasicConfigurator;
 
+import utils.math.distlib.uniform;
 import utils.math.distlib.rng.MarsagliaMulticarry;
 import utils.math.distlib.rng.SuperDuper;
 import utils.math.distlib.rng.WichmannHill;
