@@ -1,22 +1,5 @@
 package utils.bioinformatics.proteome.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-
-import org.junit.Test;
-
-import utils.bioinformatics.genome.FastaSet;
-import utils.bioinformatics.genome.Genome;
-import utils.bioinformatics.proteome.Domain;
-import utils.bioinformatics.proteome.InterProScanReaderYeast;
-import utils.bioinformatics.proteome.Protein;
-import utils.bioinformatics.proteome.Proteome;
-
 public class ProteomeYeastTest
 {
 	/*****************************************************************************
@@ -61,8 +44,7 @@ public class ProteomeYeastTest
 	 * for (Domain lDomain : lDomainSet) if (lDomain.getEValue() < 1E-10) {
 	 * System.out.println("Domain:"); System.out.println(lDomain);
 	 * System.out.println(lDomain.getCorrespondingFastaSequence());
-	 * System.out.println(""); }
-	 *  } } /
+	 * System.out.println(""); } } } /
 	 ****************************************************************************/
 
 }

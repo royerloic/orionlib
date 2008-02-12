@@ -1,35 +1,5 @@
 package utils.bioinformatics.proteome.simcorr;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.junit.Test;
-
-import utils.bioinformatics.genome.FastaSequence;
-import utils.bioinformatics.genome.FastaSet;
-import utils.bioinformatics.jaligner.Alignment;
-import utils.bioinformatics.jaligner.Sequence;
-import utils.bioinformatics.jaligner.SmithWatermanGotoh;
-import utils.bioinformatics.jaligner.matrix.MatrixLoader;
-import utils.bioinformatics.jaligner.util.SequenceParser;
-import utils.bioinformatics.proteome.Domain;
-import utils.bioinformatics.proteome.InterProReader;
-import utils.bioinformatics.proteome.Protein;
-import utils.bioinformatics.proteome.Proteome;
-import utils.bioinformatics.proteome.test.DomainIndex;
-import utils.structures.HashMapMap;
-import utils.structures.HashSetMap;
-import utils.structures.graph.Node;
-
 public class MainEColi
 {
 
@@ -54,9 +24,7 @@ public class MainEColi
 	 * File("G:/Projects/Prologome/EColi/Ecoli.interpro.tab.txt");
 	 * InterProReader.addDomainsTo(lProteome, lInterProScanFile);
 	 * 
-	 * lProteome.write(lProteomeCache);
-	 *  // System.out.println(lProteome);
-	 *  }
+	 * lProteome.write(lProteomeCache); // System.out.println(lProteome); }
 	 * 
 	 * System.out.println(lProteome.getInteractionGraph().getNumberOfNodes());
 	 * System.out.println(lProteome.getInteractionGraph().getNumberOfEdges());
@@ -70,8 +38,8 @@ public class MainEColi
 	 * 
 	 * Set<String> lDomainInterProIdSet = lDomainIndex.getDomainInterProIdSet();
 	 * for (String lInterProId : lDomainInterProIdSet) { collectFor(lProteome,
-	 * lDomainIndex, lInterProId, lPrintWriter); }
-	 *  } catch (Throwable e) { e.printStackTrace(); fail("Exception: " + e); } }
+	 * lDomainIndex, lInterProId, lPrintWriter); } } catch (Throwable e) {
+	 * e.printStackTrace(); fail("Exception: " + e); } }
 	 * 
 	 * public void collectFor( Proteome pProteome, DomainIndex pDomainIndex,
 	 * String pInterProDomainId, PrintWriter pPrintWriter) throws IOException,
@@ -88,16 +56,13 @@ public class MainEColi
 	 * .size() + " distinct domains");
 	 * 
 	 * for (Domain lDomain : lDomainSet) if (lDomain.getSource().equals("PF")) if
-	 * (lDomain.getEValue() < 1E-5)
-	 *  { final FastaSequence lFastaSequence =
+	 * (lDomain.getEValue() < 1E-5) { final FastaSequence lFastaSequence =
 	 * lDomain.getCorrespondingFastaSequence();
 	 * lSequenceToProteinMap.put(lFastaSequence, lProtein);
 	 * lSequenceList.add(lFastaSequence);
 	 * 
 	 * System.out.println("Domain:"); System.out.println(lDomain);
-	 * System.out.println(lFastaSequence); System.out.println("");
-	 *  }
-	 *  }
+	 * System.out.println(lFastaSequence); System.out.println(""); } }
 	 * 
 	 * File lSequenceSimilarityCache = new File("SequenceSimilarity.bin");
 	 * HashMapMap<Protein, Protein, Double> lSequenceSimilarityMap = new
@@ -123,8 +88,8 @@ public class MainEColi
 	 * lSequenceSimilarityMap.get(lProtein1, lProtein2); if (lExistingSimilarity !=
 	 * null) { lSimilarity = Math.max(lSimilarity, lExistingSimilarity); }
 	 * lSequenceSimilarityMap.put(lProtein1, lProtein2, lSimilarity);
-	 * lSequenceSimilarityMap.put(lProtein2, lProtein1, lSimilarity); } }
-	 *  } catch (Throwable e) { e.printStackTrace(); }
+	 * lSequenceSimilarityMap.put(lProtein2, lProtein1, lSimilarity); } } } catch
+	 * (Throwable e) { e.printStackTrace(); }
 	 * 
 	 * System.out.println(lSequenceSimilarityMap);
 	 * 
@@ -174,8 +139,6 @@ public class MainEColi
 	 * if (lSeqSim != null) { pPrintWriter.println(lProtein1.getId() + "\t" +
 	 * lProtein2.getId() + "\t" + lSeqSim + "\t" + lIntSim + "\t" +
 	 * lProtein1.getNumberOfDistinctDomains() + "\t" +
-	 * lProtein2.getNumberOfDistinctDomains() + "\t" + lMaxIntSim); }
-	 *  }
-	 *  }/
+	 * lProtein2.getNumberOfDistinctDomains() + "\t" + lMaxIntSim); } } }/
 	 ****************************************************************************/
 }

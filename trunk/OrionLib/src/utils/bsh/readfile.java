@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.structures.Matrix;
 import bsh.CallStack;

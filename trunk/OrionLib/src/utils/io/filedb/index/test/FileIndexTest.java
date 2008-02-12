@@ -1,22 +1,44 @@
-package utils.io.filedb.index;
+package utils.io.filedb.index.test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.Test;
 
+import utils.io.StreamToFile;
+import utils.io.filedb.index.FileIndex;
+
 public class FileIndexTest
 {
+	
+	static File sTempFile;
+	static
+	{
+		try
+		{
+			InputStream lInputStream = FileIndexTest.class.getResourceAsStream("test.tab.txt");
+			assertTrue(lInputStream!=null);
+			sTempFile = File.createTempFile("FileIndexTest","temp");
+			StreamToFile.streamToFile(lInputStream,sTempFile);
+		}
+		catch (IOException e)
+		{
+			fail("Could not create temp file");
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void testFileIndexTest() throws IOException
 	{
 		File lCurrentFolder = new File(".");
 		System.out.println(lCurrentFolder.getAbsolutePath());
-		File lFile = new File("bin/utils/io/fileindex/test.tab.txt");
-		FileIndex lFileIndex = new FileIndex(lFile, "\\t");
+			
+		FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
 
 		lFileIndex.buildIndex(1);
 
@@ -32,10 +54,7 @@ public class FileIndexTest
 	@Test
 	public void testFileIndexTestWithCache() throws IOException
 	{
-		File lCurrentFolder = new File(".");
-		System.out.println(lCurrentFolder.getAbsolutePath());
-		File lFile = new File("bin/utils/io/fileindex/test.tab.txt");
-		FileIndex lFileIndex = new FileIndex(lFile, "\\t");
+		FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
 
 		lFileIndex.buildIndex(1);
 

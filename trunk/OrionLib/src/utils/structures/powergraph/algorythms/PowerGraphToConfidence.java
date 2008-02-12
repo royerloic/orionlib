@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import utils.io.LineReader;
 import utils.io.MatrixFile;
 import utils.structures.ArrayMatrix;
 import utils.structures.Matrix;

@@ -73,9 +73,9 @@ public class GenomeTest
 
 	/*****************************************************************************
 	 * @Test public void testYeastGenome() throws IOException { Genome lGenome =
-	 * null; try { final File lGenomeFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
-	 * lGenome = new Genome(lGenomeFile);
+	 *       null; try { final File lGenomeFile = new
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
+	 *       lGenome = new Genome(lGenomeFile);
 	 * 
 	 * final File lGeneSequencesFile = new
 	 * File("G:/Projects/PowerGraphs/Data/Yeast/orf_coding_all.fasta");
@@ -85,8 +85,7 @@ public class GenomeTest
 	 * 
 	 * assertTrue(lGenome.getGeneSet().getNumberOfGenes() == 6609);
 	 * assertNotNull(lGenome .getGeneSet() .getGeneById("YAL065C")
-	 * .getCorrespondingFastaSequence());
-	 *  }/
+	 * .getCorrespondingFastaSequence()); }/
 	 ****************************************************************************/
 
 }

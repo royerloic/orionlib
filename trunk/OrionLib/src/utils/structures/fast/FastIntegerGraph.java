@@ -13,8 +13,6 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
 import java.util.regex.Pattern;
 
 public class FastIntegerGraph implements Serializable

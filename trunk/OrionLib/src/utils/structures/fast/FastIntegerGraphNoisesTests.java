@@ -42,7 +42,7 @@ public class FastIntegerGraphNoisesTests
 		int times = 100;
 		int lSucc = FastIntegerGraphNoises.rewire(lRandom, lFastIntegerGraph, times);
 
-		assertTrue(lSucc > ((double) times) * 0.90);
+		assertTrue(lSucc > (times) * 0.90);
 
 		assertTrue(lNumberOfEdges == lFastIntegerGraph.getNumberOfEdges());
 
