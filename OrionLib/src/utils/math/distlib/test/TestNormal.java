@@ -1,8 +1,9 @@
 /*
  * Created on Apr 15, 2007
  */
-package utils.math.distlib;
+package utils.math.distlib.test;
 
+import utils.math.distlib.normal;
 import junit.framework.TestCase;
 
 public class TestNormal extends TestCase
