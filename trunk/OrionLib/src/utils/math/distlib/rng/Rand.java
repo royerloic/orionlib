@@ -7,21 +7,24 @@ import java.util.Random;
 
 import utils.math.distlib.StdUniformRng;
 
+public class Rand implements StdUniformRng
+{
 
-public class Rand implements StdUniformRng {
+	Random random;
 
-  Random random;
-  
-  public Rand() {
-    random = new Random();
-  }
-  
-  public void fixupSeeds() {
-    ; // do nothing since seeds are managed
-  }
+	public Rand()
+	{
+		random = new Random();
+	}
 
-  public double random() {
-    return random.nextDouble();
-  }
+	public void fixupSeeds()
+	{
+		; // do nothing since seeds are managed
+	}
+
+	public double random()
+	{
+		return random.nextDouble();
+	}
 
 }

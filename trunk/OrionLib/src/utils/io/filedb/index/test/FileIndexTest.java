@@ -1,7 +1,8 @@
 package utils.io.filedb.index.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +15,16 @@ import utils.io.filedb.index.FileIndex;
 
 public class FileIndexTest
 {
-	
+
 	static File sTempFile;
 	static
 	{
 		try
 		{
 			InputStream lInputStream = FileIndexTest.class.getResourceAsStream("test.tab.txt");
-			assertTrue(lInputStream!=null);
-			sTempFile = File.createTempFile("FileIndexTest","temp");
-			StreamToFile.streamToFile(lInputStream,sTempFile);
+			assertTrue(lInputStream != null);
+			sTempFile = File.createTempFile("FileIndexTest", "temp");
+			StreamToFile.streamToFile(lInputStream, sTempFile);
 		}
 		catch (IOException e)
 		{
@@ -37,7 +38,7 @@ public class FileIndexTest
 	{
 		File lCurrentFolder = new File(".");
 		System.out.println(lCurrentFolder.getAbsolutePath());
-			
+
 		FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
 
 		lFileIndex.buildIndex(1);

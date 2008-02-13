@@ -162,11 +162,11 @@ public class HyperGeometricEnrichement
 
 	}
 
-	public final static double hyperg(	double total,
-																			double set1,
-																			double set2,
-																			double inter,
-																			double threshold)
+	public final static double hyperg(double total,
+																		double set1,
+																		double set2,
+																		double inter,
+																		double threshold)
 	{
 		return hypergeometricpvalue(inter, set1, total - set1, set2, threshold);
 	}

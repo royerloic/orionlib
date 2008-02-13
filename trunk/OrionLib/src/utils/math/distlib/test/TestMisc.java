@@ -3,8 +3,8 @@
  */
 package utils.math.distlib.test;
 
-import utils.math.distlib.misc;
 import junit.framework.TestCase;
+import utils.math.distlib.misc;
 
 public class TestMisc extends TestCase
 {

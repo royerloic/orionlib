@@ -39,7 +39,7 @@ public class FirstInPrioritizedSetDecomposer<E, A>
 
 			for (Set<E> lSetPart : lPairOfCuttedSets)
 			{
-				addSet(lSetPart,pAttribute);
+				addSet(lSetPart, pAttribute);
 			}
 		}
 	}

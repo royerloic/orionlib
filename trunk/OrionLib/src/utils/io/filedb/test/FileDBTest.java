@@ -1,7 +1,8 @@
 package utils.io.filedb.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import org.junit.Test;
 
 import utils.io.StreamToFile;
 import utils.io.filedb.FileDB;
-import utils.io.filedb.index.FileIndex;
 
 public class FileDBTest
 {
@@ -42,13 +42,16 @@ public class FileDBTest
 		assertTrue(lColumnNames.contains("col1"));
 		assertTrue(lColumnNames.contains("col2"));
 	}
-	
+
 	@Test
 	public void testGetColumnType() throws IOException
 	{
-		assertEquals(FileDB.getColumnType(sTempFile, 0, 1000).getSimpleName(),"Double");
-		assertEquals(FileDB.getColumnType(sTempFile, 1, 1000).getSimpleName(),"String");
-		assertEquals(FileDB.getColumnType(sTempFile, 2, 1000).getSimpleName(),"Double");
+		assertEquals(	FileDB.getColumnType(sTempFile, 0, 1000).getSimpleName(),
+									"Double");
+		assertEquals(	FileDB.getColumnType(sTempFile, 1, 1000).getSimpleName(),
+									"String");
+		assertEquals(	FileDB.getColumnType(sTempFile, 2, 1000).getSimpleName(),
+									"Double");
 	}
 
 }
