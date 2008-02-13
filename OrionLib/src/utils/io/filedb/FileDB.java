@@ -10,10 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import utils.io.LineReader;
+
 public class FileDB
 {
 	public static Pattern sTabDelPattern = Pattern.compile("\\t");
 	public static Pattern sIntPattern = Pattern.compile("[0-9]+");
+	public static Pattern sFloatPattern = Pattern.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?");
 
 	public static List<String> getColumnNames(File pFile) throws IOException
 	{
@@ -53,7 +56,36 @@ public class FileDB
 						return i;
 					}
 		}
-		throw new IllegalArgumentException("Column name/index not recognized:"+pColumn+" in "+pFile.getName());
+		throw new IllegalArgumentException("Column name/index not recognized:" + pColumn
+																				+ " in "
+																				+ pFile.getName());
+	}
+
+	public static Class getColumnType(File pFile, int pColumnIndex, int pMaxLinesChecked) throws IOException
+	{
+
+		int counter = 0;
+		for (String lLine : LineReader.getLines(pFile))
+			if (!lLine.isEmpty())
+				if (!lLine.startsWith("//"))
+				{
+					final String lValue = sTabDelPattern.split(lLine, -1)[pColumnIndex];
+					boolean isFloatOrInt = sFloatPattern.matcher(lValue).matches();
+					if (!isFloatOrInt)
+					{
+						return String.class;
+					}
+					else
+					{
+						counter++;
+					}
+					if (counter > pMaxLinesChecked)
+					{
+						return Double.class;
+					}
+				}
+
+		return Double.class;
 	}
 
 }
