@@ -9,9 +9,9 @@ import utils.bioinformatics.ids.GoIdConversion;
 import utils.bioinformatics.ids.InterproIdConversion;
 import utils.io.LineReader;
 import utils.io.MatrixFile;
-import utils.structures.ArrayListMap;
-import utils.structures.ListMap;
-import utils.structures.Matrix;
+import utils.structures.map.ArrayListMap;
+import utils.structures.map.ListMap;
+import utils.structures.matrix.Matrix;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.

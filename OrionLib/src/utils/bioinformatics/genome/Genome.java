@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.io.LineReader;
-import utils.structures.HashSetMap;
+import utils.structures.map.HashSetMap;
 
 public class Genome implements Serializable
 {

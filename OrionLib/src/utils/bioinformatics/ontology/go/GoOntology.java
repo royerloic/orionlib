@@ -3,9 +3,10 @@ package utils.bioinformatics.ontology.go;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.zip.ZipInputStream;
 
 import utils.bioinformatics.ontology.OboOntology;
-import utils.structures.IntegerMap;
+import utils.structures.map.IntegerMap;
 
 public class GoOntology extends OboOntology
 {
@@ -17,8 +18,10 @@ public class GoOntology extends OboOntology
 	{
 		if (sGoOntology == null)
 		{
-			final InputStream lInputStream = GoOntology.class.getResourceAsStream("go.obo.txt");
-			sGoOntology = new GoOntology(lInputStream);
+			final InputStream lInputStream = GoOntology.class.getResourceAsStream("go.obo.txt.zip");
+			final ZipInputStream lZipInputStream = new ZipInputStream(lInputStream);
+			lZipInputStream.getNextEntry();
+			sGoOntology = new GoOntology(lZipInputStream);
 		}
 		return sGoOntology;
 	}

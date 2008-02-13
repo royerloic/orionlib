@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="X:/EclipseWorkspace/StandardWorkspace/OrionLib/bin/OrionLib.jar"/>
+    <jar path="C:/Documents and Settings/royer/My Documents/EclipseWorkspace/OrionGroup/OrionLib/bin/OrionLib.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/OrionLib/jarbuild/OrionLib.jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" manifestLocation="/BlueEarth/manifest" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
@@ -12,12 +12,10 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.graphics"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.annotation.filtering"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.math.regression"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.graphics.doc"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.web.feeds.doc"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.powergraph.io"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.powergraph.io"/>
         <file path="/OrionLib/.project"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.zip"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures"/>
@@ -26,50 +24,38 @@
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.sound"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.fast"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.random"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.annotation"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.graph"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.string"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.ontology.tax"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.pubmed"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.geolocator.data.old"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.utils.gui.images"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.stdimpl"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.graph.algorythms"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.io"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.stdimpl.test"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.ontology.go"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.utils.gui"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.wordlists.lists"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.wordlists.lists"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.interpro"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.math.plot"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.web"/>
         <file path="/OrionLib/pom.xml"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.utils"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.wordlists"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.math.io"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.nlp.synparsing"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.web.feeds"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.geolocator"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.interf"/>
         <file path="/OrionLib/.classpath"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.ontology"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.graph.io.psimi"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.gui"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.bioinformatics.ids"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.dbcol"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.web.systembrowser"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.script"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.math.stdimpl"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.lattice"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.regex"/>
+        <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.lattice"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.graph.io"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.date"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.java"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.utils"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.graphics.test"/>
-        <javaElement handleIdentifier="=OrionLib/src&lt;utils.optimal.stdimpl.test.functions"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.regex.compiler"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.structures.powergraph.algorythms"/>
         <javaElement handleIdentifier="=OrionLib/src&lt;utils.memory"/>

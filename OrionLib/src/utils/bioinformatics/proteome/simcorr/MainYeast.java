@@ -20,9 +20,9 @@ import utils.bioinformatics.proteome.Domain;
 import utils.bioinformatics.proteome.Protein;
 import utils.bioinformatics.proteome.Proteome;
 import utils.bioinformatics.proteome.test.DomainIndex;
-import utils.structures.HashMapMap;
-import utils.structures.HashSetMap;
 import utils.structures.graph.Node;
+import utils.structures.map.HashMapMap;
+import utils.structures.map.HashSetMap;
 
 public class MainYeast
 {

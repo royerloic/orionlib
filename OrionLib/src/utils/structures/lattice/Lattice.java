@@ -2,7 +2,7 @@ package utils.structures.lattice;
 
 import java.util.Set;
 
-import utils.structures.IntegerMap;
+import utils.structures.map.IntegerMap;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.

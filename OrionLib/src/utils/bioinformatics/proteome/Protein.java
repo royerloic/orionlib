@@ -7,7 +7,7 @@ import java.util.Set;
 import utils.bioinformatics.genome.FastaSequence;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.ontology.OboTerm;
-import utils.structures.HashSetMap;
+import utils.structures.map.HashSetMap;
 
 public class Protein implements Serializable
 {

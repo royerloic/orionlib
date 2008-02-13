@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import utils.io.LineReader;
 import utils.io.LineWriter;
 import utils.math.distlib.hypergeometric;
-import utils.structures.HashSetMap;
+import utils.structures.map.HashSetMap;
 
 public class HyperGeometricEnrichement
 {
@@ -162,7 +162,7 @@ public class HyperGeometricEnrichement
 
 	}
 
-	private final static double hyperg(	double total,
+	public final static double hyperg(	double total,
 																			double set1,
 																			double set2,
 																			double inter,

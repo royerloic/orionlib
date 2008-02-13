@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import utils.io.MatrixFile;
-import utils.structures.BijectiveBidiHashMap;
-import utils.structures.Matrix;
+import utils.structures.map.BijectiveBidiHashMap;
+import utils.structures.matrix.Matrix;
 
 public class TabularFile
 {

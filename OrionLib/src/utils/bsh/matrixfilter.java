@@ -3,9 +3,9 @@ package utils.bsh;
 import java.util.Iterator;
 import java.util.List;
 
-import utils.structures.HashSetMap;
-import utils.structures.Matrix;
-import utils.structures.SetMap;
+import utils.structures.map.HashSetMap;
+import utils.structures.map.SetMap;
+import utils.structures.matrix.Matrix;
 import bsh.CallStack;
 import bsh.Interpreter;
 

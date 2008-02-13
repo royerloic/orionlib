@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import utils.io.MatrixFile;
-import utils.structures.Matrix;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
 import utils.structures.graph.HashGraph;
 import utils.structures.graph.Node;
 import utils.structures.graph.UndirectedEdge;
+import utils.structures.matrix.Matrix;
 
 /**
  * Loic Royer, Copyright (c) 2005, Some Rights Reserved.
