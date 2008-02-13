@@ -2,20 +2,10 @@ package utils.structures.set.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 import org.junit.Test;
 
-import utils.bioinformatics.genemap.Element;
-import utils.bioinformatics.genemap.GeneMapBuilder;
-import utils.bioinformatics.genemap.GeneSet;
-import utils.math.stats.HyperGeometricEnrichement;
 import utils.structures.set.FirstInPrioritizedSetDecomposer;
 
 public class FirstInPrioritizedSetDecomposerTest

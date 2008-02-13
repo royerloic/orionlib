@@ -38,7 +38,7 @@ public class Element
 			return true;
 		if (obj == null)
 			return false;
-		
+
 		if (obj instanceof Element)
 		{
 			final Element other = (Element) obj;

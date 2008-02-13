@@ -3,15 +3,11 @@ package utils.io.filedb.sort;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,7 +20,7 @@ public class FileSort
 {
 	public static Pattern sTabDelPattern = Pattern.compile("\\t");
 
-	private static final class KeyedLine<O extends Comparable<O>>																															
+	private static final class KeyedLine<O extends Comparable<O>>
 	{
 		String mLine;
 		O mKey;
@@ -48,8 +44,9 @@ public class FileSort
 		}
 
 	}
-	
-	private static class AscendingComparator<O extends Comparable<O>> implements Comparator<KeyedLine<O>>
+
+	private static class AscendingComparator<O extends Comparable<O>> implements
+																																		Comparator<KeyedLine<O>>
 	{
 
 		@Override
@@ -57,10 +54,11 @@ public class FileSort
 		{
 			return pO1.mKey.compareTo(pO2.mKey);
 		}
-		
+
 	}
-	
-	private static class DescendingComparator<O extends Comparable<O>> implements Comparator<KeyedLine<O>>
+
+	private static class DescendingComparator<O extends Comparable<O>>	implements
+																																			Comparator<KeyedLine<O>>
 	{
 		@Override
 		public int compare(KeyedLine<O> pO1, KeyedLine<O> pO2)
@@ -68,7 +66,6 @@ public class FileSort
 			return -pO1.mKey.compareTo(pO2.mKey);
 		}
 	}
-	
 
 	public static final void sort(File pInputFile,
 																String pColumn,
@@ -110,7 +107,7 @@ public class FileSort
 				lList.add(lKeyedLine);
 			}
 
-		if(pAscending)
+		if (pAscending)
 		{
 			Collections.sort(lList, new AscendingComparator());
 		}
@@ -118,7 +115,6 @@ public class FileSort
 		{
 			Collections.sort(lList, new DescendingComparator());
 		}
-		
 
 		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 		for (KeyedLine<? extends Comparable<?>> lKeyedLine : lList)
@@ -128,6 +124,5 @@ public class FileSort
 		lBufferedWriter.close();
 
 	}
-
 
 }

@@ -14,8 +14,8 @@ package utils.math.distlib.test;
  * @version 18 May 02
  */
 
-import utils.math.distlib.wilcox;
 import junit.framework.TestCase;
+import utils.math.distlib.wilcox;
 
 public class TestWilcox extends TestCase
 {
