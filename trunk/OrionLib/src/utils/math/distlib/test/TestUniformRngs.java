@@ -17,7 +17,6 @@ public class TestUniformRngs extends TestCase
 
 	uniform unirng;
 
-	@Override
 	public void setUp()
 	{
 		BasicConfigurator.configure();

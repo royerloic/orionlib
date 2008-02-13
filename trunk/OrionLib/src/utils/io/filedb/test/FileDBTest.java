@@ -35,12 +35,20 @@ public class FileDBTest
 	}
 
 	@Test
-	public void testgetColumnNames() throws IOException
+	public void testGetColumnNames() throws IOException
 	{
 		List<String> lColumnNames = FileDB.getColumnNames(sTempFile);
 		assertTrue(lColumnNames.contains("col0"));
 		assertTrue(lColumnNames.contains("col1"));
 		assertTrue(lColumnNames.contains("col2"));
+	}
+	
+	@Test
+	public void testGetColumnType() throws IOException
+	{
+		assertEquals(FileDB.getColumnType(sTempFile, 0, 1000).getSimpleName(),"Double");
+		assertEquals(FileDB.getColumnType(sTempFile, 1, 1000).getSimpleName(),"String");
+		assertEquals(FileDB.getColumnType(sTempFile, 2, 1000).getSimpleName(),"Double");
 	}
 
 }
