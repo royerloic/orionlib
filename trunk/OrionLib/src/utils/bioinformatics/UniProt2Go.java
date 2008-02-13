@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.List;
 
 import utils.io.MatrixFile;
-import utils.structures.ArrayListMap;
-import utils.structures.ListMap;
+import utils.structures.map.ArrayListMap;
+import utils.structures.map.ListMap;
 
 public class UniProt2Go
 {

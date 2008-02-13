@@ -2,9 +2,9 @@ package utils.bsh;
 
 import java.util.List;
 
-import utils.structures.IntegerHashMap;
-import utils.structures.IntegerMap;
-import utils.structures.Matrix;
+import utils.structures.map.IntegerHashMap;
+import utils.structures.map.IntegerMap;
+import utils.structures.matrix.Matrix;
 import bsh.CallStack;
 import bsh.Interpreter;
 

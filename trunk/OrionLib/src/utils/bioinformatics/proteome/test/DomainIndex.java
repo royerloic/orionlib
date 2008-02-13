@@ -6,7 +6,7 @@ import java.util.Set;
 import utils.bioinformatics.proteome.Domain;
 import utils.bioinformatics.proteome.Protein;
 import utils.bioinformatics.proteome.Proteome;
-import utils.structures.HashSetMap;
+import utils.structures.map.HashSetMap;
 
 public class DomainIndex
 {

@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import utils.structures.HashSetMap;
-import utils.structures.SetMap;
+import utils.structures.map.HashSetMap;
+import utils.structures.map.SetMap;
 
 public class HashGraph<N, E extends Edge<N>>	implements
 																							Graph<N, E>,

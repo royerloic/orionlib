@@ -14,10 +14,10 @@ import java.util.regex.Pattern;
 
 import utils.io.MatrixFile;
 import utils.string.StringUtils;
-import utils.structures.HashSetMap;
-import utils.structures.Matrix;
 import utils.structures.Pair;
-import utils.structures.SetMap;
+import utils.structures.map.HashSetMap;
+import utils.structures.map.SetMap;
+import utils.structures.matrix.Matrix;
 
 public class ContextRegex
 {

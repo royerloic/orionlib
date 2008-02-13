@@ -11,10 +11,10 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import utils.io.MatrixFile;
-import utils.structures.ArrayMatrix;
-import utils.structures.Matrix;
 import utils.structures.graph.Edge;
 import utils.structures.graph.UndirectedEdge;
+import utils.structures.matrix.ArrayMatrix;
+import utils.structures.matrix.Matrix;
 import utils.structures.powergraph.PowerGraph;
 
 public class PowerGraphToConfidence<N>

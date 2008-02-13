@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
-import utils.structures.IntegerHashMap;
+import utils.structures.map.IntegerHashMap;
 
 public class PowerGraphSpectrum
 {

@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import utils.structures.IntegerHashMap;
-import utils.structures.IntegerMap;
-import utils.structures.IntersectionMonitor;
 import utils.structures.Triple;
 import utils.structures.graph.DirectedEdge;
 import utils.structures.graph.HashGraph;
+import utils.structures.map.IntegerHashMap;
+import utils.structures.map.IntegerMap;
+import utils.structures.set.IntersectionMonitor;
 import utils.structures.utils.CollectionUtils;
 
 /**

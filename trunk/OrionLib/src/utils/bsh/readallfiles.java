@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import utils.io.MatrixFile;
-import utils.structures.ArrayMatrix;
-import utils.structures.Matrix;
+import utils.structures.matrix.ArrayMatrix;
+import utils.structures.matrix.Matrix;
 import bsh.CallStack;
 import bsh.Interpreter;
 

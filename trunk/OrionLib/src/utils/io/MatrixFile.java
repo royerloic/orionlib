@@ -17,8 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import utils.structures.ArrayMatrix;
-import utils.structures.Matrix;
+import utils.structures.matrix.ArrayMatrix;
+import utils.structures.matrix.Matrix;
 
 public class MatrixFile
 {

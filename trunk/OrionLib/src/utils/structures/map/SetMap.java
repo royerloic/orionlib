@@ -1,4 +1,4 @@
-package utils.structures;
+package utils.structures.map;
 
 import java.io.Serializable;
 import java.util.Collection;

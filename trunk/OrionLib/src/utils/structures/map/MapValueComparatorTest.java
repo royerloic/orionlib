@@ -1,4 +1,4 @@
-package utils.structures;
+package utils.structures.map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,7 @@ public class MapValueComparatorTest
 
 	/**
 	 * Test method for
-	 * {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
+	 * {@link utils.structures.map.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
 	 */
 	@Test
 	public void testCompareStringInteger()
@@ -45,7 +45,7 @@ public class MapValueComparatorTest
 
 	/**
 	 * Test method for
-	 * {@link utils.structures.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
+	 * {@link utils.structures.map.MapValueComparator#compare(java.lang.Object, java.lang.Object)}.
 	 */
 	@Test
 	public void testCompareStringString()

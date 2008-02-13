@@ -1,4 +1,4 @@
-package utils.structures;
+package utils.structures.map;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,11 +10,14 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class HashIntegerMap<K> extends HashMap<K, Integer> implements
+public class IntegerHashMap<K> extends HashMap<K, Integer> implements
 																													IntegerMap<K>
 {
 
-	private static final long serialVersionUID = 2807897144550596770L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5619054777054023067L;
 
 	/*
 	 * (non-Javadoc)
@@ -26,13 +29,9 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	{
 		Integer lValue = get(pKey);
 		if (lValue == null)
-		{
 			lValue = pValue;
-		}
 		else
-		{
 			lValue = lValue + pValue;
-		}
 
 		return put(pKey, lValue);
 	}
@@ -41,9 +40,7 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 																	final Integer pValue)
 	{
 		for (final K lK : pCollection)
-		{
 			add(lK, pValue);
-		}
 		return this;
 	}
 
@@ -68,13 +65,9 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	{
 		Integer lValue = get(pKey);
 		if (lValue == null)
-		{
 			lValue = pValue;
-		}
 		else
-		{
 			lValue = lValue * pValue;
-		}
 
 		return put(pKey, lValue);
 	}
@@ -94,13 +87,9 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	{
 		final Integer lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue > pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 
@@ -108,31 +97,23 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	{
 		final Integer lOldValue = get(pKey);
 		if (lOldValue == null)
-		{
 			return put(pKey, pNewValue);
-		}
 		else if (lOldValue < pNewValue)
-		{
 			return put(pKey, pNewValue);
-		}
 		return lOldValue;
 	}
 
 	public IntegerMap<K> minAll(final Map<K, Integer> pMap)
 	{
 		for (final Map.Entry<K, Integer> lEntry : pMap.entrySet())
-		{
 			min(lEntry.getKey(), lEntry.getValue());
-		}
 		return this;
 	}
 
 	public IntegerMap<K> maxAll(final Map<K, Integer> pMap)
 	{
 		for (final Map.Entry<K, Integer> lEntry : pMap.entrySet())
-		{
 			max(lEntry.getKey(), lEntry.getValue());
-		}
 		return this;
 	}
 

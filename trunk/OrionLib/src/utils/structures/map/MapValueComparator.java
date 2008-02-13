@@ -1,4 +1,4 @@
-package utils.structures;
+package utils.structures.map;
 
 import java.util.Comparator;
 import java.util.Map;
