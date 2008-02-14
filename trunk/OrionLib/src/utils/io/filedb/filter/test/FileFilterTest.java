@@ -1,7 +1,6 @@
-package utils.io.filedb.filter.test;
+package utils.io.filedb.sort.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -10,49 +9,53 @@ import java.io.OutputStream;
 
 import org.junit.Test;
 
-import utils.io.filedb.filter.FileFilter;
+import utils.io.filedb.sort.FileSort;
 
-public class FileFilterTest
+public class FileSortTest
 {
 
 	@Test
-	public void testFilterOut() throws IOException
+	public void testSortInt() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileSortTest.class.getResourceAsStream("test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
-		FileFilter.filterOut(lInputStream, 1, "ohoh", lOutputStream);
+		FileSort.sort(lInputStream, 0, "Double", true, lOutputStream);
 		String lString = lOutputStream.toString();
-		//System.out.println(lString);
-		assertFalse(lString.contains("ohoh"));
+		// System.out.println(lString);
+		assertEquals(lString, "//col0	col1	col3\n2	ab	3.2\n4	aa	1.3E-10\n10	a	2.1\n30	ac	1.0006\n");
 	}
 
 	@Test
-	public void testFilterIn() throws IOException
+	public void testSortDouble() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileSortTest.class.getResourceAsStream("test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
-		FileFilter.filterIn(lInputStream, 1, "ohoh", lOutputStream);
+		FileSort.sort(lInputStream, 2, "Double", true, lOutputStream);
 		String lString = lOutputStream.toString();
-		System.out.println(lString);
-		assertTrue(lString.contains("ohoh"));
-		assertFalse(lString.contains("blublu"));
-		assertFalse(lString.contains("blu"));
-		assertFalse(lString.contains("bla"));
+		// System.out.println(lString);
+		assertEquals(lString, "//col0	col1	col3\n4	aa	1.3E-10\n30	ac	1.0006\n10	a	2.1\n2	ab	3.2\n");
 	}
 
 	@Test
-	public void testFilterHigherLower() throws IOException
+	public void testSortString() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileSortTest.class.getResourceAsStream("test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
-		FileFilter.filterLowerHigher(lInputStream, 0, "Double", "2.0", true,lOutputStream);
+		FileSort.sort(lInputStream, 1, "String", true, lOutputStream);
 		String lString = lOutputStream.toString();
-		System.out.println(lString);
-		assertTrue(lString.contains("ohoh"));
-		assertTrue(lString.contains("blublu"));
-		assertTrue(lString.contains("blu"));
-		assertFalse(lString.contains("bla"));
-		
+		// System.out.println(lString);
+		assertEquals(lString, "//col0	col1	col3\n10	a	2.1\n4	aa	1.3E-10\n2	ab	3.2\n30	ac	1.0006\n");
+	}
+
+	@Test
+	public void testSortDescendingString() throws IOException
+	{
+		InputStream lInputStream = FileSortTest.class.getResourceAsStream("test.tab.txt");
+		OutputStream lOutputStream = new ByteArrayOutputStream();
+		FileSort.sort(lInputStream, 1, "String", false, lOutputStream);
+		String lString = lOutputStream.toString();
+		// System.out.println(lString);
+		assertEquals(lString, "//col0	col1	col3\n30	ac	1.0006\n2	ab	3.2\n4	aa	1.3E-10\n10	a	2.1\n");
 	}
 
 }
