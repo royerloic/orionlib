@@ -69,43 +69,58 @@ public class FileSort
 
 	public static final void sort(File pInputFile,
 																String pColumn,
-																boolean pAscending,
+																Boolean pAscending,
 																File pOutputFile) throws IOException
 	{
 		final int lColumnIndex = FileDB.resolveColumn(pInputFile, pColumn);
+		sort(pInputFile, lColumnIndex, pAscending, pOutputFile);
+	}
+
+	public static final void sort(File pInputFile,
+																Integer pColumnIndex,
+																Boolean pAscending,
+																File pOutputFile) throws IOException
+	{
 		// check 100 lines, might be dangerous but too slow otherwise
-		Class lColumnType = FileDB.getColumnType(pInputFile, lColumnIndex, 1000);
+		Class lColumnType = FileDB.getColumnType(pInputFile, pColumnIndex, 1000);
 		sort(	new FileInputStream(pInputFile),
-					lColumnIndex,
+					pColumnIndex,
 					lColumnType.getSimpleName(),
 					pAscending,
-					new FileOutputStream(pInputFile));
+					new FileOutputStream(pOutputFile));
 	}
 
 	public static final void sort(InputStream pInputStream,
-																int pColumnIndex,
+																Integer pColumnIndex,
 																String pColumnType,
-																boolean pAscending,
+																Boolean pAscending,
 																OutputStream pOutputStream) throws IOException
 	{
 		ArrayList<KeyedLine<? extends Comparable<?>>> lList = new ArrayList<KeyedLine<? extends Comparable<?>>>();
 
+		String lHeaderLine = null;
+		boolean isFirstLine = true;
 		for (String lLine : LineReader.getLines(pInputStream))
-			if (!lLine.isEmpty() && !lLine.startsWith("//"))
-			{
-				final String lValue = sTabDelPattern.split(lLine, -1)[pColumnIndex];
-				KeyedLine<? extends Comparable<?>> lKeyedLine = null;
-				if (pColumnType.equals(Double.class.getSimpleName()))
+			if (!lLine.isEmpty())
+				if (!lLine.startsWith("//"))
 				{
-					final double lDoubleValue = Double.parseDouble(lValue);
-					lKeyedLine = new KeyedLine<Double>(lLine, lDoubleValue);
+					final String lValue = sTabDelPattern.split(lLine, -1)[pColumnIndex];
+					KeyedLine<? extends Comparable<?>> lKeyedLine = null;
+					if (pColumnType.equals(Double.class.getSimpleName()))
+					{
+						final double lDoubleValue = Double.parseDouble(lValue);
+						lKeyedLine = new KeyedLine<Double>(lLine, lDoubleValue);
+					}
+					else
+					{
+						lKeyedLine = new KeyedLine<String>(lLine, lValue);
+					}
+					lList.add(lKeyedLine);
 				}
-				else
+				else if (isFirstLine)
 				{
-					lKeyedLine = new KeyedLine<String>(lLine, lValue);
+					lHeaderLine = lLine;
 				}
-				lList.add(lKeyedLine);
-			}
 
 		if (pAscending)
 		{
@@ -117,6 +132,8 @@ public class FileSort
 		}
 
 		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		if (lHeaderLine != null)
+			lBufferedWriter.append(lHeaderLine+"\n");
 		for (KeyedLine<? extends Comparable<?>> lKeyedLine : lList)
 		{
 			lBufferedWriter.append(lKeyedLine.toLineString() + "\n");

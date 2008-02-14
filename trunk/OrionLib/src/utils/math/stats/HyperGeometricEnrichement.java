@@ -168,7 +168,21 @@ public class HyperGeometricEnrichement
 																		double inter,
 																		double threshold)
 	{
-		return hypergeometricpvalue(inter, set1, total - set1, set2, threshold);
+		final double pvalue = hypergeometricpvalue(	inter,
+																								set1,
+																								total - set1,
+																								set2,
+																								threshold);
+		/*System.out.println("total=" + total
+												+ " set1="
+												+ set1
+												+ " set2="
+												+ set2
+												+ " inter="
+												+ inter
+												+ " ->pvalue="
+												+ pvalue);/**/
+		return pvalue;
 	}
 
 	private final static double hypergeometricpvalue(	double k,

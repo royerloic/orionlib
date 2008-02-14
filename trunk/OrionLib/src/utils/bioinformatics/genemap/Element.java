@@ -19,10 +19,15 @@ public class Element
 		mId = pId;
 	}
 
+	public String toTabDel()
+	{
+		return mId + "\t" + mName + "\t" + mDescription;
+	}
+	
 	@Override
 	public String toString()
 	{
-		return mId + "\t" + mName + "\t" + mDescription;
+		return "("+mId + ", " + mName + ", " + mDescription+")";
 	}
 
 	@Override

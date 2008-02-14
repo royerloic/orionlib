@@ -62,8 +62,8 @@ public class FileDB
 	}
 
 	public static Class getColumnType(File pFile,
-																		int pColumnIndex,
-																		int pMaxLinesChecked) throws IOException
+																		Integer pColumnIndex,
+																		Integer pMaxLinesChecked) throws IOException
 	{
 
 		int counter = 0;

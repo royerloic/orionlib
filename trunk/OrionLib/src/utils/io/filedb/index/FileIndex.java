@@ -31,7 +31,7 @@ public class FileIndex implements Serializable
 		mColumnSeparatorPattern = Pattern.compile(mColumnSeparatorRegex);
 	}
 
-	public void buildIndex(final int pColumnIndex) throws IOException
+	public void buildIndex(final Integer pColumnIndex) throws IOException
 	{
 		final String lineSep = System.getProperty("line.separator");
 		final FileReader lFileReader = new FileReader(mFile);

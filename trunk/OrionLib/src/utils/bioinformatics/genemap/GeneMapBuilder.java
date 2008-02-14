@@ -22,24 +22,52 @@ public class GeneMapBuilder
 	HashSetMap<Element, Element> mGene2AttributeMap = new HashSetMap<Element, Element>();
 	HashSetMap<Element, Element> mAttribute2GeneMap = new HashSetMap<Element, Element>();
 
-	public void addGene(int pGeneId, String pGeneName, String pGeneDescription)
+	public Element addGene(Integer pGeneId, String pGeneName, String pGeneDescription)
 	{
-		mGeneMap.put(pGeneId, new Element(pGeneId, pGeneName, pGeneDescription));
+		Element lElement = new Element(pGeneId, pGeneName, pGeneDescription);
+		mGeneMap.put(pGeneId, lElement);
+		return lElement;
 	}
 
-	public void addAttribute(	int pAttributeId,
-														String pAttributeName,
-														String pAttributeDescription)
+	public Element addAttribute(int pAttributeId,
+															String pAttributeName,
+															String pAttributeDescription)
 	{
-		mAttributeMap.put(pAttributeId, new Element(pAttributeId,
-																								pAttributeName,
-																								pAttributeDescription));
+		Element lElement = new Element(	pAttributeId,
+																		pAttributeName,
+																		pAttributeDescription);
+		mAttributeMap.put(pAttributeId, lElement);
+		return lElement;
 	}
 
-	public void addAnnotation(int pGeneId, int pAttributeId)
+	public void addAnnotation(Integer pGeneId, Integer pAttributeId)
 	{
-		final Element lGene = mGeneMap.get(pGeneId);
-		final Element lAttribute = mAttributeMap.get(pAttributeId);
+		addAnnotation(pGeneId, "", pAttributeId, "");
+	}
+
+	public void addAnnotation(Integer pGeneId,
+														String pGeneName,
+														Integer pAttributeId,
+														String pAttributeName)
+	{
+		Element lGene = mGeneMap.get(pGeneId);
+		if (lGene == null)
+		{
+			lGene = addGene(pGeneId, pGeneName, "");
+		}
+		/*else
+		{
+			lGene.mDescription+= "|"+pGeneName;
+		}/***/
+		Element lAttribute = mAttributeMap.get(pAttributeId);
+		if (lAttribute == null)
+		{
+			lAttribute = addAttribute(pAttributeId, pAttributeName, "");
+		}
+		/*else
+		{
+			lAttribute.mDescription+= "|"+pAttributeName;
+		}/***/
 		mGene2AttributeMap.put(lGene, lAttribute);
 		mAttribute2GeneMap.put(lAttribute, lGene);
 	}
@@ -69,7 +97,7 @@ public class GeneMapBuilder
 		double lCorrection = Math.max(lAttributeSetForSet1.size(), 1);
 		final double universe = mGeneMap.size();
 		final double set1 = pGeneSet.size();
-		HashSet<Element> lIntersection = new HashSet<Element>();
+		HashSet<Element> lIntersection = new HashSet<Element>((int)universe);
 		for (Element lAttribute : lAttributeSetForSet1)
 		{
 			Set<Element> lSet2 = mAttribute2GeneMap.get(lAttribute);
@@ -204,4 +232,29 @@ public class GeneMapBuilder
 		return lDecomposedGeneSets;
 
 	}
+
+	public static final String geneSubSetsToEdgeString(HashSet<GeneSet> pGeneSets)
+	{
+		StringBuilder lStringBuilder= new StringBuilder();
+		lStringBuilder.append("//");
+		lStringBuilder.append("EDGEFORMAT\t1\t2\n");
+		ArrayList<String> lSetAttributesList = new ArrayList<String>();
+		for (GeneSet lGeneSet : pGeneSets)
+		{
+			for (Element lGene : lGeneSet.getGenes())
+			{
+				String lSetAttributes = lGeneSet.getAttributesPValuesCouples().toString();
+				lStringBuilder.append("EDGE\t"+lGene.mId+"\t"+lSetAttributes+"\n");
+			}
+		}		
+		
+		for (String lString : lSetAttributesList)
+		{
+			lStringBuilder.append("EDGE\t"+lString+"\tALL_ATTRIBUTES\n");
+		}
+		
+		return lStringBuilder.toString();
+	}
+	
+
 }
