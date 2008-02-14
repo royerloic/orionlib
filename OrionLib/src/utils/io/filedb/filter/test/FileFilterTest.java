@@ -22,7 +22,7 @@ public class FileFilterTest
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterOut(lInputStream, 1, "ohoh", lOutputStream);
 		String lString = lOutputStream.toString();
-		System.out.println(lString);
+		//System.out.println(lString);
 		assertFalse(lString.contains("ohoh"));
 	}
 
@@ -33,9 +33,26 @@ public class FileFilterTest
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterIn(lInputStream, 1, "ohoh", lOutputStream);
 		String lString = lOutputStream.toString();
+		System.out.println(lString);
 		assertTrue(lString.contains("ohoh"));
-		assertFalse(lString.contains("3"));
-		assertFalse(lString.contains("1"));
+		assertFalse(lString.contains("blublu"));
+		assertFalse(lString.contains("blu"));
+		assertFalse(lString.contains("bla"));
+	}
+
+	@Test
+	public void testFilterHigherLower() throws IOException
+	{
+		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		OutputStream lOutputStream = new ByteArrayOutputStream();
+		FileFilter.filterLowerHigher(lInputStream, 0, "Double", "2.0", true,lOutputStream);
+		String lString = lOutputStream.toString();
+		System.out.println(lString);
+		assertTrue(lString.contains("ohoh"));
+		assertTrue(lString.contains("blublu"));
+		assertTrue(lString.contains("blu"));
+		assertFalse(lString.contains("bla"));
+		
 	}
 
 }
