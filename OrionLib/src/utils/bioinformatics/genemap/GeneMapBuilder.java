@@ -245,6 +245,7 @@ public class GeneMapBuilder
 			{
 				String lSetAttributes = lGeneSet.getAttributesPValuesCouples().toString();
 				lStringBuilder.append("EDGE\t"+lGene.mId+"\t"+lSetAttributes+"\n");
+				lSetAttributesList.add(lSetAttributes);
 			}
 		}		
 		
