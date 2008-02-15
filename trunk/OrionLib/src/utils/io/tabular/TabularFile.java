@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.io.MatrixFile;
@@ -29,19 +30,40 @@ public class TabularFile
 
 	private final boolean mHasHeader;
 	private final String mName;
+	private final Set<String> mSelection;
+	private final int mSelectionColumnIndex;
 
 	public TabularFile(File pFile, boolean pHasHeader) throws IOException
 	{
-		this(pFile.getName(), new FileInputStream(pFile), pHasHeader);
+		this(pFile, pHasHeader, 0, null);
 	}
 
-	public TabularFile(String pName, InputStream pInputStream, boolean pHasHeader) throws FileNotFoundException,
-																																								IOException
+	public TabularFile(	File pAttributeFile,
+											boolean pHasHeader,
+											int pSelectionColumnIndex,
+											Set<String> pSelection)	throws FileNotFoundException,
+																							IOException
+	{
+		this(	pAttributeFile.getName(),
+					new FileInputStream(pAttributeFile),
+					pHasHeader,
+					pSelectionColumnIndex,
+					pSelection);
+	}
+
+	public TabularFile(	String pName,
+											InputStream pInputStream,
+											boolean pHasHeader,
+											int pSelectionColumnIndex,
+											Set<String> pSelection)	throws FileNotFoundException,
+																							IOException
 	{
 		super();
 		mName = pName;
 		mInputStream = pInputStream;
 		mHasHeader = pHasHeader;
+		mSelectionColumnIndex = pSelectionColumnIndex;
+		mSelection = pSelection;
 
 	}
 
@@ -85,6 +107,21 @@ public class TabularFile
 				}
 			}
 		}
+
+		// keep only lines that are in the selection
+		if (mSelection != null)
+			for (int line = 0; line < lMatrix.size(); line++)
+				if (!lMatrix.get(line).isEmpty())
+					if (!lMatrix.get(line).get(0).startsWith("//"))
+					{
+						String lEntry = lMatrix.get(line).get(mSelectionColumnIndex);
+						if (!mSelection.contains(lEntry))
+						{
+							// remove since not in selection:
+							lMatrix.remove(line);
+							line--;
+						}
+					}
 
 		if (mHasHeader)
 		{
