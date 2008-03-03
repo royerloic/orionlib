@@ -1,7 +1,5 @@
 package utils.structures.matrix;
 
-import groovy.lang.IntRange;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -73,6 +72,11 @@ public class SymetricFloatMatrix implements Serializable
 		Integer xi = mIndex2ValMap.getReverse(pInteger);
 		return xi;
 	}
+	
+	public int getCapacity()
+	{
+		return mMatrix.length;
+	}
 
 	public boolean set(Integer x, Integer y, Float pValue)
 	{
@@ -88,7 +92,7 @@ public class SymetricFloatMatrix implements Serializable
 
 		return true;
 	}
-
+	
 	public float get(Integer x, Integer y)
 	{
 		check();
@@ -109,35 +113,64 @@ public class SymetricFloatMatrix implements Serializable
 		}
 	}
 
-	public ArrayList<Float> get(Integer x, IntRange yr)
+	public ArrayList<Float> get(Integer x, Collection yr)
 	{
 		check();
-		ArrayList<Float> lList = new ArrayList<Float>();
+		ArrayList<Float> lColumn = new ArrayList<Float>();
 		for (Object lObject : yr)
 		{
 			Integer y = (Integer) lObject;
-			lList.add(get(x, y));
+			lColumn.add(get(x, y));
 		}
-		return lList;
+		return lColumn;
 	}
 
-	public ArrayList<Float> get(IntRange xr, Integer y)
+	public ArrayList<Float> get(Collection xr, Integer y)
 	{
 		check();
-		ArrayList<Float> lList = new ArrayList<Float>();
+		ArrayList<Float> lLine = new ArrayList<Float>();
 		for (Object lObject : xr)
 		{
 			Integer x = (Integer) lObject;
-			lList.add(get(x, y));
+			lLine.add(get(x, y));
 		}
-		return lList;
+		return lLine;
 	}
 
+	public ArrayList<ArrayList<Float>> get(Collection xr, Collection yr)
+	{
+		check();
+		ArrayList<ArrayList<Float>> lSubMatrix = new ArrayList<ArrayList<Float>>();
+		for (Object lx : xr)
+		{
+			ArrayList<Float> lColumn = new ArrayList<Float>();
+			for (Object ly : yr)
+			{
+				Integer x = (Integer) lx;
+				Integer y = (Integer) ly;
+				lColumn.add(get(x, y));
+			}
+			lSubMatrix.add(lColumn);
+		}
+		return lSubMatrix;
+	}
+	
 	public ArrayList<ArrayList<Float>> get(int... pList)
 	{
 		ArrayList<Integer> lList = new ArrayList<Integer>();
 		for (Integer lInteger : pList)
 		{
+			lList.add(lInteger);
+		}
+		return get(lList);
+	}
+	
+	public ArrayList<ArrayList<Float>> get(Collection pIntRange)
+	{
+		ArrayList<Integer> lList = new ArrayList<Integer>();
+		for (Object lObject : pIntRange)
+		{
+			Integer lInteger = (Integer) lObject;
 			lList.add(lInteger);
 		}
 		return get(lList);
@@ -150,16 +183,16 @@ public class SymetricFloatMatrix implements Serializable
 
 		for (int i = 0; i < pList.size(); i++)
 		{
-			ArrayList<Float> lRow = new ArrayList<Float>();
+			ArrayList<Float> lColumn = new ArrayList<Float>();
 			for (int j = 0; j <= i; j++)
 			{
 				Integer x = pList.get(i);
 				Integer y = pList.get(j);
 
 				Float lValue = get(x, y);
-				lRow.add(lValue);
+				lColumn.add(lValue);
 			}
-			lSubMatrix.add(lRow);
+			lSubMatrix.add(lColumn);
 		}
 		return lSubMatrix;
 	}
@@ -206,7 +239,7 @@ public class SymetricFloatMatrix implements Serializable
 	{
 		Integer x = pColumnInteger;
 		for (String lLine : LineReader.getLines(pFile))
-			if (lLine.length()>0)
+			if (lLine.length() > 0)
 			{
 				String[] lArray = sTabDelPattern.split(lLine, -1);
 				Integer y = Integer.parseInt(lArray[0]);

@@ -5,13 +5,18 @@ import java.io.*;
 
 public class SocketThread extends Thread
 {
+	public static final String sEndofLine = "\r\n";
+
 	private Socket mSocket = null;
 	private final Service mService;
 	private final ServerSocket mServerSocket;
 
-	public SocketThread(ServerSocket pServerSocket, Service pService, Socket pSocket)
+	public SocketThread(ServerSocket pServerSocket,
+											Service pService,
+											Socket pSocket,
+											String pThreadName)
 	{
-		super("SocketThread");
+		super(pThreadName);
 		mServerSocket = pServerSocket;
 		mService = pService;
 		this.mSocket = pSocket;
@@ -26,11 +31,11 @@ public class SocketThread extends Thread
 				BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
 
 				mService.onConnection(mSocket);
-				
+
 				String inputLine, outputLine;
 				outputLine = mService.getWelcomeMessage();
-				out.println(outputLine);
-				
+				out.print(outputLine + sEndofLine);
+				out.flush();
 
 				while ((inputLine = in.readLine()) != null)
 				{
@@ -39,10 +44,13 @@ public class SocketThread extends Thread
 					outputLine = mService.processInput(inputLine);
 
 					if (mService.isListening())
-						out.println(outputLine);
+					{
+						out.print(outputLine + sEndofLine);
+						out.flush();
+					}
 					else
 					{
-						if(!mServerSocket.isClosed())
+						if (!mServerSocket.isClosed())
 							mServerSocket.close();
 						break;
 					}
@@ -50,7 +58,7 @@ public class SocketThread extends Thread
 				}
 
 				mService.onDisconnection();
-								
+
 				out.close();
 				in.close();
 				mSocket.close();
