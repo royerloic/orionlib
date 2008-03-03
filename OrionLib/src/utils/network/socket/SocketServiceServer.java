@@ -8,6 +8,7 @@ public class SocketServiceServer
 	private ServerSocket mServerSocket = null;
 	private final boolean listening = true;
 	private final Service mService;
+	private int mThreadCounter = 0;
 			
 	public SocketServiceServer(Service pService)
 	{
@@ -29,7 +30,10 @@ public class SocketServiceServer
 		try
 		{
 			while (mService.isListening())
-				new SocketThread(mServerSocket, mService, mServerSocket.accept()).start();
+			{
+				new SocketThread(mServerSocket, mService, mServerSocket.accept(),mService.getName()+mThreadCounter ).start();
+				mThreadCounter++;
+			}
 
 			if(!mServerSocket.isClosed())
 				mServerSocket.close();

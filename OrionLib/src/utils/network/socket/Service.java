@@ -4,6 +4,8 @@ import java.net.Socket;
 
 public interface Service
 {
+	String getName();
+	
 	String getWelcomeMessage();
 
 	String processInput(String pInputLine);
@@ -17,4 +19,6 @@ public interface Service
 	void onConnection(Socket pSocket);
 
 	void onDisconnection();
+
+
 }
