@@ -1,5 +1,6 @@
 package utils.structures.map;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>
+public class BijectiveBidiHashMap<K, V> extends HashMap<K, V> implements Serializable
 {
 	/**
 	 * 
@@ -38,6 +39,12 @@ public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>
 	public boolean containsValue(Object pValue)
 	{
 		return mReverseHashMap.containsKey(pValue);
+	}
+	
+
+	public K getReverse(V pValue)
+	{
+		return mReverseHashMap.get(pValue);
 	}
 
 	@Override

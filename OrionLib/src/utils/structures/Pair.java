@@ -15,7 +15,6 @@ public class Pair<O> extends Couple<O, O> implements Iterable<O>
 		super(pA, pB);
 	}
 
-	@Override
 	public Iterator<O> iterator()
 	{
 		ArrayList<O> lList = new ArrayList<O>();
