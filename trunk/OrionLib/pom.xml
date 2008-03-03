@@ -38,8 +38,23 @@
       <name>Maven Repository auf FileServer</name>
       <url>${repository-path}</url>
     </repository>
+    
+    <repository>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <id>GroovyRepository</id>
+      <name>GroovyRepository</name>
+      <url>http://repository.codehaus.org/org/codehaus/groovy/</url>
+    </repository>
   </repositories>
+  
   <dependencies>
+     <dependency>
+  		<groupId>org.codehaus.groovy</groupId>
+		<artifactId>groovy</artifactId>
+		<version>1.5.0</version>
+	</dependency>	
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>

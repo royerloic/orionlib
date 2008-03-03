@@ -87,7 +87,6 @@ public class GeneSet implements Comparable<GeneSet>
 		return true;
 	}
 
-	@Override
 	public int compareTo(GeneSet pO)
 	{
 		return getBestPValue().compareTo(pO.getBestPValue());

@@ -120,13 +120,11 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 		return true;
 	}
 
-	@Override
 	public double getConfidence()
 	{
 		return mConfidence;
 	}
 
-	@Override
 	public void setConfidence(double pConfidence)
 	{
 		mConfidence = pConfidence;
@@ -142,13 +140,11 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 		mSecondNodeConfidence = pSecondPowerNodeConfidence;
 	}
 
-	@Override
 	public double getFirstNodeConfidence()
 	{
 		return mFirstNodeConfidence;
 	}
 
-	@Override
 	public double getSecondNodeConfidence()
 	{
 		return mSecondNodeConfidence;

@@ -49,7 +49,6 @@ public class FileSort
 																																		Comparator<KeyedLine<O>>
 	{
 
-		@Override
 		public int compare(KeyedLine<O> pO1, KeyedLine<O> pO2)
 		{
 			return pO1.mKey.compareTo(pO2.mKey);
@@ -60,7 +59,6 @@ public class FileSort
 	private static class DescendingComparator<O extends Comparable<O>>	implements
 																																			Comparator<KeyedLine<O>>
 	{
-		@Override
 		public int compare(KeyedLine<O> pO1, KeyedLine<O> pO2)
 		{
 			return -pO1.mKey.compareTo(pO2.mKey);
