@@ -77,7 +77,7 @@ public class SocketServiceTest
 
 		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lService);
 
-		lSocketServiceServer.startListening(4444);
+		lSocketServiceServer.startListening(2068);
 	}
 
 }
