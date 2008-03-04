@@ -1,67 +1,73 @@
 package utils.sound.test;
 
 import java.awt.DisplayMode;
+import java.awt.Graphics2D;
 import java.awt.HeadlessException;
 
+import utils.graphics.IOrionGraphics;
+import utils.graphics.OrionGraphicsFactory;
 import utils.graphics.impl.OrionGraphics;
 import utils.sound.OrionSoundIn;
 import utils.sound.OrionSoundOut;
 
 /**
  * Oscilloscope Project
- * 
- * 
+ *
+ *
  * Created on 6 mars 2004
- * 
+ *
  * MSc. Ing. Loic Royer
  */
 
 /**
  * Oscilloscope
- * 
+ *
  * @author MSc. Ing. Loic Royer
  */
 public class Oscilloscope
 {
 
-	OrionSoundIn mSoundRecorder;
+	OrionSoundIn					mSoundRecorder;
 
-	OrionSoundOut mSoundPlayer;
+	OrionSoundOut					mSoundPlayer;
 
-	public int mWidth;
+	private byte[]				mSoundBuffer;
 
-	public int mHeight;
-
-	private int[] mPixel;
-
-	private byte[] mSoundBuffer;
-
-	private OrionGraphics mOrionGraphics;
+	private IOrionGraphics	mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
 	 */
 	public Oscilloscope()
 	{
-		mOrionGraphics = new OrionGraphics(	"Oscilloscope",
-																				OrionGraphics.cLAST_DEVICE);
+
+		int lDevice = OrionGraphicsFactory.cLAST_DEVICE;
+
+		DisplayMode lDisplayMode = OrionGraphicsFactory.getCurrentDisplayModeOnDevice(lDevice);
+
+		//lDisplayMode = new DisplayMode(800,600,32,DisplayMode.REFRESH_RATE_UNKNOWN);
+
+		mOrionGraphics = OrionGraphicsFactory.getWindowedOrionGraphics(	lDevice,
+		                                                               	lDisplayMode,
+																																		OrionGraphicsFactory.PIXEL + OrionGraphicsFactory.VECTOR);
+
+		mOrionGraphics.setNumberOfBuffers(2);
+
 	}
 
 	/**
 	 * @param pWidth
 	 * @param pHeight
 	 */
-	public void start(final int pWidth, final int pHeight)
+	public void start()
 	{
-		mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
+		//mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
 
 		mOrionGraphics.startGraphics();
+		int lHeight = mOrionGraphics.getHeight();
+		int lWidth = 16; //mOrionGraphics.getWidth();
 
-		mPixel = new int[pWidth * pHeight];
-		mWidth = pWidth;
-		mHeight = pHeight;
-
-		mSoundBuffer = new byte[2 * pWidth];
+		mSoundBuffer = new byte[2 * lWidth];
 
 		mSoundRecorder = new OrionSoundIn();
 		mSoundRecorder.start();
@@ -69,20 +75,15 @@ public class Oscilloscope
 		mSoundPlayer = new OrionSoundOut();
 		mSoundPlayer.start();
 
-		while (!mOrionGraphics.mMouseRight)
+		while (!mOrionGraphics.getMouseInfo().getMouseRight())
 		{
 			final int lBytesRead = mSoundRecorder.record(mSoundBuffer);
 
 			mSoundPlayer.play(mSoundBuffer, lBytesRead);
 
-			// System.out.println(lBytesRead);
-
-			for (int i = 0; i < mWidth * mHeight; i++)
-				mPixel[i] = 0;
-
-			int lPreviousSignal = 0;
+			/*int lPreviousSignal = 0;
 			int lSignalLock = 0;
-			for (int i = 0; i < mWidth; i++)
+			for (int i = 0; i < lWidth; i++)
 			{
 				final int lSignal = (mSoundBuffer[2 * i] + 256 * mSoundBuffer[2 * i + 1]) / 256;
 
@@ -95,24 +96,29 @@ public class Oscilloscope
 				lPreviousSignal = lSignal;
 			}
 
-			for (int i = 0; i < mWidth; i++)
+
+			final Graphics2D lGraphics = mOrionGraphics.getDrawGraphics();
+
+			lGraphics.clearRect(0, 0, lWidth, lHeight);
+			for (int i = 1; i < lWidth; i++)
 			{
+
 				int lIndex = 2 * (i + lSignalLock);
-				if (lIndex > 2 * mWidth - 2)
-					lIndex = 2 * mWidth - 2;
+				if (lIndex > 2 * lWidth - 2) lIndex = 2 * lWidth - 2;
 				final int lSignal = mSoundBuffer[lIndex] + 256
 														* mSoundBuffer[lIndex + 1];
-				int lValue = (mHeight / 2 + lSignal / 128);
+				int lValue = (lHeight / 2 + lSignal / 128);
 				if (lValue < 0)
 					lValue = 0;
-				else if (lValue >= mHeight)
-					lValue = mHeight - 1;
-				mPixel[i + mWidth * lValue] = 255 + 256 * 255 + 256 * 256 * 255;
+				else if (lValue >= lHeight) lValue = lHeight - 1;
+
+				lGraphics.drawLine(i, lHeight / 2, i, lValue);
+				//mPixel[i + lWidth * lValue] = 255 + 256 * 255 + 256 * 256 * 255;
 			}
 
-			mOrionGraphics.update(mPixel);
-			mOrionGraphics.paintPixels();
-			mOrionGraphics.refresh(); /**/
+
+
+			mOrionGraphics.showGraphics();/**/
 		}
 
 		mSoundRecorder.stop();
@@ -125,7 +131,7 @@ public class Oscilloscope
 	{
 		final Oscilloscope lOscilloscope = new Oscilloscope();
 		// mOrionGraphics.setDefaultCloseOperation(mOrionGraphics.EXIT_ON_CLOSE);
-		lOscilloscope.start(1024, 768);
+		lOscilloscope.start();
 
 	}
 }
