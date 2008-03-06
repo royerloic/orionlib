@@ -1,9 +1,11 @@
 package utils.network.socket;
 
+import java.io.File;
 import java.net.Socket;
 
 public interface Service
 {
+
 	String getName();
 	
 	String getWelcomeMessage();
@@ -20,5 +22,6 @@ public interface Service
 
 	void onDisconnection();
 
+	boolean exit();
 
 }

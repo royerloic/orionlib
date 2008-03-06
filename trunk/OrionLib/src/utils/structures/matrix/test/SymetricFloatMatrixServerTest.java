@@ -9,13 +9,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import utils.network.groovyserver.GroovyServer;
 import utils.structures.matrix.SymetricFloatMatrixServer;
 
 public class SymetricFloatMatrixServerTest
 {
 
 	@Test
-	public void test() throws IOException
+	public void test() throws IOException, InterruptedException
 	{
 		SymetricFloatMatrixServer lSymetricFloatMatrixServer = new SymetricFloatMatrixServer(	null,
 																																													4444,
@@ -23,14 +24,17 @@ public class SymetricFloatMatrixServerTest
 
 		lSymetricFloatMatrixServer.startServerNonBlocking();
 
-		Socket lSocket = SymetricFloatMatrixServer.createLocalSocket();
+		Socket lSocket = GroovyServer.createLocalSocket();
 
-		SymetricFloatMatrixServer.sendQuery(lSocket, "matrix.init(14)");
-		Object lObject = SymetricFloatMatrixServer.sendGetQuery(lSocket,
-																																										"matrix.get(1,2,3,4)");
+		Thread.sleep(500);
+		GroovyServer.sendQuery(lSocket, "matrix.init(14)");
+		Object lObject = GroovyServer.sendQueryAndDecode(lSocket, "matrix.get(1,2,3,4)");
+		
 
 		assertEquals(	lObject.toString(),
 									"[[0.0], [0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]");
+	
+		lObject = GroovyServer.sendQueryAndDecode(lSocket, "matrix.set(11,12,3f)");
 	}
 
 }

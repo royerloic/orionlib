@@ -24,7 +24,7 @@ public class SocketThread extends Thread
 
 	public void run()
 	{
-		if (mService.isListening())
+		
 			try
 			{
 				PrintWriter out = new PrintWriter(mSocket.getOutputStream(), true);
@@ -39,22 +39,11 @@ public class SocketThread extends Thread
 
 				while ((inputLine = in.readLine()) != null)
 				{
-					if (inputLine.equals(mService.getExitCommand()))
+					if (inputLine.equals(mService.getExitCommand()) || mService.exit())
 						break;
 					outputLine = mService.processInput(inputLine);
-
-					if (mService.isListening())
-					{
-						out.print(outputLine + sEndofLine);
-						out.flush();
-					}
-					else
-					{
-						if (!mServerSocket.isClosed())
-							mServerSocket.close();
-						break;
-					}
-
+					out.print(outputLine + sEndofLine);
+					out.flush();
 				}
 
 				mService.onDisconnection();

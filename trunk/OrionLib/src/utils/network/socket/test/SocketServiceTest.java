@@ -15,6 +15,7 @@ import org.junit.Test;
 import utils.io.StreamToFile;
 import utils.io.filedb.FileDB;
 import utils.network.socket.Service;
+import utils.network.socket.ServiceFactory;
 import utils.network.socket.SocketServiceServer;
 
 public class SocketServiceTest
@@ -23,7 +24,7 @@ public class SocketServiceTest
 	@Test
 	public void testGetColumnNames() throws IOException
 	{
-		Service lService = new Service()
+		final Service lService = new Service()
 		{
 
 			boolean mListening = true;
@@ -73,9 +74,21 @@ public class SocketServiceTest
 				return lAnswear;
 			}
 
+			public boolean exit()
+			{
+				return false;
+			}
+
 		};
 
-		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lService);
+		ServiceFactory lServiceFactory = new ServiceFactory()
+		{
+			public Service newService()
+			{
+				return lService;
+			}
+		};
+		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lServiceFactory);
 
 		lSocketServiceServer.startListening(2068);
 	}
