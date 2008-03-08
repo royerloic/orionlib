@@ -32,7 +32,7 @@ public class RangeTest
 		drsame = new Range(3, 3);
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testIntersectingWith()
 	{
@@ -51,7 +51,7 @@ public class RangeTest
 		Assert.assertFalse(dr.isIntersectingWith(new Range(7, 3)));
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testContiguousTo()
 	{
@@ -61,21 +61,21 @@ public class RangeTest
 		Assert.assertTrue(dr.isContiguousTo(new Range(2, 1)));
 		Assert.assertTrue(dr.isContiguousTo(new Range(6, 1)));
 
-		// test that if there is a gap between the two ranges there is no
+		// Test that if there is a gap between the two ranges there is no
 		// contiguity.
 		Assert.assertFalse(dr.isContiguousTo(new Range(0, 2)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(7, 2)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(1, 1)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(7, 1)));
 
-		// test non strict contiguity - cases when ther is overlapping
+		// Test non strict contiguity - cases when ther is overlapping
 		Assert.assertFalse(dr.isContiguousTo(new Range(2, 6)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(2, 2)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(5, 3)));
 		Assert.assertFalse(dr.isContiguousTo(new Range(4, 1)));
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testExtendStart1()
 	{
@@ -84,7 +84,7 @@ public class RangeTest
 		Assert.assertEquals(6, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testExtendStart2()
 	{
@@ -93,7 +93,7 @@ public class RangeTest
 		Assert.assertEquals(6, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testExtendEnd1()
 	{
@@ -102,7 +102,7 @@ public class RangeTest
 		Assert.assertEquals(7, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testExtendEnd2()
 	{
@@ -111,7 +111,7 @@ public class RangeTest
 		Assert.assertEquals(8, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testExtendBoth()
 	{
@@ -120,7 +120,7 @@ public class RangeTest
 		Assert.assertEquals(7, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testNoExtension()
 	{
@@ -129,7 +129,7 @@ public class RangeTest
 		Assert.assertEquals(6, dr.getEnd());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testContiguousPosition()
 	{
@@ -383,7 +383,7 @@ public class RangeTest
 		Assert.assertEquals(1, dr1.length());
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testEquals()
 	{
@@ -391,7 +391,7 @@ public class RangeTest
 		Assert.assertFalse(dr1.equals(dr));
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testHashCode()
 	{
@@ -400,7 +400,7 @@ public class RangeTest
 		Assert.assertTrue(!dr1.equals(dr) || (drsame.hashCode() == dr.hashCode()));
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testCompare()
 	{
@@ -422,7 +422,7 @@ public class RangeTest
 		assertTrue(dr.compareTo(new Range(4, 4)) == -1);
 	}
 
-	/** A test. */
+	/** A Test. */
 	@Test
 	public void testIsInside()
 	{

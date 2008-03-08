@@ -22,7 +22,7 @@ public class FileDBTest
 	{
 		try
 		{
-			InputStream lInputStream = FileDBTest.class.getResourceAsStream("test.tab.txt");
+			InputStream lInputStream = FileDBTest.class.getResourceAsStream("Test.tab.txt");
 			assertTrue(lInputStream != null);
 			sTempFile = File.createTempFile("FileDBTest", "temp");
 			StreamToFile.streamToFile(lInputStream, sTempFile);

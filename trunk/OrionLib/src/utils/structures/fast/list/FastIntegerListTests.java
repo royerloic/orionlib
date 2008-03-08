@@ -412,7 +412,7 @@ public class FastIntegerListTests
 		}
 
 		{
-			// System.out.println("Start Union Perf test");
+			// System.out.println("Start Union Perf Test");
 			long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)
@@ -439,7 +439,7 @@ public class FastIntegerListTests
 		}
 
 		{
-			// System.out.println("Start Intersection Perf test");
+			// System.out.println("Start Intersection Perf Test");
 			long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)
@@ -467,7 +467,7 @@ public class FastIntegerListTests
 		}
 
 		{
-			// System.out.println("Start Difference Perf test");
+			// System.out.println("Start Difference Perf Test");
 			long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)

@@ -31,7 +31,7 @@ public class SocketServiceTest
 
 			public String getName()
 			{
-				return "test";
+				return "Test";
 			}
 
 			public void onConnection(Socket pSocket)
@@ -56,7 +56,7 @@ public class SocketServiceTest
 
 			public String getWelcomeMessage()
 			{
-				return "Hello world, this service is a test service";
+				return "Hello world, this service is a Test service";
 			}
 
 			public boolean isListening()

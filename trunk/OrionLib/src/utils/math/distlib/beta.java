@@ -306,7 +306,7 @@ public class beta
 
 		xinbta = alpha;
 
-		/* test for admissibility of parameters */
+		/* Test for admissibility of parameters */
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(q) || Double.isNaN(alpha))

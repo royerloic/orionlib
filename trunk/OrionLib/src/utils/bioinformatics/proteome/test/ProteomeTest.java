@@ -30,14 +30,14 @@ public class ProteomeTest
 		Proteome lProteome = null;
 		try
 		{
-			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./test.gff"));
-			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./test.fasta.txt"));
+			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
+			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
 			lProteome = new Proteome(lGenome, lFastaSet);
 
-			lProteome.addInteractions(ProteomeTest.class.getResourceAsStream("./test.int.tab.txt"));
+			lProteome.addInteractions(ProteomeTest.class.getResourceAsStream("./Test.int.tab.txt"));
 
 			InterProScanReaderYeast.addDomainsTo(	lProteome,
-																						ProteomeTest.class.getResourceAsStream("./test.interpro.tab.txt"));
+																						ProteomeTest.class.getResourceAsStream("./Test.interpro.tab.txt"));
 
 			System.out.println(lProteome);
 
@@ -69,8 +69,8 @@ public class ProteomeTest
 		Proteome lProteome = null;
 		try
 		{
-			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./test.gff"));
-			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./test.fasta.txt"));
+			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
+			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
 			lProteome = new Proteome(lGenome, lFastaSet);
 		}
 		catch (Throwable e)

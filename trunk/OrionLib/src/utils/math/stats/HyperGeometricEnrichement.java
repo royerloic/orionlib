@@ -141,7 +141,7 @@ public class HyperGeometricEnrichement
 			final double lCorrection = lTestSet.size();
 
 			lWriter.append("//\n");
-			lWriter.append("//test results for: " + lTestName + "\n");
+			lWriter.append("//Test results for: " + lTestName + "\n");
 			lWriter.append("//correction used: " + lCorrection + "*pvalue" + "\n");
 			for (Test lTest : lTestSet)
 			{

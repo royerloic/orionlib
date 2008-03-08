@@ -162,7 +162,7 @@ public class noncentral_chisquare
 														- x2
 														- misc.lgammafn(f2 + 1));
 
-		/* there is no need to test ifault si */
+		/* there is no need to Test ifault si */
 		/* already been checked *//* ^^^^^^^^ ?????? */
 
 		term = v * t;

@@ -63,7 +63,7 @@ public class MainYeast
 	 * DomainIndex lDomainIndex = new DomainIndex(lProteome);
 	 * lDomainIndex.index();
 	 * 
-	 * final FileWriter lFileWriter = new FileWriter("test.txt"); final
+	 * final FileWriter lFileWriter = new FileWriter("Test.txt"); final
 	 * PrintWriter lPrintWriter = new PrintWriter(lFileWriter);
 	 * 
 	 * 

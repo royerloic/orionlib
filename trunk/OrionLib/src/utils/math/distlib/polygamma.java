@@ -157,7 +157,7 @@ public class polygamma
 	/**
 	 * *UNUSED*** xln = java.lang.Math.log(x); /***UNUSED*** for(;;) {
 	 * /***UNUSED*** nn = n + mm - 1; /***UNUSED*** fn = nn; /***UNUSED*** t = (fn +
-	 * 1) * xln; /***UNUSED*** /***UNUSED*** /* overflow and underflow test for
+	 * 1) * xln; /***UNUSED*** /***UNUSED*** /* overflow and underflow Test for
 	 * small and large x
 	 */
 	/*****************************************************************************

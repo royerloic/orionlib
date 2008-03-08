@@ -370,7 +370,7 @@ public class binomial
 							v = v * (u - p2) * xll;
 						}
 					}
-					/* determine appropriate way to perform accept/reject test */
+					/* determine appropriate way to perform accept/reject Test */
 					/* !* k = abs(ix - m); *! */
 					k = java.lang.Math.abs(ix - m);
 					if (k <= 20 || k >= xnpq / 2 - 1)
@@ -407,7 +407,7 @@ public class binomial
 						if (alv <= ynorm + amaxp)
 						{
 							/* stirling's formula to machine accuracy */
-							/* for the final acceptance/rejection test */
+							/* for the final acceptance/rejection Test */
 							x1 = ix + 1;
 							f1 = fm + 1.0;
 							z = n + 1 - fm;
