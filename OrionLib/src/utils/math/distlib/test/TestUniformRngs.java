@@ -27,7 +27,7 @@ public class TestUniformRngs extends TestCase
 	static double[] expWichmannHill =
 	{ 0.7061509002529788, 0.7518728943560409, 0.593337134401559 };
 
-	// test unconfigured generation
+	// Test unconfigured generation
 	// which results in Wichmann-Hill
 	// value obtain from run with code as of 16 Apr 07
 	public void testUnconfigGen()

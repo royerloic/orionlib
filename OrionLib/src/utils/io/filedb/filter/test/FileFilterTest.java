@@ -18,7 +18,7 @@ public class FileFilterTest
 	@Test
 	public void testFilterOut() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("Test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterOut(lInputStream, 1, "ohoh", lOutputStream);
 		String lString = lOutputStream.toString();
@@ -29,7 +29,7 @@ public class FileFilterTest
 	@Test
 	public void testFilterIn() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("Test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterIn(lInputStream, 1, "ohoh", lOutputStream);
 		String lString = lOutputStream.toString();
@@ -43,7 +43,7 @@ public class FileFilterTest
 	@Test
 	public void testFilterHigherLower() throws IOException
 	{
-		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("Test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterLowerHigher(lInputStream, 0, "Double", "2.0", true,lOutputStream);
 		String lString = lOutputStream.toString();

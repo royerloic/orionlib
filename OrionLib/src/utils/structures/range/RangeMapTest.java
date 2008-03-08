@@ -334,7 +334,7 @@ public class RangeMapTest
 	}
 
 	/**
-	 * This test is about checking any leaks of the tests. (Missing cases not
+	 * This Test is about checking any leaks of the tests. (Missing cases not
 	 * covered in the tests) It generates a random maping and stores it in two
 	 * ways, using an array and using the RangeMap. Any discrepancy is detected.
 	 */

@@ -757,7 +757,7 @@ public class normal
 
 	/* !* #endif /*4! */
 
-	// public boolean test()
+	// public boolean Test()
 	// {
 	// final int HOWMANY = 10000;
 	// double testArr[] = new double[10000];

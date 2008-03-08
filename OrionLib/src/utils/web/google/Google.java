@@ -16,7 +16,7 @@ import utils.web.WebPageFetcher;
 
 /**
  * 
- * http://www.google.com/search? as_q=test (query string) &hl=en (language)
+ * http://www.google.com/search? as_q=Test (query string) &hl=en (language)
  * &num=10 (number of results [10,20,30,50,100]) &btnG=Google+Search &as_epq=
  * (complete phrase) &as_oq= (at least one) &as_eq= (excluding) &lr= (language
  * results. [lang_countrycode]) &as_ft=i (filetype include or exclude. [i,e])

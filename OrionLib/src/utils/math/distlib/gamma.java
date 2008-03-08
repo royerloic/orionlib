@@ -324,7 +324,7 @@ public class gamma
 		double p2, q, s1, s2, s3, s4, s5, s6, t = 0.0, x;
 		int i;
 
-		/* test arguments and initialise */
+		/* Test arguments and initialise */
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(alpha) || Double.isNaN(scale))
@@ -602,7 +602,7 @@ public class gamma
 				c = 0.1515 / s;
 			}
 		}
-		/* Step 5: no quotient test if x not positive */
+		/* Step 5: no quotient Test if x not positive */
 
 		if (x > 0.0)
 		{

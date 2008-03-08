@@ -577,7 +577,7 @@ public class hypergeometric
 					v = v * (u - p2) * lamdr;
 				}
 
-				/* acceptance/rejection test */
+				/* acceptance/rejection Test */
 
 				if (m < 100 || ix <= 50)
 				{
@@ -637,7 +637,7 @@ public class hypergeometric
 								+ nm
 								* e
 								* (1. + e * (-0.5 + e / 3.0));
-					/* test against upper bound */
+					/* Test against upper bound */
 					/* !* alv = log(v); *! */
 					alv = java.lang.Math.log(v);
 					if (alv > ub)
@@ -646,7 +646,7 @@ public class hypergeometric
 					}
 					else
 					{
-						/* test against lower bound */
+						/* Test against lower bound */
 						dr = xm * (r * r * r * r);
 						if (r < 0.0)
 							dr = dr / (1.0 + r);

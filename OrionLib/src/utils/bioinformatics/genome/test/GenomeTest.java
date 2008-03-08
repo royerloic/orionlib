@@ -25,8 +25,8 @@ public class GenomeTest
 		Genome lGenome = null;
 		try
 		{
-			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./test.gff"));
-			lGenome.addSequencesFromStream(GenomeTest.class.getResourceAsStream("./test.fasta.txt"));
+			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./Test.gff"));
+			lGenome.addSequencesFromStream(GenomeTest.class.getResourceAsStream("./Test.fasta.txt"));
 			System.out.println(lGenome);
 
 		}
@@ -49,7 +49,7 @@ public class GenomeTest
 		Genome lGenome = null;
 		try
 		{
-			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./test.gff"));
+			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./Test.gff"));
 		}
 		catch (Throwable e)
 		{

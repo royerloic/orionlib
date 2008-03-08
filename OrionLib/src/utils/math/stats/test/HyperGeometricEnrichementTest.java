@@ -17,7 +17,7 @@ public class HyperGeometricEnrichementTest
 	@Test
 	public void testHyperGeometricEnrichementTest() throws IOException
 	{
-		InputStream lInputStream = HyperGeometricEnrichementTest.class.getResourceAsStream("test.tab.txt");
+		InputStream lInputStream = HyperGeometricEnrichementTest.class.getResourceAsStream("Test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 
 		HyperGeometricEnrichement.testStream(	lInputStream,
