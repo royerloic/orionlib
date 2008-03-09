@@ -42,6 +42,7 @@ public class AdvancedDiscovery
 			{
 				System.out.println("Found mote: " + mote.getBluetoothAddress());
 				mote.rumble(2000l);
+				
 				motes.add(mote);
 			}
 

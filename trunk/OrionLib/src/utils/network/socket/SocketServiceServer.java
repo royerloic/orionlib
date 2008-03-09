@@ -5,10 +5,12 @@ import java.io.*;
 
 public class SocketServiceServer
 {
-	private ServerSocket mServerSocket = null;
-	private boolean listening = true;
-	private ServiceFactory mServiceFactory;
-	private int mThreadCounter = 0;
+	private ServerSocket		mServerSocket								= null;
+	private boolean					mListening									= true;
+	private ServiceFactory	mServiceFactory;
+	private int							mThreadCounter							= 0;
+
+	boolean									mAcceptOnlyLocalConnections	= false;
 
 	public SocketServiceServer(ServiceFactory pServiceFactory)
 	{
@@ -29,29 +31,44 @@ public class SocketServiceServer
 
 		try
 		{
-			while (listening)
+			while (mListening)
 			{
 				Service lService = mServiceFactory.newService();
-				new SocketThread(	mServerSocket,
-													lService,
-													mServerSocket.accept(),
-													lService.getName() + mThreadCounter).start();
+				Socket lSocket = mServerSocket.accept();
+				InetAddress lInetAddress = lSocket.getInetAddress();
+				System.out.println("Conection request from: " + lInetAddress);
+				if (mAcceptOnlyLocalConnections == false || lInetAddress.getHostName()
+																																.equals("localhost"))
+				{
+					new SocketThread(	mServerSocket,
+														lService,
+														lSocket,
+														lService.getName() + mThreadCounter).start();
+				}
 				mThreadCounter++;
 			}
 
-			if (!mServerSocket.isClosed())
-				mServerSocket.close();
+			if (!mServerSocket.isClosed()) mServerSocket.close();
 		}
 		catch (SocketException e)
 		{
-			if (!e.getMessage().contains("socket closed"))
-				e.printStackTrace();
+			if (!e.getMessage().contains("socket closed")) e.printStackTrace();
 		}
 	}
 
 	public void stopListening()
 	{
-		listening = false;
+		mListening = false;
+	}
+
+	public boolean isAcceptOnlyLocalConnections()
+	{
+		return mAcceptOnlyLocalConnections;
+	}
+
+	public void setAcceptOnlyLocalConnections(boolean pAcceptOnlyLocalConnections)
+	{
+		mAcceptOnlyLocalConnections = pAcceptOnlyLocalConnections;
 	}
 
 }
