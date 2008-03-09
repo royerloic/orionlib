@@ -15,6 +15,8 @@
  */
 package utils.wiimote;
 
+import java.io.IOException;
+
 import javax.bluetooth.RemoteDevice;
 import javax.swing.event.EventListenerList;
 
@@ -37,6 +39,7 @@ import utils.wiimote.request.ReportModeRequest;
 import utils.wiimote.request.RumbleRequest;
 import utils.wiimote.request.StatusInformationRequest;
 import utils.wiimote.request.WriteRegisterRequest;
+import utils.wiimote.tools.WiiMode;
 
 /**
  * 
@@ -105,6 +108,11 @@ public class Mote
 	public void addStatusInformationListener(StatusInformationListener listener)
 	{
 		listenerList.add(StatusInformationListener.class, listener);
+	}
+	
+	public void addDisconnectionListener(DisconnectionListener listener)
+	{
+		listenerList.add(DisconnectionListener.class, listener);		
 	}
 
 	public void disableIrCamera()
@@ -260,6 +268,16 @@ public class Mote
 			l.statusInformationReceived(report);
 		}
 	}
+	
+	public void fireDisconnectionEvent(IOException pEx)
+	{
+		DisconnectionListener[] listeners = listenerList.getListeners(DisconnectionListener.class);
+		
+		for (DisconnectionListener l : listeners)
+		{
+			l.disconnected(pEx);
+		}
+	}
 
 	public String getBluetoothAddress()
 	{
@@ -331,4 +349,8 @@ public class Mote
 	{
 		outgoing.sendRequest(new ReportModeRequest(mode, continuous));
 	}
+
+
+
+
 }

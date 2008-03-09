@@ -301,6 +301,7 @@ class IncomingThread extends Thread
 			{
 				log.error("connection closed?", ex);
 				active = false;
+				source.fireDisconnectionEvent(ex);
 			}
 		}
 		try

@@ -33,12 +33,14 @@ import utils.utils.CmdLine;
 public class GroovyServer implements Runnable, Serializable
 {
 
-	int mPort = 4444;
-	private File mScriptFile;
+	int							mPort			= 4444;
+	private File		mScriptFile;
 
-	Binding mBinding = new SynchronizedBinding();
+	Binding					mBinding	= new SynchronizedBinding();
 
-	private String mPassword = null;
+	private String	mPassword	= null;
+	private boolean	mOnlyLocal;
+	private SocketServiceServer	mSocketServiceServer;
 
 	/**
 	 * @param args
@@ -84,12 +86,16 @@ public class GroovyServer implements Runnable, Serializable
 			mPort = Integer.parseInt(pParameters.get("port"));
 		}
 
+		if (pParameters.containsKey("onlylocal"))
+		{
+			mOnlyLocal = true;
+		}
+
 		setPassword(pParameters.get("password"));
 
 	}
 
-	public GroovyServer(int pPort,
-											File pScriptFile)
+	public GroovyServer(int pPort, File pScriptFile)
 	{
 		this();
 		mScriptFile = pScriptFile;
@@ -110,7 +116,7 @@ public class GroovyServer implements Runnable, Serializable
 	{
 		return save(new File(pFileName));
 	}
-	
+
 	public boolean save(File pFile) throws IOException
 	{
 		synchronized (this)
@@ -131,7 +137,7 @@ public class GroovyServer implements Runnable, Serializable
 	{
 		return load(new File(pFileName));
 	}
-	
+
 	public boolean load(File pFile) throws IOException
 	{
 		synchronized (this)
@@ -167,6 +173,11 @@ public class GroovyServer implements Runnable, Serializable
 		Thread lThread = new Thread(this, "GroovyServer");
 		lThread.start();
 	}
+	
+	public void stopServerNonBlocking()
+	{
+		mSocketServiceServer.stopListening();		
+	}
 
 	public void run()
 	{
@@ -189,18 +200,19 @@ public class GroovyServer implements Runnable, Serializable
 
 		final GroovyServer lGroovyServer = this;
 		ServiceFactory lServiceFactory = new ServiceFactory()
-		{
-			public Service newService()
 			{
-				return new GroovyService(lGroovyServer);
-			}
-		};
+				public Service newService()
+				{
+					return new GroovyService(lGroovyServer);
+				}
+			};
 
-		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lServiceFactory);
+		mSocketServiceServer = new SocketServiceServer(lServiceFactory);
+		mSocketServiceServer.setAcceptOnlyLocalConnections(mOnlyLocal);
 
 		try
 		{
-			lSocketServiceServer.startListening(mPort);
+			mSocketServiceServer.startListening(mPort);
 		}
 		catch (IOException e)
 		{
@@ -284,7 +296,7 @@ public class GroovyServer implements Runnable, Serializable
 		}
 		catch (MissingPropertyException e)
 		{
-			lGroovyShell.evaluate("obj = \"" + pResultString+"\"");
+			lGroovyShell.evaluate("obj = \"" + pResultString + "\"");
 		}
 
 		Object lObject = binding.getVariable("obj");
@@ -297,5 +309,6 @@ public class GroovyServer implements Runnable, Serializable
 		return mBinding;
 	}
 
+	
 
 }

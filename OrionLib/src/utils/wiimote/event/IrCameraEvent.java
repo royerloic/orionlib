@@ -27,17 +27,17 @@ import utils.wiimote.Mote;
 public class IrCameraEvent
 {
 
-	private int x;
+	private int						x;
 
-	private int y;
+	private int						y;
 
-	private int size;
+	private int						size;
 
-	private Mote source;
+	private Mote					source;
 
-	private IrCameraMode mode;
+	private IrCameraMode	mode;
 
-	private int slot;
+	private int						slot;
 
 	public IrCameraEvent(	Mote source,
 												IrCameraMode mode,
@@ -69,6 +69,16 @@ public class IrCameraEvent
 		return y;
 	}
 
+	public double getNormalizedX()
+	{
+		return ((double) x) / 1024;
+	}
+
+	public double getNormalizedY()
+	{
+		return ((double) y) / 768;
+	}
+
 	public int getSize()
 	{
 		return size;
@@ -82,6 +92,12 @@ public class IrCameraEvent
 	public IrCameraMode getMode()
 	{
 		return mode;
+	}
+
+	@Override
+	public String toString()
+	{
+		return mode + "\t" + slot + "\t" + x + "\t" + y + "\t" + size + "\n";
 	}
 
 }
