@@ -1,5 +1,7 @@
 package utils.structures.matrix;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -203,7 +205,8 @@ public class SymetricFloatMatrix implements Serializable
 		ObjectOutputStream lObjectOutputStream = null;
 
 		lFileOutputStream = new FileOutputStream(pFile);
-		lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
+		BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,10000000);
+		lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);		
 		lObjectOutputStream.writeObject(this);
 		lObjectOutputStream.close();
 
@@ -216,7 +219,8 @@ public class SymetricFloatMatrix implements Serializable
 		ObjectInputStream lObjectInputStream = null;
 
 		lFileInputStream = new FileInputStream(pFile);
-		lObjectInputStream = new ObjectInputStream(lFileInputStream);
+		BufferedInputStream lBufferedInputStream = new BufferedInputStream(lFileInputStream,10000000);
+		lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 		SymetricFloatMatrix lSymetricFloatMatrix;
 		try
 		{

@@ -4,6 +4,8 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.lang.MissingPropertyException;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -125,7 +127,8 @@ public class GroovyServer implements Runnable, Serializable
 			ObjectOutputStream lObjectOutputStream = null;
 
 			lFileOutputStream = new FileOutputStream(pFile);
-			lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
+			BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,10000000);
+			lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
 			lObjectOutputStream.writeObject(mBinding);
 			lObjectOutputStream.close();
 
@@ -146,7 +149,8 @@ public class GroovyServer implements Runnable, Serializable
 			ObjectInputStream lObjectInputStream = null;
 
 			lFileInputStream = new FileInputStream(pFile);
-			lObjectInputStream = new ObjectInputStream(lFileInputStream);
+			BufferedInputStream lBufferedInputStream = new BufferedInputStream(lFileInputStream,10000000);
+			lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 			Binding lBinding;
 			try
 			{
