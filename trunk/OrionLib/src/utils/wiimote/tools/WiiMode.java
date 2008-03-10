@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.io.IOException;
 
 import utils.wiimote.DisconnectionListener;
@@ -26,11 +27,11 @@ public class WiiMode implements
 										DisconnectionListener
 {
 
-	private Mote	mMote;
-	private Mode				mMode;
-	private Rectangle		mScreenRectangle;
+	private Mote			mMote;
+	private Mode			mMode;
+	private Rectangle	mScreenRectangle;
 
-	static Robot				mRobot;
+	static Robot			mRobot;
 
 	enum Mode
 	{
@@ -43,13 +44,12 @@ public class WiiMode implements
 		final GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		mScreenRectangle = genv.getMaximumWindowBounds();
 
-
 	}
-	
+
 	public void connect()
 	{
 		final WiiMode lWiiMode = this;
-		
+
 		Runnable lRunnable = new Runnable()
 			{
 				public void run()
@@ -65,10 +65,10 @@ public class WiiMode implements
 		Thread lThread = new Thread(lRunnable);
 		lThread.start();
 	}
-	
+
 	public void disconnect()
 	{
-		mMote.disconnect();		
+		if (mMote != null) mMote.disconnect();
 	}
 
 	public void activate(Mode pMode)
@@ -77,10 +77,12 @@ public class WiiMode implements
 		switch (mMode)
 		{
 			case mouse:
-				mMote.enableIrCamera(IrCameraMode.EXTENDED, IrCameraSensitivity.MARCAN);
-				mMote.addIrCameraListener(this);				
-				mMote.setReportMode(ReportModeRequest.DATA_REPORT_0x33);
-			break;
+				mMote.requestStatusInformation();
+				mMote.enableIrCamera(IrCameraMode.BASIC, IrCameraSensitivity.MARCAN);
+				mMote.addIrCameraListener(this);
+				mMote.setReportMode(ReportModeRequest.DATA_REPORT_0x36);
+				/***/
+				break;
 
 		}
 
@@ -107,10 +109,39 @@ public class WiiMode implements
 
 	}
 
+	static boolean	mButton1Pressed	= false;
+	static boolean	mButton2Pressed	= false;
+	static boolean	mButton3Pressed	= false;
+
 	@Override
 	public void buttonPressed(CoreButtonEvent pEvt)
 	{
 		System.out.println("button: " + pEvt.getButton());
+
+		if (!mButton1Pressed && pEvt.isButtonAPressed())
+		{
+			mButton1Pressed = true;
+			mRobot.mousePress(InputEvent.BUTTON1_MASK);
+			mRobot.waitForIdle();
+		}
+		else if (mButton1Pressed && pEvt.isNoButtonPressed())
+		{
+			mButton1Pressed = false;
+			mRobot.mouseRelease(InputEvent.BUTTON1_MASK);
+			mRobot.waitForIdle();
+		}
+		else if (!mButton3Pressed && pEvt.isButtonBPressed())
+		{
+			mButton3Pressed = true;
+			mRobot.mousePress(InputEvent.BUTTON3_MASK);
+			mRobot.waitForIdle();
+		}
+		else if (mButton3Pressed && pEvt.isNoButtonPressed())
+		{
+			mButton3Pressed = false;
+			mRobot.mouseRelease(InputEvent.BUTTON3_MASK);
+			mRobot.waitForIdle();
+		}
 
 	}
 
@@ -124,9 +155,7 @@ public class WiiMode implements
 	public void disconnected(IOException pEx)
 	{
 		System.out.println("disconnected...");
-		
+
 	}
-
-
 
 }
