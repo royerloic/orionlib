@@ -94,7 +94,7 @@ public class HyperGeometricEnrichement
 								pTestNameIndex,
 								pIndex,
 								pPValueThreshold,
-								new FileOutputStream(pInputFile));
+								new FileOutputStream(pOutputFile));
 	}
 
 	public static void testStream(InputStream pInputStream,
