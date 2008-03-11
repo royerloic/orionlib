@@ -1,11 +1,46 @@
 package utils.wiimote;
-import java.util.ArrayList;
-import java.awt.*;
-import javax.swing.*;
-import wiiremotej.*;
-import wiiremotej.event.*;
-import javax.sound.sampled.*;
-import java.io.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import wiiremotej.AbsoluteAnalogStickMouse;
+import wiiremotej.AccelerometerMouse;
+import wiiremotej.AnalogStickData;
+import wiiremotej.AnalogStickMouse;
+import wiiremotej.ButtonMap;
+import wiiremotej.ButtonMouseMap;
+import wiiremotej.ButtonMouseWheelMap;
+import wiiremotej.IRAccelerometerMouse;
+import wiiremotej.IRMouse;
+import wiiremotej.MotionAccelerometerMouse;
+import wiiremotej.PrebufferedSound;
+import wiiremotej.RelativeAnalogStickMouse;
+import wiiremotej.TiltAccelerometerMouse;
+import wiiremotej.WiiRemote;
+import wiiremotej.WiiRemoteExtension;
+import wiiremotej.WiiRemoteJ;
+import wiiremotej.event.WRAccelerationEvent;
+import wiiremotej.event.WRButtonEvent;
+import wiiremotej.event.WRClassicControllerExtensionEvent;
+import wiiremotej.event.WRExtensionEvent;
+import wiiremotej.event.WRGuitarExtensionEvent;
+import wiiremotej.event.WRIREvent;
+import wiiremotej.event.WRNunchukExtensionEvent;
+import wiiremotej.event.WRStatusEvent;
+import wiiremotej.event.WiiRemoteAdapter;
+import wiiremotej.event.WiiRemoteDiscoveredEvent;
+import wiiremotej.event.WiiRemoteDiscoveryListener;
 
 /**
  * Implements WiiRemoteListener and acts as a general test class. Note that you
@@ -66,6 +101,8 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 					{
 						System.out.println("Found " + numberFound + " remotes!");
 					}
+
+
 				};
 
 			mouseTestFrame = new JFrame();
