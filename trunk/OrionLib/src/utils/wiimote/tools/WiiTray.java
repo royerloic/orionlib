@@ -19,16 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import utils.utils.CmdLine;
-import utils.wiimote.Mote;
-import utils.wiimote.MoteFinder;
 
 public class WiiTray implements MouseListener, ActionListener, ItemListener
 {
 	TrayIcon																mTrayIcon;
 
 	HashMap<CheckboxMenuItem, WiiMode.Mode>	mCheckboxMenuIteMap	= new HashMap<CheckboxMenuItem, WiiMode.Mode>();
-
-	private Mote														mMote;
 
 	private WiiMode													mWiiMode;
 

@@ -7,31 +7,37 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.io.IOException;
 
-import utils.wiimote.DisconnectionListener;
-import utils.wiimote.IrCameraMode;
-import utils.wiimote.IrCameraSensitivity;
-import utils.wiimote.Mote;
-import utils.wiimote.MoteFinder;
-import utils.wiimote.StatusInformationReport;
-import utils.wiimote.event.CoreButtonEvent;
-import utils.wiimote.event.CoreButtonListener;
-import utils.wiimote.event.IrCameraEvent;
-import utils.wiimote.event.IrCameraListener;
-import utils.wiimote.event.StatusInformationListener;
-import utils.wiimote.request.ReportModeRequest;
+import utils.wiimote.WRLImpl;
+import wiiremotej.IRLight;
+import wiiremotej.WiiRemote;
+import wiiremotej.WiiRemoteExtension;
+import wiiremotej.WiiRemoteJ;
+import wiiremotej.event.WRAccelerationEvent;
+import wiiremotej.event.WRButtonEvent;
+import wiiremotej.event.WRCombinedEvent;
+import wiiremotej.event.WRExtensionEvent;
+import wiiremotej.event.WRIREvent;
+import wiiremotej.event.WRStatusEvent;
+import wiiremotej.event.WiiRemoteDiscoveredEvent;
+import wiiremotej.event.WiiRemoteDiscoveryListener;
+import wiiremotej.event.WiiRemoteListener;
 
-public class WiiMode implements
-										IrCameraListener,
-										CoreButtonListener,
-										StatusInformationListener,
-										DisconnectionListener
+public class WiiMode implements WiiRemoteListener
 {
+	private static WiiRemote	remote;
 
-	private Mote			mMote;
-	private Mode			mMode;
-	private Rectangle	mScreenRectangle;
+	private static int				t		= 0;
+	private static int				x		= 0;
+	private static int				y		= 0;
+	private static int				z		= 0;
 
-	static Robot			mRobot;
+	private static double			mX	= 0;
+	private static double			mY	= 0;
+
+	private Mode							mMode;
+	private Rectangle					mScreenRectangle;
+
+	static Robot							mRobot;
 
 	enum Mode
 	{
@@ -54,11 +60,35 @@ public class WiiMode implements
 			{
 				public void run()
 				{
-					mMote = MoteFinder.getMoteFinder().findMote();
-					mMote.setPlayerLeds(new boolean[] { true, false, false, false });
-					mMote.addCoreButtonListener(lWiiMode);
-					mMote.addStatusInformationListener(lWiiMode);
-					mMote.addDisconnectionListener(lWiiMode);
+					try
+					{
+						WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
+							{
+								public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
+								{
+									evt	.getWiiRemote()
+											.addWiiRemoteListener(new WRLImpl(evt.getWiiRemote()));
+								}
+
+								public void findFinished(int numberFound)
+								{
+									System.out.println("Found " + numberFound + " remotes!");
+								}
+							};
+
+						// Find and connect to a Wii Remote
+						remote = WiiRemoteJ.findRemote();
+						remote.addWiiRemoteListener(lWiiMode);
+						remote.setAccelerometerEnabled(false);
+						remote.setSpeakerEnabled(false);
+
+						remote.setLEDIlluminated(0, true);
+
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
 				}
 			};
 
@@ -68,19 +98,35 @@ public class WiiMode implements
 
 	public void disconnect()
 	{
-		if (mMote != null) mMote.disconnect();
+		if (remote != null) remote.disconnect();
 	}
 
-	public void activate(Mode pMode)
+	public void activate(Mode pMode) 
 	{
 		mMode = pMode;
 		switch (mMode)
 		{
 			case mouse:
-				mMote.requestStatusInformation();
-				mMote.enableIrCamera(IrCameraMode.BASIC, IrCameraSensitivity.MARCAN);
-				mMote.addIrCameraListener(this);
-				mMote.setReportMode(ReportModeRequest.DATA_REPORT_0x36);
+				try
+				{
+					remote.setIRSensorEnabled(true, WRIREvent.BASIC);
+				}
+				catch (IllegalArgumentException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (IllegalStateException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 				/***/
 				break;
 
@@ -89,23 +135,63 @@ public class WiiMode implements
 	}
 
 	@Override
-	public void irImageChanged(IrCameraEvent pEvt)
+	public void IRInputReceived(WRIREvent evt)
 	{
-		System.out.println(pEvt);
 		switch (mMode)
 		{
 			case mouse:
-			{
-				if (pEvt.getSlot() == 0)
+				try
 				{
-					final int x = (int) ((1 - pEvt.getNormalizedX()) * mScreenRectangle.getWidth());
-					final int y = (int) (pEvt.getNormalizedY() * mScreenRectangle.getHeight());
-					mRobot.mouseMove(x, y);
+					int i = 0;
+					double nmX = 0;
+					double nmY = 0;
+
+					for (IRLight light : evt.getIRLights())
+					{
+						if (light != null)
+						{
+							System.out.println("Light: " + i);
+							System.out.println("X: " + light.getX());
+							System.out.println("Y:" + light.getY());
+							// System.out.println("R:" + light.getSize());
+
+							nmX += light.getX();
+							nmY += light.getY();
+							i++;
+						}
+					}
+
+					if (i > 0)
+					{
+						mX = nmX / (double) i;
+						mY = nmY / (double) i;
+
+						final int x = (int) ((1 - mX) * mScreenRectangle.getWidth());
+						final int y = (int) (mY * mScreenRectangle.getHeight());
+						mRobot.mouseMove(x, y);
+
+						/*******************************************************************
+						 * if (y < mScreenRectangle.getHeight() / 2) {
+						 * remote.startModulatedVibrating(x); } else {
+						 * remote.stopModulatedVibrating(); }/
+						 ******************************************************************/
+					}
 				}
-			}
+				catch (Throwable e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}/**/
 				break;
 
 		}
+
+	}
+
+	@Override
+	public void accelerationInputReceived(WRAccelerationEvent pArg0)
+	{
+		// TODO Auto-generated method stub
 
 	}
 
@@ -114,47 +200,95 @@ public class WiiMode implements
 	static boolean	mButton3Pressed	= false;
 
 	@Override
-	public void buttonPressed(CoreButtonEvent pEvt)
+	public void buttonInputReceived(WRButtonEvent evt)
 	{
-		System.out.println("button: " + pEvt.getButton());
+		switch (mMode)
+		{
+			case mouse:
+				System.out.println(evt);
+				if (!mButton1Pressed && evt.isPressed(WRButtonEvent.A))
+				{
+					mButton1Pressed = true;
+					mRobot.mousePress(InputEvent.BUTTON1_MASK);
+					mRobot.waitForIdle();
+				}
+				else if (mButton1Pressed && evt.wasReleased(WRButtonEvent.A))
+				{
+					mButton1Pressed = false;
+					mRobot.mouseRelease(InputEvent.BUTTON1_MASK);
+					mRobot.waitForIdle();
+				}
+				else if (!mButton3Pressed && evt.isPressed(WRButtonEvent.B))
+				{
+					mButton3Pressed = true;
+					mRobot.mousePress(InputEvent.BUTTON3_MASK);
+					mRobot.waitForIdle();
+				}
+				else if (mButton3Pressed && evt.wasReleased(WRButtonEvent.B))
+				{
+					mButton3Pressed = false;
+					mRobot.mouseRelease(InputEvent.BUTTON3_MASK);
+					mRobot.waitForIdle();
+				}
+				break;
 
-		if (!mButton1Pressed && pEvt.isButtonAPressed())
-		{
-			mButton1Pressed = true;
-			mRobot.mousePress(InputEvent.BUTTON1_MASK);
-			mRobot.waitForIdle();
-		}
-		else if (mButton1Pressed && pEvt.isNoButtonPressed())
-		{
-			mButton1Pressed = false;
-			mRobot.mouseRelease(InputEvent.BUTTON1_MASK);
-			mRobot.waitForIdle();
-		}
-		else if (!mButton3Pressed && pEvt.isButtonBPressed())
-		{
-			mButton3Pressed = true;
-			mRobot.mousePress(InputEvent.BUTTON3_MASK);
-			mRobot.waitForIdle();
-		}
-		else if (mButton3Pressed && pEvt.isNoButtonPressed())
-		{
-			mButton3Pressed = false;
-			mRobot.mouseRelease(InputEvent.BUTTON3_MASK);
-			mRobot.waitForIdle();
 		}
 
 	}
 
 	@Override
-	public void statusInformationReceived(StatusInformationReport pReport)
+	public void combinedInputReceived(WRCombinedEvent pArg0)
 	{
-		System.out.println(pReport);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void disconnected(IOException pEx)
+	public void disconnected()
 	{
 		System.out.println("disconnected...");
+
+	}
+
+	@Override
+	public void extensionConnected(WiiRemoteExtension pArg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void extensionDisconnected(WiiRemoteExtension pArg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void extensionInputReceived(WRExtensionEvent pArg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void extensionPartiallyInserted()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void extensionUnknown()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void statusReported(WRStatusEvent pArg0)
+	{
+		System.out.println(pArg0);
 
 	}
 
