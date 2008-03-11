@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import utils.wiimote.WRLImpl;
 import wiiremotej.IRLight;
@@ -26,15 +27,15 @@ public class WiiMode implements WiiRemoteListener
 {
 	private static WiiRemote	remote;
 
-	private static int				t		= 0;
-	private static int				x		= 0;
-	private static int				y		= 0;
-	private static int				z		= 0;
+	private static int				t			= 0;
+	private static int				x			= 0;
+	private static int				y			= 0;
+	private static int				z			= 0;
 
-	private static double			mX	= 0;
-	private static double			mY	= 0;
+	private static double			mX		= 0;
+	private static double			mY		= 0;
 
-	private Mode							mMode;
+	private Mode							mMode	= null;
 	private Rectangle					mScreenRectangle;
 
 	static Robot							mRobot;
@@ -78,11 +79,20 @@ public class WiiMode implements WiiRemoteListener
 
 						// Find and connect to a Wii Remote
 						remote = WiiRemoteJ.findRemote();
-						remote.addWiiRemoteListener(lWiiMode);
-						remote.setAccelerometerEnabled(false);
-						remote.setSpeakerEnabled(false);
 
-						remote.setLEDIlluminated(0, true);
+						if (remote != null)
+						{
+							remote.addWiiRemoteListener(lWiiMode);
+							remote.setAccelerometerEnabled(false);
+							// Wremote.setSpeakerEnabled(false);
+
+							remote.setLEDIlluminated(0, true);
+						}
+						else
+						{
+							// Connection failed
+							System.out.println("Connection failed.");
+						}
 
 					}
 					catch (Exception e)
@@ -101,10 +111,10 @@ public class WiiMode implements WiiRemoteListener
 		if (remote != null) remote.disconnect();
 	}
 
-	public void activate(Mode pMode) 
+	public void activate(Mode pMode)
 	{
 		mMode = pMode;
-		switch (mMode)
+		if (mMode != null) switch (mMode)
 		{
 			case mouse:
 				try
@@ -137,7 +147,7 @@ public class WiiMode implements WiiRemoteListener
 	@Override
 	public void IRInputReceived(WRIREvent evt)
 	{
-		switch (mMode)
+		if (mMode != null) switch (mMode)
 		{
 			case mouse:
 				try
@@ -202,7 +212,7 @@ public class WiiMode implements WiiRemoteListener
 	@Override
 	public void buttonInputReceived(WRButtonEvent evt)
 	{
-		switch (mMode)
+		if (mMode != null) switch (mMode)
 		{
 			case mouse:
 				System.out.println(evt);
@@ -240,15 +250,9 @@ public class WiiMode implements WiiRemoteListener
 	public void combinedInputReceived(WRCombinedEvent pArg0)
 	{
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
-	public void disconnected()
-	{
-		System.out.println("disconnected...");
-
-	}
+	
 
 	@Override
 	public void extensionConnected(WiiRemoteExtension pArg0)
@@ -290,6 +294,26 @@ public class WiiMode implements WiiRemoteListener
 	{
 		System.out.println(pArg0);
 
+	}
+
+	
+	
+	
+	ArrayList<DisconnectListener>	lDisconnectListenerList	= new ArrayList<DisconnectListener>();
+
+	public void addDisconnectListener(DisconnectListener pDisconnectListener)
+	{
+		lDisconnectListenerList.add(pDisconnectListener);
+	}
+	
+	@Override
+	public void disconnected()
+	{
+		System.out.println("disconnected...");
+		for (DisconnectListener lDisconnectListener : lDisconnectListenerList)
+		{
+			lDisconnectListener.disconnected();
+		}
 	}
 
 }

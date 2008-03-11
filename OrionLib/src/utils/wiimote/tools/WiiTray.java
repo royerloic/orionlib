@@ -20,7 +20,7 @@ import java.util.Map;
 
 import utils.utils.CmdLine;
 
-public class WiiTray implements MouseListener, ActionListener, ItemListener
+public class WiiTray implements MouseListener, ActionListener, ItemListener, DisconnectListener
 {
 	TrayIcon																mTrayIcon;
 
@@ -51,6 +51,8 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener
 
 			if (SystemTray.isSupported())
 			{
+				mWiiMode.addDisconnectListener(this);
+				
 
 				SystemTray tray = SystemTray.getSystemTray();
 				URL lURL = WiiTray.class.getResource("remote.png");
@@ -65,10 +67,30 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener
 						{
 							System.out.println("Connecting...");
 							mWiiMode.connect();
+							for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+							{
+								lCheckboxMenuItem.setEnabled(true);
+							}
 						}
 					};
 				lConnectItem.addActionListener(lConnectItemListener);
 				popup.add(lConnectItem);
+
+				MenuItem lDisconnectItem = new MenuItem("Disconnect");
+				ActionListener lDisconnectItemListener = new ActionListener()
+					{
+						public void actionPerformed(ActionEvent e)
+						{
+							System.out.println("Disconnecting...");
+							mWiiMode.disconnect();
+							for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+							{
+								lCheckboxMenuItem.setEnabled(false);
+							}
+						}
+					};
+				lDisconnectItem.addActionListener(lDisconnectItemListener);
+				popup.add(lDisconnectItem);
 
 				popup.addSeparator();
 
@@ -88,6 +110,11 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener
 				lSlideShowMode.addItemListener(this);
 				mCheckboxMenuIteMap.put(lSlideShowMode, WiiMode.Mode.slideshow);
 				popup.add(lSlideShowMode);
+				
+				for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+				{
+					lCheckboxMenuItem.setEnabled(false);
+				}
 
 				popup.addSeparator();
 
@@ -180,5 +207,14 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener
 		WiiMode.Mode lWiiModeMode = mCheckboxMenuIteMap.get(pE.getSource());
 
 		mWiiMode.activate(lWiiModeMode);
+	}
+
+	@Override
+	public void disconnected()
+	{
+		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+		{
+			lCheckboxMenuItem.setEnabled(false);
+		}		
 	}
 }
