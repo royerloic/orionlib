@@ -20,7 +20,7 @@ import java.util.Map;
 
 import utils.utils.CmdLine;
 
-public class WiiTray implements MouseListener, ActionListener, ItemListener, DisconnectListener
+public class WiiTray implements MouseListener, ActionListener, ItemListener, WiiStatusListener
 {
 	TrayIcon																mTrayIcon;
 
@@ -67,10 +67,7 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Dis
 						{
 							System.out.println("Connecting...");
 							mWiiMode.connect();
-							for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
-							{
-								lCheckboxMenuItem.setEnabled(true);
-							}
+
 						}
 					};
 				lConnectItem.addActionListener(lConnectItemListener);
@@ -83,10 +80,6 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Dis
 						{
 							System.out.println("Disconnecting...");
 							mWiiMode.disconnect();
-							for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
-							{
-								lCheckboxMenuItem.setEnabled(false);
-							}
 						}
 					};
 				lDisconnectItem.addActionListener(lDisconnectItemListener);
@@ -210,6 +203,15 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Dis
 	}
 
 	@Override
+	public void connected()
+	{
+		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+		{
+			lCheckboxMenuItem.setEnabled(true);
+		}		
+	}
+	
+	@Override
 	public void disconnected()
 	{
 		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
@@ -217,4 +219,6 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Dis
 			lCheckboxMenuItem.setEnabled(false);
 		}		
 	}
+
+
 }
