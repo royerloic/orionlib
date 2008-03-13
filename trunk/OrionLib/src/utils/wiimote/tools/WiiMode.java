@@ -25,20 +25,22 @@ import wiiremotej.event.WiiRemoteListener;
 
 public class WiiMode implements WiiRemoteListener
 {
-	private static WiiRemote	remote;
+	private static WiiRemote			remote;
 
-	private static int				t			= 0;
-	private static int				x			= 0;
-	private static int				y			= 0;
-	private static int				z			= 0;
+	private static int						t												= 0;
+	private static int						x												= 0;
+	private static int						y												= 0;
+	private static int						z												= 0;
 
-	private static double			mX		= 0;
-	private static double			mY		= 0;
+	private static double					mX											= 0;
+	private static double					mY											= 0;
 
-	private Mode							mMode	= null;
-	private Rectangle					mScreenRectangle;
+	private Mode									mMode										= null;
+	private Rectangle							mScreenRectangle;
 
-	static Robot							mRobot;
+	static Robot									mRobot;
+
+	ArrayList<WiiStatusListener>	lWiiStatusListenerList	= new ArrayList<WiiStatusListener>();
 
 	enum Mode
 	{
@@ -49,7 +51,9 @@ public class WiiMode implements WiiRemoteListener
 	{
 		mRobot = new Robot();
 		final GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		mScreenRectangle = genv.getMaximumWindowBounds();
+		mScreenRectangle = genv	.getDefaultScreenDevice()
+														.getDefaultConfiguration()
+														.getBounds();
 
 	}
 
@@ -87,6 +91,11 @@ public class WiiMode implements WiiRemoteListener
 							// Wremote.setSpeakerEnabled(false);
 
 							remote.setLEDIlluminated(0, true);
+
+							for (WiiStatusListener lWiiStatusListener : lWiiStatusListenerList)
+							{
+								lWiiStatusListener.connected();
+							}
 						}
 						else
 						{
@@ -109,49 +118,43 @@ public class WiiMode implements WiiRemoteListener
 	public void disconnect()
 	{
 		if (remote != null) remote.disconnect();
+		disconnected();
 	}
 
 	public void activate(Mode pMode)
 	{
-		mMode = pMode;
-		if (mMode != null) switch (mMode)
+		try
 		{
-			case mouse:
-				try
-				{
+			mMode = pMode;
+			if (mMode != null) switch (mMode)
+			{
+				case mouse:
+				case pen:
+
 					remote.setIRSensorEnabled(true, WRIREvent.BASIC);
-				}
-				catch (IllegalArgumentException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				catch (IllegalStateException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
-				/***/
-				break;
+					/***/
+					break;
 
+			}
 		}
-
+		catch (Throwable e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void IRInputReceived(WRIREvent evt)
 	{
-		if (mMode != null) switch (mMode)
+		try
 		{
-			case mouse:
-				try
+			if (mMode != null) switch (mMode)
+			{
+				case mouse:
 				{
+
 					int i = 0;
 					double nmX = 0;
 					double nmY = 0;
@@ -160,10 +163,11 @@ public class WiiMode implements WiiRemoteListener
 					{
 						if (light != null)
 						{
-							System.out.println("Light: " + i);
-							System.out.println("X: " + light.getX());
-							System.out.println("Y:" + light.getY());
-							// System.out.println("R:" + light.getSize());
+							/*****************************************************************
+							 * System.out.println("Light: " + i); System.out.println("X: " +
+							 * light.getX()); System.out.println("Y:" + light.getY());
+							 * System.out.println("R:" + light.getSize());
+							 ****************************************************************/
 
 							nmX += light.getX();
 							nmY += light.getY();
@@ -171,30 +175,79 @@ public class WiiMode implements WiiRemoteListener
 						}
 					}
 
-					if (i > 0)
+					if (i == 2)
 					{
 						mX = nmX / (double) i;
 						mY = nmY / (double) i;
 
+						mX = mX * 1.10 - 0.05;
+						mY = mY * 1.10 - 0.05;/**/
+
 						final int x = (int) ((1 - mX) * mScreenRectangle.getWidth());
 						final int y = (int) (mY * mScreenRectangle.getHeight());
 						mRobot.mouseMove(x, y);
-
-						/*******************************************************************
-						 * if (y < mScreenRectangle.getHeight() / 2) {
-						 * remote.startModulatedVibrating(x); } else {
-						 * remote.stopModulatedVibrating(); }/
-						 ******************************************************************/
 					}
-				}
-				catch (Throwable e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}/**/
-				break;
 
+				}
+					break;
+
+				case pen:
+				{
+
+					int i = 0;
+					double nmX = 0;
+					double nmY = 0;
+
+					for (IRLight light : evt.getIRLights())
+					{
+						if (light != null)
+						{
+							/*****************************************************************
+							 * System.out.println("Light: " + i); System.out.println("X: " +
+							 * light.getX()); System.out.println("Y:" + light.getY());
+							 * System.out.println("R:" + light.getSize());
+							 ****************************************************************/
+
+							mX = light.getX();
+							mY = light.getY();
+							i++;
+						}
+					}
+
+					if (i == 1)
+					{
+						final int x = (int) (mX * mScreenRectangle.getWidth());
+						final int y = (int) ((1-mY) * mScreenRectangle.getHeight());
+						mRobot.mouseMove(x, y);
+						
+						if(mButton1Pressed==false)
+						{
+							mRobot.mousePress(InputEvent.BUTTON1_MASK);
+							mRobot.waitForIdle();
+						}
+						mButton1Pressed = true;
+					}
+					else if (i == 0)
+					{
+						if(mButton1Pressed)
+						{
+							mRobot.mouseRelease(InputEvent.BUTTON1_MASK);
+							mRobot.waitForIdle();
+						}
+						
+						mButton1Pressed = false;						
+					}
+
+				}
+					break;
+
+			}
 		}
+		catch (Throwable e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}/**/
 
 	}
 
@@ -215,7 +268,7 @@ public class WiiMode implements WiiRemoteListener
 		if (mMode != null) switch (mMode)
 		{
 			case mouse:
-				System.out.println(evt);
+				// System.out.println(evt);
 				if (!mButton1Pressed && evt.isPressed(WRButtonEvent.A))
 				{
 					mButton1Pressed = true;
@@ -241,6 +294,8 @@ public class WiiMode implements WiiRemoteListener
 					mRobot.waitForIdle();
 				}
 				break;
+				
+			case pen:
 
 		}
 
@@ -251,8 +306,6 @@ public class WiiMode implements WiiRemoteListener
 	{
 		// TODO Auto-generated method stub
 	}
-
-	
 
 	@Override
 	public void extensionConnected(WiiRemoteExtension pArg0)
@@ -296,23 +349,17 @@ public class WiiMode implements WiiRemoteListener
 
 	}
 
-	
-	
-	
-	ArrayList<DisconnectListener>	lDisconnectListenerList	= new ArrayList<DisconnectListener>();
-
-	public void addDisconnectListener(DisconnectListener pDisconnectListener)
+	public void addDisconnectListener(WiiStatusListener pWiiStatusListener)
 	{
-		lDisconnectListenerList.add(pDisconnectListener);
+		lWiiStatusListenerList.add(pWiiStatusListener);
 	}
-	
+
 	@Override
 	public void disconnected()
 	{
-		System.out.println("disconnected...");
-		for (DisconnectListener lDisconnectListener : lDisconnectListenerList)
+		for (WiiStatusListener lWiiStatusListener : lWiiStatusListenerList)
 		{
-			lDisconnectListener.disconnected();
+			lWiiStatusListener.disconnected();
 		}
 	}
 
