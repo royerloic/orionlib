@@ -183,7 +183,6 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Wii
 		System.out.println("Tray Icon - Mouse released!");
 	}
 
-	@Override
 	public void itemStateChanged(ItemEvent pE)
 	{
 		System.out.println("itemStateChanged: \n " + pE);

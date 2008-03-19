@@ -22,7 +22,9 @@ public class GeneMapBuilder
 	HashSetMap<Element, Element> mGene2AttributeMap = new HashSetMap<Element, Element>();
 	HashSetMap<Element, Element> mAttribute2GeneMap = new HashSetMap<Element, Element>();
 
-	public Element addGene(Integer pGeneId, String pGeneName, String pGeneDescription)
+	public Element addGene(	Integer pGeneId,
+													String pGeneName,
+													String pGeneDescription)
 	{
 		Element lElement = new Element(pGeneId, pGeneName, pGeneDescription);
 		mGeneMap.put(pGeneId, lElement);
@@ -55,19 +57,17 @@ public class GeneMapBuilder
 		{
 			lGene = addGene(pGeneId, pGeneName, "");
 		}
-		/*else
-		{
-			lGene.mDescription+= "|"+pGeneName;
-		}/***/
+		/***************************************************************************
+		 * else { lGene.mDescription+= "|"+pGeneName; }/
+		 **************************************************************************/
 		Element lAttribute = mAttributeMap.get(pAttributeId);
 		if (lAttribute == null)
 		{
 			lAttribute = addAttribute(pAttributeId, pAttributeName, "");
 		}
-		/*else
-		{
-			lAttribute.mDescription+= "|"+pAttributeName;
-		}/***/
+		/***************************************************************************
+		 * else { lAttribute.mDescription+= "|"+pAttributeName; }/
+		 **************************************************************************/
 		mGene2AttributeMap.put(lGene, lAttribute);
 		mAttribute2GeneMap.put(lAttribute, lGene);
 	}
@@ -85,6 +85,12 @@ public class GeneMapBuilder
 
 	public HashMap<Element, Double> computeEnrichements(Collection<Integer> pGeneSet)
 	{
+		return computeEnrichements(pGeneSet, 0);
+	}
+
+	public HashMap<Element, Double> computeEnrichements(Collection<Integer> pGeneSet,
+																											double pMinimalCoverage)
+	{
 		HashMap<Element, Double> lEnrichementMap = new HashMap<Element, Double>();
 
 		HashSet<Element> lSet1 = getElementSet(mGeneMap, pGeneSet);
@@ -97,7 +103,7 @@ public class GeneMapBuilder
 		double lCorrection = Math.max(lAttributeSetForSet1.size(), 1);
 		final double universe = mGeneMap.size();
 		final double set1 = pGeneSet.size();
-		HashSet<Element> lIntersection = new HashSet<Element>((int)universe);
+		HashSet<Element> lIntersection = new HashSet<Element>((int) universe);
 		for (Element lAttribute : lAttributeSetForSet1)
 		{
 			Set<Element> lSet2 = mAttribute2GeneMap.get(lAttribute);
@@ -108,13 +114,18 @@ public class GeneMapBuilder
 			lIntersection.retainAll(lSet2);
 			final double inter = lIntersection.size();
 
-			final double pvalue = HyperGeometricEnrichement.hyperg(	universe,
-																															set1,
-																															set2,
-																															inter,
-																															1);
-			final double lCorrectedpValue = pvalue * lCorrection;
-			lEnrichementMap.put(lAttribute, lCorrectedpValue);
+			final double coverage = inter / set1;
+
+			if (coverage > pMinimalCoverage)
+			{
+				final double pvalue = HyperGeometricEnrichement.hyperg(	universe,
+																																set1,
+																																set2,
+																																inter,
+																																1);
+				final double lCorrectedpValue = pvalue * lCorrection;
+				lEnrichementMap.put(lAttribute, lCorrectedpValue);
+			}
 		}
 
 		return lEnrichementMap;
@@ -235,7 +246,7 @@ public class GeneMapBuilder
 
 	public static final String geneSubSetsToEdgeString(HashSet<GeneSet> pGeneSets)
 	{
-		StringBuilder lStringBuilder= new StringBuilder();
+		StringBuilder lStringBuilder = new StringBuilder();
 		lStringBuilder.append("//");
 		lStringBuilder.append("EDGEFORMAT\t1\t2\n");
 		ArrayList<String> lSetAttributesList = new ArrayList<String>();
@@ -243,19 +254,22 @@ public class GeneMapBuilder
 		{
 			for (Element lGene : lGeneSet.getGenes())
 			{
-				String lSetAttributes = lGeneSet.getAttributesPValuesCouples().toString();
-				lStringBuilder.append("EDGE\t"+lGene.mId+"\t"+lSetAttributes+"\n");
+				String lSetAttributes = lGeneSet.getAttributesPValuesCouples()
+																				.toString();
+				lStringBuilder.append("EDGE\t" + lGene.mId
+															+ "\t"
+															+ lSetAttributes
+															+ "\n");
 				lSetAttributesList.add(lSetAttributes);
 			}
-		}		
-		
+		}
+
 		for (String lString : lSetAttributesList)
 		{
-			lStringBuilder.append("EDGE\t"+lString+"\tALL_ATTRIBUTES\n");
+			lStringBuilder.append("EDGE\t" + lString + "\tALL_ATTRIBUTES\n");
 		}
-		
+
 		return lStringBuilder.toString();
 	}
-	
 
 }

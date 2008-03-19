@@ -145,7 +145,6 @@ public class WiiMode implements WiiRemoteListener
 		}
 	}
 
-	@Override
 	public void IRInputReceived(WRIREvent evt)
 	{
 		try
@@ -262,7 +261,6 @@ public class WiiMode implements WiiRemoteListener
 	static boolean	mButton2Pressed	= false;
 	static boolean	mButton3Pressed	= false;
 
-	@Override
 	public void buttonInputReceived(WRButtonEvent evt)
 	{
 		if (mMode != null) switch (mMode)
@@ -301,13 +299,11 @@ public class WiiMode implements WiiRemoteListener
 
 	}
 
-	@Override
 	public void combinedInputReceived(WRCombinedEvent pArg0)
 	{
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	public void extensionConnected(WiiRemoteExtension pArg0)
 	{
 		// TODO Auto-generated method stub
