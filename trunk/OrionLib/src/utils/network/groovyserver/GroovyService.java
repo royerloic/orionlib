@@ -3,13 +3,14 @@ package utils.network.groovyserver;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
 import utils.network.socket.Service;
 import utils.network.socket.SocketThread;
 
-public class GroovyService implements Service
+public class GroovyService implements Service, Serializable
 {
 	private static final Pattern lRemoveNewLines = Pattern.compile("(\\n|\\r)+");
 

@@ -3,7 +3,7 @@ package utils.network.socket;
 import java.net.*;
 import java.io.*;
 
-public class SocketServiceServer
+public class SocketServiceServer implements Serializable
 {
 	private ServerSocket		mServerSocket								= null;
 	private boolean					mListening									= true;
