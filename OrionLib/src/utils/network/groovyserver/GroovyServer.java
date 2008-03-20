@@ -35,6 +35,12 @@ import utils.utils.CmdLine;
 public class GroovyServer implements Runnable, Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	int							mPort			= 4444;
 	private File		mScriptFile;
 
@@ -42,7 +48,7 @@ public class GroovyServer implements Runnable, Serializable
 
 	private String	mPassword	= null;
 	private boolean	mOnlyLocal;
-	private SocketServiceServer	mSocketServiceServer;
+	volatile private SocketServiceServer	mSocketServiceServer;
 
 	/**
 	 * @param args
@@ -64,7 +70,7 @@ public class GroovyServer implements Runnable, Serializable
 	public GroovyServer()
 	{
 		// mBinding.setVariable("shell", mGroovyShell);
-		mBinding.setVariable("binding", mBinding);
+		//mBinding.setVariable("binding", mBinding);
 		mBinding.getVariables();
 		mBinding.setVariable("server", this);
 	}
@@ -123,13 +129,18 @@ public class GroovyServer implements Runnable, Serializable
 	{
 		synchronized (this)
 		{
+			
 			FileOutputStream lFileOutputStream = null;
 			ObjectOutputStream lObjectOutputStream = null;
 
 			lFileOutputStream = new FileOutputStream(pFile);
 			BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,10000000);
 			lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
+			
+			mBinding.setVariable("server", null); // we don't want this to be saved...
 			lObjectOutputStream.writeObject(mBinding);
+			mBinding.setVariable("server", this);
+			
 			lObjectOutputStream.close();
 
 			return true;
@@ -156,6 +167,7 @@ public class GroovyServer implements Runnable, Serializable
 			{
 				lBinding = (Binding) lObjectInputStream.readObject();
 				mBinding = lBinding;
+				mBinding.setVariable("server", this);
 				return true;
 			}
 			catch (ClassNotFoundException e)
