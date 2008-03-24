@@ -14,26 +14,45 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import utils.utils.CmdLine;
+import utils.wiimote.WRLImpl;
+import utils.wiimote.modes.MouseMode;
+import utils.wiimote.modes.PenMode;
+import utils.wiimote.modes.SlideShowMode;
+import utils.wiimote.modes.WiiMode;
+import wiiremotej.WiiRemote;
+import wiiremotej.WiiRemoteJ;
+import wiiremotej.event.WiiRemoteAdapter;
+import wiiremotej.event.WiiRemoteDiscoveredEvent;
+import wiiremotej.event.WiiRemoteDiscoveryListener;
+import wiiremotej.event.WiiRemoteListener;
 
-public class WiiTray implements MouseListener, ActionListener, ItemListener, WiiStatusListener
+public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemListener
 {
-	TrayIcon																mTrayIcon;
+	TrayIcon mTrayIcon;
 
-	HashMap<CheckboxMenuItem, WiiMode.Mode>	mCheckboxMenuIteMap	= new HashMap<CheckboxMenuItem, WiiMode.Mode>();
+	ArrayList<WiiMode> mModeList;
 
-	private WiiMode													mWiiMode;
+	private static WiiRemote mWiiRemote;
 
 	public static void main(String[] args)
 	{
 		try
 		{
 			Map<String, String> lParameters = CmdLine.getMap(args);
-			WiiTray lWiiTray = new WiiTray(lParameters);
+			ArrayList<WiiMode> lModeList = new ArrayList<WiiMode>();
+
+			lModeList.add(new MouseMode());
+			lModeList.add(new PenMode());
+			lModeList.add(new SlideShowMode());
+
+			WiiTray lWiiTray = new WiiTray(lParameters, lModeList);
 		}
 		catch (Throwable e)
 		{
@@ -41,18 +60,16 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Wii
 		}
 	}
 
-	public WiiTray(Map<String, String> pParameters)
+	public WiiTray(Map<String, String> pParameters, ArrayList<WiiMode> pModeList)
 	{
 		super();
 
+		mModeList = pModeList;
+
 		try
 		{
-			mWiiMode = new WiiMode();
-
 			if (SystemTray.isSupported())
 			{
-				mWiiMode.addDisconnectListener(this);
-				
 
 				SystemTray tray = SystemTray.getSystemTray();
 				URL lURL = WiiTray.class.getResource("remote.png");
@@ -62,72 +79,55 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Wii
 
 				MenuItem lConnectItem = new MenuItem("Connect");
 				ActionListener lConnectItemListener = new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
 					{
-						public void actionPerformed(ActionEvent e)
-						{
-							System.out.println("Connecting...");
-							mWiiMode.connect();
-
-						}
-					};
+						System.out.println("Connecting...");
+						connect();
+					}
+				};
 				lConnectItem.addActionListener(lConnectItemListener);
 				popup.add(lConnectItem);
 
 				MenuItem lDisconnectItem = new MenuItem("Disconnect");
 				ActionListener lDisconnectItemListener = new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
 					{
-						public void actionPerformed(ActionEvent e)
-						{
-							System.out.println("Disconnecting...");
-							mWiiMode.disconnect();
-						}
-					};
+						System.out.println("Disconnecting...");
+						disconnect();
+					}
+				};
 				lDisconnectItem.addActionListener(lDisconnectItemListener);
 				popup.add(lDisconnectItem);
 
 				popup.addSeparator();
 
-				CheckboxMenuItem lMouseModeItem = new CheckboxMenuItem(	"Mouse Mode",
-																																false);
-				lMouseModeItem.addItemListener(this);
-				mCheckboxMenuIteMap.put(lMouseModeItem, WiiMode.Mode.mouse);
-				popup.add(lMouseModeItem);
-
-				CheckboxMenuItem lPenModeItem = new CheckboxMenuItem("Pen Mode", false);
-				lPenModeItem.addItemListener(this);
-				mCheckboxMenuIteMap.put(lPenModeItem, WiiMode.Mode.pen);
-				popup.add(lPenModeItem);
-
-				CheckboxMenuItem lSlideShowMode = new CheckboxMenuItem(	"SlideShow Mode",
-																																false);
-				lSlideShowMode.addItemListener(this);
-				mCheckboxMenuIteMap.put(lSlideShowMode, WiiMode.Mode.slideshow);
-				popup.add(lSlideShowMode);
-				
-				for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+				for (WiiMode lWiiMode : mModeList)
 				{
-					lCheckboxMenuItem.setEnabled(false);
+					popup.add(lWiiMode.getMenuItem());
+					lWiiMode.getMenuItem().addItemListener(this);
+					lWiiMode.getMenuItem().setEnabled(false);
 				}
 
 				popup.addSeparator();
 
 				MenuItem lExitItem = new MenuItem("Exit");
 				ActionListener lExitItemListener = new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
 					{
-						public void actionPerformed(ActionEvent e)
-						{
-							System.out.println("Exiting...");
-							mWiiMode.disconnect();
-							System.exit(0);
-						}
-					};
+						System.out.println("Exiting...");
+						disconnect();
+						System.exit(0);
+					}
+				};
 				lExitItem.addActionListener(lExitItemListener);
 				popup.add(lExitItem);
 
 				mTrayIcon = new TrayIcon(image, "WiiTray", popup);
 
 				mTrayIcon.setImageAutoSize(true);
-				mTrayIcon.addActionListener(this);
 				mTrayIcon.addMouseListener(this);
 
 				try
@@ -151,11 +151,62 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Wii
 		}
 	}
 
-	public void actionPerformed(ActionEvent e)
+	public void connect()
 	{
-		mTrayIcon.displayMessage(	"Action Event",
-															"An Action Event Has Been Performed!",
-															TrayIcon.MessageType.INFO);
+		final WiiTray lWiiTray = this;
+		
+		Runnable lRunnable = new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
+					{
+						public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
+						{
+							evt	.getWiiRemote()
+									.addWiiRemoteListener(new WRLImpl(evt.getWiiRemote()));
+						}
+
+						public void findFinished(int numberFound)
+						{
+							System.out.println("Found " + numberFound + " remotes!");
+						}
+					};
+
+					// Find and connect to a Wii Remote
+					mWiiRemote = WiiRemoteJ.findRemote();
+
+					if (mWiiRemote != null)
+					{
+						mWiiRemote.setLEDIlluminated(0, true);
+						connected();
+						mWiiRemote.addWiiRemoteListener(lWiiTray);
+					}
+					else
+					{
+						// Connection failed
+						System.out.println("Connection failed.");
+					}
+
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		};
+
+		Thread lThread = new Thread(lRunnable);
+		lThread.start();
+	}
+
+	public void disconnect()
+	{
+		if (mWiiRemote != null)
+			mWiiRemote.disconnect();
+		disconnected();
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -183,41 +234,45 @@ public class WiiTray implements MouseListener, ActionListener, ItemListener, Wii
 		System.out.println("Tray Icon - Mouse released!");
 	}
 
-	public void itemStateChanged(ItemEvent pE)
-	{
-		System.out.println("itemStateChanged: \n " + pE);
-		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
-			if (lCheckboxMenuItem != pE.getSource())
-			{
-				lCheckboxMenuItem.setState(false);
-			}
-			else
-			{
-
-			}
-
-		WiiMode.Mode lWiiModeMode = mCheckboxMenuIteMap.get(pE.getSource());
-
-		mWiiMode.activate(lWiiModeMode);
-	}
-
-	@Override
 	public void connected()
 	{
-		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
+		for (WiiMode lWiiMode : mModeList)
 		{
-			lCheckboxMenuItem.setEnabled(true);
-		}		
-	}
-	
-	@Override
-	public void disconnected()
-	{
-		for (CheckboxMenuItem lCheckboxMenuItem : mCheckboxMenuIteMap.keySet())
-		{
-			lCheckboxMenuItem.setEnabled(false);
-		}		
+			lWiiMode.getMenuItem().setEnabled(true);
+		}
 	}
 
+	public void disconnected()
+	{
+		for (WiiMode lWiiMode : mModeList)
+		{
+			//lWiiMode.deactivate(mWiiRemote);
+			lWiiMode.getMenuItem().setEnabled(false);
+		}
+		mWiiRemote=null;
+	}
+
+	public void itemStateChanged(ItemEvent pE)
+	{
+		try
+		{
+			for (WiiMode lWiiMode : mModeList)
+				if (pE.getSource().equals(lWiiMode.getMenuItem()))
+				{
+					lWiiMode.getMenuItem().setState(true);
+					lWiiMode.activate(mWiiRemote);
+				}
+				else
+				{
+					lWiiMode.getMenuItem().setState(false);
+					lWiiMode.deactivate(mWiiRemote);
+				}
+		}
+		catch (Throwable e)
+		{
+			e.printStackTrace();
+		}
+	
+	}
 
 }
