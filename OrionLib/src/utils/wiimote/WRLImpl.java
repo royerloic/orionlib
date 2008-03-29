@@ -1,13 +1,23 @@
 package utils.wiimote;
-import java.util.ArrayList;
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 
-import javax.swing.*;
-import wiiremotej.*;
-import wiiremotej.event.*;
-import javax.sound.sampled.*;
-import java.io.*;
+import wiiremotej.ButtonMap;
+import wiiremotej.IRLight;
+import wiiremotej.WiiRemote;
+import wiiremotej.WiiRemoteExtension;
+import wiiremotej.WiiRemoteJ;
+import wiiremotej.event.WRAccelerationEvent;
+import wiiremotej.event.WRButtonEvent;
+import wiiremotej.event.WRExtensionEvent;
+import wiiremotej.event.WRIREvent;
+import wiiremotej.event.WRNunchukExtensionEvent;
+import wiiremotej.event.WRStatusEvent;
+import wiiremotej.event.WiiRemoteAdapter;
+import wiiremotej.event.WiiRemoteDiscoveredEvent;
+import wiiremotej.event.WiiRemoteDiscoveryListener;
 
 /**
  * Implements WiiRemoteListener and acts as a general test class. Note that you
