@@ -22,6 +22,7 @@ import java.util.Map;
 
 import utils.utils.CmdLine;
 import utils.wiimote.WRLImpl;
+import utils.wiimote.modes.GoogleEarthMode;
 import utils.wiimote.modes.MouseMode;
 import utils.wiimote.modes.PenMode;
 import utils.wiimote.modes.SlideShowMode;
@@ -51,6 +52,7 @@ public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemList
 			lModeList.add(new MouseMode());
 			lModeList.add(new PenMode());
 			lModeList.add(new SlideShowMode());
+			lModeList.add(new GoogleEarthMode());
 
 			WiiTray lWiiTray = new WiiTray(lParameters, lModeList);
 		}
