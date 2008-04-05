@@ -11,7 +11,8 @@ import java.util.Map;
  * @param <K>
  * @param <V>
  */
-public class BijectiveBidiHashMap<K, V> extends HashMap<K, V> implements Serializable
+public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>	implements
+																															Serializable
 {
 	/**
 	 * 
@@ -40,7 +41,6 @@ public class BijectiveBidiHashMap<K, V> extends HashMap<K, V> implements Seriali
 	{
 		return mReverseHashMap.containsKey(pValue);
 	}
-	
 
 	public K getReverse(V pValue)
 	{

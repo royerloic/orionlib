@@ -23,11 +23,11 @@ public class Element
 	{
 		return mId + "\t" + mName + "\t" + mDescription;
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return "("+mId + ", " + mName + ", " + mDescription+")";
+		return "(" + mId + ", " + mName + ", " + mDescription + ")";
 	}
 
 	@Override

@@ -271,8 +271,5 @@ public class GeneMapBuilder
 
 		return lStringBuilder.toString();
 	}
-	
-	
-	
 
 }

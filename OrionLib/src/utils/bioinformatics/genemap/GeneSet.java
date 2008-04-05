@@ -55,7 +55,7 @@ public class GeneSet implements Comparable<GeneSet>
 	@Override
 	public String toString()
 	{
-		return "{ size=" +mSet.size()+  mAttribute2PValueMap + "}";
+		return "{ size=" + mSet.size() + mAttribute2PValueMap + "}";
 	}
 
 	@Override

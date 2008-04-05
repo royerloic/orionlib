@@ -7,7 +7,7 @@ import java.util.Map;
 import utils.network.groovyserver.GroovyServer;
 import utils.utils.CmdLine;
 
-public class SymetricFloatMatrixServer 
+public class SymetricFloatMatrixServer
 {
 	GroovyServer mGroovyServer;
 
@@ -33,8 +33,9 @@ public class SymetricFloatMatrixServer
 	public SymetricFloatMatrixServer()
 	{
 		mGroovyServer = new GroovyServer();
-		
-		//mGroovyServer.evaluate("import utils.structures.matrix.SymetricFloatMatrix");
+
+		// mGroovyServer.evaluate("import
+		// utils.structures.matrix.SymetricFloatMatrix");
 		mGroovyServer.getBinding().setVariable("matrix", mSymetricFloatMatrix);
 	}
 
@@ -50,7 +51,7 @@ public class SymetricFloatMatrixServer
 	{
 		if (pSymetricFloatMatrix != null)
 			mSymetricFloatMatrix = pSymetricFloatMatrix;
-		mGroovyServer = new GroovyServer(pPort,pScriptFile);
+		mGroovyServer = new GroovyServer(pPort, pScriptFile);
 		mGroovyServer.getBinding().setVariable("matrix", mSymetricFloatMatrix);
 	}
 
@@ -63,6 +64,5 @@ public class SymetricFloatMatrixServer
 	{
 		mGroovyServer.startServerNonBlocking();
 	}
-
 
 }

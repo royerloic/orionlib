@@ -1,12 +1,10 @@
 package utils.sound.test;
 
 import java.awt.DisplayMode;
-import java.awt.Graphics2D;
 import java.awt.HeadlessException;
 
 import utils.graphics.IOrionGraphics;
 import utils.graphics.OrionGraphicsFactory;
-import utils.graphics.impl.OrionGraphics;
 import utils.sound.OrionSoundIn;
 import utils.sound.OrionSoundOut;
 
@@ -21,19 +19,19 @@ import utils.sound.OrionSoundOut;
 
 /**
  * Oscilloscope
- *
+ * 
  * @author MSc. Ing. Loic Royer
  */
 public class Oscilloscope
 {
 
-	OrionSoundIn					mSoundRecorder;
+	OrionSoundIn mSoundRecorder;
 
-	OrionSoundOut					mSoundPlayer;
+	OrionSoundOut mSoundPlayer;
 
-	private byte[]				mSoundBuffer;
+	private byte[] mSoundBuffer;
 
-	private IOrionGraphics	mOrionGraphics;
+	private IOrionGraphics mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
@@ -45,10 +43,11 @@ public class Oscilloscope
 
 		DisplayMode lDisplayMode = OrionGraphicsFactory.getCurrentDisplayModeOnDevice(lDevice);
 
-		//lDisplayMode = new DisplayMode(800,600,32,DisplayMode.REFRESH_RATE_UNKNOWN);
+		// lDisplayMode = new
+		// DisplayMode(800,600,32,DisplayMode.REFRESH_RATE_UNKNOWN);
 
 		mOrionGraphics = OrionGraphicsFactory.getWindowedOrionGraphics(	lDevice,
-		                                                               	lDisplayMode,
+																																		lDisplayMode,
 																																		OrionGraphicsFactory.PIXEL + OrionGraphicsFactory.VECTOR);
 
 		mOrionGraphics.setNumberOfBuffers(2);
@@ -61,11 +60,12 @@ public class Oscilloscope
 	 */
 	public void start()
 	{
-		//mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32, 0));
+		// mOrionGraphics.addModeInWishList(new DisplayMode(pWidth, pHeight, 32,
+		// 0));
 
 		mOrionGraphics.startGraphics();
 		int lHeight = mOrionGraphics.getHeight();
-		int lWidth = 16; //mOrionGraphics.getWidth();
+		int lWidth = 16; // mOrionGraphics.getWidth();
 
 		mSoundBuffer = new byte[2 * lWidth];
 
@@ -81,44 +81,35 @@ public class Oscilloscope
 
 			mSoundPlayer.play(mSoundBuffer, lBytesRead);
 
-			/*int lPreviousSignal = 0;
-			int lSignalLock = 0;
-			for (int i = 0; i < lWidth; i++)
-			{
-				final int lSignal = (mSoundBuffer[2 * i] + 256 * mSoundBuffer[2 * i + 1]) / 256;
-
-				if ((lSignal < -64) && (lPreviousSignal > 64))
-				{
-					lSignalLock = i;
-					break;
-				}
-
-				lPreviousSignal = lSignal;
-			}
-
-
-			final Graphics2D lGraphics = mOrionGraphics.getDrawGraphics();
-
-			lGraphics.clearRect(0, 0, lWidth, lHeight);
-			for (int i = 1; i < lWidth; i++)
-			{
-
-				int lIndex = 2 * (i + lSignalLock);
-				if (lIndex > 2 * lWidth - 2) lIndex = 2 * lWidth - 2;
-				final int lSignal = mSoundBuffer[lIndex] + 256
-														* mSoundBuffer[lIndex + 1];
-				int lValue = (lHeight / 2 + lSignal / 128);
-				if (lValue < 0)
-					lValue = 0;
-				else if (lValue >= lHeight) lValue = lHeight - 1;
-
-				lGraphics.drawLine(i, lHeight / 2, i, lValue);
-				//mPixel[i + lWidth * lValue] = 255 + 256 * 255 + 256 * 256 * 255;
-			}
-
-
-
-			mOrionGraphics.showGraphics();/**/
+			/*************************************************************************
+			 * int lPreviousSignal = 0; int lSignalLock = 0; for (int i = 0; i <
+			 * lWidth; i++) { final int lSignal = (mSoundBuffer[2 * i] + 256 *
+			 * mSoundBuffer[2 * i + 1]) / 256;
+			 * 
+			 * if ((lSignal < -64) && (lPreviousSignal > 64)) { lSignalLock = i;
+			 * break; }
+			 * 
+			 * lPreviousSignal = lSignal; }
+			 * 
+			 * 
+			 * final Graphics2D lGraphics = mOrionGraphics.getDrawGraphics();
+			 * 
+			 * lGraphics.clearRect(0, 0, lWidth, lHeight); for (int i = 1; i < lWidth;
+			 * i++) {
+			 * 
+			 * int lIndex = 2 * (i + lSignalLock); if (lIndex > 2 * lWidth - 2) lIndex =
+			 * 2 * lWidth - 2; final int lSignal = mSoundBuffer[lIndex] + 256
+			 * mSoundBuffer[lIndex + 1]; int lValue = (lHeight / 2 + lSignal / 128);
+			 * if (lValue < 0) lValue = 0; else if (lValue >= lHeight) lValue =
+			 * lHeight - 1;
+			 * 
+			 * lGraphics.drawLine(i, lHeight / 2, i, lValue); //mPixel[i + lWidth *
+			 * lValue] = 255 + 256 * 255 + 256 * 256 * 255; }
+			 * 
+			 * 
+			 * 
+			 * mOrionGraphics.showGraphics();/
+			 ************************************************************************/
 		}
 
 		mSoundRecorder.stop();

@@ -131,7 +131,7 @@ public class FileSort
 
 		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 		if (lHeaderLine != null)
-			lBufferedWriter.append(lHeaderLine+"\n");
+			lBufferedWriter.append(lHeaderLine + "\n");
 		for (KeyedLine<? extends Comparable<?>> lKeyedLine : lList)
 		{
 			lBufferedWriter.append(lKeyedLine.toLineString() + "\n");

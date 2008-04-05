@@ -1,16 +1,20 @@
 package utils.network.socket;
 
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
 
 public class SocketServiceServer implements Serializable
 {
-	private ServerSocket		mServerSocket								= null;
-	private boolean					mListening									= true;
-	private ServiceFactory	mServiceFactory;
-	private int							mThreadCounter							= 0;
+	private ServerSocket mServerSocket = null;
+	private boolean mListening = true;
+	private ServiceFactory mServiceFactory;
+	private int mThreadCounter = 0;
 
-	boolean									mAcceptOnlyLocalConnections	= false;
+	boolean mAcceptOnlyLocalConnections = false;
 
 	public SocketServiceServer(ServiceFactory pServiceFactory)
 	{
@@ -48,11 +52,13 @@ public class SocketServiceServer implements Serializable
 				mThreadCounter++;
 			}
 
-			if (!mServerSocket.isClosed()) mServerSocket.close();
+			if (!mServerSocket.isClosed())
+				mServerSocket.close();
 		}
 		catch (SocketException e)
 		{
-			if (!e.getMessage().contains("socket closed")) e.printStackTrace();
+			if (!e.getMessage().contains("socket closed"))
+				e.printStackTrace();
 		}
 	}
 

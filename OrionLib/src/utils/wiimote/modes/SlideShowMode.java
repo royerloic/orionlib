@@ -11,7 +11,9 @@ import wiiremotej.event.WRButtonEvent;
 import wiiremotej.event.WiiRemoteAdapter;
 import wiiremotej.event.WiiRemoteListener;
 
-public class SlideShowMode extends WiiRemoteAdapter implements WiiMode, WiiRemoteListener
+public class SlideShowMode extends WiiRemoteAdapter	implements
+																										WiiMode,
+																										WiiRemoteListener
 {
 	CheckboxMenuItem mSlideShowModeItem = new CheckboxMenuItem(	"SlideShow Mode",
 																															false);

@@ -1,7 +1,6 @@
 package utils.wiimote.tools;
 
 import java.awt.AWTException;
-import java.awt.CheckboxMenuItem;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -14,27 +13,26 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import utils.utils.CmdLine;
 import utils.wiimote.WRLImpl;
-import utils.wiimote.modes.SlideShowMode;
+import utils.wiimote.modes.GoogleEarthMode;
 import utils.wiimote.modes.MouseMode;
 import utils.wiimote.modes.PenMode;
-import utils.wiimote.modes.GoogleEarthMode;
+import utils.wiimote.modes.SlideShowMode;
 import utils.wiimote.modes.WiiMode;
 import wiiremotej.WiiRemote;
 import wiiremotej.WiiRemoteJ;
 import wiiremotej.event.WiiRemoteAdapter;
 import wiiremotej.event.WiiRemoteDiscoveredEvent;
 import wiiremotej.event.WiiRemoteDiscoveryListener;
-import wiiremotej.event.WiiRemoteListener;
 
-public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemListener
+public class WiiTray extends WiiRemoteAdapter	implements
+																							MouseListener,
+																							ItemListener
 {
 	TrayIcon mTrayIcon;
 
@@ -51,10 +49,10 @@ public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemList
 
 			lModeList.add(new MouseMode());
 			lModeList.add(new PenMode());
-			lModeList.add(new GoogleEarthMode());
 			lModeList.add(new SlideShowMode());
+			lModeList.add(new GoogleEarthMode());
 
-			WiiTray lWiiTray = new WiiTray(lParameters, lModeList);
+			new WiiTray(lParameters, lModeList);
 		}
 		catch (Throwable e)
 		{
@@ -156,7 +154,7 @@ public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemList
 	public void connect()
 	{
 		final WiiTray lWiiTray = this;
-		
+
 		Runnable lRunnable = new Runnable()
 		{
 			public void run()
@@ -248,10 +246,10 @@ public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemList
 	{
 		for (WiiMode lWiiMode : mModeList)
 		{
-			//lWiiMode.deactivate(mWiiRemote);
+			// lWiiMode.deactivate(mWiiRemote);
 			lWiiMode.getMenuItem().setEnabled(false);
 		}
-		mWiiRemote=null;
+		mWiiRemote = null;
 	}
 
 	public void itemStateChanged(ItemEvent pE)
@@ -274,7 +272,7 @@ public class WiiTray extends WiiRemoteAdapter implements MouseListener, ItemList
 		{
 			e.printStackTrace();
 		}
-	
+
 	}
 
 }

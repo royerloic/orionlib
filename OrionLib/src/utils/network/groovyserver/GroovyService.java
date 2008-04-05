@@ -1,6 +1,5 @@
 package utils.network.groovyserver;
 
-import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
 import java.io.Serializable;
@@ -96,8 +95,10 @@ public class GroovyService implements Service, Serializable
 	{
 		mGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
 																		mGroovyServer.getBinding());
-		
-		System.out.println(mSocket.getLocalSocketAddress()+">'" + pInputLine.replaceAll("(\\n|\\r)+", "|") + "'");
+
+		System.out.println(mSocket.getLocalSocketAddress() + ">'"
+												+ pInputLine.replaceAll("(\\n|\\r)+", "|")
+												+ "'");
 		if (pInputLine.equals(getShutdownCommand()))
 			mListening = false;
 
@@ -124,7 +125,9 @@ public class GroovyService implements Service, Serializable
 				e.printStackTrace();
 			}
 
-			System.out.println(mSocket.getLocalSocketAddress()+"<'" + lAnswer.replaceAll("(\\n|\\r)+", "|") + "'");
+			System.out.println(mSocket.getLocalSocketAddress() + "<'"
+													+ lAnswer.replaceAll("(\\n|\\r)+", "|")
+													+ "'");
 			return lAnswer;
 		}
 		else

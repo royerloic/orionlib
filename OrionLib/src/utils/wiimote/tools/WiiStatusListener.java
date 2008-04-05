@@ -4,7 +4,7 @@ public interface WiiStatusListener
 {
 
 	void connected();
-	
+
 	void disconnected();
 
 }

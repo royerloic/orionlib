@@ -22,15 +22,15 @@ public class Test
 		{
 			URL lURL = new URL("http://www.genome.org/cgi/reprint/gr.7187808v1.pdf");
 			URLConnection lURLConnection = lURL.openConnection();
-			
+
 			PDFParser lPDFParser = new PDFParser(lURLConnection.getInputStream());
-			
+
 			lPDFParser.parse();
-			
+
 			COSDocument lDocument = lPDFParser.getDocument();
 			FDFDocument lDocument2 = lPDFParser.getFDFDocument();
 			PDDocument lDocument3 = lPDFParser.getPDDocument();
-			
+
 			System.out.println(lDocument);
 		}
 		catch (MalformedURLException e)

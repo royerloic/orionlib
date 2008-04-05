@@ -1,13 +1,12 @@
 package utils.network.socket;
 
-import java.io.File;
 import java.net.Socket;
 
 public interface Service
 {
 
 	String getName();
-	
+
 	String getWelcomeMessage();
 
 	String processInput(String pInputLine);

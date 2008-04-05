@@ -6,7 +6,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
-import java.io.IOException;
 
 import wiiremotej.IRLight;
 import wiiremotej.WiiRemote;
@@ -15,7 +14,7 @@ import wiiremotej.event.WRButtonEvent;
 import wiiremotej.event.WRIREvent;
 import wiiremotej.event.WiiRemoteAdapter;
 
-public class MouseMode  extends WiiRemoteAdapter implements WiiMode
+public class MouseMode extends WiiRemoteAdapter implements WiiMode
 {
 	CheckboxMenuItem mMouseModeItem = new CheckboxMenuItem("Mouse Mode", false);
 
@@ -57,10 +56,10 @@ public class MouseMode  extends WiiRemoteAdapter implements WiiMode
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 
-	public void deactivate(WiiRemote pRemote) 
+	public void deactivate(WiiRemote pRemote)
 	{
 		try
 		{
@@ -71,7 +70,7 @@ public class MouseMode  extends WiiRemoteAdapter implements WiiMode
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	public void IRInputReceived(WRIREvent pWRIREvent)
@@ -146,7 +145,5 @@ public class MouseMode  extends WiiRemoteAdapter implements WiiMode
 		}
 
 	}
-
-	
 
 }
