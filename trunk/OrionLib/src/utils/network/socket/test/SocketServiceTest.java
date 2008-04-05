@@ -1,19 +1,10 @@
 package utils.network.socket.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
-import java.util.List;
 
 import org.junit.Test;
 
-import utils.io.StreamToFile;
-import utils.io.filedb.FileDB;
 import utils.network.socket.Service;
 import utils.network.socket.ServiceFactory;
 import utils.network.socket.SocketServiceServer;

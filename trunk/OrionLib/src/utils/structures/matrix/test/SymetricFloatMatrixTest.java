@@ -35,18 +35,33 @@ public class SymetricFloatMatrixTest
 		assertTrue(lSymetricFloatMatrix2.get(100, 50) == 0.1234f);
 		assertTrue(lSymetricFloatMatrix2.get(10, 50) == 0.5678f);
 
-		assertTrue(lSymetricFloatMatrix2.get(10, new IntRange(50-10,50+10)).toString().contains("0.5678"));
-		assertFalse(lSymetricFloatMatrix2.get(10, new IntRange(50-20,50-10)).toString().contains("0.5678"));
-		assertTrue(lSymetricFloatMatrix2.get(10,50,100,200).toString().equals("[[0.0], [0.5678, 0.0], [0.0, 0.1234, 0.0], [0.0, 0.0, 0.0, 0.0]]"));
-		
-		assertTrue(lSymetricFloatMatrix2.get(new IntRange(5,55)).toString().contains("0.5678"));
-		assertFalse(lSymetricFloatMatrix2.get(new IntRange(5,55)).toString().contains("0.1234"));
-	
-		assertTrue(lSymetricFloatMatrix2.get(new IntRange(8,12), new IntRange(48,52)).toString().contains("0.5678"));
-		assertFalse(lSymetricFloatMatrix2.get(new IntRange(8,12), new IntRange(48,52)).toString().contains("0.1234"));
-		
+		assertTrue(lSymetricFloatMatrix2.get(10, new IntRange(50 - 10, 50 + 10))
+																		.toString()
+																		.contains("0.5678"));
+		assertFalse(lSymetricFloatMatrix2	.get(10, new IntRange(50 - 20, 50 - 10))
+																			.toString()
+																			.contains("0.5678"));
+		assertTrue(lSymetricFloatMatrix2.get(10, 50, 100, 200)
+																		.toString()
+																		.equals("[[0.0], [0.5678, 0.0], [0.0, 0.1234, 0.0], [0.0, 0.0, 0.0, 0.0]]"));
+
+		assertTrue(lSymetricFloatMatrix2.get(new IntRange(5, 55))
+																		.toString()
+																		.contains("0.5678"));
+		assertFalse(lSymetricFloatMatrix2	.get(new IntRange(5, 55))
+																			.toString()
+																			.contains("0.1234"));
+
+		assertTrue(lSymetricFloatMatrix2.get(	new IntRange(8, 12),
+																					new IntRange(48, 52))
+																		.toString()
+																		.contains("0.5678"));
+		assertFalse(lSymetricFloatMatrix2	.get(	new IntRange(8, 12),
+																						new IntRange(48, 52))
+																			.toString()
+																			.contains("0.1234"));
+
 		lSymetricFloatMatrix2 = null;
-		
 
 	}
 

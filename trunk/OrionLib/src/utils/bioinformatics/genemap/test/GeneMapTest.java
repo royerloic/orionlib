@@ -20,20 +20,20 @@ public class GeneMapTest
 	{
 		GeneMapBuilder lGeneMap = new GeneMapBuilder();
 
-		lGeneMap.addAnnotation(10,"gene10", 0,"att0");
-		lGeneMap.addAnnotation(11,"gene11", 0,"att0");
-		lGeneMap.addAnnotation(12,"gene12", 0,"att0");
-		lGeneMap.addAnnotation(13,"gene13", 0,"att0");
-		lGeneMap.addAnnotation(14,"gene14", 0,"att0");
+		lGeneMap.addAnnotation(10, "gene10", 0, "att0");
+		lGeneMap.addAnnotation(11, "gene11", 0, "att0");
+		lGeneMap.addAnnotation(12, "gene12", 0, "att0");
+		lGeneMap.addAnnotation(13, "gene13", 0, "att0");
+		lGeneMap.addAnnotation(14, "gene14", 0, "att0");
 
-		lGeneMap.addAnnotation(10,"gene10", 1,"att1");
-		lGeneMap.addAnnotation(11,"gene11", 1,"att1");
-		lGeneMap.addAnnotation(12,"gene12", 1,"att1");
+		lGeneMap.addAnnotation(10, "gene10", 1, "att1");
+		lGeneMap.addAnnotation(11, "gene11", 1, "att1");
+		lGeneMap.addAnnotation(12, "gene12", 1, "att1");
 
-		lGeneMap.addAnnotation(13,"gene13", 2,"att2");
-		lGeneMap.addAnnotation(14,"gene14", 2,"att2");
+		lGeneMap.addAnnotation(13, "gene13", 2, "att2");
+		lGeneMap.addAnnotation(14, "gene14", 2, "att2");
 
-		lGeneMap.addAnnotation(12,"gene12", 3,"att3");
+		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
 
 		HashMap<Element, Double> lEnrichement = lGeneMap.computeEnrichements(	10,
 																																					11,
@@ -44,9 +44,8 @@ public class GeneMapTest
 		assertTrue(lEnrichement.get(new Element(1)) == 0.30000000000000004);
 		assertTrue(lEnrichement.get(new Element(3)) == 1.8000000000000003);
 
-
 	}
-	
+
 	@Test
 	public void test2() throws IOException
 	{
@@ -99,7 +98,7 @@ public class GeneMapTest
 																																									12,
 																																									13,
 																																									14);
-		//System.out.println(lDecomposedGeneSets);
+		// System.out.println(lDecomposedGeneSets);
 		assertTrue(lDecomposedGeneSets.size() == 1);
 		assertTrue(lDecomposedGeneSets.iterator().next().getBestPValue() == 1.2000000000000002);
 

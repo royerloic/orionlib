@@ -74,7 +74,7 @@ public class SymetricFloatMatrix implements Serializable
 		Integer xi = mIndex2ValMap.getReverse(pInteger);
 		return xi;
 	}
-	
+
 	public int getCapacity()
 	{
 		return mMatrix.length;
@@ -94,7 +94,7 @@ public class SymetricFloatMatrix implements Serializable
 
 		return true;
 	}
-	
+
 	public float get(Integer x, Integer y)
 	{
 		check();
@@ -156,7 +156,7 @@ public class SymetricFloatMatrix implements Serializable
 		}
 		return lSubMatrix;
 	}
-	
+
 	public ArrayList<ArrayList<Float>> get(int... pList)
 	{
 		ArrayList<Integer> lList = new ArrayList<Integer>();
@@ -166,7 +166,7 @@ public class SymetricFloatMatrix implements Serializable
 		}
 		return get(lList);
 	}
-	
+
 	public ArrayList<ArrayList<Float>> get(Collection pIntRange)
 	{
 		ArrayList<Integer> lList = new ArrayList<Integer>();
@@ -205,8 +205,9 @@ public class SymetricFloatMatrix implements Serializable
 		ObjectOutputStream lObjectOutputStream = null;
 
 		lFileOutputStream = new FileOutputStream(pFile);
-		BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,10000000);
-		lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);		
+		BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
+																																					10000000);
+		lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
 		lObjectOutputStream.writeObject(this);
 		lObjectOutputStream.close();
 
@@ -219,7 +220,8 @@ public class SymetricFloatMatrix implements Serializable
 		ObjectInputStream lObjectInputStream = null;
 
 		lFileInputStream = new FileInputStream(pFile);
-		BufferedInputStream lBufferedInputStream = new BufferedInputStream(lFileInputStream,10000000);
+		BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
+																																				10000000);
 		lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 		SymetricFloatMatrix lSymetricFloatMatrix;
 		try

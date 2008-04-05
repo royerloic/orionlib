@@ -21,11 +21,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.HashMap;
 import java.util.Map;
-
-import org.codehaus.groovy.control.CompilationFailedException;
-import org.codehaus.groovy.runtime.metaclass.MissingPropertyExceptionNoStack;
 
 import utils.network.socket.Service;
 import utils.network.socket.ServiceFactory;
@@ -39,16 +35,15 @@ public class GroovyServer implements Runnable, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	int							mPort			= 4444;
-	private File		mScriptFile;
 
-	Binding					mBinding	= new SynchronizedBinding();
+	int mPort = 4444;
+	private File mScriptFile;
 
-	private String	mPassword	= null;
-	private boolean	mOnlyLocal;
-	volatile private SocketServiceServer	mSocketServiceServer;
+	Binding mBinding = new SynchronizedBinding();
+
+	private String mPassword = null;
+	private boolean mOnlyLocal;
+	volatile private SocketServiceServer mSocketServiceServer;
 
 	/**
 	 * @param args
@@ -70,7 +65,7 @@ public class GroovyServer implements Runnable, Serializable
 	public GroovyServer()
 	{
 		// mBinding.setVariable("shell", mGroovyShell);
-		//mBinding.setVariable("binding", mBinding);
+		// mBinding.setVariable("binding", mBinding);
 		mBinding.getVariables();
 		mBinding.setVariable("server", this);
 	}
@@ -129,18 +124,19 @@ public class GroovyServer implements Runnable, Serializable
 	{
 		synchronized (this)
 		{
-			
+
 			FileOutputStream lFileOutputStream = null;
 			ObjectOutputStream lObjectOutputStream = null;
 
 			lFileOutputStream = new FileOutputStream(pFile);
-			BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,10000000);
+			BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
+																																						10000000);
 			lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
-			
+
 			mBinding.setVariable("server", null); // we don't want this to be saved...
 			lObjectOutputStream.writeObject(mBinding);
 			mBinding.setVariable("server", this);
-			
+
 			lObjectOutputStream.close();
 
 			return true;
@@ -160,7 +156,8 @@ public class GroovyServer implements Runnable, Serializable
 			ObjectInputStream lObjectInputStream = null;
 
 			lFileInputStream = new FileInputStream(pFile);
-			BufferedInputStream lBufferedInputStream = new BufferedInputStream(lFileInputStream,10000000);
+			BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
+																																					10000000);
 			lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 			Binding lBinding;
 			try
@@ -189,10 +186,10 @@ public class GroovyServer implements Runnable, Serializable
 		Thread lThread = new Thread(this, "GroovyServer");
 		lThread.start();
 	}
-	
+
 	public void stopServerNonBlocking()
 	{
-		mSocketServiceServer.stopListening();		
+		mSocketServiceServer.stopListening();
 	}
 
 	public void run()
@@ -216,12 +213,12 @@ public class GroovyServer implements Runnable, Serializable
 
 		final GroovyServer lGroovyServer = this;
 		ServiceFactory lServiceFactory = new ServiceFactory()
+		{
+			public Service newService()
 			{
-				public Service newService()
-				{
-					return new GroovyService(lGroovyServer);
-				}
-			};
+				return new GroovyService(lGroovyServer);
+			}
+		};
 
 		mSocketServiceServer = new SocketServiceServer(lServiceFactory);
 		mSocketServiceServer.setAcceptOnlyLocalConnections(mOnlyLocal);
@@ -324,7 +321,5 @@ public class GroovyServer implements Runnable, Serializable
 	{
 		return mBinding;
 	}
-
-	
 
 }

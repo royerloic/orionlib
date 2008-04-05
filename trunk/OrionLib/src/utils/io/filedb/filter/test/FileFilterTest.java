@@ -22,7 +22,7 @@ public class FileFilterTest
 		OutputStream lOutputStream = new ByteArrayOutputStream();
 		FileFilter.filterOut(lInputStream, 1, "ohoh", lOutputStream);
 		String lString = lOutputStream.toString();
-		//System.out.println(lString);
+		// System.out.println(lString);
 		assertFalse(lString.contains("ohoh"));
 	}
 
@@ -45,14 +45,19 @@ public class FileFilterTest
 	{
 		InputStream lInputStream = FileFilterTest.class.getResourceAsStream("Test.tab.txt");
 		OutputStream lOutputStream = new ByteArrayOutputStream();
-		FileFilter.filterLowerHigher(lInputStream, 0, "Double", "2.0", true,lOutputStream);
+		FileFilter.filterLowerHigher(	lInputStream,
+																	0,
+																	"Double",
+																	"2.0",
+																	true,
+																	lOutputStream);
 		String lString = lOutputStream.toString();
 		System.out.println(lString);
 		assertTrue(lString.contains("ohoh"));
 		assertTrue(lString.contains("blublu"));
 		assertTrue(lString.contains("blu"));
 		assertFalse(lString.contains("bla"));
-		
+
 	}
 
 }

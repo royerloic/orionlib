@@ -1,7 +1,11 @@
 package utils.network.socket;
 
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class SocketThread extends Thread
 {
@@ -24,38 +28,38 @@ public class SocketThread extends Thread
 
 	public void run()
 	{
-		
-			try
+
+		try
+		{
+			PrintWriter out = new PrintWriter(mSocket.getOutputStream(), true);
+			BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
+
+			mService.onConnection(mSocket);
+
+			String inputLine, outputLine;
+			outputLine = mService.getWelcomeMessage();
+			out.print(outputLine + sEndofLine);
+			out.flush();
+
+			while ((inputLine = in.readLine()) != null)
 			{
-				PrintWriter out = new PrintWriter(mSocket.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
-
-				mService.onConnection(mSocket);
-
-				String inputLine, outputLine;
-				outputLine = mService.getWelcomeMessage();
+				if (inputLine.equals(mService.getExitCommand()) || mService.exit())
+					break;
+				outputLine = mService.processInput(inputLine);
 				out.print(outputLine + sEndofLine);
 				out.flush();
-
-				while ((inputLine = in.readLine()) != null)
-				{
-					if (inputLine.equals(mService.getExitCommand()) || mService.exit())
-						break;
-					outputLine = mService.processInput(inputLine);
-					out.print(outputLine + sEndofLine);
-					out.flush();
-				}
-
-				mService.onDisconnection();
-
-				out.close();
-				in.close();
-				mSocket.close();
-
 			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+
+			mService.onDisconnection();
+
+			out.close();
+			in.close();
+			mSocket.close();
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

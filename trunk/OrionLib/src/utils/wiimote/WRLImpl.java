@@ -1,4 +1,5 @@
 package utils.wiimote;
+
 import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -31,24 +32,24 @@ import wiiremotej.event.WiiRemoteDiscoveryListener;
 
 public class WRLImpl extends WiiRemoteAdapter
 {
-	private static boolean		accelerometerSource	= true;	// true = wii
+	private static boolean accelerometerSource = true; // true = wii
 
-	private static boolean		mouseTestingOn;
+	private static boolean mouseTestingOn;
 
-	private static WiiRemote	remote;
+	private static WiiRemote remote;
 
-	private static int				t										= 0;
-	private static int				x										= 0;
-	private static int				y										= 0;
-	private static int				z										= 0;
+	private static int t = 0;
+	private static int x = 0;
+	private static int y = 0;
+	private static int z = 0;
 
-	private static double			mX									= 0;
-	private static double			mY									= 0;
-	static java.awt.Robot			mRobot;
-	static boolean						mButton1Pressed			= false;
-	static boolean						mButton2Pressed			= false;
-	static boolean						mButton3Pressed			= false;
-	static Rectangle					mScreenRectangle;
+	private static double mX = 0;
+	private static double mY = 0;
+	static java.awt.Robot mRobot;
+	static boolean mButton1Pressed = false;
+	static boolean mButton2Pressed = false;
+	static boolean mButton3Pressed = false;
+	static Rectangle mScreenRectangle;
 
 	public static void main(String args[]) throws AWTException
 	{
@@ -63,18 +64,18 @@ public class WRLImpl extends WiiRemoteAdapter
 		try
 		{
 			WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
+			{
+				public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
 				{
-					public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
-					{
-						evt	.getWiiRemote()
-								.addWiiRemoteListener(new WRLImpl(evt.getWiiRemote()));
-					}
+					evt	.getWiiRemote()
+							.addWiiRemoteListener(new WRLImpl(evt.getWiiRemote()));
+				}
 
-					public void findFinished(int numberFound)
-					{
-						System.out.println("Found " + numberFound + " remotes!");
-					}
-				};
+				public void findFinished(int numberFound)
+				{
+					System.out.println("Found " + numberFound + " remotes!");
+				}
+			};
 
 			// Find and connect to a Wii Remote
 			remote = WiiRemoteJ.findRemote();
@@ -89,7 +90,8 @@ public class WRLImpl extends WiiRemoteAdapter
 						.add(new ButtonMap(	WRButtonEvent.HOME,
 																ButtonMap.NUNCHUK,
 																WRNunchukExtensionEvent.C,
-																new int[] { java.awt.event.KeyEvent.VK_CONTROL },
+																new int[]
+																{ java.awt.event.KeyEvent.VK_CONTROL },
 																java.awt.event.InputEvent.BUTTON1_MASK,
 																0,
 																-1));

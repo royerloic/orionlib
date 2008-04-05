@@ -173,15 +173,10 @@ public class HyperGeometricEnrichement
 																								total - set1,
 																								set2,
 																								threshold);
-		/*System.out.println("total=" + total
-												+ " set1="
-												+ set1
-												+ " set2="
-												+ set2
-												+ " inter="
-												+ inter
-												+ " ->pvalue="
-												+ pvalue);/**/
+		/***************************************************************************
+		 * System.out.println("total=" + total + " set1=" + set1 + " set2=" + set2 + "
+		 * inter=" + inter + " ->pvalue=" + pvalue);/
+		 **************************************************************************/
 		return pvalue;
 	}
 
