@@ -28,10 +28,11 @@ public class HyperGeometricEnrichementTest
 																					lOutputStream);
 
 		String lString = lOutputStream.toString();
+		System.out.println(lString);
 
 		assertTrue(lString.contains("81.44516686402928"));
 
-		System.out.println(lString);
+		
 	}
 
 }
