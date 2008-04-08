@@ -72,7 +72,7 @@ public class GeneMapBuilder
 		mAttribute2GeneMap.put(lAttribute, lGene);
 	}
 
-	public HashMap<Element, Double> computeEnrichements(int... pIntegers)
+	public HashMap<Element, Enrichment> computeEnrichements(int... pIntegers)
 
 	{
 		HashSet<Integer> lSet = new HashSet<Integer>();
@@ -83,21 +83,22 @@ public class GeneMapBuilder
 		return computeEnrichements(lSet);
 	}
 
-	public HashMap<Element, Double> computeEnrichements(Collection<Integer> pGeneSet)
+	public HashMap<Element, Enrichment> computeEnrichements(Collection<Integer> pGeneSet)
 	{
 		return computeEnrichements(pGeneSet, 0);
 	}
 
-	public HashMap<Element, Double> computeEnrichements(Collection<Integer> pGeneSet,
+	public HashMap<Element, Enrichment> computeEnrichements(Collection<Integer> pGeneSet,
 																											double pMinimalCoverage)
 	{
-		HashMap<Element, Double> lEnrichementMap = new HashMap<Element, Double>();
+		HashMap<Element, Enrichment> lEnrichementMap = new HashMap<Element, Enrichment>();
 
 		HashSet<Element> lSet1 = getElementSet(mGeneMap, pGeneSet);
 		HashSet<Element> lAttributeSetForSet1 = getAttributesForGeneSet(lSet1);
 		for (Element lAttribute : lAttributeSetForSet1)
 		{
-			lEnrichementMap.put(lAttribute, 1.0);
+			Enrichment lEnrichment = new Enrichment();
+			lEnrichementMap.put(lAttribute, lEnrichment);
 		}
 
 		double lCorrection = Math.max(lAttributeSetForSet1.size(), 1);
@@ -114,9 +115,9 @@ public class GeneMapBuilder
 			lIntersection.retainAll(lSet2);
 			final double inter = lIntersection.size();
 
-			final double coverage = inter / set1;
+			final double lCoverage = inter / set1;
 
-			if (coverage > pMinimalCoverage)
+			if (lCoverage > pMinimalCoverage)
 			{
 				final double pvalue = HyperGeometricEnrichement.hyperg(	universe,
 																																set1,
@@ -124,7 +125,22 @@ public class GeneMapBuilder
 																																inter,
 																																1);
 				final double lCorrectedpValue = pvalue * lCorrection;
-				lEnrichementMap.put(lAttribute, lCorrectedpValue);
+				Enrichment lEnrichment = lEnrichementMap.get(lAttribute);
+				
+				lEnrichment.mSet1 = new ArrayList<Element>(lSet1);
+				lEnrichment.mSet2 = new ArrayList<Element>(lSet2);
+				lEnrichment.mIntersectionSet = new ArrayList<Element>(lIntersection);
+				
+				lEnrichment.mUniverseSize = universe;
+				lEnrichment.mSet1Size = set1;
+				lEnrichment.mSet2Size = set2;
+				lEnrichment.mIntersectionSize = inter;
+				
+				lEnrichment.mPValue = pvalue;
+				lEnrichment.mCorrectedPValue = lCorrectedpValue;
+				lEnrichment.mCoverage = lCoverage;
+								
+				
 			}
 		}
 
@@ -172,12 +188,12 @@ public class GeneMapBuilder
 		HashMap<HashSet<Element>, GeneSet> lGeneSetMap = new HashMap<HashSet<Element>, GeneSet>();
 
 		HashSet<Element> lGeneElementSet = getElementSet(mGeneMap, pGeneSet);
-		HashMap<Element, Double> lEnrichementMap = computeEnrichements(pGeneSet);
+		HashMap<Element, Enrichment> lEnrichementMap = computeEnrichements(pGeneSet);
 
-		for (Entry<Element, Double> lEntry : lEnrichementMap.entrySet())
+		for (Entry<Element, Enrichment> lEntry : lEnrichementMap.entrySet())
 		{
 			final Element lAttribute = lEntry.getKey();
-			final double lPValue = lEntry.getValue();
+			final double lPValue = lEntry.getValue().mCorrectedPValue;
 			if (lPValue < pPValueThreshold)
 			{
 

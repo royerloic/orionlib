@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import utils.bioinformatics.genemap.Element;
+import utils.bioinformatics.genemap.Enrichment;
 import utils.bioinformatics.genemap.GeneMapBuilder;
 import utils.bioinformatics.genemap.GeneSet;
 
@@ -35,14 +36,14 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
 
-		HashMap<Element, Double> lEnrichement = lGeneMap.computeEnrichements(	10,
+		HashMap<Element, Enrichment> lEnrichment = lGeneMap.computeEnrichements(	10,
 																																					11,
 																																					12);
 
-		System.out.println(lEnrichement);
-		assertTrue(lEnrichement.get(new Element(0)) == 3.0);
-		assertTrue(lEnrichement.get(new Element(1)) == 0.30000000000000004);
-		assertTrue(lEnrichement.get(new Element(3)) == 1.8000000000000003);
+		System.out.println(lEnrichment);
+		assertTrue(lEnrichment.get(new Element(0)).mCorrectedPValue == 3.0);
+		assertTrue(lEnrichment.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);
+		assertTrue(lEnrichment.get(new Element(3)).mCorrectedPValue == 1.8000000000000003);
 
 	}
 
@@ -78,13 +79,13 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, 3);
 
-		HashMap<Element, Double> lEnrichement = lGeneMap.computeEnrichements(	10,
+		HashMap<Element, Enrichment> lEnrichement = lGeneMap.computeEnrichements(	10,
 																																					11,
 																																					12);
 
-		assertTrue(lEnrichement.get(new Element(0)) == 3.0);
-		assertTrue(lEnrichement.get(new Element(1)) == 0.30000000000000004);
-		assertTrue(lEnrichement.get(new Element(3)) == 1.8000000000000003);
+		assertTrue(lEnrichement.get(new Element(0)).mCorrectedPValue == 3.0);
+		assertTrue(lEnrichement.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);
+		assertTrue(lEnrichement.get(new Element(3)).mCorrectedPValue == 1.8000000000000003);
 
 		// System.out.println(lEnrichement);
 
