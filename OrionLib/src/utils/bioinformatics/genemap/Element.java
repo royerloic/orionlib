@@ -2,9 +2,9 @@ package utils.bioinformatics.genemap;
 
 public class Element
 {
-	int mId;
-	String mName;
-	String mDescription;
+	public int mId;
+	public String mName;
+	public String mDescription;
 
 	public Element(int pGeneId, String pGeneName, String pGeneDescription)
 	{
