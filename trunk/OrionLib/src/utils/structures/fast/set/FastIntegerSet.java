@@ -6,11 +6,22 @@ import java.util.Random;
 
 public final class FastIntegerSet
 {
+	private static final long serialVersionUID = 1L;
 
-	int [] elements = new int[0];
+	private int[] elements;
+	private int size;
+	
+	public FastIntegerSet(int initialCapacity)
+	{
+		super();
+		if (initialCapacity < 0)
+			throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+		this.elements = new int[initialCapacity];
+	}
 	
 	public FastIntegerSet(int[] pElementData)
 	{
+		Arrays.sort(pElementData);
 		elements = pElementData;
 	}
 	

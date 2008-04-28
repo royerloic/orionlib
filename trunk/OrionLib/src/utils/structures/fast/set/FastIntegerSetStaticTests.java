@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  */
-public class FastIntegerSetTests
+public class FastIntegerSetStaticTests
 {
 
 	@Test
