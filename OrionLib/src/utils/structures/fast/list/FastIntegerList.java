@@ -12,9 +12,9 @@ public class FastIntegerList implements
 														java.io.Serializable,
 														Collection<Integer>
 {
-	private static final long serialVersionUID = 8683452581122892189L;
+	private static final long serialVersionUID = 1L;
 
-	private int[] elementData;
+	private int[] elements;
 	private int size;
 
 	public FastIntegerList(int initialCapacity)
@@ -22,7 +22,7 @@ public class FastIntegerList implements
 		super();
 		if (initialCapacity < 0)
 			throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
-		this.elementData = new int[initialCapacity];
+		this.elements = new int[initialCapacity];
 	}
 
 	public FastIntegerList()
@@ -32,9 +32,9 @@ public class FastIntegerList implements
 
 	public final void trimToSize()
 	{
-		if (elementData.length > size)
+		if (elements.length > size)
 		{
-			elementData = Arrays.copyOf(elementData, size);
+			elements = Arrays.copyOf(elements, size);
 		}
 	}
 
@@ -48,14 +48,14 @@ public class FastIntegerList implements
 	 */
 	public final void ensureCapacity(int minCapacity)
 	{
-		int oldCapacity = elementData.length;
+		int oldCapacity = elements.length;
 		if (minCapacity > oldCapacity)
 		{
 			int newCapacity = (oldCapacity * 3) / 2 + 1;
 			if (newCapacity < minCapacity)
 				newCapacity = minCapacity;
 			// minCapacity is usually close to size, so this is a win:
-			elementData = Arrays.copyOf(elementData, newCapacity);
+			elements = Arrays.copyOf(elements, newCapacity);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class FastIntegerList implements
 	public final boolean contains(int o)
 	{
 		for (int i=0; i<size; i++)
-			if (o == elementData[i])
+			if (o == elements[i])
 				return true;
 		return false;
 	}
@@ -87,7 +87,7 @@ public class FastIntegerList implements
 	public final int indexOf(int o)
 	{
 		for (int i=0; i<size; i++)
-			if (o == elementData[i])
+			if (o == elements[i])
 				return i;
 		return -1;
 	}
@@ -103,7 +103,7 @@ public class FastIntegerList implements
 	{
 		{
 			for (int i = size - 1; i >= 0; i--)
-				if (o==elementData[i])
+				if (o==elements[i])
 					return i;
 		}
 		return -1;
@@ -114,19 +114,19 @@ public class FastIntegerList implements
 	public final int get(int index)
 	{
 		rangeCheck(index);
-		return elementData[index];
+		return elements[index];
 	}
 
 	public final void set(int index, int element)
 	{
 		rangeCheck(index);
-		elementData[index] = element;
+		elements[index] = element;
 	}
 
 	public void add(int e)
 	{
 		ensureCapacity(size + 1); 
-		elementData[size++] = e;
+		elements[size++] = e;
 	}
 
 	public void add(int index, int element)
@@ -134,8 +134,8 @@ public class FastIntegerList implements
 		rangeCheck(index);
 
 		ensureCapacity(size + 1); // Increments modCount!!
-		System.arraycopy(elementData, index, elementData, index + 1, size - index);
-		elementData[index] = element;
+		System.arraycopy(elements, index, elements, index + 1, size - index);
+		elements[index] = element;
 		size++;
 	}
 
@@ -144,14 +144,14 @@ public class FastIntegerList implements
 		rangeCheck(index);
 		int numMoved = size - index - 1;
 		if (numMoved > 0)
-			System.arraycopy(elementData, index + 1, elementData, index, numMoved);
+			System.arraycopy(elements, index + 1, elements, index, numMoved);
 		size--;
 	}
 
 	public boolean removeValue(int o)
 	{
 		for (int index = 0; index < size; index++)
-			if (o == elementData[index])
+			if (o == elements[index])
 			{
 				remove(index);
 				return true;
@@ -162,9 +162,9 @@ public class FastIntegerList implements
 	public boolean addAll(FastIntegerList pFastIntegerList)
 	{
 		ensureCapacity(size + pFastIntegerList.size);
-		System.arraycopy(	pFastIntegerList.elementData,
+		System.arraycopy(	pFastIntegerList.elements,
 											0,
-											elementData,
+											elements,
 											size,
 											pFastIntegerList.size);
 		size = size + pFastIntegerList.size;
@@ -198,7 +198,7 @@ public class FastIntegerList implements
 		final int prime = 31;
 		int result = 1;
 		for (int i = 0; i < size; i++)
-			result = prime * result + elementData[i];
+			result = prime * result + elements[i];
 		return result;
 	}
 
@@ -217,8 +217,8 @@ public class FastIntegerList implements
 			return false;
 
 		{
-			final int[] a1 = this.elementData;
-			final int[] a2 = other.elementData;
+			final int[] a1 = this.elements;
+			final int[] a2 = other.elements;
 			if (a1 == a2)
 				return true;
 			if (a1 == null || a2 == null)
@@ -239,7 +239,7 @@ public class FastIntegerList implements
 		lStringBuilder.append("[");
 		for (int i = 0; i < size; i++)
 		{
-			final int val = elementData[i];
+			final int val = elements[i];
 			lStringBuilder.append(val);
 			lStringBuilder.append(",");
 		}
@@ -253,13 +253,13 @@ public class FastIntegerList implements
 	int[] getUnderlyingArray()
 	{
 		trimToSize();
-		return elementData;	
+		return elements;	
 	}
 	
 	FastIntegerSet getSet()
 	{
 		trimToSize();
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elementData);
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elements);
 		return lFastIntegerSet;
 	}	
 	
@@ -279,9 +279,9 @@ public class FastIntegerList implements
 		Integer[] a = (Integer[]) c.toArray();
 		final int numNew = a.length;
 		ensureCapacity(size + numNew); // Increments modCount
-		System.arraycopy(a, 0, elementData, size, numNew);
+		System.arraycopy(a, 0, elements, size, numNew);
 		for (int i = 0; i < numNew; i++)
-			elementData[i] = a[size + i];
+			elements[i] = a[size + i];
 		size += numNew;
 		return numNew != 0;
 	}
@@ -314,7 +314,7 @@ public class FastIntegerList implements
 			{
 				if (hasNext())
 					mPosition++;
-				return elementData[mPosition];
+				return elements[mPosition];
 			}
 
 			public void remove()
@@ -342,7 +342,7 @@ public class FastIntegerList implements
 	public boolean retainAll(Collection<?> pC)
 	{
 		boolean haschanged = false;
-		for (int element : elementData)
+		for (int element : elements)
 			if (!pC.contains(element))
 				removeValue(element);
 		return haschanged;
@@ -353,7 +353,7 @@ public class FastIntegerList implements
 		Integer[] lArray = new Integer[size];
 		for (int i = 0; i < size; i++)
 		{
-			lArray[i] = (Integer) elementData[i];
+			lArray[i] = (Integer) elements[i];
 		}
 		return lArray;
 	}
