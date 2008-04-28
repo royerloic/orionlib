@@ -2,14 +2,20 @@ package utils.structures.fast.list;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.RandomAccess;
 
-public class FastIntegerList implements RandomAccess, java.io.Serializable
+import utils.structures.fast.set.FastIntegerSet;
+
+public class FastIntegerList implements
+														RandomAccess,
+														java.io.Serializable,
+														Collection<Integer>
 {
 	private static final long serialVersionUID = 8683452581122892189L;
 
-	public int[] elementData;
-	public int size;
+	private int[] elementData;
+	private int size;
 
 	public FastIntegerList(int initialCapacity)
 	{
@@ -24,10 +30,9 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 		this(10);
 	}
 
-	private final void trimToSize()
+	public final void trimToSize()
 	{
-		int oldCapacity = elementData.length;
-		if (size < oldCapacity)
+		if (elementData.length > size)
 		{
 			elementData = Arrays.copyOf(elementData, size);
 		}
@@ -41,7 +46,7 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 	 * @param minCapacity
 	 *          the desired minimum capacity
 	 */
-	private final void ensureCapacity(int minCapacity)
+	public final void ensureCapacity(int minCapacity)
 	{
 		int oldCapacity = elementData.length;
 		if (minCapacity > oldCapacity)
@@ -66,8 +71,8 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 
 	public final boolean contains(int o)
 	{
-		for (int i : elementData)
-			if (o == i)
+		for (int i=0; i<size; i++)
+			if (o == elementData[i])
 				return true;
 		return false;
 	}
@@ -81,8 +86,8 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 	 */
 	public final int indexOf(int o)
 	{
-		for (int i : elementData)
-			if (o == i)
+		for (int i=0; i<size; i++)
+			if (o == elementData[i])
 				return i;
 		return -1;
 	}
@@ -94,11 +99,11 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 	 * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
 	 * or -1 if there is no such index.
 	 */
-	public final int lastIndexOf(Object o)
+	public final int lastIndexOf(int o)
 	{
 		{
 			for (int i = size - 1; i >= 0; i--)
-				if (o.equals(elementData[i]))
+				if (o==elementData[i])
 					return i;
 		}
 		return -1;
@@ -108,24 +113,25 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 
 	public final int get(int index)
 	{
+		rangeCheck(index);
 		return elementData[index];
 	}
 
 	public final void set(int index, int element)
 	{
+		rangeCheck(index);
 		elementData[index] = element;
 	}
 
 	public void add(int e)
 	{
-		ensureCapacity(size + 1); // Increments modCount!!
+		ensureCapacity(size + 1); 
 		elementData[size++] = e;
 	}
 
 	public void add(int index, int element)
 	{
-		if (index > size || index < 0)
-			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+		rangeCheck(index);
 
 		ensureCapacity(size + 1); // Increments modCount!!
 		System.arraycopy(elementData, index, elementData, index + 1, size - index);
@@ -135,6 +141,7 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 
 	public void remove(int index)
 	{
+		rangeCheck(index);
 		int numMoved = size - index - 1;
 		if (numMoved > 0)
 			System.arraycopy(elementData, index + 1, elementData, index, numMoved);
@@ -152,6 +159,18 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 		return false;
 	}
 
+	public boolean addAll(FastIntegerList pFastIntegerList)
+	{
+		ensureCapacity(size + pFastIntegerList.size);
+		System.arraycopy(	pFastIntegerList.elementData,
+											0,
+											elementData,
+											size,
+											pFastIntegerList.size);
+		size = size + pFastIntegerList.size;
+		return pFastIntegerList.size > 0;
+	}
+
 	/**
 	 * Removes all of the elements from this list. The list will be empty after
 	 * this call returns.
@@ -159,6 +178,100 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 	public void clear()
 	{
 		size = 0;
+	}
+
+	/**
+	 * Checks if the given index is in range. If not, throws an appropriate
+	 * runtime exception. This method does *not* check if the index is negative:
+	 * It is always used immediately prior to an array access, which throws an
+	 * ArrayIndexOutOfBoundsException if index is negative.
+	 */
+	private final void rangeCheck(int index)
+	{
+		if (index >= size || size<0)
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		for (int i = 0; i < size; i++)
+			result = prime * result + elementData[i];
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final FastIntegerList other = (FastIntegerList) obj;
+
+		if (size != other.size)
+			return false;
+
+		{
+			final int[] a1 = this.elementData;
+			final int[] a2 = other.elementData;
+			if (a1 == a2)
+				return true;
+			if (a1 == null || a2 == null)
+				return false;
+
+			for (int i = 0; i < size; i++)
+				if (a1[i] != a2[i])
+					return false;
+
+			return true;
+		}
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder lStringBuilder = new StringBuilder();
+		lStringBuilder.append("[");
+		for (int i = 0; i < size; i++)
+		{
+			final int val = elementData[i];
+			lStringBuilder.append(val);
+			lStringBuilder.append(",");
+		}
+		lStringBuilder.setCharAt(lStringBuilder.length() - 1, ']');
+		return lStringBuilder.toString();
+	}
+
+	// Special methods:
+	
+	
+	int[] getUnderlyingArray()
+	{
+		trimToSize();
+		return elementData;	
+	}
+	
+	FastIntegerSet getSet()
+	{
+		trimToSize();
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elementData);
+		return lFastIntegerSet;
+	}	
+	
+	
+	
+	// *************************************************************
+	// Methods implementing interface Collection<Integer>
+
+	public boolean add(Integer pE)
+	{
+		add((int) pE);
+		return true;
 	}
 
 	public boolean addAll(Collection<? extends Integer> c)
@@ -173,16 +286,81 @@ public class FastIntegerList implements RandomAccess, java.io.Serializable
 		return numNew != 0;
 	}
 
-	/**
-	 * Checks if the given index is in range. If not, throws an appropriate
-	 * runtime exception. This method does *not* check if the index is negative:
-	 * It is always used immediately prior to an array access, which throws an
-	 * ArrayIndexOutOfBoundsException if index is negative.
-	 */
-	private void RangeCheck(int index)
+	public boolean contains(Object pO)
 	{
-		if (index >= size)
-			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+		return contains((int) ((Integer) pO));
+	}
+
+	public boolean containsAll(Collection<?> pC)
+	{
+		for (Object element : pC)
+			if (!contains(element))
+				return false;
+		return true;
+	}
+
+	public Iterator<Integer> iterator()
+	{
+		Iterator<Integer> lIterator = new Iterator<Integer>()
+		{
+			int mPosition = 0;
+
+			public boolean hasNext()
+			{
+				return mPosition < size - 1;
+			}
+
+			public Integer next()
+			{
+				if (hasNext())
+					mPosition++;
+				return elementData[mPosition];
+			}
+
+			public void remove()
+			{
+				throw new UnsupportedOperationException("Cannot remove");
+			}
+		};
+		return lIterator;
+	}
+
+	public boolean remove(Object pO)
+	{
+		remove((int) ((Integer) pO));
+		return true;
+	}
+
+	public boolean removeAll(Collection<?> pC)
+	{
+		boolean haschanged = false;
+		for (Object element : pC)
+			haschanged |= removeValue((int) ((Integer) element));
+		return haschanged;
+	}
+
+	public boolean retainAll(Collection<?> pC)
+	{
+		boolean haschanged = false;
+		for (int element : elementData)
+			if (!pC.contains(element))
+				removeValue(element);
+		return haschanged;
+	}
+
+	public Object[] toArray()
+	{
+		Integer[] lArray = new Integer[size];
+		for (int i = 0; i < size; i++)
+		{
+			lArray[i] = (Integer) elementData[i];
+		}
+		return lArray;
+	}
+
+	public <T> T[] toArray(T[] pA)
+	{
+		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
 	}
 
 }

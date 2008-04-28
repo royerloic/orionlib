@@ -7,6 +7,15 @@ import java.util.Random;
 public final class FastIntegerSet
 {
 
+	int [] elements = new int[0];
+	
+	public FastIntegerSet(int[] pElementData)
+	{
+		elements = pElementData;
+	}
+	
+	
+
 	public static final int[] add(final int[] pArray, final int pInteger)
 	{
 		if (pArray.length == 0)
