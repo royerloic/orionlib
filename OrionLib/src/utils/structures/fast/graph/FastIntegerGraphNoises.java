@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import utils.structures.fast.set.FastIntegerSet;
+
 public class FastIntegerGraphNoises
 {
 
@@ -11,7 +13,7 @@ public class FastIntegerGraphNoises
 																		FastIntegerGraph pIntegerGraph,
 																		int pTries)
 	{
-		int[] lNodeSet = pIntegerGraph.getNodeSet();
+		int[] lNodeSet = pIntegerGraph.getNodeSet().getUnderlyingArray();
 
 		if (lNodeSet.length < 4)
 			return false;
@@ -27,16 +29,16 @@ public class FastIntegerGraphNoises
 		{
 
 			fefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			int[] fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
-			if (fefnNei.length < 1)
+			FastIntegerSet fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
+			if (fefnNei.size() < 1)
 				continue;
-			fesn = fefnNei[pRandom.nextInt(fefnNei.length)];
+			fesn = fefnNei.getUnderlyingArray()[pRandom.nextInt(fefnNei.size())];
 
 			sefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			int[] sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
-			if (sefnNei.length < 1)
+			FastIntegerSet sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
+			if (sefnNei.size() < 1)
 				continue;
-			sesn = sefnNei[pRandom.nextInt(sefnNei.length)];
+			sesn = sefnNei.getUnderlyingArray()[pRandom.nextInt(sefnNei.size())];
 
 			valid = fefn != fesn && sefn != sesn
 							&& fefn != sefn
@@ -79,7 +81,7 @@ public class FastIntegerGraphNoises
 		ArrayList<Integer> lFirstNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
 		ArrayList<Integer> lSecondNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
 		for (int node1 = 0; node1 < pIntegerGraph.mSparseMatrix.size(); node1++)
-			for (int node2 : pIntegerGraph.mSparseMatrix.get(node1))
+			for (int node2 : pIntegerGraph.mSparseMatrix.get(node1).getUnderlyingArray())
 			{
 				lFirstNodeList.add(node1);
 				lSecondNodeList.add(node2);

@@ -2,168 +2,307 @@ package utils.structures.fast.set;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.RandomAccess;
 
-public final class FastIntegerSet
+import utils.structures.fast.list.FastIntegerList;
+
+public final class FastIntegerSet	implements
+																	RandomAccess,
+																	java.io.Serializable,
+																	Collection<Integer>,
+																	Iterable<Integer>
 {
 	private static final long serialVersionUID = 1L;
 
 	private int[] elements;
-	private int size;
-	
-	public FastIntegerSet(int initialCapacity)
+	private int size = 0;
+
+	public FastIntegerSet()
+	{
+		elements = new int[10];
+	}
+
+	public FastIntegerSet(final int[] pElementData, final int pSize)
 	{
 		super();
-		if (initialCapacity < 0)
-			throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
-		this.elements = new int[initialCapacity];
-	}
-	
-	public FastIntegerSet(int[] pElementData)
-	{
-		Arrays.sort(pElementData);
 		elements = pElementData;
-	}
-	
-	
-
-	public static final int[] add(final int[] pArray, final int pInteger)
-	{
-		if (pArray.length == 0)
-		{
-			int[] lNewArray = new int[1];
-			lNewArray[0] = pInteger;
-			return lNewArray;
-		}
-
-		final int lInsertPosition = locate(pArray, pInteger);
-		final int lInsertValue = pArray[lInsertPosition];
-		if (lInsertValue == pInteger)
-		{
-			return pArray;
-		}
-		else if (lInsertValue <= pInteger)
-		{
-			int[] lNewArray = insertAt(pArray, lInsertPosition + 1, pInteger);
-			return lNewArray;
-		}
-		else if (lInsertValue >= pInteger)
-		{
-			int[] lNewArray = insertAt(pArray, lInsertPosition, pInteger);
-			return lNewArray;
-		}
-
-		return null;
+		size = pSize;
 	}
 
-	public static int[] del(int[] pArray, int pInt)
+	public FastIntegerSet(int... pElementData)
 	{
-		final int index = locate(pArray, pInt);
+		super();
+		elements = Arrays.copyOf(pElementData, pElementData.length);
+		Arrays.sort(elements);
 
-		if (contains(pArray, pInt))
-		{
-			final int[] lNewArray = new int[pArray.length - 1];
+		int writeindex = 0;
+		int readindex = 0;
+		final int length = elements.length;
 
-			int numMoved = pArray.length - index - 1;
-			System.arraycopy(pArray, 0, lNewArray, 0, pArray.length - 1);
-			if (numMoved > 0)
-				System.arraycopy(pArray, index + 1, lNewArray, index, numMoved);
+		while (readindex < length)
+			if (readindex == length - 1)
+			{
+				elements[writeindex] = elements[readindex];
+				writeindex++;
+				break;
+			}
+			else if ((elements[readindex] == elements[readindex + 1]))
+			{
+				readindex++;
+				continue;
+			}
+			else
+			{
+				elements[writeindex] = elements[readindex];
+				readindex++;
+				writeindex++;
+			}
 
-			return lNewArray;
-		}
-
-		return pArray;
+		size = writeindex;
 	}
 
-	public static final int locate(final int[] pArray, final int pInt)
+	public FastIntegerSet(FastIntegerSet pFastIntegerSet)
 	{
-		if (pArray.length == 0)
-			return 0;
-		return locateRecursive(pArray, pInt, 0, pArray.length);
+		size = pFastIntegerSet.size;
+		elements = Arrays.copyOf(pFastIntegerSet.elements, size);
 	}
 
-	private static final int locateRecursive(	final int[] pArray,
-																						final int pInt,
-																						final int pStartIndex,
-																						final int pEndIndex)
+	public final void trimToSize()
 	{
-		final int lLength = pEndIndex - pStartIndex;
-		if (lLength == 1)
+		if (elements.length > size)
 		{
-			return pStartIndex;
+			elements = Arrays.copyOf(elements, size);
 		}
+	}
 
-		final int lMedianIndex = (pEndIndex + pStartIndex) / 2;
-		final int lMedianValue = pArray[lMedianIndex];
-
-		if (lMedianValue == pInt)
+	/**
+	 * Increases the capacity of this <tt>ArrayList</tt> instance, if necessary,
+	 * to ensure that it can hold at least the number of elements specified by the
+	 * minimum capacity argument.
+	 * 
+	 * @param minCapacity
+	 *          the desired minimum capacity
+	 */
+	public final void ensureCapacity(int minCapacity)
+	{
+		final int oldCapacity = elements.length;
+		if (minCapacity > oldCapacity)
 		{
-			return lMedianIndex;
+			int newCapacity = (oldCapacity * 3) / 2 + 1;
+			if (newCapacity < minCapacity)
+				newCapacity = minCapacity;
+			elements = Arrays.copyOf(elements, newCapacity);
 		}
-		else if (lMedianValue <= pInt)
+	}
+
+	public final int size()
+	{
+		return size;
+	}
+
+	public final boolean isEmpty()
+	{
+		return size == 0;
+	}
+
+	public final boolean contains(int o)
+	{
+		return Arrays.binarySearch(elements, 0, size, o) >= 0;
+	}
+
+	public final boolean contains(int... pArray)
+	{
+		for (int val : pArray)
+			if (!contains(val))
+				return false;
+		return true;
+	}
+
+	public final boolean contains(FastIntegerSet pFastIntegerSet)
+	{
+		final int[] otherElements = pFastIntegerSet.elements;
+		// we first check last element, might lead to early failure...
+		if (!contains(otherElements[pFastIntegerSet.size - 1]))
+			return false;
+		// then we check first and all following
+		for (int i = 0; i < pFastIntegerSet.size - 1; i++)
+			if (!contains(otherElements[i]))
+				return false;
+		return true;
+	}
+
+	public boolean equals(int... pArray)
+	{
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet(pArray);
+		return lFastIntegerSet.equals(this);
+	}
+
+	/**
+	 * Removes all of the elements from this set. The set will be empty after his
+	 * call returns.
+	 */
+	public void clear()
+	{
+		size = 0;
+	}
+
+	/**
+	 * Removes all of the elements from this list. The set will be empty after
+	 * this call returns. Additionally to clear, this call releases the reference
+	 * to the underlying array thus potentially freeing memory. (after garbage
+	 * collection)
+	 */
+	public void wipe()
+	{
+		size = 0;
+	}
+
+	/**
+	 * Checks if the given index is in range. If not, throws an appropriate
+	 * runtime exception. This method does *not* check if the index is negative:
+	 * It is always used immediately prior to an array access, which throws an
+	 * ArrayIndexOutOfBoundsException if index is negative.
+	 */
+	private final void rangeCheck(int index)
+	{
+		if (index >= size || size < 0)
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		for (int i = 0; i < size; i++)
+			result = prime * result + elements[i];
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final FastIntegerSet other = (FastIntegerSet) obj;
+
+		if (size != other.size)
+			return false;
+
 		{
-			return locateRecursive(pArray, pInt, lMedianIndex, pEndIndex);
+			final int[] a1 = this.elements;
+			final int[] a2 = other.elements;
+			if (a1 == a2)
+				return true;
+			if (a1 == null || a2 == null)
+				return false;
+
+			for (int i = 0; i < size; i++)
+				if (a1[i] != a2[i])
+					return false;
+
+			return true;
+		}
+	}
+
+	@Override
+	public String toString()
+	{
+		if (size == 0)
+		{
+			return "[] as Set";
 		}
 		else
 		{
-			return locateRecursive(pArray, pInt, pStartIndex, lMedianIndex);
+			StringBuilder lStringBuilder = new StringBuilder();
+			lStringBuilder.append("[");
+			for (int i = 0; i < size; i++)
+			{
+				final int val = elements[i];
+				lStringBuilder.append(val);
+				lStringBuilder.append(",");
+			}
+			lStringBuilder.setCharAt(lStringBuilder.length() - 1, ']');
+			lStringBuilder.append(" as Set");
+			return lStringBuilder.toString();
 		}
-
 	}
 
-	public static final boolean contains(final int[] pArray, final int pInt)
+	public boolean add(int o)
 	{
-		final int index = locate(pArray, pInt);
-		return index < pArray.length && pArray[index] == pInt;
-	}
+		final int index = Arrays.binarySearch(elements, 0, size, o);
 
-	public static final int[] insertAt(	final int[] pArray,
-																			final int pInsertPosition,
-																			final int pI)
-	{
-		final int oldArrayLength = pArray.length;
-		final int[] lNewArray = getNewArrayWithCapacity(pArray.length + 1);
-
-		if (pInsertPosition == oldArrayLength)
+		if (index >= 0)
 		{
-			System.arraycopy(pArray, 0, lNewArray, 0, oldArrayLength);
-			lNewArray[pInsertPosition] = pI;
-		}
-		else if (pInsertPosition == 0)
-		{
-			System.arraycopy(pArray, 0, lNewArray, 1, oldArrayLength);
-			lNewArray[pInsertPosition] = pI;
+			return false;
 		}
 		else
 		{
-			final int lPreLength = pInsertPosition;
-			final int lPostLength = oldArrayLength - lPreLength;
-			System.arraycopy(pArray, 0, lNewArray, 0, lPreLength);
-			lNewArray[pInsertPosition] = pI;
-			System.arraycopy(	pArray,
-												pInsertPosition,
-												lNewArray,
-												pInsertPosition + 1,
-												lPostLength);
+			final int insertionindex = -index - 1;
+			ensureCapacity(size + 1);
+			System.arraycopy(	elements,
+												insertionindex,
+												elements,
+												insertionindex + 1,
+												size - insertionindex);
+			elements[insertionindex] = o;
+			size++;
+			return true;
 		}
-
-		return lNewArray;
 	}
 
-	public static final int[] intersection(	final int[] pArray1,
-																					final int[] pArray2)
+	public boolean del(int o)
 	{
-		final int lMaximalSize = max(pArray1.length, pArray2.length);
+		final int index = Arrays.binarySearch(elements, 0, size, o);
+
+		if (index < 0)
+		{
+			return false;
+		}
+		else
+		{
+			final int deletionindex = index;
+			ensureCapacity(size);
+			System.arraycopy(	elements,
+												deletionindex + 1,
+												elements,
+												deletionindex,
+												size - deletionindex - 1);
+			size--;
+			return true;
+		}
+	}
+
+	// Static Intersection, Union, Difference, Symetric Difference
+
+	/**
+	 * Computes the intersection of two sets: set1 Inter set2
+	 */
+	public static final FastIntegerSet intersection(final FastIntegerSet set1,
+																									final FastIntegerSet set2)
+	{
+		final int[] array1 = set1.elements;
+		final int size1 = set1.size;
+		final int[] array2 = set2.elements;
+		final int size2 = set2.size;
+
+		final int lMaximalSize = max(size1, size2);
 		final int[] lNewArray = new int[lMaximalSize];
 
 		int i = 0;
 		int j = 0;
 		int k = 0;
 
-		while (i < pArray1.length && j < pArray2.length)
+		while (i < size1 && j < size2)
 		{
-			final int lA = pArray1[i];
-			final int lB = pArray2[j];
+			final int lA = array1[i];
+			final int lB = array2[j];
 
 			if (lA == lB)
 			{
@@ -182,49 +321,54 @@ public final class FastIntegerSet
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet(lNewArray, k);
 
-		return lResizedArray;
+		return lFastIntegerSet;
 	}
 
-	public static final int[] union(final int[] pArray1, final int[] pArray2)
+	/**
+	 * Computes the union of two sets: set1 Union set2
+	 */
+	public static final FastIntegerSet union(	final FastIntegerSet set1,
+																						final FastIntegerSet set2)
 	{
-		if (pArray1.length == 0 && pArray2.length != 0)
+		final int[] array1 = set1.elements;
+		final int size1 = set1.size;
+		final int[] array2 = set2.elements;
+		final int size2 = set2.size;
+
+		if (size1 == 0 && size2 != 0)
 		{
-			final int[] lNewArray = new int[pArray2.length];
-			System.arraycopy(pArray2, 0, lNewArray, 0, pArray2.length);
-			return lNewArray;
+			return new FastIntegerSet(set2);
 		}
-		if (pArray2.length == 0 && pArray1.length != 0)
+		if (size2 == 0 && size1 != 0)
 		{
-			final int[] lNewArray = new int[pArray1.length];
-			System.arraycopy(pArray1, 0, lNewArray, 0, pArray1.length);
-			return lNewArray;
+			return new FastIntegerSet(set1);
 		}
-		if (pArray2.length == 0 && pArray1.length == 0)
+		if (size2 == 0 && size1 == 0)
 		{
-			return new int[0];
+			return new FastIntegerSet();
 		}
 
-		final int lMaximalSize = pArray1.length + pArray2.length;
+		final int lMaximalSize = size1 + size2;
 		final int[] lNewArray = new int[lMaximalSize];
 
 		int i = 0;
 		int j = 0;
 		int k = 0;
 
-		int lA = pArray1[i];
-		int lB = pArray2[j];
+		int lA = array1[i];
+		int lB = array2[j];
 		while (true)
 		{
 
-			if (i < pArray1.length)
+			if (i < size1)
 			{
-				lA = pArray1[i];
+				lA = array1[i];
 
-				if (j < pArray2.length)
+				if (j < size2)
 				{
-					lB = pArray2[j];
+					lB = array2[j];
 				}
 				else
 				{
@@ -235,9 +379,9 @@ public final class FastIntegerSet
 			{
 				lA = Integer.MAX_VALUE;
 
-				if (j < pArray2.length)
+				if (j < size2)
 				{
-					lB = pArray2[j];
+					lB = array2[j];
 				}
 				else
 				{
@@ -266,53 +410,51 @@ public final class FastIntegerSet
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
-
-		return lResizedArray;
+		return new FastIntegerSet(lNewArray, k);
 	}
 
 	/**
-	 * Computes the difference Set1 - Set2 (not the symmetric one!!!)
-	 * 
-	 * @param pArray1
-	 * @param pArray2
-	 * @return
+	 * Computes the difference set1 Minus set2 (not the symmetric one!!!)
 	 */
-	public static final int[] difference(final int[] pArray1, final int[] pArray2)
+	public static final FastIntegerSet difference(final FastIntegerSet set1,
+																								final FastIntegerSet set2)
 	{
-		if (pArray1.length == 0 && pArray2.length != 0)
+		final int[] array1 = set1.elements;
+		final int size1 = set1.size;
+		final int[] array2 = set2.elements;
+		final int size2 = set2.size;
+
+		if (size1 == 0 && size2 != 0)
 		{
-			return new int[0];
+			return new FastIntegerSet();
 		}
-		if (pArray1.length != 0 && pArray2.length == 0)
+		if (size1 != 0 && size2 == 0)
 		{
-			final int[] lNewArray = new int[pArray1.length];
-			System.arraycopy(pArray1, 0, lNewArray, 0, pArray1.length);
-			return lNewArray;
+			return new FastIntegerSet(set1);
 		}
-		if (pArray2.length == 0 && pArray1.length == 0)
+		if (size2 == 0 && size1 == 0)
 		{
-			return new int[0];
+			return new FastIntegerSet();
 		}
 
-		final int lMaximalSize = pArray1.length;
+		final int lMaximalSize = size1;
 		final int[] lNewArray = new int[lMaximalSize];
 
 		int i = 0;
 		int j = 0;
 		int k = 0;
-		int lA = pArray1[i];
-		int lB = pArray2[j];
+		int lA = array1[i];
+		int lB = array2[j];
 		while (true)
 		{
 
-			if (i < pArray1.length)
+			if (i < size1)
 			{
-				lA = pArray1[i];
+				lA = array1[i];
 
-				if (j < pArray2.length)
+				if (j < size2)
 				{
-					lB = pArray2[j];
+					lB = array2[j];
 				}
 				else
 				{
@@ -323,9 +465,9 @@ public final class FastIntegerSet
 			{
 				lA = Integer.MAX_VALUE;
 
-				if (j < pArray2.length)
+				if (j < size2)
 				{
-					lB = pArray2[j];
+					lB = array2[j];
 				}
 				else
 				{
@@ -350,104 +492,137 @@ public final class FastIntegerSet
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
-
-		return lResizedArray;
+		return new FastIntegerSet(lNewArray, k);
 	}
 
-	public static final int[] from(final Collection<Integer> pCollection)
-	{
-		final int[] lArray = getNewArrayWithCapacity(pCollection.size());
+	// Special methods:
 
-		int i = 0;
-		for (int lI : pCollection)
-		{
-			lArray[i] = lI;
-			i++;
-		}
-		return lArray;
+	public int[] getUnderlyingArray()
+	{
+		trimToSize();
+		return elements;
 	}
 
-	public static final int[] from(final Integer[] pIntegerArray)
+	public FastIntegerList getList()
 	{
-		final int[] lArray = getNewArrayWithCapacity(pIntegerArray.length);
-
-		int i = 0;
-		for (int lI : pIntegerArray)
-		{
-			lArray[i] = lI;
-			i++;
-		}
-		return lArray;
+		FastIntegerList lFastIntegerList = new FastIntegerList(elements, size);
+		return lFastIntegerList;
 	}
 
-	private static final int[] getNewArrayWithCapacity(final int pNewCapacity)
+	public FastIntegerSet getRandomSubSet(Random pRandom, double pDensity)
 	{
-		final int[] newArray = new int[pNewCapacity];
-		return newArray;
-		/***************************************************************************
-		 * final int lOldCapacity = pArray.length; if (lOldCapacity < pNewCapacity) {
-		 * final int[] oldArray = pArray; int newCapacity = (lOldCapacity * 4) / 3 +
-		 * 1; if (newCapacity < pNewCapacity) newCapacity = pNewCapacity; final
-		 * int[] newArray = new int[newCapacity]; return newArray; } return pArray;/
-		 **************************************************************************/
-	}
-
-	private static final int[] setCapacity(	final int[] pArray,
-																					final int pNewCapacity)
-	{
-		final int[] lNewArray = new int[pNewCapacity];
-		System.arraycopy(pArray, 0, lNewArray, 0, pNewCapacity);
-		return lNewArray;
-	}
-
-	public static final boolean equals(final int[] pArray1, final int[] pArray2)
-	{
-		if (pArray1.length != pArray2.length)
-		{
-			return false;
-		}
-		else
-		{
-			for (int i = 0; i < pArray1.length; i++)
-			{
-				if (pArray1[i] != pArray2[i])
-					return false;
-			}
-			return true;
-		}
-	}
-
-	public static final int[] random(	final Random pRandom,
-																		final int pDomainSize,
-																		final double pDensity)
-	{
-		final int[] lArray = getNewArrayWithCapacity(pDomainSize);
-
-		int lCurrentIndex = 0;
-		int i = 0;
-		while (i < pDomainSize)
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet();
+		for (int val : elements)
 		{
 			if (pRandom.nextDouble() < pDensity)
 			{
-				lArray[lCurrentIndex] = i;
-				lCurrentIndex++;
+				lFastIntegerSet.add(val);
 			}
-			i++;
 		}
-
-		int[] lResizedArray = setCapacity(lArray, lCurrentIndex);
-		return lResizedArray;
+		return lFastIntegerSet;
 	}
+
+	// Special static methods:
 
 	private static final int max(int a, int b)
 	{
 		return (a >= b) ? a : b;
 	}
 
-	public static void validate(int[] pReferenceSet)
+	// *************************************************************
+	// Methods implementing interfaces
+	
+	public boolean add(Integer pE)
 	{
-		Arrays.sort(pReferenceSet);
+		return add((int) pE);
 	}
 
+	public boolean addAll(Collection<? extends Integer> c)
+	{
+		Integer[] a = (Integer[]) c.toArray();
+		final int numNew = a.length;
+		ensureCapacity(size + numNew); // Increments modCount
+		System.arraycopy(a, 0, elements, size, numNew);
+		for (int i = 0; i < numNew; i++)
+			elements[i] = a[size + i];
+		size += numNew;
+		return numNew != 0;
+	}
+
+	public boolean contains(Object pO)
+	{
+		return contains((int) ((Integer) pO));
+	}
+
+	public boolean containsAll(Collection<?> pC)
+	{
+		for (Object element : pC)
+			if (!contains(element))
+				return false;
+		return true;
+	}
+
+	public Iterator<Integer> iterator()
+	{
+		Iterator<Integer> lIterator = new Iterator<Integer>()
+		{
+			int mPosition = 0;
+
+			public boolean hasNext()
+			{
+				return mPosition < size - 1;
+			}
+
+			public Integer next()
+			{
+				if (hasNext())
+					mPosition++;
+				return elements[mPosition];
+			}
+
+			public void remove()
+			{
+				throw new UnsupportedOperationException("Cannot remove");
+			}
+		};
+		return lIterator;
+	}
+
+	public boolean remove(Object pO)
+	{
+		del((int) ((Integer) pO));
+		return true;
+	}
+
+	public boolean removeAll(Collection<?> pC)
+	{
+		boolean haschanged = false;
+		for (Object element : pC)
+			haschanged |= del((int) ((Integer) element));
+		return haschanged;
+	}
+
+	public boolean retainAll(Collection<?> pC)
+	{
+		boolean haschanged = false;
+		for (int element : elements)
+			if (!pC.contains(element))
+				del(element);
+		return haschanged;
+	}
+
+	public Object[] toArray()
+	{
+		Integer[] lArray = new Integer[size];
+		for (int i = 0; i < size; i++)
+		{
+			lArray[i] = (Integer) elements[i];
+		}
+		return lArray;
+	}
+
+	public <T> T[] toArray(T[] pA)
+	{
+		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
+	}
 }
