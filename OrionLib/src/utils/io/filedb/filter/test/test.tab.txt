@@ -1,6 +1,7 @@
-//col0	col1	col2
-1	bla	2
-2	blu	3
-3	blublu	6
-4	ohoh	8
+//col0	col1	col3
+2	ab	3.2
+4	aa	1.3E-10
+10	a	2.1
+30	ac	1.0006
+
 
