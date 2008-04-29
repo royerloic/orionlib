@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,7 +24,7 @@ public class FastGraph<N> implements Serializable
 	 */
 	private static final long serialVersionUID = -3867746158442088438L;
 
-	final FastIntegerGraph mFastIntegerGraph = new FastIntegerGraph();
+	FastIntegerGraph mFastIntegerGraph = new FastIntegerGraph();
 
 	final HashMap<N, Integer> mNameToNodeMap = new HashMap<N, Integer>();
 	final HashMap<Integer, N> mNodeToNameMap = new HashMap<Integer, N>();
@@ -33,9 +34,20 @@ public class FastGraph<N> implements Serializable
 		super();
 	}
 
-	public FastIntegerGraph getUnderlyingFastIntegerGraph()
+	protected FastIntegerGraph getUnderlyingFastIntegerGraph()
 	{
 		return mFastIntegerGraph;
+	}
+	
+	/**
+	 * Sets the underlying FastIntegerGraph
+	 * WARNING: you need to know what you are doing, the integer graph must
+	 * be compatible with the mappings contained in the Fast Graph...
+	 * @param pFastIntegerGraph
+	 */
+	public void setUnderlyingFastIntegerGraph(FastIntegerGraph pFastIntegerGraph)
+	{
+		mFastIntegerGraph = pFastIntegerGraph;
 	}
 
 	public void addNode(final N pNodeName)
@@ -129,6 +141,11 @@ public class FastGraph<N> implements Serializable
 		return lEdgeSet;
 	}
 
+	public void writeEdgeFile(File pFile) throws IOException
+	{
+		writeEdgeFile(new FileOutputStream(pFile));
+	}
+	
 	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
