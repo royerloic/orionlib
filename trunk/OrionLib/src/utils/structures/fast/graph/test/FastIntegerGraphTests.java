@@ -138,21 +138,19 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addNodesUpTo(11);
 		lFastIntegerGraph.addNodesUpTo(12);
 
-		assertTrue(FastIntegerSet.equals(	new int[]
-																			{ 0,
-																				1,
-																				2,
-																				3,
-																				4,
-																				5,
-																				6,
-																				7,
-																				8,
-																				9,
-																				10,
-																				11,
-																				12 },
-																			lFastIntegerGraph.getNodeSet()));
+		assertTrue(lFastIntegerGraph.getNodeSet().equals(	0,
+																											1,
+																											2,
+																											3,
+																											4,
+																											5,
+																											6,
+																											7,
+																											8,
+																											9,
+																											10,
+																											11,
+																											12));
 	}
 
 	@Test
@@ -210,26 +208,21 @@ public class FastIntegerGraphTests
 		lFastIntegerGraph.addNodesUpTo(11);
 		lFastIntegerGraph.addNodesUpTo(12);
 
-		assertTrue(FastIntegerSet.equals(new int[]
-		{ 1, 2, 3 }, lFastIntegerGraph.getNodeNeighbours(0)));
-		assertTrue(FastIntegerSet.equals(	new int[] {},
-																			lFastIntegerGraph.getNodeNeighbours(0, 0)));
-		assertTrue(FastIntegerSet.equals(new int[]
-		{ 1, 2, 3 }, lFastIntegerGraph.getNodeNeighbours(0, 1)));
-		assertTrue(FastIntegerSet.equals(	new int[]
-																			{ 1,
-																				2,
-																				3,
-																				11,
-																				12,
-																				13,
-																				21,
-																				22,
-																				23,
-																				31,
-																				32,
-																				33 },
-																			lFastIntegerGraph.getNodeNeighbours(0, 2)));
+		assertTrue(lFastIntegerGraph.getNodeNeighbours(0).equals(1, 2, 3));
+		assertTrue(lFastIntegerGraph.getNodeNeighbours(0, 0).isEmpty());
+		assertTrue(lFastIntegerGraph.getNodeNeighbours(0, 1).equals(1, 2, 3));
+		assertTrue(lFastIntegerGraph.getNodeNeighbours(0, 2).equals(1,
+																																2,
+																																3,
+																																11,
+																																12,
+																																13,
+																																21,
+																																22,
+																																23,
+																																31,
+																																32,
+																																33));
 	}
 
 	@Test
@@ -259,8 +252,9 @@ public class FastIntegerGraphTests
 
 		// System.out.println(lFastIntegerGraph.toString());
 
-		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new int[]
-		{ 1, 2, 3 });
+		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(1,
+																																														2,
+																																														3));
 
 		// System.out.println(lSubGraph.toString());
 
@@ -270,8 +264,10 @@ public class FastIntegerGraphTests
 		assertFalse(lFastIntegerGraph.isEdge(2, 3));
 		assertFalse(lFastIntegerGraph.isEdge(3, 1));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new int[]
-		{ 0, 1, 2, 3 });
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(	0,
+																																						1,
+																																						2,
+																																						3));
 
 		assertSame(4, lSubGraph.getNumberOfNodes());
 		assertSame(3, lSubGraph.getNumberOfEdges());
@@ -279,8 +275,10 @@ public class FastIntegerGraphTests
 		assertTrue(lFastIntegerGraph.isEdge(0, 2));
 		assertTrue(lFastIntegerGraph.isEdge(0, 3));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new int[]
-		{ 0, 11, 12, 13 });
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(	0,
+																																						11,
+																																						12,
+																																						13));
 
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(0, lSubGraph.getNumberOfEdges());

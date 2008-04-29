@@ -105,7 +105,7 @@ public class FastIntegerListTests
 		{
 			//System.out.println(i);
 			//System.out.println(lFastIntegerList);
-			lFastIntegerList.removeValue(i);
+			lFastIntegerList.del(i);
 		}
 		assertTrue(lFastIntegerList.size()==0);	
 	}

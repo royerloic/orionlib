@@ -10,7 +10,8 @@ import utils.structures.fast.set.FastIntegerSet;
 public class FastIntegerList implements
 														RandomAccess,
 														java.io.Serializable,
-														Collection<Integer>
+														Collection<Integer>, 
+														Iterable<Integer>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -28,6 +29,24 @@ public class FastIntegerList implements
 	public FastIntegerList()
 	{
 		this(10);
+	}
+
+	public FastIntegerList(int... pIntArray)
+	{
+		elements = pIntArray;
+		size = elements.length;
+	}
+
+	public FastIntegerList(int[] pElements, int pSize)
+	{
+		elements = pElements;
+		size = pSize;
+	}
+
+	public FastIntegerList(FastIntegerList pFastIntegerList)
+	{
+		size = pFastIntegerList.size;
+		elements = Arrays.copyOf(pFastIntegerList.elements, size);
 	}
 
 	public final void trimToSize()
@@ -48,7 +67,7 @@ public class FastIntegerList implements
 	 */
 	public final void ensureCapacity(int minCapacity)
 	{
-		int oldCapacity = elements.length;
+		final int oldCapacity = elements.length;
 		if (minCapacity > oldCapacity)
 		{
 			int newCapacity = (oldCapacity * 3) / 2 + 1;
@@ -71,7 +90,7 @@ public class FastIntegerList implements
 
 	public final boolean contains(int o)
 	{
-		for (int i=0; i<size; i++)
+		for (int i = 0; i < size; i++)
 			if (o == elements[i])
 				return true;
 		return false;
@@ -86,7 +105,7 @@ public class FastIntegerList implements
 	 */
 	public final int indexOf(int o)
 	{
-		for (int i=0; i<size; i++)
+		for (int i = 0; i < size; i++)
 			if (o == elements[i])
 				return i;
 		return -1;
@@ -103,7 +122,7 @@ public class FastIntegerList implements
 	{
 		{
 			for (int i = size - 1; i >= 0; i--)
-				if (o==elements[i])
+				if (o == elements[i])
 					return i;
 		}
 		return -1;
@@ -125,21 +144,20 @@ public class FastIntegerList implements
 
 	public void add(int e)
 	{
-		ensureCapacity(size + 1); 
+		ensureCapacity(size + 1);
 		elements[size++] = e;
 	}
 
-	public void add(int index, int element)
+	public void addAt(int index, int element)
 	{
 		rangeCheck(index);
-
 		ensureCapacity(size + 1); // Increments modCount!!
 		System.arraycopy(elements, index, elements, index + 1, size - index);
 		elements[index] = element;
 		size++;
 	}
 
-	public void remove(int index)
+	public void removeAt(int index)
 	{
 		rangeCheck(index);
 		int numMoved = size - index - 1;
@@ -148,12 +166,12 @@ public class FastIntegerList implements
 		size--;
 	}
 
-	public boolean removeValue(int o)
+	public boolean del(int o)
 	{
 		for (int index = 0; index < size; index++)
 			if (o == elements[index])
 			{
-				remove(index);
+				removeAt(index);
 				return true;
 			}
 		return false;
@@ -181,6 +199,17 @@ public class FastIntegerList implements
 	}
 
 	/**
+	 * Removes all of the elements from this list. The list will be empty after
+	 * this call returns. Additionally to clear, this call releases the reference
+	 * to the underlying array thus potentially freeing memory. (after garbage
+	 * collection)
+	 */
+	public void wipe()
+	{
+		size = 0;
+	}
+
+	/**
 	 * Checks if the given index is in range. If not, throws an appropriate
 	 * runtime exception. This method does *not* check if the index is negative:
 	 * It is always used immediately prior to an array access, which throws an
@@ -188,7 +217,7 @@ public class FastIntegerList implements
 	 */
 	private final void rangeCheck(int index)
 	{
-		if (index >= size || size<0)
+		if (index >= size || size < 0)
 			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 	}
 
@@ -235,38 +264,41 @@ public class FastIntegerList implements
 	@Override
 	public String toString()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
-		lStringBuilder.append("[");
-		for (int i = 0; i < size; i++)
+		if (size == 0)
 		{
-			final int val = elements[i];
-			lStringBuilder.append(val);
-			lStringBuilder.append(",");
+			return "[]";
 		}
-		lStringBuilder.setCharAt(lStringBuilder.length() - 1, ']');
-		return lStringBuilder.toString();
+		else
+		{
+			StringBuilder lStringBuilder = new StringBuilder();
+			lStringBuilder.append("[");
+			for (int i = 0; i < size; i++)
+			{
+				final int val = elements[i];
+				lStringBuilder.append(val);
+				lStringBuilder.append(",");
+			}
+			lStringBuilder.setCharAt(lStringBuilder.length() - 1, ']');
+			return lStringBuilder.toString();
+		}
 	}
 
 	// Special methods:
-	
-	
-	int[] getUnderlyingArray()
+
+	public int[] getUnderlyingArray()
 	{
 		trimToSize();
-		return elements;	
+		return elements;
 	}
-	
-	FastIntegerSet getSet()
+
+	public FastIntegerSet getSet()
 	{
-		trimToSize();
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elements);
+		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elements, size);
 		return lFastIntegerSet;
-	}	
-	
-	
-	
+	}
+
 	// *************************************************************
-	// Methods implementing interface Collection<Integer>
+	// Methods implementing interfaces
 
 	public boolean add(Integer pE)
 	{
@@ -327,7 +359,7 @@ public class FastIntegerList implements
 
 	public boolean remove(Object pO)
 	{
-		remove((int) ((Integer) pO));
+		del((int) ((Integer) pO));
 		return true;
 	}
 
@@ -335,7 +367,7 @@ public class FastIntegerList implements
 	{
 		boolean haschanged = false;
 		for (Object element : pC)
-			haschanged |= removeValue((int) ((Integer) element));
+			haschanged |= del((int) ((Integer) element));
 		return haschanged;
 	}
 
@@ -344,7 +376,7 @@ public class FastIntegerList implements
 		boolean haschanged = false;
 		for (int element : elements)
 			if (!pC.contains(element))
-				removeValue(element);
+				del(element);
 		return haschanged;
 	}
 
