@@ -15,7 +15,7 @@ public class LineWriter
 	{
 		// use buffering
 		// FileWriter always assumes default encoding is OK!
-		final int lBufferSize = 10000000;
+		final int lBufferSize = 1000000;
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream),
 																							lBufferSize);
 		return lWriter;
