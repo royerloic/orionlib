@@ -23,7 +23,7 @@ public class FastIntegerGraph implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7839093381557158850L;
+	private static final long serialVersionUID = 1L;
 
 	ArrayList<FastIntegerSet> mSparseMatrix;
 

@@ -1,4 +1,4 @@
-package utils.structures.fast.graph;
+package utils.structures.fast.powergraph;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,29 +10,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import utils.structures.fast.graph.Edge;
+import utils.structures.fast.graph.FastGraph;
+import utils.structures.fast.graph.FastIntegerGraph;
 import utils.structures.fast.set.FastIntegerSet;
 
-public class FastGraph<N> implements Serializable
+public class FastPowerGraph<N>
 {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3867746158442088438L;
 
 	FastIntegerGraph mFastIntegerGraph = new FastIntegerGraph();
 
-	final HashMap<N, Integer> mNameToNodeMap = new HashMap<N, Integer>();
-	final HashMap<Integer, N> mNodeToNameMap = new HashMap<Integer, N>();
+	final HashMap<N, FastIntegerSet> mNameToNodeMap = new HashMap<N, FastIntegerSet>();
+	final HashMap<FastIntegerSet, N> mNodeToNameMap = new HashMap<FastIntegerSet, N>();
 
-	public FastGraph()
+	public FastPowerGraph()
 	{
 		super();
 	}
@@ -45,32 +46,12 @@ public class FastGraph<N> implements Serializable
 	/**
 	 * Sets the underlying FastIntegerGraph
 	 * WARNING: you need to know what you are doing, the integer graph must
-	 * be compatible with the mappings contained in the FastGraph...
+	 * be compatible with the mappings contained in the Fast Graph...
 	 * @param pFastIntegerGraph
 	 */
 	public void setUnderlyingFastIntegerGraph(FastIntegerGraph pFastIntegerGraph)
 	{
 		mFastIntegerGraph = pFastIntegerGraph;
-	}
-	
-	public ArrayList<N> getNodesForIntegers(int... set)
-	{
-		ArrayList<N> list = new ArrayList<N>(set.length);
-		for (Integer lInteger : set)
-		{
-			list.add(mNodeToNameMap.get(lInteger));
-		}
-		return list;
-	}
-	
-	public ArrayList<N> getNodesForIntegers(FastIntegerSet set)
-	{
-		ArrayList<N> list = new ArrayList<N>(set.size());
-		for (Integer lInteger : set)
-		{
-			list.add(mNodeToNameMap.get(lInteger));
-		}
-		return list;
 	}
 
 	public void addNode(final N pNodeName)
@@ -298,5 +279,4 @@ public class FastGraph<N> implements Serializable
 		;
 		return lStringBuilder.toString();
 	}
-
 }
