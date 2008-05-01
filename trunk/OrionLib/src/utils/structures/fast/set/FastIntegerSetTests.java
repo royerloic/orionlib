@@ -5,10 +5,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
+import utils.structures.fast.map.FastIntegerHashMap;
 
 /**
  */
@@ -385,4 +389,81 @@ public class FastIntegerSetTests
 		}
 
 	}
+	
+	@Test
+	public void testPerformance()
+	{
+		int size = 20000;
+		
+		FastIntegerSet set = new FastIntegerSet();
+		set.ensureCapacity(size);
+		HashSet<Integer> setref = new HashSet<Integer>(size);
+
+		
+		double timeref;
+		double time;
+		double fold;
+		
+		{
+			long start = System.nanoTime();
+			Random rnd = new Random();
+			for (int i = 0; i < size; i++)
+			{
+				final int key = rnd.nextInt();
+				setref.add(key);
+			}
+			long stop = System.nanoTime();
+			timeref = ((double) (stop - start));
+		}
+		System.out.println("timeref="+timeref);		
+		
+		
+		{
+			long start = System.nanoTime();
+			Random rnd = new Random();
+			for (int i = 0; i < size; i++)
+			{
+				final int key = rnd.nextInt();
+				set.add(key);
+			}
+			long stop = System.nanoTime();
+			time = ((double) (stop - start)) ;
+		}
+		System.out.println("time="+time);
+				
+		fold = timeref/time;
+		System.out.println("add:FastIntegerSet is "+fold+" times faster than HashSet<Integer> ");
+		
+		{
+			long start = System.nanoTime();
+			Random rnd = new Random();
+			for (int i = 0; i < size; i++)
+			{
+				final int key = rnd.nextInt();
+				setref.addAll(setref);
+			}
+			long stop = System.nanoTime();
+			timeref = ((double) (stop - start));
+		}
+		System.out.println("timeref="+timeref);		
+		
+		
+		{
+			long start = System.nanoTime();
+			Random rnd = new Random();
+			for (int i = 0; i < size; i++)
+			{
+				final int key = rnd.nextInt();
+				FastIntegerSet.union(set, set);
+			}
+			long stop = System.nanoTime();
+			time = ((double) (stop - start)) ;
+		}
+		System.out.println("time="+time);
+				
+		fold = timeref/time;
+		System.out.println("union: FastIntegerSet is "+fold+" times faster than HashSet<Integer> ");
+
+	}
+	
 }
