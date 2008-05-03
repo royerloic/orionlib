@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastIntegerGraphNoises
 {
@@ -29,13 +29,13 @@ public class FastIntegerGraphNoises
 		{
 
 			fefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			FastIntegerSet fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
+			FastSparseIntegerSet fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
 			if (fefnNei.size() < 1)
 				continue;
 			fesn = fefnNei.getUnderlyingArray()[pRandom.nextInt(fefnNei.size())];
 
 			sefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			FastIntegerSet sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
+			FastSparseIntegerSet sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
 			if (sefnNei.size() < 1)
 				continue;
 			sesn = sefnNei.getUnderlyingArray()[pRandom.nextInt(sefnNei.size())];

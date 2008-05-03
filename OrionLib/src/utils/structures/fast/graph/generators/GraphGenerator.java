@@ -5,7 +5,7 @@ import java.util.Random;
 import utils.random.DistributionSource;
 import utils.random.RandomUtils;
 import utils.structures.fast.graph.FastIntegerGraph;
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class GraphGenerator
 {
@@ -65,7 +65,7 @@ public class GraphGenerator
 	{
 		final int newnode = pGraph.addNode();
 
-		FastIntegerSet nodelist = pGraph.getNodeSet();
+		FastSparseIntegerSet nodelist = pGraph.getNodeSet();
 
 		double lTotal = 0;
 		for (final int node : nodelist.getUnderlyingArray())

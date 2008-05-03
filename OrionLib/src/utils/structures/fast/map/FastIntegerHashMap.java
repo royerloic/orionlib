@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import utils.structures.Couple;
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastIntegerHashMap<O> implements Iterable<Integer>
 {
@@ -15,7 +15,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 	boolean[] isdirect;
 	int[] keycache;
 	
-	FastIntegerSet keyset;
+	FastSparseIntegerSet keyset;
 
 	static final Random sRandom = new Random();
 	int hashseed = Math.abs(sRandom.nextInt());
@@ -44,7 +44,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		capacity = 2;
 		while(capacity<pCapacity)
 			capacity*=2;
-		keyset = new FastIntegerSet();
+		keyset = new FastSparseIntegerSet();
 		keyset.ensureCapacity(capacity);
 		elements = new Object[capacity];
 		isdirect = new boolean[capacity];

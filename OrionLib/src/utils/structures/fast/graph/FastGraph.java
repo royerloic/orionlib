@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastGraph<N> implements Serializable
 {
@@ -63,7 +63,7 @@ public class FastGraph<N> implements Serializable
 		return list;
 	}
 	
-	public ArrayList<N> getNodesForIntegers(FastIntegerSet set)
+	public ArrayList<N> getNodesForIntegers(FastSparseIntegerSet set)
 	{
 		ArrayList<N> list = new ArrayList<N>(set.size());
 		for (Integer lInteger : set)
