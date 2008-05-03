@@ -9,7 +9,7 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 /**
  */

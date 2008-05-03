@@ -13,7 +13,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import utils.structures.fast.graph.FastIntegerGraph;
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 /**
  */
@@ -252,7 +252,7 @@ public class FastIntegerGraphTests
 
 		// System.out.println(lFastIntegerGraph.toString());
 
-		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(1,
+		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(1,
 																																														2,
 																																														3));
 
@@ -264,7 +264,7 @@ public class FastIntegerGraphTests
 		assertFalse(lFastIntegerGraph.isEdge(2, 3));
 		assertFalse(lFastIntegerGraph.isEdge(3, 1));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(	0,
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(	0,
 																																						1,
 																																						2,
 																																						3));
@@ -275,7 +275,7 @@ public class FastIntegerGraphTests
 		assertTrue(lFastIntegerGraph.isEdge(0, 2));
 		assertTrue(lFastIntegerGraph.isEdge(0, 3));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastIntegerSet(	0,
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(	0,
 																																						11,
 																																						12,
 																																						13));

@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import utils.structures.fast.graph.Edge;
 import utils.structures.fast.graph.FastGraph;
 import utils.structures.fast.graph.FastIntegerGraph;
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastPowerGraph<N>
 {
@@ -30,8 +30,8 @@ public class FastPowerGraph<N>
 
 	FastIntegerGraph mFastIntegerGraph = new FastIntegerGraph();
 
-	final HashMap<N, FastIntegerSet> mNameToNodeMap = new HashMap<N, FastIntegerSet>();
-	final HashMap<FastIntegerSet, N> mNodeToNameMap = new HashMap<FastIntegerSet, N>();
+	final HashMap<N, FastSparseIntegerSet> mNameToNodeMap = new HashMap<N, FastSparseIntegerSet>();
+	final HashMap<FastSparseIntegerSet, N> mNodeToNameMap = new HashMap<FastSparseIntegerSet, N>();
 
 	public FastPowerGraph()
 	{

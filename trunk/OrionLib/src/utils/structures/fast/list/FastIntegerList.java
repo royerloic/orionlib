@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.RandomAccess;
 
-import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastIntegerList implements
 														RandomAccess,
@@ -291,10 +291,10 @@ public class FastIntegerList implements
 		return elements;
 	}
 
-	public FastIntegerSet getSet()
+	public FastSparseIntegerSet getSet()
 	{
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet(elements, size);
-		return lFastIntegerSet;
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(elements, size);
+		return lFastSparseIntegerSet;
 	}
 
 	// *************************************************************

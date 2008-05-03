@@ -8,7 +8,7 @@ import java.util.RandomAccess;
 
 import utils.structures.fast.list.FastIntegerList;
 
-public final class FastIntegerSet	implements
+public final class FastSparseIntegerSet	implements
 																	RandomAccess,
 																	java.io.Serializable,
 																	Collection<Integer>,
@@ -19,19 +19,19 @@ public final class FastIntegerSet	implements
 	private int[] elements;
 	private int size = 0;
 
-	public FastIntegerSet()
+	public FastSparseIntegerSet()
 	{
 		elements = new int[10];
 	}
 
-	public FastIntegerSet(final int[] pElementData, final int pSize)
+	public FastSparseIntegerSet(final int[] pElementData, final int pSize)
 	{
 		super();
 		elements = pElementData;
 		size = pSize;
 	}
 
-	public FastIntegerSet(int... pElementData)
+	public FastSparseIntegerSet(int... pElementData)
 	{
 		super();
 		elements = Arrays.copyOf(pElementData, pElementData.length);
@@ -63,10 +63,10 @@ public final class FastIntegerSet	implements
 		size = writeindex;
 	}
 
-	public FastIntegerSet(FastIntegerSet pFastIntegerSet)
+	public FastSparseIntegerSet(FastSparseIntegerSet pFastSparseIntegerSet)
 	{
-		size = pFastIntegerSet.size;
-		elements = Arrays.copyOf(pFastIntegerSet.elements, size);
+		size = pFastSparseIntegerSet.size;
+		elements = Arrays.copyOf(pFastSparseIntegerSet.elements, size);
 	}
 
 	public final void trimToSize()
@@ -120,14 +120,14 @@ public final class FastIntegerSet	implements
 		return true;
 	}
 
-	public final boolean contains(FastIntegerSet pFastIntegerSet)
+	public final boolean contains(FastSparseIntegerSet pFastSparseIntegerSet)
 	{
-		final int[] otherElements = pFastIntegerSet.elements;
+		final int[] otherElements = pFastSparseIntegerSet.elements;
 		// we first check last element, might lead to early failure...
-		if (!contains(otherElements[pFastIntegerSet.size - 1]))
+		if (!contains(otherElements[pFastSparseIntegerSet.size - 1]))
 			return false;
 		// then we check first and all following
-		for (int i = 0; i < pFastIntegerSet.size - 1; i++)
+		for (int i = 0; i < pFastSparseIntegerSet.size - 1; i++)
 			if (!contains(otherElements[i]))
 				return false;
 		return true;
@@ -135,8 +135,8 @@ public final class FastIntegerSet	implements
 
 	public boolean equals(int... pArray)
 	{
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet(pArray);
-		return lFastIntegerSet.equals(this);
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(pArray);
+		return lFastSparseIntegerSet.equals(this);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public final class FastIntegerSet	implements
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final FastIntegerSet other = (FastIntegerSet) obj;
+		final FastSparseIntegerSet other = (FastSparseIntegerSet) obj;
 
 		if (size != other.size)
 			return false;
@@ -284,8 +284,8 @@ public final class FastIntegerSet	implements
 	/**
 	 * Computes the intersection of two sets: set1 Inter set2
 	 */
-	public static final FastIntegerSet intersection(final FastIntegerSet set1,
-																									final FastIntegerSet set2)
+	public static final FastSparseIntegerSet intersection(final FastSparseIntegerSet set1,
+																									final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -321,16 +321,16 @@ public final class FastIntegerSet	implements
 			}
 		}
 
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet(lNewArray, k);
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(lNewArray, k);
 
-		return lFastIntegerSet;
+		return lFastSparseIntegerSet;
 	}
 
 	/**
 	 * Computes the union of two sets: set1 Union set2
 	 */
-	public static final FastIntegerSet union(	final FastIntegerSet set1,
-																						final FastIntegerSet set2)
+	public static final FastSparseIntegerSet union(	final FastSparseIntegerSet set1,
+																						final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -339,15 +339,15 @@ public final class FastIntegerSet	implements
 
 		if (size1 == 0 && size2 != 0)
 		{
-			return new FastIntegerSet(set2);
+			return new FastSparseIntegerSet(set2);
 		}
 		if (size2 == 0 && size1 != 0)
 		{
-			return new FastIntegerSet(set1);
+			return new FastSparseIntegerSet(set1);
 		}
 		if (size2 == 0 && size1 == 0)
 		{
-			return new FastIntegerSet();
+			return new FastSparseIntegerSet();
 		}
 
 		final int lMaximalSize = size1 + size2;
@@ -410,14 +410,14 @@ public final class FastIntegerSet	implements
 			}
 		}
 
-		return new FastIntegerSet(lNewArray, k);
+		return new FastSparseIntegerSet(lNewArray, k);
 	}
 
 	/**
 	 * Computes the difference set1 Minus set2 (not the symmetric one!!!)
 	 */
-	public static final FastIntegerSet difference(final FastIntegerSet set1,
-																								final FastIntegerSet set2)
+	public static final FastSparseIntegerSet difference(final FastSparseIntegerSet set1,
+																								final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -426,15 +426,15 @@ public final class FastIntegerSet	implements
 
 		if (size1 == 0 && size2 != 0)
 		{
-			return new FastIntegerSet();
+			return new FastSparseIntegerSet();
 		}
 		if (size1 != 0 && size2 == 0)
 		{
-			return new FastIntegerSet(set1);
+			return new FastSparseIntegerSet(set1);
 		}
 		if (size2 == 0 && size1 == 0)
 		{
-			return new FastIntegerSet();
+			return new FastSparseIntegerSet();
 		}
 
 		final int lMaximalSize = size1;
@@ -492,7 +492,7 @@ public final class FastIntegerSet	implements
 			}
 		}
 
-		return new FastIntegerSet(lNewArray, k);
+		return new FastSparseIntegerSet(lNewArray, k);
 	}
 
 	// Special methods:
@@ -509,17 +509,17 @@ public final class FastIntegerSet	implements
 		return lFastIntegerList;
 	}
 
-	public FastIntegerSet getRandomSubSet(Random pRandom, double pDensity)
+	public FastSparseIntegerSet getRandomSubSet(Random pRandom, double pDensity)
 	{
-		FastIntegerSet lFastIntegerSet = new FastIntegerSet();
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet();
 		for (int val : elements)
 		{
 			if (pRandom.nextDouble() < pDensity)
 			{
-				lFastIntegerSet.add(val);
+				lFastSparseIntegerSet.add(val);
 			}
 		}
-		return lFastIntegerSet;
+		return lFastSparseIntegerSet;
 	}
 
 	// Special static methods:
