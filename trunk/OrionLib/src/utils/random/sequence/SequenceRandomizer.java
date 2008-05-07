@@ -19,6 +19,9 @@ public class SequenceRandomizer
 
 	static Random mRandom = new Random(System.currentTimeMillis());
 
+	static ContextPreservingSequenceRandomizer mContextPreservingSequenceRandomizer;
+	
+	
 	public static void main(String argstring)
 	{
 		String[] args = argstring.split("\\s+");
@@ -27,9 +30,10 @@ public class SequenceRandomizer
 
 	/**
 	 * @param args
+	 * @throws ClassNotFoundException 
 	 * @throws IOException
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
 		try
 		{
@@ -66,6 +70,24 @@ public class SequenceRandomizer
 
 			String type = map.get("type") == null ? "2gramsym" : map.get("type");
 
+			if(type.equalsIgnoreCase("context"))
+			{
+				File cache = new File(map.get("filein")+".cache");
+				if(cache.exists())
+				{
+					mContextPreservingSequenceRandomizer = ContextPreservingSequenceRandomizer.load(cache);
+				}
+				else
+				{
+					int radius = map.get("radius") == null ? 2 : Integer.parseInt(map.get("radius"));
+					mContextPreservingSequenceRandomizer = new ContextPreservingSequenceRandomizer(radius);
+					mContextPreservingSequenceRandomizer.addSequences(filein,format);
+					mContextPreservingSequenceRandomizer.finalizeStatistics();
+					mContextPreservingSequenceRandomizer.save(cache);
+				}
+			}
+			
+			
 			System.out.println("type = " + type);
 			System.out.println("number = " + number);
 			System.out.println("iterations = " + iterations);
@@ -172,6 +194,10 @@ public class SequenceRandomizer
 		else if (type.equalsIgnoreCase("2gramsym"))
 		{
 			return pairInvariantRandomization(pSequence);
+		}
+		else if(type.equalsIgnoreCase("context"))
+		{
+			return mContextPreservingSequenceRandomizer.randomize(pSequence);
 		}
 		throw new RuntimeException("Invalid type: " + type);
 	}
