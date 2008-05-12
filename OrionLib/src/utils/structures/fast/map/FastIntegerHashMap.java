@@ -1,11 +1,9 @@
 package utils.structures.fast.map;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import utils.structures.Couple;
 import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastIntegerHashMap<O> implements Iterable<Integer>
@@ -14,7 +12,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 	Object[] elements;
 	boolean[] isdirect;
 	int[] keycache;
-	
+
 	FastSparseIntegerSet keyset;
 
 	static final Random sRandom = new Random();
@@ -42,8 +40,8 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 	void initialize(int pCapacity)
 	{
 		capacity = 2;
-		while(capacity<pCapacity)
-			capacity*=2;
+		while (capacity < pCapacity)
+			capacity *= 2;
 		keyset = new FastSparseIntegerSet();
 		keyset.ensureCapacity(capacity);
 		elements = new Object[capacity];
@@ -79,8 +77,8 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 				int newhashseed = hashseed;
 				while (newhashseed == hashseed)
 					newhashseed += Math.abs(sRandom.nextInt());
-				FastIntegerHashMap lFastIntegerHashMap = new FastIntegerHashMap(capacity/2,
-																																							newhashseed);
+				FastIntegerHashMap lFastIntegerHashMap = new FastIntegerHashMap(capacity / 2,
+																																				newhashseed);
 				isdirect[hash] = false;
 				lFastIntegerHashMap.put(keycache[hash], elements[hash]);
 				elements[hash] = lFastIntegerHashMap;
@@ -154,14 +152,13 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		return keyset.size();
 	}
 
-	
 	private final int hash(int h)
 	{
 		h += hashseed;
 		h *= hashseed;
 		h ^= (h >> 20) ^ (h >> 12);
 		h ^= (h >> 7) ^ (h >> 4);
-		return h & (capacity-1);
+		return h & (capacity - 1);
 	}
 
 	public Iterator<Integer> iterator()

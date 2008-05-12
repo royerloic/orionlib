@@ -89,7 +89,7 @@ public class GeneMapBuilder
 	}
 
 	public HashMap<Element, Enrichment> computeEnrichements(Collection<Integer> pGeneSet,
-																											double pMinimalCoverage)
+																													double pMinimalCoverage)
 	{
 		HashMap<Element, Enrichment> lEnrichementMap = new HashMap<Element, Enrichment>();
 
@@ -126,21 +126,20 @@ public class GeneMapBuilder
 																																1);
 				final double lCorrectedpValue = pvalue * lCorrection;
 				Enrichment lEnrichment = lEnrichementMap.get(lAttribute);
-				
+
 				lEnrichment.mSet1 = new ArrayList<Element>(lSet1);
 				lEnrichment.mSet2 = new ArrayList<Element>(lSet2);
 				lEnrichment.mIntersectionSet = new ArrayList<Element>(lIntersection);
-				
+
 				lEnrichment.mUniverseSize = universe;
 				lEnrichment.mSet1Size = set1;
 				lEnrichment.mSet2Size = set2;
 				lEnrichment.mIntersectionSize = inter;
-				
+
 				lEnrichment.mPValue = pvalue;
 				lEnrichment.mCorrectedPValue = lCorrectedpValue;
 				lEnrichment.mCoverage = lCoverage;
-								
-				
+
 			}
 		}
 

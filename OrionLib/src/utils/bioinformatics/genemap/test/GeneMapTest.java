@@ -36,9 +36,9 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
 
-		HashMap<Element, Enrichment> lEnrichment = lGeneMap.computeEnrichements(	10,
-																																					11,
-																																					12);
+		HashMap<Element, Enrichment> lEnrichment = lGeneMap.computeEnrichements(10,
+																																						11,
+																																						12);
 
 		System.out.println(lEnrichment);
 		assertTrue(lEnrichment.get(new Element(0)).mCorrectedPValue == 3.0);
@@ -80,8 +80,8 @@ public class GeneMapTest
 		lGeneMap.addAnnotation(12, 3);
 
 		HashMap<Element, Enrichment> lEnrichement = lGeneMap.computeEnrichements(	10,
-																																					11,
-																																					12);
+																																							11,
+																																							12);
 
 		assertTrue(lEnrichement.get(new Element(0)).mCorrectedPValue == 3.0);
 		assertTrue(lEnrichement.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);

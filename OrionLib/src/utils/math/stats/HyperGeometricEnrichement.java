@@ -17,8 +17,6 @@ import utils.structures.map.HashSetMap;
 
 public class HyperGeometricEnrichement
 {
-	
-	
 
 	private static class Test
 	{
@@ -98,7 +96,7 @@ public class HyperGeometricEnrichement
 								pPValueThreshold,
 								new FileOutputStream(pOutputFile));
 	}
-	
+
 	static boolean echo = true;
 
 	public static void testStream(InputStream pInputStream,
@@ -119,7 +117,7 @@ public class HyperGeometricEnrichement
 
 		Writer lWriter = LineWriter.getWriter(pOutputStream);
 		String lCurrentTestName = null;
-		
+
 		int lLineIndex = 0;
 		for (String lLine : LineReader.getLines(pInputStream))
 		{
@@ -128,10 +126,10 @@ public class HyperGeometricEnrichement
 				{
 					final String[] lTokenArray = lLine.split("\t", -1);
 					final String lTestName = lTokenArray[pTestNameIndex];
-					
-					if(lCurrentTestName==null)
+
+					if (lCurrentTestName == null)
 					{
-						lCurrentTestName = lTestName;			
+						lCurrentTestName = lTestName;
 					}
 					else if (!lCurrentTestName.equals(lTestName))
 					{
@@ -143,27 +141,30 @@ public class HyperGeometricEnrichement
 
 							lWriter.append("//\n");
 							lWriter.append("//Test results for: " + lTestNameInMap + "\n");
-							lWriter.append("//correction used: " + lCorrection + "*pvalue" + "\n");
+							lWriter.append("//correction used: " + lCorrection
+															+ "*pvalue"
+															+ "\n");
 							for (Test lTest : lTestSet)
 							{
 								lTest.applyCorrection(lCorrection);
 								if (lTest.getPValue() > pPValueThreshold)
 								{
-									if(echo) lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
-																	+ "'\n");
+									if (echo)
+										lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
+																		+ "'\n");
 								}
 								else
 								{
 									lWriter.append(lTest.toTabDel() + "\n");
 								}
 							}
-						}		
-						
+						}
+
 						lNameToTestSetsMap.clear();
-					}				
-					
+					}
+
 					lCurrentTestName = lTestName;
-					
+
 					final double set1 = Double.parseDouble(lTokenArray[set1index]);
 					final double set2 = Double.parseDouble(lTokenArray[set2index]);
 					final double inter = Double.parseDouble(lTokenArray[interindex]);
@@ -173,7 +174,7 @@ public class HyperGeometricEnrichement
 				}
 			lLineIndex++;
 		}
-	
+
 		for (Entry<String, Set<Test>> lEntry : lNameToTestSetsMap.entrySet())
 		{
 			final String lTestNameInMap = lEntry.getKey();
@@ -188,15 +189,17 @@ public class HyperGeometricEnrichement
 				lTest.applyCorrection(lCorrection);
 				if (lTest.getPValue() > pPValueThreshold)
 				{
-					if(echo) lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
-													+ "'\n");
+					if (echo)
+						lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
+														+ "'\n");
 				}
 				else
 				{
 					lWriter.append(lTest.toTabDel() + "\n");
 				}
 			}
-		}		/***/
+		}
+		/***/
 
 		lWriter.close();
 

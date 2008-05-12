@@ -467,8 +467,8 @@ public class FastIntegerSetStaticTests
 		for (int i = 0; i < cNumberOfSets; i++)
 		{
 			lList[i] = FastIntegerSetStatic.random(	lRandom,
-																				cDomainSize,
-																				lRandom.nextDouble() * 0.01);
+																							cDomainSize,
+																							lRandom.nextDouble() * 0.01);
 			// System.out.println(lList[i].length);
 		}
 

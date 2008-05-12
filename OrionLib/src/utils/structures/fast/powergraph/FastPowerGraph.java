@@ -42,11 +42,12 @@ public class FastPowerGraph<N>
 	{
 		return mFastIntegerGraph;
 	}
-	
+
 	/**
-	 * Sets the underlying FastIntegerGraph
-	 * WARNING: you need to know what you are doing, the integer graph must
-	 * be compatible with the mappings contained in the Fast Graph...
+	 * Sets the underlying FastIntegerGraph WARNING: you need to know what you are
+	 * doing, the integer graph must be compatible with the mappings contained in
+	 * the Fast Graph...
+	 * 
 	 * @param pFastIntegerGraph
 	 */
 	public void setUnderlyingFastIntegerGraph(FastIntegerGraph pFastIntegerGraph)
@@ -149,7 +150,7 @@ public class FastPowerGraph<N>
 	{
 		writeEdgeFile(new FileOutputStream(pFile));
 	}
-	
+
 	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));

@@ -13,7 +13,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import utils.structures.fast.graph.FastIntegerGraph;
-import utils.structures.fast.set.FastSparseIntegerSet;
+import utils.structures.fast.set.FastBoundedIntegerSet;
 
 /**
  */
@@ -252,9 +252,10 @@ public class FastIntegerGraphTests
 
 		// System.out.println(lFastIntegerGraph.toString());
 
-		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(1,
-																																														2,
-																																														3));
+		FastIntegerGraph lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastBoundedIntegerSet(	true,
+																																																		1,
+																																																		2,
+																																																		3));
 
 		// System.out.println(lSubGraph.toString());
 
@@ -264,10 +265,11 @@ public class FastIntegerGraphTests
 		assertFalse(lFastIntegerGraph.isEdge(2, 3));
 		assertFalse(lFastIntegerGraph.isEdge(3, 1));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(	0,
-																																						1,
-																																						2,
-																																						3));
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastBoundedIntegerSet(true,
+																																									0,
+																																									1,
+																																									2,
+																																									3));
 
 		assertSame(4, lSubGraph.getNumberOfNodes());
 		assertSame(3, lSubGraph.getNumberOfEdges());
@@ -275,10 +277,11 @@ public class FastIntegerGraphTests
 		assertTrue(lFastIntegerGraph.isEdge(0, 2));
 		assertTrue(lFastIntegerGraph.isEdge(0, 3));
 
-		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastSparseIntegerSet(	0,
-																																						11,
-																																						12,
-																																						13));
+		lSubGraph = lFastIntegerGraph.extractStrictSubGraph(new FastBoundedIntegerSet(true,
+																																									0,
+																																									11,
+																																									12,
+																																									13));
 
 		assertSame(14, lSubGraph.getNumberOfNodes());
 		assertSame(0, lSubGraph.getNumberOfEdges());

@@ -1,18 +1,14 @@
 package utils.structures.fast.set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
-
-import utils.structures.fast.map.FastIntegerHashMap;
 
 /**
  */
@@ -21,26 +17,36 @@ public class FastSparseIntegerSetTests
 	@Test
 	public void testArrayConstructor()
 	{
-		FastSparseIntegerSet set1 = new FastSparseIntegerSet(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		FastSparseIntegerSet set1 = new FastSparseIntegerSet(	0,
+																													0,
+																													1,
+																													2,
+																													3,
+																													4,
+																													5,
+																													6,
+																													7,
+																													8,
+																													9);
 
 		assertEquals(10, set1.size());
 		for (int i = 0; i < 10; i++)
 			assertTrue(set1.contains(i));
 
 		FastSparseIntegerSet set2 = new FastSparseIntegerSet(	1,
-																							0,
-																							1,
-																							2,
-																							3,
-																							0,
-																							5,
-																							5,
-																							6,
-																							7,
-																							8,
-																							9,
-																							4,
-																							3);
+																													0,
+																													1,
+																													2,
+																													3,
+																													0,
+																													5,
+																													5,
+																													6,
+																													7,
+																													8,
+																													9,
+																													4,
+																													3);
 		assertEquals(10, set2.size());
 		for (int i = 0; i < 10; i++)
 			assertTrue(set2.contains(i));
@@ -50,7 +56,17 @@ public class FastSparseIntegerSetTests
 	@Test
 	public void testCopyConstructor()
 	{
-		FastSparseIntegerSet set1 = new FastSparseIntegerSet(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		FastSparseIntegerSet set1 = new FastSparseIntegerSet(	0,
+																													0,
+																													1,
+																													2,
+																													3,
+																													4,
+																													5,
+																													6,
+																													7,
+																													8,
+																													9);
 		FastSparseIntegerSet copyset1 = new FastSparseIntegerSet(set1);
 		assertEquals(set1, copyset1);
 	}
@@ -59,19 +75,19 @@ public class FastSparseIntegerSetTests
 	public void testContains()
 	{
 		FastSparseIntegerSet set2 = new FastSparseIntegerSet(	1,
-																							0,
-																							1,
-																							2,
-																							3,
-																							0,
-																							5,
-																							5,
-																							6,
-																							7,
-																							8,
-																							9,
-																							4,
-																							3);
+																													0,
+																													1,
+																													2,
+																													3,
+																													0,
+																													5,
+																													5,
+																													6,
+																													7,
+																													8,
+																													9,
+																													4,
+																													3);
 		assertEquals(10, set2.size());
 		for (int i = 0; i < 10; i++)
 			assertTrue(set2.contains(i));
@@ -136,13 +152,16 @@ public class FastSparseIntegerSetTests
 			FastSparseIntegerSet set0 = new FastSparseIntegerSet();
 			FastSparseIntegerSet set1 = new FastSparseIntegerSet();
 
-			FastSparseIntegerSet lSetInter = FastSparseIntegerSet.intersection(set0, set1);
+			FastSparseIntegerSet lSetInter = FastSparseIntegerSet.intersection(	set0,
+																																					set1);
 			assertTrue(lSetInter.isEmpty());
 
-			FastSparseIntegerSet lSetInter2 = FastSparseIntegerSet.intersection(set0, set1);
+			FastSparseIntegerSet lSetInter2 = FastSparseIntegerSet.intersection(set0,
+																																					set1);
 			assertTrue(lSetInter2.isEmpty());
 
-			FastSparseIntegerSet lSetInter3 = FastSparseIntegerSet.intersection(set1, set0);
+			FastSparseIntegerSet lSetInter3 = FastSparseIntegerSet.intersection(set1,
+																																					set0);
 			assertTrue(lSetInter3.isEmpty());
 		}
 
@@ -160,11 +179,13 @@ public class FastSparseIntegerSetTests
 			FastSparseIntegerSet set1 = new FastSparseIntegerSet(4, 5, 6);
 			FastSparseIntegerSet set2 = new FastSparseIntegerSet(3, 4, 5);
 
-			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1, set2);
+			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1,
+																																			set2);
 			assertSame(2, inter1.size());
 			assertSame(4, inter1.getUnderlyingArray()[0]);
 			assertSame(5, inter1.getUnderlyingArray()[1]);
-			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2, set1);
+			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2,
+																																			set1);
 			assertSame(2, inter2.size());
 			assertSame(4, inter2.getUnderlyingArray()[0]);
 			assertSame(5, inter2.getUnderlyingArray()[1]);
@@ -174,10 +195,12 @@ public class FastSparseIntegerSetTests
 			FastSparseIntegerSet set1 = new FastSparseIntegerSet(1, 2, 3);
 			FastSparseIntegerSet set2 = new FastSparseIntegerSet(2);
 
-			FastSparseIntegerSet lSetInter = FastSparseIntegerSet.intersection(set1, set2);
+			FastSparseIntegerSet lSetInter = FastSparseIntegerSet.intersection(	set1,
+																																					set2);
 			assertEquals(1, lSetInter.size());
 			assertSame(2, lSetInter.getUnderlyingArray()[0]);
-			FastSparseIntegerSet lSetInter2 = FastSparseIntegerSet.intersection(set2, set1);
+			FastSparseIntegerSet lSetInter2 = FastSparseIntegerSet.intersection(set2,
+																																					set1);
 			assertEquals(1, lSetInter2.size());
 		}
 
@@ -185,10 +208,12 @@ public class FastSparseIntegerSetTests
 			FastSparseIntegerSet set1 = new FastSparseIntegerSet(11, 12, 13);
 			FastSparseIntegerSet set2 = new FastSparseIntegerSet(1, 2, 3, 12);
 
-			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1, set2);
+			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1,
+																																			set2);
 			assertSame(1, inter1.size());
 			assertSame(12, inter1.getUnderlyingArray()[0]);
-			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2, set1);
+			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2,
+																																			set1);
 			assertSame(1, inter2.size());
 			assertSame(12, inter2.getUnderlyingArray()[0]);
 		}
@@ -197,10 +222,12 @@ public class FastSparseIntegerSetTests
 			FastSparseIntegerSet set1 = new FastSparseIntegerSet(1, 2, 3, 4, 10);
 			FastSparseIntegerSet set2 = new FastSparseIntegerSet(1, 2, 3, 5, 10);
 
-			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1, set2);
+			FastSparseIntegerSet inter1 = FastSparseIntegerSet.intersection(set1,
+																																			set2);
 			assertSame(4, inter1.size());
 			assertSame(10, inter1.getUnderlyingArray()[inter1.size() - 1]);
-			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2, set1);
+			FastSparseIntegerSet inter2 = FastSparseIntegerSet.intersection(set2,
+																																			set1);
 			assertSame(4, inter2.size());
 			assertSame(10, inter2.getUnderlyingArray()[inter2.size() - 1]);
 		}
@@ -378,7 +405,7 @@ public class FastSparseIntegerSetTests
 
 			FastSparseIntegerSet diff2 = FastSparseIntegerSet.difference(set2, set1);
 			assertSame(1, diff2.size());
-			assertSame(5, diff2.getUnderlyingArray()[0]);
+			assertTrue(diff2.contains(5));
 		}
 
 		{
@@ -389,21 +416,20 @@ public class FastSparseIntegerSetTests
 		}
 
 	}
-	
+
 	@Test
 	public void testPerformance()
 	{
 		int size = 20000;
-		
+
 		FastSparseIntegerSet set = new FastSparseIntegerSet();
 		set.ensureCapacity(size);
 		HashSet<Integer> setref = new HashSet<Integer>(size);
 
-		
 		double timeref;
 		double time;
 		double fold;
-		
+
 		{
 			long start = System.nanoTime();
 			Random rnd = new Random();
@@ -415,9 +441,8 @@ public class FastSparseIntegerSetTests
 			long stop = System.nanoTime();
 			timeref = ((double) (stop - start));
 		}
-		System.out.println("timeref="+timeref);		
-		
-		
+		System.out.println("timeref=" + timeref);
+
 		{
 			long start = System.nanoTime();
 			Random rnd = new Random();
@@ -427,13 +452,14 @@ public class FastSparseIntegerSetTests
 				set.add(key);
 			}
 			long stop = System.nanoTime();
-			time = ((double) (stop - start)) ;
+			time = ((double) (stop - start));
 		}
-		System.out.println("time="+time);
-				
-		fold = timeref/time;
-		System.out.println("add:FastSparseIntegerSet is "+fold+" times faster than HashSet<Integer> ");
-		
+		System.out.println("time=" + time);
+
+		fold = timeref / time;
+		System.out.println("add:FastSparseIntegerSet is " + fold
+												+ " times faster than HashSet<Integer> ");
+
 		{
 			long start = System.nanoTime();
 			Random rnd = new Random();
@@ -445,9 +471,8 @@ public class FastSparseIntegerSetTests
 			long stop = System.nanoTime();
 			timeref = ((double) (stop - start));
 		}
-		System.out.println("timeref="+timeref);		
-		
-		
+		System.out.println("timeref=" + timeref);
+
 		{
 			long start = System.nanoTime();
 			Random rnd = new Random();
@@ -457,13 +482,14 @@ public class FastSparseIntegerSetTests
 				FastSparseIntegerSet.union(set, set);
 			}
 			long stop = System.nanoTime();
-			time = ((double) (stop - start)) ;
+			time = ((double) (stop - start));
 		}
-		System.out.println("time="+time);
-				
-		fold = timeref/time;
-		System.out.println("union: FastSparseIntegerSet is "+fold+" times faster than HashSet<Integer> ");
+		System.out.println("time=" + time);
+
+		fold = timeref / time;
+		System.out.println("union: FastSparseIntegerSet is " + fold
+												+ " times faster than HashSet<Integer> ");
 
 	}
-	
+
 }

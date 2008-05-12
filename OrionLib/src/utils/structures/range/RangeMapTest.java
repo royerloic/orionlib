@@ -388,7 +388,7 @@ public class RangeMapTest
 
 		final long lElapsedTime = lEndTime - lStartTime;
 		final double lPutsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
-		System.out.println("Puts per millisecond: "+lPutsPerMilliseconds);
+		System.out.println("Puts per millisecond: " + lPutsPerMilliseconds);
 		Assert.assertTrue(lPutsPerMilliseconds > 500);
 	}
 
@@ -410,7 +410,7 @@ public class RangeMapTest
 
 		final long lElapsedTime = lEndTime - lStartTime;
 		final double lGetsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
-		System.out.println("Gets per milliseconds: "+lGetsPerMilliseconds);
+		System.out.println("Gets per milliseconds: " + lGetsPerMilliseconds);
 
 		Assert.assertTrue(lGetsPerMilliseconds > 2500);
 	}

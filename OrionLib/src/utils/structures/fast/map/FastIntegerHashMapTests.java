@@ -1,14 +1,10 @@
 package utils.structures.fast.map;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -79,11 +75,10 @@ public class FastIntegerHashMapTests
 		FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(1000);
 		HashMap<Integer, String> mapref = new HashMap<Integer, String>(1000);
 
-		
 		double timeref;
 		double time;
 		double fold;
-		
+
 		{
 			long start = System.nanoTime();
 			Random rnd = new Random();
@@ -96,8 +91,7 @@ public class FastIntegerHashMapTests
 			long stop = System.nanoTime();
 			timeref = ((double) (stop - start));
 		}
-		System.out.println("timeref="+timeref);		
-		
+		System.out.println("timeref=" + timeref);
 
 		{
 			long start = System.nanoTime();
@@ -111,10 +105,11 @@ public class FastIntegerHashMapTests
 			long stop = System.nanoTime();
 			time = ((double) (stop - start));
 		}
-		System.out.println("time="+time);
-				
-		fold = timeref/time;
-		System.out.println("put: FastIntegerHashMap is "+fold+" times faster than HashMap<Integer,O> ");
+		System.out.println("time=" + time);
+
+		fold = timeref / time;
+		System.out.println("put: FastIntegerHashMap is " + fold
+												+ " times faster than HashMap<Integer,O> ");
 
 		{
 			long start = System.nanoTime();
@@ -125,10 +120,9 @@ public class FastIntegerHashMapTests
 				mapref.get(key);
 			}
 			long stop = System.nanoTime();
-			timeref = ((double) (stop - start)) ;
+			timeref = ((double) (stop - start));
 		}
-		System.out.println("timeref="+timeref);		
-		
+		System.out.println("timeref=" + timeref);
 
 		{
 			long start = System.nanoTime();
@@ -141,10 +135,11 @@ public class FastIntegerHashMapTests
 			long stop = System.nanoTime();
 			time = ((double) (stop - start));
 		}
-		System.out.println("time="+time);
-				
-		fold = timeref/time;
-		System.out.println("get: FastIntegerHashMap is "+fold+" times faster than HashMap<Integer,O> ");
+		System.out.println("time=" + time);
+
+		fold = timeref / time;
+		System.out.println("get: FastIntegerHashMap is " + fold
+												+ " times faster than HashMap<Integer,O> ");
 	}
 
 	/**/

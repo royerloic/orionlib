@@ -10,7 +10,7 @@ import utils.structures.fast.set.FastSparseIntegerSet;
 public class FastIntegerList implements
 														RandomAccess,
 														java.io.Serializable,
-														Collection<Integer>, 
+														Collection<Integer>,
 														Iterable<Integer>
 {
 	private static final long serialVersionUID = 1L;
@@ -293,7 +293,8 @@ public class FastIntegerList implements
 
 	public FastSparseIntegerSet getSet()
 	{
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(elements, size);
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(elements,
+																																					size);
 		return lFastSparseIntegerSet;
 	}
 

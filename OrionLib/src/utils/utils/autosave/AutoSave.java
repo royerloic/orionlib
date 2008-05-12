@@ -15,25 +15,10 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import utils.utils.CmdLine;
-import utils.wiimote.WRLImpl;
-import utils.wiimote.modes.SlideShowMode;
-import utils.wiimote.modes.MouseMode;
-import utils.wiimote.modes.PenMode;
-import utils.wiimote.modes.GoogleEarthMode;
-import utils.wiimote.modes.WiiMode;
-import wiiremotej.WiiRemote;
-import wiiremotej.WiiRemoteJ;
-import wiiremotej.event.WiiRemoteAdapter;
-import wiiremotej.event.WiiRemoteDiscoveredEvent;
-import wiiremotej.event.WiiRemoteDiscoveryListener;
-import wiiremotej.event.WiiRemoteListener;
 
 public class AutoSave implements MouseListener, ItemListener
 {
@@ -70,7 +55,8 @@ public class AutoSave implements MouseListener, ItemListener
 				URL lActiveImageURL = AutoSave.class.getResource("autosave.active.png");
 				mActiveImage = Toolkit.getDefaultToolkit().getImage(lActiveImageURL);
 				URL lInactiveImageURL = AutoSave.class.getResource("autosave.inactive.png");
-				mInactiveImage = Toolkit.getDefaultToolkit().getImage(lInactiveImageURL);
+				mInactiveImage = Toolkit.getDefaultToolkit()
+																.getImage(lInactiveImageURL);
 
 				PopupMenu popup = new PopupMenu();
 
@@ -102,7 +88,7 @@ public class AutoSave implements MouseListener, ItemListener
 				try
 				{
 					tray.add(mTrayIcon);
-					
+
 					mAutoSaveRunnable = new AutoSaveRunnable(30, new int[]
 					{ KeyEvent.VK_CONTROL, KeyEvent.VK_S });
 					Thread lThread = new Thread(mAutoSaveRunnable, "AutoSaveThread");

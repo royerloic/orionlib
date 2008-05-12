@@ -29,12 +29,12 @@ public class Element
 	{
 		return "(" + mId + ", " + mName + ", " + mDescription + ")";
 	}
-	
+
 	public int getId()
 	{
 		return mId;
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

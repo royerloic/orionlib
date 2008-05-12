@@ -4,7 +4,6 @@ import java.awt.AWTException;
 import java.awt.CheckboxMenuItem;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import wiiremotej.WiiRemote;
@@ -81,7 +80,7 @@ public class GoogleEarthMode extends WiiRemoteAdapter implements WiiMode
 
 		if (isBpressed)
 		{
-			if (zdd > epsilon && Math.abs(xdd) < zeta )
+			if (zdd > epsilon && Math.abs(xdd) < zeta)
 			{
 
 				zcounter += zdd;

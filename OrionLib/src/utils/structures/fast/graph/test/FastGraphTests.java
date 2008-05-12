@@ -3,6 +3,7 @@ package utils.structures.fast.graph.test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,13 +79,13 @@ public class FastGraphTests
 		}
 		catch (RuntimeException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			fail();
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			fail();
 		}
 
 	}

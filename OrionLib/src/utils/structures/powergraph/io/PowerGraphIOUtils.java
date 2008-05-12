@@ -3,21 +3,15 @@ package utils.structures.powergraph.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import utils.io.MatrixFile;
-import utils.structures.graph.Edge;
 import utils.structures.graph.Node;
-import utils.structures.graph.UndirectedEdge;
 import utils.structures.map.HashSetMap;
 import utils.structures.map.SetMap;
-import utils.structures.powergraph.PowerGraph;
 
 public class PowerGraphIOUtils
 {
@@ -27,23 +21,21 @@ public class PowerGraphIOUtils
 		super();
 	}
 
-	
-
-	public static SetMap<String, Node> getPowerNodes(final File pFile)	throws FileNotFoundException,
-																																	IOException
+	public static SetMap<String, Node> getPowerNodes(final File pFile) throws FileNotFoundException,
+																																		IOException
 	{
 		final List<List<String>> lMatrix = MatrixFile.readMatrixFromFile(	pFile,
 																																			false);
 
 		final SetMap<String, Node> lPowerNodeNameToSetMap = new HashSetMap<String, Node>();
-	
+
 		for (final List<String> lLine : lMatrix)
 			if (lLine.get(0).equalsIgnoreCase("SET"))
 			{
 				final String lSetName = lLine.get(1);
 				lPowerNodeNameToSetMap.put(lSetName);
 			}
-	
+
 		for (final Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
 		{
 			final String lSetName = lEntry.getKey();
