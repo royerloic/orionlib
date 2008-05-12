@@ -1,9 +1,6 @@
 package utils.network.socket.test;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 import org.junit.Test;
@@ -84,8 +81,8 @@ public class SocketServiceTest
 		};
 		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lServiceFactory);
 
-		//lSocketServiceServer.startListening(2068);
-				
+		// lSocketServiceServer.startListening(2068);
+
 	}
 
 }

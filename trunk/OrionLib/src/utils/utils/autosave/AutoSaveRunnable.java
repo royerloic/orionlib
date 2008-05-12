@@ -2,7 +2,6 @@ package utils.utils.autosave;
 
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.event.KeyEvent;
 
 public class AutoSaveRunnable implements Runnable
 {
@@ -46,7 +45,7 @@ public class AutoSaveRunnable implements Runnable
 					{
 						mRobot.keyPress(lKeyEvent);
 					}
-					for (int i=mKeyEvents.length-1; i>=0; i--)
+					for (int i = mKeyEvents.length - 1; i >= 0; i--)
 					{
 						mRobot.keyRelease(mKeyEvents[i]);
 					}

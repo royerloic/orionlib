@@ -17,12 +17,13 @@ public class SymetricFloatMatrixServerTest
 	public void test() throws IOException, InterruptedException
 	{
 		SymetricFloatMatrixServer lSymetricFloatMatrixServer = new SymetricFloatMatrixServer(	null,
-		                                                                                     	6283,
+																																													6283,
 																																													null);
 
 		lSymetricFloatMatrixServer.startServerNonBlocking();
 
-		Socket lSocket = GroovyServer.createClientSocketAndConnect("localhost",6283);
+		Socket lSocket = GroovyServer.createClientSocketAndConnect(	"localhost",
+																																6283);
 
 		Thread.sleep(500);
 		GroovyServer.sendQuery(lSocket, "matrix.init(14)");

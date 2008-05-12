@@ -9,10 +9,10 @@ import java.util.RandomAccess;
 import utils.structures.fast.list.FastIntegerList;
 
 public final class FastSparseIntegerSet	implements
-																	RandomAccess,
-																	java.io.Serializable,
-																	Collection<Integer>,
-																	Iterable<Integer>
+																				RandomAccess,
+																				java.io.Serializable,
+																				Collection<Integer>,
+																				Iterable<Integer>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -285,7 +285,7 @@ public final class FastSparseIntegerSet	implements
 	 * Computes the intersection of two sets: set1 Inter set2
 	 */
 	public static final FastSparseIntegerSet intersection(final FastSparseIntegerSet set1,
-																									final FastSparseIntegerSet set2)
+																												final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -321,7 +321,8 @@ public final class FastSparseIntegerSet	implements
 			}
 		}
 
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(lNewArray, k);
+		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(lNewArray,
+																																					k);
 
 		return lFastSparseIntegerSet;
 	}
@@ -330,7 +331,7 @@ public final class FastSparseIntegerSet	implements
 	 * Computes the union of two sets: set1 Union set2
 	 */
 	public static final FastSparseIntegerSet union(	final FastSparseIntegerSet set1,
-																						final FastSparseIntegerSet set2)
+																									final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -417,7 +418,7 @@ public final class FastSparseIntegerSet	implements
 	 * Computes the difference set1 Minus set2 (not the symmetric one!!!)
 	 */
 	public static final FastSparseIntegerSet difference(final FastSparseIntegerSet set1,
-																								final FastSparseIntegerSet set2)
+																											final FastSparseIntegerSet set2)
 	{
 		final int[] array1 = set1.elements;
 		final int size1 = set1.size;
@@ -531,7 +532,7 @@ public final class FastSparseIntegerSet	implements
 
 	// *************************************************************
 	// Methods implementing interfaces
-	
+
 	public boolean add(Integer pE)
 	{
 		return add((int) pE);

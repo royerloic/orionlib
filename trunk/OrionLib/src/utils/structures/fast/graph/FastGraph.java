@@ -30,7 +30,7 @@ public class FastGraph<N> implements Serializable
 	FastIntegerGraph mFastIntegerGraph = new FastIntegerGraph();
 
 	final HashMap<N, Integer> mNameToNodeMap = new HashMap<N, Integer>();
-	final HashMap<Integer, N> mNodeToNameMap = new HashMap<Integer, N>();
+	final ArrayList<N> mNodeToNameList = new ArrayList<N>();
 
 	public FastGraph()
 	{
@@ -41,45 +41,46 @@ public class FastGraph<N> implements Serializable
 	{
 		return mFastIntegerGraph;
 	}
-	
+
 	/**
-	 * Sets the underlying FastIntegerGraph
-	 * WARNING: you need to know what you are doing, the integer graph must
-	 * be compatible with the mappings contained in the FastGraph...
+	 * Sets the underlying FastIntegerGraph WARNING: you need to know what you are
+	 * doing, the integer graph must be compatible with the mappings contained in
+	 * the FastGraph...
+	 * 
 	 * @param pFastIntegerGraph
 	 */
 	public void setUnderlyingFastIntegerGraph(FastIntegerGraph pFastIntegerGraph)
 	{
 		mFastIntegerGraph = pFastIntegerGraph;
 	}
-	
+
 	public ArrayList<N> getNodesForIntegers(int... set)
 	{
 		ArrayList<N> list = new ArrayList<N>(set.length);
 		for (Integer lInteger : set)
 		{
-			list.add(mNodeToNameMap.get(lInteger));
+			list.add(mNodeToNameList.get(lInteger));
 		}
 		return list;
 	}
-	
+
 	public ArrayList<N> getNodesForIntegers(FastSparseIntegerSet set)
 	{
 		ArrayList<N> list = new ArrayList<N>(set.size());
 		for (Integer lInteger : set)
 		{
-			list.add(mNodeToNameMap.get(lInteger));
+			list.add(mNodeToNameList.get(lInteger));
 		}
 		return list;
 	}
 
 	public void addNode(final N pNodeName)
 	{
-		if (!mNodeToNameMap.containsKey(pNodeName))
+		if (!mNameToNodeMap.containsKey(pNodeName))
 		{
 			final int lNodeIndex = mFastIntegerGraph.addNode();
 			mNameToNodeMap.put(pNodeName, lNodeIndex);
-			mNodeToNameMap.put(lNodeIndex, pNodeName);
+			mNodeToNameList.add(lNodeIndex, pNodeName);
 		}
 	}
 
@@ -98,14 +99,14 @@ public class FastGraph<N> implements Serializable
 		{
 			lNodeIndex1 = mFastIntegerGraph.addNode();
 			mNameToNodeMap.put(pNodeName1, lNodeIndex1);
-			mNodeToNameMap.put(lNodeIndex1, pNodeName1);
+			mNodeToNameList.add(lNodeIndex1, pNodeName1);
 		}
 
 		if (lNodeIndex2 == null)
 		{
 			lNodeIndex2 = mFastIntegerGraph.addNode();
 			mNameToNodeMap.put(pNodeName2, lNodeIndex2);
-			mNodeToNameMap.put(lNodeIndex2, pNodeName2);
+			mNodeToNameList.add(lNodeIndex2, pNodeName2);
 		}
 
 		mFastIntegerGraph.addEdge(lNodeIndex1, lNodeIndex2);
@@ -154,8 +155,8 @@ public class FastGraph<N> implements Serializable
 
 		for (int[] lEdgeInts : mFastIntegerGraph.getIntPairList())
 		{
-			final N lNodeName1 = mNodeToNameMap.get(lEdgeInts[0]);
-			final N lNodeName2 = mNodeToNameMap.get(lEdgeInts[1]);
+			final N lNodeName1 = mNodeToNameList.get(lEdgeInts[0]);
+			final N lNodeName2 = mNodeToNameList.get(lEdgeInts[1]);
 
 			Edge<N> lEdge = new Edge<N>(lNodeName1, lNodeName2);
 			lEdgeSet.add(lEdge);
@@ -168,7 +169,7 @@ public class FastGraph<N> implements Serializable
 	{
 		writeEdgeFile(new FileOutputStream(pFile));
 	}
-	
+
 	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));

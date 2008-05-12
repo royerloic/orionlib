@@ -26,10 +26,21 @@ public final class FastBoundedIntegerSet implements
 	{
 		elements = new int[10];
 	}
-	
+
 	public FastBoundedIntegerSet(int capacity)
 	{
-		elements = new int[capacity];
+		this();
+		ensureCapacity((capacity / 32) + 1);
+	}
+
+	public FastBoundedIntegerSet(boolean test, int... ints)
+	{
+		this();
+		ensureCapacity((ints.length / 32) + 1);
+		for (int i : ints)
+		{
+			add(i);
+		}
 	}
 
 	public FastBoundedIntegerSet(	final int[] pElementData,
@@ -41,7 +52,6 @@ public final class FastBoundedIntegerSet implements
 		min = pMin;
 		max = pMax;
 	}
-
 
 	public FastBoundedIntegerSet(final FastBoundedIntegerSet pFastSparseIntegerSet)
 	{
@@ -77,6 +87,31 @@ public final class FastBoundedIntegerSet implements
 				newCapacity = minCapacity;
 			elements = Arrays.copyOf(elements, newCapacity);
 		}
+	}
+
+	private void tightenMinMax()
+	{
+		{
+			int newmin = Integer.MAX_VALUE;
+			int newmax = Integer.MIN_VALUE;
+			for (int i = min; i < max; i++)
+				if (elements[i] != 0)
+				{
+					newmin = i;
+					break;
+				}
+			for (int i = max - 1; i >= min; i--)
+				if (elements[i] != 0)
+				{
+					newmax = i + 1;
+					break;
+				}
+			min = newmin;
+			max = newmax;
+		}
+		/***************************************************************************
+		 * else { min = Integer.MAX_VALUE; max = Integer.MIN_VALUE; }/
+		 **************************************************************************/
 	}
 
 	static int[] bitsInWord = new int[256 * 256];
@@ -144,18 +179,18 @@ public final class FastBoundedIntegerSet implements
 	{
 		final int bitindex = o % 32;
 		final int intindex = o >> 5;
-		
+
 		final boolean isin = (elements[intindex] & (1 << bitindex)) != 0;
 		if (isin)
 		{
 			ensureCapacity(intindex + 1);
 			elements[intindex] ^= 1 << bitindex;
 			cachedsize--;
-			if(min==intindex && elements[intindex]==0)
+			if (min == intindex && elements[intindex] == 0)
 			{
 				min++;
 			}
-			if(max==intindex+1 && elements[intindex]==0)
+			if (max == intindex + 1 && elements[intindex] == 0)
 			{
 				max--;
 			}/**/
@@ -230,6 +265,18 @@ public final class FastBoundedIntegerSet implements
 		return result;
 	}
 
+	public boolean equals(int... intarray)
+	{
+		if (size() != intarray.length)
+			return false;
+		for (int i : intarray)
+		{
+			if (!contains(i))
+				return false;
+		}
+		return true;
+	}
+
 	public boolean equals(FastBoundedIntegerSet other)
 	{
 		if (max != other.max || min != other.min || size() != other.size())
@@ -302,7 +349,7 @@ public final class FastBoundedIntegerSet implements
 		if (min <= set.min && set.max <= max)
 		{
 			for (int i = set.min; i < set.max; i++)
-				if ( ( ~elements[i] & set.elements[i]) != 0)
+				if ((~elements[i] & set.elements[i]) != 0)
 					return false;
 			return true;
 		}
@@ -336,18 +383,19 @@ public final class FastBoundedIntegerSet implements
 			sizeOutOfDate = true;
 			final int[] otherelements = set.elements;
 
-			final int intermin = max(min,set.min);
-			final int intermax = min(max,set.max);
-			
+			final int intermin = max(min, set.min);
+			final int intermax = min(max, set.max);
+
 			for (int i = min; i < intermin; i++)
 				elements[i] = 0;
 			for (int i = intermin; i < intermax; i++)
 				elements[i] &= otherelements[i];
 			for (int i = intermax; i < max; i++)
 				elements[i] = 0;
-			
-			min=intermin;
-			max=intermax;
+
+			min = intermin;
+			max = intermax;
+			tightenMinMax();
 		}
 		else
 		{
@@ -355,20 +403,76 @@ public final class FastBoundedIntegerSet implements
 		}
 	}
 
+	public static FastBoundedIntegerSet intersection(	FastBoundedIntegerSet set1,
+																										FastBoundedIntegerSet set2)
+	{
+		FastBoundedIntegerSet inter = new FastBoundedIntegerSet();
+
+		if (!(set1.min >= set2.max || set1.max <= set2.min))
+		{
+			inter.ensureCapacity(min(set1.elements.length, set2.elements.length));
+			final int[] elements1 = set1.elements;
+			final int[] elements2 = set2.elements;
+			final int[] elementsi = inter.elements;
+
+			final int intermin = max(set1.min, set2.min);
+			final int intermax = min(set1.max, set2.max);
+
+			for (int i = intermin; i < intermax; i++)
+				elementsi[i] = elements1[i] & elements2[i];
+
+			inter.sizeOutOfDate = true;
+			inter.min = intermin;
+			inter.max = intermax;
+			inter.tightenMinMax();
+		}
+		return inter;
+	}
+
 	/**
 	 * Computes the union between this set and another set.
 	 */
 	public final void union(final FastBoundedIntegerSet set)
 	{
-		sizeOutOfDate = true;
-		final int[] otherelements = set.elements;
-		ensureCapacity(set.max);
+		if (set.size() > 0)
+		{
+			sizeOutOfDate = true;
+			final int[] otherelements = set.elements;
+			ensureCapacity(set.max);
 
-		for (int i = set.min; i < set.max; i++)
-			elements[i] |= otherelements[i];
+			for (int i = set.min; i < set.max; i++)
+				elements[i] |= otherelements[i];
 
-		min = min(min, set.min);
-		max = max(max, set.max);
+			min = min(min, set.min);
+			max = max(max, set.max);
+			tightenMinMax();
+		}
+	}
+
+	public static FastBoundedIntegerSet union(FastBoundedIntegerSet set1,
+																						FastBoundedIntegerSet set2)
+	{
+		FastBoundedIntegerSet union = new FastBoundedIntegerSet();
+		if (set1.size() > 0 || set2.size() > 0)
+		{
+			final int[] elements1 = set1.elements;
+			final int[] elements2 = set2.elements;
+			final int[] elementsu = union.elements;
+
+			union.ensureCapacity(max(elements1.length, elements2.length));
+
+			final int unionmin = min(set1.min, set2.min);
+			final int unionmax = max(set1.max, set2.max);
+
+			for (int i = unionmin; i < unionmax; i++)
+				elementsu[i] = elements1[i] | elements2[i];
+
+			union.sizeOutOfDate = true;
+			union.min = unionmin;
+			union.max = unionmax;
+			union.tightenMinMax();
+		}
+		return union;
 	}
 
 	/**
@@ -378,13 +482,37 @@ public final class FastBoundedIntegerSet implements
 	{
 		sizeOutOfDate = true;
 		final int[] otherelements = set.elements;
-		ensureCapacity(set.max);
 
 		for (int i = set.min; i < set.max; i++)
-			elements[i] |= otherelements[i];
+			elements[i] &= ~otherelements[i];
 
-		min = min(min, set.min);
-		max = max(max, set.max);
+		tightenMinMax();
+	}
+
+	public static FastBoundedIntegerSet difference(	FastBoundedIntegerSet set1,
+																									FastBoundedIntegerSet set2)
+	{
+		FastBoundedIntegerSet diff = new FastBoundedIntegerSet();
+		if (set1.size() > 0)
+		{
+			final int[] elements1 = set1.elements;
+			final int[] elements2 = set2.elements;
+			final int[] elementsd = diff.elements;
+
+			diff.ensureCapacity(elements1.length);
+
+			final int diffmin = set1.min;
+			final int diffmax = set1.max;
+
+			for (int i = diffmin; i < diffmax; i++)
+				elementsd[i] = elements1[i] & ~elements2[i];
+
+			diff.sizeOutOfDate = true;
+			diff.min = diffmin;
+			diff.max = diffmax;
+			diff.tightenMinMax();
+		}
+		return diff;
 	}
 
 	public FastBoundedIntegerSet getRandomSubSet(Random pRandom, double pDensity)
@@ -576,4 +704,17 @@ public final class FastBoundedIntegerSet implements
 	{
 		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
 	}
+
+	public int[] toIntArray()
+	{
+		int[] lArray = new int[size()];
+		int i = 0;
+		for (int element : this)
+		{
+			lArray[i] = element;
+			i++;
+		}
+		return lArray;
+	}
+
 }

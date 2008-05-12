@@ -32,7 +32,6 @@ public class HyperGeometricEnrichementTest
 
 		assertTrue(lString.contains("81.44516686402928"));
 
-		
 	}
 
 }

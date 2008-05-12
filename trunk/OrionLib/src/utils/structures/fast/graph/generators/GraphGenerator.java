@@ -5,7 +5,7 @@ import java.util.Random;
 import utils.random.DistributionSource;
 import utils.random.RandomUtils;
 import utils.structures.fast.graph.FastIntegerGraph;
-import utils.structures.fast.set.FastSparseIntegerSet;
+import utils.structures.fast.set.FastBoundedIntegerSet;
 
 public class GraphGenerator
 {
@@ -25,7 +25,7 @@ public class GraphGenerator
 			lFastIntegerGraph.addNode();
 		}
 
-		int[] lNodeArray = lFastIntegerGraph.getNodeSet().getUnderlyingArray();
+		int[] lNodeArray = lFastIntegerGraph.getNodeSet().toIntArray();
 
 		for (int node1 = 0; node1 < lNodeArray.length; node1++)
 			for (int node2 = 0; node2 < node1; node2++)
@@ -65,20 +65,21 @@ public class GraphGenerator
 	{
 		final int newnode = pGraph.addNode();
 
-		FastSparseIntegerSet nodelist = pGraph.getNodeSet();
+		FastBoundedIntegerSet nodelist = pGraph.getNodeSet();
 
 		double lTotal = 0;
-		for (final int node : nodelist.getUnderlyingArray())
+		for (final int node : nodelist)
 			lTotal += pGraph.getNodeNeighbours(node).size();
 
 		if (lTotal == 0 && pNewEdges > 0)
 		{
-			pGraph.addEdge(newnode, nodelist.getUnderlyingArray()[pRandom.nextInt(nodelist.size())]);
+			pGraph.addEdge(	newnode,
+											nodelist.toIntArray()[pRandom.nextInt(nodelist.size())]);
 		}
 		else
 		{
 			final DistributionSource<Integer> lDistributionSource = new DistributionSource<Integer>();
-			for (final int node : nodelist.getUnderlyingArray())
+			for (final int node : nodelist)
 			{
 				double lProbability = ((pGraph.getNodeNeighbours(node).size()) / lTotal);
 				lDistributionSource.addObject(node, lProbability);
@@ -107,7 +108,7 @@ public class GraphGenerator
 				if (node != -1)
 				{
 					pGraph.addEdge(newnode, node);
-					nodelist.del(node);
+					nodelist.remove(node);
 				}
 			}
 		}
