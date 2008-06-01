@@ -272,6 +272,84 @@ public class FastBoundedIntegerSetTests
 	}
 
 	@Test
+	public void testRelationship()
+	{
+		// same int:
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 4, 5, 6);
+
+			assertEquals(0,FastBoundedIntegerSet.relationship(set1, set2));
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 2, 3, 4);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 2);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 2, 3);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 1);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 1, 2, 3 ,4);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == -1);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 1, 2, 3);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 3);
+		}
+		
+    // different ints:
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 104, 105, 106);
+
+			assertEquals(0,FastBoundedIntegerSet.relationship(set1, set2));
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1001 ,1, 2, 103);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 2, 103, 4, 1004);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 2);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 103);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 2, 103);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 1);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 103);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 1, 2, 103 ,4, 104);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == -1);
+		}
+		
+		{
+			FastBoundedIntegerSet set1 = new FastBoundedIntegerSet(true, 1, 2, 3, 101, 1001);
+			FastBoundedIntegerSet set2 = new FastBoundedIntegerSet(true, 1, 2, 3, 101, 1001);
+
+			assertTrue(FastBoundedIntegerSet.relationship(set1, set2) == 3);
+		}
+
+	}
+
+	@Test
 	public void testIntersectionStatic()
 	{
 		{
@@ -633,7 +711,7 @@ public class FastBoundedIntegerSetTests
 		System.out.println("time=" + time);
 
 		fold = timeref / time;
-		System.out.println("add:FastSparseIntegerSet is " + fold
+		System.out.println("add:FastBoundedIntegerSet is " + fold
 												+ " times faster than HashSet<Integer> ");
 
 		{
@@ -672,7 +750,7 @@ public class FastBoundedIntegerSetTests
 		System.out.println("time=" + time);
 
 		fold = timeref / time;
-		System.out.println("union: FastSparseIntegerSet is " + fold
+		System.out.println("union: FastBoundedIntegerSet is " + fold
 												+ " times faster than HashSet<Integer> ");
 
 		{
@@ -710,7 +788,7 @@ public class FastBoundedIntegerSetTests
 		System.out.println("time=" + time);
 
 		fold = timeref / time;
-		System.out.println("intersection: FastSparseIntegerSet is " + fold
+		System.out.println("intersection: FastBoundedIntegerSet is " + fold
 												+ " times faster than HashSet<Integer> ");
 
 	}

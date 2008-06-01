@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.Set;
 
+
 public final class FastBoundedIntegerSet implements
 																				RandomAccess,
 																				java.io.Serializable,
@@ -513,6 +514,97 @@ public final class FastBoundedIntegerSet implements
 			diff.tightenMinMax();
 		}
 		return diff;
+	}
+
+	
+	/**
+	 * Computes the relationship between set1 and set2:
+	 *  0 if set1 is disjoint of set2, 
+	 *  1 if set1 constains set2, 
+	 *  -1 if set2 contains set1, 
+	 *  2 if set1 and set2 are strictly intersecting, 
+	 *  3 if set1 and set2 are equal, 
+	 * @param set1
+	 * @param set2
+	 * @return
+	 */
+	public static final int relationship(FastBoundedIntegerSet set1, FastBoundedIntegerSet set2)
+	{
+				
+		if (set1.min >= set2.max || set1.max <= set2.min)
+		{
+			return 0; // set1 and set2 disjoint
+		}
+		else
+		{
+			final int[] elements1 = set1.elements;
+			final int[] elements2 = set2.elements;		
+			
+			boolean intersection = false;
+			boolean set1alone = false;
+			boolean set2alone = false;
+			
+			set1alone |= (set1.min < set2.min || set2.max < set1.max);
+			set2alone |= (set2.min < set1.min || set1.max < set2.max);
+			
+			final int mininter = max(set1.min, set2.min);
+			final int maxinter = min(set1.max, set2.max);
+			
+			{
+				int i=mininter;
+				while(!set1alone && i<maxinter)
+				{
+					set1alone |= (elements1[i] & ~elements2[i]) != 0;
+					i++;
+				}
+			}
+			
+			{
+				int i=mininter;
+				while(!set2alone && i<maxinter)
+				{
+					set2alone |= (elements2[i] & ~elements1[i]) != 0;
+					i++;
+				}
+			}
+			
+			{
+				int i=mininter;
+				while(!intersection && i<maxinter)
+				{
+					intersection |= (elements1[i] & elements2[i]) != 0;		
+					i++;
+				}
+			}
+			
+			if (intersection)
+			{
+				if (set1alone && set2alone)
+				{
+					return 2;  // set1 and set2 strictly intersecting;
+				}
+				else if (set1alone)
+				{
+					return 1; // set1 contains set2
+				}
+				else if (set2alone)
+				{
+					return -1; // set2 contains set1
+				}
+				else
+				{
+					return 3; // equal
+				}
+			}
+			else
+			{
+				return 0; // set1 and set2 disjoint
+			}
+
+			
+		}
+		
+
 	}
 
 	public FastBoundedIntegerSet getRandomSubSet(Random pRandom, double pDensity)
