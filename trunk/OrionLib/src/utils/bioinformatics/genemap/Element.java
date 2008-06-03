@@ -27,7 +27,7 @@ public class Element
 	@Override
 	public String toString()
 	{
-		return "(" + mId + ", " + mName + ", " + mDescription + ")";
+		return "(" + mId + "\t" + mName + "\t" + mDescription + ")";
 	}
 
 	public int getId()

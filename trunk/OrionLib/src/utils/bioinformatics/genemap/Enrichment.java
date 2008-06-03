@@ -15,5 +15,14 @@ public class Enrichment
 	public Collection<Element> mSet1;
 	public Collection<Element> mSet2;
 	public Collection<Element> mIntersectionSet;
+	
+	
+	@Override
+	public String toString()
+	{
+		return "("+mCorrectedPValue+"\t"+mCoverage+")";
+	}
 
+	
+	
 }
