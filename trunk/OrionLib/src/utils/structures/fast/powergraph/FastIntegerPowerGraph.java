@@ -1,7 +1,23 @@
 package utils.structures.fast.powergraph;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import utils.structures.fast.graph.FastIntegerDirectedGraph;
 import utils.structures.fast.graph.FastIntegerGraph;
@@ -138,12 +154,17 @@ public class FastIntegerPowerGraph
 		mPowerEgdesGraph.addEdge(pPowerNodeId1, pPowerNodeId2);
 	}
 
-	public void addPowerEdge(	FastBoundedIntegerSet pPowerNode1,
-														FastBoundedIntegerSet pPowerNode2)
+	public boolean addPowerEdge(FastBoundedIntegerSet pPowerNode1,
+															FastBoundedIntegerSet pPowerNode2)
 	{
 		Integer lId1 = addPowerNode(pPowerNode1);
 		Integer lId2 = addPowerNode(pPowerNode2);
-		mPowerEgdesGraph.addEdge(lId1, lId2);
+		if (lId1 != null && lId2 != null)
+		{
+			return mPowerEgdesGraph.addEdge(lId1, lId2);
+		}
+		else
+			return false;
 	}
 
 	public void removePowerEdge(int pPowerNodeId1, int pPowerNodeId2)
@@ -326,31 +347,152 @@ public class FastIntegerPowerGraph
 	@Override
 	public String toString()
 	{
+		return toTabDel();
+	}
+
+	public String toTabDel()
+	{
 		StringBuilder lBuilder = new StringBuilder();
 		for (int node : mNodesSet)
 		{
-			lBuilder.append("NODE\t" + node + "\n");
+			lBuilder.append("NODE\tnode" + node + "\n");
 		}
-		
+
 		for (int i = 1; i < mId2PowerNode.size(); i++)
 		{
-			lBuilder.append("SET\t" + i + "\n");
+			lBuilder.append("SET\tset" + i + "\n");
 		}
+
+		for (int lPowerNodeId : getPowerNodeIdSet())
+			if (lPowerNodeId != 0)
+			{
+				for (int lNode : mId2PowerNode.get(lPowerNodeId))
+				{
+					lBuilder.append("IN\tnode" + lNode + "\tset" + lPowerNodeId + "\n");
+				}
+			}
 
 		for (int lPowerNodeId : getPowerNodeIdSet())
 			if (lPowerNodeId != 0)
 			{
 				for (int lChildrenId : mHierarchyGraph.getOutgoingNodeNeighbours(lPowerNodeId))
 				{
-					lBuilder.append("IN\t" + lChildrenId + "\t" + lPowerNodeId + "\n");
+					lBuilder.append("IN\tset" + lChildrenId
+													+ "\tset"
+													+ lPowerNodeId
+													+ "\n");
 				}
 			}
 
 		for (int[] lEdge : mPowerEgdesGraph.getIntPairList())
 		{
-			lBuilder.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
+			FastBoundedIntegerSet powernode1 = mId2PowerNode.get(lEdge[0]);
+			FastBoundedIntegerSet powernode2 = mId2PowerNode.get(lEdge[1]);
+			String powernode1str = "set" + lEdge[0];
+			String powernode2str = "set" + lEdge[1];
+
+			lBuilder.append("EDGE\t" + powernode1str + "\t" + powernode2str + "\n");
 		}
 
 		return lBuilder.toString();
+	}
+
+	public void writeEdgeFile(File pFile) throws IOException
+	{
+		writeEdgeFile(new FileOutputStream(pFile));
+	}
+
+	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
+	{
+		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		lWriter.append(toTabDel());
+		lWriter.flush();
+	}
+
+	/**
+	 * This method reads BBL files written by this class. It does not read other
+	 * BBL files, since it assumes nodes and sets of the syntax: setx and nodex.
+	 * 
+	 * @param pFile
+	 * @throws IOException
+	 */
+	public void readEdgeFile(String pString) throws IOException
+	{
+		readEdgeFile(new ByteArrayInputStream(pString.getBytes("UTF-8")));
+	}
+
+	/**
+	 * This method reads BBL files written by this class. It does not read other
+	 * BBL files, since it assumes nodes and sets of the syntax: setx and nodex.
+	 * 
+	 * @param pFile
+	 * @throws IOException
+	 */
+	public void readEdgeFile(File pFile) throws IOException
+	{
+		readEdgeFile(new FileInputStream(pFile));
+	}
+
+	/**
+	 * This method reads BBL files written by this class. It does not read other
+	 * BBL files, since it assumes nodes and sets of the syntax: setx and nodex.
+	 * 
+	 * @param pInputStream
+	 * @throws IOException
+	 */
+	public void readEdgeFile(InputStream pInputStream) throws IOException
+	{
+		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
+		Pattern lPattern = Pattern.compile("\t");
+
+		ArrayList<FastBoundedIntegerSet> lPowerNodeList = new ArrayList<FastBoundedIntegerSet>();
+		lPowerNodeList.add(null); // need to start at 1 since 0 is root.
+		ArrayList<int[]> lEgdeList = new ArrayList<int[]>();
+
+		String lLine = null;
+		while ((lLine = lBufferedReader.readLine()) != null)
+			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			{
+				final String[] lArray = lPattern.split(lLine, -1);
+				if (lLine.startsWith("NODE\t"))
+				{
+					int node = Integer.parseInt(lArray[1].substring(4));
+				}
+				else if (lLine.startsWith("SET\t"))
+				{
+					int setid = Integer.parseInt(lArray[1].substring(3));
+					lPowerNodeList.add(new FastBoundedIntegerSet());
+				}
+				else if (lLine.startsWith("IN\t"))
+				{
+					final String first = lArray[1];
+					if (first.startsWith("node"))
+					{
+						final int nodeid = Integer.parseInt(first.substring(4));
+						final String second = lArray[2];
+						final int setid = Integer.parseInt(second.substring(3));
+						lPowerNodeList.get(setid).add(nodeid);
+					}
+				}
+				else if (lLine.startsWith("EDGE\t"))
+				{
+					final int node1 = Integer.parseInt(lArray[1].substring(3));
+					final int node2 = Integer.parseInt(lArray[2].substring(3));
+					lEgdeList.add(new int[]
+					{ node1, node2 });
+				}
+			}
+
+		for (FastBoundedIntegerSet lPowerNode : lPowerNodeList)
+			if (lPowerNode != null)
+			{
+				addPowerNode(lPowerNode);
+			}
+
+		for (int[] lEdge : lEgdeList)
+		{
+			addPowerEdge(lEdge[0], lEdge[1]);
+		}
+
 	}
 }
