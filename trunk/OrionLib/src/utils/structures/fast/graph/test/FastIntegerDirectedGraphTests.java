@@ -32,6 +32,27 @@ public class FastIntegerDirectedGraphTests
 
 		assertFalse(lFastIntegerGraph.isEdge(1, 0));
 		assertFalse(lFastIntegerGraph.isEdge(2, 0));
+	}
+
+	@Test
+	public void testTransitiveClosure()
+	{
+		FastIntegerDirectedGraph lFastIntegerGraph = new FastIntegerDirectedGraph();
+
+		lFastIntegerGraph.addEdge(1, 2);
+		lFastIntegerGraph.addEdge(2, 3);
+		lFastIntegerGraph.addEdge(3, 1);
+
+		lFastIntegerGraph.addEdge(3, 4);
+		lFastIntegerGraph.addEdge(4, 5);
+		lFastIntegerGraph.addEdge(5, 6);
+
+		lFastIntegerGraph.addEdge(6, 7);
+		lFastIntegerGraph.addEdge(6, 8);
+		lFastIntegerGraph.addEdge(6, 9);
+
+		assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9] as Set", lFastIntegerGraph.getOutgoingTransitiveClosure(1)
+																			.toString());
 
 	}
 
@@ -257,7 +278,7 @@ public class FastIntegerDirectedGraphTests
 		lFastIntegerGraph.addEdge(7, 6);
 		lFastIntegerGraph.addEdge(8, 6);
 		lFastIntegerGraph.addEdge(9, 6);
-		lFastIntegerGraph.addEdge(1,11);
+		lFastIntegerGraph.addEdge(1, 11);
 
 		assertTrue(lFastIntegerGraph.getIncommingNodeNeighbours(0).equals(1, 2, 3));
 		assertTrue(lFastIntegerGraph.getIncommingNodeNeighbours(0, 0).isEmpty());
