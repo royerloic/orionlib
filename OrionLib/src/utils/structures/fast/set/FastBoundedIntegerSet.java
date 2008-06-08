@@ -622,14 +622,12 @@ public final class FastBoundedIntegerSet implements
 		{
 			i++;
 		}
-		;
 
 		int bit = pMin % 32;
 		while (((elements[i] & (1 << bit)) == 0) && bit < 32)
 		{
 			bit++;
 		}
-		;
 
 		if ((elements[i] & (1 << bit)) != 0)
 			return 32 * i + bit;
@@ -637,23 +635,24 @@ public final class FastBoundedIntegerSet implements
 			return null;
 	}
 
-	public int getMax(final int pMax)
+	public Integer getMax(final int pMax)
 	{
-		int i = min(max, pMax/32);
+		int i = min(max, pMax / 32);
 		while (elements[i] == 0 && i >= min)
 		{
 			i--;
 		}
-		;
 
-		int bit = pMax%32;
+		int bit = pMax % 32;
 		while (((elements[i] & (1 << bit)) == 0) && bit >= 0)
 		{
 			bit--;
 		}
-		;
 
-		return 32 * i + bit;
+		if ((elements[i] & (1 << bit)) != 0)
+			return 32 * i + bit;
+		else
+			return null;
 	}
 
 	// Special static methods:

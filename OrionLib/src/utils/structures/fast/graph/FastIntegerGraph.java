@@ -44,7 +44,7 @@ public class FastIntegerGraph implements Serializable
 	public int addNode()
 	{
 		mSparseMatrix.add(new FastBoundedIntegerSet());
-		return mSparseMatrix.size()-1;
+		return mSparseMatrix.size() - 1;
 	}
 
 	public void addNodesUpTo(final int pNode)
@@ -69,7 +69,7 @@ public class FastIntegerGraph implements Serializable
 		}
 	}
 
-	public void addEdge(final int pNode1, final int pNode2)
+	public boolean addEdge(final int pNode1, final int pNode2)
 	{
 		if (!isEdge(pNode1, pNode2))
 		{
@@ -86,6 +86,11 @@ public class FastIntegerGraph implements Serializable
 			mSparseMatrix.set(pNode2, lNeiSet2);
 
 			mEdgeCount++;
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
