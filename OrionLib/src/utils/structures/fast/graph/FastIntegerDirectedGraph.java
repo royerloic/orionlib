@@ -230,6 +230,26 @@ public class FastIntegerDirectedGraph implements Serializable
 		}
 	}
 
+	public FastBoundedIntegerSet getOutgoingTransitiveClosure(int pNodeId)
+	{
+		FastBoundedIntegerSet lClosure = new FastBoundedIntegerSet();
+		FastBoundedIntegerSet lFrontier = new FastBoundedIntegerSet();
+		lFrontier.add(pNodeId);
+
+		while (!lFrontier.isEmpty())
+		{
+			lClosure.union(lFrontier);
+			for (Integer lNodeId : lFrontier)
+			{
+				FastBoundedIntegerSet lNei = getOutgoingNodeNeighbours(lNodeId);
+				lFrontier.union(lNei);
+			}
+			lFrontier.difference(lClosure);
+		}
+		lClosure.remove(pNodeId);
+		return lClosure;
+	}
+
 	public FastBoundedIntegerSet getIncommingNodeNeighbours(final int pNode)
 	{
 		return mIncomming.get(pNode);
@@ -269,6 +289,26 @@ public class FastIntegerDirectedGraph implements Serializable
 		{
 			throw new IndexOutOfBoundsException("Argument pDepth cannot be negative: " + pDepth);
 		}
+	}
+
+	public FastBoundedIntegerSet getIncommingTransitiveClosure(int pNodeId)
+	{
+		FastBoundedIntegerSet lClosure = new FastBoundedIntegerSet();
+		FastBoundedIntegerSet lFrontier = new FastBoundedIntegerSet();
+		lFrontier.add(pNodeId);
+
+		while (!lFrontier.isEmpty())
+		{
+			lClosure.union(lFrontier);
+			for (Integer lNodeId : lFrontier)
+			{
+				FastBoundedIntegerSet lNei = getIncommingNodeNeighbours(lNodeId);
+				lFrontier.union(lNei);
+			}
+			lFrontier.difference(lClosure);
+		}
+		lClosure.remove(pNodeId);
+		return lClosure;
 	}
 
 	public FastIntegerDirectedGraph extractStrictSubGraph(FastBoundedIntegerSet pNodeSet)

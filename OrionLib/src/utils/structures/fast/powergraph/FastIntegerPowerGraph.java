@@ -35,7 +35,7 @@ public class FastIntegerPowerGraph
 
 	public FastIntegerPowerGraph()
 	{
-		this(10, 10, 10);
+		this(0, 0, 0);
 	}
 
 	public Integer addPowerNode(FastBoundedIntegerSet pPowerNode)
@@ -86,7 +86,6 @@ public class FastIntegerPowerGraph
 			mPowerNode2Id.put(pPowerNode, lPowerNodeId);
 			mPowerEgdesGraph.addNodesUpTo(lPowerNodeId);
 			mHierarchyGraph.addEdge(pInsertPowerNodeId, lPowerNodeId);
-			
 
 			for (int child : childtodisplace)
 			{
@@ -107,7 +106,7 @@ public class FastIntegerPowerGraph
 	{
 		return mPowerNode2Id.get(pPowerNode);
 	}
-	
+
 	public boolean isPowerNode(FastBoundedIntegerSet pPowerNode)
 	{
 		Integer lId = mPowerNode2Id.get(pPowerNode);
@@ -118,10 +117,20 @@ public class FastIntegerPowerGraph
 	{
 		return mHierarchyGraph.isNode(pPowerNodeId);
 	}
-	
+
+	public FastBoundedIntegerSet getPowerNodeIdSet()
+	{
+		return mPowerEgdesGraph.getNodeSet();
+	}
+
 	public int getNumberOfPowerNodes()
 	{
 		return mPowerEgdesGraph.getNumberOfNodes();
+	}
+
+	public int getNumberOfNodes()
+	{
+		return mNodesSet.size();
 	}
 
 	public void addPowerEdge(int pPowerNodeId1, int pPowerNodeId2)
@@ -169,7 +178,7 @@ public class FastIntegerPowerGraph
 	{
 		return mPowerEgdesGraph.isEdge(pPowerNodeId1, pPowerNodeId2);
 	}
-	
+
 	public int getNumberOfPowerEdges()
 	{
 		return mPowerEgdesGraph.getNumberOfEdges();
@@ -179,14 +188,169 @@ public class FastIntegerPowerGraph
 	{
 		return mHierarchyGraph.getOutgoingNodeNeighbours(pPowerNodeId);
 	}
-	
+
 	public FastBoundedIntegerSet getPowerNodeChildrenOf(FastBoundedIntegerSet pPowerNode)
 	{
 		return mHierarchyGraph.getOutgoingNodeNeighbours(mPowerNode2Id.get(pPowerNode));
 	}
 
+	public FastBoundedIntegerSet getPowerNodeDescendentsOf(int pPowerNodeId)
+	{
+		return mHierarchyGraph.getOutgoingTransitiveClosure(pPowerNodeId);
+	}
 
+	public FastBoundedIntegerSet getPowerNodeParentsOf(int pPowerNodeId)
+	{
+		return mHierarchyGraph.getIncommingNodeNeighbours(pPowerNodeId);
+	}
 
+	public FastBoundedIntegerSet getPowerNodeParentOf(FastBoundedIntegerSet pPowerNode)
+	{
+		return mHierarchyGraph.getIncommingNodeNeighbours(mPowerNode2Id.get(pPowerNode));
+	}
 
+	public FastBoundedIntegerSet getPowerNodeAncestorsOf(int pPowerNodeId)
+	{
+		return mHierarchyGraph.getIncommingTransitiveClosure(pPowerNodeId);
+	}
 
+	public FastBoundedIntegerSet getDirectPowerNodeNeighbors(int pPowerNodeId)
+	{
+		return mPowerEgdesGraph.getNodeNeighbours(pPowerNodeId);
+	}
+
+	public FastBoundedIntegerSet getAllPowerNodeNeighbors(int pPowerNodeId)
+	{
+		FastBoundedIntegerSet lDirectNeighbors = mPowerEgdesGraph.getNodeNeighbours(pPowerNodeId);
+		FastBoundedIntegerSet lDescendents = mHierarchyGraph.getOutgoingTransitiveClosure(pPowerNodeId);
+		FastBoundedIntegerSet lAncestors = mHierarchyGraph.getIncommingTransitiveClosure(pPowerNodeId);
+
+		FastBoundedIntegerSet lAllPowerNodeNeighbors = new FastBoundedIntegerSet(lDirectNeighbors.size() + lDescendents.size()
+																																							+ lAncestors.size());
+		lAllPowerNodeNeighbors.union(lDirectNeighbors);
+
+		for (int lPowerNodeId : lDescendents)
+		{
+			lAllPowerNodeNeighbors.union(getDirectPowerNodeNeighbors(lPowerNodeId));
+		}
+
+		for (int lPowerNodeId : lAncestors)
+		{
+			lAllPowerNodeNeighbors.union(getDirectPowerNodeNeighbors(lPowerNodeId));
+		}
+
+		return lAllPowerNodeNeighbors;
+	}
+
+	public FastBoundedIntegerSet getConnectedPowerNodeNeighbors(int pPowerNodeId)
+	{
+		FastBoundedIntegerSet lDirectNeighbors = mPowerEgdesGraph.getNodeNeighbours(pPowerNodeId);
+		FastBoundedIntegerSet lDescendents = mHierarchyGraph.getOutgoingTransitiveClosure(pPowerNodeId);
+		FastBoundedIntegerSet lAncestors = mHierarchyGraph.getIncommingTransitiveClosure(pPowerNodeId);
+		lAncestors.remove(0);
+
+		FastBoundedIntegerSet lAllPowerNodeNeighbors = new FastBoundedIntegerSet(lDirectNeighbors.size() + lDescendents.size()
+																																							+ lAncestors.size());
+		lAllPowerNodeNeighbors.union(lDirectNeighbors);
+
+		for (int lPowerNodeId : lAncestors)
+		{
+			lAllPowerNodeNeighbors.union(getDirectPowerNodeNeighbors(lPowerNodeId));
+		}
+
+		if (!lAllPowerNodeNeighbors.isEmpty())
+			for (int lPowerNodeId : lDescendents)
+			{
+				lAllPowerNodeNeighbors.union(getDirectPowerNodeNeighbors(lPowerNodeId));
+			}
+
+		return lAllPowerNodeNeighbors;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+							+ ((mHierarchyGraph == null) ? 0 : mHierarchyGraph.hashCode());
+		result = prime * result
+							+ ((mId2PowerNode == null) ? 0 : mId2PowerNode.hashCode());
+		result = prime * result + ((mNodesSet == null) ? 0 : mNodesSet.hashCode());
+		result = prime * result
+							+ ((mPowerEgdesGraph == null) ? 0 : mPowerEgdesGraph.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final FastIntegerPowerGraph other = (FastIntegerPowerGraph) obj;
+		if (mHierarchyGraph == null)
+		{
+			if (other.mHierarchyGraph != null)
+				return false;
+		}
+		else if (!mHierarchyGraph.equals(other.mHierarchyGraph))
+			return false;
+		if (mId2PowerNode == null)
+		{
+			if (other.mId2PowerNode != null)
+				return false;
+		}
+		else if (!mId2PowerNode.equals(other.mId2PowerNode))
+			return false;
+		if (mNodesSet == null)
+		{
+			if (other.mNodesSet != null)
+				return false;
+		}
+		else if (!mNodesSet.equals(other.mNodesSet))
+			return false;
+		if (mPowerEgdesGraph == null)
+		{
+			if (other.mPowerEgdesGraph != null)
+				return false;
+		}
+		else if (!mPowerEgdesGraph.equals(other.mPowerEgdesGraph))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder lBuilder = new StringBuilder();
+		for (int node : mNodesSet)
+		{
+			lBuilder.append("NODE\t" + node + "\n");
+		}
+		
+		for (int i = 1; i < mId2PowerNode.size(); i++)
+		{
+			lBuilder.append("SET\t" + i + "\n");
+		}
+
+		for (int lPowerNodeId : getPowerNodeIdSet())
+			if (lPowerNodeId != 0)
+			{
+				for (int lChildrenId : mHierarchyGraph.getOutgoingNodeNeighbours(lPowerNodeId))
+				{
+					lBuilder.append("IN\t" + lChildrenId + "\t" + lPowerNodeId + "\n");
+				}
+			}
+
+		for (int[] lEdge : mPowerEgdesGraph.getIntPairList())
+		{
+			lBuilder.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
+		}
+
+		return lBuilder.toString();
+	}
 }

@@ -19,7 +19,7 @@ import utils.structures.fast.set.FastBoundedIntegerSet;
 
 /**
  */
-public class FastIntegerGraphTests
+public class FastIntegerPowerGraphTests
 {
 
 	@Test
