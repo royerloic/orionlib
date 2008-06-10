@@ -86,6 +86,7 @@ public class PowerGraphIO
 		MatrixFile.writeMatrixToFile(lBubbleFormat, pFile);
 	}
 
+
 	public static PowerGraph<Node> loadPowerGraph(final File pFile)	throws FileNotFoundException,
 																																	IOException
 	{

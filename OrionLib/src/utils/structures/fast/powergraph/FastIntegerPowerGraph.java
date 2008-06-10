@@ -386,8 +386,6 @@ public class FastIntegerPowerGraph
 
 		for (int[] lEdge : mPowerEgdesGraph.getIntPairList())
 		{
-			FastBoundedIntegerSet powernode1 = mId2PowerNode.get(lEdge[0]);
-			FastBoundedIntegerSet powernode2 = mId2PowerNode.get(lEdge[1]);
 			String powernode1str = "set" + lEdge[0];
 			String powernode2str = "set" + lEdge[1];
 

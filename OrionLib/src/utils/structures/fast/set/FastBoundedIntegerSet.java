@@ -61,6 +61,16 @@ public final class FastBoundedIntegerSet implements
 		max = pFastSparseIntegerSet.max;
 	}
 
+	public FastBoundedIntegerSet(Collection<Integer> pCollection)
+	{
+		this(pCollection.size());
+
+		for (int i : pCollection)
+		{
+			this.add(i);
+		}
+	}
+
 	public final void trimToSize()
 	{
 		if (elements.length > max)

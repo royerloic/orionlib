@@ -1,5 +1,12 @@
 package utils.bioinformatics.genemap;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,15 +14,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import utils.math.stats.HyperGeometricEnrichement;
+import utils.random.sequence.ContextPreservingSequenceRandomizer;
 import utils.structures.Couple;
 import utils.structures.map.HashSetMap;
 import utils.structures.set.FirstInPrioritizedSetDecomposer;
 
-public class GeneMapBuilder
+public class GeneMapBuilder implements Serializable
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	HashMap<Integer, Element> mGeneMap = new HashMap<Integer, Element>();
 	HashMap<Integer, Element> mAttributeMap = new HashMap<Integer, Element>();
 
@@ -287,4 +298,31 @@ public class GeneMapBuilder
 		return lStringBuilder.toString();
 	}
 
+	public static GeneMapBuilder load(File pCache) throws IOException
+	{
+		try
+		{
+			FileInputStream lFileInputStream = new FileInputStream(pCache);
+			GZIPInputStream lGZIPInputStream = new GZIPInputStream(lFileInputStream);
+			ObjectInputStream lObjectInputStream = new ObjectInputStream(lGZIPInputStream);
+			GeneMapBuilder obj = (GeneMapBuilder) lObjectInputStream.readObject();
+			return obj;
+		}
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void save(File pCache) throws IOException
+	{
+		FileOutputStream lFileOutputStream = new FileOutputStream(pCache);
+		GZIPOutputStream lGZIPOutputStream = new GZIPOutputStream(lFileOutputStream);
+		ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lGZIPOutputStream);
+		lObjectOutputStream.writeObject(this);
+		lObjectOutputStream.flush();
+		lObjectOutputStream.close();
+	}
+	
 }
