@@ -1,9 +1,12 @@
 package utils.bioinformatics.genemap;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class Enrichment
+public class Enrichment implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	public double mUniverseSize;
 	public double mSet1Size;
 	public double mSet2Size;

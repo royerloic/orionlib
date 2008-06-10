@@ -2,6 +2,7 @@ package utils.bioinformatics.genemap.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -102,6 +103,42 @@ public class GeneMapTest
 		// System.out.println(lDecomposedGeneSets);
 		assertTrue(lDecomposedGeneSets.size() == 1);
 		assertTrue(lDecomposedGeneSets.iterator().next().getBestPValue() == 1.2000000000000002);
+
+	}
+
+	@Test
+	public void testSaveLoad() throws IOException
+	{
+		GeneMapBuilder lGeneMap = new GeneMapBuilder();
+
+		lGeneMap.addAnnotation(10, "gene10", 0, "att0");
+		lGeneMap.addAnnotation(11, "gene11", 0, "att0");
+		lGeneMap.addAnnotation(12, "gene12", 0, "att0");
+		lGeneMap.addAnnotation(13, "gene13", 0, "att0");
+		lGeneMap.addAnnotation(14, "gene14", 0, "att0");
+
+		lGeneMap.addAnnotation(10, "gene10", 1, "att1");
+		lGeneMap.addAnnotation(11, "gene11", 1, "att1");
+		lGeneMap.addAnnotation(12, "gene12", 1, "att1");
+
+		lGeneMap.addAnnotation(13, "gene13", 2, "att2");
+		lGeneMap.addAnnotation(14, "gene14", 2, "att2");
+
+		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
+
+		File tempFile = File.createTempFile("GeneMapBuilder", "testSaveLoad");
+		System.out.println(tempFile);
+		lGeneMap.save(tempFile);
+
+		GeneMapBuilder lGeneMapFromDisc = GeneMapBuilder.load(tempFile);
+
+		HashMap<Element, Enrichment> lEnrichment = lGeneMapFromDisc.computeEnrichements(10,
+																																										11,
+																																										12);
+		System.out.println(lEnrichment);
+		assertTrue(lEnrichment.get(new Element(0)).mCorrectedPValue == 3.0);
+		assertTrue(lEnrichment.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);
+		assertTrue(lEnrichment.get(new Element(3)).mCorrectedPValue == 1.8000000000000003);
 
 	}
 

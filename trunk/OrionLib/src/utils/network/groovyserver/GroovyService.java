@@ -108,7 +108,8 @@ public class GroovyService implements Service, Serializable
 			try
 			{
 				lAnswer = pInputLine + SocketThread.sEndofLine;
-				lAnswer += (String) mGroovyShell.evaluate(pInputLine).toString();
+				final String lString = (String) mGroovyShell.evaluate(pInputLine);
+				lAnswer += lString.toString();
 
 				/***********************************************************************
 				 * sCounter++; if (sCounter >= sCleanCycle) { // just to make sure that

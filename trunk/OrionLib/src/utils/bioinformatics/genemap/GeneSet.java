@@ -1,5 +1,6 @@
 package utils.bioinformatics.genemap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,9 +9,11 @@ import java.util.Map.Entry;
 
 import utils.structures.Couple;
 
-public class GeneSet implements Comparable<GeneSet>
+public class GeneSet implements Comparable<GeneSet>, Serializable
 {
 
+	private static final long serialVersionUID = 1L;
+	
 	private final HashSet<Element> mSet;
 	private final HashMap<Element, Double> mAttribute2PValueMap = new HashMap<Element, Double>();
 

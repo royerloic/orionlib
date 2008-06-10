@@ -1,7 +1,11 @@
 package utils.bioinformatics.genemap;
 
-public class Element
+import java.io.Serializable;
+
+public class Element implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	public int mId;
 	public String mName;
 	public String mDescription;
