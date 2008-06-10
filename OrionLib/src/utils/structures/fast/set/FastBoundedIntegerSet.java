@@ -69,14 +69,6 @@ public final class FastBoundedIntegerSet implements
 		}
 	}
 
-	/**
-	 * Increases the capacity of this <tt>ArrayList</tt> instance, if necessary,
-	 * to ensure that it can hold at least the number of elements specified by the
-	 * minimum capacity argument.
-	 * 
-	 * @param minCapacity
-	 *          the desired minimum capacity
-	 */
 	private final void ensureCapacity(final int minCapacity)
 	{
 		final int oldCapacity = elements.length;
@@ -597,9 +589,32 @@ public final class FastBoundedIntegerSet implements
 			{
 				return 0; // set1 and set2 disjoint
 			}
-
 		}
+	}
 
+	/**
+	 * Computes the dot product of the two bit vectors equivalent to the two sets
+	 * 
+	 * @param set1
+	 * @param set2
+	 * @return
+	 */
+	public static final int dotproduct(	FastBoundedIntegerSet set1,
+																			FastBoundedIntegerSet set2)
+	{
+		int dotproduct = 0;
+		if (!(set1.min >= set2.max || set1.max <= set2.min))
+		{
+			final int[] elements1 = set1.elements;
+			final int[] elements2 = set2.elements;
+
+			final int intermin = max(set1.min, set2.min);
+			final int intermax = min(set1.max, set2.max);
+
+			for (int i = intermin; i < intermax; i++)
+				dotproduct += bitcount(elements1[i] & elements2[i]);
+		}
+		return dotproduct;
 	}
 
 	public FastBoundedIntegerSet getRandomSubSet(Random pRandom, double pDensity)
@@ -842,6 +857,13 @@ public final class FastBoundedIntegerSet implements
 			i++;
 		}
 		return lArray;
+	}
+
+	public static int[] copyOf(int[] original, int newLength)
+	{
+		int[] copy = new int[newLength];
+		System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
+		return copy;
 	}
 
 }
