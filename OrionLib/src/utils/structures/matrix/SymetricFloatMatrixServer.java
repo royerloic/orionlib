@@ -16,15 +16,15 @@ public class SymetricFloatMatrixServer
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			Map<String, String> lParameters = CmdLine.getMap(args);
-			SymetricFloatMatrixServer lSymetricFloatMatrixServer = new SymetricFloatMatrixServer(lParameters);
+			final Map<String, String> lParameters = CmdLine.getMap(args);
+			final SymetricFloatMatrixServer lSymetricFloatMatrixServer = new SymetricFloatMatrixServer(lParameters);
 			lSymetricFloatMatrixServer.startServerBlocking();
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
@@ -39,18 +39,20 @@ public class SymetricFloatMatrixServer
 		mGroovyServer.getBinding().setVariable("matrix", mSymetricFloatMatrix);
 	}
 
-	public SymetricFloatMatrixServer(Map<String, String> pParameters)
+	public SymetricFloatMatrixServer(final Map<String, String> pParameters)
 	{
 		mGroovyServer = new GroovyServer(pParameters);
 		mGroovyServer.getBinding().setVariable("matrix", mSymetricFloatMatrix);
 	}
 
-	public SymetricFloatMatrixServer(	SymetricFloatMatrix pSymetricFloatMatrix,
-																		int pPort,
-																		File pScriptFile)
+	public SymetricFloatMatrixServer(	final SymetricFloatMatrix pSymetricFloatMatrix,
+																		final int pPort,
+																		final File pScriptFile)
 	{
 		if (pSymetricFloatMatrix != null)
+		{
 			mSymetricFloatMatrix = pSymetricFloatMatrix;
+		}
 		mGroovyServer = new GroovyServer(pPort, pScriptFile);
 		mGroovyServer.getBinding().setVariable("matrix", mSymetricFloatMatrix);
 	}

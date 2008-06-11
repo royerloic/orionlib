@@ -10,7 +10,7 @@ public class EdgeDensity
 		final double lNumberOfEdges = pGraph.getEdgeSet().size();
 		final double lNumberOfNodes = pGraph.getNodeSet().size();
 
-		final double lEdgeDensity = lNumberOfEdges / ((lNumberOfNodes) * (lNumberOfNodes - 1) / 2);
+		final double lEdgeDensity = lNumberOfEdges / (lNumberOfNodes * (lNumberOfNodes - 1) / 2);
 		return lEdgeDensity;
 	}
 

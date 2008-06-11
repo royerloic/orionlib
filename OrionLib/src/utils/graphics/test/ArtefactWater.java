@@ -16,7 +16,7 @@ import utils.graphics.impl.OrionGraphics;
 public class ArtefactWater
 {
 
-	private OrionGraphics mOrionGraphics;
+	private final OrionGraphics mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
@@ -89,7 +89,7 @@ public class ArtefactWater
 		int lHeightMatrix2[] = new int[lSize];
 		int lHeightMatrixTemp[];
 
-		for (int index = 0; index < (lSize); index++)
+		for (int index = 0; index < lSize; index++)
 		{
 			lHeightMatrix1[index] = 0;
 			lHeightMatrix2[index] = 0;
@@ -109,21 +109,27 @@ public class ArtefactWater
 			final Graphics lGraphics = mOrionGraphics.getDrawGraphics();
 
 			for (int ly = -10; ly < 10; ly++)
+			{
 				for (int lx = -10; lx < 10; lx++)
 				{
 					int lIndex = mOrionGraphics.mMouseX + lx
 												+ pWidth
 												* (mOrionGraphics.mMouseY + ly);
 					if (lIndex < 0)
+					{
 						lIndex = 0;
+					}
 					else if (lIndex >= lSize)
+					{
 						lIndex = lSize - 1;
+					}
 
 					lHeightMatrix1[lIndex] = 100;
 					lHeightMatrix2[lIndex] = 100;
 				}
+			}
 
-			for (int index = 3 * pWidth; index < (lSize - 3 * pWidth); index++)
+			for (int index = 3 * pWidth; index < lSize - 3 * pWidth; index++)
 			{
 				lHeightMatrix2[index] = (lHeightMatrix1[index + 3] + lHeightMatrix1[index - 3]
 																	+ lHeightMatrix1[index - 3 * pWidth]
@@ -136,15 +142,22 @@ public class ArtefactWater
 				final int gY = lHeightMatrix1[index + pWidth] - lHeightMatrix1[index - pWidth];
 				final int lReflectionIndex = index + 2 * gX + pWidth * 2 * gY;
 				if (lReflectionIndex < 0)
+				{
 					lPixel[index] = 0;
+				}
 				else if (lReflectionIndex >= lSize)
+				{
 					lPixel[index] = 0;
+				}
 				else
+				{
 					lPixel[index] = MoonMap[lReflectionIndex];
+				}
 
 			}
 
-			for (int index = 3 * pWidth; index < (lSize - 3 * pWidth); index++)
+			for (int index = 3 * pWidth; index < lSize - 3 * pWidth; index++)
+			{
 				lHeightMatrix2[index] = (+lHeightMatrix2[index - 1] + lHeightMatrix2[index + 1]
 																	+ lHeightMatrix2[index - 1 * pWidth]
 																	+ lHeightMatrix2[index + 1 * pWidth]
@@ -153,6 +166,7 @@ public class ArtefactWater
 				 * lHeightMatrix2[index - 2*pWidth] + lHeightMatrix2[index + 2*pWidth] /
 				 **********************************************************************/
 				+ 1) / 4;
+			}
 
 			lHeightMatrixTemp = lHeightMatrix1;
 			lHeightMatrix1 = lHeightMatrix2;

@@ -39,7 +39,7 @@ public class XmlStringUtils
 		try
 		{
 			parser = XMLReaderFactory.createXMLReader();
-			ContentHandler lContentHandler = new DefaultHandler()
+			final ContentHandler lContentHandler = new DefaultHandler()
 			{
 
 				private boolean mInTag;
@@ -48,7 +48,9 @@ public class XmlStringUtils
 				public void characters(char[] pCh, int pStart, int pLength) throws SAXException
 				{
 					if (mInTag)
+					{
 						lStringBuilder.append(pCh, pStart, pLength);
+					}
 				}
 
 				@Override
@@ -58,7 +60,9 @@ public class XmlStringUtils
 																	Attributes pAtts) throws SAXException
 				{
 					if (pLocalName.equals(pTag))
+					{
 						mInTag = true;
+					}
 
 				}
 
@@ -77,12 +81,12 @@ public class XmlStringUtils
 			};
 
 			parser.setContentHandler(lContentHandler);
-			ByteArrayInputStream lByteArrayInputStream = new java.io.ByteArrayInputStream(pXML.getBytes());
-			InputSource lInputSource = new InputSource(lByteArrayInputStream);
+			final ByteArrayInputStream lByteArrayInputStream = new java.io.ByteArrayInputStream(pXML.getBytes());
+			final InputSource lInputSource = new InputSource(lByteArrayInputStream);
 			parser.parse(lInputSource);
 
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}

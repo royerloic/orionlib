@@ -41,8 +41,11 @@ public class CliqueEnumerator<N>
 																			final Set<N> pExcluded)
 	{
 		if (pPotential.isEmpty() && pExcluded.isEmpty())
+		{
 			this.mCliqueSet.add(this.mGraphInterface.extractStrictSubGraph(pReachable));
+		}
 		else
+		{
 			for (final N lNode : pPotential)
 			{
 				final Set<N> ReachableNew = new HashSet<N>(pPotential.size());
@@ -62,6 +65,7 @@ public class CliqueEnumerator<N>
 				BronKerboschRecursive(ReachableNew, PotentialNew, ExcludedNew);
 
 			}
+		}
 
 	}
 

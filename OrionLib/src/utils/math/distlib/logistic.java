@@ -26,12 +26,16 @@ public class logistic
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double location, double scale)
+	public static double density(	final double x,
+																final double location,
+																final double scale)
 	{
 		double e, f;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		/* !* #endif /*4! */
 		if (scale <= 0.0)
 		{
@@ -65,11 +69,15 @@ public class logistic
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double location, double scale)
+	public static double cumulative(final double x,
+																	final double location,
+																	final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		/* !* #endif /*4! */
 		if (scale <= 0.0)
 		{
@@ -79,9 +87,13 @@ public class logistic
 		if (Double.isInfinite(x))
 		{
 			if (x > 0)
+			{
 				return 1;
+			}
 			else
+			{
 				return 0;
+			}
 		}
 		/* !* return 1.0 / (1.0 + exp(-(x - location) / scale)); *! */
 		return 1.0 / (1.0 + java.lang.Math.exp(-(x - location) / scale));
@@ -108,11 +120,15 @@ public class logistic
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double location, double scale)
+	public static double quantile(final double x,
+																final double location,
+																final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		/* !* #endif /*4! */
 		if (scale <= 0.0 || x < 0 || x > 1)
 		{
@@ -120,9 +136,13 @@ public class logistic
 			// return Double.NaN;
 		}
 		if (x <= 0)
+		{
 			return Double.NEGATIVE_INFINITY;
+		}
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* return location + scale * log(x / (1.0 - x)); *! */
 		return location + scale * java.lang.Math.log(x / (1.0 - x));
 	}
@@ -148,7 +168,9 @@ public class logistic
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double location, double scale, uniform PRNG)
+	public static double random(final double location,
+															final double scale,
+															final uniform PRNG)
 	{
 		double u;
 		/* #ifndef IEEE_754 */

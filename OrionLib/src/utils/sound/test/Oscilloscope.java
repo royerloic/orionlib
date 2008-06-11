@@ -31,7 +31,7 @@ public class Oscilloscope
 
 	private byte[] mSoundBuffer;
 
-	private IOrionGraphics mOrionGraphics;
+	private final IOrionGraphics mOrionGraphics;
 
 	/**
 	 * @throws HeadlessException
@@ -39,9 +39,9 @@ public class Oscilloscope
 	public Oscilloscope()
 	{
 
-		int lDevice = OrionGraphicsFactory.cLAST_DEVICE;
+		final int lDevice = OrionGraphicsFactory.cLAST_DEVICE;
 
-		DisplayMode lDisplayMode = OrionGraphicsFactory.getCurrentDisplayModeOnDevice(lDevice);
+		final DisplayMode lDisplayMode = OrionGraphicsFactory.getCurrentDisplayModeOnDevice(lDevice);
 
 		// lDisplayMode = new
 		// DisplayMode(800,600,32,DisplayMode.REFRESH_RATE_UNKNOWN);
@@ -64,8 +64,8 @@ public class Oscilloscope
 		// 0));
 
 		mOrionGraphics.startGraphics();
-		int lHeight = mOrionGraphics.getHeight();
-		int lWidth = 16; // mOrionGraphics.getWidth();
+		final int lHeight = mOrionGraphics.getHeight();
+		final int lWidth = 16; // mOrionGraphics.getWidth();
 
 		mSoundBuffer = new byte[2 * lWidth];
 

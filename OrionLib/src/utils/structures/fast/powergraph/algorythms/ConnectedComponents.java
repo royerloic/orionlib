@@ -8,11 +8,11 @@ import utils.structures.fast.set.FastBoundedIntegerSet;
 public class ConnectedComponents
 {
 
-	public static final ArrayList<FastBoundedIntegerSet> getConnectedComponents(FastIntegerPowerGraph pPowerGraph)
+	public static final ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastIntegerPowerGraph pPowerGraph)
 	{
-		ArrayList<FastBoundedIntegerSet> lConnectedComponentList = new ArrayList<FastBoundedIntegerSet>();
+		final ArrayList<FastBoundedIntegerSet> lConnectedComponentList = new ArrayList<FastBoundedIntegerSet>();
 
-		FastBoundedIntegerSet allpowernodes = pPowerGraph.getPowerNodeIdSet();
+		final FastBoundedIntegerSet allpowernodes = pPowerGraph.getPowerNodeIdSet();
 		allpowernodes.remove(0);
 
 		FastBoundedIntegerSet componentpowernodes = null;
@@ -22,7 +22,7 @@ public class ConnectedComponents
 		while (!allpowernodes.isEmpty())
 		{
 			componentpowernodes = new FastBoundedIntegerSet(pPowerGraph.getNumberOfPowerNodes());
-			int lPowerNodeId = allpowernodes.getMin(1);
+			final int lPowerNodeId = allpowernodes.getMin(1);
 
 			frontierpowernodes.clear();
 			frontierpowernodes.add(lPowerNodeId);
@@ -32,18 +32,18 @@ public class ConnectedComponents
 				componentpowernodes.union(frontierpowernodes);
 				newfrontierpowernodes.clear();
 
-				for (int lFrontierPowerNodeId : frontierpowernodes)
+				for (final int lFrontierPowerNodeId : frontierpowernodes)
 				{
 					newfrontierpowernodes.union(pPowerGraph.getConnectedPowerNodeNeighbors(lFrontierPowerNodeId));
 				}
 
 				newfrontierpowernodes.difference(componentpowernodes);
 
-				FastBoundedIntegerSet temp = frontierpowernodes;
+				final FastBoundedIntegerSet temp = frontierpowernodes;
 				frontierpowernodes = newfrontierpowernodes;
 				newfrontierpowernodes = temp;
 			}
-			
+
 			componentpowernodes.remove(0);
 			lConnectedComponentList.add(componentpowernodes);
 			allpowernodes.difference(componentpowernodes);

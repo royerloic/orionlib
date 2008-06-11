@@ -6,25 +6,30 @@ import java.util.HashMap;
 public class FastaSequence implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected String mFastaName;
 
 	protected String mSequence = "";
 
 	protected HashMap<String, String> mHeaderMap = new HashMap<String, String>();
 
-	public FastaSequence(String pFastaName)
+	public FastaSequence(final String pFastaName)
 	{
 		super();
 		mFastaName = pFastaName;
 	}
 
-	protected FastaSequence(String pFastaName, String pSequenceString)
+	protected FastaSequence(final String pFastaName, final String pSequenceString)
 	{
 		mFastaName = pFastaName;
 		mSequence = pSequenceString;
 	}
 
-	public void append(String pString)
+	public void append(final String pString)
 	{
 		mSequence = mSequence + pString;
 	}
@@ -37,7 +42,7 @@ public class FastaSequence implements Serializable
 	@Override
 	public String toString()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		lStringBuilder.append(">" + mFastaName + "\n");
 		int lColumn = 0;
 		for (int i = 0; i < mSequence.length(); i++)
@@ -60,7 +65,7 @@ public class FastaSequence implements Serializable
 		return mFastaName;
 	}
 
-	public void put(String pKey, String pValue)
+	public void put(final String pKey, final String pValue)
 	{
 		mHeaderMap.put(pKey, pValue);
 	}
@@ -70,7 +75,7 @@ public class FastaSequence implements Serializable
 		return mSequence.length();
 	}
 
-	public FastaSequence subSequence(int pStart, int pEnd)
+	public FastaSequence subSequence(final int pStart, final int pEnd)
 	{
 		final FastaSequence lFastaSequence = new FastaSequence(	mFastaName + "\t{SubSequence["
 																																+ pStart
@@ -87,36 +92,49 @@ public class FastaSequence implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-							+ ((mFastaName == null) ? 0 : mFastaName.hashCode());
-		result = prime * result + ((mSequence == null) ? 0 : mSequence.hashCode());
+		result = prime * result + (mFastaName == null ? 0 : mFastaName.hashCode());
+		result = prime * result + (mSequence == null ? 0 : mSequence.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final FastaSequence other = (FastaSequence) obj;
 		if (mFastaName == null)
 		{
 			if (other.mFastaName != null)
+			{
 				return false;
+			}
 		}
 		else if (!mFastaName.equals(other.mFastaName))
+		{
 			return false;
+		}
 		if (mSequence == null)
 		{
 			if (other.mSequence != null)
+			{
 				return false;
+			}
 		}
 		else if (!mSequence.equals(other.mSequence))
+		{
 			return false;
+		}
 		return true;
 	}
 

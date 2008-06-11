@@ -25,7 +25,7 @@ public class FlatTextTableReader
 
 	private String mNullRegex = "[-]";
 
-	private Set<Integer> mExcludedColumns;
+	private final Set<Integer> mExcludedColumns;
 
 	private FlatTextTableReaderHandler mHandler;
 
@@ -92,9 +92,13 @@ public class FlatTextTableReader
 		pMaximumNumberOfColumns = Math.max(	pMaximumNumberOfColumns,
 																				pIntegerArray.length);
 		for (int i = 1; i < pMaximumNumberOfColumns; i++)
+		{
 			mExcludedColumns.add(i);
+		}
 		for (final int lI : pIntegerArray)
+		{
 			mExcludedColumns.remove(lI);
+		}
 	}
 
 	/**
@@ -133,6 +137,7 @@ public class FlatTextTableReader
 		finally
 		{
 			if (lBufferedReader != null)
+			{
 				try
 				{
 					lBufferedReader.close();
@@ -141,6 +146,7 @@ public class FlatTextTableReader
 				{
 					exception.printStackTrace();
 				}
+			}
 		}
 	}
 
@@ -158,7 +164,9 @@ public class FlatTextTableReader
 
 		String lLineString;
 		if (pFileHasHeader)
+		{
 			lLineString = pBufferedReader.readLine();
+		}
 		int lLineCounter = 0;
 		lineloop: while ((lLineString = pBufferedReader.readLine()) != null)
 		{
@@ -183,7 +191,9 @@ public class FlatTextTableReader
 																															lSetCounter,
 																															element);
 							if (lSkipCell)
+							{
 								continue lineloop;
+							}
 							lSetCounter++;
 						}
 					}
@@ -192,7 +202,9 @@ public class FlatTextTableReader
 			}
 
 			if (!mHandler.handleEndOfCell(lLineCounter))
+			{
 				return;
+			}
 		}
 	}
 

@@ -24,7 +24,7 @@ public class AutoSaveRunnable implements Runnable
 		mRobot.setAutoDelay(0);
 	}
 
-	public AutoSaveRunnable(int pDelayInSeconds, int[] pKeyEvents) throws AWTException
+	public AutoSaveRunnable(final int pDelayInSeconds, final int[] pKeyEvents) throws AWTException
 	{
 		this();
 		mDelayInSeconds = pDelayInSeconds;
@@ -41,7 +41,7 @@ public class AutoSaveRunnable implements Runnable
 				if (mActive)
 				{
 					mRobot.waitForIdle();
-					for (int lKeyEvent : mKeyEvents)
+					for (final int lKeyEvent : mKeyEvents)
 					{
 						mRobot.keyPress(lKeyEvent);
 					}
@@ -51,7 +51,7 @@ public class AutoSaveRunnable implements Runnable
 					}
 				}
 			}
-			catch (Throwable e)
+			catch (final Throwable e)
 			{
 				e.printStackTrace();
 			}

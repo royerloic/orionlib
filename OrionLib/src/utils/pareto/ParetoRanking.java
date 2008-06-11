@@ -24,27 +24,37 @@ public class ParetoRanking<O>
 		{
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((mObject == null) ? 0 : mObject.hashCode());
+			result = prime * result + (mObject == null ? 0 : mObject.hashCode());
 			return result;
 		}
 
 		@Override
-		public boolean equals(Object obj)
+		public boolean equals(final Object obj)
 		{
 			if (this == obj)
+			{
 				return true;
+			}
 			if (obj == null)
+			{
 				return false;
+			}
 			if (getClass() != obj.getClass())
+			{
 				return false;
+			}
 			final Vector other = (Vector) obj;
 			if (mObject == null)
 			{
 				if (other.mObject != null)
+				{
 					return false;
+				}
 			}
 			else if (!mObject.equals(other.mObject))
+			{
 				return false;
+			}
 			return true;
 		}
 	}
@@ -53,22 +63,24 @@ public class ParetoRanking<O>
 
 	HashMap<Vector, Double> mRankingMap = new HashMap<Vector, Double>();
 
-	public final void addVector(O pObject, double... pValues)
+	public final void addVector(final O pObject, final double... pValues)
 	{
-		Vector lVector = new Vector();
+		final Vector lVector = new Vector();
 		lVector.mObject = pObject;
 		lVector.mValues = pValues;
 
 		mVectorMap.put(pObject, lVector);
 	}
 
-	public final void addVector(O pObject, List<Double> pValues)
+	public final void addVector(final O pObject, final List<Double> pValues)
 	{
-		Vector lVector = new Vector();
+		final Vector lVector = new Vector();
 		lVector.mObject = pObject;
-		double[] lValues = new double[pValues.size()];
+		final double[] lValues = new double[pValues.size()];
 		for (int i = 0; i < pValues.size(); i++)
+		{
 			lValues[i] = pValues.get(i);
+		}
 		lVector.mValues = lValues;
 
 		mVectorMap.put(pObject, lVector);
@@ -81,20 +93,20 @@ public class ParetoRanking<O>
 
 	public final int computeRanking(final int pMaxLayer)
 	{
-		HashSet<Vector> lWorkingSet = new HashSet<Vector>(mVectorMap.values());
+		final HashSet<Vector> lWorkingSet = new HashSet<Vector>(mVectorMap.values());
 
-		HashSet<Vector> lParetoFront = new HashSet<Vector>();
-		HashSet<Vector> lParetoFrontDel = new HashSet<Vector>();
-		HashSet<Vector> lParetoFrontAdd = new HashSet<Vector>();
+		final HashSet<Vector> lParetoFront = new HashSet<Vector>();
+		final HashSet<Vector> lParetoFrontDel = new HashSet<Vector>();
+		final HashSet<Vector> lParetoFrontAdd = new HashSet<Vector>();
 
 		double lLayer = 0;
 		while (!lWorkingSet.isEmpty() && lLayer <= pMaxLayer)
 		{
-			for (Vector lVector : lWorkingSet)
+			for (final Vector lVector : lWorkingSet)
 			{
 				lParetoFrontDel.clear();
 				lParetoFrontAdd.clear();
-				for (Vector lVectorFromFront : lParetoFront)
+				for (final Vector lVectorFromFront : lParetoFront)
 				{
 					if (dominate(lVector.mValues, lVectorFromFront.mValues))
 					{
@@ -117,14 +129,16 @@ public class ParetoRanking<O>
 				// it, or there
 				// is nothing yet in front and we also add it.
 				if (lParetoFrontDel.size() > 0 || lParetoFront.size() == 0)
+				{
 					lParetoFrontAdd.add(lVector);
+				}
 
 				// we update the front:
 				lParetoFront.removeAll(lParetoFrontDel);
 				lParetoFront.addAll(lParetoFrontAdd);
 			}
 
-			for (Vector lVector : lParetoFront)
+			for (final Vector lVector : lParetoFront)
 			{
 				mRankingMap.put(lVector, lLayer);
 			}
@@ -143,7 +157,7 @@ public class ParetoRanking<O>
 
 	public final double getRanking(final O pObject)
 	{
-		Double lRank = mRankingMap.get(mVectorMap.get(pObject));
+		final Double lRank = mRankingMap.get(mVectorMap.get(pObject));
 		return lRank == null ? Double.POSITIVE_INFINITY : lRank;
 	}
 
@@ -155,18 +169,18 @@ public class ParetoRanking<O>
 
 	public String toTabDel()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
-		for (Map.Entry<Vector, Double> lEntry : mRankingMap.entrySet())
+		final StringBuilder lStringBuilder = new StringBuilder();
+		for (final Map.Entry<Vector, Double> lEntry : mRankingMap.entrySet())
 		{
-			Vector lVector = lEntry.getKey();
-			O lObject = lVector.mObject;
-			double[] lValues = lVector.mValues;
-			double lRank = lEntry.getValue();
+			final Vector lVector = lEntry.getKey();
+			final O lObject = lVector.mObject;
+			final double[] lValues = lVector.mValues;
+			final double lRank = lEntry.getValue();
 			lStringBuilder.append(lObject);
 			lStringBuilder.append("\t");
 			lStringBuilder.append(lRank);
 			lStringBuilder.append("\t");
-			for (double lValue : lValues)
+			for (final double lValue : lValues)
 			{
 				lStringBuilder.append(lValue);
 				lStringBuilder.append("\t");
@@ -176,26 +190,36 @@ public class ParetoRanking<O>
 		return lStringBuilder.toString();
 	}
 
-	private static final boolean dominate(double[] v1, double[] v2)
+	private static final boolean dominate(final double[] v1, final double[] v2)
 	{
-		assert (v1.length == v2.length);
+		assert v1.length == v2.length;
 
 		if (equal(v1, v2))
+		{
 			return false;
+		}
 
 		for (int i = 0; i < v1.length; i++)
+		{
 			if (v1[i] < v2[i])
+			{
 				return false;
+			}
+		}
 		return true;
 	}
 
-	private static final boolean equal(double[] v1, double[] v2)
+	private static final boolean equal(final double[] v1, final double[] v2)
 	{
-		assert (v1.length == v2.length);
+		assert v1.length == v2.length;
 
 		for (int i = 0; i < v1.length; i++)
+		{
 			if (v1[i] != v2[i])
+			{
 				return false;
+			}
+		}
 
 		return true;
 	}

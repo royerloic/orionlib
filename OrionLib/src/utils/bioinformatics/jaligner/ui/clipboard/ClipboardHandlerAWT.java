@@ -44,15 +44,15 @@ public class ClipboardHandlerAWT implements ClipboardHandler
 	public String getContents()
 	{
 		String contents = null;
-		Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-		Transferable data = c.getContents(null);
+		final Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+		final Transferable data = c.getContents(null);
 		if (data != null && data.isDataFlavorSupported(DataFlavor.stringFlavor))
 		{
 			try
 			{
-				contents = ((String) (data.getTransferData(DataFlavor.stringFlavor)));
+				contents = (String) data.getTransferData(DataFlavor.stringFlavor);
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				logger.log(	Level.WARNING,
 										"Failed getting tranfer data: " + e.getMessage(),
@@ -68,9 +68,9 @@ public class ClipboardHandlerAWT implements ClipboardHandler
 	 * @param s
 	 *          the clipboard contents to set
 	 */
-	public void setContents(String s)
+	public void setContents(final String s)
 	{
-		Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+		final Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
 		c.setContents(new StringSelection(s), null);
 	}
 }

@@ -18,10 +18,10 @@ public class FileFilter
 	public static Pattern sTabDelPattern = Pattern.compile("\\t");
 
 	/** ******************************************************************************************* */
-	public static final void filterOut(	File pInputFile,
-																			String pColumn,
-																			String pValue,
-																			File pOutputFile) throws IOException
+	public static final void filterOut(	final File pInputFile,
+																			final String pColumn,
+																			final String pValue,
+																			final File pOutputFile) throws IOException
 	{
 		filterOut(new FileInputStream(pInputFile),
 							FileDB.resolveColumn(pInputFile, pColumn),
@@ -29,10 +29,10 @@ public class FileFilter
 							new FileOutputStream(pInputFile));
 	}
 
-	public static final void filterOut(	File pInputFile,
-																			Integer pColumnIndex,
-																			String pValue,
-																			File pOutputFile) throws IOException
+	public static final void filterOut(	final File pInputFile,
+																			final Integer pColumnIndex,
+																			final String pValue,
+																			final File pOutputFile) throws IOException
 	{
 		filterOut(new FileInputStream(pInputFile),
 							pColumnIndex,
@@ -40,13 +40,14 @@ public class FileFilter
 							new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterOut(	InputStream pInputStream,
-																			int pColumn,
-																			String pValue,
-																			OutputStream pOutputStream) throws IOException
+	public static final void filterOut(	final InputStream pInputStream,
+																			final int pColumn,
+																			final String pValue,
+																			final OutputStream pOutputStream) throws IOException
 	{
-		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
-		for (String lLine : LineReader.getLines(pInputStream))
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		for (final String lLine : LineReader.getLines(pInputStream))
+		{
 			if (lLine.startsWith("//"))
 			{
 				lBufferedWriter.write(lLine);
@@ -61,14 +62,15 @@ public class FileFilter
 					lBufferedWriter.write("\n");
 				}
 			}
+		}
 		lBufferedWriter.close();
 	}
 
 	/** ******************************************************************************************* */
-	public static final void filterIn(File pInputFile,
-																		String pColumn,
-																		String pValue,
-																		File pOutputFile) throws IOException
+	public static final void filterIn(final File pInputFile,
+																		final String pColumn,
+																		final String pValue,
+																		final File pOutputFile) throws IOException
 	{
 		filterIn(	new FileInputStream(pInputFile),
 							FileDB.resolveColumn(pInputFile, pColumn),
@@ -76,10 +78,10 @@ public class FileFilter
 							new FileOutputStream(pInputFile));
 	}
 
-	public static final void filterIn(File pInputFile,
-																		Integer pColumnIndex,
-																		String pValue,
-																		File pOutputFile) throws IOException
+	public static final void filterIn(final File pInputFile,
+																		final Integer pColumnIndex,
+																		final String pValue,
+																		final File pOutputFile) throws IOException
 	{
 		filterIn(	new FileInputStream(pInputFile),
 							pColumnIndex,
@@ -87,13 +89,14 @@ public class FileFilter
 							new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterIn(InputStream pInputStream,
-																		int pColumn,
-																		String pValue,
-																		OutputStream pOutputStream) throws IOException
+	public static final void filterIn(final InputStream pInputStream,
+																		final int pColumn,
+																		final String pValue,
+																		final OutputStream pOutputStream) throws IOException
 	{
-		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
-		for (String lLine : LineReader.getLines(pInputStream))
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		for (final String lLine : LineReader.getLines(pInputStream))
+		{
 			if (lLine.startsWith("//"))
 			{
 				lBufferedWriter.write(lLine);
@@ -108,18 +111,21 @@ public class FileFilter
 					lBufferedWriter.write("\n");
 				}
 			}
+		}
 		lBufferedWriter.close();
 	}
 
 	/** ******************************************************************************************* */
-	public static final void filterLowerHigher(	File pInputFile,
-																							String pColumn,
-																							String pValue,
-																							Boolean pHigher,
-																							File pOutputFile) throws IOException
+	public static final void filterLowerHigher(	final File pInputFile,
+																							final String pColumn,
+																							final String pValue,
+																							final Boolean pHigher,
+																							final File pOutputFile) throws IOException
 	{
 		final int lColumnIndex = FileDB.resolveColumn(pInputFile, pColumn);
-		Class lColumnType = FileDB.getColumnType(pInputFile, lColumnIndex, 1000);
+		final Class lColumnType = FileDB.getColumnType(	pInputFile,
+																										lColumnIndex,
+																										1000);
 		filterLowerHigher(new FileInputStream(pInputFile),
 											lColumnIndex,
 											lColumnType.getSimpleName(),
@@ -128,14 +134,16 @@ public class FileFilter
 											new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterLowerHigher(	File pInputFile,
-																							String pColumn,
-																							Double pValue,
-																							Boolean pHigher,
-																							File pOutputFile) throws IOException
+	public static final void filterLowerHigher(	final File pInputFile,
+																							final String pColumn,
+																							final Double pValue,
+																							final Boolean pHigher,
+																							final File pOutputFile) throws IOException
 	{
 		final int lColumnIndex = FileDB.resolveColumn(pInputFile, pColumn);
-		Class lColumnType = FileDB.getColumnType(pInputFile, lColumnIndex, 1000);
+		final Class lColumnType = FileDB.getColumnType(	pInputFile,
+																										lColumnIndex,
+																										1000);
 		filterLowerHigher(new FileInputStream(pInputFile),
 											lColumnIndex,
 											lColumnType.getSimpleName(),
@@ -144,13 +152,15 @@ public class FileFilter
 											new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterLowerHigher(	File pInputFile,
-																							Integer pColumnIndex,
-																							String pValue,
-																							Boolean pHigher,
-																							File pOutputFile) throws IOException
+	public static final void filterLowerHigher(	final File pInputFile,
+																							final Integer pColumnIndex,
+																							final String pValue,
+																							final Boolean pHigher,
+																							final File pOutputFile) throws IOException
 	{
-		Class lColumnType = FileDB.getColumnType(pInputFile, pColumnIndex, 1000);
+		final Class lColumnType = FileDB.getColumnType(	pInputFile,
+																										pColumnIndex,
+																										1000);
 		filterLowerHigher(new FileInputStream(pInputFile),
 											pColumnIndex,
 											lColumnType.getSimpleName(),
@@ -159,11 +169,11 @@ public class FileFilter
 											new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterLowerHigher(	File pInputFile,
-																							Integer pColumnIndex,
-																							Double pValue,
-																							Boolean pHigher,
-																							File pOutputFile) throws IOException
+	public static final void filterLowerHigher(	final File pInputFile,
+																							final Integer pColumnIndex,
+																							final Double pValue,
+																							final Boolean pHigher,
+																							final File pOutputFile) throws IOException
 	{
 		filterLowerHigher(new FileInputStream(pInputFile),
 											pColumnIndex,
@@ -173,14 +183,14 @@ public class FileFilter
 											new FileOutputStream(pOutputFile));
 	}
 
-	public static final void filterLowerHigher(	InputStream pInputStream,
-																							int pColumn,
-																							String pColumnType,
-																							String pValue,
-																							Boolean pHigher,
-																							OutputStream pOutputStream) throws IOException
+	public static final void filterLowerHigher(	final InputStream pInputStream,
+																							final int pColumn,
+																							final String pColumnType,
+																							final String pValue,
+																							final Boolean pHigher,
+																							final OutputStream pOutputStream) throws IOException
 	{
-		int higher = pHigher ? 1 : -1;
+		final int higher = pHigher ? 1 : -1;
 
 		Comparable lGivenComparableValue;
 		if (pColumnType.equals(Double.class.getSimpleName()))
@@ -192,8 +202,9 @@ public class FileFilter
 			lGivenComparableValue = pValue;
 		}
 
-		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
-		for (String lLine : LineReader.getLines(pInputStream))
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		for (final String lLine : LineReader.getLines(pInputStream))
+		{
 			if (lLine.startsWith("//"))
 			{
 				lBufferedWriter.write(lLine);
@@ -218,6 +229,7 @@ public class FileFilter
 					lBufferedWriter.write("\n");
 				}
 			}
+		}
 		lBufferedWriter.close();
 	}
 

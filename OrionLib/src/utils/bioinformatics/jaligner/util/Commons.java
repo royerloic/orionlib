@@ -74,7 +74,7 @@ public abstract class Commons
 		{
 			userDirectory = System.getProperty("user.dir");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed getting user current directory: " + e.getMessage(),
@@ -92,7 +92,7 @@ public abstract class Commons
 		{
 			fileSeparator = System.getProperty("file.separator");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed getting system file separator: " + e.getMessage(),
@@ -111,7 +111,7 @@ public abstract class Commons
 		{
 			lineSeparator = System.getProperty("line.separator");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed getting system line separator: " + e.getMessage(),
@@ -129,7 +129,7 @@ public abstract class Commons
 		{
 			jnlp = "true".equalsIgnoreCase(System.getProperty("jnlp.enabled"));
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed getting jnlp enabled property: " + e.getMessage(),
@@ -174,7 +174,7 @@ public abstract class Commons
 	 * @param jnlp
 	 *          true or false
 	 */
-	public static void setJnlp(boolean jnlp)
+	public static void setJnlp(final boolean jnlp)
 	{
 		Commons.jnlp = jnlp;
 	}
@@ -198,7 +198,7 @@ public abstract class Commons
 	{
 		JarURLConnection connection = null;
 		JarFile jarFile = null;
-		URL url = Commons.class.getClassLoader().getResource("jaligner");
+		final URL url = Commons.class.getClassLoader().getResource("jaligner");
 		try
 		{
 			// Get jar connection
@@ -208,17 +208,17 @@ public abstract class Commons
 			jarFile = connection.getJarFile();
 
 			// Get the manifest
-			Manifest manifest = jarFile.getManifest();
+			final Manifest manifest = jarFile.getManifest();
 
 			// Get the manifest entries
-			Attributes attributes = manifest.getMainAttributes();
+			final Attributes attributes = manifest.getMainAttributes();
 
-			Attributes.Name name = new Attributes.Name(BUILD_TIMESTAMP);
+			final Attributes.Name name = new Attributes.Name(BUILD_TIMESTAMP);
 			return attributes.getValue(name);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed getting the current release info: " + e.getMessage();
+			final String message = "Failed getting the current release info: " + e.getMessage();
 			logger.log(Level.WARNING, message);
 		}
 		return null;

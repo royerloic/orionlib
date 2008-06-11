@@ -62,7 +62,7 @@ public class Cell
 	 * @param col
 	 *          The col to set.
 	 */
-	public void setCol(int col)
+	public void setCol(final int col)
 	{
 		this.col = col;
 	}
@@ -79,7 +79,7 @@ public class Cell
 	 * @param row
 	 *          The row to set.
 	 */
-	public void setRow(int row)
+	public void setRow(final int row)
 	{
 		this.row = row;
 	}
@@ -96,7 +96,7 @@ public class Cell
 	 * @param score
 	 *          The score to set.
 	 */
-	public void setScore(float score)
+	public void setScore(final float score)
 	{
 		this.score = score;
 	}
@@ -111,7 +111,7 @@ public class Cell
 	 * @param score
 	 *          The score to set.
 	 */
-	public void set(int row, int col, float score)
+	public void set(final int row, final int col, final float score)
 	{
 		this.row = row;
 		this.col = col;

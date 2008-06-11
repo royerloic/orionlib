@@ -23,7 +23,7 @@ public class PIDController
 	double mPreviousError = 0;
 	double mI = 0;
 
-	public PIDController(double p, double i, double d)
+	public PIDController(final double p, final double i, final double d)
 	{
 		super();
 		mKP = p;
@@ -34,7 +34,7 @@ public class PIDController
 	public double control(final double pError)
 	{
 		final double lDT = mPreviousTime == Double.NEGATIVE_INFINITY ? 0
-																																: (getTime() - mPreviousTime);
+																																: getTime() - mPreviousTime;
 		mPreviousTime = getTime();
 
 		final double lP = mKP * pError;
@@ -45,9 +45,13 @@ public class PIDController
 		final double lD = mKD * (pError - mPreviousError) / lDT;
 		mPreviousError = pError;
 		if (Double.isNaN(lD))
+		{
 			return boundOutput(lP + lI);
+		}
 		else
+		{
 			return boundOutput(lP + lI + lD);
+		}
 
 	}
 
@@ -59,9 +63,13 @@ public class PIDController
 	private final double boundOutput(final double pD)
 	{
 		if (pD > 1)
+		{
 			return 1;
+		}
 		else if (pD < -1)
+		{
 			return -1;
+		}
 		return pD;
 	}
 

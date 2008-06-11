@@ -8,7 +8,9 @@ public class CollectionUtils
 	{
 		double lAverage = 0;
 		for (final Double lDouble : pCollection)
+		{
 			lAverage += lDouble;
+		}
 		lAverage /= pCollection.size();
 
 		return lAverage;
@@ -18,7 +20,9 @@ public class CollectionUtils
 	{
 		double lMax = 0;
 		for (final Double lDouble : pCollection)
+		{
 			lMax = Math.max(lMax, lDouble);
+		}
 
 		return lMax;
 	}

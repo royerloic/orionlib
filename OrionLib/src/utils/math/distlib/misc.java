@@ -35,7 +35,7 @@ public class misc
 	 * made so that the routines conform to the IEEE 754 standard.
 	 */
 
-	public static double beta(double a, double b)
+	public static double beta(final double a, final double b)
 	{
 		double xmax = 0;
 		double alnsml = 0;
@@ -51,7 +51,9 @@ public class misc
 		}
 
 		if (Double.isNaN(a) || Double.isNaN(b))
+		{
 			return a + b;
+		}
 
 		if (a < 0 || b < 0)
 		{
@@ -67,7 +69,9 @@ public class misc
 		}
 
 		if (a + b < xmax)
+		{
 			return gammafn(a) * gammafn(b) / gammafn(a + b);
+		}
 
 		val = lbeta(a, b);
 		// check for underflow of beta
@@ -89,10 +93,12 @@ public class misc
 	 * Based on the Fortran routine dcsevl by W. Fullerton. Adapted from R.
 	 * Broucke, Algorithm 446, CACM., 16, 254 (1973).
 	 */
-	static int chebyshev_init(double dos[], int nos, double eta)
+	static int chebyshev_init(final double dos[], final int nos, final double eta)
 	{
 		if (nos < 1)
+		{
 			return 0;
+		}
 
 		double err = 0.0;
 		int i = 0;
@@ -116,7 +122,9 @@ public class misc
 	 * @param n
 	 * @return
 	 */
-	public static double chebyshev_eval(double x, double a[], int n)
+	public static double chebyshev_eval(final double x,
+																			final double a[],
+																			final int n)
 	{
 		if (n < 1 || n > 1000)
 		{
@@ -128,7 +136,7 @@ public class misc
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 
-		double twox = x * 2;
+		final double twox = x * 2;
 		double b2 = 0;
 		double b1 = 0;
 		double b0 = 0;
@@ -154,12 +162,12 @@ public class misc
 	 */
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double lfastchoose(double n, double k)
+	public static double lfastchoose(final double n, final double k)
 	{
 		return lgammafn(n + 1.0) - lgammafn(k + 1.0) - lgammafn(n - k + 1.0);
 	}
 
-	public static double fastchoose(double n, double k)
+	public static double fastchoose(final double n, final double k)
 	{
 		return java.lang.Math.exp(lfastchoose(n, k));
 	}
@@ -169,7 +177,9 @@ public class misc
 		n = java.lang.Math.floor(n + 0.5);
 		k = java.lang.Math.floor(k + 0.5);
 		if (Double.isNaN(n) || Double.isNaN(k))
+		{
 			return n + k;
+		}
 		if (k < 0 || n < k)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -189,7 +199,9 @@ public class misc
 		n = java.lang.Math.floor(n + 0.5);
 		k = java.lang.Math.floor(k + 0.5);
 		if (Double.isNaN(n) || Double.isNaN(k))
+		{
 			return n + k;
+		}
 		if (k < 0 || n < k)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -204,7 +216,7 @@ public class misc
 	 * @return
 	 */
 
-	public static double d1mach(int i)
+	public static double d1mach(final int i)
 	{
 		switch (i)
 		{
@@ -228,27 +240,31 @@ public class misc
 	/*
 	 * Returns the cube of its argument.
 	 */
-	public static double fcube(double x)
+	public static double fcube(final double x)
 	{
 		return x * x * x;
 	}
 
-	public static double fmax2(double x, double y)
+	public static double fmax2(final double x, final double y)
 	{
 		if (Double.isNaN(x) || Double.isNaN(y))
+		{
 			return x + y;
-		return (x < y) ? y : x;
+		}
+		return x < y ? y : x;
 	}
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double fmin2(double x, double y)
+	public static double fmin2(final double x, final double y)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
+		{
 			return x + y;
+		}
 		/* !* #endif /*4! */
-		return (x < y) ? x : y;
+		return x < y ? x : y;
 	}
 
 	/*
@@ -269,12 +285,14 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double fmod(double x, double y)
+	public static double fmod(final double x, final double y)
 	{
 		double quot;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
+		{
 			return x + y;
+		}
 		/* !* #endif /*4! */
 		quot = x / y;
 		/* !* return x - (quot < 0.0 ? ceil(quot) : floor(quot)) * y; *! */
@@ -301,25 +319,39 @@ public class misc
 	{
 
 		if (Double.isNaN(x) || Double.isNaN(digits))
+		{
 			return x + digits;
+		}
 		if (Double.isInfinite(x))
+		{
 			return x;
+		}
 		if (Double.isInfinite(digits))
 		{
 			if (digits > 0)
+			{
 				return x;
+			}
 			else
+			{
 				return 0;
+			}
 		}
 
 		if (x == 0)
+		{
 			return x;
+		}
 
 		digits = java.lang.Math.floor(digits + 0.5);
 		if (digits > MAXPLACES)
+		{
 			return x;
+		}
 		else if (digits < 1)
+		{
 			digits = 1;
+		}
 
 		double sgn = 1.0;
 		if (x < 0.0)
@@ -327,29 +359,31 @@ public class misc
 			sgn = -sgn;
 			x = -x;
 		}
-		double l10 = Math.log(x) / Math.log(10.0);
+		final double l10 = Math.log(x) / Math.log(10.0);
 		// Max.expon. of 10 (=308.2547)
-		int e10 = (int) (digits - 1 - java.lang.Math.floor(l10));
+		final int e10 = (int) (digits - 1 - java.lang.Math.floor(l10));
 		final double max10e = Constants.DBL_MAX_EXP * Constants.M_LOG10_2;
 		if (Math.abs(l10) < max10e - 2)
 		{
-			double pow10 = Math.pow(10.0, e10);
-			return (sgn * Math.floor(x * pow10 + 0.5) / pow10);
+			final double pow10 = Math.pow(10.0, e10);
+			return sgn * Math.floor(x * pow10 + 0.5) / pow10;
 		}
 		else
 		{ /* -- LARGE or small -- */
 			/* !* do_round = max10e - l10 >= pow(10.0, -digits); *! */
-			boolean do_round = max10e - l10 >= Math.pow(10.0, -digits);
-			int e2 = (e10 > 0) ? 16 : -16;
-			double p10 = Math.pow(10.0, e2);
+			final boolean do_round = max10e - l10 >= Math.pow(10.0, -digits);
+			final int e2 = e10 > 0 ? 16 : -16;
+			final double p10 = Math.pow(10.0, e2);
 			x *= p10;
-			double P10 = Math.pow(10.0, (double) e10 - e2);
+			final double P10 = Math.pow(10.0, (double) e10 - e2);
 			x *= P10;
 			/*-- p10 * P10 = 10 ^ e10 */
 			if (do_round)
+			{
 				x += 0.5;
+			}
 			x = Math.floor(x) / p10;
-			return (sgn * x / P10);
+			return sgn * x / P10;
 		}
 	}
 
@@ -379,34 +413,6 @@ public class misc
 
 	/* 2^52 for IEEE */
 
-	static private double Rint(double x)
-	{
-		final double biggest = BIGGEST;
-		double tmp;
-
-		if (x != x)
-			return x; /* NaN */
-
-		/* !* if (fabs(x) >= biggest) !!!COMMENT!!! *! */
-		if (java.lang.Math.abs(x) >= biggest) /* Already integer */
-			return x;
-
-		if (x >= 0)
-		{
-			tmp = x + biggest;
-			return tmp - biggest;
-		}
-		else
-		{
-			tmp = x - biggest;
-			return tmp + biggest;
-		}
-	}
-
-	/* !* #else /*4! */
-	// final double R_rint = rint;
-	/* !* #endif /*4! */
-
 	public static double fround(double x, double digits)
 	{
 		double pow10, sgn, intx;
@@ -414,15 +420,21 @@ public class misc
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(digits))
+		{
 			return x + digits;
+		}
 		if (Double.isInfinite(x))
+		{
 			return x;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		/* !* digits = floor(digits + 0.5); *! */
 		digits = java.lang.Math.floor(digits + 0.5);
 		if (digits > maxdigits)
+		{
 			digits = maxdigits;
+		}
 		/* !* pow10 = pow(10.0, digits); *! */
 		pow10 = java.lang.Math.pow(10.0, digits);
 		sgn = 1.0;
@@ -458,14 +470,16 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double fsign(double x, double y)
+	public static double fsign(final double x, final double y)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
+		{
 			return x + y;
+		}
 		/* !* #endif /*4! */
 		/* !* return ((y >= 0) ? fabs(x) : -fabs(x)); *! */
-		return ((y >= 0) ? java.lang.Math.abs(x) : -java.lang.Math.abs(x));
+		return y >= 0 ? java.lang.Math.abs(x) : -java.lang.Math.abs(x);
 	}
 
 	/*
@@ -481,7 +495,7 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double fsquare(double x)
+	public static double fsquare(final double x)
 	{
 		return x * x;
 	}
@@ -489,12 +503,16 @@ public class misc
 	/**
 	 * Truncation toward zero.
 	 */
-	public static double ftrunc(double x)
+	public static double ftrunc(final double x)
 	{
 		if (x >= 0)
+		{
 			return java.lang.Math.floor(x);
+		}
 		else
+		{
 			return java.lang.Math.ceil(x);
+		}
 	}
 
 	/*
@@ -562,7 +580,7 @@ public class misc
 		+.3376448816585338090334890666666e-30,
 		-.5793070335782135784625493333333e-31 };
 
-	public static double gammafn(double x)
+	public static double gammafn(final double x)
 	{
 		int ngam = 0;
 		double xmin = 0.;
@@ -590,8 +608,10 @@ public class misc
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x))
+		{
 			return x;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		/* !* y = fabs(x); *! */
 		y = java.lang.Math.abs(x);
@@ -605,12 +625,16 @@ public class misc
 
 			n = (int) x;
 			if (x < 0)
+			{
 				--n;
+			}
 			y = x - n;/* n = floor(x) ==> y in [ 0, 1 ) */
 			--n;
 			value = chebyshev_eval(y * 2 - 1, gamcs, ngam) + .9375;
 			if (n == 0)
+			{
 				return value;/* x = 1.dddd = 1+y */
+			}
 
 			if (n < 0)
 			{
@@ -618,7 +642,7 @@ public class misc
 
 				/* If the argument is exactly zero or a negative integer */
 				/* then return NaN. */
-				if (x == 0 || (x < 0 && x == n + 2))
+				if (x == 0 || x < 0 && x == n + 2)
 				{
 					throw new java.lang.ArithmeticException("Math Error: RANGE");
 					// return Double.NaN;
@@ -644,7 +668,7 @@ public class misc
 
 				for (i = 0; i < n; i++)
 				{
-					value /= (x + i);
+					value /= x + i;
 				}
 				return value;
 			}
@@ -654,7 +678,7 @@ public class misc
 
 				for (i = 1; i <= n; i++)
 				{
-					value *= (y + i);
+					value *= y + i;
 				}
 				return value;
 			}
@@ -685,7 +709,9 @@ public class misc
 																	+ lgammacor(y));
 
 			if (x > 0)
+			{
 				return value;
+			}
 
 			/* !* if (fabs((x - (int)(x - 0.5))/x) < dxrel){ *! */
 			if (java.lang.Math.abs((x - (int) (x - 0.5)) / x) < dxrel)
@@ -869,7 +895,9 @@ public class misc
 				if (res != 0.)
 				{
 					if (y1 != ftrunc(y1 * .5) * 2.)
+					{
 						parity = true;
+					}
 					/* !* fact = -Constants.M_PI / sin(Constants.M_PI * res); *! */
 					fact = -Constants.M_PI / java.lang.Math.sin(Constants.M_PI * res);
 					y += 1.;
@@ -995,9 +1023,13 @@ public class misc
 			 * ----------------------------------------------------------------------
 			 */
 			if (parity)
+			{
 				res = -res;
+			}
 			if (fact != 1.)
+			{
 				res = fact / res;
+			}
 
 		} // L_end:
 		return res;
@@ -1046,7 +1078,7 @@ public class misc
 				/* !* if (fabs(xmin - xold) < .005) { *! */
 				if (java.lang.Math.abs(xmin - xold) < .005)
 				{
-					xmin = -(xmin) + .01;
+					xmin = -xmin + .01;
 					break find_xmax;
 				}
 			}
@@ -1084,17 +1116,17 @@ public class misc
 			// xmin = xmax = Double.NaN;
 
 		} // done:
-		xmin = fmax2(xmin, -(xmax) + 1);
+		xmin = fmax2(xmin, -xmax + 1);
 
-		double retval[] = new double[2];
+		final double retval[] = new double[2];
 		retval[0] = xmin;
 		retval[1] = xmax;
-		return (retval);
+		return retval;
 	}
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static int i1mach(int i)
+	public static int i1mach(final int i)
 	{
 		switch (i)
 		{
@@ -1142,7 +1174,7 @@ public class misc
 		}
 	}
 
-	int i1mach_(int i)
+	int i1mach_(final int i)
 	{
 		return i1mach(i);
 	}
@@ -1160,9 +1192,9 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	int imax2(int x, int y)
+	int imax2(final int x, final int y)
 	{
-		return (x < y) ? y : x;
+		return x < y ? y : x;
 	}
 
 	/*
@@ -1178,9 +1210,9 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	int imin2(int x, int y)
+	int imin2(final int x, final int y)
 	{
-		return (x < y) ? x : y;
+		return x < y ? x : y;
 	}
 
 	/*
@@ -1201,20 +1233,26 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double lbeta(double a, double b)
+	public static double lbeta(final double a, final double b)
 	{
 		double corr, p, q;
 
 		p = q = a;
 		if (b < p)
+		{
 			p = b;/* := min(a,b) */
+		}
 		if (b > q)
+		{
 			q = b;/* := max(a,b) */
+		}
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(a) || Double.isNaN(b))
+		{
 			return a + b;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		/* both arguments must be >= 0 */
 
@@ -1264,9 +1302,11 @@ public class misc
 							* logrelerr(-p / (p + q));
 		}
 		else
+		{
 			/* p and q are small: p <= q > 10. */
 			/* !* return log(gammafn(p) * (gammafn(q) / gammafn(p + q))); *! */
-			return java.lang.Math.log(gammafn(p) * (gammafn(q) / gammafn(p + q)));
+			return java.lang.Math.log(gammafn(p) * gammafn(q) / gammafn(p + q));
+		}
 	}
 
 	/*
@@ -1310,8 +1350,10 @@ public class misc
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x))
+		{
 			return x;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		if (x <= 0 && x == (int) x)
 		{ /* Negative integer argument */
@@ -1338,6 +1380,7 @@ public class misc
 			}
 
 			if (x > 0)
+			{
 				/*
 				 * !* return Constants.M_LN_SQRT_2PI + (x - 0.5) * log(x) - x +
 				 * lgammacor(y); *!
@@ -1346,6 +1389,7 @@ public class misc
 								* java.lang.Math.log(x)
 								- x
 								+ lgammacor(y);
+			}
 
 			/* else: x < -10 */
 			/* !* sinpiy = fabs(sin(Constants.M_PI * y)); *! */
@@ -1353,8 +1397,8 @@ public class misc
 
 			if (sinpiy == 0)
 			{ /*
-				 * Negative integer argument === Now UNNECESSARY: caught above
-				 */
+			 * Negative integer argument === Now UNNECESSARY: caught above
+			 */
 				System.out.println(" ** should NEVER happen! *** [lgamma.c: Neg.int+ y=%g]\n" + y);
 				throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 				// return Double.NaN;
@@ -1376,9 +1420,13 @@ public class misc
 			}
 
 			if (x > 0)
+			{
 				return ans;
-			else if (((int) (-x)) % 2 == 0)
+			}
+			else if ((int) -x % 2 == 0)
+			{
 				signgam = -1;
+			}
 			return ans;
 		}
 	}
@@ -1403,7 +1451,7 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double lgammacor(double x)
+	public static double lgammacor(final double x)
 	{
 		final double algmcs[] /* [15] */=
 		{ +.1666389480451863247205729650822e+0,
@@ -1452,7 +1500,9 @@ public class misc
 			return chebyshev_eval(tmp * tmp * 2 - 1, algmcs, nalgm) / x;
 		}
 		else
+		{
 			return 1 / (x * 12);
+		}
 	}
 
 	/*
@@ -1475,7 +1525,7 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double logrelerr(double x)
+	public static double logrelerr(final double x)
 	{
 		/* series for alnr on the interval -3.75000e-01 to 3.75000e-01 */
 		/* with weighted error 6.35e-32 */
@@ -1550,10 +1600,14 @@ public class misc
 
 		/* !* if (fabs(x) <= .375) *! */
 		if (java.lang.Math.abs(x) <= .375)
+		{
 			return x * (1 - x * chebyshev_eval(x / .375, alnrcs, nlnrel));
+		}
 		else
+		{
 			/* !* return log(x + 1); *! */
 			return java.lang.Math.log(x + 1);
+		}
 	}
 
 	/* !* #include "DistLib.h" /*4! */
@@ -1597,12 +1651,14 @@ public class misc
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double sign(double x)
+	public static double sign(final double x)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x))
+		{
 			return x;
+		}
 		/* !* #endif /*4! */
-		return ((x > 0) ? 1 : ((x == 0) ? 0 : -1));
+		return x > 0 ? 1 : x == 0 ? 0 : -1;
 	}
 }

@@ -20,6 +20,10 @@ public class RangeMap<O> implements Serializable
 	 */
 	private static class MapItem<O> implements Serializable
 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		int mPosition;
 		O mObject;
 
@@ -41,30 +45,42 @@ public class RangeMap<O> implements Serializable
 		{
 			final int PRIME = 31;
 			int result = 1;
-			result = PRIME * result + ((mObject == null) ? 0 : mObject.hashCode());
+			result = PRIME * result + (mObject == null ? 0 : mObject.hashCode());
 			result = PRIME * result + mPosition;
 			return result;
 		}
 
 		@Override
-		public boolean equals(Object obj)
+		public boolean equals(final Object obj)
 		{
 			if (this == obj)
+			{
 				return true;
+			}
 			if (obj == null)
+			{
 				return false;
+			}
 			if (getClass() != obj.getClass())
+			{
 				return false;
+			}
 			final MapItem<O> other = (MapItem<O>) obj;
 			if (mObject == null)
 			{
 				if (other.mObject != null)
+				{
 					return false;
+				}
 			}
 			else if (!mObject.equals(other.mObject))
+			{
 				return false;
+			}
 			if (mPosition != other.mPosition)
+			{
 				return false;
+			}
 			return true;
 		}
 	}
@@ -86,7 +102,7 @@ public class RangeMap<O> implements Serializable
 		clear();
 	}
 
-	public RangeMap(int pInitialCapacity)
+	public RangeMap(final int pInitialCapacity)
 	{
 		mList = new ArrayList<MapItem<O>>(pInitialCapacity < 2 ? 2
 																													: pInitialCapacity);
@@ -101,7 +117,9 @@ public class RangeMap<O> implements Serializable
 	public void clear()
 	{
 		if (mList.size() > 0)
+		{
 			mList.clear();
+		}
 		mList.add(new MapItem<O>(Integer.MIN_VALUE, null));
 		mList.add(new MapItem<O>(Integer.MAX_VALUE, null));/**/
 	}
@@ -130,9 +148,13 @@ public class RangeMap<O> implements Serializable
 		if (lBeforeEndItem.mPosition == lStart)
 		{
 			if (lBeforeEndItem.mPosition == lBeforeStartItem.mPosition)
+			{
 				lObjectAfterEnd = lBeforeStartItem.mObject;
+			}
 			else
+			{
 				lObjectAfterEnd = null;
+			}
 		}
 		else
 		{
@@ -329,11 +351,13 @@ public class RangeMap<O> implements Serializable
 	 */
 	public O getFirst()
 	{
-		for (MapItem<O> lMapItem : mList)
+		for (final MapItem<O> lMapItem : mList)
 		{
 			final O lO = lMapItem.mObject;
 			if (lO != null)
+			{
 				return lO;
+			}
 		}
 		return null;
 	}
@@ -349,7 +373,9 @@ public class RangeMap<O> implements Serializable
 		{
 			final O lO = mList.get(i).mObject;
 			if (lO != null)
+			{
 				return lO;
+			}
 		}
 		return null;
 	}
@@ -359,7 +385,7 @@ public class RangeMap<O> implements Serializable
 	 * 
 	 * @see range.RangeMapInterface#translate(int)
 	 */
-	public void translate(int pOffset)
+	public void translate(final int pOffset)
 	{
 		for (int i = 1; i < mList.size() - 1; i++)
 		{
@@ -377,11 +403,13 @@ public class RangeMap<O> implements Serializable
 	public int getNumberOfNonNullRangeSpans()
 	{
 		int lNumber = 0;
-		for (MapItem<O> lMapItem : mList)
+		for (final MapItem<O> lMapItem : mList)
 		{
 			final O lO = lMapItem.mObject;
 			if (lO != null)
+			{
 				lNumber++;
+			}
 		}
 		return lNumber;
 	}
@@ -402,27 +430,37 @@ public class RangeMap<O> implements Serializable
 	{
 		final int PRIME = 31;
 		int result = super.hashCode();
-		result = PRIME * result + ((mList == null) ? 0 : mList.hashCode());
+		result = PRIME * result + (mList == null ? 0 : mList.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (!super.equals(obj))
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final RangeMap other = (RangeMap) obj;
 		if (mList == null)
 		{
 			if (other.mList != null)
+			{
 				return false;
+			}
 		}
 		else if (!mList.equals(other.mList))
+		{
 			return false;
+		}
 		return true;
 	}
 

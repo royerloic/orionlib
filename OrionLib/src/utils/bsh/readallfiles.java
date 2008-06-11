@@ -42,12 +42,14 @@ public class readallfiles
 		final Matrix<String> lAgregatedMatrix = pMatrix;
 		final File lFolder = new File(pFolderName);
 		for (final File lFile : lFolder.listFiles())
+		{
 			if (lFile.getName().matches(pFileNameRegex))
 			{
 				final Matrix<String> lMatrix = MatrixFile.readMatrixFromFile(	lFile,
 																																			pHasHeader);
 				lAgregatedMatrix.addAll(lMatrix);
 			}
+		}
 
 		return lAgregatedMatrix;
 	}

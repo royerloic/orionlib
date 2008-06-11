@@ -17,7 +17,7 @@ public class ContextRegexTests
 	@Test
 	public void testExample() throws IOException
 	{
-		InputStream lInputStream = ContextRegexTests.class.getResourceAsStream("/utils/regex/compiler/Test.3rules.txt");
+		final InputStream lInputStream = ContextRegexTests.class.getResourceAsStream("/utils/regex/compiler/Test.3rules.txt");
 		mContextRegexFilter = new ContextRegex(lInputStream);
 
 		// raw match without left or right trailing characters

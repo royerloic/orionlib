@@ -55,17 +55,23 @@ public class Attach<O, V>
 	public final boolean equals(final Object pObj)
 	{
 		final Attach<O, V> lAttachedValue = (Attach<O, V>) pObj;
-		return (this.mO.equals(lAttachedValue.mO));
+		return this.mO.equals(lAttachedValue.mO);
 	}
 
 	public final boolean fastEquals(final Attach<O, V> pAttachedValue)
 	{
 		if (this == pAttachedValue)
+		{
 			return true;
+		}
 		else if (this.hashCode() != pAttachedValue.hashCode())
+		{
 			return false;
+		}
 		else
-			return (this.mO.equals(pAttachedValue.mO));
+		{
+			return this.mO.equals(pAttachedValue.mO);
+		}
 	}
 
 	@Override

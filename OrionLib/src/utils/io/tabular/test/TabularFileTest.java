@@ -13,10 +13,10 @@ public class TabularFileTest
 	@Test
 	public void testFileIndexTest() throws IOException
 	{
-		File lCurrentFolder = new File(".");
+		final File lCurrentFolder = new File(".");
 		System.out.println(lCurrentFolder.getAbsolutePath());
-		File lFile = new File("bin/utils/io/tabular/Test/Test.tab.txt");
-		TabularFile lTabularFile = new TabularFile(lFile, true);
+		final File lFile = new File("bin/utils/io/tabular/Test/Test.tab.txt");
+		final TabularFile lTabularFile = new TabularFile(lFile, true);
 
 		lTabularFile.read();
 

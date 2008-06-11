@@ -36,7 +36,7 @@ public class ErrorLogBox extends IwuJFrame
 
 	private String mMessage;
 
-	private JTextArea mJTextArea;
+	private final JTextArea mJTextArea;
 
 	public boolean getResult()
 	{
@@ -78,7 +78,9 @@ public class ErrorLogBox extends IwuJFrame
 		mMessage = mMessage + "-Error-\n" + pString + "\n\n";
 		mJTextArea.setText(mMessage);
 		if (!isVisible())
+		{
 			setVisible(true);
+		}
 	}
 
 }

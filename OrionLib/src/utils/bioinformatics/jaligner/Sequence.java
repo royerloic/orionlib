@@ -77,7 +77,7 @@ public class Sequence implements Serializable
 	 * 
 	 * @param sequence
 	 */
-	public Sequence(String sequence)
+	public Sequence(final String sequence)
 	{
 		super();
 		this.sequence = sequence;
@@ -91,7 +91,10 @@ public class Sequence implements Serializable
 	 * @param description
 	 * @param type
 	 */
-	public Sequence(String sequence, String id, String description, int type)
+	public Sequence(final String sequence,
+									final String id,
+									final String description,
+									final int type)
 	{
 		super();
 		this.sequence = sequence;
@@ -116,7 +119,7 @@ public class Sequence implements Serializable
 	 * @param sequence
 	 *          The sequence to set
 	 */
-	public void setSequence(String sequence)
+	public void setSequence(final String sequence)
 	{
 		this.sequence = sequence;
 	}
@@ -137,7 +140,7 @@ public class Sequence implements Serializable
 	 * @param id
 	 *          The id to set
 	 */
-	public void setId(String id)
+	public void setId(final String id)
 	{
 		this.id = id;
 	}
@@ -158,7 +161,7 @@ public class Sequence implements Serializable
 	 * @param description
 	 *          The description to set
 	 */
-	public void setDescription(String description)
+	public void setDescription(final String description)
 	{
 		this.description = description;
 	}
@@ -179,7 +182,7 @@ public class Sequence implements Serializable
 	 * @param type
 	 *          The type to set
 	 */
-	public void setType(int type)
+	public void setType(final int type)
 	{
 		this.type = type;
 	}
@@ -203,7 +206,7 @@ public class Sequence implements Serializable
 	 *          length of subsequence
 	 * @return subsequence
 	 */
-	public String subsequence(int index, int length)
+	public String subsequence(final int index, final int length)
 	{
 		return this.sequence.substring(index, index + length);
 	}
@@ -214,7 +217,7 @@ public class Sequence implements Serializable
 	 * @param index
 	 * @return acid at index
 	 */
-	public char acidAt(int index)
+	public char acidAt(final int index)
 	{
 		return this.sequence.charAt(index);
 	}

@@ -75,9 +75,13 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 		{
 			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
 			for (final DisplayMode element0 : modes)
-				if ((element0.getWidth() == element.getWidth()) && (element0.getHeight() == element.getHeight())
-						&& (element0.getBitDepth() == element.getBitDepth()))
+			{
+				if (element0.getWidth() == element.getWidth() && element0.getHeight() == element.getHeight()
+						&& element0.getBitDepth() == element.getBitDepth())
+				{
 					return element;
+				}
+			}
 		}
 		return null;
 	}
@@ -86,7 +90,9 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 	{
 		final DisplayMode lBestDisplayMode = getBestDisplayMode(pGraphicsDevice);
 		if (lBestDisplayMode != null)
+		{
 			pGraphicsDevice.setDisplayMode(lBestDisplayMode);
+		}
 
 	}
 
@@ -135,7 +141,9 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 	synchronized void setFullscreen()
 	{
 		if (isDisplayable())
+		{
 			dispose();
+		}
 
 		setVisible(false);
 
@@ -164,7 +172,9 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 	synchronized void setWindowed()
 	{
 		if (isDisplayable())
+		{
 			dispose();
+		}
 
 		setVisible(false);
 
@@ -198,7 +208,9 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 		final GraphicsEnvironment lGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		final GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
 		if (mScreenIndex == cLAST_DEVICE)
+		{
 			mScreenIndex = lAllGraphicsDevices.length - 1;
+		}
 
 		mGraphicsDevice = lAllGraphicsDevices[mScreenIndex];
 
@@ -210,9 +222,13 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 		try
 		{
 			if (mFullScreen)
+			{
 				setFullscreen();
+			}
 			else
+			{
 				setWindowed();
+			}
 
 			// get component size
 			final Dimension lComponentSize = getSize();
@@ -247,9 +263,11 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 	public void stop()
 	{
 		// check thread is valid and alive
-		if ((mThread != null) && mThread.isAlive())
+		if (mThread != null && mThread.isAlive())
+		{
 			// stop thread
 			mThread.stop();
+		}
 
 		// null thread
 		mThread = null;
@@ -381,13 +399,19 @@ public abstract class OrionGraphicsOld extends JFrame	implements
 	{
 
 		if (SwingUtilities.isLeftMouseButton(pMouseEvent))
+		{
 			mMouseLeft = false;
+		}
 
 		if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
+		{
 			mMouseMiddle = false;
+		}
 
 		if (SwingUtilities.isRightMouseButton(pMouseEvent))
+		{
 			mMouseRight = false;
+		}
 
 	}
 

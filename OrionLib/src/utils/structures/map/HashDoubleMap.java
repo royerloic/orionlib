@@ -27,9 +27,13 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	{
 		Double lValue = get(pKey);
 		if (lValue == null)
+		{
 			lValue = pValue;
+		}
 		else
+		{
 			lValue = lValue + pValue;
+		}
 
 		return put(pKey, lValue);
 	}
@@ -55,9 +59,13 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	{
 		Double lValue = get(pKey);
 		if (lValue == null)
+		{
 			lValue = pValue;
+		}
 		else
+		{
 			lValue = lValue * pValue;
+		}
 
 		return put(pKey, lValue);
 	}
@@ -77,9 +85,13 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	{
 		final Double lOldValue = get(pKey);
 		if (lOldValue == null)
+		{
 			return put(pKey, pNewValue);
+		}
 		else if (lOldValue > pNewValue)
+		{
 			return put(pKey, pNewValue);
+		}
 		return lOldValue;
 	}
 
@@ -87,9 +99,13 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	{
 		final Double lOldValue = get(pKey);
 		if (lOldValue == null)
+		{
 			return put(pKey, pNewValue);
+		}
 		else if (lOldValue < pNewValue)
+		{
 			return put(pKey, pNewValue);
+		}
 		return lOldValue;
 	}
 

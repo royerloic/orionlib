@@ -53,13 +53,17 @@ public class FileUtils
 		{
 			// If there is no filter or the filter accepts the
 			// file / directory, add it to the list
-			if ((filter == null) || filter.accept(directory, entry.getName()))
+			if (filter == null || filter.accept(directory, entry.getName()))
+			{
 				files.add(entry);
+			}
 
 			// If the file is a directory and the recurse flag
 			// is set, recurse into the directory
 			if (recurse && entry.isDirectory())
+			{
 				files.addAll(listFiles(entry, filter, recurse));
+			}
 		}
 
 		// Return collection of files

@@ -34,7 +34,7 @@ public class TextComponentUtilException extends Exception
 	/**
 	 * @param message
 	 */
-	public TextComponentUtilException(String message)
+	public TextComponentUtilException(final String message)
 	{
 		super(message);
 	}

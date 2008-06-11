@@ -30,11 +30,13 @@ public class PowerGraphIOUtils
 		final SetMap<String, Node> lPowerNodeNameToSetMap = new HashSetMap<String, Node>();
 
 		for (final List<String> lLine : lMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("SET"))
 			{
 				final String lSetName = lLine.get(1);
 				lPowerNodeNameToSetMap.put(lSetName);
 			}
+		}
 
 		for (final Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
 		{
@@ -54,9 +56,10 @@ public class PowerGraphIOUtils
 			return;
 		}
 
-		HashSet<Node> lHashSet = new HashSet<Node>();
+		final HashSet<Node> lHashSet = new HashSet<Node>();
 
 		for (final List<String> lLine : pMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("IN"))
 			{
 				final String lNodeOrSetName1 = lLine.get(1);
@@ -77,6 +80,7 @@ public class PowerGraphIOUtils
 					}
 				}
 			}
+		}
 
 		pPowerNodeNameToSetMap.put(pSetName, lHashSet);
 	}

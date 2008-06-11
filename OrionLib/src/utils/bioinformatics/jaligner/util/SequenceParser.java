@@ -83,7 +83,7 @@ public class SequenceParser
 				throw new SequenceParserException("Invalid sequence format");
 			}
 
-			String first = sequence.substring(1, index);
+			final String first = sequence.substring(1, index);
 			sequence = sequence.substring(index);
 
 			index = 0;
@@ -93,7 +93,8 @@ public class SequenceParser
 				// Skip white spaces
 			}
 			sequenceName = first.substring(0, index);
-			StringTokenizer stringTokenizer = new StringTokenizer(sequenceName, "|");
+			final StringTokenizer stringTokenizer = new StringTokenizer(sequenceName,
+																																	"|");
 			while (stringTokenizer.hasMoreTokens())
 			{
 				sequenceName = stringTokenizer.nextToken();
@@ -106,10 +107,10 @@ public class SequenceParser
 			// Plain format ... nothing to do here
 		}
 
-		Sequence s = new Sequence(prepare(sequence),
-															sequenceName,
-															sequenceDescription,
-															Sequence.PROTEIN);
+		final Sequence s = new Sequence(prepare(sequence),
+																		sequenceName,
+																		sequenceDescription,
+																		Sequence.PROTEIN);
 
 		return s;
 	}
@@ -123,7 +124,7 @@ public class SequenceParser
 	 * @throws SequenceParserException
 	 * @see Sequence
 	 */
-	public static Sequence parse(File file) throws SequenceParserException
+	public static Sequence parse(final File file) throws SequenceParserException
 	{
 		String sequenceName = null;
 		String sequenceDescription = null;
@@ -131,7 +132,7 @@ public class SequenceParser
 		try
 		{
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			StringBuffer buffer = new StringBuffer();
+			final StringBuffer buffer = new StringBuffer();
 
 			// Read & parse the first line
 			String line = reader.readLine();
@@ -149,7 +150,8 @@ public class SequenceParser
 				}
 
 				sequenceName = line.substring(0, index);
-				StringTokenizer stringTokenizer = new StringTokenizer(sequenceName, "|");
+				final StringTokenizer stringTokenizer = new StringTokenizer(sequenceName,
+																																		"|");
 				while (stringTokenizer.hasMoreTokens())
 				{
 					sequenceName = stringTokenizer.nextToken();
@@ -170,13 +172,13 @@ public class SequenceParser
 			}
 			reader.close();
 
-			Sequence s = new Sequence(buffer.toString(),
-																sequenceName,
-																sequenceDescription,
-																Sequence.PROTEIN);
+			final Sequence s = new Sequence(buffer.toString(),
+																			sequenceName,
+																			sequenceDescription,
+																			Sequence.PROTEIN);
 			return s;
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new SequenceParserException(e.getMessage());
 		}
@@ -188,7 +190,7 @@ public class SequenceParser
 				{
 					reader.close();
 				}
-				catch (Exception silent)
+				catch (final Exception silent)
 				{
 					logger.log(	Level.WARNING,
 											"Failed closing reader: " + silent.getMessage(),
@@ -207,10 +209,10 @@ public class SequenceParser
 	 * @return prepared array of characters
 	 * @throws SequenceParserException
 	 */
-	private static String prepare(String sequence) throws SequenceParserException
+	private static String prepare(final String sequence) throws SequenceParserException
 	{
-		StringBuffer buffer = new StringBuffer();
-		String copy = sequence.trim().toUpperCase();
+		final StringBuffer buffer = new StringBuffer();
+		final String copy = sequence.trim().toUpperCase();
 
 		for (int i = 0, n = copy.length(); i < n; i++)
 		{

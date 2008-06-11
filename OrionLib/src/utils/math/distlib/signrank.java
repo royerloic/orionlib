@@ -38,31 +38,41 @@ public class signrank
 
 	static private double w[][];
 
-	static private double csignrank(int k, int n)
+	static private double csignrank(int k, final int n)
 	{
 		int c, u, i;
 
 		u = n * (n + 1) / 2;
-		c = (u / 2);
+		c = u / 2;
 
-		if ((k < 0) || (k > u))
-			return (0);
+		if (k < 0 || k > u)
+		{
+			return 0;
+		}
 		if (k > c)
+		{
 			k = u - k;
+		}
 		if (w[n] == null)
 		{
 			w[n] = new double[c + 1];
 			for (i = 0; i <= c; i++)
+			{
 				w[n][i] = -1;
+			}
 		}
 		if (w[n][k] < 0)
 		{
 			if (n == 0)
-				w[n][k] = (k == 0) ? 1.0 : 0.0;
+			{
+				w[n][k] = k == 0 ? 1.0 : 0.0;
+			}
 			else
+			{
 				w[n][k] = csignrank(k - n, n - 1) + csignrank(k, n - 1);
+			}
 		}
-		return (w[n][k]);
+		return w[n][k];
 	}
 
 	public static double density(double x, double n)
@@ -70,7 +80,9 @@ public class signrank
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(n))
+		{
 			return x + n;
+		}
 		/* !* #endif /*4! */
 		/* !* n = floor(n + 0.5); *! */
 		n = java.lang.Math.floor(n + 0.5);
@@ -86,11 +98,13 @@ public class signrank
 		}
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
-		if ((x < 0) || (x > (n * (n + 1) / 2)))
+		if (x < 0 || x > n * (n + 1) / 2)
+		{
 			return 0;
+		}
 		/* !* return(exp(log(csignrank(x, n)) - n * log(2))); *! */
-		return (java.lang.Math.exp(java.lang.Math.log(csignrank((int) x, (int) n)) - n
-																* java.lang.Math.log(2)));
+		return java.lang.Math.exp(java.lang.Math.log(csignrank((int) x, (int) n)) - n
+															* java.lang.Math.log(2));
 	}
 
 	/*
@@ -128,7 +142,9 @@ public class signrank
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
+		{
 			return x + n;
+		}
 		if (Double.isInfinite(n))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -150,12 +166,18 @@ public class signrank
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0.0)
+		{
 			return 0;
+		}
 		if (x >= n * (n + 1) / 2)
+		{
 			return 1;
+		}
 		for (i = 0; i <= x; i++)
+		{
 			p += density(i, n);
-		return (p);
+		}
+		return p;
 	}
 
 	/*
@@ -186,13 +208,15 @@ public class signrank
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double n)
+	public static double quantile(final double x, double n)
 	{
 		double p, q;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
+		{
 			return x + n;
+		}
 		if (Double.isInfinite(x) || Double.isInfinite(n))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -214,9 +238,13 @@ public class signrank
 		}
 
 		if (x == 0)
-			return (0.0);
+		{
+			return 0.0;
+		}
 		if (x == 1)
-			return (n * (n + 1) / 2);
+		{
+			return n * (n + 1) / 2;
+		}
 		p = 0.0;
 		q = 0.0;
 		for (;;)
@@ -224,7 +252,9 @@ public class signrank
 			/* Don't call cumulative() for efficiency */
 			p += density(q, n);
 			if (p >= x)
-				return (q);
+			{
+				return q;
+			}
 			q++;
 		}
 	}
@@ -266,7 +296,9 @@ public class signrank
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(n))
-			return (n);
+		{
+			return n;
+		}
 		/* !* #endif /*4! */
 		/* !* n = floor(n + 0.5); *! */
 		n = java.lang.Math.floor(n + 0.5);
@@ -276,14 +308,16 @@ public class signrank
 			// return Double.NaN;
 		}
 		if (n == 0)
-			return (0);
+		{
+			return 0;
+		}
 		r = 0.0;
 		k = (int) n;
 		for (i = 0; i < k;)
 		{
 			/* !* r += (++i) * floor(sunif() + 0.5); *! */
-			r += (++i) * java.lang.Math.floor(uniform.random() + 0.5);
+			r += ++i * java.lang.Math.floor(uniform.random() + 0.5);
 		}
-		return (r);
+		return r;
 	}
 }

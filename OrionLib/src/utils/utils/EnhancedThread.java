@@ -39,6 +39,7 @@ public abstract class EnhancedThread extends Thread
 	public void joinWhenStarted(final int pWaitTime)
 	{
 		while (isStarted() == false)
+		{
 			try
 			{
 				sleep(pWaitTime);
@@ -48,6 +49,7 @@ public abstract class EnhancedThread extends Thread
 				// TODO Auto-generated catch block
 				e.printStackTrace(System.out);
 			}
+		}
 	}
 
 	public boolean isStarted()
@@ -110,17 +112,23 @@ public abstract class EnhancedThread extends Thread
 				}
 
 				while (execute())
+				{
 					synchronized (mLock)
 					{
 						// if suspended, then wait:
 						while (mSuspendRequested && !mStopRequested)
+						{
 							mLock.wait();
+						}
 
 						// id stopped, then get out...
 						if (mStopRequested)
+						{
 							break;
+						}
 
 					}
+				}
 				terminate();
 			}
 		}

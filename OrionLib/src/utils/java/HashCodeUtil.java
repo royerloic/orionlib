@@ -82,7 +82,7 @@ public final class HashCodeUtil
 	public static int hash(final int aSeed, final long aLong)
 	{
 		System.out.println("long...");
-		return firstTerm(aSeed) + (int) (aLong ^ (aLong >>> 32));
+		return firstTerm(aSeed) + (int) (aLong ^ aLong >>> 32);
 	}
 
 	/**
@@ -124,9 +124,13 @@ public final class HashCodeUtil
 	{
 		int result = aSeed;
 		if (aObject == null)
+		{
 			result = hash(result, 0);
+		}
 		else if (!isArray(aObject))
+		{
 			result = hash(result, aObject.hashCode());
+		}
 		else
 		{
 			final int length = Array.getLength(aObject);

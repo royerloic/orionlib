@@ -40,7 +40,9 @@ public class ComponentEnumerator<N>
 			while (!lFrontierSet.isEmpty())
 			{
 				for (final N lFrontierNode : lFrontierSet)
+				{
 					lNewFrontierSet.addAll(this.mGraph.getNodeNeighbours(lFrontierNode));
+				}
 				lNewFrontierSet.removeAll(lReachedSet);
 				lReachedSet.addAll(lFrontierSet);
 				lFrontierSet.clear();

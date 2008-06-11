@@ -15,7 +15,7 @@ public class DomainIndex
 
 	private final HashSetMap<String, Protein> mDomainIdToProteinIndex = new HashSetMap<String, Protein>();
 
-	public DomainIndex(Proteome pProteome)
+	public DomainIndex(final Proteome pProteome)
 	{
 		mProteome = pProteome;
 
@@ -23,18 +23,20 @@ public class DomainIndex
 
 	public void index()
 	{
-		for (Protein lProtein : mProteome.getProteinSet().getSet())
+		for (final Protein lProtein : mProteome.getProteinSet().getSet())
 		{
-			HashSetMap<String, Domain> lDomainsMap = lProtein.getDomainMap();
-			for (Map.Entry<String, Set<Domain>> lEntry : lDomainsMap.entrySet())
-				for (Domain lDomain : lEntry.getValue())
+			final HashSetMap<String, Domain> lDomainsMap = lProtein.getDomainMap();
+			for (final Map.Entry<String, Set<Domain>> lEntry : lDomainsMap.entrySet())
+			{
+				for (final Domain lDomain : lEntry.getValue())
 				{
 					mDomainIdToProteinIndex.put(lDomain.getInterproId(), lProtein);
 				}
+			}
 		}
 	}
 
-	public Set<Protein> getProteinByDomainInterproId(String pDomainId)
+	public Set<Protein> getProteinByDomainInterproId(final String pDomainId)
 	{
 		return mDomainIdToProteinIndex.get(pDomainId);
 	}

@@ -21,12 +21,12 @@ public class FileIndexTest
 	{
 		try
 		{
-			InputStream lInputStream = FileIndexTest.class.getResourceAsStream("Test.tab.txt");
+			final InputStream lInputStream = FileIndexTest.class.getResourceAsStream("Test.tab.txt");
 			assertTrue(lInputStream != null);
 			sTempFile = File.createTempFile("FileIndexTest", "temp");
 			StreamToFile.streamToFile(lInputStream, sTempFile);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			fail("Could not create temp file");
 			e.printStackTrace();
@@ -36,10 +36,10 @@ public class FileIndexTest
 	@Test
 	public void testFileIndexTest() throws IOException
 	{
-		File lCurrentFolder = new File(".");
+		final File lCurrentFolder = new File(".");
 		System.out.println(lCurrentFolder.getAbsolutePath());
 
-		FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
+		final FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
 
 		lFileIndex.buildIndex(1);
 
@@ -55,7 +55,7 @@ public class FileIndexTest
 	@Test
 	public void testFileIndexTestWithCache() throws IOException
 	{
-		FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
+		final FileIndex lFileIndex = new FileIndex(sTempFile, "\\t");
 
 		lFileIndex.buildIndex(1);
 

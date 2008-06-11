@@ -25,7 +25,7 @@ public class FileSort
 		String mLine;
 		O mKey;
 
-		public KeyedLine(String pLine, O pKey)
+		public KeyedLine(final String pLine, final O pKey)
 		{
 			super();
 			mLine = pLine;
@@ -49,7 +49,7 @@ public class FileSort
 																																		Comparator<KeyedLine<O>>
 	{
 
-		public int compare(KeyedLine<O> pO1, KeyedLine<O> pO2)
+		public int compare(final KeyedLine<O> pO1, final KeyedLine<O> pO2)
 		{
 			return pO1.mKey.compareTo(pO2.mKey);
 		}
@@ -59,28 +59,30 @@ public class FileSort
 	private static class DescendingComparator<O extends Comparable<O>>	implements
 																																			Comparator<KeyedLine<O>>
 	{
-		public int compare(KeyedLine<O> pO1, KeyedLine<O> pO2)
+		public int compare(final KeyedLine<O> pO1, final KeyedLine<O> pO2)
 		{
 			return -pO1.mKey.compareTo(pO2.mKey);
 		}
 	}
 
-	public static final void sort(File pInputFile,
-																String pColumn,
-																Boolean pAscending,
-																File pOutputFile) throws IOException
+	public static final void sort(final File pInputFile,
+																final String pColumn,
+																final Boolean pAscending,
+																final File pOutputFile) throws IOException
 	{
 		final int lColumnIndex = FileDB.resolveColumn(pInputFile, pColumn);
 		sort(pInputFile, lColumnIndex, pAscending, pOutputFile);
 	}
 
-	public static final void sort(File pInputFile,
-																Integer pColumnIndex,
-																Boolean pAscending,
-																File pOutputFile) throws IOException
+	public static final void sort(final File pInputFile,
+																final Integer pColumnIndex,
+																final Boolean pAscending,
+																final File pOutputFile) throws IOException
 	{
 		// check 100 lines, might be dangerous but too slow otherwise
-		Class lColumnType = FileDB.getColumnType(pInputFile, pColumnIndex, 1000);
+		final Class lColumnType = FileDB.getColumnType(	pInputFile,
+																										pColumnIndex,
+																										1000);
 		sort(	new FileInputStream(pInputFile),
 					pColumnIndex,
 					lColumnType.getSimpleName(),
@@ -88,18 +90,20 @@ public class FileSort
 					new FileOutputStream(pOutputFile));
 	}
 
-	public static final void sort(InputStream pInputStream,
-																Integer pColumnIndex,
-																String pColumnType,
-																Boolean pAscending,
-																OutputStream pOutputStream) throws IOException
+	public static final void sort(final InputStream pInputStream,
+																final Integer pColumnIndex,
+																final String pColumnType,
+																final Boolean pAscending,
+																final OutputStream pOutputStream) throws IOException
 	{
-		ArrayList<KeyedLine<? extends Comparable<?>>> lList = new ArrayList<KeyedLine<? extends Comparable<?>>>();
+		final ArrayList<KeyedLine<? extends Comparable<?>>> lList = new ArrayList<KeyedLine<? extends Comparable<?>>>();
 
 		String lHeaderLine = null;
-		boolean isFirstLine = true;
-		for (String lLine : LineReader.getLines(pInputStream))
+		final boolean isFirstLine = true;
+		for (final String lLine : LineReader.getLines(pInputStream))
+		{
 			if (!lLine.isEmpty())
+			{
 				if (!lLine.startsWith("//"))
 				{
 					final String lValue = sTabDelPattern.split(lLine, -1)[pColumnIndex];
@@ -119,6 +123,8 @@ public class FileSort
 				{
 					lHeaderLine = lLine;
 				}
+			}
+		}
 
 		if (pAscending)
 		{
@@ -129,10 +135,12 @@ public class FileSort
 			Collections.sort(lList, new DescendingComparator());
 		}
 
-		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 		if (lHeaderLine != null)
+		{
 			lBufferedWriter.append(lHeaderLine + "\n");
-		for (KeyedLine<? extends Comparable<?>> lKeyedLine : lList)
+		}
+		for (final KeyedLine<? extends Comparable<?>> lKeyedLine : lList)
 		{
 			lBufferedWriter.append(lKeyedLine.toLineString() + "\n");
 		}

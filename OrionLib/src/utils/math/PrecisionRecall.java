@@ -21,7 +21,7 @@ public class PrecisionRecall
 
 	public static final double geometricMean(final double pA, final double pB)
 	{
-		return (2 * pA * pB) / (pA + pB);
+		return 2 * pA * pB / (pA + pB);
 	}
 
 	public static final double fmeasure(final double pPrecision,
@@ -34,7 +34,9 @@ public class PrecisionRecall
 																			final double pRecall,
 																			final double pAlpha)
 	{
-		return ((1 + pAlpha) * pPrecision * pRecall) / (pAlpha * pPrecision + pRecall);
+		return (1 + pAlpha) * pPrecision
+						* pRecall
+						/ (pAlpha * pPrecision + pRecall);
 	}
 
 	public static final double fmeasurePrecision(	final double pPrecision,

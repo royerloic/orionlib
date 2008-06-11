@@ -25,12 +25,19 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 																																	Lattice<N>
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Double getDepth(final N pN)
 	{
 		final Set<N> lNodeSet = getParents(pN);
 		final List<Double> lDepthList = new ArrayList<Double>();
 		for (final N lN : lNodeSet)
+		{
 			lDepthList.add(getDepth(lN));
+		}
 		final Double lDepth = CollectionUtils.max(lDepthList) + 1;
 		return lDepth;
 	}
@@ -40,7 +47,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 		final Set<N> lNodeSet = getChildren(pN);
 		final List<Double> lDepthList = new ArrayList<Double>();
 		for (final N lN : lNodeSet)
+		{
 			lDepthList.add(getHeight(lN));
+		}
 		final Double lHeight = CollectionUtils.max(lDepthList) + 1;
 		return lHeight;
 	}
@@ -54,7 +63,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 	{
 		final Set<N> lChildrenSet = new HashSet<N>();
 		for (final N lN : pNCollection)
+		{
 			lChildrenSet.addAll(getPositiveNodeNeighbours(lN));
+		}
 		return lChildrenSet;
 	}
 
@@ -62,8 +73,10 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 	{
 		final IntegerMap<N> lChildrenMap = new IntegerHashMap<N>();
 		for (final Entry<N, Integer> lEntry : pMap.entrySet())
+		{
 			lChildrenMap.addAllWith(getPositiveNodeNeighbours(lEntry.getKey()),
 															lEntry.getValue() + 1);
+		}
 		return lChildrenMap;
 	}
 
@@ -80,7 +93,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 		{
 			lNodeToDepthMap.addAllWith(lChildrenSet, pDepth);
 			for (final N lNode : lChildrenSet)
+			{
 				lNodeToDepthMap.minAll(getDescendentsRecursive(lNode, pDepth + 1));
+			}
 		}
 		return lNodeToDepthMap;
 	}
@@ -94,7 +109,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 	{
 		final Set<N> lParentSet = new HashSet<N>();
 		for (final N lN : pNCollection)
+		{
 			lParentSet.addAll(getNegativeNodeNeighbours(lN));
+		}
 		return lParentSet;
 	}
 
@@ -102,8 +119,10 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 	{
 		final IntegerMap<N> lParentMap = new IntegerHashMap<N>();
 		for (final Entry<N, Integer> lEntry : pMap.entrySet())
+		{
 			lParentMap.addAllWith(getNegativeNodeNeighbours(lEntry.getKey()),
 														lEntry.getValue() - 1);
+		}
 		return lParentMap;
 	}
 
@@ -120,7 +139,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 		{
 			lNodeToDepthMap.addAllWith(lParentSet, pDepth);
 			for (final N lNode : lParentSet)
+			{
 				lNodeToDepthMap.maxAll(getAncestorsRecursive(lNode, pDepth - 1));
+			}
 		}
 		return lNodeToDepthMap;
 	}
@@ -140,15 +161,21 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 			lMap1 = lMap1.maxAll(getParents(lMap1));
 			lMap2 = lMap2.maxAll(getParents(lMap2));
 			if (lMap1.isEmpty() && lMap2.isEmpty())
+			{
 				break;
+			}
 
 			lIntersectionMonitor.addToA(lMap1.keySet());
 			if (lIntersectionMonitor.isIntersecting())
+			{
 				break;
+			}
 
 			lIntersectionMonitor.addToB(lMap2.keySet());
 			if (lIntersectionMonitor.isIntersecting())
+			{
 				break;
+			}
 		}
 
 		final Set<N> lIntersectionSet = lIntersectionMonitor.getIntersection();
@@ -182,7 +209,9 @@ public class HashLattice<N> extends HashGraph<N, DirectedEdge<N>>	implements
 
 		final List<Double> lDepthList = new ArrayList<Double>();
 		for (final N lN : lLowerCommonAncestorsSet)
+		{
 			lDepthList.add(getDepth(lN));
+		}
 
 		final double lDepth = CollectionUtils.average(lDepthList);
 		final double l1 = lTriple.mB;

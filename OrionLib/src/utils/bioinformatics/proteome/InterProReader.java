@@ -15,17 +15,20 @@ public class InterProReader
 	private static final Pattern lSplitTabPattern = Pattern.compile("\t");
 	private static final Pattern lSplitSemicolonPattern = Pattern.compile("\\;");
 
-	public static void addDomainsTo(Proteome pProteome, File pInterProScanFile)	throws FileNotFoundException,
-																																							IOException
+	public static void addDomainsTo(final Proteome pProteome,
+																	final File pInterProScanFile)	throws FileNotFoundException,
+																																IOException
 	{
 		addDomainsTo(pProteome, new FileInputStream(pInterProScanFile));
 	}
 
-	public static void addDomainsTo(Proteome pProteome, InputStream pInputStream) throws IOException
+	public static void addDomainsTo(final Proteome pProteome,
+																	final InputStream pInputStream) throws IOException
 	{
 
-		ProteinSet lProteinSet = pProteome.getProteinSet();
+		final ProteinSet lProteinSet = pProteome.getProteinSet();
 		for (String lLine : LineReader.getLines(pInputStream))
+		{
 			if (!lLine.isEmpty())
 			{
 				lLine = lLine.trim();
@@ -71,13 +74,14 @@ public class InterProReader
 																		+ lId);
 							}
 						}
-						catch (IndexOutOfBoundsException e)
+						catch (final IndexOutOfBoundsException e)
 						{
 							System.err.println(e.getMessage());
 						}
 					}
 				}
 			}
+		}
 
 	}
 

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Couple<A, B> implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public A mA;
 	public B mB;
 
@@ -20,7 +24,7 @@ public class Couple<A, B> implements Serializable
 	public boolean equals(final Object pObj)
 	{
 		final Couple<A, B> lPair = (Couple<A, B>) pObj;
-		return (this.mA.equals(lPair.mA) && this.mB.equals(lPair.mB));
+		return this.mA.equals(lPair.mA) && this.mB.equals(lPair.mB);
 	}
 
 	@Override

@@ -21,10 +21,9 @@ public class MouseMode extends WiiRemoteAdapter implements WiiMode
 	private static double mX = 0;
 	private static double mY = 0;
 
-	private Rectangle mScreenRectangle;
+	private final Rectangle mScreenRectangle;
 
 	private boolean mButton1Pressed = false;
-	private boolean mButton2Pressed = false;
 	private boolean mButton3Pressed = false;
 
 	static Robot mRobot;
@@ -44,7 +43,7 @@ public class MouseMode extends WiiRemoteAdapter implements WiiMode
 		return mMouseModeItem;
 	}
 
-	public void activate(WiiRemote pRemote)
+	public void activate(final WiiRemote pRemote)
 	{
 		try
 		{
@@ -52,34 +51,34 @@ public class MouseMode extends WiiRemoteAdapter implements WiiMode
 			pRemote.setAccelerometerEnabled(false);
 			pRemote.setIRSensorEnabled(true, WRIREvent.BASIC);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void deactivate(WiiRemote pRemote)
+	public void deactivate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.removeWiiRemoteListener(this);
 			pRemote.setIRSensorEnabled(false, WRIREvent.BASIC);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void IRInputReceived(WRIREvent pWRIREvent)
+	public void IRInputReceived(final WRIREvent pWRIREvent)
 	{
 		int i = 0;
 		double nmX = 0;
 		double nmY = 0;
 
-		for (IRLight light : pWRIREvent.getIRLights())
+		for (final IRLight light : pWRIREvent.getIRLights())
 		{
 			if (light != null)
 			{
@@ -97,8 +96,8 @@ public class MouseMode extends WiiRemoteAdapter implements WiiMode
 
 		if (i == 2)
 		{
-			mX = nmX / (double) i;
-			mY = nmY / (double) i;
+			mX = nmX / i;
+			mY = nmY / i;
 
 			mX = mX * 1.10 - 0.05;
 			mY = mY * 1.10 - 0.05;/**/
@@ -110,13 +109,13 @@ public class MouseMode extends WiiRemoteAdapter implements WiiMode
 
 	}
 
-	public void accelerationInputReceived(WRAccelerationEvent pArg0)
+	public void accelerationInputReceived(final WRAccelerationEvent pArg0)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public void buttonInputReceived(WRButtonEvent pWRButtonEvent)
+	public void buttonInputReceived(final WRButtonEvent pWRButtonEvent)
 	{
 		// System.out.println(evt);
 		if (!mButton1Pressed && pWRButtonEvent.isPressed(WRButtonEvent.A))

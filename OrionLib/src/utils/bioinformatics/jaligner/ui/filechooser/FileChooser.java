@@ -73,7 +73,7 @@ public abstract class FileChooser
 	 * @param userDir
 	 *          The user directory to set
 	 */
-	public void setUserDirectory(String userDir)
+	public void setUserDirectory(final String userDir)
 	{
 		this.userDir = userDir;
 	}

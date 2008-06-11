@@ -43,15 +43,25 @@ public class PowerGraphComponentEnumerator
 
 			lReachedSet.add(lFirstEdge);
 			for (final Edge<Set<N>> lEdge : lPowerEdgeSet)
+			{
 				if (PowerGraph.isConnected(lFirstEdge, lEdge))
+				{
 					lFrontierSet.add(lEdge);
+				}
+			}
 
 			while (!lFrontierSet.isEmpty())
 			{
 				for (final Edge<Set<N>> lFrontierPowerEdge : lFrontierSet)
+				{
 					for (final Edge<Set<N>> lEdge : lPowerEdgeSet)
+					{
 						if (PowerGraph.isConnected(lFrontierPowerEdge, lEdge))
+						{
 							lNewFrontierSet.add(lEdge);
+						}
+					}
+				}
 				lNewFrontierSet.removeAll(lReachedSet);
 				lReachedSet.addAll(lFrontierSet);
 				lFrontierSet.clear();
@@ -64,7 +74,9 @@ public class PowerGraphComponentEnumerator
 
 			final PowerGraph<N> lComponent = new PowerGraph<N>();
 			for (final Edge<Set<N>> lEdge : lReachedSet)
+			{
 				lComponent.addPowerEdge(lEdge);
+			}
 			lComponentList.add(lComponent);
 		}
 

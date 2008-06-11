@@ -33,7 +33,7 @@ public class chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double df)
+	public static double density(final double x, final double df)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
@@ -69,7 +69,7 @@ public class chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double df)
+	public static double cumulative(final double x, final double df)
 	{
 		return gamma.cumulative(x, df / 2.0, 2.0);
 	}
@@ -102,7 +102,7 @@ public class chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double p, double df)
+	public static double quantile(final double p, final double df)
 	{
 		return gamma.quantile(p, 0.5 * df, 2.0);
 	}
@@ -139,7 +139,7 @@ public class chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double df, uniform PRNG)
+	public static double random(final double df, final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */

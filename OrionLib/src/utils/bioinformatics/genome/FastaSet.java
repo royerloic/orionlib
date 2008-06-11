@@ -14,6 +14,10 @@ import utils.io.LineReader;
 
 public class FastaSet implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final Pattern lSplitCommaPattern = Pattern.compile("\\, ");
 	private static final Pattern lSplitSpacePattern = Pattern.compile("\\ ");
 	private static final Pattern lPipeSpacePattern = Pattern.compile("\\|");
@@ -26,29 +30,29 @@ public class FastaSet implements Serializable
 		super();
 	}
 
-	public FastaSet(InputStream pInputStream) throws IOException
+	public FastaSet(final InputStream pInputStream) throws IOException
 	{
 		super();
 		addSequencesFromStream(pInputStream);
 	}
 
-	public FastaSet(File pFile) throws IOException
+	public FastaSet(final File pFile) throws IOException
 	{
 		super();
 		addSequencesFromStream(new FileInputStream(pFile));
 	}
 
-	public FastaSequence newSequence(String pCurrentFastaSequenceName)
+	public FastaSequence newSequence(final String pCurrentFastaSequenceName)
 	{
 		final FastaSequence lFastaSequence = new FastaSequence(pCurrentFastaSequenceName);
 		mFastaSequencesMap.put(pCurrentFastaSequenceName, lFastaSequence);
 		return lFastaSequence;
 	}
 
-	private FastaSequence newSgdSequence(	String pSgdSystematicName,
-																				String pName,
-																				String pID,
-																				String pHeader)
+	private FastaSequence newSgdSequence(	final String pSgdSystematicName,
+																				final String pName,
+																				final String pID,
+																				final String pHeader)
 	{
 		final FastaSequence lFastaSequence = new FastaSequence(pSgdSystematicName);
 		lFastaSequence.put("SystematicName", pSgdSystematicName);
@@ -59,8 +63,8 @@ public class FastaSet implements Serializable
 		return lFastaSequence;
 	}
 
-	private FastaSequence newSwissProtSequence(	String pSwissProtId,
-																							String pCurrentFastaSequenceHeader)
+	private FastaSequence newSwissProtSequence(	final String pSwissProtId,
+																							final String pCurrentFastaSequenceHeader)
 	{
 		final FastaSequence lFastaSequence = new FastaSequence(pSwissProtId);
 		lFastaSequence.put("Id", pSwissProtId);
@@ -69,12 +73,12 @@ public class FastaSet implements Serializable
 		return lFastaSequence;
 	}
 
-	public void addSequencesFromFile(File pFile) throws IOException
+	public void addSequencesFromFile(final File pFile) throws IOException
 	{
 		addSequencesFromStream(new FileInputStream(pFile));
 	}
 
-	public void addSequencesFromStream(InputStream pInputStream) throws IOException
+	public void addSequencesFromStream(final InputStream pInputStream) throws IOException
 	{
 
 		String lCurrentFastaSequenceHeader;
@@ -126,9 +130,13 @@ public class FastaSet implements Serializable
 			else
 			{
 				if (lCurrentFastaSequence != null)
+				{
 					lCurrentFastaSequence.append(lLine.trim());
+				}
 				else
+				{
 					throw new ParseException("Fasta sequence without name");
+				}
 			}
 		}
 
@@ -147,8 +155,8 @@ public class FastaSet implements Serializable
 	@Override
 	public String toString()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
-		for (FastaSequence lFastaSequence : mFastaSequencesMap.values())
+		final StringBuilder lStringBuilder = new StringBuilder();
+		for (final FastaSequence lFastaSequence : mFastaSequencesMap.values())
 		{
 			lStringBuilder.append(lFastaSequence);
 			lStringBuilder.append("\n");
@@ -156,7 +164,7 @@ public class FastaSet implements Serializable
 		return lStringBuilder.toString();
 	}
 
-	public FastaSequence getSequenceByName(String pName)
+	public FastaSequence getSequenceByName(final String pName)
 	{
 		return mFastaSequencesMap.get(pName);
 	}
@@ -167,28 +175,37 @@ public class FastaSet implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-							+ ((mFastaSequencesMap == null)	? 0
-																							: mFastaSequencesMap.hashCode());
+							+ (mFastaSequencesMap == null ? 0 : mFastaSequencesMap.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final FastaSet other = (FastaSet) obj;
 		if (mFastaSequencesMap == null)
 		{
 			if (other.mFastaSequencesMap != null)
+			{
 				return false;
+			}
 		}
 		else if (!mFastaSequencesMap.equals(other.mFastaSequencesMap))
+		{
 			return false;
+		}
 		return true;
 	}
 

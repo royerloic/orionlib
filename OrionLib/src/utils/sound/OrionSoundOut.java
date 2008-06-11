@@ -61,9 +61,13 @@ public class OrionSoundOut
 	{
 		int lLength;
 		if (pLength > pBuffer.length)
+		{
 			lLength = pBuffer.length;
+		}
 		else
+		{
 			lLength = pLength;
+		}
 		sourceDataLine.write(pBuffer, 0, lLength);
 	}
 
@@ -71,10 +75,12 @@ public class OrionSoundOut
 																			final byte[] pByteArray)
 	{
 		if (2 * pIntArray.length > pByteArray.length)
+		{
 			return null;
+		}
 		for (int i = 0; i < pIntArray.length; ++i)
 		{
-			pByteArray[2 * i] = (byte) ((pIntArray[i]) % 0xFF);
+			pByteArray[2 * i] = (byte) (pIntArray[i] % 0xFF);
 			pByteArray[2 * i + 1] = (byte) ((pIntArray[i] >> 8) % 0xFF);
 		}
 

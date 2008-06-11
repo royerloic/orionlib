@@ -23,7 +23,9 @@ public class CmdLine
 				lParameterMap.put(lKey, lValue);
 			}
 			else
+			{
 				lParameterMap.put(lArgument, "yes");
+			}
 		}
 		return lParameterMap;
 	}

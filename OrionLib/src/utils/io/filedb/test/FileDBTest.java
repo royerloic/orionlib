@@ -22,12 +22,12 @@ public class FileDBTest
 	{
 		try
 		{
-			InputStream lInputStream = FileDBTest.class.getResourceAsStream("Test.tab.txt");
+			final InputStream lInputStream = FileDBTest.class.getResourceAsStream("Test.tab.txt");
 			assertTrue(lInputStream != null);
 			sTempFile = File.createTempFile("FileDBTest", "temp");
 			StreamToFile.streamToFile(lInputStream, sTempFile);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			fail("Could not create temp file");
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class FileDBTest
 	@Test
 	public void testGetColumnNames() throws IOException
 	{
-		List<String> lColumnNames = FileDB.getColumnNames(sTempFile);
+		final List<String> lColumnNames = FileDB.getColumnNames(sTempFile);
 		assertTrue(lColumnNames.contains("col0"));
 		assertTrue(lColumnNames.contains("col1"));
 		assertTrue(lColumnNames.contains("col2"));

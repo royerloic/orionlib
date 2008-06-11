@@ -11,7 +11,7 @@ public class FastIntegerSetStatic
 	{
 		if (pArray.length == 0)
 		{
-			int[] lNewArray = new int[1];
+			final int[] lNewArray = new int[1];
 			lNewArray[0] = pInteger;
 			return lNewArray;
 		}
@@ -24,19 +24,19 @@ public class FastIntegerSetStatic
 		}
 		else if (lInsertValue <= pInteger)
 		{
-			int[] lNewArray = insertAt(pArray, lInsertPosition + 1, pInteger);
+			final int[] lNewArray = insertAt(pArray, lInsertPosition + 1, pInteger);
 			return lNewArray;
 		}
 		else if (lInsertValue >= pInteger)
 		{
-			int[] lNewArray = insertAt(pArray, lInsertPosition, pInteger);
+			final int[] lNewArray = insertAt(pArray, lInsertPosition, pInteger);
 			return lNewArray;
 		}
 
 		return null;
 	}
 
-	public static int[] del(int[] pArray, int pInt)
+	public static int[] del(final int[] pArray, final int pInt)
 	{
 		final int index = locate(pArray, pInt);
 
@@ -44,10 +44,12 @@ public class FastIntegerSetStatic
 		{
 			final int[] lNewArray = new int[pArray.length - 1];
 
-			int numMoved = pArray.length - index - 1;
+			final int numMoved = pArray.length - index - 1;
 			System.arraycopy(pArray, 0, lNewArray, 0, pArray.length - 1);
 			if (numMoved > 0)
+			{
 				System.arraycopy(pArray, index + 1, lNewArray, index, numMoved);
+			}
 
 			return lNewArray;
 		}
@@ -58,7 +60,9 @@ public class FastIntegerSetStatic
 	public static final int locate(final int[] pArray, final int pInt)
 	{
 		if (pArray.length == 0)
+		{
 			return 0;
+		}
 		return locateRecursive(pArray, pInt, 0, pArray.length);
 	}
 
@@ -162,7 +166,7 @@ public class FastIntegerSetStatic
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
+		final int[] lResizedArray = setCapacity(lNewArray, k);
 
 		return lResizedArray;
 	}
@@ -246,7 +250,7 @@ public class FastIntegerSetStatic
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
+		final int[] lResizedArray = setCapacity(lNewArray, k);
 
 		return lResizedArray;
 	}
@@ -330,7 +334,7 @@ public class FastIntegerSetStatic
 			}
 		}
 
-		int[] lResizedArray = setCapacity(lNewArray, k);
+		final int[] lResizedArray = setCapacity(lNewArray, k);
 
 		return lResizedArray;
 	}
@@ -340,7 +344,7 @@ public class FastIntegerSetStatic
 		final int[] lArray = getNewArrayWithCapacity(pCollection.size());
 
 		int i = 0;
-		for (int lI : pCollection)
+		for (final int lI : pCollection)
 		{
 			lArray[i] = lI;
 			i++;
@@ -353,7 +357,7 @@ public class FastIntegerSetStatic
 		final int[] lArray = getNewArrayWithCapacity(pIntegerArray.length);
 
 		int i = 0;
-		for (int lI : pIntegerArray)
+		for (final int lI : pIntegerArray)
 		{
 			lArray[i] = lI;
 			i++;
@@ -392,7 +396,9 @@ public class FastIntegerSetStatic
 			for (int i = 0; i < pArray1.length; i++)
 			{
 				if (pArray1[i] != pArray2[i])
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -416,16 +422,16 @@ public class FastIntegerSetStatic
 			i++;
 		}
 
-		int[] lResizedArray = setCapacity(lArray, lCurrentIndex);
+		final int[] lResizedArray = setCapacity(lArray, lCurrentIndex);
 		return lResizedArray;
 	}
 
-	private static final int max(int a, int b)
+	private static final int max(final int a, final int b)
 	{
-		return (a >= b) ? a : b;
+		return a >= b ? a : b;
 	}
 
-	public static void validate(int[] pReferenceSet)
+	public static void validate(final int[] pReferenceSet)
 	{
 		Arrays.sort(pReferenceSet);
 	}

@@ -41,7 +41,9 @@ public class hypergeometric
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
+		{
 			return x + NR + NB + n;
+		}
 		/* !* #endif /*4! */
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
@@ -59,7 +61,9 @@ public class hypergeometric
 		}
 		/* !* if (x < fmax2(0, n - NB) || x > fmin2(n, NR)) *! */
 		if (x < Math.max(0, n - NB) || x > Math.min(n, NR))
+		{
 			return 0;
+		}
 		/* !* return exp(lfastchoose(NR, x) + lfastchoose(NB, n - x) *! */
 		return java.lang.Math.exp(misc.lfastchoose(NR, x) + misc.lfastchoose(	NB,
 																																					n - x)
@@ -104,7 +108,9 @@ public class hypergeometric
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
+		{
 			return x + NR + NB + n;
+		}
 		if (Double.isInfinite(x) || Double.isInfinite(NR)
 				|| Double.isInfinite(NB)
 				|| Double.isInfinite(n))
@@ -133,9 +139,13 @@ public class hypergeometric
 		/* !* xend = fmin2(n, NR); *! */
 		xend = Math.min(n, NR);
 		if (x < xstart)
+		{
 			return 0.0;
+		}
 		if (x >= xend)
+		{
 			return 1.0;
+		}
 		xr = xstart;
 		xb = n - xr;
 		/* !* term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb) *! */
@@ -151,7 +161,7 @@ public class hypergeometric
 			sum += term;
 			xr++;
 			NB++;
-			term *= (NR / xr) * (xb / NB);
+			term *= NR / xr * xb / NB;
 			xb--;
 			NR--;
 		}
@@ -187,14 +197,16 @@ public class hypergeometric
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double NR, double NB, double n)
+	public static double quantile(final double x, double NR, double NB, double n)
 	{
 		double N, xstart, xend, xr, xb, sum, term;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
+		{
 			return x + NR + NB + n;
+		}
 		if (Double.isInfinite(x) || Double.isInfinite(NR)
 				|| Double.isInfinite(NB)
 				|| Double.isInfinite(n))
@@ -220,9 +232,13 @@ public class hypergeometric
 		/* !* xend = fmin2(n, NR); *! */
 		xend = Math.min(n, NR);
 		if (x <= 0)
+		{
 			return xstart;
+		}
 		if (x >= 1)
+		{
 			return xend;
+		}
 		xr = xstart;
 		xb = n - xr;
 		/* !* term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb) *! */
@@ -237,7 +253,7 @@ public class hypergeometric
 		{
 			xr++;
 			NB++;
-			term *= (NR / xr) * (xb / NB);
+			term *= NR / xr * xb / NB;
 			sum += term;
 			xb--;
 			NR--;
@@ -299,7 +315,7 @@ public class hypergeometric
 	/* , 10.60460290274525022841722740072165 */
 	};
 
-	static private double afc(int i)
+	static private double afc(final int i)
 	{
 		double di, value;
 		if (i < 0)
@@ -358,10 +374,10 @@ public class hypergeometric
 	/* extern double afc(int); */
 	static private double alv;
 
-	public static double random(double nn1in,
-															double nn2in,
-															double kkin,
-															uniform PRNG)
+	public static double random(final double nn1in,
+															final double nn2in,
+															final double kkin,
+															final uniform PRNG)
 	{
 		int nn1, nn2, kk;
 
@@ -423,7 +439,7 @@ public class hypergeometric
 			ks = kk;
 			if (kk + kk >= tn)
 			{
-				k = (int) (tn) - kk;
+				k = (int) tn - kk;
 			}
 			else
 			{
@@ -463,7 +479,9 @@ public class hypergeometric
 			else
 			{
 				if (nn1 > nn2)
+				{
 					ix = kk - ix;
+				}
 			}
 			return ix;
 
@@ -504,7 +522,9 @@ public class hypergeometric
 						ix = ix + 1;
 						p = p / ix / (n2 - k + ix);
 						if (ix > maxjx)
+						{
 							continue L10;
+						}
 						continue L20;
 					}
 					break L10;
@@ -528,7 +548,7 @@ public class hypergeometric
 				xr = m + d + .5;
 				a = afc(m) + afc(n1 - m) + afc(k - m) + afc(n2 - k + m);
 				/* !* kl = exp(a - afc((int) (xl)) - afc((int) (n1 - xl)) *! */
-				kl = java.lang.Math.exp(a - afc((int) (xl))
+				kl = java.lang.Math.exp(a - afc((int) xl)
 																- afc((int) (n1 - xl))
 																- afc((int) (k - xl))
 																- afc((int) (n2 - k + xl)));
@@ -564,7 +584,9 @@ public class hypergeometric
 					/* !* ix = xl + log(v) / lamdl; *! */
 					ix = (int) (xl + java.lang.Math.log(v) / lamdl);
 					if (ix < minjx)
+					{
 						continue L30;
+					}
 					v = v * (u - p1) * lamdl;
 				}
 				else
@@ -573,7 +595,9 @@ public class hypergeometric
 					/* !* ix = xr - log(v) / lamdr; *! */
 					ix = (int) (xr - java.lang.Math.log(v) / lamdr);
 					if (ix > maxjx)
+					{
 						continue L30;
+					}
 					v = v * (u - p2) * lamdr;
 				}
 
@@ -586,12 +610,16 @@ public class hypergeometric
 					if (m < ix)
 					{
 						for (i = m + 1; i <= ix; i++)
+						{
 							f = f * (n1 - i + 1) * (k - i + 1) / (n2 - k + i) / i;
+						}
 					}
 					else if (m > ix)
 					{
 						for (i = ix + 1; i <= m; i++)
+						{
 							f = f * i * (n2 - k + i) / (n1 - i) / (k - i);
+						}
 					}
 					if (v <= f)
 					{
@@ -614,9 +642,11 @@ public class hypergeometric
 					g = yn * yk / (y1 * nk) - 1.0;
 					dg = 1.0;
 					if (g < 0.0)
+					{
 						dg = 1.0 + g;
+					}
 					gu = g * (1.0 + g * (-0.5 + g / 3.0));
-					gl = gu - .25 * (g * g * g * g) / dg;
+					gl = gu - .25 * g * g * g * g / dg;
 					xm = m + 0.5;
 					xn = n1 - m + 0.5;
 					xk = k - m + 0.5;
@@ -647,18 +677,26 @@ public class hypergeometric
 					else
 					{
 						/* Test against lower bound */
-						dr = xm * (r * r * r * r);
+						dr = xm * r * r * r * r;
 						if (r < 0.0)
+						{
 							dr = dr / (1.0 + r);
-						ds = xn * (s * s * s * s);
+						}
+						ds = xn * s * s * s * s;
 						if (s < 0.0)
+						{
 							ds = ds / (1.0 + s);
-						dt = xk * (t * t * t * t);
+						}
+						dt = xk * t * t * t * t;
 						if (t < 0.0)
+						{
 							dt = dt / (1.0 + t);
-						de = nm * (e * e * e * e);
+						}
+						de = nm * e * e * e * e;
 						if (e < 0.0)
+						{
 							de = de / (1.0 + e);
+						}
 						if (alv < ub - 0.25
 											* (dr + ds + dt + de)
 											+ (y + m)
@@ -672,8 +710,10 @@ public class hypergeometric
 							/*
 							 * stirling's formula to machine accuracy
 							 */
-							if (alv <= (a - afc(ix) - afc(n1 - ix) - afc(k - ix) - afc(n2 - k
-																																					+ ix)))
+							if (alv <= a - afc(ix)
+													- afc(n1 - ix)
+													- afc(k - ix)
+													- afc(n2 - k + ix))
 							{
 								reject = false;
 							}
@@ -685,7 +725,9 @@ public class hypergeometric
 					}
 				}
 				if (reject)
+				{
 					continue L30;
+				}
 				break L30;
 			}
 		}
@@ -705,7 +747,9 @@ public class hypergeometric
 		else
 		{
 			if (nn1 > nn2)
+			{
 				ix = kk - ix;
+			}
 		}
 		return ix;
 	}

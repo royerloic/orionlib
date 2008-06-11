@@ -41,34 +41,34 @@ public class PrintJobMointor
 	// True iff it is safe to close the print job's input stream
 	private boolean done = false;
 
-	PrintJobMointor(DocPrintJob job)
+	PrintJobMointor(final DocPrintJob job)
 	{
 		// Add a listener to the print job
 		job.addPrintJobListener(new PrintJobAdapter()
 		{
 			@Override
-			public void printJobCanceled(PrintJobEvent printJobEvent)
+			public void printJobCanceled(final PrintJobEvent printJobEvent)
 			{
 				logger.info("Print job canceled");
 				allDone();
 			}
 
 			@Override
-			public void printJobCompleted(PrintJobEvent printJobEvent)
+			public void printJobCompleted(final PrintJobEvent printJobEvent)
 			{
 				logger.info("Print job completed");
 				allDone();
 			}
 
 			@Override
-			public void printJobFailed(PrintJobEvent printJobEvent)
+			public void printJobFailed(final PrintJobEvent printJobEvent)
 			{
 				logger.info("Print job failed");
 				allDone();
 			}
 
 			@Override
-			public void printJobNoMoreEvents(PrintJobEvent printJobEvent)
+			public void printJobNoMoreEvents(final PrintJobEvent printJobEvent)
 			{
 				allDone();
 			}
@@ -99,7 +99,7 @@ public class PrintJobMointor
 			}
 			logger.info("Finished waiting for print");
 		}
-		catch (InterruptedException e)
+		catch (final InterruptedException e)
 		{
 			logger.log(	Level.SEVERE,
 									"Failed waiting for print job: " + e.getMessage(),

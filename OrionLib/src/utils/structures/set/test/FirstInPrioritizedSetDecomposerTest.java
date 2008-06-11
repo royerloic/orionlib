@@ -14,7 +14,7 @@ public class FirstInPrioritizedSetDecomposerTest
 	@Test
 	public void testFirstInPrioritizedSetDecomposer() throws IOException
 	{
-		FirstInPrioritizedSetDecomposer<String, String> lDecomposer = new FirstInPrioritizedSetDecomposer<String, String>();
+		final FirstInPrioritizedSetDecomposer<String, String> lDecomposer = new FirstInPrioritizedSetDecomposer<String, String>();
 
 		lDecomposer.addSet("att1", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
 		lDecomposer.addSet("att2", "0", "1", "2", "3", "4");

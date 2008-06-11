@@ -30,8 +30,8 @@ public class ProteomeTest
 		Proteome lProteome = null;
 		try
 		{
-			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
-			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
+			final Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
+			final FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
 			lProteome = new Proteome(lGenome, lFastaSet);
 
 			lProteome.addInteractions(ProteomeTest.class.getResourceAsStream("./Test.int.tab.txt"));
@@ -42,7 +42,7 @@ public class ProteomeTest
 			System.out.println(lProteome);
 
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 			fail("Exception: " + e);
@@ -54,9 +54,9 @@ public class ProteomeTest
 														.getProteinById("YAL002W")
 														.getCorrespondingFastaSequence());
 
-		DomainIndex lDomainIndex = new DomainIndex(lProteome);
+		final DomainIndex lDomainIndex = new DomainIndex(lProteome);
 		lDomainIndex.index();
-		Set<Protein> lProteinSet = lDomainIndex.getProteinByDomainInterproId("IPR001023");
+		final Set<Protein> lProteinSet = lDomainIndex.getProteinByDomainInterproId("IPR001023");
 
 		assertNotNull(lProteinSet);
 		System.out.println(lProteinSet);
@@ -69,25 +69,25 @@ public class ProteomeTest
 		Proteome lProteome = null;
 		try
 		{
-			Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
-			FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
+			final Genome lGenome = new Genome(ProteomeTest.class.getResourceAsStream("./Test.gff"));
+			final FastaSet lFastaSet = new FastaSet(ProteomeTest.class.getResourceAsStream("./Test.fasta.txt"));
 			lProteome = new Proteome(lGenome, lFastaSet);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 			fail("Exception: " + e);
 		}
-		File lFile = File.createTempFile("pattern", ".suffix");
+		final File lFile = File.createTempFile("pattern", ".suffix");
 
-		FileOutputStream lFileOutputStream = new FileOutputStream(lFile);
-		ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
+		final FileOutputStream lFileOutputStream = new FileOutputStream(lFile);
+		final ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
 		lObjectOutputStream.writeObject(lProteome);
 		lObjectOutputStream.close();
 
-		FileInputStream lFileInputStream = new FileInputStream(lFile);
-		ObjectInputStream lObjectInputStream = new ObjectInputStream(lFileInputStream);
-		Proteome lLoadedProteome = (Proteome) lObjectInputStream.readObject();
+		final FileInputStream lFileInputStream = new FileInputStream(lFile);
+		final ObjectInputStream lObjectInputStream = new ObjectInputStream(lFileInputStream);
+		final Proteome lLoadedProteome = (Proteome) lObjectInputStream.readObject();
 		lObjectInputStream.close();
 
 		assertEquals(lLoadedProteome, lProteome);

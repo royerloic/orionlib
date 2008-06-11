@@ -11,6 +11,10 @@ import utils.structures.map.HashSetMap;
 
 public class Protein implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String mId;
 	protected final String mName;
 
@@ -21,21 +25,21 @@ public class Protein implements Serializable
 	protected FastaSequence mCorrespondingFastaSequence = null;
 	protected Gene mCorrespondingGene = null;
 
-	public Protein(String pId)
+	public Protein(final String pId)
 	{
 		super();
 		mId = pId;
 		mName = pId;
 	}
 
-	public Protein(String pId, String pName)
+	public Protein(final String pId, final String pName)
 	{
 		super();
 		mId = pId;
 		mName = pName;
 	}
 
-	public Protein(Gene pGene)
+	public Protein(final Gene pGene)
 	{
 		super();
 		mCorrespondingGene = pGene;
@@ -43,16 +47,16 @@ public class Protein implements Serializable
 		mName = pGene.getName();
 	}
 
-	public void addAllOboTerms(Set<String> pOboTermStringSet) throws Exception
+	public void addAllOboTerms(final Set<String> pOboTermStringSet) throws Exception
 	{
-		for (String lOboTermString : pOboTermStringSet)
+		for (final String lOboTermString : pOboTermStringSet)
 		{
-			OboTerm lOboTerm = new OboTerm(lOboTermString);
+			final OboTerm lOboTerm = new OboTerm(lOboTermString);
 			mOBOTermSet.add(lOboTerm);
 		}
 	}
 
-	public void addDomain(Domain pDomain)
+	public void addDomain(final Domain pDomain)
 	{
 		mInterProIdToDomainsSetMap.put(pDomain.getInterproId(), pDomain);
 
@@ -68,7 +72,7 @@ public class Protein implements Serializable
 		}
 	}
 
-	public Set<Domain> getDomainsByInterProId(String pInterProId)
+	public Set<Domain> getDomainsByInterProId(final String pInterProId)
 	{
 		return mInterProIdToDomainsSetMap.get(pInterProId);
 	}
@@ -83,7 +87,7 @@ public class Protein implements Serializable
 		return mId;
 	}
 
-	public void setId(String pId)
+	public void setId(final String pId)
 	{
 		mId = pId;
 	}
@@ -98,7 +102,7 @@ public class Protein implements Serializable
 		return mCorrespondingFastaSequence;
 	}
 
-	public void setCorrespondingFastaSequence(FastaSequence pCorrespondingFastaSequence)
+	public void setCorrespondingFastaSequence(final FastaSequence pCorrespondingFastaSequence)
 	{
 		mCorrespondingFastaSequence = pCorrespondingFastaSequence;
 	}
@@ -108,35 +112,49 @@ public class Protein implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mId == null) ? 0 : mId.hashCode());
-		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
+		result = prime * result + (mId == null ? 0 : mId.hashCode());
+		result = prime * result + (mName == null ? 0 : mName.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final Protein other = (Protein) obj;
 		if (mId == null)
 		{
 			if (other.mId != null)
+			{
 				return false;
+			}
 		}
 		else if (!mId.equals(other.mId))
+		{
 			return false;
+		}
 		if (mName == null)
 		{
 			if (other.mName != null)
+			{
 				return false;
+			}
 		}
 		else if (!mName.equals(other.mName))
+		{
 			return false;
+		}
 		return true;
 	}
 
@@ -149,7 +167,7 @@ public class Protein implements Serializable
 		 * protected String mStrand; protected int mPhase; protected HashSetMap<String,String>
 		 * mAttributes = new HashSetMap<String, String>();
 		 */
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		// lStringBuilder.append("# SequenceId \t Source \t Type \t Start \t End \t
 		// Score \t Strand \t Phase \t Attributes \n");
 
@@ -157,8 +175,10 @@ public class Protein implements Serializable
 		lStringBuilder.append(mName + "\t");
 
 		if (mCorrespondingFastaSequence != null)
+		{
 			lStringBuilder.append("[s=" + mCorrespondingFastaSequence.getFastaName()
 														+ "]");
+		}
 
 		return lStringBuilder.toString();
 	}

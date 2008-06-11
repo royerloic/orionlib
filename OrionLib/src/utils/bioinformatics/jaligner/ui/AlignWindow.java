@@ -120,7 +120,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	/**
 	 * Loaded scoring matrices
 	 */
-	private HashMap matrices = new HashMap();
+	private final HashMap matrices = new HashMap();
 
 	/**
 	 * Current text component
@@ -166,10 +166,10 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		try
 		{
 			// Set the icon for the frame
-			URL url = getClass().getResource(ToolbarIcons.GIFS_HOME + "jaligner.gif");
+			final URL url = getClass().getResource(ToolbarIcons.GIFS_HOME + "jaligner.gif");
 			if (url != null)
 			{
-				Image image = java.awt.Toolkit.getDefaultToolkit().getImage(url);
+				final Image image = java.awt.Toolkit.getDefaultToolkit().getImage(url);
 				setIconImage(image);
 			}
 			else
@@ -177,7 +177,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 				logger.warning("Image URL is NULL");
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed setting the frame image: " + e.getMessage(),
@@ -194,7 +194,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		{
 			matrices = MatrixLoader.list(false);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.WARNING,
 									"Failed getting list of scoring matrices: " + e.getMessage(),
@@ -209,9 +209,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		FormatFactory.getInstance().registerFormat(new Pair());
 		FormatFactory.getInstance().registerFormat(new FASTA());
 
-		Collection formats = FormatFactory.getInstance().getFormats();
-		String[] outputFormats = new String[formats.size()];
-		Iterator i = formats.iterator();
+		final Collection formats = FormatFactory.getInstance().getFormats();
+		final String[] outputFormats = new String[formats.size()];
+		final Iterator i = formats.iterator();
 		for (int j = 0; i.hasNext(); j++)
 		{
 			outputFormats[j] = (String) i.next();
@@ -351,7 +351,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupOpen.setText("Open...");
 		jPopupOpen.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupOpenActionPerformed(evt);
 			}
@@ -366,7 +366,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupSave.setText("Save...");
 		jPopupSave.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupSaveActionPerformed(evt);
 			}
@@ -383,7 +383,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupCut.setText("Cut");
 		jPopupCut.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupCutActionPerformed(evt);
 			}
@@ -398,7 +398,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupCopy.setText("Copy");
 		jPopupCopy.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupCopyActionPerformed(evt);
 			}
@@ -413,7 +413,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupPaste.setText("Paste");
 		jPopupPaste.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupPasteActionPerformed(evt);
 			}
@@ -428,7 +428,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupDelete.setText("Delete");
 		jPopupDelete.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupDeleteActionPerformed(evt);
 			}
@@ -445,7 +445,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupPrint.setText("Print");
 		jPopupPrint.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupPrintActionPerformed(evt);
 			}
@@ -461,7 +461,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jPopupSelectAll.setText("Select All");
 		jPopupSelectAll.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jPopupSelectAllActionPerformed(evt);
 			}
@@ -474,7 +474,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		setName("AlignWindow");
 		addWindowListener(new java.awt.event.WindowAdapter()
 		{
-			public void windowClosing(java.awt.event.WindowEvent evt)
+			public void windowClosing(final java.awt.event.WindowEvent evt)
 			{
 				exitForm(evt);
 			}
@@ -486,7 +486,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonOpen.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonOpenActionPerformed(evt);
 			}
@@ -500,7 +500,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonSave.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonSave.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonSaveActionPerformed(evt);
 			}
@@ -514,7 +514,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonCut.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonCut.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonCutActionPerformed(evt);
 			}
@@ -528,7 +528,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonCopy.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonCopy.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonCopyActionPerformed(evt);
 			}
@@ -542,7 +542,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonPaste.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonPaste.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonPasteActionPerformed(evt);
 			}
@@ -556,7 +556,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonDelete.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonDelete.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonDeleteActionPerformed(evt);
 			}
@@ -570,7 +570,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonPrint.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonPrint.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonPrintActionPerformed(evt);
 			}
@@ -584,7 +584,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonExit.setPreferredSize(new java.awt.Dimension(24, 24));
 		jButtonExit.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonExitActionPerformed(evt);
 			}
@@ -605,21 +605,21 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jTextAreaSequence1.setFont(new java.awt.Font("DialogInput", 0, 12));
 		jTextAreaSequence1.addFocusListener(new java.awt.event.FocusAdapter()
 		{
-			public void focusGained(java.awt.event.FocusEvent evt)
+			public void focusGained(final java.awt.event.FocusEvent evt)
 			{
 				jTextAreaSequence1FocusGained(evt);
 			}
 		});
 		jTextAreaSequence1.addMouseListener(new java.awt.event.MouseAdapter()
 		{
-			public void mouseClicked(java.awt.event.MouseEvent evt)
+			public void mouseClicked(final java.awt.event.MouseEvent evt)
 			{
 				jTextAreaSequence1MouseClicked(evt);
 			}
 		});
 		jTextAreaSequence1.addCaretListener(new javax.swing.event.CaretListener()
 		{
-			public void caretUpdate(javax.swing.event.CaretEvent evt)
+			public void caretUpdate(final javax.swing.event.CaretEvent evt)
 			{
 				jTextAreaSequence1CaretUpdate(evt);
 			}
@@ -633,7 +633,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jRadioButtonSequence1.setText("Sequence #1");
 		jRadioButtonSequence1.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jRadioButtonSequence1ActionPerformed(evt);
 			}
@@ -649,21 +649,21 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jTextAreaSequence2.setFont(new java.awt.Font("DialogInput", 0, 12));
 		jTextAreaSequence2.addFocusListener(new java.awt.event.FocusAdapter()
 		{
-			public void focusGained(java.awt.event.FocusEvent evt)
+			public void focusGained(final java.awt.event.FocusEvent evt)
 			{
 				jTextAreaSequence2FocusGained(evt);
 			}
 		});
 		jTextAreaSequence2.addMouseListener(new java.awt.event.MouseAdapter()
 		{
-			public void mouseClicked(java.awt.event.MouseEvent evt)
+			public void mouseClicked(final java.awt.event.MouseEvent evt)
 			{
 				jTextAreaSequence2MouseClicked(evt);
 			}
 		});
 		jTextAreaSequence2.addCaretListener(new javax.swing.event.CaretListener()
 		{
-			public void caretUpdate(javax.swing.event.CaretEvent evt)
+			public void caretUpdate(final javax.swing.event.CaretEvent evt)
 			{
 				jTextAreaSequence2CaretUpdate(evt);
 			}
@@ -677,7 +677,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jRadioButtonSequence2.setText("Sequence #2");
 		jRadioButtonSequence2.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jRadioButtonSequence2ActionPerformed(evt);
 			}
@@ -695,7 +695,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jRadioButtonAlignment.setText("Alignment");
 		jRadioButtonAlignment.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jRadioButtonAlignmentActionPerformed(evt);
 			}
@@ -709,21 +709,21 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jTextAreaAlignment.setTabSize(0);
 		jTextAreaAlignment.addFocusListener(new java.awt.event.FocusAdapter()
 		{
-			public void focusGained(java.awt.event.FocusEvent evt)
+			public void focusGained(final java.awt.event.FocusEvent evt)
 			{
 				jTextAreaAlignmentFocusGained(evt);
 			}
 		});
 		jTextAreaAlignment.addMouseListener(new java.awt.event.MouseAdapter()
 		{
-			public void mouseClicked(java.awt.event.MouseEvent evt)
+			public void mouseClicked(final java.awt.event.MouseEvent evt)
 			{
 				jTextAreaAlignmentMouseClicked(evt);
 			}
 		});
 		jTextAreaAlignment.addCaretListener(new javax.swing.event.CaretListener()
 		{
-			public void caretUpdate(javax.swing.event.CaretEvent evt)
+			public void caretUpdate(final javax.swing.event.CaretEvent evt)
 			{
 				jTextAreaAlignmentCaretUpdate(evt);
 			}
@@ -743,7 +743,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jRadioButtonConsole.setText("Console");
 		jRadioButtonConsole.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jRadioButtonConsoleActionPerformed(evt);
 			}
@@ -755,21 +755,21 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jTextPaneConsole.setEditable(false);
 		jTextPaneConsole.addFocusListener(new java.awt.event.FocusAdapter()
 		{
-			public void focusGained(java.awt.event.FocusEvent evt)
+			public void focusGained(final java.awt.event.FocusEvent evt)
 			{
 				jTextPaneConsoleFocusGained(evt);
 			}
 		});
 		jTextPaneConsole.addMouseListener(new java.awt.event.MouseAdapter()
 		{
-			public void mouseClicked(java.awt.event.MouseEvent evt)
+			public void mouseClicked(final java.awt.event.MouseEvent evt)
 			{
 				jTextPaneConsoleMouseClicked(evt);
 			}
 		});
 		jTextPaneConsole.addCaretListener(new javax.swing.event.CaretListener()
 		{
-			public void caretUpdate(javax.swing.event.CaretEvent evt)
+			public void caretUpdate(final javax.swing.event.CaretEvent evt)
 			{
 				jTextPaneConsoleCaretUpdate(evt);
 			}
@@ -837,7 +837,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jButtonGo.setText("Go");
 		jButtonGo.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jButtonGoActionPerformed(evt);
 			}
@@ -858,7 +858,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFileOpen.setText("Open...");
 		jMenuItemFileOpen.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFileOpenActionPerformed(evt);
 			}
@@ -873,7 +873,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFileLoadSequence1.setText("Load sequence #1...");
 		jMenuItemFileLoadSequence1.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFileLoadSequence1ActionPerformed(evt);
 			}
@@ -888,7 +888,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFileLoadSequence2.setText("Load sequence #2...");
 		jMenuItemFileLoadSequence2.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFileLoadSequence2ActionPerformed(evt);
 			}
@@ -904,7 +904,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFileLoadMatrix.setToolTipText("Load user-defined scoring matrix from file system");
 		jMenuItemFileLoadMatrix.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFileLoadMatrixActionPerformed(evt);
 			}
@@ -921,7 +921,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFileExit.setText("Exit");
 		jMenuItemFileExit.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFileExitActionPerformed(evt);
 			}
@@ -935,7 +935,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemFilePrint.setText("Print...");
 		jMenuItemFilePrint.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemFilePrintActionPerformed(evt);
 			}
@@ -954,7 +954,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemEditCut.setText("Cut");
 		jMenuItemEditCut.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemEditCutActionPerformed(evt);
 			}
@@ -969,7 +969,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemEditCopy.setText("Copy");
 		jMenuItemEditCopy.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemEditCopyActionPerformed(evt);
 			}
@@ -984,7 +984,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemEditPaste.setText("Paste");
 		jMenuItemEditPaste.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemEditPasteActionPerformed(evt);
 			}
@@ -999,7 +999,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemEditDelete.setText("Delete");
 		jMenuItemEditDelete.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemEditDeleteActionPerformed(evt);
 			}
@@ -1013,7 +1013,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemEditSelectAll.setText("Select All");
 		jMenuItemEditSelectAll.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemEditSelectAllActionPerformed(evt);
 			}
@@ -1032,7 +1032,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemToolsRunExample.setToolTipText("Aligns P53 human and P53 mouse");
 		jMenuItemToolsRunExample.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemToolsRunExampleActionPerformed(evt);
 			}
@@ -1051,7 +1051,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		jMenuItemAbout.setText("About...");
 		jMenuItemAbout.addActionListener(new java.awt.event.ActionListener()
 		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
+			public void actionPerformed(final java.awt.event.ActionEvent evt)
 			{
 				jMenuItemAboutActionPerformed(evt);
 			}
@@ -1066,12 +1066,12 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		pack();
 	}// GEN-END:initComponents
 
-	private void jPopupPrintActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupPrintActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupPrintActionPerformed
 		print();
 	}// GEN-LAST:event_jPopupPrintActionPerformed
 
-	private void jMenuItemToolsRunExampleActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemToolsRunExampleActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemToolsRunExampleActionPerformed
 		try
 		{
@@ -1082,7 +1082,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			jTextAreaAlignment.requestFocus();
 			logger.info("Finished running the example...");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(	Level.SEVERE,
 									"Failed running the example: " + e.getMessage(),
@@ -1091,22 +1091,22 @@ public class AlignWindow extends javax.swing.JFrame	implements
 
 	}// GEN-LAST:event_jMenuItemToolsRunExampleActionPerformed
 
-	private void jMenuItemFilePrintActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFilePrintActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFilePrintActionPerformed
 		print();
 	}// GEN-LAST:event_jMenuItemFilePrintActionPerformed
 
-	private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonPrintActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonPrintActionPerformed
 		print();
 	}// GEN-LAST:event_jButtonPrintActionPerformed
 
-	private void jTextPaneConsoleCaretUpdate(javax.swing.event.CaretEvent evt)
+	private void jTextPaneConsoleCaretUpdate(final javax.swing.event.CaretEvent evt)
 	{// GEN-FIRST:event_jTextPaneConsoleCaretUpdate
 		handleCaretUpdateEvent(evt);
 	}// GEN-LAST:event_jTextPaneConsoleCaretUpdate
 
-	private void jTextPaneConsoleMouseClicked(java.awt.event.MouseEvent evt)
+	private void jTextPaneConsoleMouseClicked(final java.awt.event.MouseEvent evt)
 	{// GEN-FIRST:event_jTextPaneConsoleMouseClicked
 		jTextPaneConsole.requestFocus();
 		if (evt.getButton() == MouseEvent.BUTTON3)
@@ -1115,85 +1115,85 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		}
 	}// GEN-LAST:event_jTextPaneConsoleMouseClicked
 
-	private void jTextPaneConsoleFocusGained(java.awt.event.FocusEvent evt)
+	private void jTextPaneConsoleFocusGained(final java.awt.event.FocusEvent evt)
 	{// GEN-FIRST:event_jTextPaneConsoleFocusGained
 		currentTextComponent = jTextPaneConsole;
 		jRadioButtonConsole.setSelected(true);
 		handleMoveToTextComponent();
 	}// GEN-LAST:event_jTextPaneConsoleFocusGained
 
-	private void jRadioButtonConsoleActionPerformed(java.awt.event.ActionEvent evt)
+	private void jRadioButtonConsoleActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jRadioButtonConsoleActionPerformed
 		jTextPaneConsole.requestFocus();
 	}// GEN-LAST:event_jRadioButtonConsoleActionPerformed
 
-	private void jTextAreaAlignmentFocusGained(java.awt.event.FocusEvent evt)
+	private void jTextAreaAlignmentFocusGained(final java.awt.event.FocusEvent evt)
 	{// GEN-FIRST:event_jTextAreaAlignmentFocusGained
 		currentTextComponent = jTextAreaAlignment;
 		jRadioButtonAlignment.setSelected(true);
 		handleMoveToTextComponent();
 	}// GEN-LAST:event_jTextAreaAlignmentFocusGained
 
-	private void jTextAreaSequence2FocusGained(java.awt.event.FocusEvent evt)
+	private void jTextAreaSequence2FocusGained(final java.awt.event.FocusEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence2FocusGained
 		currentTextComponent = jTextAreaSequence2;
 		jRadioButtonSequence2.setSelected(true);
 		handleMoveToTextComponent();
 	}// GEN-LAST:event_jTextAreaSequence2FocusGained
 
-	private void jTextAreaSequence1FocusGained(java.awt.event.FocusEvent evt)
+	private void jTextAreaSequence1FocusGained(final java.awt.event.FocusEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence1FocusGained
 		currentTextComponent = jTextAreaSequence1;
 		jRadioButtonSequence1.setSelected(true);
 		handleMoveToTextComponent();
 	}// GEN-LAST:event_jTextAreaSequence1FocusGained
 
-	private void jRadioButtonAlignmentActionPerformed(java.awt.event.ActionEvent evt)
+	private void jRadioButtonAlignmentActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jRadioButtonAlignmentActionPerformed
 		jTextAreaAlignment.requestFocus();
 	}// GEN-LAST:event_jRadioButtonAlignmentActionPerformed
 
-	private void jRadioButtonSequence2ActionPerformed(java.awt.event.ActionEvent evt)
+	private void jRadioButtonSequence2ActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jRadioButtonSequence2ActionPerformed
 		jTextAreaSequence2.requestFocus();
 	}// GEN-LAST:event_jRadioButtonSequence2ActionPerformed
 
-	private void jRadioButtonSequence1ActionPerformed(java.awt.event.ActionEvent evt)
+	private void jRadioButtonSequence1ActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jRadioButtonSequence1ActionPerformed
 		jTextAreaSequence1.requestFocus();
 	}// GEN-LAST:event_jRadioButtonSequence1ActionPerformed
 
-	private void jMenuItemEditCopyActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemEditCopyActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemEditCopyActionPerformed
 		copy();
 	}// GEN-LAST:event_jMenuItemEditCopyActionPerformed
 
-	private void jMenuItemEditDeleteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemEditDeleteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemEditDeleteActionPerformed
 		delete();
 	}// GEN-LAST:event_jMenuItemEditDeleteActionPerformed
 
-	private void jMenuItemEditPasteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemEditPasteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemEditPasteActionPerformed
 		paste();
 	}// GEN-LAST:event_jMenuItemEditPasteActionPerformed
 
-	private void jMenuItemFileOpenActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFileOpenActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFileOpenActionPerformed
 		loadFileToTextArea("", currentTextComponent);
 	}// GEN-LAST:event_jMenuItemFileOpenActionPerformed
 
-	private void jMenuItemEditCutActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemEditCutActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemEditCutActionPerformed
 		cut();
 	}// GEN-LAST:event_jMenuItemEditCutActionPerformed
 
-	private void jMenuItemEditSelectAllActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemEditSelectAllActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemEditSelectAllActionPerformed
 		selectAll();
 	}// GEN-LAST:event_jMenuItemEditSelectAllActionPerformed
 
-	private void jTextAreaSequence2MouseClicked(java.awt.event.MouseEvent evt)
+	private void jTextAreaSequence2MouseClicked(final java.awt.event.MouseEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence2MouseClicked
 		jTextAreaSequence2.requestFocus();
 		if (evt.getButton() == MouseEvent.BUTTON3)
@@ -1202,32 +1202,32 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		}
 	}// GEN-LAST:event_jTextAreaSequence2MouseClicked
 
-	private void jTextAreaSequence2CaretUpdate(javax.swing.event.CaretEvent evt)
+	private void jTextAreaSequence2CaretUpdate(final javax.swing.event.CaretEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence2CaretUpdate
 		handleCaretUpdateEvent(evt);
 	}// GEN-LAST:event_jTextAreaSequence2CaretUpdate
 
-	private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonExitActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonExitActionPerformed
 		exitForm(null);
 	}// GEN-LAST:event_jButtonExitActionPerformed
 
-	private void jButtonGoActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonGoActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonGoActionPerformed
 		align();
 	}// GEN-LAST:event_jButtonGoActionPerformed
 
-	private void jMenuItemFileLoadSequence2ActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFileLoadSequence2ActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFileLoadSequence2ActionPerformed
 		loadFileToTextArea("sequence #2", jTextAreaSequence2);
 	}// GEN-LAST:event_jMenuItemFileLoadSequence2ActionPerformed
 
-	private void jMenuItemFileLoadSequence1ActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFileLoadSequence1ActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFileLoadSequence1ActionPerformed
 		loadFileToTextArea("sequence #1", jTextAreaSequence1);
 	}// GEN-LAST:event_jMenuItemFileLoadSequence1ActionPerformed
 
-	private void jMenuItemFileLoadMatrixActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFileLoadMatrixActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFileLoadMatrixActionPerformed
 		NamedInputStream selectedInputStream = null;
 		try
@@ -1236,14 +1236,14 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			selectedInputStream = FileChooserFactory.getFileChooser().open();
 			if (selectedInputStream != null)
 			{
-				Matrix matrix = MatrixLoader.load(selectedInputStream);
+				final Matrix matrix = MatrixLoader.load(selectedInputStream);
 
 				// Put the loaded matrix in the matrices hashmap
 				matrices.put(selectedInputStream.getName(), matrix);
 
 				boolean found = false;
 				int index = 0;
-				int count = jComboBoxScoringMatrix.getItemCount();
+				final int count = jComboBoxScoringMatrix.getItemCount();
 				while (index < count && !found)
 				{
 					if (((String) jComboBoxScoringMatrix.getItemAt(index)).equalsIgnoreCase(selectedInputStream.getName()))
@@ -1271,9 +1271,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 				logger.info("Canceled loading scoring matrix");
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed loading scoring matrix: " + e.getMessage();
+			final String message = "Failed loading scoring matrix: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			showErrorMessage(message);
 		}
@@ -1285,7 +1285,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 				{
 					selectedInputStream.getInputStream().close();
 				}
-				catch (Exception e)
+				catch (final Exception e)
 				{
 					logger.log(	Level.WARNING,
 											"Failed closing input stream: " + e.getMessage(),
@@ -1295,7 +1295,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		}
 	}// GEN-LAST:event_jMenuItemFileLoadMatrixActionPerformed
 
-	private void jTextAreaAlignmentMouseClicked(java.awt.event.MouseEvent evt)
+	private void jTextAreaAlignmentMouseClicked(final java.awt.event.MouseEvent evt)
 	{// GEN-FIRST:event_jTextAreaAlignmentMouseClicked
 		jTextAreaAlignment.requestFocus();
 		if (evt.getButton() == MouseEvent.BUTTON3)
@@ -1304,82 +1304,82 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		}
 	}// GEN-LAST:event_jTextAreaAlignmentMouseClicked
 
-	private void jPopupSaveActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupSaveActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupSaveActionPerformed
 		saveTextAreaToFile((JTextArea) jPopup.getInvoker());
 	}// GEN-LAST:event_jPopupSaveActionPerformed
 
-	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonSaveActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonSaveActionPerformed
 		saveTextAreaToFile(currentTextComponent);
 	}// GEN-LAST:event_jButtonSaveActionPerformed
 
-	private void jTextAreaAlignmentCaretUpdate(javax.swing.event.CaretEvent evt)
+	private void jTextAreaAlignmentCaretUpdate(final javax.swing.event.CaretEvent evt)
 	{// GEN-FIRST:event_jTextAreaAlignmentCaretUpdate
 		handleCaretUpdateEvent(evt);
 	}// GEN-LAST:event_jTextAreaAlignmentCaretUpdate
 
-	private void jPopupOpenActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupOpenActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupOpenActionPerformed
 		loadFileToTextArea("", (JTextArea) jPopup.getInvoker());
 	}// GEN-LAST:event_jPopupOpenActionPerformed
 
-	private void jPopupSelectAllActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupSelectAllActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupSelectAllActionPerformed
 		selectAll();
 	}// GEN-LAST:event_jPopupSelectAllActionPerformed
 
-	private void jPopupDeleteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupDeleteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupDeleteActionPerformed
 		delete();
 	}// GEN-LAST:event_jPopupDeleteActionPerformed
 
-	private void jPopupPasteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupPasteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupPasteActionPerformed
 		paste();
 	}// GEN-LAST:event_jPopupPasteActionPerformed
 
-	private void jPopupCopyActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupCopyActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupCopyActionPerformed
 		copy();
 	}// GEN-LAST:event_jPopupCopyActionPerformed
 
-	private void jPopupCutActionPerformed(java.awt.event.ActionEvent evt)
+	private void jPopupCutActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jPopupCutActionPerformed
 		cut();
 	}// GEN-LAST:event_jPopupCutActionPerformed
 
-	private void jTextAreaSequence1CaretUpdate(javax.swing.event.CaretEvent evt)
+	private void jTextAreaSequence1CaretUpdate(final javax.swing.event.CaretEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence1CaretUpdate
 		handleCaretUpdateEvent(evt);
 	}// GEN-LAST:event_jTextAreaSequence1CaretUpdate
 
-	private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonDeleteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonDeleteActionPerformed
 		delete();
 	}// GEN-LAST:event_jButtonDeleteActionPerformed
 
-	private void jButtonPasteActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonPasteActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonPasteActionPerformed
 		paste();
 	}// GEN-LAST:event_jButtonPasteActionPerformed
 
-	private void jButtonCopyActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonCopyActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonCopyActionPerformed
 		copy();
 	}// GEN-LAST:event_jButtonCopyActionPerformed
 
-	private void jButtonCutActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonCutActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonCutActionPerformed
 		cut();
 	}// GEN-LAST:event_jButtonCutActionPerformed
 
-	private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt)
+	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jButtonOpenActionPerformed
 		loadFileToTextArea("", currentTextComponent);
 	}// GEN-LAST:event_jButtonOpenActionPerformed
 
-	private void jTextAreaSequence1MouseClicked(java.awt.event.MouseEvent evt)
+	private void jTextAreaSequence1MouseClicked(final java.awt.event.MouseEvent evt)
 	{// GEN-FIRST:event_jTextAreaSequence1MouseClicked
 		jTextAreaSequence1.requestFocus();
 		if (evt.getButton() == MouseEvent.BUTTON3)
@@ -1388,35 +1388,35 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		}
 	}// GEN-LAST:event_jTextAreaSequence1MouseClicked
 
-	private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemAboutActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemAboutActionPerformed
-		String message = "JAligner <http://jaligner.sf.net>" + Commons.getLineSeparator()
-											+ Commons.getLineSeparator()
-											+ "Open source Java implementation"
-											+ Commons.getLineSeparator()
-											+ "of the Smith-Waterman algorithm"
-											+ Commons.getLineSeparator()
-											+ "for biological sequence alignment."
-											+ Commons.getLineSeparator()
-											+ Commons.getLineSeparator()
-											+ "Build: "
-											+ Commons.getCurrentRelease()
-											+ Commons.getLineSeparator()
-											+ Commons.getLineSeparator()
-											+ "By: Ahmed Moustafa <ahmed@users.sf.net>";
+		final String message = "JAligner <http://jaligner.sf.net>" + Commons.getLineSeparator()
+														+ Commons.getLineSeparator()
+														+ "Open source Java implementation"
+														+ Commons.getLineSeparator()
+														+ "of the Smith-Waterman algorithm"
+														+ Commons.getLineSeparator()
+														+ "for biological sequence alignment."
+														+ Commons.getLineSeparator()
+														+ Commons.getLineSeparator()
+														+ "Build: "
+														+ Commons.getCurrentRelease()
+														+ Commons.getLineSeparator()
+														+ Commons.getLineSeparator()
+														+ "By: Ahmed Moustafa <ahmed@users.sf.net>";
 		JOptionPane.showMessageDialog(this,
 																	message,
 																	"About JAligner",
 																	JOptionPane.INFORMATION_MESSAGE);
 	}// GEN-LAST:event_jMenuItemAboutActionPerformed
 
-	private void jMenuItemFileExitActionPerformed(java.awt.event.ActionEvent evt)
+	private void jMenuItemFileExitActionPerformed(final java.awt.event.ActionEvent evt)
 	{// GEN-FIRST:event_jMenuItemFileExitActionPerformed
 		exitForm(null);
 	}// GEN-LAST:event_jMenuItemFileExitActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt)
+	private void exitForm(final java.awt.event.WindowEvent evt)
 	{// GEN-FIRST:event_exitForm
 		logger.info("Quitting...");
 		if (JOptionPane.showConfirmDialog(this,
@@ -1523,9 +1523,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * @param selected
 	 *          the default selected item
 	 */
-	private void populateComboBox(JComboBox combobox,
-																String[] items,
-																String selected)
+	private void populateComboBox(final JComboBox combobox,
+																final String[] items,
+																final String selected)
 	{
 		for (int i = 0; i < items.length; i++)
 		{
@@ -1547,12 +1547,12 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * @param selected
 	 *          the default selected item
 	 */
-	private void populateComboBox(JComboBox combobox,
-																Collection items,
-																String selected)
+	private void populateComboBox(final JComboBox combobox,
+																final Collection items,
+																final String selected)
 	{
 		String item;
-		Iterator i = items.iterator();
+		final Iterator i = items.iterator();
 		int index = 0;
 		while (i.hasNext())
 		{
@@ -1572,7 +1572,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * @param message
 	 *          the error message to be displayed
 	 */
-	private void showErrorMessage(String message)
+	private void showErrorMessage(final String message)
 	{
 		JOptionPane.showMessageDialog(this,
 																	message,
@@ -1586,7 +1586,8 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * @param id
 	 * @param textComponent
 	 */
-	private void loadFileToTextArea(String id, JTextComponent textComponent)
+	private void loadFileToTextArea(final String id,
+																	final JTextComponent textComponent)
 	{
 		logger.info("Loading " + id + "...");
 		try
@@ -1602,9 +1603,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 				logger.info("Canceled loading " + id);
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed loading " + id + ": " + e.getMessage();
+			final String message = "Failed loading " + id + ": " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			showErrorMessage(message);
 		}
@@ -1615,7 +1616,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param textComponent
 	 */
-	private void saveTextAreaToFile(JTextComponent textComponent)
+	private void saveTextAreaToFile(final JTextComponent textComponent)
 	{
 		try
 		{
@@ -1629,9 +1630,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 				logger.info("Canceled saving");
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed saving: " + e.getMessage();
+			final String message = "Failed saving: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			showErrorMessage(message);
 		}
@@ -1694,7 +1695,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			TextComponentUtil.print(currentTextComponent);
 			logger.info("Finished printing.");
 		}
-		catch (TextComponentUtilException textComponentUtilException)
+		catch (final TextComponentUtilException textComponentUtilException)
 		{
 			logger.log(	Level.SEVERE,
 									"Failed printing: " + textComponentUtilException.getMessage(),
@@ -1705,7 +1706,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	/**
 	 * Implements insertUpdate of {@link DocumentListener}
 	 */
-	public void insertUpdate(DocumentEvent e)
+	public void insertUpdate(final DocumentEvent e)
 	{
 		if (e.getDocument() == currentTextComponent.getDocument())
 		{
@@ -1718,7 +1719,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	/**
 	 * Implements removeUpdate of {@link DocumentListener}
 	 */
-	public void removeUpdate(DocumentEvent e)
+	public void removeUpdate(final DocumentEvent e)
 	{
 		if (e.getDocument() == currentTextComponent.getDocument())
 		{
@@ -1734,14 +1735,14 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	/**
 	 * Implements changedUpdate of {@link DocumentListener}
 	 */
-	public void changedUpdate(DocumentEvent e)
+	public void changedUpdate(final DocumentEvent e)
 	{
 	}
 
 	/**
 	 * Implements the notify method of the interface {@link ClipboardListener}
 	 */
-	public void clipboardCheck(String clipboardContents)
+	public void clipboardCheck(final String clipboardContents)
 	{
 		setPasteControlsEnabled(clipboardContents != null && currentTextComponent != null
 														&& currentTextComponent.isEditable());
@@ -1752,7 +1753,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setOpenControlsEnabled(boolean enabled)
+	private void setOpenControlsEnabled(final boolean enabled)
 	{
 		jMenuItemFileOpen.setEnabled(enabled);
 		jButtonOpen.setEnabled(enabled);
@@ -1764,7 +1765,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setSaveControlsEnabled(boolean enabled)
+	private void setSaveControlsEnabled(final boolean enabled)
 	{
 		jButtonSave.setEnabled(enabled);
 		jPopupSave.setEnabled(enabled);
@@ -1775,7 +1776,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setCutControlsEnabled(boolean enabled)
+	private void setCutControlsEnabled(final boolean enabled)
 	{
 		jMenuItemEditCut.setEnabled(enabled);
 		jButtonCut.setEnabled(enabled);
@@ -1787,7 +1788,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setCopyControlsEnabled(boolean enabled)
+	private void setCopyControlsEnabled(final boolean enabled)
 	{
 		jMenuItemEditCopy.setEnabled(enabled);
 		jButtonCopy.setEnabled(enabled);
@@ -1799,7 +1800,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setPasteControlsEnabled(boolean enabled)
+	private void setPasteControlsEnabled(final boolean enabled)
 	{
 		jMenuItemEditPaste.setEnabled(enabled);
 		jButtonPaste.setEnabled(enabled);
@@ -1811,7 +1812,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setDeleteControlsEnabled(boolean enabled)
+	private void setDeleteControlsEnabled(final boolean enabled)
 	{
 		jMenuItemEditDelete.setEnabled(enabled);
 		jButtonDelete.setEnabled(enabled);
@@ -1823,7 +1824,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setSelectAllControlsEnabled(boolean enabled)
+	private void setSelectAllControlsEnabled(final boolean enabled)
 	{
 		jMenuItemEditSelectAll.setEnabled(enabled);
 		jPopupSelectAll.setEnabled(enabled);
@@ -1834,7 +1835,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param enabled
 	 */
-	private void setPrintControlsEnabled(boolean enabled)
+	private void setPrintControlsEnabled(final boolean enabled)
 	{
 		jButtonPrint.setEnabled(enabled);
 		jPopupPrint.setEnabled(enabled);
@@ -1844,7 +1845,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param event
 	 */
-	private void handleCaretUpdateEvent(CaretEvent event)
+	private void handleCaretUpdateEvent(final CaretEvent event)
 	{
 		if (event.getSource() == currentTextComponent)
 		{
@@ -1893,7 +1894,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		setPrintControlsEnabled(enabled);
 
 		// Adjust background of the radio buttons
-		Enumeration buttons = buttonGroupSequences.getElements();
+		final Enumeration buttons = buttonGroupSequences.getElements();
 		AbstractButton button = null;
 		while (buttons.hasMoreElements())
 		{
@@ -1918,9 +1919,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	{
 		jTextAreaAlignment.setText("");
 
-		String matrixId = (String) jComboBoxScoringMatrix.getSelectedItem();
-		float open = ((Number) jFormattedTextFieldGapOpen.getValue()).floatValue();
-		float extend = ((Number) jFormattedTextFieldGapExtend.getValue()).floatValue();
+		final String matrixId = (String) jComboBoxScoringMatrix.getSelectedItem();
+		final float open = ((Number) jFormattedTextFieldGapOpen.getValue()).floatValue();
+		final float extend = ((Number) jFormattedTextFieldGapExtend.getValue()).floatValue();
 
 		Sequence sequence1 = null;
 		try
@@ -1929,9 +1930,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			sequence1 = SequenceParser.parse(jTextAreaSequence1.getText());
 			logger.info("Finished processing sequence #1");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed parsing sequence #1: " + e.getMessage();
+			final String message = "Failed parsing sequence #1: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			showErrorMessage(message);
 			jTextAreaSequence1.requestFocus();
@@ -1945,9 +1946,9 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			sequence2 = SequenceParser.parse(jTextAreaSequence2.getText());
 			logger.info("Finished processing sequence #2");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed parsing sequence #2: " + e.getMessage();
+			final String message = "Failed parsing sequence #2: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			showErrorMessage(message);
 			jTextAreaSequence2.requestFocus();
@@ -1959,7 +1960,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 		{
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
-			long start = System.currentTimeMillis();
+			final long start = System.currentTimeMillis();
 			Matrix matrix = null;
 			if (!matrices.containsKey(matrixId))
 			{
@@ -1970,38 +1971,38 @@ public class AlignWindow extends javax.swing.JFrame	implements
 			{
 				matrix = (Matrix) matrices.get(matrixId);
 			}
-			Alignment alignment = SmithWatermanGotoh.align(	sequence1,
-																											sequence2,
-																											matrix,
-																											open,
-																											extend);
-			long end = System.currentTimeMillis();
+			final Alignment alignment = SmithWatermanGotoh.align(	sequence1,
+																														sequence2,
+																														matrix,
+																														open,
+																														extend);
+			final long end = System.currentTimeMillis();
 			logger.info("Finished aligning in " + (end - start) + " milliseconds");
 
-			StringBuffer buffer = new StringBuffer();
+			final StringBuffer buffer = new StringBuffer();
 
 			buffer.append(alignment.getSummary());
 			buffer.append(Commons.getLineSeparator());
 
-			String formatId = (String) jComboBoxOutputFormat.getSelectedItem();
-			String formattedAlignment = FormatFactory	.getInstance()
-																								.getFormat(formatId)
-																								.format(alignment);
+			final String formatId = (String) jComboBoxOutputFormat.getSelectedItem();
+			final String formattedAlignment = FormatFactory	.getInstance()
+																											.getFormat(formatId)
+																											.format(alignment);
 			buffer.append(formattedAlignment);
 
 			jTextAreaAlignment.setText("");
 			jTextAreaAlignment.append(buffer.toString());
 			jTextAreaAlignment.setCaretPosition(0);
 		}
-		catch (Error error)
+		catch (final Error error)
 		{
-			String message = "Failed aligning: " + error.getMessage();
+			final String message = "Failed aligning: " + error.getMessage();
 			logger.log(Level.SEVERE, message, error);
 			showErrorMessage(message);
 		}
-		catch (Exception exception)
+		catch (final Exception exception)
 		{
-			String message = "Failed aligning: " + exception.getMessage();
+			final String message = "Failed aligning: " + exception.getMessage();
 			logger.log(Level.SEVERE, message, exception);
 			showErrorMessage(message);
 		}
@@ -2015,7 +2016,7 @@ public class AlignWindow extends javax.swing.JFrame	implements
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		logger.info(Commons.getJAlignerInfo());
 		new AlignWindow().setVisible(true);

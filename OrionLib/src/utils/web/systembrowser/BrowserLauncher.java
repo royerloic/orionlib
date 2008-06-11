@@ -223,18 +223,26 @@ public class BrowserLauncher
 			{
 				final double version = Double.valueOf(majorMRJVersion).doubleValue();
 				if (version == 2)
+				{
 					jvm = MRJ_2_0;
-				else if ((version >= 2.1) && (version < 3))
+				}
+				else if (version >= 2.1 && version < 3)
+				{
 					// Assume that all 2.x versions of MRJ work the same. MRJ 2.1 actually
 					// works via Runtime.exec() and 2.2 supports that but has an openURL()
 					// method
 					// as well that we currently ignore.
 					jvm = MRJ_2_1;
+				}
 				else if (version == 3.0)
+				{
 					jvm = MRJ_3_0;
+				}
 				else if (version >= 3.1)
+				{
 					// Assume that all 3.1 and later versions of MRJ work the same.
 					jvm = MRJ_3_1;
+				}
 				else
 				{
 					loadedWithoutErrors = false;
@@ -250,15 +258,23 @@ public class BrowserLauncher
 		else if (osName.startsWith("Windows"))
 		{
 			if (osName.indexOf("9") != -1)
+			{
 				jvm = WINDOWS_9x;
+			}
 			else
+			{
 				jvm = WINDOWS_NT;
+			}
 		}
 		else
+		{
 			jvm = OTHER;
+		}
 
 		if (loadedWithoutErrors)
+		{
 			loadedWithoutErrors = loadClasses();
+		}
 	}
 
 	/**
@@ -448,7 +464,9 @@ public class BrowserLauncher
 	private static Object locateBrowser()
 	{
 		if (browser != null)
+		{
 			return browser;
+		}
 		switch (jvm)
 		{
 		case MRJ_2_0:
@@ -523,11 +541,14 @@ public class BrowserLauncher
 			}
 			final String[] systemFolderFiles = systemFolder.list();
 			for (final String element : systemFolderFiles)
+			{
 				try
 				{
 					final File file = new File(systemFolder, element);
 					if (!file.isFile())
+					{
 						continue;
+					}
 					// We're looking for a file with a creator code of 'MACS' and
 					// a type of 'FNDR'. Only requiring the type results in non-Finder
 					// applications being picked up on certain Mac OS 9 systems,
@@ -566,6 +587,7 @@ public class BrowserLauncher
 													+ ite.getTargetException().getMessage();
 					return browser;
 				}
+			}
 			browser = null;
 			break;
 		case MRJ_3_0:
@@ -597,10 +619,14 @@ public class BrowserLauncher
 	public static void openURL(final String url) throws IOException
 	{
 		if (!loadedWithoutErrors)
+		{
 			throw new IOException("Exception in finding browser: " + errorMessage);
+		}
 		Object lBrowser = locateBrowser();
 		if (lBrowser == null)
+		{
 			throw new IOException("Unable to locate browser: " + errorMessage);
+		}
 
 		switch (jvm)
 		{
@@ -649,14 +675,20 @@ public class BrowserLauncher
 				result = ICLaunchURL(instance[0], new byte[]
 				{ 0 }, urlBytes, urlBytes.length, selectionStart, selectionEnd);
 				if (result == 0)
+				{
 					// Ignore the return value; the URL was launched successfully
 					// regardless of what happens here.
 					ICStop(instance);
+				}
 				else
+				{
 					throw new IOException("Unable to launch URL: " + result);
+				}
 			}
 			else
+			{
 				throw new IOException("Unable to create an Internet Config instance: " + result);
+			}
 			break;
 		case MRJ_3_1:
 			try
@@ -709,8 +741,10 @@ public class BrowserLauncher
 			{
 				final int exitCode = process.waitFor();
 				if (exitCode != 0)
+				{
 					Runtime.getRuntime().exec(new String[]
 					{ (String) lBrowser, url });
+				}
 			}
 			catch (final InterruptedException ie)
 			{

@@ -54,7 +54,7 @@ public class ClipboardPoller extends Thread
 	 * 
 	 * @param listener
 	 */
-	public ClipboardPoller(ClipboardListener listener)
+	public ClipboardPoller(final ClipboardListener listener)
 	{
 		logger = Logger.getLogger(this.getClass().getName());
 		this.listener = listener;
@@ -69,14 +69,14 @@ public class ClipboardPoller extends Thread
 		logger.info("Started");
 		while (running)
 		{
-			String contents = ClipboardHandlerFactory	.getClipboardHandler()
-																								.getContents();
+			final String contents = ClipboardHandlerFactory	.getClipboardHandler()
+																											.getContents();
 			listener.clipboardCheck(contents);
 			try
 			{
 				Thread.sleep(SLEEPING_TIME_IN_MILLISECONDS);
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				logger.log(Level.SEVERE, "Failed sleeping: " + e.getMessage(), e);
 				running = false;

@@ -54,9 +54,13 @@ public final class Representer implements Function
 											final GVector coeffs)
 	{
 		if (kernel == null)
+		{
 			throw new NullPointerException("kernel");
+		}
 		if (data.getNumCol() != coeffs.getSize())
+		{
 			throw new MismatchedSizeException();
+		}
 
 		this.kernel = kernel;
 		points = new GVector[data.getNumCol()];
@@ -82,7 +86,9 @@ public final class Representer implements Function
 	{
 		double sum = 0;
 		for (int i = 0; i < coeffs.getSize(); i++)
+		{
 			sum += coeffs.getElement(i) * kernel.eval(points[i], x);
+		}
 		return sum;
 	}
 

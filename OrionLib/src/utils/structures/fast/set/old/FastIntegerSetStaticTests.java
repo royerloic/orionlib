@@ -17,10 +17,10 @@ public class FastIntegerSetStaticTests
 	@Test
 	public void testLocate()
 	{
-		int[] lSet0 = new int[] {};
+		final int[] lSet0 = new int[] {};
 		assertSame(0, FastIntegerSetStatic.locate(lSet0, 0));
 
-		int[] lSet1 = new int[]
+		final int[] lSet1 = new int[]
 		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 		assertSame(0, FastIntegerSetStatic.locate(lSet1, 0));
@@ -34,7 +34,7 @@ public class FastIntegerSetStaticTests
 		assertSame(8, FastIntegerSetStatic.locate(lSet1, 8));
 		assertSame(9, FastIntegerSetStatic.locate(lSet1, 9));
 
-		int[] lSet2 = new int[]
+		final int[] lSet2 = new int[]
 		{ 5, 6 };
 
 		assertSame(0, FastIntegerSetStatic.locate(lSet2, 1));
@@ -47,11 +47,11 @@ public class FastIntegerSetStaticTests
 	@Test
 	public void testContains()
 	{
-		int[] lSet0 = new int[] {};
+		final int[] lSet0 = new int[] {};
 
 		assertFalse(FastIntegerSetStatic.contains(lSet0, 0));
 
-		int[] lSet1 = new int[]
+		final int[] lSet1 = new int[]
 		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 		assertTrue(FastIntegerSetStatic.contains(lSet1, 0));
@@ -65,7 +65,7 @@ public class FastIntegerSetStaticTests
 		assertTrue(FastIntegerSetStatic.contains(lSet1, 8));
 		assertTrue(FastIntegerSetStatic.contains(lSet1, 9));
 
-		int[] lSet2 = new int[]
+		final int[] lSet2 = new int[]
 		{ 5, 6 };
 
 		assertFalse(FastIntegerSetStatic.contains(lSet2, 1));
@@ -155,83 +155,80 @@ public class FastIntegerSetStaticTests
 	public void testIntersection()
 	{
 		{
-			int[] lSet0 = new int[] {};
-			int[] lSet1 = new int[] {};
-			int[] lSet2 = new int[]
-			{ 4, 5, 6 };
-
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet0, lSet1);
+			final int[] lSet0 = new int[] {};
+			final int[] lSet1 = new int[] {};
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet0, lSet1);
 			assertSame(0, lSetInter.length);
 
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet0, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet0, lSet1);
 			assertSame(0, lSetInter2.length);
 
-			int[] lSetInter3 = FastIntegerSetStatic.intersection(lSet1, lSet0);
+			final int[] lSetInter3 = FastIntegerSetStatic.intersection(lSet1, lSet0);
 			assertSame(0, lSetInter3.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
 			assertSame(0, lSetInter.length);
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
 			assertSame(0, lSetInter2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 4, 5, 6 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 3, 4, 5 };
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
 			assertSame(2, lSetInter.length);
 			assertSame(4, lSetInter[0]);
 			assertSame(5, lSetInter[1]);
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
 			assertSame(2, lSetInter2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 2 };
 
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
 			assertSame(1, lSetInter.length);
 			assertSame(2, lSetInter[0]);
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
 			assertSame(1, lSetInter2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 11, 12, 13 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 12 };
 
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
 			assertSame(1, lSetInter.length);
 			assertSame(12, lSetInter[0]);
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
 			assertSame(1, lSetInter2.length);
 			assertSame(12, lSetInter2[0]);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3, 4, 10 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 5, 10 };
 
-			int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
+			final int[] lSetInter = FastIntegerSetStatic.intersection(lSet1, lSet2);
 			assertSame(4, lSetInter.length);
 			assertSame(10, lSetInter[lSetInter.length - 1]);
-			int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
+			final int[] lSetInter2 = FastIntegerSetStatic.intersection(lSet2, lSet1);
 			assertSame(4, lSetInter2.length);
 			assertSame(10, lSetInter2[lSetInter2.length - 1]);
 		}
@@ -241,81 +238,81 @@ public class FastIntegerSetStaticTests
 	public void testUnion()
 	{
 		{
-			int[] lSet0 = new int[] {};
-			int[] lSet1 = new int[] {};
-			int[] lSet2 = new int[]
+			final int[] lSet0 = new int[] {};
+			final int[] lSet1 = new int[] {};
+			final int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
-			int[] lSetUnion1 = FastIntegerSetStatic.union(lSet0, lSet1);
+			final int[] lSetUnion1 = FastIntegerSetStatic.union(lSet0, lSet1);
 			assertSame(0, lSetUnion1.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetUnion1, new int[] {}));
 
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertSame(3, lSetUnion2.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetUnion2, new int[]
 			{ 4, 5, 6 }));
 
-			int[] lSetUnion3 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion3 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertSame(3, lSetUnion3.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetUnion3, new int[]
 			{ 4, 5, 6 }));
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
-			int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertTrue(FastIntegerSetStatic.equals(lSetUnion, new int[]
 			{ 1, 2, 3, 4, 5, 6 }));
 
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertTrue(FastIntegerSetStatic.equals(lSetUnion2, new int[]
 			{ 1, 2, 3, 4, 5, 6 }));
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 4, 5, 6 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 3, 4, 5 };
-			int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertSame(4, lSetUnion.length);
 			assertSame(3, lSetUnion[0]);
 			assertSame(6, lSetUnion[3]);
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertSame(4, lSetUnion2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 2 };
 
-			int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertSame(3, lSetUnion.length);
 			assertSame(1, lSetUnion[0]);
 			assertSame(2, lSetUnion[1]);
 			assertSame(3, lSetUnion[2]);
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertSame(3, lSetUnion2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 11, 12, 13 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 12 };
 
-			int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertSame(6, lSetUnion.length);
 			assertSame(1, lSetUnion[0]);
 			assertSame(3, lSetUnion[2]);
 			assertSame(13, lSetUnion[5]);
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertSame(6, lSetUnion2.length);
 			assertSame(1, lSetUnion2[0]);
 			assertSame(3, lSetUnion2[2]);
@@ -323,16 +320,16 @@ public class FastIntegerSetStaticTests
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3, 4, 10 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 5, 10 };
 
-			int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
+			final int[] lSetUnion = FastIntegerSetStatic.union(lSet1, lSet2);
 			assertSame(6, lSetUnion.length);
 			assertSame(1, lSetUnion[0]);
 			assertSame(10, lSetUnion[5]);
-			int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
+			final int[] lSetUnion2 = FastIntegerSetStatic.union(lSet2, lSet1);
 			assertSame(6, lSetUnion2.length);
 			assertSame(1, lSetUnion2[0]);
 			assertSame(10, lSetUnion2[5]);
@@ -345,81 +342,81 @@ public class FastIntegerSetStaticTests
 	{
 
 		{
-			int[] lSet0 = new int[] {};
-			int[] lSet1 = new int[] {};
-			int[] lSet2 = new int[]
+			final int[] lSet0 = new int[] {};
+			final int[] lSet1 = new int[] {};
+			final int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
-			int[] lSetDiff1 = FastIntegerSetStatic.difference(lSet0, lSet1);
+			final int[] lSetDiff1 = FastIntegerSetStatic.difference(lSet0, lSet1);
 			assertSame(0, lSetDiff1.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetDiff1, new int[] {}));
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertSame(3, lSetDiff2.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetDiff2, new int[]
 			{ 4, 5, 6 }));
 
-			int[] lSetDiff3 = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff3 = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertSame(0, lSetDiff3.length);
 			assertTrue(FastIntegerSetStatic.equals(lSetDiff3, new int[] {}));
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 4, 5, 6 };
 
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertTrue(FastIntegerSetStatic.equals(lSetDiff, new int[]
 			{ 1, 2, 3 }));
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertTrue(FastIntegerSetStatic.equals(lSetDiff2, new int[]
 			{ 4, 5, 6 }));
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 4, 5, 6 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 3, 4, 5 };
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertSame(1, lSetDiff.length);
 			assertSame(6, lSetDiff[0]);
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertSame(1, lSetDiff2.length);
 			assertSame(3, lSetDiff2[0]);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 2 };
 
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertSame(2, lSetDiff.length);
 			assertSame(1, lSetDiff[0]);
 			assertSame(3, lSetDiff[1]);
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertSame(0, lSetDiff2.length);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 11, 12, 13 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 12 };
 
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertSame(2, lSetDiff.length);
 			assertSame(11, lSetDiff[0]);
 			assertSame(13, lSetDiff[1]);
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertSame(3, lSetDiff2.length);
 			assertSame(1, lSetDiff2[0]);
 			assertSame(2, lSetDiff2[1]);
@@ -427,25 +424,25 @@ public class FastIntegerSetStaticTests
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3, 4, 10 };
-			int[] lSet2 = new int[]
+			final int[] lSet2 = new int[]
 			{ 1, 2, 3, 5, 10 };
 
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet2);
 			assertSame(1, lSetDiff.length);
 			assertSame(4, lSetDiff[0]);
 
-			int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
+			final int[] lSetDiff2 = FastIntegerSetStatic.difference(lSet2, lSet1);
 			assertSame(1, lSetDiff2.length);
 			assertSame(5, lSetDiff2[0]);
 		}
 
 		{
-			int[] lSet1 = new int[]
+			final int[] lSet1 = new int[]
 			{ 1, 2, 3, 4, 10 };
 
-			int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet1);
+			final int[] lSetDiff = FastIntegerSetStatic.difference(lSet1, lSet1);
 			assertSame(0, lSetDiff.length);
 		}
 		/**/
@@ -460,10 +457,10 @@ public class FastIntegerSetStaticTests
 	// call from main methode only
 	public void testPerformance()
 	{
-		Random lRandom = new Random();
+		final Random lRandom = new Random();
 
 		// System.out.println("generating sets");
-		int[][] lList = new int[cNumberOfSets][];
+		final int[][] lList = new int[cNumberOfSets][];
 		for (int i = 0; i < cNumberOfSets; i++)
 		{
 			lList[i] = FastIntegerSetStatic.random(	lRandom,
@@ -474,11 +471,12 @@ public class FastIntegerSetStaticTests
 
 		{
 			// System.out.println("Start Union Perf Test");
-			long lStartTime = System.currentTimeMillis();
+			final long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)
 			{
 				for (int i = 0; i < cNumberOfSets; i++)
+				{
 					for (int j = 0; j < cNumberOfSets; j++)
 					{
 						// System.out.println(".");
@@ -486,14 +484,15 @@ public class FastIntegerSetStaticTests
 						final int[] lSet2 = lList[j];
 						FastIntegerSetStatic.union(lSet1, lSet2);
 					}
-				// System.out.print(".");
+					// System.out.print(".");
+				}
 			}
 
-			long lEndTime = System.currentTimeMillis();
+			final long lEndTime = System.currentTimeMillis();
 			// System.out.println("End");
-			long lElapsedTime = lEndTime - lStartTime;
+			final long lElapsedTime = lEndTime - lStartTime;
 
-			final double lUnionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
+			final double lUnionsPerMillisecond = (double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets) / lElapsedTime;
 
 			System.out.println("Unions per Milliseconds = " + lUnionsPerMillisecond);
 			assertTrue(lUnionsPerMillisecond > 4);
@@ -501,11 +500,12 @@ public class FastIntegerSetStaticTests
 
 		{
 			// System.out.println("Start Intersection Perf Test");
-			long lStartTime = System.currentTimeMillis();
+			final long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)
 			{
 				for (int i = 0; i < cNumberOfSets; i++)
+				{
 					for (int j = 0; j < cNumberOfSets; j++)
 					{
 						// System.out.println(".");
@@ -513,14 +513,15 @@ public class FastIntegerSetStaticTests
 						final int[] lSet2 = lList[j];
 						FastIntegerSetStatic.intersection(lSet1, lSet2);
 					}
-				// System.out.print(".");
+					// System.out.print(".");
+				}
 			}
 
-			long lEndTime = System.currentTimeMillis();
+			final long lEndTime = System.currentTimeMillis();
 			// System.out.println("End");
-			long lElapsedTime = lEndTime - lStartTime;
+			final long lElapsedTime = lEndTime - lStartTime;
 
-			final double lIntersectionsPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
+			final double lIntersectionsPerMillisecond = (double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets) / lElapsedTime;
 
 			System.out.println("Intersections per Milliseconds = " + lIntersectionsPerMillisecond);
 
@@ -529,11 +530,12 @@ public class FastIntegerSetStaticTests
 
 		{
 			// System.out.println("Start Difference Perf Test");
-			long lStartTime = System.currentTimeMillis();
+			final long lStartTime = System.currentTimeMillis();
 
 			for (int c = 0; c < cNumberOfCycles; c++)
 			{
 				for (int i = 0; i < cNumberOfSets; i++)
+				{
 					for (int j = 0; j < cNumberOfSets; j++)
 					{
 						// System.out.println(".");
@@ -541,14 +543,15 @@ public class FastIntegerSetStaticTests
 						final int[] lSet2 = lList[j];
 						FastIntegerSetStatic.difference(lSet1, lSet2);
 					}
-				// System.out.print(".");
+					// System.out.print(".");
+				}
 			}
 
-			long lEndTime = System.currentTimeMillis();
+			final long lEndTime = System.currentTimeMillis();
 			// System.out.println("End");
-			long lElapsedTime = lEndTime - lStartTime;
+			final long lElapsedTime = lEndTime - lStartTime;
 
-			final double lDifferencesPerMillisecond = ((double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets)) / lElapsedTime;
+			final double lDifferencesPerMillisecond = (double) (cNumberOfCycles * cNumberOfSets * cNumberOfSets) / lElapsedTime;
 
 			System.out.println("Differences per Milliseconds = " + lDifferencesPerMillisecond);
 

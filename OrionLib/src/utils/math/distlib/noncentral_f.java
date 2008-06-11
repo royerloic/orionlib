@@ -34,14 +34,19 @@ public class noncentral_f
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double n1, double n2, double ncp)
+	public static double cumulative(final double x,
+																	final double n1,
+																	final double n2,
+																	final double ncp)
 	{
 		double y;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n1)
 				|| Double.isNaN(n2)
 				|| Double.isNaN(ncp))
+		{
 			return x + n2 + n1 + ncp;
+		}
 		/* !* #endif /*4! */
 		if (n1 <= 0.0 || n2 <= 0.0 || ncp < 0)
 		{
@@ -49,8 +54,10 @@ public class noncentral_f
 			// return Double.NaN;
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
-		y = (n1 / n2) * x;
+		}
+		y = n1 / n2 * x;
 		return noncentral_beta.cumulative(y / (1 + y), n1 / 2.0, n2 / 2.0, ncp);
 	}
 }

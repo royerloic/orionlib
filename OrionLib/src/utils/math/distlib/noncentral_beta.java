@@ -57,7 +57,10 @@ public class noncentral_beta
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double a, double b, double lambda)
+	public static double density(	final double x,
+																double a,
+																final double b,
+																final double lambda)
 	{
 		double k, lambda2, psum, sum, term, weight;
 		final double eps = 1.e-14;
@@ -67,8 +70,10 @@ public class noncentral_beta
 		if (Double.isNaN(x) || Double.isNaN(a)
 				|| Double.isNaN(b)
 				|| Double.isNaN(lambda))
+		{
 			return x + a + b + lambda;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		if (lambda < 0 || a <= 0 || b <= 0)
 		{
@@ -85,11 +90,15 @@ public class noncentral_beta
 		/* !* #endif /*4! */
 
 		if (x <= 0)
+		{
 			return 0;
+		}
 
 		term = beta.density(x, a, b);
 		if (lambda == 0)
+		{
 			return term;
+		}
 
 		lambda2 = 0.5 * lambda;
 		/* !* weight = exp(- lambda2); *! */
@@ -104,7 +113,9 @@ public class noncentral_beta
 			psum = psum + weight;
 			a = a + 1;
 			if (1 - psum < eps)
+			{
 				break;
+			}
 		}
 		return sum;
 	}
@@ -122,7 +133,10 @@ public class noncentral_beta
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double a, double b, double lambda)
+	public static double cumulative(final double x,
+																	final double a,
+																	final double b,
+																	final double lambda)
 	{
 		double a0, ans, ax, lbeta, c, errbd, gx, q, sumq, temp, x0;
 		int j;
@@ -141,8 +155,10 @@ public class noncentral_beta
 		if (Double.isNaN(x) || Double.isNaN(a)
 				|| Double.isNaN(b)
 				|| Double.isNaN(lambda))
+		{
 			return x + a + b + lambda;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		if (lambda < zero || a <= zero || b <= zero)
 		{
@@ -151,9 +167,13 @@ public class noncentral_beta
 		}
 
 		if (x <= zero)
+		{
 			return 0;
+		}
 		if (x >= one)
+		{
 			return 1;
+		}
 
 		c = lambda * half;
 
@@ -173,13 +193,17 @@ public class noncentral_beta
 														- lbeta
 														- java.lang.Math.log(a0));
 		if (a0 > a)
+		{
 			/* !* q = exp(-c + x0 * log(c) - lgammafn(x0 + one)); *! */
 			q = java.lang.Math.exp(-c + x0
 															* java.lang.Math.log(c)
 															- misc.lgammafn(x0 + one));
+		}
 		else
+		{
 			/* !* q = exp(-c); *! */
 			q = java.lang.Math.exp(-c);
+		}
 
 		ax = q * temp;
 		sumq = one - q;

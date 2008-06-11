@@ -43,15 +43,15 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	private static GraphicsDevice mGraphicsDevice;
 
-	private DisplayMode mDisplayMode;
+	private final DisplayMode mDisplayMode;
 
 	private MemoryImageSource mMemoryImageSource;
 
 	private Image mPixelOffscreen;
 
-	private int mWidth;
+	private final int mWidth;
 
-	private int mHeight;
+	private final int mHeight;
 
 	private boolean mTimerStarted;
 
@@ -172,7 +172,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
+		{
 			lDevice = lAllGraphicsDevices.length - 1;
+		}
 
 		mGraphicsDevice = lAllGraphicsDevices[lDevice];
 
@@ -265,7 +267,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 		final int lScreenHeight = mFrame.getHeight();
 
 		if (lScreenWidth * lScreenHeight != pPixelArray.length)
+		{
 			throw new IllegalArgumentException("Wrong dimension for the Pixel Array.");
+		}
 		final DirectColorModel lColorModel = new DirectColorModel(32,
 																															0x00FF0000,
 																															0x0000FF00,
@@ -311,14 +315,16 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	public void show()
 	{
 		if (mDisplayFramerate)
+		{
 			displayFrameRate();
+		}
 		mStrategy.show();
 
 	}
 
 	private void displayFrameRate()
 	{
-		if ((!mTimerStarted) || (mFrameCounter > mMaxFramesForFrameRate))
+		if (!mTimerStarted || mFrameCounter > mMaxFramesForFrameRate)
 		{
 			mTimerStarted = true;
 			mInitialTime = System.currentTimeMillis();
@@ -332,7 +338,7 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				mFrameRate = (mFrameCounter) / (lDeltaInSeconds);
+				mFrameRate = mFrameCounter / lDeltaInSeconds;
 
 				if (mDisplayFramerate)
 				{
@@ -356,7 +362,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 	{
 		double lInterFrameTime = -1;
 		if (mFrameRate != 0)
+		{
 			lInterFrameTime = 1 / mFrameRate;
+		}
 		return lInterFrameTime;
 	}
 
@@ -384,23 +392,37 @@ public class WindowedPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
 				mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					if (mMouseInfo.mMouseLeft)
+					{
 						mOrionGraphicsMouseListener.onLeftPress(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseRight)
+					{
 						mOrionGraphicsMouseListener.onRightPress(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseMiddle)
+					{
 						mOrionGraphicsMouseListener.onMiddlePress(mMouseInfo);
+					}
+				}
 			}
 
 			@Override
 			public void mouseReleased(final MouseEvent pMouseEvent)
 			{
 				if (SwingUtilities.isLeftMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseLeft = false;
+				}
 				if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseMiddle = false;
+				}
 				if (SwingUtilities.isRightMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseRight = false;
+				}
 			}
 
 			@Override
@@ -412,11 +434,17 @@ public class WindowedPixelAndVector implements IOrionGraphics
 					mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
 					mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
 					if (mMouseInfo.mMouseLeft)
+					{
 						mOrionGraphicsMouseListener.onLeftClick(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseRight)
+					{
 						mOrionGraphicsMouseListener.onRightClick(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseMiddle)
+					{
 						mOrionGraphicsMouseListener.onMiddleClick(mMouseInfo);
+					}
 				}
 			}
 
@@ -432,7 +460,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseX = pMouseEvent.getX();
 				mMouseInfo.mMouseY = pMouseEvent.getY();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				}
 			}
 
 			@Override
@@ -441,7 +471,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseX = pMouseEvent.getX();
 				mMouseInfo.mMouseY = pMouseEvent.getY();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				}
 			}
 		};
 		mFrame.addMouseMotionListener(mMouseMotionListenerAdapter);
@@ -452,7 +484,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			{
 				mMouseInfo.mMouseDeltaZ = pE.getWheelRotation();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onWheel(mMouseInfo);
+				}
 			}
 		};
 
@@ -465,7 +499,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			{
 				super.keyTyped(pE);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onKeyTyped(pE);
+				}
 			}
 
 			@Override
@@ -473,7 +509,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			{
 				super.keyPressed(pE);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onKeyPressed(pE);
+				}
 			}
 		};
 		mFrame.addKeyListener(mKeyListenerAdapter);
@@ -551,7 +589,9 @@ public class WindowedPixelAndVector implements IOrionGraphics
 			final Toolkit lToolkit = Toolkit.getDefaultToolkit();
 			final URL lURL = ClassLoader.getSystemResource(mIconFileName);
 			if (lURL == null)
+			{
 				throw new NullPointerException("lURL == null");
+			}
 			new File(lURL.toString());
 			mFrame.setIconImage(lToolkit.getImage(lURL));
 		}

@@ -33,16 +33,16 @@ public class TabularFile
 	private final Set<String> mSelection;
 	private final int mSelectionColumnIndex;
 
-	public TabularFile(File pFile, boolean pHasHeader) throws IOException
+	public TabularFile(final File pFile, final boolean pHasHeader) throws IOException
 	{
 		this(pFile, pHasHeader, 0, null);
 	}
 
-	public TabularFile(	File pAttributeFile,
-											boolean pHasHeader,
-											int pSelectionColumnIndex,
-											Set<String> pSelection)	throws FileNotFoundException,
-																							IOException
+	public TabularFile(	final File pAttributeFile,
+											final boolean pHasHeader,
+											final int pSelectionColumnIndex,
+											final Set<String> pSelection)	throws FileNotFoundException,
+																										IOException
 	{
 		this(	pAttributeFile.getName(),
 					new FileInputStream(pAttributeFile),
@@ -51,12 +51,12 @@ public class TabularFile
 					pSelection);
 	}
 
-	public TabularFile(	String pName,
-											InputStream pInputStream,
-											boolean pHasHeader,
-											int pSelectionColumnIndex,
-											Set<String> pSelection)	throws FileNotFoundException,
-																							IOException
+	public TabularFile(	final String pName,
+											final InputStream pInputStream,
+											final boolean pHasHeader,
+											final int pSelectionColumnIndex,
+											final Set<String> pSelection)	throws FileNotFoundException,
+																										IOException
 	{
 		super();
 		mName = pName;
@@ -69,14 +69,14 @@ public class TabularFile
 
 	public final void read() throws FileNotFoundException, IOException
 	{
-		Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(mInputStream);
+		final Matrix<String> lMatrix = MatrixFile.readMatrixFromStream(mInputStream);
 
 		int lMaxColumns = 0;
 		int lMinColumns = Integer.MAX_VALUE;
 		for (int line = 0; line < lMatrix.size(); line++)
 		{
 
-			int lNumberOfColumns = lMatrix.get(line).size();
+			final int lNumberOfColumns = lMatrix.get(line).size();
 			if (lNumberOfColumns != 0)
 			{
 				lMaxColumns = Math.max(lMaxColumns, lNumberOfColumns);
@@ -86,7 +86,7 @@ public class TabularFile
 
 		for (int line = 0; line < lMatrix.size(); line++)
 		{
-			int lNumberOfColumns = lMatrix.get(line).size();
+			final int lNumberOfColumns = lMatrix.get(line).size();
 			if (lNumberOfColumns < lMaxColumns)
 			{
 				// we get rid of lines that don't have enough columns...
@@ -110,11 +110,14 @@ public class TabularFile
 
 		// keep only lines that are in the selection
 		if (mSelection != null)
+		{
 			for (int line = 0; line < lMatrix.size(); line++)
+			{
 				if (!lMatrix.get(line).isEmpty())
+				{
 					if (!lMatrix.get(line).get(0).startsWith("//"))
 					{
-						String lEntry = lMatrix.get(line).get(mSelectionColumnIndex);
+						final String lEntry = lMatrix.get(line).get(mSelectionColumnIndex);
 						if (!mSelection.contains(lEntry))
 						{
 							// remove since not in selection:
@@ -122,10 +125,13 @@ public class TabularFile
 							line--;
 						}
 					}
+				}
+			}
+		}
 
 		if (mHasHeader)
 		{
-			List<String> lHeaderList = lMatrix.get(0);
+			final List<String> lHeaderList = lMatrix.get(0);
 			for (int index = 0; index < lHeaderList.size(); index++)
 			{
 				mIndexToNameMap.put(index, lHeaderList.get(index));
@@ -141,7 +147,7 @@ public class TabularFile
 
 		for (int index = 0; index < lMaxColumns; index++)
 		{
-			Column<?> lColumn = parseColumn(lMatrix, index);
+			final Column<?> lColumn = parseColumn(lMatrix, index);
 			final String lColumnName = mIndexToNameMap.get(index);
 			mNameToColumnMap.put(lColumnName, lColumn);
 		}
@@ -158,12 +164,18 @@ public class TabularFile
 		{
 			final String lItem = pMatrix.get(line).get(pColumn);
 			if (isDouble)
+			{
 				isDouble &= cDoublePattern.matcher(lItem).matches();
+			}
 			if (isInteger)
+			{
 				isInteger &= cIntegerPattern.matcher(lItem).matches();
+			}
 
 			if (!isDouble && !isInteger)
+			{
 				break;
+			}
 		}
 
 		Column lColumn = null;
@@ -212,7 +224,9 @@ public class TabularFile
 			return mNameToColumnMap.get(lName);
 		}
 		else
+		{
 			return null;
+		}
 	}
 
 	public Column getColumnByName(final String pName)
@@ -223,9 +237,9 @@ public class TabularFile
 	@Override
 	public String toString()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		lStringBuilder.append("Number of columns" + mNameToColumnMap.size() + "\n");
-		for (Map.Entry<String, Column> lEntry : mNameToColumnMap.entrySet())
+		for (final Map.Entry<String, Column> lEntry : mNameToColumnMap.entrySet())
 		{
 			final String lName = lEntry.getKey();
 			final Column lColumn = lEntry.getValue();
@@ -244,7 +258,7 @@ public class TabularFile
 		return mNameToColumnMap.size();
 	}
 
-	public String getColumnNameForIndex(int pColumnIndex)
+	public String getColumnNameForIndex(final int pColumnIndex)
 	{
 		return mIndexToNameMap.get(pColumnIndex);
 	}

@@ -21,6 +21,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 		super();
 		mCaseSensitive = pCaseSensitive;
 		for (final String lRessourceName : pResourceArray)
+		{
 			try
 			{
 				this.compileIdentificationRulesFromRessource(pClass, lRessourceName);
@@ -30,6 +31,7 @@ public class CountWordIdentifier extends GenericWordIdentifier
 				e.printStackTrace();
 				// cLogger.info(e);
 			}
+		}
 	}
 
 	/**
@@ -40,7 +42,9 @@ public class CountWordIdentifier extends GenericWordIdentifier
 	{
 		pString = pString.trim();
 		if (!mCaseSensitive)
+		{
 			pString = pString.toLowerCase();
+		}
 		return pString;
 	}
 

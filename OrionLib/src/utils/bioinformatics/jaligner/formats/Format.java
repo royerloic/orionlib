@@ -49,7 +49,7 @@ public abstract class Format
 	 * @param id
 	 *          to set
 	 */
-	public void setId(String id)
+	public void setId(final String id)
 	{
 		this.id = id;
 	}

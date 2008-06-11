@@ -28,13 +28,13 @@ public class PowerGraph<N>
 
 	private final PowerEdgeComparator<N> cPowerEdgeComparator = new PowerEdgeComparator<N>();
 
-	private Set<Set<N>> mPowerNodeSet;
+	private final Set<Set<N>> mPowerNodeSet;
 
-	private Set<Edge<Set<N>>> mPowerEdgeSet;
+	private final Set<Edge<Set<N>>> mPowerEdgeSet;
 
-	private Set<N> mNodeSet;
+	private final Set<N> mNodeSet;
 
-	private Set<Set<N>> mClusterSet;
+	private final Set<Set<N>> mClusterSet;
 
 	public PowerGraph()
 	{
@@ -54,7 +54,9 @@ public class PowerGraph<N>
 	{
 		this.mNodeSet.addAll(pNodeSet);
 		if (pNodeSet.size() > 1)
+		{
 			this.mPowerNodeSet.add(pNodeSet);
+		}
 	}
 
 	public void addCluster(final Set<N> pNodeSet)
@@ -75,8 +77,12 @@ public class PowerGraph<N>
 		Collections.<Edge<Set<N>>> sort(this.mDelayedPowerEdgeList,
 																		this.cPowerEdgeComparator);
 		for (final Edge<Set<N>> lEdge : this.mDelayedPowerEdgeList)
+		{
 			if (!isIntersectingPowerEdgePresent(lEdge))
+			{
 				addPowerEdge(lEdge);
+			}
+		}
 		this.mDelayedPowerEdgeList.clear();
 	}
 
@@ -107,18 +113,26 @@ public class PowerGraph<N>
 		this.mPowerEdgeSet.remove(pPowerEdge);
 		this.mNodeSet.clear();
 		for (final Set<N> lNodeSet : this.mPowerNodeSet)
+		{
 			this.mNodeSet.addAll(lNodeSet);
+		}
 		for (final Set<N> lNodeSet : this.mClusterSet)
+		{
 			this.mNodeSet.addAll(lNodeSet);
+		}
 	}
 
 	public boolean strictlyIncludedIn(final Edge<Set<N>> pPowerEdge1,
 																		final Edge<Set<N>> pPowerEdge2)
 	{
 		if (pPowerEdge1.equals(pPowerEdge2))
+		{
 			return false;
+		}
 		else
+		{
 			return includedIn(pPowerEdge1, pPowerEdge2);
+		}
 	}
 
 	public boolean includedIn(final Edge<Set<N>> pPowerEdge1,
@@ -132,12 +146,16 @@ public class PowerGraph<N>
 		final boolean isSecondIncludedA = lS2.containsAll(lS1);
 
 		if (isFirstIncludedA && isSecondIncludedA)
+		{
 			return true;
+		}
 
 		final boolean isFirstIncludedB = lF2.containsAll(lS1);
 		final boolean isSecondIncludedB = lS2.containsAll(lF1);
 		if (isFirstIncludedB && isSecondIncludedB)
-			return (true);
+		{
+			return true;
+		}
 
 		return false;
 	}
@@ -145,8 +163,12 @@ public class PowerGraph<N>
 	public boolean isIntersectingPowerEdgePresent(final Edge<Set<N>> pPowerEdge)
 	{
 		for (final Edge<Set<N>> lPowerEdge : this.mPowerEdgeSet)
+		{
 			if (isIntersecting(pPowerEdge, lPowerEdge))
+			{
 				return true;
+			}
+		}
 		return false;
 	}
 
@@ -158,9 +180,9 @@ public class PowerGraph<N>
 		final Set<N> lF2 = pPowerEdge2.getFirstNode();
 		final Set<N> lS2 = pPowerEdge2.getSecondNode();
 
-		return (setIntersects(lF1, lF2) && setIntersects(lS1, lS2)) || (setIntersects(lF1,
-																																									lS2) && setIntersects(lS1,
-																																																				lF2));
+		return setIntersects(lF1, lF2) && setIntersects(lS1, lS2)
+						|| setIntersects(lF1, lS2)
+						&& setIntersects(lS1, lF2);
 
 	}
 
@@ -207,7 +229,9 @@ public class PowerGraph<N>
 	void addPowerGraph(final PowerGraph<N> pPowerGraph)
 	{
 		for (final Edge<Set<N>> lPowerEdge : pPowerGraph.mPowerEdgeSet)
+		{
 			addPowerEdge(lPowerEdge);
+		}
 	}
 
 	public Integer getNumberOfNodes()
@@ -247,7 +271,8 @@ public class PowerGraph<N>
 		{
 			final PowerGraph lGraph = (PowerGraph) pObj;
 
-			return (lGraph.getPowerEdgeSet().equals(getPowerEdgeSet())) && (lGraph.getPowerNodeSet().equals(getPowerNodeSet()));
+			return lGraph.getPowerEdgeSet().equals(getPowerEdgeSet()) && lGraph	.getPowerNodeSet()
+																																					.equals(getPowerNodeSet());
 		}
 		return false;
 	}
@@ -277,17 +302,26 @@ public class PowerGraph<N>
 		int lNumberOfEdges = 0;
 
 		for (final Edge<Set<N>> lEdge : this.mPowerEdgeSet)
+		{
 			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
 			{
 				if (lEdge.getFirstNode().size() == 1)
+				{
 					lNumberOfEdges += 1;
+				}
 				else
-					lNumberOfEdges += ((lEdge.getFirstNode().size() * (lEdge.getFirstNode()
-																																	.size() - 1))) / 2;
+				{
+					lNumberOfEdges += lEdge.getFirstNode().size() * (lEdge.getFirstNode()
+																																.size() - 1)
+														/ 2;
+				}
 			}
 			else
+			{
 				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge	.getSecondNode()
 																															.size();
+			}
+		}
 
 		return lNumberOfEdges;
 	}
@@ -297,17 +331,26 @@ public class PowerGraph<N>
 		int lNumberOfEdges = 0;
 
 		for (final Edge<Set<N>> lEdge : this.mPowerEdgeSet)
+		{
 			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
 			{
 				if (lEdge.getFirstNode().size() == 1)
+				{
 					lNumberOfEdges += 0;
+				}
 				else
-					lNumberOfEdges += (lEdge.getFirstNode().size() * (lEdge	.getFirstNode()
-																																	.size() - 1)) / 2;
+				{
+					lNumberOfEdges += lEdge.getFirstNode().size() * (lEdge.getFirstNode()
+																																.size() - 1)
+														/ 2;
+				}
 			}
 			else
+			{
 				lNumberOfEdges += lEdge.getFirstNode().size() * lEdge	.getSecondNode()
 																															.size();
+			}
+		}
 
 		return lNumberOfEdges;
 	}
@@ -316,29 +359,40 @@ public class PowerGraph<N>
 	{
 		int lMaxNumberOfEdges = 0;
 		for (final Edge<Set<N>> lEdge : this.mPowerEdgeSet)
+		{
 			if (lEdge.getFirstNode().equals(lEdge.getSecondNode()))
+			{
 				lMaxNumberOfEdges = Math.max(	lMaxNumberOfEdges,
-																			(lEdge.getFirstNode().size() * (lEdge	.getFirstNode()
-																																						.size() - 1)) / 2);
+																			lEdge.getFirstNode().size() * (lEdge.getFirstNode()
+																																					.size() - 1)
+																					/ 2);
+			}
 			else
+			{
 				lMaxNumberOfEdges = Math.max(	lMaxNumberOfEdges,
 																			lEdge.getFirstNode().size() * lEdge	.getSecondNode()
 																																					.size());
+			}
+		}
 
 		return lMaxNumberOfEdges;
 	}
 
 	public Double getEdgeReduction()
 	{
-		return 1 - ((double) (getNumberOfPowerEdges()) / (double) getNumberOfEdges());
+		return 1 - (double) getNumberOfPowerEdges() / (double) getNumberOfEdges();
 	}
 
 	public List<Set<N>> getAllPowerNodeContaining(final N pNode)
 	{
 		final List<Set<N>> lList = new ArrayList<Set<N>>();
 		for (final Set<N> lPowerNode : this.mPowerNodeSet)
+		{
 			if (lPowerNode.contains(pNode))
+			{
 				lList.add(lPowerNode);
+			}
+		}
 
 		return lList;
 	}
@@ -353,12 +407,13 @@ public class PowerGraph<N>
 
 	public Double getAverageDegree()
 	{
-		return ((double) 2 * getNumberOfEdges()) / getNumberOfNodes();
+		return (double) 2 * getNumberOfEdges() / getNumberOfNodes();
 	}
 
 	public Double getPowerGraphIndex()
 	{
-		return Math.log(getEdgeReduction()) + (2.0 / 3.0)
+		return Math.log(getEdgeReduction()) + 2.0
+						/ 3.0
 						* Math.log(getAverageDegree());
 	}
 

@@ -9,24 +9,24 @@ import utils.structures.map.HashSetMap;
 
 public class FirstInPrioritizedSetDecomposer<E, A>
 {
-	private HashSetMap<Set<E>, A> mSetMap = new HashSetMap<Set<E>, A>();
+	private final HashSetMap<Set<E>, A> mSetMap = new HashSetMap<Set<E>, A>();
 
 	public HashMap<Set<E>, Set<A>> getSetsAndAttributes()
 	{
 		return mSetMap;
 	}
 
-	public void addSet(A pAttribute, E... lSetAsArray)
+	public void addSet(final A pAttribute, final E... lSetAsArray)
 	{
-		HashSet<E> lSet = new HashSet<E>();
-		for (E lE : lSetAsArray)
+		final HashSet<E> lSet = new HashSet<E>();
+		for (final E lE : lSetAsArray)
 		{
 			lSet.add(lE);
 		}
 		addSet(lSet, pAttribute);
 	}
 
-	public void addSet(Set<E> lSet, A pAttribute)
+	public void addSet(final Set<E> lSet, final A pAttribute)
 	{
 		final Set<E> lCuttingSet = ifNotCompatibleReturnCuttingSet(lSet);
 		if (lCuttingSet == null)
@@ -35,45 +35,56 @@ public class FirstInPrioritizedSetDecomposer<E, A>
 		}
 		else
 		{
-			Pair<Set<E>> lPairOfCuttedSets = cutFirstWithSecond(lSet, lCuttingSet);
+			final Pair<Set<E>> lPairOfCuttedSets = cutFirstWithSecond(lSet,
+																																lCuttingSet);
 
-			for (Set<E> lSetPart : lPairOfCuttedSets)
+			for (final Set<E> lSetPart : lPairOfCuttedSets)
 			{
 				addSet(lSetPart, pAttribute);
 			}
 		}
 	}
 
-	private Pair<Set<E>> cutFirstWithSecond(Set<E> pSet, Set<E> pCuttingSet)
+	private Pair<Set<E>> cutFirstWithSecond(final Set<E> pSet,
+																					final Set<E> pCuttingSet)
 	{
-		HashSet<E> lFirstPart = new HashSet<E>();
+		final HashSet<E> lFirstPart = new HashSet<E>();
 		lFirstPart.addAll(pSet);
 		lFirstPart.removeAll(pCuttingSet);
 
-		HashSet<E> lSecondPart = new HashSet<E>();
+		final HashSet<E> lSecondPart = new HashSet<E>();
 		lSecondPart.addAll(pSet);
 		lSecondPart.retainAll(pCuttingSet);
 
-		Pair<Set<E>> lPairOfCuttedSets = new Pair<Set<E>>(lFirstPart, lSecondPart);
+		final Pair<Set<E>> lPairOfCuttedSets = new Pair<Set<E>>(lFirstPart,
+																														lSecondPart);
 		return lPairOfCuttedSets;
 	}
 
-	private Set<E> ifNotCompatibleReturnCuttingSet(Set<E> pSet)
+	private Set<E> ifNotCompatibleReturnCuttingSet(final Set<E> pSet)
 	{
-		for (Set<E> lSet : mSetMap.keySet())
+		for (final Set<E> lSet : mSetMap.keySet())
+		{
 			if (strictlyIntersecting(lSet, pSet))
+			{
 				return lSet;
+			}
+		}
 		return null;
 	}
 
-	private boolean strictlyIntersecting(Set<E> pSet1, Set<E> pSet2)
+	private boolean strictlyIntersecting(final Set<E> pSet1, final Set<E> pSet2)
 	{
 		if (pSet1.containsAll(pSet2))
+		{
 			return false;
+		}
 		if (pSet2.containsAll(pSet1))
+		{
 			return false;
+		}
 
-		HashSet<E> lIntersection = new HashSet<E>();
+		final HashSet<E> lIntersection = new HashSet<E>();
 		lIntersection.addAll(pSet1);
 		lIntersection.retainAll(pSet2);
 

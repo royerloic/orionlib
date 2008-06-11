@@ -25,7 +25,9 @@ public class IntersectionMonitor<E>
 		this.mSetA.addAll(pCollection);
 
 		if (!Collections.disjoint(pCollection, this.mSetB))
+		{
 			this.mIsIntersecting = true;
+		}
 
 		return isIntersecting();
 	}
@@ -39,7 +41,9 @@ public class IntersectionMonitor<E>
 		this.mSetB.addAll(pCollection);
 
 		if (!Collections.disjoint(pCollection, this.mSetA))
+		{
 			this.mIsIntersecting = true;
+		}
 
 		return isIntersecting();
 	}

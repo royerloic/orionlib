@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class UndirectedEdge<N> implements Edge<N>, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private N mFirstNode;
 
 	private N mSecondNode;
@@ -74,11 +79,15 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 	public boolean equals(final Object pObject)
 	{
 		if (pObject == this)
+		{
 			return true;
+		}
 		else
 		{
 			final Edge<N> lEdge = (Edge<N>) pObject;
-			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge.getSecondNode()))) || ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
+			final boolean lEquals = this.mFirstNode.equals(lEdge.getFirstNode()) && this.mSecondNode.equals(lEdge.getSecondNode())
+															|| this.mFirstNode.equals(lEdge.getSecondNode())
+															&& this.mSecondNode.equals(lEdge.getFirstNode());
 			return lEquals;
 		}
 	}
@@ -97,7 +106,7 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 
 	public boolean symetricTo(final Edge<N> pEdge)
 	{
-		return (this.mFirstNode.equals(pEdge.getSecondNode())) && (this.mSecondNode.equals(pEdge.getFirstNode()));
+		return this.mFirstNode.equals(pEdge.getSecondNode()) && this.mSecondNode.equals(pEdge.getFirstNode());
 	}
 
 	public boolean contains(final N pNode)
@@ -125,17 +134,17 @@ public class UndirectedEdge<N> implements Edge<N>, Serializable
 		return mConfidence;
 	}
 
-	public void setConfidence(double pConfidence)
+	public void setConfidence(final double pConfidence)
 	{
 		mConfidence = pConfidence;
 	}
 
-	public void setFirstNodeConfidence(double pFirstPowerNodeConfidence)
+	public void setFirstNodeConfidence(final double pFirstPowerNodeConfidence)
 	{
 		mFirstNodeConfidence = pFirstPowerNodeConfidence;
 	}
 
-	public void setSecondNodeConfidence(double pSecondPowerNodeConfidence)
+	public void setSecondNodeConfidence(final double pSecondPowerNodeConfidence)
 	{
 		mSecondNodeConfidence = pSecondPowerNodeConfidence;
 	}

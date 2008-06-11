@@ -16,7 +16,7 @@ public class DistributionSourceTests
 	@Test
 	public void testDistributionSource()
 	{
-		DistributionSource<String> source = new DistributionSource<String>();
+		final DistributionSource<String> source = new DistributionSource<String>();
 
 		source.addObject("apple", 0.75);
 		source.addObject("orange", 0.25);
@@ -25,15 +25,15 @@ public class DistributionSourceTests
 		{
 			source.prepare(10000, 0.01);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			fail("distortion too high");
 			e.printStackTrace();
 		}
-		Random lRandom = new Random(System.currentTimeMillis());
+		final Random lRandom = new Random(System.currentTimeMillis());
 
-		int size = 1000;
-		ArrayList<String> list = new ArrayList<String>();
+		final int size = 1000;
+		final ArrayList<String> list = new ArrayList<String>();
 		for (int i = 0; i < size; i++)
 		{
 			list.add(source.getObject(lRandom));
@@ -41,7 +41,7 @@ public class DistributionSourceTests
 
 		int applecout = 0;
 		int orangecount = 0;
-		for (String type : list)
+		for (final String type : list)
 		{
 			applecout += type == "apple" ? 1 : 0;
 			orangecount += type == "orange" ? 1 : 0;

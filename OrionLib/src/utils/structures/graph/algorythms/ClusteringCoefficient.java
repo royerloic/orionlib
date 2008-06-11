@@ -12,7 +12,9 @@ public class ClusteringCoefficient<N>
 	{
 		double lSum = 0;
 		for (final N lNode : pGraph.getNodeSet())
+		{
 			lSum += computeClusteringCoefficient(pGraph, lNode);
+		}
 		final double lClusteringCoefficient = lSum / pGraph.getNodeSet().size();
 		return lClusteringCoefficient;
 	}
@@ -24,18 +26,24 @@ public class ClusteringCoefficient<N>
 		final List<N> lNodeNeighboursList = new ArrayList<N>(pGraph.getNodeNeighbours(pNode));
 		final double lDegree = lNodeNeighboursList.size();
 		if (lDegree == 0)
+		{
 			return 0;
+		}
 		for (int i = 0; i < lDegree; i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final N lNode1 = lNodeNeighboursList.get(i);
 				final N lNode2 = lNodeNeighboursList.get(j);
 
 				if (pGraph.isEdge(lNode1, lNode2))
+				{
 					lEdgeCount++;
+				}
 			}
+		}
 
-		final double lClusteringCoefficient = lEdgeCount / ((lDegree) * (lDegree + 1) / 2);
+		final double lClusteringCoefficient = lEdgeCount / (lDegree * (lDegree + 1) / 2);
 		return lClusteringCoefficient;
 	}
 

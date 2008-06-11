@@ -66,7 +66,9 @@ public class ZipExtract
 						// Read the entry data and write it to the output file.
 
 						while ((bytesRead = entryStream.read(buffer)) != -1)
+						{
 							file.write(buffer, 0, bytesRead);
+						}
 
 						System.out.println(entry.getName() + " extracted.");
 					}
@@ -81,7 +83,9 @@ public class ZipExtract
 				}
 			}
 			else
+			{
 				System.out.println(entryName + " not found.");
+			}
 		}
 		finally
 		{

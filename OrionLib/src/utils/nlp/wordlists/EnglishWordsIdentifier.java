@@ -43,7 +43,7 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 	 * @see de.tud.biotec.protein.interaction.attic.identifiers.EntityIdentifier#normalizeString(java.lang.String)
 	 */
 	@Override
-	public String normalizeString(String pString)
+	public String normalizeString(final String pString)
 	{
 		return pString.trim();
 	}
@@ -52,7 +52,9 @@ public class EnglishWordsIdentifier extends GenericWordIdentifier
 	public boolean isEntity(final String pToken)
 	{
 		if (pToken.length() == 0)
+		{
 			return false;
+		}
 		final String lAfterFirstCaracterString = pToken.substring(1);
 		final boolean lCorrectCapitalization = lAfterFirstCaracterString.toLowerCase()
 																																		.equals(lAfterFirstCaracterString);

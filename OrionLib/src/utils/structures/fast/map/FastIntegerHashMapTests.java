@@ -14,7 +14,7 @@ public class FastIntegerHashMapTests
 	@Test
 	public void testPutGet()
 	{
-		FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(2);
+		final FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(2);
 		map.put(0, "00");
 		map.put(0, "0");
 		map.put(1, "1");
@@ -30,7 +30,7 @@ public class FastIntegerHashMapTests
 	@Test
 	public void testPutRemoveGet()
 	{
-		FastIntegerHashMap<String> map = new FastIntegerHashMap<String>();
+		final FastIntegerHashMap<String> map = new FastIntegerHashMap<String>();
 		map.put(0, "00");
 		map.remove(0);
 		assertEquals(map.size(), 0);
@@ -50,10 +50,10 @@ public class FastIntegerHashMapTests
 	@Test
 	public void testLargeScale()
 	{
-		FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(100);
-		HashMap<Integer, String> mapref = new HashMap<Integer, String>(100);
+		final FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(100);
+		final HashMap<Integer, String> mapref = new HashMap<Integer, String>(100);
 
-		Random rnd = new Random();
+		final Random rnd = new Random();
 		for (int i = 0; i < 10000; i++)
 		{
 			final int key = rnd.nextInt();
@@ -62,7 +62,7 @@ public class FastIntegerHashMapTests
 			mapref.put(key, value);
 		}
 
-		for (Integer key : map)
+		for (final Integer key : map)
 		{
 			final String value = map.get(key);
 			assertEquals(mapref.get(key), value);
@@ -72,38 +72,38 @@ public class FastIntegerHashMapTests
 	@Test
 	public void testPerformance()
 	{
-		FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(1000);
-		HashMap<Integer, String> mapref = new HashMap<Integer, String>(1000);
+		final FastIntegerHashMap<String> map = new FastIntegerHashMap<String>(1000);
+		final HashMap<Integer, String> mapref = new HashMap<Integer, String>(1000);
 
 		double timeref;
 		double time;
 		double fold;
 
 		{
-			long start = System.nanoTime();
-			Random rnd = new Random();
+			final long start = System.nanoTime();
+			final Random rnd = new Random();
 			for (int i = 0; i < 1000; i++)
 			{
 				final int key = rnd.nextInt();
 				final String value = "";
 				mapref.put(key, value);
 			}
-			long stop = System.nanoTime();
-			timeref = ((double) (stop - start));
+			final long stop = System.nanoTime();
+			timeref = (stop - start);
 		}
 		System.out.println("timeref=" + timeref);
 
 		{
-			long start = System.nanoTime();
-			Random rnd = new Random();
+			final long start = System.nanoTime();
+			final Random rnd = new Random();
 			for (int i = 0; i < 1000; i++)
 			{
 				final int key = rnd.nextInt();
 				final String value = "";
 				map.put(key, value);
 			}
-			long stop = System.nanoTime();
-			time = ((double) (stop - start));
+			final long stop = System.nanoTime();
+			time = (stop - start);
 		}
 		System.out.println("time=" + time);
 
@@ -112,28 +112,28 @@ public class FastIntegerHashMapTests
 												+ " times faster than HashMap<Integer,O> ");
 
 		{
-			long start = System.nanoTime();
-			Random rnd = new Random();
+			final long start = System.nanoTime();
+			final Random rnd = new Random();
 			for (int i = 0; i < 1000; i++)
 			{
 				final int key = rnd.nextInt();
 				mapref.get(key);
 			}
-			long stop = System.nanoTime();
-			timeref = ((double) (stop - start));
+			final long stop = System.nanoTime();
+			timeref = (stop - start);
 		}
 		System.out.println("timeref=" + timeref);
 
 		{
-			long start = System.nanoTime();
-			Random rnd = new Random();
+			final long start = System.nanoTime();
+			final Random rnd = new Random();
 			for (int i = 0; i < 1000; i++)
 			{
 				final int key = rnd.nextInt();
 				map.get(key);
 			}
-			long stop = System.nanoTime();
-			time = ((double) (stop - start));
+			final long stop = System.nanoTime();
+			time = (stop - start);
 		}
 		System.out.println("time=" + time);
 

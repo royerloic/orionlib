@@ -41,7 +41,7 @@ public class StarEnumerator<N>
 
 		public int compareTo(final Star pO)
 		{
-			return (pO).mConnectivity - this.mConnectivity;
+			return pO.mConnectivity - this.mConnectivity;
 		}
 
 		@Override
@@ -82,7 +82,9 @@ public class StarEnumerator<N>
 
 				Integer lNumberOfNodesForConnectivity = this.mConnectivityStatistics.get(lNodeConnectivity);
 				if (lNumberOfNodesForConnectivity == null)
+				{
 					lNumberOfNodesForConnectivity = 0;
+				}
 				this.mConnectivityStatistics.put(	lNodeConnectivity,
 																					lNumberOfNodesForConnectivity + 1);
 
@@ -199,8 +201,12 @@ public class StarEnumerator<N>
 		final Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
 
 		for (final int lK : lConnectivity.keySet())
-			if ((lK != 0) && (lConnectivity.get(lK) != 0))
+		{
+			if (lK != 0 && lConnectivity.get(lK) != 0)
+			{
 				lLogConnectivity.put(Math.log(lK), Math.log(lConnectivity.get(lK)));
+			}
+		}
 
 		double lSigmaX = 0;
 		double lSigmaY = 0;
@@ -219,10 +225,10 @@ public class StarEnumerator<N>
 			lSigmaXY += lLogK * lLogNK;
 		}
 
-		final double a = (((lSigmaY) * (lSigmaX2)) - ((lSigmaX) * (lSigmaXY))) / ((lN * (lSigmaX2)) - (Math.pow(lSigmaX,
-																																																						2)));
-		double b = ((lN * lSigmaXY) - (lSigmaX * lSigmaY)) / ((lN * lSigmaX2) - (Math.pow(lSigmaX,
-																																											2)));
+		final double a = (lSigmaY * lSigmaX2 - lSigmaX * lSigmaXY) / (lN * lSigmaX2 - Math.pow(	lSigmaX,
+																																														2));
+		double b = (lN * lSigmaXY - lSigmaX * lSigmaY) / (lN * lSigmaX2 - Math.pow(	lSigmaX,
+																																								2));
 
 		final double gamma = -b;
 
@@ -242,8 +248,12 @@ public class StarEnumerator<N>
 		final Map<Double, Double> lLogConnectivity = new HashMap<Double, Double>();
 
 		for (final int lK : lConnectivity.keySet())
-			if ((lK != 0) && (lConnectivity.get(lK) != 0))
+		{
+			if (lK != 0 && lConnectivity.get(lK) != 0)
+			{
 				lLogConnectivity.put(Math.log(lK), Math.log(lConnectivity.get(lK)));
+			}
+		}
 		return 0;
 
 	}

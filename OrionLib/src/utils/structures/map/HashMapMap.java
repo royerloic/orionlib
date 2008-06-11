@@ -36,15 +36,21 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements
 	public void putAll(final MapMap<K1, K2, V> pMapMap)
 	{
 		for (final Map.Entry<K1, Map<K2, V>> lEntry : pMapMap.entrySet())
+		{
 			for (final Map.Entry<K2, V> lEntry2 : lEntry.getValue().entrySet())
+			{
 				put(lEntry.getKey(), lEntry2.getKey(), lEntry2.getValue());
+			}
+		}
 	}
 
 	public V get(final K1 pKey1, final K2 pKey2)
 	{
-		Map<K2, V> lMap = get(pKey1);
+		final Map<K2, V> lMap = get(pKey1);
 		if (lMap == null)
+		{
 			return null;
+		}
 		return lMap.get(pKey2);
 	}
 
@@ -82,6 +88,7 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements
 	{
 		final Set<Entry<K1, K2, V>> lEntrySet = new HashSet<Entry<K1, K2, V>>();
 		for (final Map.Entry<K1, Map<K2, V>> lEntry : entrySet())
+		{
 			for (final Map.Entry<K2, V> lEntry2 : lEntry.getValue().entrySet())
 			{
 				final Entry<K1, K2, V> lAllKeyEntry = new HashMapMapEntry<K1, K2, V>(	lEntry.getKey(),
@@ -89,6 +96,7 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements
 																																							lEntry2.getValue());
 				lEntrySet.add(lAllKeyEntry);
 			}
+		}
 		return lEntrySet;
 	}
 

@@ -30,16 +30,20 @@ public class exponential
 	/**
 	 * Density of the exponential distribution.
 	 */
-	public static double density(double x, double scale)
+	public static double density(double x, final double scale)
 	{
 		if (Double.isNaN(x) || Double.isNaN(scale))
+		{
 			return x + scale;
+		}
 		if (scale <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (x < 0.0)
+		{
 			return 0.0;
+		}
 		return java.lang.Math.exp(-x / scale) / scale;
 	}
 
@@ -47,39 +51,47 @@ public class exponential
 	 * Distribution function of the exponential distribution
 	 * 
 	 */
-	public static double cumulative(double x, double scale)
+	public static double cumulative(double x, final double scale)
 	{
 		if (Double.isNaN(x) || Double.isNaN(scale))
+		{
 			return x + scale;
+		}
 		if (scale <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
+		}
 		return 1.0 - java.lang.Math.exp(-x / scale);
 	}
 
 	/**
 	 * quantile function of the exponential distribution
 	 */
-	public static double quantile(double x, double scale)
+	public static double quantile(final double x, double scale)
 	{
 		if (Double.isNaN(x) || Double.isNaN(scale))
+		{
 			return x + scale;
+		}
 		if (scale <= 0 || x < 0 || x > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
+		}
 		return -scale * java.lang.Math.log(1.0 - x);
 	}
 
 	/**
 	 * Random variates from the exponential distribution
 	 */
-	public static double random(double scale, uniform PRNG)
+	public static double random(final double scale, final uniform PRNG)
 	{
 		if (Double.isInfinite(scale) || scale <= 0.0)
 		{
@@ -113,7 +125,7 @@ public class exponential
 		0.9999999999999999,
 		1.0000000000000000 };
 
-	public static double random(uniform PRNG)
+	public static double random(final uniform PRNG)
 	{
 		/* q[k-1] = sum(alog(2.0)**k/k!) k=1,..,n, */
 		/* The highest n (here 8) is determined by q[n-1] = 1.0 */
@@ -127,13 +139,17 @@ public class exponential
 		{
 			u = u + u;
 			if (u > 1.0)
+			{
 				break;
+			}
 			a = a + q[0];
 		}
 		u = u - 1.0;
 
 		if (u <= q[0])
+		{
 			return a + u;
+		}
 
 		i = 0;
 		ustar = uniform.random();
@@ -142,7 +158,9 @@ public class exponential
 		{
 			ustar = uniform.random();
 			if (ustar < umin)
+			{
 				umin = ustar;
+			}
 			i = i + 1;
 		}
 		while (u > q[i]);

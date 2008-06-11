@@ -60,9 +60,13 @@ public final class Images
 	{
 		final File imageFile = new File(path);
 		if (!imageFile.exists())
+		{
 			throw new FileNotFoundException("file " + path + " does not exist");
+		}
 		else if (!imageFile.canRead())
+		{
 			throw new IOException("error reading file");
+		}
 
 		final Image image = TOOLKIT.getImage(path);
 		ensureImage(image);
@@ -151,9 +155,9 @@ public final class Images
 		final GVector data = new GVector(3 * pixels.length);
 		for (int i = 0; i < pixels.length; i++)
 		{
-			final int red = (pixels[i] >> 16) & 0xff;
-			final int green = (pixels[i] >> 8) & 0xff;
-			final int blue = (pixels[i]) & 0xff;
+			final int red = pixels[i] >> 16 & 0xff;
+			final int green = pixels[i] >> 8 & 0xff;
+			final int blue = pixels[i] & 0xff;
 			data.setElement(3 * i, red);
 			data.setElement(3 * i + 1, green);
 			data.setElement(3 * i + 2, blue);
@@ -169,7 +173,9 @@ public final class Images
 	{
 		new ImageIcon(image);
 		if (image.getWidth(null) < 0)
+		{
 			throw new NotImageException(image);
+		}
 	}
 
 }

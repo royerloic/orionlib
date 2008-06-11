@@ -48,15 +48,15 @@ public class GroovyServer implements Runnable, Serializable
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			Map<String, String> lParameters = CmdLine.getMap(args);
-			GroovyServer lGroovyServer = new GroovyServer(lParameters);
+			final Map<String, String> lParameters = CmdLine.getMap(args);
+			final GroovyServer lGroovyServer = new GroovyServer(lParameters);
 			lGroovyServer.startServerBlocking();
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
@@ -70,12 +70,12 @@ public class GroovyServer implements Runnable, Serializable
 		mBinding.setVariable("server", this);
 	}
 
-	public GroovyServer(String pParametersLine)
+	public GroovyServer(final String pParametersLine)
 	{
 		this(CmdLine.getMap(pParametersLine.split("\\s+")));
 	}
 
-	public GroovyServer(Map<String, String> pParameters)
+	public GroovyServer(final Map<String, String> pParameters)
 	{
 		this();
 
@@ -98,14 +98,14 @@ public class GroovyServer implements Runnable, Serializable
 
 	}
 
-	public GroovyServer(int pPort, File pScriptFile)
+	public GroovyServer(final int pPort, final File pScriptFile)
 	{
 		this();
 		mScriptFile = pScriptFile;
 		mPort = pPort;
 	}
 
-	public void setPassword(String pPassword)
+	public void setPassword(final String pPassword)
 	{
 		mPassword = pPassword;
 	}
@@ -115,12 +115,12 @@ public class GroovyServer implements Runnable, Serializable
 		return mPassword;
 	}
 
-	public boolean save(String pFileName) throws IOException
+	public boolean save(final String pFileName) throws IOException
 	{
 		return save(new File(pFileName));
 	}
 
-	public boolean save(File pFile) throws IOException
+	public boolean save(final File pFile) throws IOException
 	{
 		synchronized (this)
 		{
@@ -129,8 +129,8 @@ public class GroovyServer implements Runnable, Serializable
 			ObjectOutputStream lObjectOutputStream = null;
 
 			lFileOutputStream = new FileOutputStream(pFile);
-			BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
-																																						10000000);
+			final BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
+																																									10000000);
 			lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
 
 			mBinding.setVariable("server", null); // we don't want this to be saved...
@@ -143,12 +143,12 @@ public class GroovyServer implements Runnable, Serializable
 		}
 	}
 
-	public boolean load(String pFileName) throws IOException
+	public boolean load(final String pFileName) throws IOException
 	{
 		return load(new File(pFileName));
 	}
 
-	public boolean load(File pFile) throws IOException
+	public boolean load(final File pFile) throws IOException
 	{
 		synchronized (this)
 		{
@@ -156,8 +156,8 @@ public class GroovyServer implements Runnable, Serializable
 			ObjectInputStream lObjectInputStream = null;
 
 			lFileInputStream = new FileInputStream(pFile);
-			BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
-																																					10000000);
+			final BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
+																																								10000000);
 			lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 			Binding lBinding;
 			try
@@ -167,7 +167,7 @@ public class GroovyServer implements Runnable, Serializable
 				mBinding.setVariable("server", this);
 				return true;
 			}
-			catch (ClassNotFoundException e)
+			catch (final ClassNotFoundException e)
 			{
 				e.printStackTrace();
 			}
@@ -183,7 +183,7 @@ public class GroovyServer implements Runnable, Serializable
 
 	public void startServerNonBlocking() throws IOException
 	{
-		Thread lThread = new Thread(this, "GroovyServer");
+		final Thread lThread = new Thread(this, "GroovyServer");
 		lThread.start();
 	}
 
@@ -200,19 +200,19 @@ public class GroovyServer implements Runnable, Serializable
 			try
 			{
 				System.out.println("Started execution of init script");
-				GroovyShell lGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
-																										mBinding);
+				final GroovyShell lGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
+																													mBinding);
 				lGroovyShell.evaluate(mScriptFile);
 				System.out.println("Ended   execution of init script");
 			}
-			catch (Throwable e)
+			catch (final Throwable e)
 			{
 				e.printStackTrace();
 			}
 		}
 
 		final GroovyServer lGroovyServer = this;
-		ServiceFactory lServiceFactory = new ServiceFactory()
+		final ServiceFactory lServiceFactory = new ServiceFactory()
 		{
 			public Service newService()
 			{
@@ -227,7 +227,7 @@ public class GroovyServer implements Runnable, Serializable
 		{
 			mSocketServiceServer.startListening(mPort);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -239,51 +239,55 @@ public class GroovyServer implements Runnable, Serializable
 		return createClientSocketAndConnect("localhost", 4444);
 	}
 
-	public static Socket createClientSocketAndConnect(String pAddresse, int pPort) throws IOException
+	public static Socket createClientSocketAndConnect(final String pAddresse,
+																										final int pPort) throws IOException
 	{
 		// Create a socket with a timeout
 
-		InetAddress addr = InetAddress.getByName(pAddresse);
-		SocketAddress sockaddr = new InetSocketAddress(addr, pPort);
+		final InetAddress addr = InetAddress.getByName(pAddresse);
+		final SocketAddress sockaddr = new InetSocketAddress(addr, pPort);
 
 		// Create an unbound socket
-		Socket lSocket = new Socket();
+		final Socket lSocket = new Socket();
 
 		// This method will block no more than timeoutMs.
 		// If the timeout occurs, SocketTimeoutException is thrown.
-		int timeoutMs = 2000; // 2 seconds
+		final int timeoutMs = 2000; // 2 seconds
 		lSocket.connect(sockaddr, timeoutMs);
 
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
 
-		String lFirstLine = lBufferedReader.readLine();
+		final String lFirstLine = lBufferedReader.readLine();
 		if (lFirstLine.contains(GroovyService.sWelcomeMessage))
 		{
 			return lSocket;
 		}
 		else
+		{
 			return null;
+		}
 
 	}
 
-	public static Object sendQueryAndDecode(Socket pSocket, String pQuery) throws IOException
+	public static Object sendQueryAndDecode(final Socket pSocket,
+																					final String pQuery) throws IOException
 	{
-		String lResult = sendQuery(pSocket, pQuery);
-		Object lObject = decode(lResult);
+		final String lResult = sendQuery(pSocket, pQuery);
+		final Object lObject = decode(lResult);
 		return lObject;
 	}
 
-	public static String sendQuery(Socket pSocket, String pQuery) throws IOException
+	public static String sendQuery(final Socket pSocket, final String pQuery) throws IOException
 	{
-		BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pSocket.getOutputStream()));
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pSocket.getInputStream()));
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(pSocket.getOutputStream()));
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pSocket.getInputStream()));
 
 		lBufferedWriter.write(pQuery + "\r\n");
 		lBufferedWriter.flush();
-		String lEchoLine = lBufferedReader.readLine();
+		final String lEchoLine = lBufferedReader.readLine();
 		if (lEchoLine.equals(pQuery))
 		{
-			String lResultLine = lBufferedReader.readLine();
+			final String lResultLine = lBufferedReader.readLine();
 			return lResultLine;
 		}
 		else
@@ -295,11 +299,11 @@ public class GroovyServer implements Runnable, Serializable
 		}
 	}
 
-	public static Object decode(String pResultString)
+	public static Object decode(final String pResultString)
 	{
 		final Binding binding = new Binding();
-		GroovyShell lGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
-																								binding);
+		final GroovyShell lGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
+																											binding);
 
 		binding.setVariable("obj", null);
 
@@ -307,12 +311,12 @@ public class GroovyServer implements Runnable, Serializable
 		{
 			lGroovyShell.evaluate("obj = " + pResultString);
 		}
-		catch (MissingPropertyException e)
+		catch (final MissingPropertyException e)
 		{
 			lGroovyShell.evaluate("obj = \"" + pResultString + "\"");
 		}
 
-		Object lObject = binding.getVariable("obj");
+		final Object lObject = binding.getVariable("obj");
 
 		return lObject;
 	}

@@ -7,16 +7,20 @@ public class LevenshteinDistance
 																			final double b,
 																			final double c)
 	{
-		if ((a <= b) && (a <= c))
+		if (a <= b && a <= c)
+		{
 			return a;
-		if ((b <= a) && (b <= c))
+		}
+		if (b <= a && b <= c)
+		{
 			return b;
+		}
 		return c;
 	}
 
 	public static final double max(final double a, final double b)
 	{
-		return (a >= b) ? a : b;
+		return a >= b ? a : b;
 	}
 
 	public static final double similarity(final String str1, final String str2)
@@ -44,14 +48,20 @@ public class LevenshteinDistance
 			distance[i][0] = i;
 		}
 		for (int j = 0; j < str2.length + 1; j++)
+		{
 			distance[0][j] = j;
+		}
 
 		for (int i = 1; i <= str1.length; i++)
+		{
 			for (int j = 1; j <= str2.length; j++)
+			{
 				distance[i][j] = minimum(	distance[i - 1][j] + deletion(str1[i - 1]),
 																	distance[i][j - 1] + insertion(str2[j - 1]),
-																	distance[i - 1][j - 1] + (substitution(	str1[i - 1],
-																																					str2[j - 1])));
+																	distance[i - 1][j - 1] + substitution(str1[i - 1],
+																																				str2[j - 1]));
+			}
+		}
 
 		return distance[str1.length][str2.length];
 	}
@@ -64,16 +74,21 @@ public class LevenshteinDistance
 		final boolean cp = isPunctuation(c);
 
 		if (cd || cu)
+		{
 			return 1.0;
-
+		}
 		else if (cl)
+		{
 			return 0.75;
-
+		}
 		else if (cp)
+		{
 			return 0.5;
-
+		}
 		else
+		{
 			return 1.0;
+		}
 
 	}
 
@@ -92,43 +107,50 @@ public class LevenshteinDistance
 		final boolean c2u = isUpper(c2);
 		final boolean c2l = isLower(c2);
 
-		if ((c1d && (c2u || c2l)) || (c2d && (c1u || c1l)))
+		if (c1d && (c2u || c2l) || c2d && (c1u || c1l))
+		{
 			return 1;
-
-		else if ((c1l && c2u) || (c1u && c2l))
+		}
+		else if (c1l && c2u || c1u && c2l)
+		{
 			return 0.5;
-
-		else if ((c1d) && (c2d))
+		}
+		else if (c1d && c2d)
+		{
 			return c1 == c2 ? 0 : 0.75;
-
+		}
 		else if (c1l && c2l)
+		{
 			return c1 == c2 ? 0 : 0.75;
-
+		}
 		else if (c1u && c2u)
+		{
 			return c1 == c2 ? 0 : 0.75;
-
+		}
 		else
-			return (c1 == c2) ? 0 : 1;
+		{
+			return c1 == c2 ? 0 : 1;
+		}
 	}
 
 	private static final boolean isDigit(final char c)
 	{
-		return (c >= 48) && (c <= 57);
+		return c >= 48 && c <= 57;
 	}
 
 	private static final boolean isUpper(final char c)
 	{
-		return (c >= 65) && (c <= 90);
+		return c >= 65 && c <= 90;
 	}
 
 	private static final boolean isLower(final char c)
 	{
-		return (c >= 97) && (c <= 122);
+		return c >= 97 && c <= 122;
 	}
 
 	private static final boolean isPunctuation(final char c)
 	{
-		return (c >= 32) && (c <= 47);
+		return c >= 32 && c <= 47;
 	}
 
 }

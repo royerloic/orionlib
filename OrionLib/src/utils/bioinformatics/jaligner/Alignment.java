@@ -138,7 +138,7 @@ public class Alignment
 	 * @param extend
 	 *          The extend to set.
 	 */
-	public void setExtend(float extend)
+	public void setExtend(final float extend)
 	{
 		this.extend = extend;
 	}
@@ -155,7 +155,7 @@ public class Alignment
 	 * @param matrix
 	 *          The matrix to set.
 	 */
-	public void setMatrix(Matrix matrix)
+	public void setMatrix(final Matrix matrix)
 	{
 		this.matrix = matrix;
 	}
@@ -173,7 +173,7 @@ public class Alignment
 	 * @param name1
 	 *          The name1 to set.
 	 */
-	public void setName1(String name1)
+	public void setName1(final String name1)
 	{
 		this.name1 = name1;
 	}
@@ -191,7 +191,7 @@ public class Alignment
 	 * @param name2
 	 *          The name2 to set.
 	 */
-	public void setName2(String name2)
+	public void setName2(final String name2)
 	{
 		this.name2 = name2;
 	}
@@ -208,7 +208,7 @@ public class Alignment
 	 * @param open
 	 *          The open to set.
 	 */
-	public void setOpen(float open)
+	public void setOpen(final float open)
 	{
 		this.open = open;
 	}
@@ -225,7 +225,7 @@ public class Alignment
 	 * @param score
 	 *          The score to set.
 	 */
-	public void setScore(float score)
+	public void setScore(final float score)
 	{
 		this.score = score;
 	}
@@ -242,7 +242,7 @@ public class Alignment
 	 * @param sequence1
 	 *          The sequence1 to set.
 	 */
-	public void setSequence1(char[] sequence1)
+	public void setSequence1(final char[] sequence1)
 	{
 		this.sequence1 = sequence1;
 	}
@@ -259,7 +259,7 @@ public class Alignment
 	 * @param sequence2
 	 *          The sequence2 to set.
 	 */
-	public void setSequence2(char[] sequence2)
+	public void setSequence2(final char[] sequence2)
 	{
 		this.sequence2 = sequence2;
 	}
@@ -276,7 +276,7 @@ public class Alignment
 	 * @param start1
 	 *          The start1 to set.
 	 */
-	public void setStart1(int start1)
+	public void setStart1(final int start1)
 	{
 		this.start1 = start1;
 	}
@@ -293,7 +293,7 @@ public class Alignment
 	 * @param start2
 	 *          The start2 to set.
 	 */
-	public void setStart2(int start2)
+	public void setStart2(final int start2)
 	{
 		this.start2 = start2;
 	}
@@ -310,7 +310,7 @@ public class Alignment
 	 * @param gaps
 	 *          The gaps to set.
 	 */
-	public void setGaps(int gaps)
+	public void setGaps(final int gaps)
 	{
 		this.gaps = gaps;
 	}
@@ -327,7 +327,7 @@ public class Alignment
 	 * @param identity
 	 *          The identity to set.
 	 */
-	public void setIdentity(int identity)
+	public void setIdentity(final int identity)
 	{
 		this.identity = identity;
 	}
@@ -344,7 +344,7 @@ public class Alignment
 	 * @param markupLine
 	 *          The markupLine to set.
 	 */
-	public void setMarkupLine(char[] markupLine)
+	public void setMarkupLine(final char[] markupLine)
 	{
 		this.markupLine = markupLine;
 	}
@@ -361,7 +361,7 @@ public class Alignment
 	 * @param similarity
 	 *          The similarity to set.
 	 */
-	public void setSimilarity(int similarity)
+	public void setSimilarity(final int similarity)
 	{
 		this.similarity = similarity;
 	}
@@ -373,11 +373,11 @@ public class Alignment
 	 */
 	public String getSummary()
 	{
-		StringBuffer buffer = new StringBuffer();
-		DecimalFormat f1 = new DecimalFormat("0.00");
-		DecimalFormat f2 = new DecimalFormat("0.00%");
+		final StringBuffer buffer = new StringBuffer();
+		final DecimalFormat f1 = new DecimalFormat("0.00");
+		final DecimalFormat f2 = new DecimalFormat("0.00%");
 
-		int length = getSequence1().length;
+		final int length = getSequence1().length;
 
 		buffer.append("Sequence #1: " + getName1());
 		buffer.append(Commons.getLineSeparator());

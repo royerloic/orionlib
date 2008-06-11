@@ -125,9 +125,13 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 			mInteractorName = null;
 		}
 		else if (qName.equals("interaction"))
+		{
 			startInteraction();
+		}
 		else if (qName.equals("proteinInteractorRef"))
+		{
 			mInteractorId = attrs.getValue("ref");
+		}
 
 	}
 
@@ -150,17 +154,23 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 			mPowerGraph.addNode(new Node(mInteractorName));
 		}
 		else if (qName.equals("interaction"))
+		{
 			endInteraction();
+		}
 		else if (qName.equals("interactorRef"))
 		{
 			if (mText != null)
+			{
 				mInteractorId = mText;
+			}
 			addInteractor(mInteractorId, lIdToNameMap.get(mInteractorId), mRole);
 		}
 		else if (qName.equals("shortLabel"))
 		{
 			if (mInteractorName == null)
+			{
 				mInteractorName = mText;
+			}
 		}
 		else if (qName.equals("role"))
 		{
@@ -193,17 +203,21 @@ public class PsiMiPowerGraphIO extends DefaultHandler
 																															lPowerNode));
 		}
 		else if (!mSpokeModel)
+		{
 			mPowerGraph.addPowerEdgeDelayed(new UndirectedEdge<Set<Node>>(lInteractorsToRoleMap.keySet(),
 																																		lInteractorsToRoleMap.keySet()));
+		}
 		else if (mSpokeModel)
 		{
 			Node lBait = null;
 			for (final Node lNode : lInteractorsToRoleMap.keySet())
+			{
 				if (lInteractorsToRoleMap.get(lNode).equals("bait"))
 				{
 					lBait = lNode;
 					break;
 				}
+			}
 
 			if (lBait != null)
 			{

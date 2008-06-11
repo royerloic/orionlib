@@ -56,8 +56,12 @@ public final class DomUtils
 	{
 		Node lNProjectPart = null;
 		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart.getNextSibling())
+		{
 			if (lNProjectPart.getNodeName().equalsIgnoreCase(pName))
+			{
 				break;
+			}
+		}
 
 		return lNProjectPart;
 	}
@@ -76,8 +80,12 @@ public final class DomUtils
 
 		Node lNProjectPart = null;
 		for (lNProjectPart = pNode.getFirstChild(); lNProjectPart != null; lNProjectPart = lNProjectPart.getNextSibling())
+		{
 			if (lNProjectPart.getNodeName().equalsIgnoreCase(pName))
+			{
 				lSubNodeList.add(lNProjectPart);
+			}
+		}
 
 		return lSubNodeList;
 	}
@@ -98,7 +106,9 @@ public final class DomUtils
 		for (lNode = pNode.getFirstChild(); lNode != null; lNode = lNode.getNextSibling())
 		{
 			if (lNode.getNodeName().equalsIgnoreCase(pName))
+			{
 				lSubNodeList.add(lNode);
+			}
 			lSubNodeList.addAll(getAllSubNodeByNameRecursive(lNode, pName));
 		}
 
@@ -120,14 +130,18 @@ public final class DomUtils
 		{
 			final int len = lMap.getLength();
 			for (int i = 0; i < len; i++)
+			{
 				if (((Attr) lMap.item(i)).getNodeName().equalsIgnoreCase(pName))
 				{
 					lResult = ((Attr) lMap.item(i)).getValue();
 					break;
 				}
+			}
 		}
 		if (lResult == null)
+		{
 			throw new Exception("Could not find attribute: '" + pName + "'");
+		}
 		return lResult;
 	}
 
@@ -219,7 +233,9 @@ public final class DomUtils
 			// Use the contained exception, if any
 			Throwable lException = tce;
 			if (tce.getException() != null)
+			{
 				lException = tce.getException();
+			}
 			lException.printStackTrace(System.out);
 
 		}
@@ -232,7 +248,9 @@ public final class DomUtils
 			// Use the contained exception, if any
 			Throwable lException = te;
 			if (te.getException() != null)
+			{
 				lException = te.getException();
+			}
 			lException.printStackTrace(System.out);
 
 		}

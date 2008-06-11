@@ -9,26 +9,30 @@ import java.net.SocketException;
 
 public class SocketServiceServer implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ServerSocket mServerSocket = null;
 	private boolean mListening = true;
-	private ServiceFactory mServiceFactory;
+	private final ServiceFactory mServiceFactory;
 	private int mThreadCounter = 0;
 
 	boolean mAcceptOnlyLocalConnections = false;
 
-	public SocketServiceServer(ServiceFactory pServiceFactory)
+	public SocketServiceServer(final ServiceFactory pServiceFactory)
 	{
 		super();
 		mServiceFactory = pServiceFactory;
 	}
 
-	public void startListening(int pPort) throws IOException
+	public void startListening(final int pPort) throws IOException
 	{
 		try
 		{
 			mServerSocket = new ServerSocket(pPort);
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			throw new IOException("Could not listen on port: " + pPort + ". ", e);
 		}
@@ -37,9 +41,9 @@ public class SocketServiceServer implements Serializable
 		{
 			while (mListening)
 			{
-				Service lService = mServiceFactory.newService();
-				Socket lSocket = mServerSocket.accept();
-				InetAddress lInetAddress = lSocket.getInetAddress();
+				final Service lService = mServiceFactory.newService();
+				final Socket lSocket = mServerSocket.accept();
+				final InetAddress lInetAddress = lSocket.getInetAddress();
 				System.out.println("Conection request from: " + lInetAddress);
 				if (mAcceptOnlyLocalConnections == false || lInetAddress.getHostName()
 																																.equals("localhost"))
@@ -53,12 +57,16 @@ public class SocketServiceServer implements Serializable
 			}
 
 			if (!mServerSocket.isClosed())
+			{
 				mServerSocket.close();
+			}
 		}
-		catch (SocketException e)
+		catch (final SocketException e)
 		{
 			if (!e.getMessage().contains("socket closed"))
+			{
 				e.printStackTrace();
+			}
 		}
 	}
 
@@ -72,7 +80,7 @@ public class SocketServiceServer implements Serializable
 		return mAcceptOnlyLocalConnections;
 	}
 
-	public void setAcceptOnlyLocalConnections(boolean pAcceptOnlyLocalConnections)
+	public void setAcceptOnlyLocalConnections(final boolean pAcceptOnlyLocalConnections)
 	{
 		mAcceptOnlyLocalConnections = pAcceptOnlyLocalConnections;
 	}

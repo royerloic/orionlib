@@ -57,7 +57,7 @@ public class PsiMiIO
 	{
 		public PsiMiGraph mGraph;
 
-		private String mConfidenceFilter;
+		private final String mConfidenceFilter;
 		private boolean mSpokeModel;
 		private boolean mIsInteractorDefinition;
 		private String mText;
@@ -126,15 +126,23 @@ public class PsiMiIO
 				if (mInteractorNode != null)
 				{
 					if (db.equalsIgnoreCase("go"))
+					{
 						mInteractorNode.addGoId(GoIdConversion.getIdFromString(id));
+					}
 					if (db.equalsIgnoreCase("interpro"))
+					{
 						mInteractorNode.addInterproId(InterproIdConversion.getIdFromString(id));
+					}
 				}
 			}
 			else if (qName.equals("interaction"))
+			{
 				startInteraction();
+			}
 			else if (qName.equals("confidence"))
+			{
 				mInteractionConfidence = attrs.getValue("value");
+			}
 		}
 
 		@Override
@@ -158,16 +166,22 @@ public class PsiMiIO
 		{
 
 			if (qName.equals("proteinInteractor") || qName.equals("proteinInteractorRef"))
+			{
 				mGraph.addNode(mInteractorNode);
+			}
 			else if (qName.equals("interaction"))
+			{
 				endInteraction();
+			}
 			else if (qName.equals("role"))
 			{
 				mRole = mText;
 				addInteractor(mInteractorNode, mRole);
 			}
 			else if (qName.equals("interactorList"))
+			{
 				mIsInteractorDefinition = false;
+			}
 
 		}
 
@@ -184,7 +198,7 @@ public class PsiMiIO
 
 		private void endInteraction()
 		{
-			if ((mConfidenceFilter == null) || mInteractionConfidence.matches(mConfidenceFilter))
+			if (mConfidenceFilter == null || mInteractionConfidence.matches(mConfidenceFilter))
 			{
 				System.out.println("Interaction confidence: " + mInteractionConfidence);
 				if (lInteractorsToRoleMap.size() == 1)
@@ -197,32 +211,49 @@ public class PsiMiIO
 				else if (!mSpokeModel)
 				{
 					for (final PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+					{
 						for (final PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
+						{
 							if (!lNode1.equals(lNode2))
+							{
 								mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+							}
+						}
+					}
 				}
 				else if (mSpokeModel)
+				{
 					for (final PsiMiNode lNode1 : lInteractorsToRoleMap.keySet())
+					{
 						for (final PsiMiNode lNode2 : lInteractorsToRoleMap.keySet())
+						{
 							if (!lNode1.equals(lNode2))
 							{
 								final String lRole1 = lInteractorsToRoleMap.get(lNode1);
 								final String lRole2 = lInteractorsToRoleMap.get(lNode2);
 								final boolean lIsInteraction = /*******************************
-																								 * (lRole1.equals("neutral") &&
-																								 * lRole2.equals("neutral")) ||/
-																								 ******************************/
-								(lRole1.equals("bait") && lRole2.equals("prey")) || lRole1.equals("unspecified")
+								 * (lRole1.equals("neutral") &&
+								 * lRole2.equals("neutral")) ||/
+								 ******************************/
+								lRole1.equals("bait") && lRole2.equals("prey")
+										|| lRole1.equals("unspecified")
 										|| lRole2.equals("unspecified");
 
 								if (!(lRole1.equals("bait") || lRole1.equals("prey")
 											|| lRole1.equals("neutral") || lRole1.equals("unspecified")))
+								{
 									System.out.println("Something strange here:" + lRole1);
+								}
 
 								if (lIsInteraction)
+								{
 									mGraph.addEdge(new UndirectedEdge<PsiMiNode>(lNode1, lNode2));
+								}
 
 							}
+						}
+					}
+				}
 
 			}
 		}

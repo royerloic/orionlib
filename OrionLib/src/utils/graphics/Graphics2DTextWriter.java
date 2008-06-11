@@ -32,7 +32,7 @@ public class Graphics2DTextWriter
 
 	public boolean mShadow = true;
 
-	private String mString;
+	private final String mString;
 
 	private Font mFont = new Font("courrier", Font.PLAIN, 16);
 
@@ -64,7 +64,9 @@ public class Graphics2DTextWriter
 		lEquals &= lWriter1.mFont.equals(lWriter2.mFont);
 		lEquals &= lWriter1.mTextColor.equals(lWriter2.mTextColor);
 		if (lWriter1.mBackgroundColor != null)
+		{
 			lEquals &= lWriter1.mBackgroundColor.equals(lWriter2.mBackgroundColor);
+		}
 		lEquals &= lWriter1.mWrappingWidth == lWriter2.mWrappingWidth;
 		lEquals &= lWriter1.mMinNumberOfLines == lWriter2.mMinNumberOfLines;
 		lEquals &= lWriter1.mMaxNumberOfLines == lWriter2.mMaxNumberOfLines;
@@ -155,7 +157,9 @@ public class Graphics2DTextWriter
 		{
 			mImage = lImageSoftReference.get();
 			if (mImage != null)
+			{
 				return mImage;
+			}
 		}
 		displayAvailableVideoMemory();
 		mImage = generateImage(pRecycledImage);
@@ -180,6 +184,7 @@ public class Graphics2DTextWriter
 	{
 		Image lImage = null;
 		if (mMultiLine)
+		{
 			lImage = createMultiLineTextImage(mString,
 																				mFont,
 																				mTextColor,
@@ -189,7 +194,9 @@ public class Graphics2DTextWriter
 																				mMaxNumberOfLines,
 																				mAntialiasing,
 																				mShadow);
+		}
 		else
+		{
 			lImage = createTextImage(	pRecycledImage,
 																mString,
 																mFont,
@@ -197,6 +204,7 @@ public class Graphics2DTextWriter
 																mBackgroundColor,
 																mAntialiasing,
 																mShadow);
+		}
 		return lImage;
 	}
 
@@ -226,7 +234,9 @@ public class Graphics2DTextWriter
 		final GraphicsDevice lGraphicsDevice = lGraphicsEnvironment.getDefaultScreenDevice();
 		int lTotalMemory = 0;
 		for (final GraphicsDevice lDevice : lGraphicsEnvironment.getScreenDevices())
+		{
 			lTotalMemory += lDevice.getAvailableAcceleratedMemory();
+		}
 		return lTotalMemory;
 	}
 
@@ -253,7 +263,7 @@ public class Graphics2DTextWriter
 		final int lTextHeight = (int) (Math.ceil(lTextBounds.getHeight()) + 2 * lTopMargin);
 
 		BufferedImage image = pImage;
-		if ((pImage == null) || (!((pImage.getHeight() >= lTextHeight) && (pImage.getWidth() >= lTextWidth))))
+		if (pImage == null || !(pImage.getHeight() >= lTextHeight && pImage.getWidth() >= lTextWidth))
 		{
 			image = new BufferedImage(lTextWidth,
 																lTextHeight,
@@ -331,9 +341,13 @@ public class Graphics2DTextWriter
 		{
 			final TextLayout lNewTextLayout = lLineBreakMeasurer.nextLayout((float) pWrappingWidth);
 			if (lNewTextLayout != null)
+			{
 				lTextLayout = lNewTextLayout;
-			if ((lNewTextLayout == null) && (lLineCounter > pMinNumberOfLines))
+			}
+			if (lNewTextLayout == null && lLineCounter > pMinNumberOfLines)
+			{
 				break;
+			}
 
 			lLineCounter++;
 			h += lTextLayout.getAscent() + lTextLayout.getDescent()
@@ -376,7 +390,9 @@ public class Graphics2DTextWriter
 		{
 			lTextLayout = lLineBreakMeasurer.nextLayout((float) pWrappingWidth);
 			if (lTextLayout == null)
+			{
 				break;
+			}
 			// Rectangle2D bounds = lTextLayout.getBounds();
 			pY += lTextLayout.getAscent() + lTextLayout.getDescent()
 						+ lTextLayout.getLeading();
@@ -390,7 +406,7 @@ public class Graphics2DTextWriter
 				lTextLayout.draw(lImageGraphics, (float) (pX + 1), (float) (pY + 1));
 			}
 			lImageGraphics.setColor(pTextColor);
-			lTextLayout.draw(lImageGraphics, (float) (pX), (float) pY);
+			lTextLayout.draw(lImageGraphics, (float) pX, (float) pY);
 
 			// lImageGraphics.drawRect((int) pX, (int) pY - (int) bounds.getHeight(),
 			// (int) bounds.getWidth(), (int) bounds.getHeight());

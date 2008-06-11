@@ -27,7 +27,9 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements
 		final List<V> lAllValuesList = new ArrayList<V>();
 		final Collection<List<V>> lValues = super.values();
 		for (final List<V> lList : lValues)
+		{
 			lAllValuesList.addAll(lList);
+		}
 		return lAllValuesList;
 	}
 
@@ -68,7 +70,9 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements
 			super.put(pKey, lValueList);
 		}
 		else
+		{
 			lValueList.addAll(pVCollection);
+		}
 
 		return lValueList;
 	}
@@ -77,7 +81,9 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements
 											final Collection<V> pVCollection)
 	{
 		for (final K lK : pKCollection)
+		{
 			this.putAll(lK, pVCollection);
+		}
 	}
 
 	public void addAll(final ListMap<K, V> pListMap)
@@ -86,9 +92,13 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements
 		{
 			final List<V> lListSet = get(lEntry.getKey());
 			if (lListSet == null)
+			{
 				super.put(lEntry.getKey(), new ArrayList<V>(lEntry.getValue()));
+			}
 			else
+			{
 				lListSet.addAll(lEntry.getValue());
+			}
 		}
 
 	}
@@ -97,7 +107,9 @@ public class HashListMap<K, V> extends HashMap<K, List<V>> implements
 	{
 		final List<V> lValueSet = get(pKey);
 		if (lValueSet != null)
+		{
 			lValueSet.clear();
+		}
 	}
 
 }

@@ -71,7 +71,7 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void cut(JTextComponent textComponent)
+	public static void cut(final JTextComponent textComponent)
 	{
 		copy(textComponent);
 		delete(textComponent);
@@ -82,7 +82,7 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void copy(JTextComponent textComponent)
+	public static void copy(final JTextComponent textComponent)
 	{
 		ClipboardHandlerFactory	.getClipboardHandler()
 														.setContents(textComponent.getSelectedText());
@@ -93,13 +93,13 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void paste(JTextComponent textComponent)
+	public static void paste(final JTextComponent textComponent)
 	{
-		String contents = ClipboardHandlerFactory	.getClipboardHandler()
-																							.getContents();
+		final String contents = ClipboardHandlerFactory	.getClipboardHandler()
+																										.getContents();
 		if (contents != null)
 		{
-			StringBuffer buffer = new StringBuffer();
+			final StringBuffer buffer = new StringBuffer();
 			char c;
 			for (int i = 0, n = contents.length(); i < n; i++)
 			{
@@ -123,7 +123,7 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void delete(JTextComponent textComponent)
+	public static void delete(final JTextComponent textComponent)
 	{
 		textComponent.replaceSelection(EMPTY);
 	}
@@ -133,7 +133,7 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void selectAll(JTextComponent textComponent)
+	public static void selectAll(final JTextComponent textComponent)
 	{
 		if (!textComponent.hasFocus())
 		{
@@ -148,14 +148,14 @@ public class TextComponentUtil
 	 * @param textComponent
 	 * @throws TextComponentUtilException
 	 */
-	public static boolean open(JTextComponent textComponent) throws TextComponentUtilException
+	public static boolean open(final JTextComponent textComponent) throws TextComponentUtilException
 	{
 		InputStream is = null;
 		BufferedReader reader = null;
 		try
 		{
-			NamedInputStream selectedInputStream = FileChooserFactory	.getFileChooser()
-																																.open();
+			final NamedInputStream selectedInputStream = FileChooserFactory	.getFileChooser()
+																																			.open();
 			if (selectedInputStream != null)
 			{
 				is = selectedInputStream.getInputStream();
@@ -163,7 +163,7 @@ public class TextComponentUtil
 
 				reader = new BufferedReader(new InputStreamReader(is));
 				String line;
-				Document document = textComponent.getDocument();
+				final Document document = textComponent.getDocument();
 				while ((line = reader.readLine()) != null)
 				{
 					document.insertString(document.getLength(),
@@ -181,7 +181,7 @@ public class TextComponentUtil
 				return false;
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new TextComponentUtilException(e.getMessage());
 		}
@@ -193,7 +193,7 @@ public class TextComponentUtil
 				{
 					is.close();
 				}
-				catch (Exception e)
+				catch (final Exception e)
 				{
 					logger.log(	Level.WARNING,
 											"Failed closing input stream: " + e.getMessage(),
@@ -206,7 +206,7 @@ public class TextComponentUtil
 				{
 					reader.close();
 				}
-				catch (Exception e)
+				catch (final Exception e)
 				{
 					logger.log(	Level.WARNING,
 											"Failed closing reader: " + e.getMessage(),
@@ -224,7 +224,8 @@ public class TextComponentUtil
 	 * @return true if a file has been chosen or false otherwise
 	 * @throws TextComponentUtilException
 	 */
-	public static boolean save(JTextComponent textComponent, String fileName) throws TextComponentUtilException
+	public static boolean save(	final JTextComponent textComponent,
+															final String fileName) throws TextComponentUtilException
 	{
 		InputStream is = null;
 		try
@@ -232,7 +233,7 @@ public class TextComponentUtil
 			is = new ByteArrayInputStream(textComponent.getText().getBytes());
 			return FileChooserFactory.getFileChooser().save(is, fileName);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new TextComponentUtilException(e.getMessage());
 		}
@@ -242,7 +243,7 @@ public class TextComponentUtil
 			{
 				is.close();
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				logger.log(	Level.WARNING,
 										"Failed closing input stream: " + e.getMessage(),
@@ -258,7 +259,7 @@ public class TextComponentUtil
 	 * @return true if a file has been chosen or false otherwise
 	 * @throws TextComponentUtilException
 	 */
-	public static boolean save(JTextComponent textComponent) throws TextComponentUtilException
+	public static boolean save(final JTextComponent textComponent) throws TextComponentUtilException
 	{
 		return save(textComponent, null);
 	}
@@ -268,39 +269,39 @@ public class TextComponentUtil
 	 * 
 	 * @param textComponent
 	 */
-	public static void print(JTextComponent textComponent) throws TextComponentUtilException
+	public static void print(final JTextComponent textComponent) throws TextComponentUtilException
 	{
 		InputStream is = null;
 		try
 		{
-			PrintService[] printServices = PrintServiceLookup.lookupPrintServices(DocFlavor.INPUT_STREAM.AUTOSENSE,
-																																						null);
+			final PrintService[] printServices = PrintServiceLookup.lookupPrintServices(DocFlavor.INPUT_STREAM.AUTOSENSE,
+																																									null);
 			if (printServices.length > 0)
 			{
 
-				PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+				final PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
 				printRequestAttributeSet.add(new JobName("JAligner", null));
-				PrintService service = ServiceUI.printDialog(	null,
-																											50,
-																											50,
-																											printServices,
-																											PrintServiceLookup.lookupDefaultPrintService(),
-																											DocFlavor.INPUT_STREAM.AUTOSENSE,
-																											printRequestAttributeSet);
+				final PrintService service = ServiceUI.printDialog(	null,
+																														50,
+																														50,
+																														printServices,
+																														PrintServiceLookup.lookupDefaultPrintService(),
+																														DocFlavor.INPUT_STREAM.AUTOSENSE,
+																														printRequestAttributeSet);
 
 				if (service != null)
 				{
-					DocPrintJob printJob = service.createPrintJob();
-					PrintJobMointor printJobMointor = new PrintJobMointor(printJob);
+					final DocPrintJob printJob = service.createPrintJob();
+					final PrintJobMointor printJobMointor = new PrintJobMointor(printJob);
 
 					is = new ByteArrayInputStream(textComponent.getText().getBytes());
 
-					DocumentName documentName = new DocumentName("JAligner", null);
-					HashDocAttributeSet docAttributeSet = new HashDocAttributeSet();
+					final DocumentName documentName = new DocumentName("JAligner", null);
+					final HashDocAttributeSet docAttributeSet = new HashDocAttributeSet();
 					docAttributeSet.add(documentName);
-					Doc doc = new SimpleDoc(is,
-																	DocFlavor.INPUT_STREAM.AUTOSENSE,
-																	docAttributeSet);
+					final Doc doc = new SimpleDoc(is,
+																				DocFlavor.INPUT_STREAM.AUTOSENSE,
+																				docAttributeSet);
 
 					printJob.print(doc, printRequestAttributeSet);
 					printJobMointor.waitForPrintJob();
@@ -311,7 +312,7 @@ public class TextComponentUtil
 				throw new TextComponentUtilException("No print service found!");
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new TextComponentUtilException(e.getMessage());
 		}
@@ -323,7 +324,7 @@ public class TextComponentUtil
 				{
 					is.close();
 				}
-				catch (IOException e)
+				catch (final IOException e)
 				{
 					logger.log(	Level.WARNING,
 											"Failed closing input stream: " + e.getMessage(),

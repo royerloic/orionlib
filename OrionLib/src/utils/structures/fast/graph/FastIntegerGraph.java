@@ -52,7 +52,9 @@ public class FastIntegerGraph implements Serializable
 		if (!isNode(pNode))
 		{
 			while (addNode() < pNode)
+			{
 				;
+			}
 		}
 	}
 
@@ -63,7 +65,7 @@ public class FastIntegerGraph implements Serializable
 
 	public void addEdges(final int pNode1, final FastBoundedIntegerSet pNodeSet)
 	{
-		for (int lNode2 : pNodeSet)
+		for (final int lNode2 : pNodeSet)
 		{
 			addEdge(pNode1, lNode2);
 		}
@@ -76,8 +78,8 @@ public class FastIntegerGraph implements Serializable
 			addNodesUpTo(pNode1);
 			addNodesUpTo(pNode2);
 
-			FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
-			FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
+			final FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
+			final FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
 
 			lNeiSet1.add(pNode2);
 			lNeiSet2.add(pNode1);
@@ -98,8 +100,8 @@ public class FastIntegerGraph implements Serializable
 	{
 		if (isEdge(pNode1, pNode2))
 		{
-			FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
-			FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
+			final FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
+			final FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
 
 			lNeiSet1.remove(pNode2);
 			lNeiSet2.remove(pNode1);
@@ -115,10 +117,12 @@ public class FastIntegerGraph implements Serializable
 	{
 		final int lAfterLastIndex = mSparseMatrix.size();
 		if (pNode1 >= lAfterLastIndex || pNode2 >= lAfterLastIndex)
+		{
 			return false;
+		}
 
-		FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
-		FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
+		final FastBoundedIntegerSet lNeiSet1 = mSparseMatrix.get(pNode1);
+		final FastBoundedIntegerSet lNeiSet2 = mSparseMatrix.get(pNode2);
 		// not optimized but we could detect bugs better.
 		return lNeiSet1.contains(pNode2) && lNeiSet2.contains(pNode1);
 	}
@@ -127,25 +131,29 @@ public class FastIntegerGraph implements Serializable
 	{
 		final FastBoundedIntegerSet lNodeSet = new FastBoundedIntegerSet(mSparseMatrix.size());
 		for (int i = 0; i < mSparseMatrix.size(); i++)
+		{
 			lNodeSet.add(i);
+		}
 		return lNodeSet;
 	}
 
 	public ArrayList<int[]> getIntPairList()
 	{
 		// NOT OPTIMIZED: should use an iterator to avoid allocating data
-		ArrayList<int[]> lEdgeList = new ArrayList<int[]>();
-		boolean[] lVisited = new boolean[mSparseMatrix.size()];
+		final ArrayList<int[]> lEdgeList = new ArrayList<int[]>();
+		final boolean[] lVisited = new boolean[mSparseMatrix.size()];
 		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
 		{
-			FastBoundedIntegerSet lNei = mSparseMatrix.get(node1);
-			for (int node2 : lNei)
+			final FastBoundedIntegerSet lNei = mSparseMatrix.get(node1);
+			for (final int node2 : lNei)
+			{
 				if (!lVisited[node2])
 				{
 					lEdgeList.add(new int[]
 					{ node1, node2 });
 
 				}
+			}
 			lVisited[node1] = true;
 		}
 		return lEdgeList;
@@ -154,17 +162,19 @@ public class FastIntegerGraph implements Serializable
 	public ArrayList<Edge<Integer>> getEdgeList()
 	{
 		// NOT OPTIMIZED: should use an iterator to avoid allocating data
-		ArrayList<Edge<Integer>> lEdgeList = new ArrayList<Edge<Integer>>();
-		boolean[] lVisited = new boolean[mSparseMatrix.size()];
+		final ArrayList<Edge<Integer>> lEdgeList = new ArrayList<Edge<Integer>>();
+		final boolean[] lVisited = new boolean[mSparseMatrix.size()];
 		for (int node1 = 0; node1 < mSparseMatrix.size(); node1++)
 		{
-			FastBoundedIntegerSet lNei = mSparseMatrix.get(node1);
-			for (int node2 : lNei)
+			final FastBoundedIntegerSet lNei = mSparseMatrix.get(node1);
+			for (final int node2 : lNei)
+			{
 				if (!lVisited[node2])
 				{
 					lEdgeList.add(new Edge<Integer>(node1, node2));
 
 				}
+			}
 			lVisited[node1] = true;
 		}
 		return lEdgeList;
@@ -182,12 +192,12 @@ public class FastIntegerGraph implements Serializable
 
 	public double getAverageDegree()
 	{
-		return ((double) 2 * getNumberOfEdges()) / (getNumberOfNodes());
+		return (double) 2 * getNumberOfEdges() / getNumberOfNodes();
 	}
 
 	public double getEdgeDensity()
 	{
-		return ((double) getNumberOfEdges()) / ((double) (getNumberOfNodes() * (getNumberOfNodes() - 1) / 2));
+		return (double) getNumberOfEdges() / (double) (getNumberOfNodes() * (getNumberOfNodes() - 1) / 2);
 	}
 
 	public FastBoundedIntegerSet getNodeNeighbours(final int pNode)
@@ -213,12 +223,13 @@ public class FastIntegerGraph implements Serializable
 		else if (pDepth > 1)
 		{
 			FastBoundedIntegerSet lNeiResult = new FastBoundedIntegerSet();
-			FastBoundedIntegerSet lNei = mSparseMatrix.get(pNode);
+			final FastBoundedIntegerSet lNei = mSparseMatrix.get(pNode);
 			lNeiResult = FastBoundedIntegerSet.union(lNeiResult, lNei);
 
-			for (int lNode : lNei)
+			for (final int lNode : lNei)
 			{
-				FastBoundedIntegerSet lNeiNei = getNodeNeighbours(lNode, pDepth - 1);
+				final FastBoundedIntegerSet lNeiNei = getNodeNeighbours(lNode,
+																																pDepth - 1);
 				lNeiResult = FastBoundedIntegerSet.union(lNeiResult, lNeiNei);
 			}
 			lNeiResult.remove(pNode);
@@ -230,11 +241,11 @@ public class FastIntegerGraph implements Serializable
 		}
 	}
 
-	public FastIntegerGraph extractStrictSubGraph(FastBoundedIntegerSet pNodeSet)
+	public FastIntegerGraph extractStrictSubGraph(final FastBoundedIntegerSet pNodeSet)
 	{
-		FastIntegerGraph lNewGraph = new FastIntegerGraph();
+		final FastIntegerGraph lNewGraph = new FastIntegerGraph();
 
-		for (int i : pNodeSet)
+		for (final int i : pNodeSet)
 		{
 			FastBoundedIntegerSet lNei = mSparseMatrix.get(i);
 			lNei = FastBoundedIntegerSet.intersection(lNei, pNodeSet);
@@ -245,13 +256,13 @@ public class FastIntegerGraph implements Serializable
 		return lNewGraph;
 	}
 
-	public FastIntegerGraph extractSubGraph(int[] pNodeSet)
+	public FastIntegerGraph extractSubGraph(final int[] pNodeSet)
 	{
-		FastIntegerGraph lNewGraph = new FastIntegerGraph();
+		final FastIntegerGraph lNewGraph = new FastIntegerGraph();
 
-		for (int i : pNodeSet)
+		for (final int i : pNodeSet)
 		{
-			FastBoundedIntegerSet lNei = mSparseMatrix.get(i);
+			final FastBoundedIntegerSet lNei = mSparseMatrix.get(i);
 			lNewGraph.addEdges(i, lNei);
 		}
 
@@ -264,7 +275,7 @@ public class FastIntegerGraph implements Serializable
 		final int prime = 31;
 		int result = 1;
 
-		for (FastBoundedIntegerSet lNeiSet : mSparseMatrix)
+		for (final FastBoundedIntegerSet lNeiSet : mSparseMatrix)
 		{
 			result = prime * result + lNeiSet.hashCode();
 		}
@@ -273,28 +284,40 @@ public class FastIntegerGraph implements Serializable
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final FastIntegerGraph other = (FastIntegerGraph) obj;
 		if (mSparseMatrix == null)
 		{
 			if (other.mSparseMatrix != null)
+			{
 				return false;
+			}
 		}
 		else if (mSparseMatrix.size() != other.mSparseMatrix.size())
+		{
 			return false;
+		}
 		else
 		{
 			for (int i = 0; i < mSparseMatrix.size(); i++)
 			{
 				if (!mSparseMatrix.get(i).equals(mSparseMatrix.get(i)))
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -305,9 +328,9 @@ public class FastIntegerGraph implements Serializable
 	@Override
 	public String toString()
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		int lCurrentNode = 0;
-		for (FastBoundedIntegerSet lNeiSet : mSparseMatrix)
+		for (final FastBoundedIntegerSet lNeiSet : mSparseMatrix)
 		{
 			lStringBuilder.append(lCurrentNode + " - " + lNeiSet.toString() + "\n");
 			lCurrentNode++;
@@ -315,21 +338,21 @@ public class FastIntegerGraph implements Serializable
 		return lStringBuilder.toString();
 	}
 
-	public void writeEdgeFile(File pFile) throws IOException
+	public void writeEdgeFile(final File pFile) throws IOException
 	{
 		writeEdgeFile(new FileOutputStream(pFile));
 	}
 
-	public void writeEdgeFile(OutputStream pOutputStream) throws IOException
+	public void writeEdgeFile(final OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 
-		for (int lNode : getNodeSet())
+		for (final int lNode : getNodeSet())
 		{
 			lWriter.append("NODE\t" + lNode + "\n");
 		}
 
-		for (int[] lEdge : getIntPairList())
+		for (final int[] lEdge : getIntPairList())
 		{
 			lWriter.append("EDGE\t" + lEdge[0] + "\t" + lEdge[1] + "\n");
 		}
@@ -337,15 +360,15 @@ public class FastIntegerGraph implements Serializable
 
 	}
 
-	public void readEdgeFile(File pFile) throws IOException
+	public void readEdgeFile(final File pFile) throws IOException
 	{
 		readEdgeFile(new FileInputStream(pFile));
 	}
 
-	public void readEdgeFile(InputStream pInputStream) throws IOException
+	public void readEdgeFile(final InputStream pInputStream) throws IOException
 	{
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
-		Pattern lPattern = Pattern.compile("\t");
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
+		final Pattern lPattern = Pattern.compile("\t");
 
 		int nodeindex1 = 1;
 		int nodeindex2 = 2;
@@ -356,6 +379,7 @@ public class FastIntegerGraph implements Serializable
 
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
+		{
 			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
@@ -401,6 +425,7 @@ public class FastIntegerGraph implements Serializable
 				}
 
 			}
+		}
 
 	}
 

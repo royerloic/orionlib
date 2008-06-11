@@ -11,6 +11,11 @@ import utils.network.socket.SocketThread;
 
 public class GroovyService implements Service, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Pattern lRemoveNewLines = Pattern.compile("(\\n|\\r)+");
 
 	public static final String sWelcomeMessage = "Welcome to GroovyServer";
@@ -31,7 +36,7 @@ public class GroovyService implements Service, Serializable
 
 	}
 
-	public GroovyService(GroovyServer pGroovyServer)
+	public GroovyService(final GroovyServer pGroovyServer)
 	{
 		super();
 		mGroovyServer = pGroovyServer;
@@ -39,7 +44,7 @@ public class GroovyService implements Service, Serializable
 																		pGroovyServer.getBinding());
 	}
 
-	public void onConnection(Socket pSocket)
+	public void onConnection(final Socket pSocket)
 	{
 		mSocket = pSocket;
 		System.out.println("Connection received from: " + pSocket);
@@ -70,7 +75,7 @@ public class GroovyService implements Service, Serializable
 		return mListening;
 	}
 
-	public String processInput(String pInputLine)
+	public String processInput(final String pInputLine)
 	{
 		if (authenticated || mGroovyServer.getPassword() == null)
 		{
@@ -78,7 +83,7 @@ public class GroovyService implements Service, Serializable
 		}
 		else
 		{
-			String lTrimmedString = pInputLine;
+			final String lTrimmedString = pInputLine;
 			if (mGroovyServer.getPassword().equals(lTrimmedString))
 			{
 				authenticated = true;
@@ -91,7 +96,7 @@ public class GroovyService implements Service, Serializable
 		}
 	}
 
-	private String executeCommand(String pInputLine)
+	private String executeCommand(final String pInputLine)
 	{
 		mGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
 																		mGroovyServer.getBinding());
@@ -100,7 +105,9 @@ public class GroovyService implements Service, Serializable
 												+ pInputLine.replaceAll("(\\n|\\r)+", "|")
 												+ "'");
 		if (pInputLine.equals(getShutdownCommand()))
+		{
 			mListening = false;
+		}
 
 		if (pInputLine.length() > 0)
 		{
@@ -120,7 +127,7 @@ public class GroovyService implements Service, Serializable
 				 * mGroovyShell.getContext()); }/
 				 **********************************************************************/
 			}
-			catch (Throwable e)
+			catch (final Throwable e)
 			{
 				lAnswer = e.getMessage();
 				e.printStackTrace();

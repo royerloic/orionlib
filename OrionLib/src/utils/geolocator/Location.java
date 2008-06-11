@@ -23,22 +23,20 @@ public class Location
 	public String toString()
 	{
 		String lString = new String();
-		if ((mType != null) && mType.equalsIgnoreCase("city"))
+		if (mType != null && mType.equalsIgnoreCase("city"))
+		{
 			lString = mName + ", ";
+		}
 		lString += mCountry + ", Coordinates: ("
 								+ mLatitude
 								+ ", "
 								+ mLongitude
 								+ ")";
 		if (mSourceString != null)
+		{
 			lString += "\n '" + mSourceString + "' \n";
+		}
 		return lString;
-	}
-
-	private Location()
-	{
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Location(final String pType,
@@ -51,9 +49,13 @@ public class Location
 		mType = pType;
 		mName = pName;
 		if (!mType.matches("@.*"))
+		{
 			mPlaceName = mName;
+		}
 		else
+		{
 			mPlaceName = pCountry;
+		}
 		mLatitude = pLatitude;
 		mLongitude = pLongitude;
 		mCountry = pCountry;
@@ -126,13 +128,15 @@ public class Location
 		{
 			final Location lLocation = (Location) pObj;
 			boolean lEquals = true;
-			lEquals |= (lLocation.mType.equals(mType));
-			lEquals |= (lLocation.mName.equals(mName));
-			lEquals |= (lLocation.mCountry.equals(mCountry));
+			lEquals |= lLocation.mType.equals(mType);
+			lEquals |= lLocation.mName.equals(mName);
+			lEquals |= lLocation.mCountry.equals(mCountry);
 			return lEquals;
 		}
 		else
+		{
 			return false;
+		}
 
 	}
 
@@ -153,9 +157,13 @@ public class Location
 	{
 		String lString;
 		if (!mType.matches("@.*"))
+		{
 			lString = mName + ", " + mCountry;
+		}
 		else
+		{
 			lString = mCountry;
+		}
 		return lString;
 	}
 

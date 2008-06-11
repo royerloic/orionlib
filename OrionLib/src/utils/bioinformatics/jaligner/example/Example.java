@@ -64,21 +64,21 @@ public class Example
 		{
 			logger.info("Running example...");
 
-			Sequence s1 = SequenceParser.parse(loadP53Human());
-			Sequence s2 = SequenceParser.parse(loadP53Mouse());
+			final Sequence s1 = SequenceParser.parse(loadP53Human());
+			final Sequence s2 = SequenceParser.parse(loadP53Mouse());
 
-			Alignment alignment = SmithWatermanGotoh.align(	s1,
-																											s2,
-																											MatrixLoader.load("BLOSUM62"),
-																											10f,
-																											0.5f);
+			final Alignment alignment = SmithWatermanGotoh.align(	s1,
+																														s2,
+																														MatrixLoader.load("BLOSUM62"),
+																														10f,
+																														0.5f);
 
 			System.out.println(alignment.getSummary());
 			System.out.println(new Pair().format(alignment));
 
 			logger.info("Finished running example");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			logger.log(Level.SEVERE, "Failed running example: " + e.getMessage(), e);
 		}
@@ -91,11 +91,11 @@ public class Example
 	 * @return sequence string
 	 * @throws IOException
 	 */
-	private static String loadSampleSequence(String path) throws IOException
+	private static String loadSampleSequence(final String path) throws IOException
 	{
-		InputStream inputStream = Example.class	.getClassLoader()
-																						.getResourceAsStream(path);
-		StringBuffer buffer = new StringBuffer();
+		final InputStream inputStream = Example.class	.getClassLoader()
+																									.getResourceAsStream(path);
+		final StringBuffer buffer = new StringBuffer();
 		int ch;
 		while ((ch = inputStream.read()) != -1)
 		{

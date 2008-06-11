@@ -13,16 +13,17 @@ public class GeneSet implements Comparable<GeneSet>, Serializable
 {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private final HashSet<Element> mSet;
 	private final HashMap<Element, Double> mAttribute2PValueMap = new HashMap<Element, Double>();
 
-	public GeneSet(Set<Element> pSet)
+	public GeneSet(final Set<Element> pSet)
 	{
 		mSet = new HashSet<Element>(pSet);
 	}
 
-	public void addAttributeAndPValue(Element pAttribute, double pValue)
+	public void addAttributeAndPValue(final Element pAttribute,
+																		final double pValue)
 	{
 		mAttribute2PValueMap.put(pAttribute, pValue);
 	}
@@ -34,12 +35,12 @@ public class GeneSet implements Comparable<GeneSet>, Serializable
 
 	public ArrayList<Couple<Element, Double>> getAttributesPValuesCouples()
 	{
-		ArrayList<Couple<Element, Double>> lList = new ArrayList<Couple<Element, Double>>();
+		final ArrayList<Couple<Element, Double>> lList = new ArrayList<Couple<Element, Double>>();
 
-		for (Entry<Element, Double> lEntry : mAttribute2PValueMap.entrySet())
+		for (final Entry<Element, Double> lEntry : mAttribute2PValueMap.entrySet())
 		{
-			Couple<Element, Double> lCouple = new Couple<Element, Double>(lEntry.getKey(),
-																																		lEntry.getValue());
+			final Couple<Element, Double> lCouple = new Couple<Element, Double>(lEntry.getKey(),
+																																					lEntry.getValue());
 			lList.add(lCouple);
 		}
 		return lList;
@@ -48,7 +49,7 @@ public class GeneSet implements Comparable<GeneSet>, Serializable
 	public Double getBestPValue()
 	{
 		Double lBestPValue = Double.POSITIVE_INFINITY;
-		for (Double lPValue : mAttribute2PValueMap.values())
+		for (final Double lPValue : mAttribute2PValueMap.values())
 		{
 			lBestPValue = Math.min(lBestPValue, lPValue);
 		}
@@ -66,31 +67,41 @@ public class GeneSet implements Comparable<GeneSet>, Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mSet == null) ? 0 : mSet.hashCode());
+		result = prime * result + (mSet == null ? 0 : mSet.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final GeneSet other = (GeneSet) obj;
 		if (mSet == null)
 		{
 			if (other.mSet != null)
+			{
 				return false;
+			}
 		}
 		else if (!mSet.equals(other.mSet))
+		{
 			return false;
+		}
 		return true;
 	}
 
-	public int compareTo(GeneSet pO)
+	public int compareTo(final GeneSet pO)
 	{
 		return getBestPValue().compareTo(pO.getBestPValue());
 	}

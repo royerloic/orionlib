@@ -14,7 +14,7 @@ public class FastIntegerListTests
 	@Test
 	public void testConstruct()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 
 		for (int i = 0; i < 1000; i++)
 		{
@@ -33,7 +33,7 @@ public class FastIntegerListTests
 	@Test
 	public void testContains()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 		for (int i = 0; i < 1000; i++)
 		{
 			lFastIntegerList.add(i);
@@ -47,7 +47,7 @@ public class FastIntegerListTests
 	@Test
 	public void testIndexOf()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 		for (int i = 0; i < 1000; i++)
 		{
 			lFastIntegerList.add(i);
@@ -73,7 +73,7 @@ public class FastIntegerListTests
 	@Test
 	public void testToString()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 
 		for (int i = 0; i < 1000; i++)
 		{
@@ -88,7 +88,7 @@ public class FastIntegerListTests
 	@Test
 	public void testAddAndRemoveValue()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 
 		for (int i = 0; i < 2000; i++)
 		{
@@ -108,7 +108,7 @@ public class FastIntegerListTests
 	@Test
 	public void testAddAll()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 
 		for (int i = 0; i < 1000; i++)
 		{
@@ -123,7 +123,7 @@ public class FastIntegerListTests
 	@Test
 	public void testClear()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList();
+		final FastIntegerList lFastIntegerList = new FastIntegerList();
 
 		for (int i = 0; i < 1000; i++)
 		{

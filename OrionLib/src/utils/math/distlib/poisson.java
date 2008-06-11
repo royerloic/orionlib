@@ -33,11 +33,13 @@ public class poisson
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double lambda)
+	public static double density(double x, final double lambda)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
+		{
 			return x + lambda;
+		}
 		/* !* #endif /*4! */
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
@@ -47,10 +49,14 @@ public class poisson
 			// return Double.NaN;
 		}
 		if (x < 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 0;
+		}
 		/* !* #endif /*4! */
 		/* !* return exp(x * log(lambda) - lambda - lgammafn(x + 1)); *! */
 		return java.lang.Math.exp(x * java.lang.Math.log(lambda)
@@ -86,11 +92,13 @@ public class poisson
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double lambda)
+	public static double cumulative(double x, final double lambda)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
+		{
 			return x + lambda;
+		}
 		/* !* #endif /*4! */
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
@@ -100,10 +108,14 @@ public class poisson
 			// return Double.NaN;
 		}
 		if (x < 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 1;
+		}
 		/* !* #endif /*4! */
 		return 1 - gamma.cumulative(lambda, x + 1, 1.0);
 	}
@@ -143,12 +155,14 @@ public class poisson
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double lambda)
+	public static double quantile(final double x, final double lambda)
 	{
 		double mu, sigma, gamma, z, y;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
+		{
 			return x + lambda;
+		}
 		if (Double.isInfinite(lambda))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -161,10 +175,14 @@ public class poisson
 			// return Double.NaN;
 		}
 		if (x == 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* #endif /*4! */
 		mu = lambda;
 		/* !* sigma = sqrt(lambda); *! */
@@ -183,7 +201,9 @@ public class poisson
 			for (;;)
 			{
 				if ((z = poisson.cumulative(y - 1, lambda)) < x)
+				{
 					return y;
+				}
 				y = y - 1;
 			}
 		}
@@ -195,7 +215,9 @@ public class poisson
 			for (;;)
 			{
 				if ((z = poisson.cumulative(y + 1, lambda)) >= x)
+				{
 					return y + 1;
+				}
 				y = y + 1;
 			}
 		}
@@ -236,30 +258,7 @@ public class poisson
 	static double fact[] =
 	{ 1.0, 1.0, 2.0, 6.0, 24.0, 120.0, 720.0, 5040.0, 40320.0, 362880.0 };
 
-	static private double a0 = -0.5;
-	static private double a1 = 0.3333333;
-	static private double a2 = -0.2500068;
-	static private double a3 = 0.2000118;
-	static private double a4 = -0.1661269;
-	static private double a5 = 0.1421878;
-	static private double a6 = -0.1384794;
-	static private double a7 = 0.1250060;
-
-	// static private double while(true) = for(;;);
-
-	/* !* #include "DistLib.h" /*4! */
-
-	static private double /* a0, a1, a2, a3, a4, a5, a6, a7, */b1, b2;
-	static private double c, c0, c1, c2, c3, d, del, difmuk, e;
-	static private double fk, fx, fy, g, omega;
-	static private double p, p0, px, py, q, s, t, u, v, x, xx;
-	static private double pp[] = new double[36];
-	static private int j, k, kflag, l, m;
-	static private int ipois;
-	static private double muprev = 0.0;
-	static private double muold = 0.0;
-
-	public static double random(double mu, uniform PRNG)
+	public static double random(final double mu, final uniform PRNG)
 	{
 		throw new java.lang.ArithmeticException("FUNCTION NOT IMPLEMENTED");
 	}

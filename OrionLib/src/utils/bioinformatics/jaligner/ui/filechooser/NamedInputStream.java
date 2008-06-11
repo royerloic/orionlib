@@ -47,7 +47,7 @@ public class NamedInputStream extends Object implements Serializable
 	/**
 	 * 
 	 */
-	public NamedInputStream(String name, InputStream inputStream)
+	public NamedInputStream(final String name, final InputStream inputStream)
 	{
 		this.name = name;
 		this.inputStream = inputStream;

@@ -23,6 +23,10 @@ import utils.structures.lattice.HashLattice;
 public class OboOntology extends HashLattice<OboTerm>
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Map<Integer, OboTerm> mIdToOboTermMap = new HashMap<Integer, OboTerm>();
 
 	@Override
@@ -44,7 +48,9 @@ public class OboOntology extends HashLattice<OboTerm>
 		{
 			final OboTerm lOboTerm = getOboTermFromId(lId);
 			if (lOboTerm != null)
+			{
 				lOboTermList.add(lOboTerm);
+			}
 
 		}
 		return lOboTermList;
@@ -71,10 +77,15 @@ public class OboOntology extends HashLattice<OboTerm>
 			boolean isTerm = false;
 
 			for (final List<String> lList : lOboMatrix)
+			{
 				if (lList.get(0).equals("[Term]"))
+				{
 					isTerm = true;
+				}
 				else if (lList.get(0).equals("[Typedef]"))
+				{
 					isTerm = false;
+				}
 				else if (isTerm && lList.get(0).equals("id"))
 				{
 					lIdString = lList.get(1);
@@ -88,15 +99,20 @@ public class OboOntology extends HashLattice<OboTerm>
 					addNode(lCurrentOboTerm);
 				}
 				else if (lId != null)
+				{
 					if (lList.get(0).equals("name"))
 					{
 						final String lName = lList.get(1);
 						lCurrentOboTerm.setName(lName);
 					}
 					else if (lList.get(0).equals("def"))
+					{
 						lCurrentOboTerm.setDefinition(lList.get(1));
+					}
 					else if (lList.get(0).equals("namespace"))
+					{
 						lCurrentOboTerm.setNameSpace(lList.get(1));
+					}
 					else if (lList.get(0).equals("is_a") || lList	.get(0)
 																												.equals("relationship"))
 					{
@@ -108,14 +124,20 @@ public class OboOntology extends HashLattice<OboTerm>
 						OboTerm lParentOboTerm = new OboTerm("", lParentId);
 						final OboTerm lParentOboTermTemp = lOboTermMap.get(lParentOboTerm);
 						if (lParentOboTermTemp == null)
+						{
 							lOboTermMap.put(lParentOboTerm, lParentOboTerm);
+						}
 						else
+						{
 							lParentOboTerm = lParentOboTermTemp;
+						}
 
 						final DirectedEdge<OboTerm> lEdge = new DirectedEdge(	lParentOboTerm,
 																																	lCurrentOboTerm);
 						lEdgeSet.add(lEdge);
 					}
+				}
+			}
 
 			for (final DirectedEdge<OboTerm> lEdge : lEdgeSet)
 			{

@@ -50,9 +50,9 @@ public class FASTA extends Format
 	 * 
 	 * @return String
 	 */
-	public String format(Sequence sequence)
+	public String format(final Sequence sequence)
 	{
-		StringBuffer buffer = new StringBuffer(">");
+		final StringBuffer buffer = new StringBuffer(">");
 		buffer.append(sequence.getId() == null ? "" : sequence.getId());
 		buffer.append("\n");
 		for (int i = 0, n = sequence.length(); i * LINE_WIDTH < n; i++)
@@ -73,11 +73,11 @@ public class FASTA extends Format
 	 * @return FASTA format of the input alignment
 	 */
 	@Override
-	public String format(Alignment alignment)
+	public String format(final Alignment alignment)
 	{
-		StringBuffer buffer = new StringBuffer();
-		StringBuffer s1 = new StringBuffer();
-		StringBuffer s2 = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
+		final StringBuffer s1 = new StringBuffer();
+		final StringBuffer s2 = new StringBuffer();
 		s1.append(alignment.getSequence1());
 		s2.append(alignment.getSequence2());
 		buffer.append(format(new Sequence(s1.toString(),

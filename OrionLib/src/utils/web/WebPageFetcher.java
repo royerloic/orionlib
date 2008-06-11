@@ -19,7 +19,7 @@ import java.util.Random;
 public final class WebPageFetcher
 {
 
-	private URL mURL;
+	private final URL mURL;
 
 	private static final String cHTTP = "http";
 
@@ -36,28 +36,30 @@ public final class WebPageFetcher
 
 	private static final int sBufferSize = 1000000;
 
-	private String mUserAgent;
+	private final String mUserAgent;
 
 	private String mReferer;
 
-	private String mAccept;
+	private final String mAccept;
 
-	private String mAcceptLanguage;
+	private final String mAcceptLanguage;
 
-	private String mAcceptEncoding;
+	private final String mAcceptEncoding;
 
-	private String mAcceptCharset;
+	private final String mAcceptCharset;
 
-	private String mKeepAlive;
+	private final String mKeepAlive;
 
-	private String mConnection;
+	private final String mConnection;
 
 	private URLConnection mURLConnection;
 
 	public WebPageFetcher(final URL pURL)
 	{
 		if (!pURL.getProtocol().equals(cHTTP))
+		{
 			throw new IllegalArgumentException("URL is not for HTTP Protocol: " + pURL);
+		}
 		mURL = pURL;
 		mUserAgent = getRandomUserAgent();
 		mReferer = "";
@@ -74,9 +76,9 @@ public final class WebPageFetcher
 
 	private String getRandomUserAgent()
 	{
-		String lAgentString = cUserAgents[lRandom.nextInt(3)];
-		String lRandomVersionAgentString = lAgentString.replaceAll(	"@version@",
-																																Integer.toString(lRandom.nextInt(10)));
+		final String lAgentString = cUserAgents[lRandom.nextInt(3)];
+		final String lRandomVersionAgentString = lAgentString.replaceAll(	"@version@",
+																																			Integer.toString(lRandom.nextInt(10)));
 		return lRandomVersionAgentString;
 	}
 
@@ -123,7 +125,7 @@ public final class WebPageFetcher
 			while ((headerValue = mURLConnection.getHeaderField(headerIdx)) != null)
 			{
 				headerKey = mURLConnection.getHeaderFieldKey(headerIdx);
-				if ((headerKey != null) && (headerKey.length() > 0))
+				if (headerKey != null && headerKey.length() > 0)
 				{
 					result.append(headerKey);
 					result.append(" : ");
@@ -182,7 +184,9 @@ public final class WebPageFetcher
 		try
 		{
 			if (aReader != null)
+			{
 				aReader.close();
+			}
 		}
 		catch (final IOException ex)
 		{
@@ -205,11 +209,17 @@ public final class WebPageFetcher
 	{
 		final WebPageFetcher fetcher = new WebPageFetcher(aArguments[0]);
 		if (aArguments[1].equalsIgnoreCase("header"))
+		{
 			System.out.println(fetcher.getPageHeader());
+		}
 		else if (aArguments[1].equalsIgnoreCase("content"))
+		{
 			System.out.println(fetcher.getPageContent());
+		}
 		else
+		{
 			System.err.println("Unknown option.");
+		}
 	}
 
 	public String getReferer()

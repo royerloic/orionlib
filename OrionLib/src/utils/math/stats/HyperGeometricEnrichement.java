@@ -30,12 +30,12 @@ public class HyperGeometricEnrichement
 
 		volatile double pvalue = -1;
 
-		public Test(String pLine,
-								double pSet1,
-								double pSet2,
-								double pInter,
-								double pTotal,
-								double pThreshold)
+		public Test(final String pLine,
+								final double pSet1,
+								final double pSet2,
+								final double pInter,
+								final double pTotal,
+								final double pThreshold)
 		{
 			super();
 			mLine = pLine;
@@ -46,7 +46,7 @@ public class HyperGeometricEnrichement
 			mThreshold = pThreshold;
 		}
 
-		public void applyCorrection(double pCorrection)
+		public void applyCorrection(final double pCorrection)
 		{
 			mCorrection = pCorrection;
 		}
@@ -54,7 +54,9 @@ public class HyperGeometricEnrichement
 		public double getPValue()
 		{
 			if (pvalue != -1)
+			{
 				return pvalue;
+			}
 
 			pvalue = hyperg(total, set1, set2, inter, mThreshold) * mCorrection;
 			return pvalue;
@@ -63,7 +65,9 @@ public class HyperGeometricEnrichement
 		public double getBitScore()
 		{
 			if (pvalue == -1)
+			{
 				getPValue();
+			}
 
 			final double bitscore = -Math.log(pvalue);
 
@@ -72,7 +76,7 @@ public class HyperGeometricEnrichement
 
 		public String toTabDel()
 		{
-			StringBuilder lStringBuilder = new StringBuilder();
+			final StringBuilder lStringBuilder = new StringBuilder();
 
 			lStringBuilder.append(mLine);
 			lStringBuilder.append("\t" + getPValue());
@@ -82,12 +86,12 @@ public class HyperGeometricEnrichement
 		}
 	}
 
-	public static void testFile(File pInputFile,
-															int pStartLine,
-															int pTestNameIndex,
-															int pIndex,
-															double pPValueThreshold,
-															File pOutputFile) throws IOException
+	public static void testFile(final File pInputFile,
+															final int pStartLine,
+															final int pTestNameIndex,
+															final int pIndex,
+															final double pPValueThreshold,
+															final File pOutputFile) throws IOException
 	{
 		testStream(	new FileInputStream(pInputFile),
 								pStartLine,
@@ -99,12 +103,12 @@ public class HyperGeometricEnrichement
 
 	static boolean echo = true;
 
-	public static void testStream(InputStream pInputStream,
-																int pStartLine,
-																int pTestNameIndex,
-																int pIndex,
-																double pPValueThreshold,
-																OutputStream pOutputStream) throws IOException
+	public static void testStream(final InputStream pInputStream,
+																final int pStartLine,
+																final int pTestNameIndex,
+																final int pIndex,
+																final double pPValueThreshold,
+																final OutputStream pOutputStream) throws IOException
 	{
 
 		final int set1index = pIndex;
@@ -113,15 +117,16 @@ public class HyperGeometricEnrichement
 		final int totalindex = set1index + 3;
 		final double threshold = pPValueThreshold;
 
-		HashSetMap<String, Test> lNameToTestSetsMap = new HashSetMap<String, Test>();
+		final HashSetMap<String, Test> lNameToTestSetsMap = new HashSetMap<String, Test>();
 
-		Writer lWriter = LineWriter.getWriter(pOutputStream);
+		final Writer lWriter = LineWriter.getWriter(pOutputStream);
 		String lCurrentTestName = null;
 
 		int lLineIndex = 0;
-		for (String lLine : LineReader.getLines(pInputStream))
+		for (final String lLine : LineReader.getLines(pInputStream))
 		{
 			if (lLineIndex >= pStartLine)
+			{
 				if (!lLine.startsWith("//") && !lLine.isEmpty())
 				{
 					final String[] lTokenArray = lLine.split("\t", -1);
@@ -133,7 +138,7 @@ public class HyperGeometricEnrichement
 					}
 					else if (!lCurrentTestName.equals(lTestName))
 					{
-						for (Entry<String, Set<Test>> lEntry : lNameToTestSetsMap.entrySet())
+						for (final Entry<String, Set<Test>> lEntry : lNameToTestSetsMap.entrySet())
 						{
 							final String lTestNameInMap = lEntry.getKey();
 							final Set<Test> lTestSet = lEntry.getValue();
@@ -144,14 +149,16 @@ public class HyperGeometricEnrichement
 							lWriter.append("//correction used: " + lCorrection
 															+ "*pvalue"
 															+ "\n");
-							for (Test lTest : lTestSet)
+							for (final Test lTest : lTestSet)
 							{
 								lTest.applyCorrection(lCorrection);
 								if (lTest.getPValue() > pPValueThreshold)
 								{
 									if (echo)
+									{
 										lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
 																		+ "'\n");
+									}
 								}
 								else
 								{
@@ -169,13 +176,19 @@ public class HyperGeometricEnrichement
 					final double set2 = Double.parseDouble(lTokenArray[set2index]);
 					final double inter = Double.parseDouble(lTokenArray[interindex]);
 					final double total = Double.parseDouble(lTokenArray[totalindex]);
-					Test lTest = new Test(lLine, set1, set2, inter, total, threshold);
+					final Test lTest = new Test(lLine,
+																			set1,
+																			set2,
+																			inter,
+																			total,
+																			threshold);
 					lNameToTestSetsMap.put(lTestName, lTest);
 				}
+			}
 			lLineIndex++;
 		}
 
-		for (Entry<String, Set<Test>> lEntry : lNameToTestSetsMap.entrySet())
+		for (final Entry<String, Set<Test>> lEntry : lNameToTestSetsMap.entrySet())
 		{
 			final String lTestNameInMap = lEntry.getKey();
 			final Set<Test> lTestSet = lEntry.getValue();
@@ -184,14 +197,16 @@ public class HyperGeometricEnrichement
 			lWriter.append("//\n");
 			lWriter.append("//Test results for: " + lTestNameInMap + "\n");
 			lWriter.append("//correction used: " + lCorrection + "*pvalue" + "\n");
-			for (Test lTest : lTestSet)
+			for (final Test lTest : lTestSet)
 			{
 				lTest.applyCorrection(lCorrection);
 				if (lTest.getPValue() > pPValueThreshold)
 				{
 					if (echo)
+					{
 						lWriter.append("// p-value too high, skipped: '" + lTest.toTabDel()
 														+ "'\n");
+					}
 				}
 				else
 				{
@@ -205,11 +220,11 @@ public class HyperGeometricEnrichement
 
 	}
 
-	public final static double hyperg(double total,
-																		double set1,
-																		double set2,
-																		double inter,
-																		double threshold)
+	public final static double hyperg(final double total,
+																		final double set1,
+																		final double set2,
+																		final double inter,
+																		final double threshold)
 	{
 		final double pvalue = hypergeometricpvalue(	inter,
 																								set1,
@@ -224,15 +239,19 @@ public class HyperGeometricEnrichement
 	}
 
 	private final static double hypergeometricpvalue(	double k,
-																										double R,
-																										double B,
-																										double n,
-																										double threshold)
+																										final double R,
+																										final double B,
+																										final double n,
+																										final double threshold)
 	{
 		if (k > R)
+		{
 			k = R;
+		}
 		if (k > n)
+		{
 			k = n;
+		}
 
 		final double min = Math.min(R, n);
 		double sum = 0;
@@ -242,7 +261,9 @@ public class HyperGeometricEnrichement
 		{
 			sum += hypergeometric.density(kk, R, B, n);
 			if (sum > threshold)
+			{
 				break;
+			}
 			kk++;
 		}
 		return sum;

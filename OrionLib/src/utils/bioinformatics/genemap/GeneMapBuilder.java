@@ -18,7 +18,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import utils.math.stats.HyperGeometricEnrichement;
-import utils.random.sequence.ContextPreservingSequenceRandomizer;
 import utils.structures.Couple;
 import utils.structures.map.HashSetMap;
 import utils.structures.set.FirstInPrioritizedSetDecomposer;
@@ -26,42 +25,42 @@ import utils.structures.set.FirstInPrioritizedSetDecomposer;
 public class GeneMapBuilder implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	HashMap<Integer, Element> mGeneMap = new HashMap<Integer, Element>();
 	HashMap<Integer, Element> mAttributeMap = new HashMap<Integer, Element>();
 
 	HashSetMap<Element, Element> mGene2AttributeMap = new HashSetMap<Element, Element>();
 	HashSetMap<Element, Element> mAttribute2GeneMap = new HashSetMap<Element, Element>();
 
-	public Element addGene(	Integer pGeneId,
-													String pGeneName,
-													String pGeneDescription)
+	public Element addGene(	final Integer pGeneId,
+													final String pGeneName,
+													final String pGeneDescription)
 	{
-		Element lElement = new Element(pGeneId, pGeneName, pGeneDescription);
+		final Element lElement = new Element(pGeneId, pGeneName, pGeneDescription);
 		mGeneMap.put(pGeneId, lElement);
 		return lElement;
 	}
 
-	public Element addAttribute(int pAttributeId,
-															String pAttributeName,
-															String pAttributeDescription)
+	public Element addAttribute(final int pAttributeId,
+															final String pAttributeName,
+															final String pAttributeDescription)
 	{
-		Element lElement = new Element(	pAttributeId,
-																		pAttributeName,
-																		pAttributeDescription);
+		final Element lElement = new Element(	pAttributeId,
+																					pAttributeName,
+																					pAttributeDescription);
 		mAttributeMap.put(pAttributeId, lElement);
 		return lElement;
 	}
 
-	public void addAnnotation(Integer pGeneId, Integer pAttributeId)
+	public void addAnnotation(final Integer pGeneId, final Integer pAttributeId)
 	{
 		addAnnotation(pGeneId, "", pAttributeId, "");
 	}
 
-	public void addAnnotation(Integer pGeneId,
-														String pGeneName,
-														Integer pAttributeId,
-														String pAttributeName)
+	public void addAnnotation(final Integer pGeneId,
+														final String pGeneName,
+														final Integer pAttributeId,
+														final String pAttributeName)
 	{
 		Element lGene = mGeneMap.get(pGeneId);
 		if (lGene == null)
@@ -83,42 +82,42 @@ public class GeneMapBuilder implements Serializable
 		mAttribute2GeneMap.put(lAttribute, lGene);
 	}
 
-	public HashMap<Element, Enrichment> computeEnrichements(int... pIntegers)
+	public HashMap<Element, Enrichment> computeEnrichements(final int... pIntegers)
 
 	{
-		HashSet<Integer> lSet = new HashSet<Integer>();
-		for (int lInt : pIntegers)
+		final HashSet<Integer> lSet = new HashSet<Integer>();
+		for (final int lInt : pIntegers)
 		{
 			lSet.add(lInt);
 		}
 		return computeEnrichements(lSet);
 	}
 
-	public HashMap<Element, Enrichment> computeEnrichements(Collection<Integer> pGeneSet)
+	public HashMap<Element, Enrichment> computeEnrichements(final Collection<Integer> pGeneSet)
 	{
 		return computeEnrichements(pGeneSet, 0);
 	}
 
-	public HashMap<Element, Enrichment> computeEnrichements(Collection<Integer> pGeneSet,
-																													double pMinimalCoverage)
+	public HashMap<Element, Enrichment> computeEnrichements(final Collection<Integer> pGeneSet,
+																													final double pMinimalCoverage)
 	{
-		HashMap<Element, Enrichment> lEnrichementMap = new HashMap<Element, Enrichment>();
+		final HashMap<Element, Enrichment> lEnrichementMap = new HashMap<Element, Enrichment>();
 
-		HashSet<Element> lSet1 = getElementSet(mGeneMap, pGeneSet);
-		HashSet<Element> lAttributeSetForSet1 = getAttributesForGeneSet(lSet1);
-		for (Element lAttribute : lAttributeSetForSet1)
+		final HashSet<Element> lSet1 = getElementSet(mGeneMap, pGeneSet);
+		final HashSet<Element> lAttributeSetForSet1 = getAttributesForGeneSet(lSet1);
+		for (final Element lAttribute : lAttributeSetForSet1)
 		{
-			Enrichment lEnrichment = new Enrichment();
+			final Enrichment lEnrichment = new Enrichment();
 			lEnrichementMap.put(lAttribute, lEnrichment);
 		}
 
-		double lCorrection = Math.max(lAttributeSetForSet1.size(), 1);
+		final double lCorrection = Math.max(lAttributeSetForSet1.size(), 1);
 		final double universe = mGeneMap.size();
 		final double set1 = pGeneSet.size();
-		HashSet<Element> lIntersection = new HashSet<Element>((int) universe);
-		for (Element lAttribute : lAttributeSetForSet1)
+		final HashSet<Element> lIntersection = new HashSet<Element>((int) universe);
+		for (final Element lAttribute : lAttributeSetForSet1)
 		{
-			Set<Element> lSet2 = mAttribute2GeneMap.get(lAttribute);
+			final Set<Element> lSet2 = mAttribute2GeneMap.get(lAttribute);
 			final double set2 = lSet2.size();
 
 			lIntersection.clear();
@@ -136,7 +135,7 @@ public class GeneMapBuilder implements Serializable
 																																inter,
 																																1);
 				final double lCorrectedpValue = pvalue * lCorrection;
-				Enrichment lEnrichment = lEnrichementMap.get(lAttribute);
+				final Enrichment lEnrichment = lEnrichementMap.get(lAttribute);
 
 				lEnrichment.mSet1 = new ArrayList<Element>(lSet1);
 				lEnrichment.mSet2 = new ArrayList<Element>(lSet2);
@@ -157,57 +156,59 @@ public class GeneMapBuilder implements Serializable
 		return lEnrichementMap;
 	}
 
-	private HashSet<Element> getAttributesForGeneSet(HashSet<Element> pSet1)
+	private HashSet<Element> getAttributesForGeneSet(final HashSet<Element> pSet1)
 	{
-		HashSet<Element> lAttributeSet = new HashSet<Element>();
-		for (Element lElement : pSet1)
+		final HashSet<Element> lAttributeSet = new HashSet<Element>();
+		for (final Element lElement : pSet1)
 		{
-			Set<Element> lAttributeSetForGene = mGene2AttributeMap.get(lElement);
+			final Set<Element> lAttributeSetForGene = mGene2AttributeMap.get(lElement);
 			if (lAttributeSetForGene != null)
+			{
 				lAttributeSet.addAll(lAttributeSetForGene);
+			}
 		}
 		return lAttributeSet;
 	}
 
-	private HashSet<Element> getElementSet(	HashMap<Integer, Element> pElementMap,
-																					Collection<Integer> pElementSet)
+	private HashSet<Element> getElementSet(	final HashMap<Integer, Element> pElementMap,
+																					final Collection<Integer> pElementSet)
 	{
-		HashSet<Element> lSet = new HashSet<Element>();
-		for (Integer lElementId : pElementSet)
+		final HashSet<Element> lSet = new HashSet<Element>();
+		for (final Integer lElementId : pElementSet)
 		{
 			lSet.add(pElementMap.get(lElementId));
 		}
 		return lSet;
 	}
 
-	public Collection<GeneSet> getGeneSubSets(double pPValueThreshold,
-																						int... pIntegers)
+	public Collection<GeneSet> getGeneSubSets(final double pPValueThreshold,
+																						final int... pIntegers)
 
 	{
-		HashSet<Integer> lSet = new HashSet<Integer>();
-		for (int lInt : pIntegers)
+		final HashSet<Integer> lSet = new HashSet<Integer>();
+		for (final int lInt : pIntegers)
 		{
 			lSet.add(lInt);
 		}
 		return getGeneSubSets(lSet, pPValueThreshold);
 	}/**/
 
-	public Collection<GeneSet> getGeneSubSets(Collection<Integer> pGeneSet,
-																						double pPValueThreshold)
+	public Collection<GeneSet> getGeneSubSets(final Collection<Integer> pGeneSet,
+																						final double pPValueThreshold)
 	{
-		HashMap<HashSet<Element>, GeneSet> lGeneSetMap = new HashMap<HashSet<Element>, GeneSet>();
+		final HashMap<HashSet<Element>, GeneSet> lGeneSetMap = new HashMap<HashSet<Element>, GeneSet>();
 
-		HashSet<Element> lGeneElementSet = getElementSet(mGeneMap, pGeneSet);
-		HashMap<Element, Enrichment> lEnrichementMap = computeEnrichements(pGeneSet);
+		final HashSet<Element> lGeneElementSet = getElementSet(mGeneMap, pGeneSet);
+		final HashMap<Element, Enrichment> lEnrichementMap = computeEnrichements(pGeneSet);
 
-		for (Entry<Element, Enrichment> lEntry : lEnrichementMap.entrySet())
+		for (final Entry<Element, Enrichment> lEntry : lEnrichementMap.entrySet())
 		{
 			final Element lAttribute = lEntry.getKey();
 			final double lPValue = lEntry.getValue().mCorrectedPValue;
 			if (lPValue < pPValueThreshold)
 			{
 
-				HashSet<Element> lSet = new HashSet<Element>();
+				final HashSet<Element> lSet = new HashSet<Element>();
 				lSet.addAll(mAttribute2GeneMap.get(lAttribute));
 				lSet.retainAll(lGeneElementSet);
 
@@ -224,42 +225,45 @@ public class GeneMapBuilder implements Serializable
 		return lGeneSetMap.values();
 	}
 
-	public HashSet<GeneSet> getGeneSubSetsAndDecompose(	double pPValueThreshold,
-																											int... pIntegers)
+	public HashSet<GeneSet> getGeneSubSetsAndDecompose(	final double pPValueThreshold,
+																											final int... pIntegers)
 
 	{
-		HashSet<Integer> lSet = new HashSet<Integer>();
-		for (int lInt : pIntegers)
+		final HashSet<Integer> lSet = new HashSet<Integer>();
+		for (final int lInt : pIntegers)
 		{
 			lSet.add(lInt);
 		}
 		return getGeneSubSetsAndDecompose(lSet, pPValueThreshold);
 	}/**/
 
-	public HashSet<GeneSet> getGeneSubSetsAndDecompose(	Collection<Integer> pGeneSet,
-																											double pPValueThreshold)
+	public HashSet<GeneSet> getGeneSubSetsAndDecompose(	final Collection<Integer> pGeneSet,
+																											final double pPValueThreshold)
 	{
-		Collection<GeneSet> lGeneSets = getGeneSubSets(pGeneSet, pPValueThreshold);
+		final Collection<GeneSet> lGeneSets = getGeneSubSets(	pGeneSet,
+																													pPValueThreshold);
 
-		ArrayList<GeneSet> lGeneSetList = new ArrayList<GeneSet>(lGeneSets);
+		final ArrayList<GeneSet> lGeneSetList = new ArrayList<GeneSet>(lGeneSets);
 
 		Collections.sort(lGeneSetList);
 
-		FirstInPrioritizedSetDecomposer<Element, Couple<Element, Double>> lDecomposer = new FirstInPrioritizedSetDecomposer<Element, Couple<Element, Double>>();
+		final FirstInPrioritizedSetDecomposer<Element, Couple<Element, Double>> lDecomposer = new FirstInPrioritizedSetDecomposer<Element, Couple<Element, Double>>();
 
-		for (GeneSet lGeneSet : lGeneSetList)
-			for (Couple<Element, Double> lCouple : lGeneSet.getAttributesPValuesCouples())
+		for (final GeneSet lGeneSet : lGeneSetList)
+		{
+			for (final Couple<Element, Double> lCouple : lGeneSet.getAttributesPValuesCouples())
 			{
 				lDecomposer.addSet(lGeneSet.getGenes(), lCouple);
 			}
+		}
 
-		HashSet<GeneSet> lDecomposedGeneSets = new HashSet<GeneSet>();
+		final HashSet<GeneSet> lDecomposedGeneSets = new HashSet<GeneSet>();
 
-		for (Entry<Set<Element>, Set<Couple<Element, Double>>> lEntry : lDecomposer	.getSetsAndAttributes()
-																																								.entrySet())
+		for (final Entry<Set<Element>, Set<Couple<Element, Double>>> lEntry : lDecomposer	.getSetsAndAttributes()
+																																											.entrySet())
 		{
-			GeneSet lGeneSet = new GeneSet(lEntry.getKey());
-			for (Couple<Element, Double> lCouple : lEntry.getValue())
+			final GeneSet lGeneSet = new GeneSet(lEntry.getKey());
+			for (final Couple<Element, Double> lCouple : lEntry.getValue())
 			{
 				lGeneSet.addAttributeAndPValue(lCouple.mA, lCouple.mB);
 			}
@@ -270,18 +274,18 @@ public class GeneMapBuilder implements Serializable
 
 	}
 
-	public static final String geneSubSetsToEdgeString(HashSet<GeneSet> pGeneSets)
+	public static final String geneSubSetsToEdgeString(final HashSet<GeneSet> pGeneSets)
 	{
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		lStringBuilder.append("//");
 		lStringBuilder.append("EDGEFORMAT\t1\t2\n");
-		ArrayList<String> lSetAttributesList = new ArrayList<String>();
-		for (GeneSet lGeneSet : pGeneSets)
+		final ArrayList<String> lSetAttributesList = new ArrayList<String>();
+		for (final GeneSet lGeneSet : pGeneSets)
 		{
-			for (Element lGene : lGeneSet.getGenes())
+			for (final Element lGene : lGeneSet.getGenes())
 			{
-				String lSetAttributes = lGeneSet.getAttributesPValuesCouples()
-																				.toString();
+				final String lSetAttributes = lGeneSet.getAttributesPValuesCouples()
+																							.toString();
 				lStringBuilder.append("EDGE\t" + lGene.mId
 															+ "\t"
 															+ lSetAttributes
@@ -290,7 +294,7 @@ public class GeneMapBuilder implements Serializable
 			}
 		}
 
-		for (String lString : lSetAttributesList)
+		for (final String lString : lSetAttributesList)
 		{
 			lStringBuilder.append("EDGE\t" + lString + "\tALL_ATTRIBUTES\n");
 		}
@@ -298,31 +302,31 @@ public class GeneMapBuilder implements Serializable
 		return lStringBuilder.toString();
 	}
 
-	public static GeneMapBuilder load(File pCache) throws IOException
+	public static GeneMapBuilder load(final File pCache) throws IOException
 	{
 		try
 		{
-			FileInputStream lFileInputStream = new FileInputStream(pCache);
-			GZIPInputStream lGZIPInputStream = new GZIPInputStream(lFileInputStream);
-			ObjectInputStream lObjectInputStream = new ObjectInputStream(lGZIPInputStream);
-			GeneMapBuilder obj = (GeneMapBuilder) lObjectInputStream.readObject();
+			final FileInputStream lFileInputStream = new FileInputStream(pCache);
+			final GZIPInputStream lGZIPInputStream = new GZIPInputStream(lFileInputStream);
+			final ObjectInputStream lObjectInputStream = new ObjectInputStream(lGZIPInputStream);
+			final GeneMapBuilder obj = (GeneMapBuilder) lObjectInputStream.readObject();
 			return obj;
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public void save(File pCache) throws IOException
+
+	public void save(final File pCache) throws IOException
 	{
-		FileOutputStream lFileOutputStream = new FileOutputStream(pCache);
-		GZIPOutputStream lGZIPOutputStream = new GZIPOutputStream(lFileOutputStream);
-		ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lGZIPOutputStream);
+		final FileOutputStream lFileOutputStream = new FileOutputStream(pCache);
+		final GZIPOutputStream lGZIPOutputStream = new GZIPOutputStream(lFileOutputStream);
+		final ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lGZIPOutputStream);
 		lObjectOutputStream.writeObject(this);
 		lObjectOutputStream.flush();
 		lObjectOutputStream.close();
 	}
-	
+
 }

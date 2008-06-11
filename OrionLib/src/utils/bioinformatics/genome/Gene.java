@@ -8,6 +8,10 @@ import utils.bioinformatics.ontology.OboTerm;
 
 public class Gene implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String mId;
 	protected final String mName;
 	protected final String mNote;
@@ -21,14 +25,14 @@ public class Gene implements Serializable
 
 	protected FastaSequence mCorrespondingFastaSequence = null;
 
-	public Gene(String pId,
-							String pName,
-							String pNote,
-							String pOrfClassification,
-							int pStart,
-							int pEnd,
-							String pStrand,
-							int pPhase)
+	public Gene(final String pId,
+							final String pName,
+							final String pNote,
+							final String pOrfClassification,
+							final int pStart,
+							final int pEnd,
+							final String pStrand,
+							final int pPhase)
 	{
 		super();
 		mId = pId;
@@ -41,11 +45,11 @@ public class Gene implements Serializable
 		mPhase = pPhase;
 	}
 
-	public void addAllOboTerms(Set<String> pOboTermStringSet) throws Exception
+	public void addAllOboTerms(final Set<String> pOboTermStringSet) throws Exception
 	{
-		for (String lOboTermString : pOboTermStringSet)
+		for (final String lOboTermString : pOboTermStringSet)
 		{
-			OboTerm lOboTerm = new OboTerm(lOboTermString);
+			final OboTerm lOboTerm = new OboTerm(lOboTermString);
 			mOBOTermSet.add(lOboTerm);
 		}
 	}
@@ -55,7 +59,7 @@ public class Gene implements Serializable
 		return mId;
 	}
 
-	public void setId(String pId)
+	public void setId(final String pId)
 	{
 		mId = pId;
 	}
@@ -70,7 +74,7 @@ public class Gene implements Serializable
 		return mStart;
 	}
 
-	public void setStart(int pStart)
+	public void setStart(final int pStart)
 	{
 		mStart = pStart;
 	}
@@ -80,7 +84,7 @@ public class Gene implements Serializable
 		return mEnd;
 	}
 
-	public void setEnd(int pEnd)
+	public void setEnd(final int pEnd)
 	{
 		mEnd = pEnd;
 	}
@@ -90,7 +94,7 @@ public class Gene implements Serializable
 		return mStrand;
 	}
 
-	public void setStrand(String pStrand)
+	public void setStrand(final String pStrand)
 	{
 		mStrand = pStrand;
 	}
@@ -100,7 +104,7 @@ public class Gene implements Serializable
 		return mPhase;
 	}
 
-	public void setPhase(int pPhase)
+	public void setPhase(final int pPhase)
 	{
 		mPhase = pPhase;
 	}
@@ -111,43 +115,63 @@ public class Gene implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + mEnd;
-		result = prime * result + ((mId == null) ? 0 : mId.hashCode());
+		result = prime * result + (mId == null ? 0 : mId.hashCode());
 		result = prime * result + mPhase;
 		result = prime * result + mStart;
-		result = prime * result + ((mStrand == null) ? 0 : mStrand.hashCode());
+		result = prime * result + (mStrand == null ? 0 : mStrand.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final Gene other = (Gene) obj;
 		if (mEnd != other.mEnd)
+		{
 			return false;
+		}
 		if (mId == null)
 		{
 			if (other.mId != null)
+			{
 				return false;
+			}
 		}
 		else if (!mId.equals(other.mId))
+		{
 			return false;
+		}
 		if (mPhase != other.mPhase)
+		{
 			return false;
+		}
 		if (mStart != other.mStart)
+		{
 			return false;
+		}
 		if (mStrand == null)
 		{
 			if (other.mStrand != null)
+			{
 				return false;
+			}
 		}
 		else if (!mStrand.equals(other.mStrand))
+		{
 			return false;
+		}
 		return true;
 	}
 
@@ -160,13 +184,15 @@ public class Gene implements Serializable
 		 * protected String mStrand; protected int mPhase; protected HashSetMap<String,String>
 		 * mAttributes = new HashSetMap<String, String>();
 		 */
-		StringBuilder lStringBuilder = new StringBuilder();
+		final StringBuilder lStringBuilder = new StringBuilder();
 		// lStringBuilder.append("# SequenceId \t Source \t Type \t Start \t End \t
 		// Score \t Strand \t Phase \t Attributes \n");
 
 		if (mCorrespondingFastaSequence != null)
+		{
 			lStringBuilder.append("# This gene is linked to sequence: " + mCorrespondingFastaSequence.getFastaName()
 														+ "\n");
+		}
 
 		lStringBuilder.append(mId + "\t");
 		lStringBuilder.append(mName + "\t");
@@ -188,7 +214,7 @@ public class Gene implements Serializable
 		return mCorrespondingFastaSequence;
 	}
 
-	public void setCorrespondingFastaSequence(FastaSequence pCorrespondingFastaSequence)
+	public void setCorrespondingFastaSequence(final FastaSequence pCorrespondingFastaSequence)
 	{
 		mCorrespondingFastaSequence = pCorrespondingFastaSequence;
 	}

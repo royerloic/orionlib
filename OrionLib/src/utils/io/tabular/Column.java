@@ -11,7 +11,7 @@ public class Column<O extends Comparable<O>>
 
 	private final Class<O> mClass;
 
-	public Column(Class<O> pClass)
+	public Column(final Class<O> pClass)
 	{
 		mClass = pClass;
 		// TODO Auto-generated constructor stub
@@ -36,7 +36,7 @@ public class Column<O extends Comparable<O>>
 	{
 		if (mClass == Double.class || mClass == Integer.class)
 		{
-			double[] lBucketArray = new double[256];
+			final double[] lBucketArray = new double[256];
 
 			double lMax = Double.NEGATIVE_INFINITY;
 			double lMin = Double.POSITIVE_INFINITY;
@@ -113,22 +113,24 @@ public class Column<O extends Comparable<O>>
 		}
 		else if (mClass == String.class)
 		{
-			TreeSet<String> lSet = new TreeSet<String>();
-			for (Object lObject : mList)
+			final TreeSet<String> lSet = new TreeSet<String>();
+			for (final Object lObject : mList)
 			{
 				lSet.add(lObject.toString());
 				if (lSet.size() > 256)
+				{
 					return;
+				}
 			}
 
-			ArrayList<String> lList = new ArrayList<String>(lSet);
-			HashMap<String, Double> lMap = new HashMap<String, Double>();
+			final ArrayList<String> lList = new ArrayList<String>(lSet);
+			final HashMap<String, Double> lMap = new HashMap<String, Double>();
 
 			if (lSet.size() > 1)
 			{
-				final double lDelta = 1 / (((double) lSet.size()) - 1);
+				final double lDelta = 1 / ((double) lSet.size() - 1);
 				double lPercentileValue = 0;
-				for (String lItem : lList)
+				for (final String lItem : lList)
 				{
 					lMap.put(lItem, lPercentileValue);
 					lPercentileValue += lDelta;
@@ -136,7 +138,7 @@ public class Column<O extends Comparable<O>>
 
 				for (int i = 0; i < mList.size(); i++)
 				{
-					String lValue = (String) mList.get(i);
+					final String lValue = (String) mList.get(i);
 					double lPercentile = lMap.get(lValue);
 					lPercentile = lPercentile > 1 ? 1 : lPercentile;
 					mPercentileList.add(lPercentile);
@@ -152,35 +154,49 @@ public class Column<O extends Comparable<O>>
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mClass == null) ? 0 : mClass.hashCode());
-		result = prime * result + ((mList == null) ? 0 : mList.hashCode());
+		result = prime * result + (mClass == null ? 0 : mClass.hashCode());
+		result = prime * result + (mList == null ? 0 : mList.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final Column other = (Column) obj;
 		if (mClass == null)
 		{
 			if (other.mClass != null)
+			{
 				return false;
+			}
 		}
 		else if (!mClass.equals(other.mClass))
+		{
 			return false;
+		}
 		if (mList == null)
 		{
 			if (other.mList != null)
+			{
 				return false;
+			}
 		}
 		else if (!mList.equals(other.mList))
+		{
 			return false;
+		}
 		return true;
 	}
 

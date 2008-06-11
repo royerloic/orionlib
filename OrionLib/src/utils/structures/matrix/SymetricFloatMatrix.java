@@ -43,7 +43,7 @@ public class SymetricFloatMatrix implements Serializable
 		}
 	}
 
-	public boolean init(int pSize)
+	public boolean init(final int pSize)
 	{
 		mMatrix = new float[pSize][];
 		for (int i = 0; i < pSize; i++)
@@ -53,7 +53,7 @@ public class SymetricFloatMatrix implements Serializable
 		return true;
 	}
 
-	public int getOrCreateIndexFor(Integer pInteger)
+	public int getOrCreateIndexFor(final Integer pInteger)
 	{
 		Integer xi = mIndex2ValMap.getReverse(pInteger);
 		if (xi == null)
@@ -69,9 +69,9 @@ public class SymetricFloatMatrix implements Serializable
 		return xi;
 	}
 
-	public Integer getIndexFor(Integer pInteger)
+	public Integer getIndexFor(final Integer pInteger)
 	{
-		Integer xi = mIndex2ValMap.getReverse(pInteger);
+		final Integer xi = mIndex2ValMap.getReverse(pInteger);
 		return xi;
 	}
 
@@ -80,34 +80,42 @@ public class SymetricFloatMatrix implements Serializable
 		return mMatrix.length;
 	}
 
-	public boolean set(Integer x, Integer y, Float pValue)
+	public boolean set(final Integer x, final Integer y, final Float pValue)
 	{
 		check();
 
-		int xi = getOrCreateIndexFor(x);
-		int yi = getOrCreateIndexFor(y);
+		final int xi = getOrCreateIndexFor(x);
+		final int yi = getOrCreateIndexFor(y);
 
 		if (xi >= yi)
+		{
 			mMatrix[xi][yi] = pValue;
+		}
 		else
+		{
 			mMatrix[yi][xi] = pValue;
+		}
 
 		return true;
 	}
 
-	public float get(Integer x, Integer y)
+	public float get(final Integer x, final Integer y)
 	{
 		check();
 
-		Integer xi = getIndexFor(x);
-		Integer yi = getIndexFor(y);
+		final Integer xi = getIndexFor(x);
+		final Integer yi = getIndexFor(y);
 
 		if (xi != null && yi != null)
 		{
 			if (xi >= yi)
+			{
 				return mMatrix[xi][yi];
+			}
 			else
+			{
 				return mMatrix[yi][xi];
+			}
 		}
 		else
 		{
@@ -115,41 +123,42 @@ public class SymetricFloatMatrix implements Serializable
 		}
 	}
 
-	public ArrayList<Float> get(Integer x, Collection yr)
+	public ArrayList<Float> get(final Integer x, final Collection yr)
 	{
 		check();
-		ArrayList<Float> lColumn = new ArrayList<Float>();
-		for (Object lObject : yr)
+		final ArrayList<Float> lColumn = new ArrayList<Float>();
+		for (final Object lObject : yr)
 		{
-			Integer y = (Integer) lObject;
+			final Integer y = (Integer) lObject;
 			lColumn.add(get(x, y));
 		}
 		return lColumn;
 	}
 
-	public ArrayList<Float> get(Collection xr, Integer y)
+	public ArrayList<Float> get(final Collection xr, final Integer y)
 	{
 		check();
-		ArrayList<Float> lLine = new ArrayList<Float>();
-		for (Object lObject : xr)
+		final ArrayList<Float> lLine = new ArrayList<Float>();
+		for (final Object lObject : xr)
 		{
-			Integer x = (Integer) lObject;
+			final Integer x = (Integer) lObject;
 			lLine.add(get(x, y));
 		}
 		return lLine;
 	}
 
-	public ArrayList<ArrayList<Float>> get(Collection xr, Collection yr)
+	public ArrayList<ArrayList<Float>> get(	final Collection xr,
+																					final Collection yr)
 	{
 		check();
-		ArrayList<ArrayList<Float>> lSubMatrix = new ArrayList<ArrayList<Float>>();
-		for (Object lx : xr)
+		final ArrayList<ArrayList<Float>> lSubMatrix = new ArrayList<ArrayList<Float>>();
+		for (final Object lx : xr)
 		{
-			ArrayList<Float> lColumn = new ArrayList<Float>();
-			for (Object ly : yr)
+			final ArrayList<Float> lColumn = new ArrayList<Float>();
+			for (final Object ly : yr)
 			{
-				Integer x = (Integer) lx;
-				Integer y = (Integer) ly;
+				final Integer x = (Integer) lx;
+				final Integer y = (Integer) ly;
 				lColumn.add(get(x, y));
 			}
 			lSubMatrix.add(lColumn);
@@ -157,41 +166,41 @@ public class SymetricFloatMatrix implements Serializable
 		return lSubMatrix;
 	}
 
-	public ArrayList<ArrayList<Float>> get(int... pList)
+	public ArrayList<ArrayList<Float>> get(final int... pList)
 	{
-		ArrayList<Integer> lList = new ArrayList<Integer>();
-		for (Integer lInteger : pList)
+		final ArrayList<Integer> lList = new ArrayList<Integer>();
+		for (final Integer lInteger : pList)
 		{
 			lList.add(lInteger);
 		}
 		return get(lList);
 	}
 
-	public ArrayList<ArrayList<Float>> get(Collection pIntRange)
+	public ArrayList<ArrayList<Float>> get(final Collection pIntRange)
 	{
-		ArrayList<Integer> lList = new ArrayList<Integer>();
-		for (Object lObject : pIntRange)
+		final ArrayList<Integer> lList = new ArrayList<Integer>();
+		for (final Object lObject : pIntRange)
 		{
-			Integer lInteger = (Integer) lObject;
+			final Integer lInteger = (Integer) lObject;
 			lList.add(lInteger);
 		}
 		return get(lList);
 	}
 
-	public ArrayList<ArrayList<Float>> get(List<Integer> pList)
+	public ArrayList<ArrayList<Float>> get(final List<Integer> pList)
 	{
 		check();
-		ArrayList<ArrayList<Float>> lSubMatrix = new ArrayList<ArrayList<Float>>();
+		final ArrayList<ArrayList<Float>> lSubMatrix = new ArrayList<ArrayList<Float>>();
 
 		for (int i = 0; i < pList.size(); i++)
 		{
-			ArrayList<Float> lColumn = new ArrayList<Float>();
+			final ArrayList<Float> lColumn = new ArrayList<Float>();
 			for (int j = 0; j <= i; j++)
 			{
-				Integer x = pList.get(i);
-				Integer y = pList.get(j);
+				final Integer x = pList.get(i);
+				final Integer y = pList.get(j);
 
-				Float lValue = get(x, y);
+				final Float lValue = get(x, y);
 				lColumn.add(lValue);
 			}
 			lSubMatrix.add(lColumn);
@@ -199,14 +208,14 @@ public class SymetricFloatMatrix implements Serializable
 		return lSubMatrix;
 	}
 
-	public boolean saveToFile(File pFile) throws IOException
+	public boolean saveToFile(final File pFile) throws IOException
 	{
 		FileOutputStream lFileOutputStream = null;
 		ObjectOutputStream lObjectOutputStream = null;
 
 		lFileOutputStream = new FileOutputStream(pFile);
-		BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
-																																					10000000);
+		final BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream,
+																																								10000000);
 		lObjectOutputStream = new ObjectOutputStream(lBufferedOutputStream);
 		lObjectOutputStream.writeObject(this);
 		lObjectOutputStream.close();
@@ -214,14 +223,14 @@ public class SymetricFloatMatrix implements Serializable
 		return true;
 	}
 
-	public boolean loadFromFile(File pFile) throws IOException
+	public boolean loadFromFile(final File pFile) throws IOException
 	{
 		FileInputStream lFileInputStream = null;
 		ObjectInputStream lObjectInputStream = null;
 
 		lFileInputStream = new FileInputStream(pFile);
-		BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
-																																				10000000);
+		final BufferedInputStream lBufferedInputStream = new BufferedInputStream(	lFileInputStream,
+																																							10000000);
 		lObjectInputStream = new ObjectInputStream(lBufferedInputStream);
 		SymetricFloatMatrix lSymetricFloatMatrix;
 		try
@@ -231,7 +240,7 @@ public class SymetricFloatMatrix implements Serializable
 			mIndex2ValMap = lSymetricFloatMatrix.mIndex2ValMap;
 			return true;
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
@@ -241,18 +250,21 @@ public class SymetricFloatMatrix implements Serializable
 
 	private static final Pattern sTabDelPattern = Pattern.compile("\t");
 
-	public boolean loadColumnFromTabDelFile(Integer pColumnInteger, File pFile) throws IOException
+	public boolean loadColumnFromTabDelFile(final Integer pColumnInteger,
+																					final File pFile) throws IOException
 	{
-		Integer x = pColumnInteger;
-		for (String lLine : LineReader.getLines(pFile))
+		final Integer x = pColumnInteger;
+		for (final String lLine : LineReader.getLines(pFile))
+		{
 			if (lLine.length() > 0)
 			{
-				String[] lArray = sTabDelPattern.split(lLine, -1);
-				Integer y = Integer.parseInt(lArray[0]);
-				Float val = Float.parseFloat(lArray[1]);
+				final String[] lArray = sTabDelPattern.split(lLine, -1);
+				final Integer y = Integer.parseInt(lArray[0]);
+				final Float val = Float.parseFloat(lArray[1]);
 
 				set(x, y, val);
 			}
+		}
 		return true;
 	}
 

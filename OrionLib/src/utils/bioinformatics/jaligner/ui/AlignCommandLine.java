@@ -45,7 +45,7 @@ public class AlignCommandLine
 	 * @param args
 	 *          The command line arguments
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		logger.info(Commons.getJAlignerInfo());
 
@@ -60,21 +60,26 @@ public class AlignCommandLine
 				try
 				{
 
-					String f1 = args[0]; // file name of sequence #1
-					String f2 = args[1]; // file name of sequence #1
-					String m = args[2]; // scoring matrix id or file name user-defined
+					final String f1 = args[0]; // file name of sequence #1
+					final String f2 = args[1]; // file name of sequence #1
+					final String m = args[2]; // scoring matrix id or file name
+																		// user-defined
 					// scoring matrix
-					float o = Float.parseFloat(args[3]); // open gap penalty
-					float e = Float.parseFloat(args[4]); // extend gap penalty
+					final float o = Float.parseFloat(args[3]); // open gap penalty
+					final float e = Float.parseFloat(args[4]); // extend gap penalty
 
-					Sequence s1 = SequenceParser.parse(new File(f1));
-					Sequence s2 = SequenceParser.parse(new File(f2));
-					Matrix matrix = MatrixLoader.load(m);
-					Alignment alignment = SmithWatermanGotoh.align(s1, s2, matrix, o, e);
+					final Sequence s1 = SequenceParser.parse(new File(f1));
+					final Sequence s2 = SequenceParser.parse(new File(f2));
+					final Matrix matrix = MatrixLoader.load(m);
+					final Alignment alignment = SmithWatermanGotoh.align(	s1,
+																																s2,
+																																matrix,
+																																o,
+																																e);
 					System.out.println(alignment.getSummary());
 					System.out.println(new Pair().format(alignment));
 				}
-				catch (Exception e)
+				catch (final Exception e)
 				{
 					logger.log(	Level.SEVERE,
 											"Failed processing the command line: " + e.getMessage(),
@@ -97,7 +102,7 @@ public class AlignCommandLine
 	 */
 	private static void printUsage()
 	{
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 		buffer.append("\n");
 		buffer.append("Usage:\n");
 		buffer.append("------\n");

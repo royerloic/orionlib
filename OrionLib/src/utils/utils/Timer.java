@@ -22,7 +22,7 @@ public class Timer
 	 */
 	public String getPrefix()
 	{
-		return name + ((!"".equals(name)) ? ":" : "") + prefix;
+		return name + (!"".equals(name) ? ":" : "") + prefix;
 	}
 
 	/**

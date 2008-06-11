@@ -17,7 +17,9 @@ public class PowerEdgeDump<N>
 	{
 		{
 			if (pFile == null)
+			{
 				throw new IllegalArgumentException("File should not be null.");
+			}
 
 			// declared here only to make visible to finally clause; generic reference
 			Writer lWriter = null;
@@ -49,7 +51,9 @@ public class PowerEdgeDump<N>
 			{
 				// flush and close both "output" and its underlying FileWriter
 				if (lWriter != null)
+				{
 					lWriter.close();
+				}
 			}
 		}
 

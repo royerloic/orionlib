@@ -45,7 +45,7 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 	private static Frame mFrame;
 
-	private DisplayMode mDisplayMode;
+	private final DisplayMode mDisplayMode;
 
 	private MemoryImageSource mMemoryImageSource;
 
@@ -172,7 +172,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
+		{
 			lDevice = lAllGraphicsDevices.length - 1;
+		}
 
 		mGraphicsDevice = lAllGraphicsDevices[lDevice];
 
@@ -271,7 +273,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		final int lScreenHeight = mFrame.getHeight();
 
 		if (lScreenWidth * lScreenHeight != pPixelArray.length)
+		{
 			throw new IllegalArgumentException("Wrong dimension for the Pixel Array.");
+		}
 		final DirectColorModel lColorModel = new DirectColorModel(32,
 																															0x00FF0000,
 																															0x0000FF00,
@@ -316,13 +320,15 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 	public void show()
 	{
 		if (mDisplayFramerate)
+		{
 			displayFrameRate();
+		}
 		mStrategy.show();
 	}
 
 	private void displayFrameRate()
 	{
-		if ((!mTimerStarted) || (mFrameCounter > mMaxFramesForFrameRate))
+		if (!mTimerStarted || mFrameCounter > mMaxFramesForFrameRate)
 		{
 			mTimerStarted = true;
 			mInitialTime = System.currentTimeMillis();
@@ -336,7 +342,7 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				mFrameRate = (mFrameCounter) / (lDeltaInSeconds);
+				mFrameRate = mFrameCounter / lDeltaInSeconds;
 
 				if (mDisplayFramerate)
 				{
@@ -360,7 +366,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 	{
 		double lInterFrameTime = -1;
 		if (mFrameRate != 0)
+		{
 			lInterFrameTime = 1 / mFrameRate;
+		}
 		return lInterFrameTime;
 	}
 
@@ -392,12 +400,20 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
 				mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					if (mMouseInfo.mMouseLeft)
+					{
 						mOrionGraphicsMouseListener.onLeftPress(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseRight)
+					{
 						mOrionGraphicsMouseListener.onRightPress(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseMiddle)
+					{
 						mOrionGraphicsMouseListener.onMiddlePress(mMouseInfo);
+					}
+				}
 
 			}
 
@@ -409,11 +425,17 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 				mMouseInfo.mShift = pMouseEvent.isShiftDown();
 
 				if (SwingUtilities.isLeftMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseLeft = false;
+				}
 				if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseMiddle = false;
+				}
 				if (SwingUtilities.isRightMouseButton(pMouseEvent))
+				{
 					mMouseInfo.mMouseRight = false;
+				}
 			}
 
 			@Override
@@ -429,11 +451,17 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 					mMouseInfo.mMouseMiddle = SwingUtilities.isMiddleMouseButton(pMouseEvent);
 					mMouseInfo.mMouseRight = SwingUtilities.isRightMouseButton(pMouseEvent);/**/
 					if (mMouseInfo.mMouseLeft)
+					{
 						mOrionGraphicsMouseListener.onLeftClick(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseRight)
+					{
 						mOrionGraphicsMouseListener.onRightClick(mMouseInfo);
+					}
 					else if (mMouseInfo.mMouseMiddle)
+					{
 						mOrionGraphicsMouseListener.onMiddleClick(mMouseInfo);
+					}
 				}
 			}
 
@@ -453,7 +481,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseX = pMouseEvent.getX();
 				mMouseInfo.mMouseY = pMouseEvent.getY();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				}
 			}
 
 			@Override
@@ -466,7 +496,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 				mMouseInfo.mMouseX = pMouseEvent.getX();
 				mMouseInfo.mMouseY = pMouseEvent.getY();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onMove(mMouseInfo);
+				}
 			}
 		};
 		mFrame.addMouseMotionListener(mMouseMotionListenerAdapter);
@@ -481,7 +513,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 				mMouseInfo.mMouseDeltaZ = pMouseWheelEvent.getWheelRotation();
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onWheel(mMouseInfo);
+				}
 			}
 		};
 
@@ -494,7 +528,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 			{
 				super.keyTyped(pE);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onKeyTyped(pE);
+				}
 			}
 
 			@Override
@@ -502,7 +538,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 			{
 				super.keyPressed(pE);
 				if (mOrionGraphicsMouseListener != null)
+				{
 					mOrionGraphicsMouseListener.onKeyPressed(pE);
+				}
 			}
 		};
 		mFrame.addKeyListener(mKeyListenerAdapter);
@@ -583,7 +621,9 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 														.getClassLoader()
 														.getResource(mIconFileName);
 			if (lURL == null)
+			{
 				throw new NullPointerException("lURL == null");
+			}
 			new File(lURL.toString());
 			mFrame.setIconImage(lToolkit.getImage(lURL));
 		}

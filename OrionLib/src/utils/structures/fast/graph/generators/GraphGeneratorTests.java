@@ -29,9 +29,9 @@ public class GraphGeneratorTests
 		assertTrue(GraphGenerator	.generateErdosRenyiGraph(mRandom, 100, 0.5)
 															.getNumberOfEdges() > 0);
 		assertTrue(GraphGenerator	.generateErdosRenyiGraph(mRandom, 100, 0.5)
-															.getNumberOfEdges() < (100 * 99) / 2);
+															.getNumberOfEdges() < 100 * 99 / 2);
 		assertTrue(GraphGenerator	.generateErdosRenyiGraph(mRandom, 100, 1)
-															.getNumberOfEdges() == (100 * 99) / 2);
+															.getNumberOfEdges() == 100 * 99 / 2);
 
 	}
 
@@ -40,12 +40,12 @@ public class GraphGeneratorTests
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			double lTargetDensity = mRandom.nextDouble();
-			FastIntegerGraph graph = GraphGenerator.generateErdosRenyiGraph(mRandom,
-																																			1000,
-																																			lTargetDensity);
-			double lEffectiveDensity = graph.getEdgeDensity();
-			double lError = Math.abs((lTargetDensity - lEffectiveDensity) / lTargetDensity);
+			final double lTargetDensity = mRandom.nextDouble();
+			final FastIntegerGraph graph = GraphGenerator.generateErdosRenyiGraph(mRandom,
+																																						1000,
+																																						lTargetDensity);
+			final double lEffectiveDensity = graph.getEdgeDensity();
+			final double lError = Math.abs((lTargetDensity - lEffectiveDensity) / lTargetDensity);
 			System.out.println(lError);
 			assertTrue(lError < 0.05);
 		}
@@ -66,7 +66,7 @@ public class GraphGeneratorTests
 		assertTrue(GraphGenerator	.generateBarabasiAlbertGraph(mRandom, 100, 0.5)
 															.getNumberOfEdges() > 0);
 		assertTrue(GraphGenerator	.generateBarabasiAlbertGraph(mRandom, 100, 0.5)
-															.getNumberOfEdges() < (100 * 99) / 2);
+															.getNumberOfEdges() < 100 * 99 / 2);
 
 	}
 
@@ -75,12 +75,12 @@ public class GraphGeneratorTests
 	{
 		for (double i = 0.; i <= 1; i += 0.05)
 		{
-			double lTargetDensity = i;// mRandom.nextDouble();
-			FastIntegerGraph graph = GraphGenerator.generateBarabasiAlbertGraph(mRandom,
-																																					100,
-																																					lTargetDensity);
-			double lEffectiveDensity = graph.getEdgeDensity();
-			double lError = Math.abs((lTargetDensity - lEffectiveDensity) / lTargetDensity);
+			final double lTargetDensity = i;// mRandom.nextDouble();
+			final FastIntegerGraph graph = GraphGenerator.generateBarabasiAlbertGraph(mRandom,
+																																								100,
+																																								lTargetDensity);
+			final double lEffectiveDensity = graph.getEdgeDensity();
+			final double lError = Math.abs((lTargetDensity - lEffectiveDensity) / lTargetDensity);
 			System.out.println("lTargetDensity=" + lTargetDensity);
 			System.out.println("lEffectiveDensity=" + lEffectiveDensity);
 			System.out.println(lError);

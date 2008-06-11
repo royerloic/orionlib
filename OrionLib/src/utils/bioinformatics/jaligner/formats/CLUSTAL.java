@@ -76,15 +76,15 @@ public class CLUSTAL extends Format
 	 * @param sequences
 	 *          array of the sequences
 	 */
-	public String format(String[] names, String[] sequences)
+	public String format(final String[] names, final String[] sequences)
 	{
-		StringBuffer buffer = new StringBuffer(HEADER);
+		final StringBuffer buffer = new StringBuffer(HEADER);
 		int maxSequenceLength = 0;
-		for (int i = 0; i < sequences.length; i++)
+		for (final String lElement : sequences)
 		{
-			if (sequences[i].length() > maxSequenceLength)
+			if (lElement.length() > maxSequenceLength)
 			{
-				maxSequenceLength = sequences[i].length();
+				maxSequenceLength = lElement.length();
 			}
 		}
 
@@ -105,8 +105,8 @@ public class CLUSTAL extends Format
 					buffer.append(" ");
 				}
 				buffer.append(sequences[j].substring(	i * SEQUENCE_WIDTH,
-																							((i + 1) * SEQUENCE_WIDTH) < sequences[j].length() ? (i + 1) * SEQUENCE_WIDTH
-																																																: sequences[j].length()));
+																							(i + 1) * SEQUENCE_WIDTH < sequences[j].length() ? (i + 1) * SEQUENCE_WIDTH
+																																															: sequences[j].length()));
 				if (j < sequences.length)
 				{
 					buffer.append("\n");
@@ -128,12 +128,12 @@ public class CLUSTAL extends Format
 	 * @return CLUSTAL format of the alignment
 	 */
 	@Override
-	public String format(Alignment alignment)
+	public String format(final Alignment alignment)
 	{
-		String[] sequences =
+		final String[] sequences =
 		{ new String(alignment.getSequence1()),
 			new String(alignment.getSequence2()) };
-		String[] names =
+		final String[] names =
 		{ alignment.getName1(), alignment.getName2() };
 		return format(names, sequences);
 	}

@@ -21,8 +21,8 @@ public class PowerGraphToConfidence<N>
 {
 
 	final PowerGraph<N> mPowerGraph;
-	private int mTotalNumberOfEdges;
-	private int mMaximalPowerEdgeSize;
+	private final int mTotalNumberOfEdges;
+	private final int mMaximalPowerEdgeSize;
 
 	public PowerGraphToConfidence(final PowerGraph<N> pPowerGraph)
 	{
@@ -39,15 +39,23 @@ public class PowerGraphToConfidence<N>
 
 		double lSize = 0;
 		for (final Set<N> lSet1 : lSetList1)
+		{
 			for (final Set<N> lSet2 : lSetList2)
 			{
 				final boolean isPowerEdge = this.mPowerGraph.isPowerEdge(lSet1, lSet2);
 				if (isPowerEdge)
+				{
 					if (lSet1.equals(lSet2))
+					{
 						lSize += lSet1.size() * (lSet1.size() - 1) / 2;
+					}
 					else
+					{
 						lSize += lSet1.size() * lSet2.size();
+					}
+				}
 			}
+		}
 
 		final double lConfidence = lSize / this.mMaximalPowerEdgeSize;
 
@@ -76,8 +84,11 @@ public class PowerGraphToConfidence<N>
 		final Matrix<String> lMatrix = new ArrayMatrix<String>();
 
 		for (final Edge<Set<N>> lPowerEdge : this.mPowerGraph.getPowerEdgeSet())
+		{
 			for (final N lNode1 : lPowerEdge.getFirstNode())
+			{
 				for (final N lNode2 : lPowerEdge.getSecondNode())
+				{
 					if (!lNode1.equals(lNode2))
 					{
 						final Double lConfidence = getConfidence(lNode1, lNode2);
@@ -88,6 +99,9 @@ public class PowerGraphToConfidence<N>
 						lList.add(lConfidence.toString());
 						lMatrix.add(lList);
 					}
+				}
+			}
+		}
 
 		MatrixFile.writeMatrixToFile(lMatrix, pFile);
 	}
@@ -108,6 +122,7 @@ public class PowerGraphToConfidence<N>
 		final Map<Edge<String>, Double> lMap2 = new HashMap<Edge<String>, Double>();
 
 		for (final List<String> lList : lMatrix1)
+		{
 			try
 			{
 				final String lNode1 = lList.get(pIndices1[0]);
@@ -120,8 +135,10 @@ public class PowerGraphToConfidence<N>
 			{
 				lThrowable.printStackTrace();
 			}
+		}
 
 		for (final List<String> lList : lMatrix2)
+		{
 			try
 			{
 				final String lNode1 = lList.get(pIndices2[0]);
@@ -134,6 +151,7 @@ public class PowerGraphToConfidence<N>
 			{
 				lThrowable.printStackTrace();
 			}
+		}
 
 		final Matrix<String> lResultMatrix = new ArrayMatrix<String>();
 

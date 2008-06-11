@@ -77,7 +77,9 @@ public class MessageBox extends JDialog implements ActionListener
 		lPanel.setLayout(new FlowLayout());
 		createOKButton(lPanel);
 		if (pOkCancelButtons)
+		{
 			createCancelButton(lPanel);
+		}
 		getContentPane().add("South", lPanel);
 	}
 

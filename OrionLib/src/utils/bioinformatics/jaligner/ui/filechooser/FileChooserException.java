@@ -35,7 +35,7 @@ public class FileChooserException extends Exception
 	/**
 	 * @param message
 	 */
-	public FileChooserException(String message)
+	public FileChooserException(final String message)
 	{
 		super(message);
 	}

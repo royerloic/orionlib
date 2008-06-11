@@ -32,44 +32,56 @@ public class uniform
 	/**
 	 * density of the uniform distribution.
 	 */
-	public static double density(double x, double a, double b)
+	public static double density(final double x, final double a, final double b)
 	{
 		if (Double.isNaN(x) || Double.isNaN(a) || Double.isNaN(b))
+		{
 			return x + a + b;
+		}
 		if (b <= a)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (a <= x && x <= b)
+		{
 			return 1.0 / (b - a);
+		}
 		return 0.0;
 	}
 
 	/**
 	 * distribution function of the uniform distribution.
 	 */
-	public static double cumulative(double x, double a, double b)
+	public static double cumulative(final double x, final double a, final double b)
 	{
 		if (Double.isNaN(x) || Double.isNaN(a) || Double.isNaN(b))
+		{
 			return x + a + b;
+		}
 		if (b <= a)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (x <= a)
+		{
 			return 0.0;
+		}
 		if (x >= b)
+		{
 			return 1.0;
+		}
 		return (x - a) / (b - a);
 	}
 
 	/**
 	 * quantile function of the uniform distribution.
 	 */
-	public static double quantile(double x, double a, double b)
+	public static double quantile(final double x, final double a, final double b)
 	{
 		if (Double.isNaN(x) || Double.isNaN(a) || Double.isNaN(b))
+		{
 			return x + a + b;
+		}
 		if (b <= a || x < 0 || x > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -80,16 +92,20 @@ public class uniform
 	/**
 	 * Random variates from the uniform distribution.
 	 */
-	public static double random(double a, double b)
+	public static double random(final double a, final double b)
 	{
 		if (Double.isInfinite(a) || Double.isInfinite(b) || b < a)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (a == b)
+		{
 			return a;
+		}
 		else
+		{
 			return a + (b - a) * random();
+		}
 	}
 
 	/**

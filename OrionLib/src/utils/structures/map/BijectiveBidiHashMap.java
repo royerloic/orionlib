@@ -31,24 +31,24 @@ public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>	implements
 	@Override
 	public Object clone()
 	{
-		BijectiveBidiHashMap<K, V> lMap = new BijectiveBidiHashMap<K, V>();
+		final BijectiveBidiHashMap<K, V> lMap = new BijectiveBidiHashMap<K, V>();
 		lMap.putAll(this);
 		return lMap;
 	}
 
 	@Override
-	public boolean containsValue(Object pValue)
+	public boolean containsValue(final Object pValue)
 	{
 		return mReverseHashMap.containsKey(pValue);
 	}
 
-	public K getReverse(V pValue)
+	public K getReverse(final V pValue)
 	{
 		return mReverseHashMap.get(pValue);
 	}
 
 	@Override
-	public V put(K pKey, V pValue)
+	public V put(final K pKey, final V pValue)
 	{
 		if (mReverseHashMap.containsValue(pValue))
 		{
@@ -59,16 +59,16 @@ public class BijectiveBidiHashMap<K, V> extends HashMap<K, V>	implements
 	}
 
 	@Override
-	public void putAll(Map<? extends K, ? extends V> pM)
+	public void putAll(final Map<? extends K, ? extends V> pM)
 	{
-		for (Map.Entry<? extends K, ? extends V> lEntry : pM.entrySet())
+		for (final Map.Entry<? extends K, ? extends V> lEntry : pM.entrySet())
 		{
 			this.put(lEntry.getKey(), lEntry.getValue());
 		}
 	}
 
 	@Override
-	public V remove(Object pKey)
+	public V remove(final Object pKey)
 	{
 		mReverseHashMap.remove(super.get(pKey));
 		return super.remove(pKey);

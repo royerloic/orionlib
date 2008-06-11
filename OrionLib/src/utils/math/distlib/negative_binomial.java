@@ -37,11 +37,13 @@ public class negative_binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double n, double p)
+	public static double density(double x, double n, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		/* !* #endif /*4! */
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
@@ -53,10 +55,14 @@ public class negative_binomial
 			// return Double.NaN;
 		}
 		if (x < 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 0;
+		}
 		/* !* #endif /*4! */
 		/* !* return exp(lfastchoose(x + n - 1, x) *! */
 		return java.lang.Math.exp(misc.lfastchoose(x + n - 1, x)
@@ -96,11 +102,13 @@ public class negative_binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double n, double p)
+	public static double cumulative(double x, double n, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		if (Double.isInfinite(n) || Double.isInfinite(p))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -117,10 +125,14 @@ public class negative_binomial
 			// return Double.NaN;
 		}
 		if (x < 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 1;
+		}
 		/* !* #endif /*4! */
 		return beta.cumulative(p, n, x + 1);
 	}
@@ -164,13 +176,15 @@ public class negative_binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double n, double p)
+	public static double quantile(final double x, double n, final double p)
 	{
 		double P, Q, mu, sigma, gamma, z, y;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		if (Double.isInfinite(x))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -185,10 +199,14 @@ public class negative_binomial
 			// return Double.NaN;
 		}
 		if (x == 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* #endif /*4! */
 		Q = 1.0 / p;
 		P = (1.0 - p) * Q;
@@ -211,7 +229,9 @@ public class negative_binomial
 			for (;;)
 			{
 				if ((z = cumulative(y - 1, n, p)) < x)
+				{
 					return y;
+				}
 				y = y - 1;
 			}
 		}
@@ -223,7 +243,9 @@ public class negative_binomial
 			for (;;)
 			{
 				if ((z = cumulative(y + 1, n, p)) >= x)
+				{
 					return y + 1;
+				}
 				y = y + 1;
 			}
 		}
@@ -271,7 +293,7 @@ public class negative_binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double n, double p, uniform PRNG)
+	public static double random(double n, final double p, final uniform PRNG)
 	{
 		/* !* n = floor(n + 0.5); *! */
 		n = java.lang.Math.floor(n + 0.5);

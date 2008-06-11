@@ -11,6 +11,11 @@ public class Range implements
 									Iterable<Integer>,
 									Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// because in Java int are signed, we need to restrict the length of ranges
 	// otherwise overflows happen.
 	public static final int cMaxRangeLength = Integer.MAX_VALUE / 2;
@@ -23,7 +28,7 @@ public class Range implements
 	 * 
 	 * @param id
 	 */
-	public Range(int pPosition)
+	public Range(final int pPosition)
 	{
 		mRangeStart = pPosition;
 		mRangeEnd = pPosition + 1;
@@ -198,8 +203,11 @@ public class Range implements
 	{
 		final int otherStart = otherRange.getStart();
 		final int otherEnd = otherRange.getEnd();
-		return ((mRangeStart <= otherStart) && (otherStart < mRangeEnd)) || ((mRangeStart < otherEnd) && (otherEnd <= mRangeEnd))
-						|| ((otherStart < mRangeStart) && (mRangeEnd < otherEnd));
+		return mRangeStart <= otherStart && otherStart < mRangeEnd
+						|| mRangeStart < otherEnd
+						&& otherEnd <= mRangeEnd
+						|| otherStart < mRangeStart
+						&& mRangeEnd < otherEnd;
 	}
 
 	/**
@@ -214,7 +222,7 @@ public class Range implements
 	{
 		final int otherStart = otherRange.getStart();
 		final int otherEnd = otherRange.getEnd();
-		return ((mRangeStart == otherEnd) || (mRangeEnd == otherStart));
+		return mRangeStart == otherEnd || mRangeEnd == otherStart;
 	}
 
 	/**
@@ -224,7 +232,7 @@ public class Range implements
 	 */
 	public final boolean isContiguousPosition(final int i)
 	{
-		return (mRangeStart - 1 <= i) && (i <= mRangeEnd);
+		return mRangeStart - 1 <= i && i <= mRangeEnd;
 	}
 
 	/**
@@ -297,7 +305,7 @@ public class Range implements
 	 */
 	public final boolean isInside(final Range otherRange)
 	{
-		return (mRangeStart <= otherRange.getStart()) && (mRangeEnd >= otherRange.getEnd());
+		return mRangeStart <= otherRange.getStart() && mRangeEnd >= otherRange.getEnd();
 	}
 
 	/**
@@ -306,18 +314,18 @@ public class Range implements
 	 */
 	public final boolean isInside(final int pos)
 	{
-		return (mRangeStart <= pos) && (mRangeEnd > pos);
+		return mRangeStart <= pos && mRangeEnd > pos;
 	}
 
 	@Override
 	public final String toString()
 	{
-		return "[" + mRangeStart + "(" + (length()) + ")]";
+		return "[" + mRangeStart + "(" + length() + ")]";
 	}
 
-	public boolean equals(int pAbsoluteStart, int pAbsoluteEnd)
+	public boolean equals(final int pAbsoluteStart, final int pAbsoluteEnd)
 	{
-		return (mRangeStart == pAbsoluteStart) && (mRangeEnd == pAbsoluteEnd);
+		return mRangeStart == pAbsoluteStart && mRangeEnd == pAbsoluteEnd;
 	}
 
 	/**
@@ -335,7 +343,7 @@ public class Range implements
 		{
 			return false;
 		}
-		return (mRangeStart == ((Range) range).mRangeStart) && (mRangeEnd == ((Range) range).mRangeEnd);
+		return mRangeStart == ((Range) range).mRangeStart && mRangeEnd == ((Range) range).mRangeEnd;
 	}
 
 	@Override

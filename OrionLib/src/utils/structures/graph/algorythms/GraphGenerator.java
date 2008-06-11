@@ -40,11 +40,16 @@ public class GraphGenerator
 			final Set<Node> lDomainSet = new HashSet<Node>();
 			lDomainList.add(i, lDomainSet);
 			for (final Node lDomainNode : pDomainGraph.getNodeSet())
+			{
 				if (pRandom.nextDouble() < pDomainProbability)
+				{
 					lDomainSet.add(lDomainNode);
+				}
+			}
 		}
 
 		for (int i = 0; i < lNodeList.size(); i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final Node lNode1 = lNodeList.get(i);
@@ -54,10 +59,17 @@ public class GraphGenerator
 				final Set<Node> lDomainSet1 = lDomainList.get(i);
 				final Set<Node> lDomainSet2 = lDomainList.get(j);
 				for (final Node lDomain1 : lDomainSet1)
+				{
 					for (final Node lDomain2 : lDomainSet2)
+					{
 						if (pDomainGraph.isEdge(lDomain1, lDomain2))
+						{
 							lGraph.addEdge(new UndirectedEdge<Node>(lNode1, lNode2));
+						}
+					}
+				}
 			}
+		}
 		return lGraph;
 	}
 
@@ -74,13 +86,17 @@ public class GraphGenerator
 			lGraph.addNode(lNode);
 		}
 		for (int i = 0; i < lNodeList.size(); i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final Node lNode1 = lNodeList.get(i);
 				final Node lNode2 = lNodeList.get(j);
 				if (pRandom.nextDouble() < pEdgeProbability)
+				{
 					lGraph.addEdge(new UndirectedEdge<Node>(lNode1, lNode2));
+				}
 			}
+		}
 		return lGraph;
 	}
 
@@ -126,7 +142,9 @@ public class GraphGenerator
 		}
 
 		if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
+		{
 			throw new RuntimeException("Not Average Degree invariant!" + (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
+		}
 
 		return lGraph;
 	}
@@ -158,6 +176,7 @@ public class GraphGenerator
 																																				pReconnectionProbability,
 																																				lNeighboursSet2);
 					for (final Node lReconnectedNode : lReconnectionList)
+					{
 						if (!lGraph.isEdge(lBait, lReconnectedNode))
 						{
 							lGraph.removeEdge(lReconnectedNode, lNeighbour);
@@ -166,18 +185,25 @@ public class GraphGenerator
 
 							// System.out.println("reconnecting");
 						}
+					}
 				}
 			}
 
 			if (lGraph.getNumberOfEdges() != pGraph.getNumberOfEdges())
+			{
 				throw new RuntimeException("Not Average Degree invariant! :" + (lGraph.getNumberOfEdges() - pGraph.getNumberOfEdges()));
+			}
 
 			if (lGraph.equals(pGraph))
+			{
 				System.out.println("Graph was not changed!");
+			}
 			// throw new RuntimeException("Graph was not changed!");
 			lCounter++;
 			if (lCounter > 10)
+			{
 				break;
+			}
 		}
 		while (lGraph.equals(pGraph));
 
@@ -199,21 +225,31 @@ public class GraphGenerator
 		final List<Node> lNewNodeList = new ArrayList<Node>();
 
 		for (final Node lNode : lOriginalNodeList)
+		{
 			if (pRandom.nextDouble() < pSamplingRate)
+			{
 				lNewNodeList.add(lNode);
+			}
+		}
 
 		for (final Node lNode : lNewNodeList)
+		{
 			lGraph.addNode(lNode);
+		}
 
 		for (int i = 0; i < lNewNodeList.size(); i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final Node lNode1 = lNewNodeList.get(i);
 				final Node lNode2 = lNewNodeList.get(j);
 
 				if (pGraph.isEdge(lNode1, lNode2))
+				{
 					lGraph.addEdge(new UndirectedEdge<Node>(lNode1, lNode2));
+				}
 			}
+		}
 		return lGraph;
 	}
 
@@ -226,15 +262,17 @@ public class GraphGenerator
 		int lCounter = 0;
 		if (pNumberOfNodes > 0)
 		{
-			final Node lFirstNode = new Node("node" + (lCounter++));
+			final Node lFirstNode = new Node("node" + lCounter++);
 			lGraph.addNode(lFirstNode);
 
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
+			{
 				addNodePreferentialAttachement(	pRandom,
 																				lGraph,
 																				lCounter++,
 																				pAverageDegree / 2,
 																				pExponent);
+			}
 
 		}
 		return lGraph;
@@ -253,7 +291,9 @@ public class GraphGenerator
 
 		double lTotal = 0;
 		for (final Node lNode : lNodeList)
+		{
 			lTotal += pGraph.getNodeNeighbours(lNode).size();
+		}
 
 		if (lTotal == 0)
 		{
@@ -266,7 +306,7 @@ public class GraphGenerator
 			final DistributionSource<Node> lDistributionSource = new DistributionSource<Node>();
 			for (final Node lNode : lNodeList)
 			{
-				double lProbability = ((pGraph.getNodeNeighbours(lNode).size()) / lTotal);
+				double lProbability = pGraph.getNodeNeighbours(lNode).size() / lTotal;
 				lProbability = Math.pow(lProbability, pExponent);
 				lDistributionSource.addObject(lNode, lProbability);
 			}
@@ -301,14 +341,16 @@ public class GraphGenerator
 		int lCounter = 0;
 		if (pNumberOfNodes > 0)
 		{
-			final Node lFirstNode = new Node("node" + (lCounter++));
+			final Node lFirstNode = new Node("node" + lCounter++);
 			lGraph.addNode(lFirstNode);
 			Node lCurrentNode = lFirstNode;
 
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
 			{
 				for (int i = 0; i < pRandom.nextInt(pNumberOfNodes); i++)
+				{
 					lCurrentNode = oneStep(pRandom, lGraph, lCurrentNode);
+				}
 				addNodeAndConnect(lGraph, lCurrentNode, lCounter++);
 			}
 
@@ -322,7 +364,9 @@ public class GraphGenerator
 	{
 		final Set<Node> lNodeSet = pGraph.getNodeNeighbours(pNode);
 		if (lNodeSet.isEmpty())
+		{
 			return pNode;
+		}
 		else
 		{
 			final Node[] lNodeArray = lNodeSet.toArray(new Node[lNodeSet.size()]);
@@ -355,22 +399,28 @@ public class GraphGenerator
 			while (lGraph.getNumberOfNodes() < pNumberOfNodes)
 			{
 				for (int i = 0; i < pRandom.nextInt(pNumberOfNodes); i++)
+				{
 					lCurrentNode = oneStep(pRandom, lGraph, lCurrentNode);
+				}
 
 				final Set<Node> lNodeSet = lGraph.getNodeNeighbours(lCurrentNode);
 
 				if (lNodeSet.isEmpty())
+				{
 					addNodeAndConnect(lGraph, lCurrentNode, lCounter);
+				}
 				else
 				{
 					final Node lNewNode = new Node("node" + lCounter);
 					double lTotal = 0;
 					for (final Node lNode : lNodeSet)
+					{
 						lTotal += lGraph.getNodeNeighbours(lNode).size();
+					}
 
 					for (final Node lNode : lNodeSet)
 					{
-						double lProbability = ((lGraph.getNodeNeighbours(lNode).size()) / lTotal);
+						double lProbability = lGraph.getNodeNeighbours(lNode).size() / lTotal;
 						lProbability = Math.pow(lProbability, pParameter);
 						if (pRandom.nextDouble() < lProbability)
 						{
@@ -415,11 +465,13 @@ public class GraphGenerator
 					lGraph.addNode(lNewNode);
 					lCounter++;
 					for (final Node lNode : lNodeSet)
+					{
 						if (pRandom.nextDouble() < pCopyProbability)
 						{
 							final Edge<Node> lEdge = new UndirectedEdge<Node>(lNewNode, lNode);
 							lGraph.addEdge(lEdge);
 						}
+					}
 				}
 				System.out.print(".");
 			}
@@ -447,6 +499,7 @@ public class GraphGenerator
 		}
 
 		for (int i = 0; i < pNumberOfNodes; i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final double[] lVector1 = lVectorArray[i];
@@ -460,6 +513,7 @@ public class GraphGenerator
 					lGraph.addEdge(lEdge);
 				}
 			}
+		}
 
 		return lGraph;
 	}
@@ -469,7 +523,9 @@ public class GraphGenerator
 	{
 		final double[] lVector = new double[pDimension];
 		for (int i = 0; i < pDimension; i++)
+		{
 			lVector[i] = pRandom.nextDouble();
+		}
 		return lVector;
 	}
 
@@ -480,8 +536,8 @@ public class GraphGenerator
 		double lSum = 0;
 		for (int i = 0; i < lLength; i++)
 		{
-			final double lFirst = (i < pVector1.length) ? pVector1[i] : 0;
-			final double lSecond = (i < pVector2.length) ? pVector2[i] : 0;
+			final double lFirst = i < pVector1.length ? pVector1[i] : 0;
+			final double lSecond = i < pVector2.length ? pVector2[i] : 0;
 			lSum += (lFirst - lSecond) * (lFirst - lSecond);
 		}
 		final double lDistance = Math.sqrt(lSum);

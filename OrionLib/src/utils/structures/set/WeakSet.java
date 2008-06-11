@@ -62,7 +62,9 @@ public class WeakSet<K> implements Set<K>
 	public boolean addAll(final Collection<? extends K> c)
 	{
 		for (final K k : c)
+		{
 			this.mWeakHashMap.put(k, null);
+		}
 		return true;
 	}
 
@@ -72,7 +74,9 @@ public class WeakSet<K> implements Set<K>
 		{
 			final K lK = lEntry.getKey();
 			if (!c.contains(lK))
+			{
 				remove(lK);
+			}
 		}
 		return true;
 	}
@@ -80,7 +84,9 @@ public class WeakSet<K> implements Set<K>
 	public boolean removeAll(final Collection<?> c)
 	{
 		for (final Object k : c)
+		{
 			this.mWeakHashMap.remove(k);
+		}
 		return true;
 	}
 
