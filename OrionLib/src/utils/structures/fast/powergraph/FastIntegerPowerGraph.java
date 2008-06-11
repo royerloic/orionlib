@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import utils.structures.fast.graph.Edge;
 import utils.structures.fast.graph.FastIntegerDirectedGraph;
 import utils.structures.fast.graph.FastIntegerGraph;
 import utils.structures.fast.set.FastBoundedIntegerSet;
@@ -286,6 +287,12 @@ public class FastIntegerPowerGraph
 			}
 
 		return lAllPowerNodeNeighbors;
+	}
+	
+	
+	public ArrayList<int[]> getPowerEdgeList()
+	{
+		return mPowerEgdesGraph.getIntPairList();
 	}
 
 	@Override

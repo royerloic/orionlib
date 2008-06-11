@@ -1,4 +1,4 @@
-package utils.structures.fast.powergraph.test;
+package utils.structures.fast.powergraph.algorythms.test;
 
 import static org.junit.Assert.fail;
 
@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import utils.structures.fast.powergraph.PowerGraphSpectrum;
+import utils.structures.fast.powergraph.algorythms.PowerGraphSpectrum;
 
 /**
  */

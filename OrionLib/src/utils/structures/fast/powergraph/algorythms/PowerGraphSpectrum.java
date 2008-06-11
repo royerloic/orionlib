@@ -1,4 +1,4 @@
-package utils.structures.fast.powergraph;
+package utils.structures.fast.powergraph.algorythms;
 
 import java.io.BufferedReader;
 import java.io.File;
