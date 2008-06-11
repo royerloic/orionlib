@@ -397,14 +397,14 @@ public class RangeTest
 	{
 		Assert.assertEquals(drsame.hashCode(), dr.hashCode());
 		// equivalent to: dr1.equals(dr) -> drsame.hashCode()==dr.hashCode()
-		Assert.assertTrue(!dr1.equals(dr) || (drsame.hashCode() == dr.hashCode()));
+		Assert.assertTrue(!dr1.equals(dr) || drsame.hashCode() == dr.hashCode());
 	}
 
 	/** A Test. */
 	@Test
 	public void testCompare()
 	{
-		List<Range> lList = new ArrayList<Range>();
+		final List<Range> lList = new ArrayList<Range>();
 		lList.add(Range.constructRangeWithStartEnd(2, 4));
 		lList.add(Range.constructRangeWithStartEnd(1, 4));
 		lList.add(Range.constructRangeWithStartEnd(1, 2));

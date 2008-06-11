@@ -18,11 +18,13 @@ public class FastIntegerList implements
 	private int[] elements;
 	private int size;
 
-	public FastIntegerList(int initialCapacity)
+	public FastIntegerList(final int initialCapacity)
 	{
 		super();
 		if (initialCapacity < 0)
+		{
 			throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+		}
 		this.elements = new int[initialCapacity];
 	}
 
@@ -31,19 +33,19 @@ public class FastIntegerList implements
 		this(10);
 	}
 
-	public FastIntegerList(int... pIntArray)
+	public FastIntegerList(final int... pIntArray)
 	{
 		elements = pIntArray;
 		size = elements.length;
 	}
 
-	public FastIntegerList(int[] pElements, int pSize)
+	public FastIntegerList(final int[] pElements, final int pSize)
 	{
 		elements = pElements;
 		size = pSize;
 	}
 
-	public FastIntegerList(FastIntegerList pFastIntegerList)
+	public FastIntegerList(final FastIntegerList pFastIntegerList)
 	{
 		size = pFastIntegerList.size;
 		elements = Arrays.copyOf(pFastIntegerList.elements, size);
@@ -65,14 +67,16 @@ public class FastIntegerList implements
 	 * @param minCapacity
 	 *          the desired minimum capacity
 	 */
-	public final void ensureCapacity(int minCapacity)
+	public final void ensureCapacity(final int minCapacity)
 	{
 		final int oldCapacity = elements.length;
 		if (minCapacity > oldCapacity)
 		{
-			int newCapacity = (oldCapacity * 3) / 2 + 1;
+			int newCapacity = oldCapacity * 3 / 2 + 1;
 			if (newCapacity < minCapacity)
+			{
 				newCapacity = minCapacity;
+			}
 			// minCapacity is usually close to size, so this is a win:
 			elements = Arrays.copyOf(elements, newCapacity);
 		}
@@ -88,11 +92,15 @@ public class FastIntegerList implements
 		return size == 0;
 	}
 
-	public final boolean contains(int o)
+	public final boolean contains(final int o)
 	{
 		for (int i = 0; i < size; i++)
+		{
 			if (o == elements[i])
+			{
 				return true;
+			}
+		}
 		return false;
 	}
 
@@ -103,11 +111,15 @@ public class FastIntegerList implements
 	 * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
 	 * or -1 if there is no such index.
 	 */
-	public final int indexOf(int o)
+	public final int indexOf(final int o)
 	{
 		for (int i = 0; i < size; i++)
+		{
 			if (o == elements[i])
+			{
 				return i;
+			}
+		}
 		return -1;
 	}
 
@@ -118,37 +130,41 @@ public class FastIntegerList implements
 	 * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>,
 	 * or -1 if there is no such index.
 	 */
-	public final int lastIndexOf(int o)
+	public final int lastIndexOf(final int o)
 	{
 		{
 			for (int i = size - 1; i >= 0; i--)
+			{
 				if (o == elements[i])
+				{
 					return i;
+				}
+			}
 		}
 		return -1;
 	}
 
 	// Positional Access Operations
 
-	public final int get(int index)
+	public final int get(final int index)
 	{
 		rangeCheck(index);
 		return elements[index];
 	}
 
-	public final void set(int index, int element)
+	public final void set(final int index, final int element)
 	{
 		rangeCheck(index);
 		elements[index] = element;
 	}
 
-	public void add(int e)
+	public void add(final int e)
 	{
 		ensureCapacity(size + 1);
 		elements[size++] = e;
 	}
 
-	public void addAt(int index, int element)
+	public void addAt(final int index, final int element)
 	{
 		rangeCheck(index);
 		ensureCapacity(size + 1); // Increments modCount!!
@@ -157,27 +173,31 @@ public class FastIntegerList implements
 		size++;
 	}
 
-	public void removeAt(int index)
+	public void removeAt(final int index)
 	{
 		rangeCheck(index);
-		int numMoved = size - index - 1;
+		final int numMoved = size - index - 1;
 		if (numMoved > 0)
+		{
 			System.arraycopy(elements, index + 1, elements, index, numMoved);
+		}
 		size--;
 	}
 
-	public boolean del(int o)
+	public boolean del(final int o)
 	{
 		for (int index = 0; index < size; index++)
+		{
 			if (o == elements[index])
 			{
 				removeAt(index);
 				return true;
 			}
+		}
 		return false;
 	}
 
-	public boolean addAll(FastIntegerList pFastIntegerList)
+	public boolean addAll(final FastIntegerList pFastIntegerList)
 	{
 		ensureCapacity(size + pFastIntegerList.size);
 		System.arraycopy(	pFastIntegerList.elements,
@@ -215,10 +235,12 @@ public class FastIntegerList implements
 	 * It is always used immediately prior to an array access, which throws an
 	 * ArrayIndexOutOfBoundsException if index is negative.
 	 */
-	private final void rangeCheck(int index)
+	private final void rangeCheck(final int index)
 	{
 		if (index >= size || size < 0)
+		{
 			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+		}
 	}
 
 	@Override
@@ -227,35 +249,53 @@ public class FastIntegerList implements
 		final int prime = 31;
 		int result = 1;
 		for (int i = 0; i < size; i++)
+		{
 			result = prime * result + elements[i];
+		}
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final FastIntegerList other = (FastIntegerList) obj;
 
 		if (size != other.size)
+		{
 			return false;
+		}
 
 		{
 			final int[] a1 = this.elements;
 			final int[] a2 = other.elements;
 			if (a1 == a2)
+			{
 				return true;
+			}
 			if (a1 == null || a2 == null)
+			{
 				return false;
+			}
 
 			for (int i = 0; i < size; i++)
+			{
 				if (a1[i] != a2[i])
+				{
 					return false;
+				}
+			}
 
 			return true;
 		}
@@ -270,7 +310,7 @@ public class FastIntegerList implements
 		}
 		else
 		{
-			StringBuilder lStringBuilder = new StringBuilder();
+			final StringBuilder lStringBuilder = new StringBuilder();
 			lStringBuilder.append("[");
 			for (int i = 0; i < size; i++)
 			{
@@ -293,48 +333,54 @@ public class FastIntegerList implements
 
 	public FastSparseIntegerSet getSet()
 	{
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(elements,
-																																					size);
+		final FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(elements,
+																																								size);
 		return lFastSparseIntegerSet;
 	}
 
 	// *************************************************************
 	// Methods implementing interfaces
 
-	public boolean add(Integer pE)
+	public boolean add(final Integer pE)
 	{
 		add((int) pE);
 		return true;
 	}
 
-	public boolean addAll(Collection<? extends Integer> c)
+	public boolean addAll(final Collection<? extends Integer> c)
 	{
-		Integer[] a = (Integer[]) c.toArray();
+		final Integer[] a = (Integer[]) c.toArray();
 		final int numNew = a.length;
 		ensureCapacity(size + numNew); // Increments modCount
 		System.arraycopy(a, 0, elements, size, numNew);
 		for (int i = 0; i < numNew; i++)
+		{
 			elements[i] = a[size + i];
+		}
 		size += numNew;
 		return numNew != 0;
 	}
 
-	public boolean contains(Object pO)
+	public boolean contains(final Object pO)
 	{
-		return contains((int) ((Integer) pO));
+		return contains((int) (Integer) pO);
 	}
 
-	public boolean containsAll(Collection<?> pC)
+	public boolean containsAll(final Collection<?> pC)
 	{
-		for (Object element : pC)
+		for (final Object element : pC)
+		{
 			if (!contains(element))
+			{
 				return false;
+			}
+		}
 		return true;
 	}
 
 	public Iterator<Integer> iterator()
 	{
-		Iterator<Integer> lIterator = new Iterator<Integer>()
+		final Iterator<Integer> lIterator = new Iterator<Integer>()
 		{
 			int mPosition = 0;
 
@@ -346,7 +392,9 @@ public class FastIntegerList implements
 			public Integer next()
 			{
 				if (hasNext())
+				{
 					mPosition++;
+				}
 				return elements[mPosition];
 			}
 
@@ -358,40 +406,46 @@ public class FastIntegerList implements
 		return lIterator;
 	}
 
-	public boolean remove(Object pO)
+	public boolean remove(final Object pO)
 	{
-		del((int) ((Integer) pO));
+		del((Integer) pO);
 		return true;
 	}
 
-	public boolean removeAll(Collection<?> pC)
+	public boolean removeAll(final Collection<?> pC)
 	{
 		boolean haschanged = false;
-		for (Object element : pC)
-			haschanged |= del((int) ((Integer) element));
+		for (final Object element : pC)
+		{
+			haschanged |= del((Integer) element);
+		}
 		return haschanged;
 	}
 
-	public boolean retainAll(Collection<?> pC)
+	public boolean retainAll(final Collection<?> pC)
 	{
-		boolean haschanged = false;
-		for (int element : elements)
+		final boolean haschanged = false;
+		for (final int element : elements)
+		{
 			if (!pC.contains(element))
+			{
 				del(element);
+			}
+		}
 		return haschanged;
 	}
 
 	public Object[] toArray()
 	{
-		Integer[] lArray = new Integer[size];
+		final Integer[] lArray = new Integer[size];
 		for (int i = 0; i < size; i++)
 		{
-			lArray[i] = (Integer) elements[i];
+			lArray[i] = elements[i];
 		}
 		return lArray;
 	}
 
-	public <T> T[] toArray(T[] pA)
+	public <T> T[] toArray(final T[] pA)
 	{
 		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
 	}

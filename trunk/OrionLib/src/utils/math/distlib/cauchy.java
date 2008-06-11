@@ -34,13 +34,17 @@ public class cauchy
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double location, double scale)
+	public static double density(	final double x,
+																final double location,
+																final double scale)
 	{
 		double y;
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		/* !* #endif /*4! */
 		if (scale <= 0)
 		{
@@ -80,11 +84,15 @@ public class cauchy
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double location, double scale)
+	public static double cumulative(double x,
+																	final double location,
+																	final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		/* !* #endif /*4! */
 		if (scale <= 0)
 		{
@@ -96,9 +104,13 @@ public class cauchy
 		if (Double.isInfinite(x))
 		{
 			if (x < 0)
+			{
 				return 0;
+			}
 			else
+			{
 				return 1;
+			}
 		}
 		/* !* #endif /*4! */
 		/* !* return 0.5 + atan(x) / Constants.M_PI; *! */
@@ -134,11 +146,15 @@ public class cauchy
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double location, double scale)
+	public static double quantile(final double x,
+																final double location,
+																final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
+		{
 			return x + location + scale;
+		}
 		if (Double.isInfinite(x) || Double.isInfinite(location)
 				|| Double.isInfinite(scale))
 		{
@@ -184,7 +200,9 @@ public class cauchy
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double location, double scale, uniform PRNG)
+	public static double random(final double location,
+															final double scale,
+															final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */

@@ -33,11 +33,13 @@ public class geometric
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double p)
+	public static double density(double x, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
+		{
 			return x + p;
+		}
 		/* !* #endif /*4! */
 		if (p <= 0 || p >= 1)
 		{
@@ -47,10 +49,14 @@ public class geometric
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 1;
+		}
 		/* !* #endif /*4! */
 		/* !* return p * pow(1 - p, x); *! */
 		return p * java.lang.Math.pow(1 - p, x);
@@ -84,11 +90,13 @@ public class geometric
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double p)
+	public static double cumulative(double x, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
+		{
 			return x + p;
+		}
 		/* !* #endif /*4! */
 		/* !* x = floor(x); *! */
 		x = java.lang.Math.floor(x);
@@ -98,10 +106,14 @@ public class geometric
 			// return Double.NaN;
 		}
 		if (x < 0.0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 1;
+		}
 		/* !* #endif /*4! */
 		/* !* return 1 - pow(1 - p, x + 1); *! */
 		return 1 - java.lang.Math.pow(1 - p, x + 1);
@@ -135,18 +147,22 @@ public class geometric
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double p)
+	public static double quantile(final double x, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
+		{
 			return x + p;
+		}
 		if (x < 0 || x > 1 || p <= 0 || p > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* #else /*4! */
 		if (x < 0 || x >= 1 || p <= 0 || p > 1)
 		{
@@ -155,7 +171,9 @@ public class geometric
 		}
 		/* !* #endif /*4! */
 		if (x == 0)
+		{
 			return 0;
+		}
 		/* !* return ceil(log(1 - x) / log(1.0 - p) - 1); *! */
 		return java.lang.Math.ceil(java.lang.Math.log(1 - x) / java.lang.Math.log(1.0 - p)
 																- 1);
@@ -200,7 +218,7 @@ public class geometric
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double p, uniform PRNG)
+	public static double random(final double p, final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */
@@ -211,6 +229,6 @@ public class geometric
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		return poisson.random(exponential.random(PRNG) * ((1 - p) / p), PRNG);
+		return poisson.random(exponential.random(PRNG) * (1 - p) / p, PRNG);
 	}
 }

@@ -13,13 +13,13 @@ public class SuperDuper implements StdUniformRng
 {
 
 	private int i1_seed;
-	private int[] i_seed;
+	private final int[] i_seed;
 
 	static private double i2_32m1 = 2.328306437080797e-10; /* = 1/(2^32 - 1) */
 
-	static private int do32bits(int N)
+	static private int do32bits(final int N)
 	{
-		return (N);
+		return N;
 	}
 
 	public SuperDuper()
@@ -32,18 +32,22 @@ public class SuperDuper implements StdUniformRng
 	public void fixupSeeds()
 	{
 		if (i1_seed == 0)
+		{
 			i1_seed++;
+		}
 		for (int j = 0; j < i_seed.length; j++)
 		{
 			if (i_seed[j] == 0)
+			{
 				i_seed[j]++;
+			}
 		}
 		i_seed[0] |= 1; // seed must be odd
 	}
 
 	public double random()
 	{
-		i1_seed ^= ((i1_seed >> 15) & 0377777); /* Tausworthe */
+		i1_seed ^= i1_seed >> 15 & 0377777; /* Tausworthe */
 		i1_seed ^= do32bits(i1_seed << 17);
 		i_seed[0] *= 69069; /* Congruential */
 		i_seed[0] = do32bits(69069 * i_seed[0]);

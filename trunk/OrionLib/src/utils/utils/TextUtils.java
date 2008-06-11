@@ -15,31 +15,43 @@ public class TextUtils
 		String lFirstSentence = pString;
 		final int lFirstPoint = pString.indexOf('.');
 		if (lFirstPoint > pMinimalSentenceSize)
+		{
 			lFirstSentence = pString.substring(0, lFirstPoint + 1);
+		}
 		else
 		{
 			final int lFirstSemiColon = pString.indexOf(';');
 			if (lFirstSemiColon > pMinimalSentenceSize)
+			{
 				lFirstSentence = pString.substring(0, lFirstSemiColon + 1);
+			}
 			else
 			{
 				final int lFirstComa = pString.indexOf(',');
 				if (lFirstComa > pMinimalSentenceSize)
+				{
 					lFirstSentence = pString.substring(0, lFirstComa + 1);
+				}
 				else
 				{
 					final int lFirstNewLine = pString.indexOf('\n');
 					if (lFirstNewLine > pMinimalSentenceSize)
+					{
 						lFirstSentence = pString.substring(0, lFirstNewLine + 1);
+					}
 				}
 			}
 		}
 
 		if (lFirstSentence.length() > pMaxSentenceSize)
+		{
 			lFirstSentence = lFirstSentence.substring(0, pMaxSentenceSize);
+		}
 
 		if (lFirstSentence.length() < pString.length())
+		{
 			lFirstSentence += "(...)";
+		}
 
 		return lFirstSentence;
 	}
@@ -58,11 +70,15 @@ public class TextUtils
 			lSentenceCounter++;
 			lFirstSentences += lSentence + ".";
 			if (lSentenceCounter >= pNumberOfSentences)
+			{
 				break;
+			}
 		}
 
 		if (lFirstSentences.length() < pString.length())
+		{
 			lFirstSentences += "(...)";
+		}
 
 		return lFirstSentences;
 	}

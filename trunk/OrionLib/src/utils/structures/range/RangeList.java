@@ -20,7 +20,7 @@ public class RangeList
 		mList = new ArrayList<Range>();
 	}
 
-	public RangeList(List<Range> pList)
+	public RangeList(final List<Range> pList)
 	{
 		super();
 		mList = pList;

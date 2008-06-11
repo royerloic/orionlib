@@ -195,7 +195,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 														+ "(?:\\W|$)");
 	}
 
-	private String wrapAroundGroup(String pRegex)
+	private String wrapAroundGroup(final String pRegex)
 	{
 		/***************************************************************************
 		 * if(!(pRegex.startsWith("(?:") && pRegex.endsWith(""))) {/
@@ -221,7 +221,7 @@ public class RegexCompiler implements Iterable<Pair<String>>
 
 			public Pair<String> next()
 			{
-				Map.Entry<String, String> lEntry = mIterator.next();
+				final Map.Entry<String, String> lEntry = mIterator.next();
 				return new Pair<String>(lEntry.getKey(), lEntry.getValue());
 			}
 

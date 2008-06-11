@@ -86,14 +86,22 @@ public class PubMedAccess
 			final String text = resultset.getString("abstract_text");
 
 			if (title != null)
+			{
 				res = title.trim();
+			}
 
 			// add the text to the full citation
 			if (text != null)
+			{
 				if (res.endsWith(".") || res.endsWith("?") || res.endsWith("!"))
+				{
 					res += " " + text;
+				}
 				else
+				{
 					res += ". " + text;
+				}
+			}
 
 		}
 		catch (final java.sql.SQLException sqle)
@@ -112,7 +120,9 @@ public class PubMedAccess
 			try
 			{
 				if (resultset != null)
+				{
 					resultset.close();
+				}
 			}
 			catch (final Exception e)
 			{
@@ -141,7 +151,9 @@ public class PubMedAccess
 	{
 
 		for (int i = 0; i < 1000; i++)
+		{
 			System.out.println(getRandomAbstract());
+		}
 	}
 
 }

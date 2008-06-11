@@ -114,7 +114,7 @@ public class RegexPatterns
 
 	public static boolean isAbbreviationType2(final CharSequence pCharSequence)
 	{
-		return StringUtils.matches(pCharSequence, sAbbreviationPatternType2) && ((StringUtils.countUpperCase(pCharSequence) + StringUtils.countDigits(pCharSequence)) > pCharSequence.length() / 4);
+		return StringUtils.matches(pCharSequence, sAbbreviationPatternType2) && StringUtils.countUpperCase(pCharSequence) + StringUtils.countDigits(pCharSequence) > pCharSequence.length() / 4;
 	}
 
 	public static boolean isAbbreviationType3(final CharSequence pCharSequence)
@@ -122,12 +122,14 @@ public class RegexPatterns
 		final String[] lTokenArray = StringUtils.split(pCharSequence, "\\W+", 0);
 		boolean isAbbreviationType3 = true;
 		for (final String lToken : lTokenArray)
+		{
 			isAbbreviationType3 &= isAbbreviationType1(lToken) || isAbbreviationType2(lToken)
 															|| isNumber(lToken);
+		}
 		return isAbbreviationType3;
 	}
 
-	private static boolean isNumber(String pToken)
+	private static boolean isNumber(final String pToken)
 	{
 		return StringUtils.matches(pToken, "[0-9]+");
 	}
@@ -167,12 +169,18 @@ public class RegexPatterns
 	public static boolean isGarbage(final CharSequence pCharSequence)
 	{
 		if (StringUtils.submatches(pCharSequence, "(H|h)ypothetical"))
+		{
 			return true;
+		}
 		else if (StringUtils.submatches(pCharSequence,
 																		"(C|c)hromosome.*(O|o)pen\\W+(R|r)eading\\W+(F|f)rame"))
+		{
 			return true;
+		}
 		else if (StringUtils.submatches(pCharSequence, "pseudogene"))
+		{
 			return true;
+		}
 		return false;
 	}
 

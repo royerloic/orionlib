@@ -10,17 +10,17 @@ public class RingList<O>
 
 	int mCursor = 0;
 
-	public RingList(List<O> pList)
+	public RingList(final List<O> pList)
 	{
 		super();
 		mList = pList;
 	}
 
-	public RingList(O[] pValues)
+	public RingList(final O[] pValues)
 	{
 		super();
 		mList = new ArrayList<O>();
-		for (O lO : pValues)
+		for (final O lO : pValues)
 		{
 			mList.add(lO);
 		}
@@ -30,7 +30,7 @@ public class RingList<O>
 	{
 	}
 
-	public void setList(List<O> pList)
+	public void setList(final List<O> pList)
 	{
 		mList = pList;
 	}
@@ -58,9 +58,13 @@ public class RingList<O>
 		if (!mList.isEmpty())
 		{
 			if (mCursor == 0)
+			{
 				mCursor = mList.size() - 1;
+			}
 			else
+			{
 				mCursor--;
+			}
 
 			return mList.get(mCursor);
 		}
@@ -88,36 +92,48 @@ public class RingList<O>
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + mCursor;
-		result = prime * result + ((mList == null) ? 0 : mList.hashCode());
+		result = prime * result + (mList == null ? 0 : mList.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final RingList other = (RingList) obj;
 		if (mCursor != other.mCursor)
+		{
 			return false;
+		}
 		if (mList == null)
 		{
 			if (other.mList != null)
+			{
 				return false;
+			}
 		}
 		else if (!mList.equals(other.mList))
+		{
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString()
 	{
-		O lO = get();
+		final O lO = get();
 		if (lO != null)
 		{
 			return get().toString();

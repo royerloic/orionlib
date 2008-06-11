@@ -13,6 +13,10 @@ public class HashGraph<N, E extends Edge<N>>	implements
 																							Graph<N, E>,
 																							Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Set<N> mNodeSet;
 	private Set<E> mEdgeSet;
 	private SetMap<N, N> mNodeToFrontNeighboursSetMap;
@@ -59,9 +63,13 @@ public class HashGraph<N, E extends Edge<N>>	implements
 	public void addGraph(final Graph<N, E> pGraph)
 	{
 		for (final N lNode : pGraph.getNodeSet())
+		{
 			addNode(lNode);
+		}
 		for (final E lEdge : pGraph.getEdgeSet())
+		{
 			addEdge(lEdge);
+		}
 	}
 
 	public void removeNode(final N pNode)
@@ -70,24 +78,36 @@ public class HashGraph<N, E extends Edge<N>>	implements
 		{
 			final Set<N> lFrontNeighboursNodeSet = this.mNodeToFrontNeighboursSetMap.get(pNode);
 			if (lFrontNeighboursNodeSet != null)
+			{
 				for (final N lNode : lFrontNeighboursNodeSet)
+				{
 					if (!lNode.equals(pNode))
 					{
 						final Set<N> lNodeSet = this.mNodeToBackNeighboursSetMap.get(lNode);
 						if (lNodeSet != null)
+						{
 							lNodeSet.remove(pNode);
+						}
 					}
+				}
+			}
 			this.mNodeToFrontNeighboursSetMap.remove(pNode);
 
 			final Set<N> lBackNeighboursNodeSet = this.mNodeToBackNeighboursSetMap.get(pNode);
 			if (lBackNeighboursNodeSet != null)
+			{
 				for (final N lNode : lBackNeighboursNodeSet)
+				{
 					if (!lNode.equals(pNode))
 					{
 						final Set<N> lNodeSet = this.mNodeToFrontNeighboursSetMap.get(lNode);
 						if (lNodeSet != null)
+						{
 							lNodeSet.remove(pNode);
+						}
 					}
+				}
+			}
 			this.mNodeToBackNeighboursSetMap.remove(pNode);
 
 			Set<E> lDeletedEdgeSet = this.mNodeToEdgeSetMap.get(pNode);
@@ -102,13 +122,16 @@ public class HashGraph<N, E extends Edge<N>>	implements
 	public void removeAllNodes(final Set<N> pNodeSet)
 	{
 		for (final N lNode : pNodeSet)
+		{
 			removeNode(lNode);
+		}
 	}
 
 	public void removeEdge(final N pFirstNode, final N pSecondNode)
 	{
 		final Set<E> lCandidateEdgeList = this.mNodeToEdgeSetMap.get(pFirstNode);
 		for (final E lEdge : lCandidateEdgeList)
+		{
 			if (lEdge.getFirstNode().equals(pFirstNode) && lEdge.getSecondNode()
 																													.equals(pSecondNode))
 			{
@@ -123,6 +146,7 @@ public class HashGraph<N, E extends Edge<N>>	implements
 				this.mNodeToEdgeSetMap.get(lSecondNode).remove(lEdge);
 				break;
 			}
+		}
 
 	}
 
@@ -152,9 +176,13 @@ public class HashGraph<N, E extends Edge<N>>	implements
 		final Set<N> lSetFront = this.mNodeToFrontNeighboursSetMap.get(pNode);
 		final Set<N> lSetBack = this.mNodeToBackNeighboursSetMap.get(pNode);
 		if (lSetFront != null)
+		{
 			lSet.addAll(lSetFront);
+		}
 		if (lSetBack != null)
+		{
 			lSet.addAll(lSetBack);
+		}
 		return lSet;
 	}
 
@@ -185,13 +213,19 @@ public class HashGraph<N, E extends Edge<N>>	implements
 	public Set<N> getNodeNeighbours(final N pNode, final int pDepth)
 	{
 		if (pDepth < 1)
+		{
 			return Collections.<N> emptySet();
+		}
 		if (pDepth == 1)
+		{
 			return getNodeNeighbours(pNode);
+		}
 
 		final Set<N> lNodeSet = new HashSet<N>();
 		for (final N lNode : getNodeNeighbours(pNode))
+		{
 			lNodeSet.addAll(getNodeNeighbours(lNode, pDepth - 1));
+		}
 		lNodeSet.addAll(getNodeNeighbours(pNode));
 		lNodeSet.remove(pNode);
 		return lNodeSet;
@@ -259,7 +293,8 @@ public class HashGraph<N, E extends Edge<N>>	implements
 		if (pObj instanceof HashGraph)
 		{
 			final HashGraph<N, E> lGraph = (HashGraph<N, E>) pObj;
-			return (lGraph.getEdgeSet().equals(getEdgeSet())) && (lGraph.getNodeSet().equals(getNodeSet()));
+			return lGraph.getEdgeSet().equals(getEdgeSet()) && lGraph	.getNodeSet()
+																																.equals(getNodeSet());
 		}
 		return false;
 	}
@@ -281,7 +316,7 @@ public class HashGraph<N, E extends Edge<N>>	implements
 
 	public Double getAverageDegree()
 	{
-		return ((double) 2 * getNumberOfEdges()) / getNumberOfNodes();
+		return (double) 2 * getNumberOfEdges() / getNumberOfNodes();
 	}
 
 }

@@ -35,13 +35,17 @@ public class lognormal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double logmean, double logsd)
+	public static double density(	final double x,
+																final double logmean,
+																final double logsd)
 	{
 		double y;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
+		{
 			return x + logmean + logsd;
+		}
 		/* !* #endif /*4! */
 		if (logsd <= 0)
 		{
@@ -49,7 +53,9 @@ public class lognormal
 			// return Double.NaN;
 		}
 		if (x == 0)
+		{
 			return 0;
+		}
 		/* !* y = (log(x) - logmean) / logsd; *! */
 		y = (java.lang.Math.log(x) - logmean) / logsd;
 		/* !* return Constants.M_1_SQRT_2PI * exp(-0.5 * y * y) / (x * logsd); *! */
@@ -86,11 +92,15 @@ public class lognormal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double logmean, double logsd)
+	public static double cumulative(final double x,
+																	final double logmean,
+																	final double logsd)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
+		{
 			return x + logmean + logsd;
+		}
 		/* !* #endif /*4! */
 		if (logsd <= 0)
 		{
@@ -98,8 +108,10 @@ public class lognormal
 			// return Double.NaN;
 		}
 		if (x > 0)
+		{
 			/* !* return normal.cumulative!!!COMMENT!!!(log(x), logmean, logsd); *! */
 			return normal.cumulative(java.lang.Math.log(x), logmean, logsd);
+		}
 		return 0;
 	}
 
@@ -132,11 +144,15 @@ public class lognormal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double logmean, double logsd)
+	public static double quantile(final double x,
+																final double logmean,
+																final double logsd)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
+		{
 			return x + logmean + logsd;
+		}
 		/* !* #endif /*4! */
 		if (x < 0 || x > 1 || logsd <= 0)
 		{
@@ -144,10 +160,14 @@ public class lognormal
 			// return Double.NaN;
 		}
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* if (x > 0) return exp(qnorm(x, logmean, logsd)); *! */
 		if (x > 0)
+		{
 			return java.lang.Math.exp(normal.quantile(x, logmean, logsd));
+		}
 		return 0;
 	}
 
@@ -179,7 +199,9 @@ public class lognormal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double logmean, double logsd, uniform PRNG)
+	public static double random(final double logmean,
+															final double logsd,
+															final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */

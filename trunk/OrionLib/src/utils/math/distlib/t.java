@@ -33,11 +33,13 @@ public class t
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double n)
+	public static double density(final double x, final double n)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
+		{
 			return x + n;
+		}
 		/* !* #endif /*4! */
 		if (n <= 0.0)
 		{
@@ -46,9 +48,13 @@ public class t
 		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 0;
+		}
 		if (Double.isInfinite(n))
+		{
 			return normal.density(x, 0.0, 1.0);
+		}
 		/* !* #endif /*4! */
 		/* !* return pow(1.0 + x * x / n, -0.5 * (n + 1.0)) *! */
 		return java.lang.Math.pow(1.0 + x * x / n, -0.5 * (n + 1.0))
@@ -77,12 +83,14 @@ public class t
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double n)
+	public static double cumulative(final double x, final double n)
 	{
 		double val;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
+		{
 			return x + n;
+		}
 		/* !* #endif /*4! */
 		if (n <= 0.0)
 		{
@@ -91,12 +99,16 @@ public class t
 		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
-			return (x < 0) ? 0 : 1;
+		{
+			return x < 0 ? 0 : 1;
+		}
 		if (Double.isInfinite(n))
+		{
 			return normal.cumulative(x, 0.0, 1.0);
+		}
 		/* !* #endif /*4! */
 		val = 0.5 * beta.cumulative(n / (n + x * x), n / 2.0, 0.5);
-		return (x > 0.0) ? 1 - val : val;
+		return x > 0.0 ? 1 - val : val;
 	}
 
 	/*
@@ -134,23 +146,29 @@ public class t
 
 	static private double eps = 1.e-12;
 
-	public static double quantile(double p, double ndf)
+	public static double quantile(final double p, final double ndf)
 	{
 		double a, b, c, d, prob, P, q, x, y;
 		boolean neg;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(ndf))
+		{
 			return p + ndf;
+		}
 		if (ndf < 1 || p > 1 || p < 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
 		if (p == 0)
+		{
 			return Double.NEGATIVE_INFINITY;
+		}
 		if (p == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* #else /*4! */
 		if (ndf < 1 || p > 1 || p < 0)
 		{
@@ -159,7 +177,9 @@ public class t
 		}
 		/* !* #endif /*4! */
 		if (ndf > 1e20)
+		{
 			return normal.quantile(p, 0.0, 1.0);
+		}
 
 		if (p > 0.5)
 		{
@@ -207,13 +227,17 @@ public class t
 				x = normal.quantile(0.5 * P, 0.0, 1.0);
 				y = x * x;
 				if (ndf < 5)
+				{
 					c = c + 0.3 * (ndf - 4.5) * (x + 0.6);
+				}
 				c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;
 				y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1) * x;
 				y = a * y * y;
 				if (y > 0.002)
+				{
 					/* !* y = exp(y) - 1; *! */
 					y = java.lang.Math.exp(y) - 1;
+				}
 				else
 				{
 					/* Taylor of e^y -1 : */
@@ -231,7 +255,9 @@ public class t
 			q = java.lang.Math.sqrt(ndf * y);
 		}
 		if (neg)
+		{
 			q = -q;
+		}
 		return q;
 	}
 
@@ -267,7 +293,7 @@ public class t
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double df, uniform PRNG)
+	public static double random(final double df, final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */
@@ -278,10 +304,14 @@ public class t
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 		if (Double.isInfinite(df))
+		{
 			return normal.random(PRNG);
+		}
 		else
+		{
 			/* !* return normal.random!!!COMMENT!!!() / sqrt(rchisq(df) / df); *! */
 			return normal.random(PRNG) / java.lang.Math.sqrt(chisquare.random(df,
 																																				PRNG) / df);
+		}
 	}
 }

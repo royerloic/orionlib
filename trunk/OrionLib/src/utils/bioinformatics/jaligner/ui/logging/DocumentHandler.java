@@ -51,12 +51,12 @@ public class DocumentHandler extends Handler
 	 * 
 	 * @param textPane
 	 */
-	public DocumentHandler(JTextPane textPane)
+	public DocumentHandler(final JTextPane textPane)
 	{
 		this.textPane = textPane;
 		setFormatter(new RecordFormatter());
 
-		StyledDocument document = (StyledDocument) this.textPane.getDocument();
+		final StyledDocument document = (StyledDocument) this.textPane.getDocument();
 
 		infoStyle = document.addStyle("INFO", null);
 		StyleConstants.setFontFamily(infoStyle, "Monospaced");
@@ -89,7 +89,7 @@ public class DocumentHandler extends Handler
 	 * 
 	 */
 	@Override
-	public void publish(LogRecord record)
+	public void publish(final LogRecord record)
 	{
 		if (!isLoggable(record))
 		{
@@ -102,7 +102,7 @@ public class DocumentHandler extends Handler
 		{
 			message = getFormatter().format(record);
 		}
-		catch (Exception exception)
+		catch (final Exception exception)
 		{
 			reportError(null, exception, ErrorManager.FORMAT_FAILURE);
 			return;
@@ -134,7 +134,7 @@ public class DocumentHandler extends Handler
 				}
 				textPane.setCaretPosition(textPane.getDocument().getLength());
 			}
-			catch (Exception ex)
+			catch (final Exception ex)
 			{
 				reportError(null, ex, ErrorManager.WRITE_FAILURE);
 			}

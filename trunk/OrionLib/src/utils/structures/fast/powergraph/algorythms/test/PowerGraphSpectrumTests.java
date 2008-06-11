@@ -22,14 +22,14 @@ public class PowerGraphSpectrumTests
 		{
 
 			{
-				InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("hprd.bbl");
+				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("hprd.bbl");
 				System.out.println("hprd.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
 			}
 
 			{
-				InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.bbl");
-				InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.rewired.bbl");
+				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.bbl");
+				final InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.rewired.bbl");
 				System.out.println("Gavin.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
 				System.out.println("Gavin.rewired.bbl");
@@ -37,20 +37,20 @@ public class PowerGraphSpectrumTests
 			}
 
 			{
-				InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.bbl");
-				InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.rewired.bbl");
+				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.bbl");
+				final InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.rewired.bbl");
 				System.out.println("Lacount.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
 				System.out.println("Lacount.rewired.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStreamRewired);
 			}
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			e.printStackTrace();
 			fail();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 			fail();

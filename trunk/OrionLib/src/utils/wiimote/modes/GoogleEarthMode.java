@@ -32,27 +32,27 @@ public class GoogleEarthMode extends WiiRemoteAdapter implements WiiMode
 		return mGoogleEarthModeItem;
 	}
 
-	public void activate(WiiRemote pRemote)
+	public void activate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.addWiiRemoteListener(this);
 			pRemote.setAccelerometerEnabled(true);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public void deactivate(WiiRemote pRemote)
+	public void deactivate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.removeWiiRemoteListener(this);
 			pRemote.setAccelerometerEnabled(false);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class GoogleEarthMode extends WiiRemoteAdapter implements WiiMode
 	double xdd = 0;
 	double zdd = 0;
 
-	public void accelerationInputReceived(WRAccelerationEvent pEvent)
+	public void accelerationInputReceived(final WRAccelerationEvent pEvent)
 	{
 		final double epsilon = 0.05;
 		final double zeta = 0.15;
@@ -158,69 +158,69 @@ public class GoogleEarthMode extends WiiRemoteAdapter implements WiiMode
 	boolean isMinusPressed = false;
 	boolean isPlusPressed = false;
 
-	public void buttonInputReceived(WRButtonEvent pEvent)
+	public void buttonInputReceived(final WRButtonEvent pEvent)
 	{
 		isApressed = pEvent.isPressed(WRButtonEvent.A);
 		isBpressed = pEvent.isPressed(WRButtonEvent.B);
 
-		if (!isDownPressed && (pEvent.wasPressed(WRButtonEvent.DOWN)))
+		if (!isDownPressed && pEvent.wasPressed(WRButtonEvent.DOWN))
 		{
 			isDownPressed = true;
 			mRobot.keyPress(KeyEvent.VK_DOWN);
 		}
-		else if (!isUpPressed && (pEvent.wasPressed(WRButtonEvent.UP)))
+		else if (!isUpPressed && pEvent.wasPressed(WRButtonEvent.UP))
 		{
 			isUpPressed = true;
 			mRobot.keyPress(KeyEvent.VK_UP);
 		}
-		else if (isDownPressed && (pEvent.wasReleased(WRButtonEvent.DOWN)))
+		else if (isDownPressed && pEvent.wasReleased(WRButtonEvent.DOWN))
 		{
 			isDownPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_DOWN);
 		}
-		else if (isUpPressed && (pEvent.wasReleased(WRButtonEvent.UP)))
+		else if (isUpPressed && pEvent.wasReleased(WRButtonEvent.UP))
 		{
 			isUpPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_UP);
 		}
 
-		if (!isRightPressed && (pEvent.wasPressed(WRButtonEvent.RIGHT)))
+		if (!isRightPressed && pEvent.wasPressed(WRButtonEvent.RIGHT))
 		{
 			isRightPressed = true;
 			mRobot.keyPress(KeyEvent.VK_RIGHT);
 		}
-		else if (!isLeftPressed && (pEvent.wasPressed(WRButtonEvent.LEFT)))
+		else if (!isLeftPressed && pEvent.wasPressed(WRButtonEvent.LEFT))
 		{
 			isLeftPressed = true;
 			mRobot.keyPress(KeyEvent.VK_LEFT);
 		}
-		else if (isRightPressed && (pEvent.wasReleased(WRButtonEvent.RIGHT)))
+		else if (isRightPressed && pEvent.wasReleased(WRButtonEvent.RIGHT))
 		{
 			isRightPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_RIGHT);
 		}
-		else if (isLeftPressed && (pEvent.wasReleased(WRButtonEvent.LEFT)))
+		else if (isLeftPressed && pEvent.wasReleased(WRButtonEvent.LEFT))
 		{
 			isLeftPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_LEFT);
 		}
 
-		if (!isMinusPressed && (pEvent.wasPressed(WRButtonEvent.MINUS)))
+		if (!isMinusPressed && pEvent.wasPressed(WRButtonEvent.MINUS))
 		{
 			isMinusPressed = true;
 			mRobot.keyPress(KeyEvent.VK_PAGE_DOWN);
 		}
-		else if (!isPlusPressed && (pEvent.wasPressed(WRButtonEvent.PLUS)))
+		else if (!isPlusPressed && pEvent.wasPressed(WRButtonEvent.PLUS))
 		{
 			isPlusPressed = true;
 			mRobot.keyPress(KeyEvent.VK_PAGE_UP);
 		}
-		else if (isMinusPressed && (pEvent.wasReleased(WRButtonEvent.MINUS)))
+		else if (isMinusPressed && pEvent.wasReleased(WRButtonEvent.MINUS))
 		{
 			isMinusPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_PAGE_DOWN);
 		}
-		else if (isPlusPressed && (pEvent.wasReleased(WRButtonEvent.PLUS)))
+		else if (isPlusPressed && pEvent.wasReleased(WRButtonEvent.PLUS))
 		{
 			isPlusPressed = false;
 			mRobot.keyRelease(KeyEvent.VK_PAGE_UP);

@@ -77,7 +77,7 @@ public class MatrixLoader
 	 * @throws MatrixLoaderException
 	 * @see Matrix
 	 */
-	public static Matrix load(String matrix) throws MatrixLoaderException
+	public static Matrix load(final String matrix) throws MatrixLoaderException
 	{
 		InputStream is = null;
 
@@ -96,9 +96,9 @@ public class MatrixLoader
 			{
 				is = new FileInputStream(matrix);
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
-				String message = "Failed opening input stream: " + e.getMessage();
+				final String message = "Failed opening input stream: " + e.getMessage();
 				logger.log(Level.SEVERE, message, e);
 				throw new MatrixLoaderException(message);
 			}
@@ -117,10 +117,10 @@ public class MatrixLoader
 	 * @see Matrix
 	 * @see NamedInputStream
 	 */
-	public static Matrix load(NamedInputStream nis) throws MatrixLoaderException
+	public static Matrix load(final NamedInputStream nis) throws MatrixLoaderException
 	{
 		logger.info("Loading scoring matrix...");
-		char[] acids = new char[SIZE];
+		final char[] acids = new char[SIZE];
 
 		// Initialize the acids array to null values (ascii = 0)
 		for (int i = 0; i < SIZE; i++)
@@ -128,9 +128,9 @@ public class MatrixLoader
 			acids[i] = 0;
 		}
 
-		float[][] scores = new float[SIZE][SIZE];
+		final float[][] scores = new float[SIZE][SIZE];
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(nis.getInputStream()));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(nis.getInputStream()));
 
 		String line;
 
@@ -138,11 +138,13 @@ public class MatrixLoader
 		{
 			// Skip the comment lines
 			while ((line = reader.readLine()) != null && line.trim().charAt(0) == COMMENT_STARTER)
+			{
 				;
+			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed reading from input stream: " + e.getMessage();
+			final String message = "Failed reading from input stream: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			throw new MatrixLoaderException(message);
 		}
@@ -161,7 +163,7 @@ public class MatrixLoader
 			while ((line = reader.readLine()) != null)
 			{
 				tokenizer = new StringTokenizer(line.trim());
-				char acid = tokenizer.nextToken().charAt(0);
+				final char acid = tokenizer.nextToken().charAt(0);
 				for (int i = 0; i < SIZE; i++)
 				{
 					if (acids[i] != 0)
@@ -171,9 +173,9 @@ public class MatrixLoader
 				}
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed reading from input stream: " + e.getMessage();
+			final String message = "Failed reading from input stream: " + e.getMessage();
 			logger.log(Level.SEVERE, message, e);
 			throw new MatrixLoaderException(message);
 		}
@@ -189,11 +191,12 @@ public class MatrixLoader
 	 * @return sorted array of scoring matrices
 	 * @throws MatrixLoaderException
 	 */
-	public static Collection list(boolean sort) throws MatrixLoaderException
+	public static Collection list(final boolean sort) throws MatrixLoaderException
 	{
 		logger.info("Loading list of scoring matrices...");
-		ArrayList matrices = new ArrayList();
-		URL url = MatrixLoader.class.getClassLoader().getResource(MATRICES_HOME);
+		final ArrayList matrices = new ArrayList();
+		final URL url = MatrixLoader.class.getClassLoader()
+																			.getResource(MATRICES_HOME);
 		if (url.getFile().toString().indexOf("!") != -1)
 		{
 			// Load from Jar
@@ -204,16 +207,16 @@ public class MatrixLoader
 				connection = (JarURLConnection) url.openConnection();
 				jar = connection.getJarFile();
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
-				String message = "Failed opening a connection to jar: " + e.getMessage();
+				final String message = "Failed opening a connection to jar: " + e.getMessage();
 				logger.log(Level.SEVERE, message, e);
 				throw new MatrixLoaderException(message);
 			}
-			Enumeration entries = jar.entries();
+			final Enumeration entries = jar.entries();
 			JarEntry entry;
 			String entryName;
-			int length = MATRICES_HOME.length();
+			final int length = MATRICES_HOME.length();
 			while (entries.hasMoreElements())
 			{
 				entry = (JarEntry) entries.nextElement();
@@ -230,13 +233,13 @@ public class MatrixLoader
 		else
 		{
 			// Load from file system
-			String home = url.getFile();
-			File dir = new File(home);
-			String files[] = dir.list();
+			final String home = url.getFile();
+			final File dir = new File(home);
+			final String files[] = dir.list();
 			File file;
-			for (int i = 0, n = files.length; i < n; i++)
+			for (final String lElement : files)
 			{
-				file = new File(home + files[i]);
+				file = new File(home + lElement);
 				if (file.isFile() && file.canRead())
 				{
 					matrices.add(file.getName());

@@ -33,12 +33,14 @@ public class binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double n, double p)
+	public static double density(double x, double n, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		/* !* #endif /*4! */
 		/* !* n = floor(n + 0.5); *! */
 		n = java.lang.Math.floor(n + 0.5);
@@ -50,11 +52,17 @@ public class binomial
 		/* !* x = floor(x + 0.5); *! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0 || x > n)
+		{
 			return 0;
+		}
 		if (p == 0)
-			return (x == 0) ? 1 : 0;
+		{
+			return x == 0 ? 1 : 0;
+		}
 		if (p == 1)
-			return (x == n) ? 1 : 0;
+		{
+			return x == n ? 1 : 0;
+		}
 		/* !* return exp(lfastchoose(n, x) + log(p) * x + (n - x) * log(1 - p)); *! */
 		return java.lang.Math.exp(misc.lfastchoose(n, x) + java.lang.Math.log(p)
 															* x
@@ -90,11 +98,13 @@ public class binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double n, double p)
+	public static double cumulative(double x, double n, final double p)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		if (Double.isInfinite(n) || Double.isInfinite(p))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -111,9 +121,13 @@ public class binomial
 		/* !* x = floor(x); *! */
 		x = java.lang.Math.floor(x);
 		if (x < 0.0)
+		{
 			return 0;
+		}
 		if (n <= x)
+		{
 			return 1;
+		}
 		return beta.cumulative(1.0 - p, n - x, x + 1);
 	}
 
@@ -152,13 +166,15 @@ public class binomial
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double n, double p)
+	public static double quantile(final double x, double n, final double p)
 	{
 		double q, mu, sigma, gamma, z, y;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
+		{
 			return x + n + p;
+		}
 		if (Double.isInfinite(x) || Double.isInfinite(n) || Double.isInfinite(p))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -174,9 +190,13 @@ public class binomial
 			// return Double.NaN;
 		}
 		if (x == 0)
+		{
 			return 0.0;
+		}
 		if (x == 1)
+		{
 			return n;
+		}
 		q = 1 - p;
 		mu = n * p;
 		/* !* sigma = sqrt(n * p * q); *! */
@@ -195,7 +215,9 @@ public class binomial
 			for (;;)
 			{
 				if ((z = cumulative(y - 1, n, p)) < x)
+				{
 					return y;
+				}
 				y = y - 1;
 			}
 		}
@@ -207,7 +229,9 @@ public class binomial
 			for (;;)
 			{
 				if ((z = cumulative(y + 1, n, p)) >= x)
+				{
 					return y + 1;
+				}
 				y = y + 1;
 			}
 		}
@@ -247,7 +271,9 @@ public class binomial
 	/* !* #include "DistLib.h" /*4! */
 	/* !* #include <stdlib.h> /*4! */
 
-	public static double random(double nin, double pp, uniform PRNG)
+	public static double random(final double nin,
+															final double pp,
+															final uniform PRNG)
 	{
 		double al = 0.0, alv = 0.0, amaxp = 0.0, c = 0.0, f = 0.0, f1 = 0.0;
 		double f2 = 0.0, ffm = 0.0, fm = 0.0, g = 0.0;
@@ -273,9 +299,13 @@ public class binomial
 			// return Double.NaN;
 		}
 		if (n == 0.0 || pp == 0)
+		{
 			return 0;
+		}
 		if (pp == 1.0)
+		{
 			return n;
+		}
 
 		/* setup, perform only when parameters change */
 
@@ -295,7 +325,9 @@ public class binomial
 					else if (n == nsave)
 					{
 						if (xnp < 30.0)
+						{
 							break L20;
+						}
 						break L10;
 					}
 					xnp = n * p;
@@ -348,7 +380,9 @@ public class binomial
 						/* !* v = v * c + 1.0 - fabs(xm - x) / p1; *! */
 						v = v * c + 1.0 - java.lang.Math.abs(xm - x) / p1;
 						if (v > 1.0 || v <= 0.)
+						{
 							continue;
+						}
 						ix = (int) x;
 					}
 					else
@@ -358,7 +392,9 @@ public class binomial
 							/* !* ix = xr - log(v) / xlr; *! */
 							ix = (int) (xr - java.lang.Math.log(v) / xlr);
 							if (ix > n)
+							{
 								continue;
+							}
 							v = v * (u - p3) * xlr;
 						}
 						else
@@ -366,7 +402,9 @@ public class binomial
 							/* !* ix = xl + log(v) / xll; *! */
 							ix = (int) (xl + java.lang.Math.log(v) / xll);
 							if (ix < 0)
+							{
 								continue;
+							}
 							v = v * (u - p2) * xll;
 						}
 					}
@@ -383,27 +421,36 @@ public class binomial
 						{
 							mp = m + 1;
 							for (i = mp; i <= ix; i++)
+							{
 								f = f * (g / i - r);
+							}
 						}
 						else if (m != ix)
 						{
 							ix1 = ix + 1;
 							for (i = ix1; i <= m; i++)
+							{
 								f = f / (g / i - r);
+							}
 						}
 						if (v <= f)
+						{
 							break L30;
+						}
 					}
 					else
 					{
 						/* squeezing using upper and lower bounds */
 						/* on log(f(x)) */
-						amaxp = (k / xnpq) * ((k * (k / 3.0 + 0.625) + 0.1666666666666) / xnpq + 0.5);
+						amaxp = k / xnpq
+										* ((k * (k / 3.0 + 0.625) + 0.1666666666666) / xnpq + 0.5);
 						ynorm = -k * k / (2.0 * xnpq);
 						/* !* alv = log(v); *! */
 						alv = java.lang.Math.log(v);
 						if (alv < ynorm - amaxp)
+						{
 							break L30;
+						}
 						if (alv <= ynorm + amaxp)
 						{
 							/* stirling's formula to machine accuracy */
@@ -442,7 +489,9 @@ public class binomial
 													+ (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / w2) / w2) / w2) / w2)
 													/ w
 													/ 166320.)
+							{
 								break L30;
+							}
 						}
 					}
 				}
@@ -456,9 +505,13 @@ public class binomial
 				while (true)
 				{
 					if (u < f)
+					{
 						break L30;
+					}
 					if (ix > 110)
+					{
 						break;
+					}
 					u = u - f;
 					ix = ix + 1;
 					f = f * (g / ix - r);
@@ -467,7 +520,9 @@ public class binomial
 		}
 		// L30:
 		if (psave > 0.5)
+		{
 			ix = n - ix;
+		}
 		return ix;
 	}
 }

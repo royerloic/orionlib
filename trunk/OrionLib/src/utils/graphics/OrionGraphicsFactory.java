@@ -84,7 +84,9 @@ public class OrionGraphicsFactory
 
 		int lDevice = pDevice;
 		if (pDevice == OrionGraphicsFactory.cLAST_DEVICE)
+		{
 			lDevice = lAllGraphicsDevices.length - 1;
+		}
 
 		final GraphicsDevice lGraphicsDevice = lAllGraphicsDevices[lDevice];
 

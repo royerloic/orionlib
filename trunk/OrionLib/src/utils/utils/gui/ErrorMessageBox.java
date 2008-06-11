@@ -41,7 +41,7 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 
 	private Button mButtonOk, mButtonCancel;
 
-	private JTextArea mJTextArea;
+	private final JTextArea mJTextArea;
 
 	public boolean getResult()
 	{
@@ -85,7 +85,9 @@ public class ErrorMessageBox extends JDialog implements ActionListener
 		lPanel.setLayout(new FlowLayout());
 		createOKButton(lPanel);
 		if (pOkCancelButtons)
+		{
 			createCancelButton(lPanel);
+		}
 		getContentPane().add("South", lPanel);
 	}
 

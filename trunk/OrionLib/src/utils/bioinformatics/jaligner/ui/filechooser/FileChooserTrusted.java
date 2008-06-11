@@ -48,9 +48,9 @@ public class FileChooserTrusted extends FileChooser
 	{
 		try
 		{
-			JFileChooser chooser = new JFileChooser();
+			final JFileChooser chooser = new JFileChooser();
 			chooser.setCurrentDirectory(new File(getUserDirectory()));
-			int returnVal = chooser.showOpenDialog(null);
+			final int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION)
 			{
 				setUserDirectory(chooser.getCurrentDirectory().toString());
@@ -63,9 +63,9 @@ public class FileChooserTrusted extends FileChooser
 				return null;
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed open: " + e.getMessage();
+			final String message = "Failed open: " + e.getMessage();
 			logger.warning(message);
 			throw new FileChooserException(message);
 		}
@@ -80,24 +80,24 @@ public class FileChooserTrusted extends FileChooser
 	 * @throws FileChooserException
 	 */
 	@Override
-	public boolean save(InputStream is, String fileName) throws FileChooserException
+	public boolean save(final InputStream is, final String fileName) throws FileChooserException
 	{
 		try
 		{
-			JFileChooser chooser = new JFileChooser();
+			final JFileChooser chooser = new JFileChooser();
 			chooser.setCurrentDirectory(new File(getUserDirectory()));
 			if (fileName != null)
 			{
 				chooser.setSelectedFile(new File(fileName));
 			}
-			int returnVal = chooser.showSaveDialog(null);
+			final int returnVal = chooser.showSaveDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION)
 			{
 				setUserDirectory(chooser.getCurrentDirectory().toString());
-				File file = chooser.getSelectedFile();
+				final File file = chooser.getSelectedFile();
 				logger.info("Saved: " + file.getName());
-				FileOutputStream fos = new FileOutputStream(file);
-				byte[] buffer = new byte[BUFFER_SIZE];
+				final FileOutputStream fos = new FileOutputStream(file);
+				final byte[] buffer = new byte[BUFFER_SIZE];
 				int len;
 				while ((len = is.read(buffer)) != -1)
 				{
@@ -112,9 +112,9 @@ public class FileChooserTrusted extends FileChooser
 				return false;
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			String message = "Failed save: " + e.getMessage();
+			final String message = "Failed save: " + e.getMessage();
 			logger.warning(message);
 			throw new FileChooserException(message);
 		}

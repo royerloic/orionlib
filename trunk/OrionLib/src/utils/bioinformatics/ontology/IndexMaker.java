@@ -13,12 +13,6 @@ public class IndexMaker<O>
 	Map<O, Integer> mIndexMap = new HashMap<O, Integer>();
 	private int mIndex = 0;
 
-	private IndexMaker()
-	{
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public IndexMaker(final Lattice<O> pLattice)
 	{
 		super();
@@ -31,13 +25,17 @@ public class IndexMaker<O>
 		this.mIndex = 0;
 		this.mIndexMap.clear();
 		for (final O lO : pRoots)
+		{
 			if (!this.mIndexMap.containsKey(lO))
 			{
 				this.mIndexMap.put(lO, this.mIndex);
 				this.mIndex++;
 			}
+		}
 		for (final O lO : pRoots)
+		{
 			breathFirstIndexRecursive(lO);
+		}
 
 		return this.mIndexMap;
 	}
@@ -46,13 +44,17 @@ public class IndexMaker<O>
 	{
 		final Set<O> lChildrenSet = this.mLattice.getChildren(pNode);
 		for (final O lO : lChildrenSet)
+		{
 			if (!this.mIndexMap.containsKey(lO))
 			{
 				this.mIndexMap.put(lO, this.mIndex);
 				this.mIndex++;
 			}
+		}
 		for (final O lO : lChildrenSet)
+		{
 			breathFirstIndexRecursive(lO);
+		}
 	}
 
 	public final Map<O, Integer> computeMapDepthFirst(final Collection<O> pRoots)
@@ -60,12 +62,14 @@ public class IndexMaker<O>
 		this.mIndex = 0;
 		this.mIndexMap.clear();
 		for (final O lO : pRoots)
+		{
 			if (!this.mIndexMap.containsKey(lO))
 			{
 				this.mIndexMap.put(lO, this.mIndex);
 				this.mIndex++;
 				deapthFirstIndexRecursive(lO);
 			}
+		}
 
 		return this.mIndexMap;
 	}
@@ -74,12 +78,14 @@ public class IndexMaker<O>
 	{
 		final Set<O> lChildrenSet = this.mLattice.getChildren(pNode);
 		for (final O lO : lChildrenSet)
+		{
 			if (!this.mIndexMap.containsKey(lO))
 			{
 				this.mIndexMap.put(lO, this.mIndex);
 				this.mIndex++;
 				deapthFirstIndexRecursive(lO);
 			}
+		}
 	}
 
 }

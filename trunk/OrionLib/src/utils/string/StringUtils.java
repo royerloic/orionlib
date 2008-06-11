@@ -206,9 +206,9 @@ public class StringUtils
 		}
 	}
 
-	public static final String cleanWhiteSpaces(CharSequence pString)
+	public static final String cleanWhiteSpaces(final CharSequence pString)
 	{
-		StringBuffer lStringBuffer = replaceAll(pString, "\\s+", " ");
+		final StringBuffer lStringBuffer = replaceAll(pString, "\\s+", " ");
 		return lStringBuffer.toString().trim();
 	}
 
@@ -351,7 +351,7 @@ public class StringUtils
 
 			// Construct result
 			int resultSize = lMatchList.size();
-			while ((resultSize > 0) && lMatchList.get(resultSize - 1).equals(""))
+			while (resultSize > 0 && lMatchList.get(resultSize - 1).equals(""))
 			{
 				resultSize--;
 			}
@@ -377,7 +377,7 @@ public class StringUtils
 		{
 			if (!StringUtils.matches(lToken, pSplitRegex))
 			{
-				final boolean lInside = (lCharacterIndex <= pCharacterIndex) && (pCharacterIndex <= lCharacterIndex + lToken.length());
+				final boolean lInside = lCharacterIndex <= pCharacterIndex && pCharacterIndex <= lCharacterIndex + lToken.length();
 				if (lInside)
 				{
 					break;
@@ -404,7 +404,7 @@ public class StringUtils
 		{
 			if (!StringUtils.matches(lToken, pSplitRegex))
 			{
-				final boolean lRightToken = (lTokenIndex == pTokenIndex);
+				final boolean lRightToken = lTokenIndex == pTokenIndex;
 				if (lRightToken)
 				{
 					break;
@@ -446,16 +446,16 @@ public class StringUtils
 		{
 			boolean isDigit = false;
 			final char lChar = pSynonym.charAt(i);
-			isDigit |= lChar == ('0');
-			isDigit |= lChar == ('1');
-			isDigit |= lChar == ('2');
-			isDigit |= lChar == ('3');
-			isDigit |= lChar == ('4');
-			isDigit |= lChar == ('5');
-			isDigit |= lChar == ('6');
-			isDigit |= lChar == ('7');
-			isDigit |= lChar == ('8');
-			isDigit |= lChar == ('9');
+			isDigit |= lChar == '0';
+			isDigit |= lChar == '1';
+			isDigit |= lChar == '2';
+			isDigit |= lChar == '3';
+			isDigit |= lChar == '4';
+			isDigit |= lChar == '5';
+			isDigit |= lChar == '6';
+			isDigit |= lChar == '7';
+			isDigit |= lChar == '8';
+			isDigit |= lChar == '9';
 
 			lCount += isDigit ? 1 : 0;
 		}

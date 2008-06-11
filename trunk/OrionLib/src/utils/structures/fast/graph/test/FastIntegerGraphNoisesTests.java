@@ -17,7 +17,7 @@ public class FastIntegerGraphNoisesTests
 	@Test
 	public void testRewireOnce()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -35,16 +35,18 @@ public class FastIntegerGraphNoisesTests
 		lFastIntegerGraph.addEdge(3, 32);
 		lFastIntegerGraph.addEdge(3, 33);
 
-		Random lRandom = new Random(System.currentTimeMillis());
+		final Random lRandom = new Random(System.currentTimeMillis());
 		// assertTrue(FastIntegerGraphNoises.rewireOnce(lRandom,
 		// lFastIntegerGraph,10));
 
-		int lNumberOfEdges = lFastIntegerGraph.getNumberOfEdges();
+		final int lNumberOfEdges = lFastIntegerGraph.getNumberOfEdges();
 
-		int times = 100;
-		int lSucc = FastIntegerGraphNoises.rewire(lRandom, lFastIntegerGraph, times);
+		final int times = 100;
+		final int lSucc = FastIntegerGraphNoises.rewire(lRandom,
+																										lFastIntegerGraph,
+																										times);
 
-		assertTrue(lSucc > (times) * 0.90);
+		assertTrue(lSucc > times * 0.90);
 
 		assertTrue(lNumberOfEdges == lFastIntegerGraph.getNumberOfEdges());
 

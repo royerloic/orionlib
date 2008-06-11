@@ -10,6 +10,11 @@ import java.util.regex.Pattern;
  */
 public class OboTerm implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Pattern cSeparatorPattern = Pattern.compile("\\:");
 
 	private Integer mId;
@@ -17,13 +22,13 @@ public class OboTerm implements Serializable
 	private String mDefinition;
 	private String mNameSpace;
 
-	public OboTerm(String pNameSpace, final Integer pId)
+	public OboTerm(final String pNameSpace, final Integer pId)
 	{
 		mNameSpace = pNameSpace;
 		mId = pId;
 	}
 
-	public OboTerm(String pOboTermString) throws Exception
+	public OboTerm(final String pOboTermString) throws Exception
 	{
 		final String[] lOboTermArray = cSeparatorPattern.split(pOboTermString, -1);
 		if (lOboTermArray.length == 2)
@@ -73,7 +78,9 @@ public class OboTerm implements Serializable
 	public boolean equals(final Object pObj)
 	{
 		if (this == pObj)
+		{
 			return true;
+		}
 
 		final OboTerm lOboTerm = (OboTerm) pObj;
 

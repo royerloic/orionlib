@@ -43,7 +43,7 @@ public class Matrix implements Serializable
 	 */
 	private float[][] scores = null;
 
-	public Matrix(String id, float[][] scores)
+	public Matrix(final String id, final float[][] scores)
 	{
 		this.id = id;
 		this.scores = scores;
@@ -71,7 +71,7 @@ public class Matrix implements Serializable
 	 * @param b
 	 * @return score
 	 */
-	public float getScore(char a, char b)
+	public float getScore(final char a, final char b)
 	{
 		return this.scores[a][b];
 	}

@@ -23,34 +23,34 @@ public class SynchronizedBinding extends Binding implements Serializable
 		// TODO Auto-generated constructor stub
 	}
 
-	private void readObject(ObjectInputStream in)	throws IOException,
-																								ClassNotFoundException
+	private void readObject(final ObjectInputStream in)	throws IOException,
+																											ClassNotFoundException
 	{
-		Map lVariables = (Map) in.readObject();
+		final Map lVariables = (Map) in.readObject();
 		this.getVariables().putAll(lVariables);
 		in.defaultReadObject();
 	}
 
-	private void writeObject(ObjectOutputStream out) throws IOException
+	private void writeObject(final ObjectOutputStream out) throws IOException
 	{
 		out.writeObject(this.getVariables());
 		out.defaultWriteObject();
 	}
 
-	public SynchronizedBinding(Map pVariables)
+	public SynchronizedBinding(final Map pVariables)
 	{
 		super(pVariables);
 		// TODO Auto-generated constructor stub
 	}
 
-	public SynchronizedBinding(String[] pArgs)
+	public SynchronizedBinding(final String[] pArgs)
 	{
 		super(pArgs);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Object getProperty(String pArg0)
+	public Object getProperty(final String pArg0)
 	{
 		synchronized (this)
 		{
@@ -59,7 +59,7 @@ public class SynchronizedBinding extends Binding implements Serializable
 	}
 
 	@Override
-	public Object getVariable(String pName)
+	public Object getVariable(final String pName)
 	{
 		synchronized (this)
 		{
@@ -77,7 +77,7 @@ public class SynchronizedBinding extends Binding implements Serializable
 	}
 
 	@Override
-	public void setProperty(String pArg0, Object pArg1)
+	public void setProperty(final String pArg0, final Object pArg1)
 	{
 		synchronized (this)
 		{
@@ -86,7 +86,7 @@ public class SynchronizedBinding extends Binding implements Serializable
 	}
 
 	@Override
-	public void setVariable(String pName, Object pValue)
+	public void setVariable(final String pName, final Object pValue)
 	{
 		synchronized (this)
 		{
@@ -104,7 +104,7 @@ public class SynchronizedBinding extends Binding implements Serializable
 	}
 
 	@Override
-	public Object invokeMethod(String pName, Object pArgs)
+	public Object invokeMethod(final String pName, final Object pArgs)
 	{
 		synchronized (this)
 		{
@@ -113,7 +113,7 @@ public class SynchronizedBinding extends Binding implements Serializable
 	}
 
 	@Override
-	public void setMetaClass(MetaClass pMetaClass)
+	public void setMetaClass(final MetaClass pMetaClass)
 	{
 		synchronized (this)
 		{

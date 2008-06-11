@@ -52,13 +52,13 @@ public class LineReader
 		return lInputStream;
 	}
 
-	public static final LineIterator getLines(String pString) throws IOException
+	public static final LineIterator getLines(final String pString) throws IOException
 	{
 		return getLines(Object.class.getResourceAsStream(pString));
 	}
 
 	public static final LineIterator getLines(final InputStream pInputStream,
-																						int pSkipLines) throws IOException
+																						final int pSkipLines) throws IOException
 	{
 		return new LineIterator(pInputStream, pSkipLines);
 	}
@@ -121,7 +121,7 @@ public class LineReader
 						return true;
 					}
 				}
-				catch (IOException e)
+				catch (final IOException e)
 				{
 					throw new RuntimeException(e);
 				}

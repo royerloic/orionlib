@@ -34,7 +34,7 @@ public class MatrixLoaderException extends Exception
 	/**
 	 * @param message
 	 */
-	public MatrixLoaderException(String message)
+	public MatrixLoaderException(final String message)
 	{
 		super(message);
 	}

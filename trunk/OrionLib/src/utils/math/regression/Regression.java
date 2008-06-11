@@ -59,7 +59,9 @@ public final class Regression
 
 		final int numPoints = data.getNumCol();
 		if (numPoints != values.getSize())
+		{
 			throw new MismatchedSizeException();
+		}
 
 		// calculate the coefficients c
 		final GMatrix k = kernelMatrix(data, kernel);

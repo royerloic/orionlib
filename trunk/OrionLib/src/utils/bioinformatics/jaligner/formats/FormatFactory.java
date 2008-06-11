@@ -37,7 +37,7 @@ public class FormatFactory
 	/**
 	 * {@link HashMap} of {@link Format}
 	 */
-	private HashMap formats = new HashMap();
+	private final HashMap formats = new HashMap();
 
 	/**
 	 * Hidden constructor
@@ -68,7 +68,7 @@ public class FormatFactory
 	 * @param format
 	 *          instance of format
 	 */
-	public void registerFormat(Format format)
+	public void registerFormat(final Format format)
 	{
 		formats.put(format.getId(), format);
 	}
@@ -80,7 +80,7 @@ public class FormatFactory
 	 *          format id
 	 * @return {@link Format} or null if id not found
 	 */
-	public Format getFormat(String id)
+	public Format getFormat(final String id)
 	{
 		return (Format) formats.get(id);
 	}

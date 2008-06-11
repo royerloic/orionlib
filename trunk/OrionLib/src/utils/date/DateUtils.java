@@ -17,25 +17,25 @@ public class DateUtils
 
 	public static double secondsElapsed(final Date pDate)
 	{
-		final double lSecondsElapsed = ((double) millisecondsElapsed(pDate)) / (1000);
+		final double lSecondsElapsed = (double) millisecondsElapsed(pDate) / 1000;
 		return lSecondsElapsed;
 	}
 
 	public static double minutesElapsed(final Date pDate)
 	{
-		final double lMinutesElapsed = ((double) millisecondsElapsed(pDate)) / (1000 * 60);
+		final double lMinutesElapsed = (double) millisecondsElapsed(pDate) / (1000 * 60);
 		return lMinutesElapsed;
 	}
 
 	public static double hoursElapsed(final Date pDate)
 	{
-		final double lMinutesElapsed = ((double) millisecondsElapsed(pDate)) / (1000 * 60 * 60);
+		final double lMinutesElapsed = (double) millisecondsElapsed(pDate) / (1000 * 60 * 60);
 		return lMinutesElapsed;
 	}
 
 	public static double daysElapsed(final Date pDate)
 	{
-		final double lMinutesElapsed = ((double) millisecondsElapsed(pDate)) / (1000 * 60 * 60 * 24);
+		final double lMinutesElapsed = (double) millisecondsElapsed(pDate) / (1000 * 60 * 60 * 24);
 		return lMinutesElapsed;
 	}
 
@@ -49,8 +49,11 @@ public class DateUtils
 
 		String lString = "";
 		if (lDays > 3)
+		{
 			lString = lDays + " days ago";
+		}
 		else if (lDays > 0)
+		{
 			switch ((int) lDays)
 			{
 			case 1:
@@ -66,9 +69,13 @@ public class DateUtils
 				break;
 
 			}
+		}
 		else if (lHours > 3)
+		{
 			lString = lHours + " hours ago";
+		}
 		else if (lHours > 0)
+		{
 			switch ((int) lHours)
 			{
 			case 1:
@@ -84,9 +91,13 @@ public class DateUtils
 				break;
 
 			}
+		}
 		else if (lMinutes > 3)
+		{
 			lString = lMinutes + " minutes ago";
+		}
 		else if (lMinutes > 0)
+		{
 			switch ((int) lMinutes)
 			{
 			case 1:
@@ -102,14 +113,23 @@ public class DateUtils
 				break;
 
 			}
+		}
 		else if (lSeconds > 1)
+		{
 			lString = lSeconds + " seconds ago";
+		}
 		else if (lSeconds == 1)
+		{
 			lString = "one second ago";
+		}
 		else if (lMilliseconds > 0)
+		{
 			lString = lMilliseconds + " milliseconds ago";
+		}
 		else if (lMilliseconds == 0)
+		{
 			lString = "now";
+		}
 
 		return lString;
 	}

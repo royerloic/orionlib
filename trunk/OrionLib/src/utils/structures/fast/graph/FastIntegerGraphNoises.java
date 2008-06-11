@@ -9,14 +9,16 @@ import utils.structures.fast.set.FastBoundedIntegerSet;
 public class FastIntegerGraphNoises
 {
 
-	public static boolean rewireOnce(	Random pRandom,
-																		FastIntegerGraph pIntegerGraph,
-																		int pTries)
+	public static boolean rewireOnce(	final Random pRandom,
+																		final FastIntegerGraph pIntegerGraph,
+																		final int pTries)
 	{
-		int[] lNodeSet = pIntegerGraph.getNodeSet().toIntArray();
+		final int[] lNodeSet = pIntegerGraph.getNodeSet().toIntArray();
 
 		if (lNodeSet.length < 4)
+		{
 			return false;
+		}
 
 		int fefn = -1;
 		int fesn = -1;
@@ -29,15 +31,19 @@ public class FastIntegerGraphNoises
 		{
 
 			fefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			FastBoundedIntegerSet fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
+			final FastBoundedIntegerSet fefnNei = pIntegerGraph.getNodeNeighbours(fefn);
 			if (fefnNei.size() < 1)
+			{
 				continue;
+			}
 			fesn = fefnNei.toIntArray()[pRandom.nextInt(fefnNei.size())];
 
 			sefn = lNodeSet[pRandom.nextInt(lNodeSet.length)];
-			FastBoundedIntegerSet sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
+			final FastBoundedIntegerSet sefnNei = pIntegerGraph.getNodeNeighbours(sefn);
 			if (sefnNei.size() < 1)
+			{
 				continue;
+			}
 			sesn = sefnNei.toIntArray()[pRandom.nextInt(sefnNei.size())];
 
 			valid = fefn != fesn && sefn != sesn
@@ -71,43 +77,48 @@ public class FastIntegerGraphNoises
 		return valid;
 	}
 
-	public static FastIntegerGraph rewireOnce2(	Random pRandom,
-																							FastIntegerGraph pIntegerGraph)
+	public static FastIntegerGraph rewireOnce2(	final Random pRandom,
+																							final FastIntegerGraph pIntegerGraph)
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
-		ArrayList<int[]> lEdgeList = pIntegerGraph.getIntPairList();
+		final ArrayList<int[]> lEdgeList = pIntegerGraph.getIntPairList();
 		Collections.shuffle(lEdgeList, pRandom);
-		ArrayList<Integer> lFirstNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
-		ArrayList<Integer> lSecondNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
+		final ArrayList<Integer> lFirstNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
+		final ArrayList<Integer> lSecondNodeList = new ArrayList<Integer>(pIntegerGraph.getNumberOfEdges());
 		for (int node1 = 0; node1 < pIntegerGraph.mSparseMatrix.size(); node1++)
-			for (int node2 : pIntegerGraph.mSparseMatrix.get(node1).toIntArray())
+		{
+			for (final int node2 : pIntegerGraph.mSparseMatrix.get(node1)
+																												.toIntArray())
 			{
 				lFirstNodeList.add(node1);
 				lSecondNodeList.add(node2);
 			}
+		}
 
 		Collections.rotate(lSecondNodeList, -1);
 
 		for (int i = 0; i < lFirstNodeList.size(); i++)
 		{
-			int node1 = lFirstNodeList.get(i);
-			int node2 = lSecondNodeList.get(i);
+			final int node1 = lFirstNodeList.get(i);
+			final int node2 = lSecondNodeList.get(i);
 			lFastIntegerGraph.addEdge(node1, node2);
 		}
 
 		return lFastIntegerGraph;
 	}
 
-	public static int rewire(	Random pRandom,
-														FastIntegerGraph pIntegerGraph,
-														int pRewireSteps)
+	public static int rewire(	final Random pRandom,
+														final FastIntegerGraph pIntegerGraph,
+														final int pRewireSteps)
 	{
 		int lNumberOfSuccesses = 0;
 		for (int i = 1; i <= pRewireSteps; i++)
+		{
 			lNumberOfSuccesses += FastIntegerGraphNoises.rewireOnce(pRandom,
 																															pIntegerGraph,
 																															10) ? 1 : 0;
+		}
 		return lNumberOfSuccesses;
 	}
 

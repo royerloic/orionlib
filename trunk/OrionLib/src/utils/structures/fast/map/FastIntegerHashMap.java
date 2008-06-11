@@ -24,24 +24,26 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		initialize(10);
 	}
 
-	public FastIntegerHashMap(int pCapacity)
+	public FastIntegerHashMap(final int pCapacity)
 	{
 		super();
 		initialize(pCapacity);
 	}
 
-	private FastIntegerHashMap(int pCapacity, int pHashSeed)
+	private FastIntegerHashMap(final int pCapacity, final int pHashSeed)
 	{
 		super();
 		initialize(pCapacity);
 		hashseed = Math.abs(pHashSeed);
 	}
 
-	void initialize(int pCapacity)
+	void initialize(final int pCapacity)
 	{
 		capacity = 2;
 		while (capacity < pCapacity)
+		{
 			capacity *= 2;
+		}
 		keyset = new FastSparseIntegerSet();
 		keyset.ensureCapacity(capacity);
 		elements = new Object[capacity];
@@ -50,7 +52,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		keycache = new int[capacity];
 	}
 
-	public O put(int key, O obj)
+	public O put(final int key, final O obj)
 	{
 		keyset.add(key);
 		final int hash = hash(key);
@@ -76,9 +78,11 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 				// collision, need to replace direct access withr recursive map.
 				int newhashseed = hashseed;
 				while (newhashseed == hashseed)
+				{
 					newhashseed += Math.abs(sRandom.nextInt());
-				FastIntegerHashMap lFastIntegerHashMap = new FastIntegerHashMap(capacity / 2,
-																																				newhashseed);
+				}
+				final FastIntegerHashMap lFastIntegerHashMap = new FastIntegerHashMap(capacity / 2,
+																																							newhashseed);
 				isdirect[hash] = false;
 				lFastIntegerHashMap.put(keycache[hash], elements[hash]);
 				elements[hash] = lFastIntegerHashMap;
@@ -92,7 +96,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		}
 	}
 
-	public O get(int key)
+	public O get(final int key)
 	{
 		final int hash = hash(key);
 
@@ -117,7 +121,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 		}
 	}
 
-	public O remove(int key)
+	public O remove(final int key)
 	{
 		keyset.del(key);
 		final int hash = hash(key);
@@ -156,9 +160,9 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 	{
 		h += hashseed;
 		h *= hashseed;
-		h ^= (h >> 20) ^ (h >> 12);
-		h ^= (h >> 7) ^ (h >> 4);
-		return h & (capacity - 1);
+		h ^= h >> 20 ^ h >> 12;
+		h ^= h >> 7 ^ h >> 4;
+		return h & capacity - 1;
 	}
 
 	public Iterator<Integer> iterator()

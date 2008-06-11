@@ -57,6 +57,7 @@ public class LocationDatabase
 
 				String lLineString;
 				while ((lLineString = lBufferedReader.readLine()) != null)
+				{
 					if (!lLineString.matches("#.*"))
 					{
 						final StringTokenizer lStringTokenizer = new StringTokenizer(	lLineString,
@@ -70,8 +71,10 @@ public class LocationDatabase
 						final String lLongitudeString = lStringTokenizer.nextToken();
 						final String lCountry = lStringTokenizer.nextToken();
 
-						final double lLatitude = (Double.valueOf(lLatitudeString)).doubleValue();
-						final double lLongitude = (Double.valueOf(lLongitudeString)).doubleValue();
+						final double lLatitude = Double	.valueOf(lLatitudeString)
+																						.doubleValue();
+						final double lLongitude = Double.valueOf(lLongitudeString)
+																						.doubleValue();
 
 						final Location lLocation = new Location(lType,
 																										lName,
@@ -79,11 +82,14 @@ public class LocationDatabase
 																										lLongitude,
 																										lCountry);
 						if (isDebug())
+						{
 							lLocation.setSourceString(lLineString);
+						}
 
 						mLocationList.put(lName, lLocation);
 
 					}
+				}
 			}
 			catch (final IOException e2)
 			{
@@ -114,7 +120,9 @@ public class LocationDatabase
 		Location lLocation = null;
 		// lLocation = findSingleWordLocationInString(pString);
 		if (lLocation == null)
+		{
 			lLocation = findLocationMatchInString(pString);
+		}
 		return lLocation;
 	}
 
@@ -162,7 +170,7 @@ public class LocationDatabase
 			final int lIndex = lLowerCaseString.indexOf(lRefactoredlName);
 			// System.out.println("Searching for : '"+lRefactoredlName+"', found it
 			// at: "+lIndex);
-			if ((lIndex < lMinimalIndex) && (lIndex >= 0))
+			if (lIndex < lMinimalIndex && lIndex >= 0)
 			{
 				lMinimalIndex = lIndex;
 				lLocationFound = mLocationList.get(lName);

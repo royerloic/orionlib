@@ -17,7 +17,7 @@ public class Pair<O> extends Couple<O, O> implements Iterable<O>
 
 	public Iterator<O> iterator()
 	{
-		ArrayList<O> lList = new ArrayList<O>();
+		final ArrayList<O> lList = new ArrayList<O>();
 		lList.add(mA);
 		lList.add(mB);
 		return lList.iterator();

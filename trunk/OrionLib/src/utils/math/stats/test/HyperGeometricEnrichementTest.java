@@ -17,8 +17,8 @@ public class HyperGeometricEnrichementTest
 	@Test
 	public void testHyperGeometricEnrichementTest() throws IOException
 	{
-		InputStream lInputStream = HyperGeometricEnrichementTest.class.getResourceAsStream("Test.tab.txt");
-		OutputStream lOutputStream = new ByteArrayOutputStream();
+		final InputStream lInputStream = HyperGeometricEnrichementTest.class.getResourceAsStream("Test.tab.txt");
+		final OutputStream lOutputStream = new ByteArrayOutputStream();
 
 		HyperGeometricEnrichement.testStream(	lInputStream,
 																					0,
@@ -27,7 +27,7 @@ public class HyperGeometricEnrichementTest
 																					1,
 																					lOutputStream);
 
-		String lString = lOutputStream.toString();
+		final String lString = lOutputStream.toString();
 		System.out.println(lString);
 
 		assertTrue(lString.contains("81.44516686402928"));

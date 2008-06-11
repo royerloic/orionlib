@@ -26,7 +26,9 @@ public class RandomUtils
 		{
 			final double lRND = pRandom.nextDouble();
 			if (lRND < pProbability)
+			{
 				lList.add(lO);
+			}
 		}
 		return lList;
 	}
@@ -45,7 +47,9 @@ public class RandomUtils
 		int lFloor = (int) pExpectedAverage;
 		final double lRemainder = pExpectedAverage - lFloor;
 		if (pRandom.nextDouble() < lRemainder)
+		{
 			lFloor += 1;
+		}
 		return lFloor;
 	}
 
@@ -62,7 +66,7 @@ public class RandomUtils
 																					final double pBegin,
 																					final int pEnd)
 	{
-		return pBegin + (pRandom.nextDouble() * (pEnd - pBegin));
+		return pBegin + pRandom.nextDouble() * (pEnd - pBegin);
 	}
 
 }

@@ -19,7 +19,7 @@ public class PenMode extends WiiRemoteAdapter implements WiiMode
 	private static double mX = 0;
 	private static double mY = 0;
 
-	private Rectangle mScreenRectangle;
+	private final Rectangle mScreenRectangle;
 
 	private boolean mButton1Pressed = false;
 
@@ -40,7 +40,7 @@ public class PenMode extends WiiRemoteAdapter implements WiiMode
 		return mPenModeItem;
 	}
 
-	public void activate(WiiRemote pRemote)
+	public void activate(final WiiRemote pRemote)
 	{
 		try
 		{
@@ -48,32 +48,29 @@ public class PenMode extends WiiRemoteAdapter implements WiiMode
 			pRemote.setAccelerometerEnabled(false);
 			pRemote.setIRSensorEnabled(true, WRIREvent.BASIC);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public void deactivate(WiiRemote pRemote)
+	public void deactivate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.removeWiiRemoteListener(this);
 			pRemote.setIRSensorEnabled(false, WRIREvent.BASIC);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public void IRInputReceived(WRIREvent pWRIREvent)
+	public void IRInputReceived(final WRIREvent pWRIREvent)
 	{
 		int i = 0;
-		double nmX = 0;
-		double nmY = 0;
-
-		for (IRLight light : pWRIREvent.getIRLights())
+		for (final IRLight light : pWRIREvent.getIRLights())
 		{
 			if (light != null)
 			{

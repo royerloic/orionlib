@@ -13,15 +13,13 @@ public class SocketThread extends Thread
 
 	private Socket mSocket = null;
 	private final Service mService;
-	private final ServerSocket mServerSocket;
 
-	public SocketThread(ServerSocket pServerSocket,
-											Service pService,
-											Socket pSocket,
-											String pThreadName)
+	public SocketThread(final ServerSocket pServerSocket,
+											final Service pService,
+											final Socket pSocket,
+											final String pThreadName)
 	{
 		super(pThreadName);
-		mServerSocket = pServerSocket;
 		mService = pService;
 		this.mSocket = pSocket;
 	}
@@ -31,8 +29,8 @@ public class SocketThread extends Thread
 
 		try
 		{
-			PrintWriter out = new PrintWriter(mSocket.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
+			final PrintWriter out = new PrintWriter(mSocket.getOutputStream(), true);
+			final BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
 
 			mService.onConnection(mSocket);
 
@@ -44,7 +42,9 @@ public class SocketThread extends Thread
 			while ((inputLine = in.readLine()) != null)
 			{
 				if (inputLine.equals(mService.getExitCommand()) || mService.exit())
+				{
 					break;
+				}
 				outputLine = mService.processInput(inputLine);
 				out.print(outputLine + sEndofLine);
 				out.flush();
@@ -57,7 +57,7 @@ public class SocketThread extends Thread
 			mSocket.close();
 
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}

@@ -34,8 +34,6 @@ public class WRLImpl extends WiiRemoteAdapter
 {
 	private static boolean accelerometerSource = true; // true = wii
 
-	private static boolean mouseTestingOn;
-
 	private static WiiRemote remote;
 
 	private static int t = 0;
@@ -51,7 +49,7 @@ public class WRLImpl extends WiiRemoteAdapter
 	static boolean mButton3Pressed = false;
 	static Rectangle mScreenRectangle;
 
-	public static void main(String args[]) throws AWTException
+	public static void main(final String args[]) throws AWTException
 	{
 		mRobot = new java.awt.Robot();
 
@@ -63,7 +61,7 @@ public class WRLImpl extends WiiRemoteAdapter
 
 		try
 		{
-			WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
+			final WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
 			{
 				public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
 				{
@@ -97,15 +95,15 @@ public class WRLImpl extends WiiRemoteAdapter
 																-1));
 
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public WRLImpl(WiiRemote remote)
+	public WRLImpl(final WiiRemote remote)
 	{
-		this.remote = remote;
+		WRLImpl.remote = remote;
 	}
 
 	public void disconnected()
@@ -114,16 +112,14 @@ public class WRLImpl extends WiiRemoteAdapter
 		System.exit(0);
 	}
 
-	public void statusReported(WRStatusEvent evt)
+	public void statusReported(final WRStatusEvent evt)
 	{
-		System.out.println("Battery level: " + (double) evt.getBatteryLevel()
-												/ 2
-												+ "%");
+		System.out.println("Battery level: " + evt.getBatteryLevel() / 2 + "%");
 		System.out.println("Continuous: " + evt.isContinuousEnabled());
 		System.out.println("Remote continuous: " + remote.isContinuousEnabled());
 	}
 
-	public void IRInputReceived(WRIREvent evt)
+	public void IRInputReceived(final WRIREvent evt)
 	{
 
 		try
@@ -132,7 +128,7 @@ public class WRLImpl extends WiiRemoteAdapter
 			double nmX = 0;
 			double nmY = 0;
 
-			for (IRLight light : evt.getIRLights())
+			for (final IRLight light : evt.getIRLights())
 			{
 				if (light != null)
 				{
@@ -149,8 +145,8 @@ public class WRLImpl extends WiiRemoteAdapter
 
 			if (i > 0)
 			{
-				mX = nmX / (double) i;
-				mY = nmY / (double) i;
+				mX = nmX / i;
+				mY = nmY / i;
 
 				final int x = (int) ((1 - mX) * mScreenRectangle.getWidth());
 				final int y = (int) (mY * mScreenRectangle.getHeight());
@@ -163,7 +159,7 @@ public class WRLImpl extends WiiRemoteAdapter
 				 **********************************************************************/
 			}
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,7 +167,7 @@ public class WRLImpl extends WiiRemoteAdapter
 
 	}
 
-	public void accelerationInputReceived(WRAccelerationEvent evt)
+	public void accelerationInputReceived(final WRAccelerationEvent evt)
 	{
 		if (accelerometerSource)
 		{
@@ -186,19 +182,19 @@ public class WRLImpl extends WiiRemoteAdapter
 
 	}
 
-	public void extensionInputReceived(WRExtensionEvent evt)
+	public void extensionInputReceived(final WRExtensionEvent evt)
 	{
 
 	}
 
-	public void extensionConnected(WiiRemoteExtension extension)
+	public void extensionConnected(final WiiRemoteExtension extension)
 	{
 		System.out.println("Extension connected!");
 		try
 		{
 			remote.setExtensionEnabled(true);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -214,12 +210,12 @@ public class WRLImpl extends WiiRemoteAdapter
 		System.out.println("Extension unknown. Did you try to plug in a toaster or something?");
 	}
 
-	public void extensionDisconnected(WiiRemoteExtension extension)
+	public void extensionDisconnected(final WiiRemoteExtension extension)
 	{
 		System.out.println("Extension disconnected. Why'd you unplug it, retard?");
 	}
 
-	public void buttonInputReceived(WRButtonEvent evt)
+	public void buttonInputReceived(final WRButtonEvent evt)
 	{
 
 		System.out.println(evt);

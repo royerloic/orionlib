@@ -22,7 +22,7 @@ public class FastGraphTests
 	@Test
 	public void testAddNode()
 	{
-		FastGraph lFastGraph = new FastGraph();
+		final FastGraph lFastGraph = new FastGraph();
 
 		lFastGraph.addNode("me");
 		lFastGraph.addNode("you");
@@ -43,7 +43,7 @@ public class FastGraphTests
 
 		try
 		{
-			FastGraph<String> lFastGraph = new FastGraph<String>();
+			final FastGraph<String> lFastGraph = new FastGraph<String>();
 
 			lFastGraph.addEdge("0", "1");
 			lFastGraph.addEdge("0", "2");
@@ -61,28 +61,30 @@ public class FastGraphTests
 			lFastGraph.addEdge("3", "32");
 			lFastGraph.addEdge("3", "33");
 
-			File lEdgeFile = File.createTempFile("temp", "temp");
+			final File lEdgeFile = File.createTempFile("temp", "temp");
 			System.out.println(lEdgeFile);
 			if (lEdgeFile.exists())
+			{
 				lEdgeFile.delete();
+			}
 
-			FileOutputStream lFileOutPutStream = new FileOutputStream(lEdgeFile);
+			final FileOutputStream lFileOutPutStream = new FileOutputStream(lEdgeFile);
 			lFastGraph.writeEdgeFile(lFileOutPutStream);
 			lFileOutPutStream.close();
 
 			FastGraph<String> lFastGraphReadFromFile = new FastGraph<String>();
-			FileInputStream lFileInputStream = new FileInputStream(lEdgeFile);
+			final FileInputStream lFileInputStream = new FileInputStream(lEdgeFile);
 			lFastGraphReadFromFile = FastGraph.readEdgeFile(lFileInputStream);
 
 			assertTrue(lFastGraph.equals(lFastGraphReadFromFile));
 
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			e.printStackTrace();
 			fail();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 			fail();

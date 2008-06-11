@@ -49,10 +49,14 @@ public class ReplaceEntities
 		buff.append(content.substring(begin, content.length()));
 
 		if (hasFilterFoundUnknownEntity)
+		{
 			System.out.println("Filter encountered unknown entities");
+		}
 
 		if (hasFilterDecodedEntities)
+		{
 			System.out.println("Filter has replaced entities.");
+		}
 
 		return buff.toString();
 
@@ -205,7 +209,9 @@ public class ReplaceEntities
 		final StringBuffer temp = new StringBuffer();
 
 		for (final String[] lPair : ENTITIES)
+		{
 			sEntitiesMap.put(lPair[1], lPair[0]);
+		}
 	}
 
 }

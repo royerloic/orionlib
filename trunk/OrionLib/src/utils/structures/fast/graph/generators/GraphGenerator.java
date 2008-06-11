@@ -18,21 +18,25 @@ public class GraphGenerator
 																													final int pNumberOfNodes,
 																													final double pDensity)
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		for (int i = 0; i < pNumberOfNodes; i++)
 		{
 			lFastIntegerGraph.addNode();
 		}
 
-		int[] lNodeArray = lFastIntegerGraph.getNodeSet().toIntArray();
+		final int[] lNodeArray = lFastIntegerGraph.getNodeSet().toIntArray();
 
 		for (int node1 = 0; node1 < lNodeArray.length; node1++)
+		{
 			for (int node2 = 0; node2 < node1; node2++)
 			{
 				if (pRandom.nextDouble() <= pDensity)
+				{
 					lFastIntegerGraph.addEdge(node1, node2);
+				}
 			}
+		}
 
 		return lFastIntegerGraph;
 	}
@@ -41,17 +45,19 @@ public class GraphGenerator
 																															final int pNumberOfNodes,
 																															final double pTargetDensity)
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		if (pNumberOfNodes > 0)
 		{
 
 			lFastIntegerGraph.addNode();
 
-			int m = (int) ((pTargetDensity * (pNumberOfNodes - 1)) * (3d / 4d));
+			final int m = (int) (pTargetDensity * (pNumberOfNodes - 1) * 3d / 4d);
 
 			while (lFastIntegerGraph.getNumberOfNodes() < pNumberOfNodes)
+			{
 				addNodePreferentialAttachement(pRandom, lFastIntegerGraph, m);
+			}
 
 		}
 
@@ -65,11 +71,13 @@ public class GraphGenerator
 	{
 		final int newnode = pGraph.addNode();
 
-		FastBoundedIntegerSet nodelist = pGraph.getNodeSet();
+		final FastBoundedIntegerSet nodelist = pGraph.getNodeSet();
 
 		double lTotal = 0;
 		for (final int node : nodelist)
+		{
 			lTotal += pGraph.getNodeNeighbours(node).size();
+		}
 
 		if (lTotal == 0 && pNewEdges > 0)
 		{
@@ -81,7 +89,7 @@ public class GraphGenerator
 			final DistributionSource<Integer> lDistributionSource = new DistributionSource<Integer>();
 			for (final int node : nodelist)
 			{
-				double lProbability = ((pGraph.getNodeNeighbours(node).size()) / lTotal);
+				final double lProbability = pGraph.getNodeNeighbours(node).size() / lTotal;
 				lDistributionSource.addObject(node, lProbability);
 			}
 			try

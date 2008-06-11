@@ -33,7 +33,7 @@ public class SequenceParserException extends Exception
 	/**
 	 * @param message
 	 */
-	public SequenceParserException(String message)
+	public SequenceParserException(final String message)
 	{
 		super(message);
 	}

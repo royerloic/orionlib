@@ -38,9 +38,9 @@ public class RecordFormatter extends Formatter
 	 * @param record
 	 */
 	@Override
-	public String format(LogRecord record)
+	public String format(final LogRecord record)
 	{
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 		buffer.append(new Date().toString());
 		buffer.append(" ");
 		buffer.append(record.getLevel());
@@ -58,7 +58,7 @@ public class RecordFormatter extends Formatter
 	 * @param handler
 	 */
 	@Override
-	public String getHead(Handler handler)
+	public String getHead(final Handler handler)
 	{
 		return "";
 	}
@@ -69,7 +69,7 @@ public class RecordFormatter extends Formatter
 	 * @param handler
 	 */
 	@Override
-	public String getTail(Handler handler)
+	public String getTail(final Handler handler)
 	{
 		return "\n";
 	}

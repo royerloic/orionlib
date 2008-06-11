@@ -67,10 +67,9 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 	private static JFrame mouseTestFrame;
 	private static JPanel mouseTestPanel;
 
-	private WiiRemote remote;
+	private final WiiRemote remote;
 	private static JFrame graphFrame;
 	private static JPanel graph;
-	private static int[][] pixels;
 	private static int t = 0;
 	private static int x = 0;
 	private static int y = 0;
@@ -82,7 +81,7 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 
 	private static PrebufferedSound prebuf;
 
-	public static void main(String args[])
+	public static void main(final String args[])
 	{
 		// basic console logging options...
 		WiiRemoteJ.setConsoleLoggingAll();
@@ -90,7 +89,7 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 
 		try
 		{
-			WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
+			final WiiRemoteDiscoveryListener listener = new WiiRemoteDiscoveryListener()
 			{
 				public void wiiRemoteDiscovered(WiiRemoteDiscoveredEvent evt)
 				{
@@ -113,19 +112,30 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 
 			mouseTestPanel = new JPanel()
 			{
-				public void paintComponent(Graphics graphics)
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public void paintComponent(final Graphics graphics)
 				{
 					graphics.clearRect(0, 0, 4 * LS, 7 * LS);
 					graphics.setColor(Color.YELLOW);
 					if (status == 0)
+					{
 						graphics.fillRect(status * LS,
 															(accelerometerStatus + 1) * LS,
 															LS,
 															LS);
+					}
 					else if (status == 3)
+					{
 						graphics.fillRect(status * LS, (analogStickStatus + 1) * LS, LS, LS);
+					}
 					else
+					{
 						graphics.fillRect(status * LS, LS, LS, LS);
+					}
 
 					graphics.setColor(Color.BLACK);
 					graphics.drawString("WM", (int) (LS * 0.5), (int) (LS * 1.5));
@@ -155,10 +165,14 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			graphFrame.setResizable(false);
 
 			t = 801;
-			pixels = new int[800][600];
 			graph = new JPanel()
 			{
-				public void paintComponent(Graphics graphics)
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public void paintComponent(final Graphics graphics)
 				{
 					if (t >= 800 || accelerometerSource != lastSource)
 					{
@@ -182,7 +196,7 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			graphFrame.setVisible(true);
 
 			// Find and connect to a Wii Remote
-			WiiRemote remote = WiiRemoteJ.findRemote();
+			final WiiRemote remote = WiiRemoteJ.findRemote();
 			remote.addWiiRemoteListener(new CopyOfWRLImpl(remote));
 			remote.setAccelerometerEnabled(true);
 			remote.setSpeakerEnabled(true);
@@ -202,19 +216,19 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			// Prebuffer a preformatted audio file
 			System.out.println("Buffering audio file...");
 			long time = System.currentTimeMillis();
-			AudioInputStream audio = AudioSystem.getAudioInputStream(new java.io.File("Audio.au"));
+			final AudioInputStream audio = AudioSystem.getAudioInputStream(new java.io.File("Audio.au"));
 			prebuf = WiiRemote.bufferSound(audio);
 			time = System.currentTimeMillis() - time;
 			time /= 1000;
 			System.out.println("Prebuf done: " + time + " seconds.");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public CopyOfWRLImpl(WiiRemote remote)
+	public CopyOfWRLImpl(final WiiRemote remote)
 	{
 		this.remote = remote;
 	}
@@ -225,16 +239,14 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 		System.exit(0);
 	}
 
-	public void statusReported(WRStatusEvent evt)
+	public void statusReported(final WRStatusEvent evt)
 	{
-		System.out.println("Battery level: " + (double) evt.getBatteryLevel()
-												/ 2
-												+ "%");
+		System.out.println("Battery level: " + evt.getBatteryLevel() / 2 + "%");
 		System.out.println("Continuous: " + evt.isContinuousEnabled());
 		System.out.println("Remote continuous: " + remote.isContinuousEnabled());
 	}
 
-	public void IRInputReceived(WRIREvent evt)
+	public void IRInputReceived(final WRIREvent evt)
 	{
 		/*
 		 * for (IRLight light : evt.getIRLights()) { if (light != null) {
@@ -244,7 +256,7 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 
 	}
 
-	public void accelerationInputReceived(WRAccelerationEvent evt)
+	public void accelerationInputReceived(final WRAccelerationEvent evt)
 	{
 		if (accelerometerSource)
 		{
@@ -269,15 +281,15 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 		 */
 	}
 
-	public void extensionInputReceived(WRExtensionEvent evt)
+	public void extensionInputReceived(final WRExtensionEvent evt)
 	{
 		if (evt instanceof WRNunchukExtensionEvent)
 		{
-			WRNunchukExtensionEvent NEvt = (WRNunchukExtensionEvent) evt;
+			final WRNunchukExtensionEvent NEvt = (WRNunchukExtensionEvent) evt;
 
 			if (!accelerometerSource)
 			{
-				WRAccelerationEvent AEvt = NEvt.getAcceleration();
+				final WRAccelerationEvent AEvt = NEvt.getAcceleration();
 				lastX = x;
 				lastY = y;
 				lastZ = z;
@@ -292,41 +304,73 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			}
 
 			if (NEvt.wasPressed(WRNunchukExtensionEvent.C))
+			{
 				System.out.println("Jump...");
+			}
 			if (NEvt.wasPressed(WRNunchukExtensionEvent.Z))
+			{
 				System.out.println("And crouch.");
+			}
 		}
 		else if (evt instanceof WRClassicControllerExtensionEvent)
 		{
-			WRClassicControllerExtensionEvent CCEvt = (WRClassicControllerExtensionEvent) evt;
+			final WRClassicControllerExtensionEvent CCEvt = (WRClassicControllerExtensionEvent) evt;
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.A))
+			{
 				System.out.println("A!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.B))
+			{
 				System.out.println("B!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.Y))
+			{
 				System.out.println("Y!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.X))
+			{
 				System.out.println("X!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.LEFT_Z))
+			{
 				System.out.println("ZL!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.RIGHT_Z))
+			{
 				System.out.println("ZR!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.LEFT_TRIGGER))
+			{
 				System.out.println("TL!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.RIGHT_TRIGGER))
+			{
 				System.out.println("TR!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.DPAD_LEFT))
+			{
 				System.out.println("DL!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.DPAD_RIGHT))
+			{
 				System.out.println("DR!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.DPAD_UP))
+			{
 				System.out.println("DU!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.DPAD_DOWN))
+			{
 				System.out.println("DD!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.PLUS))
+			{
 				System.out.println("Plus!");
+			}
 			if (CCEvt.wasPressed(WRClassicControllerExtensionEvent.MINUS))
+			{
 				System.out.println("Minus!");
+			}
 			if (CCEvt.isPressed(WRClassicControllerExtensionEvent.HOME))
 			{
 				System.out.println("L shoulder: " + CCEvt.getLeftTrigger());
@@ -335,42 +379,60 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 		}
 		else if (evt instanceof WRGuitarExtensionEvent)
 		{
-			WRGuitarExtensionEvent GEvt = (WRGuitarExtensionEvent) evt;
+			final WRGuitarExtensionEvent GEvt = (WRGuitarExtensionEvent) evt;
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.MINUS))
+			{
 				System.out.println("Minus!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.PLUS))
+			{
 				System.out.println("Plus!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.STRUM_UP))
+			{
 				System.out.println("Strum up!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.YELLOW))
+			{
 				System.out.println("Yellow!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.GREEN))
+			{
 				System.out.println("Green!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.BLUE))
+			{
 				System.out.println("Blue!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.RED))
+			{
 				System.out.println("Red!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.ORANGE))
+			{
 				System.out.println("Orange!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.STRUM_DOWN))
+			{
 				System.out.println("Strum down!");
+			}
 			if (GEvt.wasPressed(WRGuitarExtensionEvent.GREEN + WRGuitarExtensionEvent.RED))
 			{
 				System.out.println("Whammy bar: " + GEvt.getWhammyBar());
-				AnalogStickData AS = GEvt.getAnalogStickData();
+				final AnalogStickData AS = GEvt.getAnalogStickData();
 				System.out.println("Analog- X: " + AS.getX() + " Y: " + AS.getY());
 			}
 		}
 	}
 
-	public void extensionConnected(WiiRemoteExtension extension)
+	public void extensionConnected(final WiiRemoteExtension extension)
 	{
 		System.out.println("Extension connected!");
 		try
 		{
 			remote.setExtensionEnabled(true);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -386,7 +448,7 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 		System.out.println("Extension unknown. Did you try to plug in a toaster or something?");
 	}
 
-	public void extensionDisconnected(WiiRemoteExtension extension)
+	public void extensionDisconnected(final WiiRemoteExtension extension)
 	{
 		System.out.println("Extension disconnected. Why'd you unplug it, retard?");
 	}
@@ -398,63 +460,87 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			if (status == 0)
 			{
 				if (accelerometerStatus == 0)
+				{
 					remote.setMouse(MotionAccelerometerMouse.getDefault());
+				}
 				else if (accelerometerStatus == 1)
+				{
 					remote.setMouse(TiltAccelerometerMouse.getDefault());
+				}
 				else if (accelerometerStatus == 2)
+				{
 					remote.setMouse(new MotionAccelerometerMouse(	80,
 																												60,
 																												AccelerometerMouse.NUNCHUK_EXTENSION,
 																												0.06,
 																												0.08));
+				}
 				else if (accelerometerStatus == 3)
+				{
 					remote.setMouse(new TiltAccelerometerMouse(	10,
 																											10,
 																											AccelerometerMouse.NUNCHUK_EXTENSION,
 																											0.1,
 																											0.1));
+				}
 			}
 			else if (status == 1)
+			{
 				remote.setMouse(IRMouse.getDefault());
+			}
 			else if (status == 2)
+			{
 				remote.setMouse(IRAccelerometerMouse.getDefault());
+			}
 			else if (status == 3)
 			{
 				if (analogStickStatus == 0)
+				{
 					remote.setMouse(AbsoluteAnalogStickMouse.getDefault());
+				}
 				else if (analogStickStatus == 1)
+				{
 					remote.setMouse(RelativeAnalogStickMouse.getDefault());
+				}
 				else if (analogStickStatus == 2)
+				{
 					remote.setMouse(new AbsoluteAnalogStickMouse(	1,
 																												1,
 																												AnalogStickMouse.CLASSIC_CONTROLLER_LEFT));
+				}
 				else if (analogStickStatus == 3)
+				{
 					remote.setMouse(new RelativeAnalogStickMouse(	10,
 																												10,
 																												0.05,
 																												0.05,
 																												AnalogStickMouse.CLASSIC_CONTROLLER_LEFT));
+				}
 				else if (analogStickStatus == 4)
+				{
 					remote.setMouse(new AbsoluteAnalogStickMouse(	1,
 																												1,
 																												AnalogStickMouse.CLASSIC_CONTROLLER_RIGHT));
+				}
 				else if (analogStickStatus == 5)
+				{
 					remote.setMouse(new RelativeAnalogStickMouse(	10,
 																												10,
 																												0.05,
 																												0.05,
 																												AnalogStickMouse.CLASSIC_CONTROLLER_RIGHT));
+				}
 			}
 			mouseTestPanel.repaint();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}
 
 	}
 
-	public void buttonInputReceived(WRButtonEvent evt)
+	public void buttonInputReceived(final WRButtonEvent evt)
 	{
 		/***************************************************************************
 		 * if (evt.wasPressed(WRButtonEvent.TWO))System.out.println("2"); if
@@ -479,7 +565,6 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 
 			if (evt.isPressed(WRButtonEvent.HOME))
 			{
-				boolean lightChanged = false;
 				if (evt.wasPressed(WRButtonEvent.PLUS) && !mouseTestingOn)
 				{
 					mouseTestingOn = true;
@@ -517,14 +602,18 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 				{
 					accelerometerSource = !accelerometerSource;
 					if (accelerometerSource)
+					{
 						graphFrame.setTitle("Accelerometer graph: Wii Remote");
+					}
 					else
+					{
 						graphFrame.setTitle("Accelerometer graph: Nunchuk");
+					}
 				}
 				else if (evt.wasPressed(WRButtonEvent.TWO)) // code for Wii Remote
 				// memory dump/comparison
 				{
-					Thread thread = new Thread(new Runnable()
+					final Thread thread = new Thread(new Runnable()
 					{
 						public void run()
 						{
@@ -573,7 +662,9 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 										// System.out.println("0x" + Integer.toHexString(data[c])
 										// + " : 0x" + Integer.toHexString(dataO[c]));
 										if (data[c] != dataO[c])
+										{
 											System.out.println("Flash: 0x" + Integer.toHexString(c));
+										}
 									}
 									System.out.println("Comparing complete");
 								}
@@ -646,27 +737,35 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 					}
 
 					if (change)
+					{
 						mouseCycle();
+					}
 				}
 			}
 			else if (evt.wasPressed(WRButtonEvent.TWO))
 			{
 				remote.requestStatus();
 				if (remote.isPlayingSound())
+				{
 					remote.stopSound();
+				}
 			}
 			else if (evt.wasPressed(WRButtonEvent.ONE))
 			{
 				if (prebuf != null)
+				{
 					remote.playPrebufferedSound(prebuf, WiiRemote.SF_PCM8S);
+				}
 			}
 			else if (evt.wasPressed(WRButtonEvent.PLUS))
 			{
 				if (remote.isSpeakerEnabled())
 				{
-					double volume = (remote.getSpeakerVolume() * 20 + 1) / 20;
+					final double volume = (remote.getSpeakerVolume() * 20 + 1) / 20;
 					if (volume <= 1)
+					{
 						remote.setSpeakerVolume(volume);
+					}
 					System.out.println("Volume: " + remote.getSpeakerVolume());
 				}
 			}
@@ -674,14 +773,16 @@ public class CopyOfWRLImpl extends WiiRemoteAdapter
 			{
 				if (remote.isSpeakerEnabled())
 				{
-					double volume = (remote.getSpeakerVolume() * 20 - 1) / 20;
+					final double volume = (remote.getSpeakerVolume() * 20 - 1) / 20;
 					if (volume >= 0)
+					{
 						remote.setSpeakerVolume(volume);
+					}
 					System.out.println("Volume: " + remote.getSpeakerVolume());
 				}
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 		}

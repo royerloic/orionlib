@@ -106,7 +106,9 @@ public class FeedChannelsMonitor
 
 					Date lDate = pItemIF.getDate();
 					if (lDate != null)
+					{
 						lFeedItem.setDate(pItemIF.getDate());
+					}
 					else
 					{
 						try
@@ -118,22 +120,34 @@ public class FeedChannelsMonitor
 							e.printStackTrace();
 						}
 						if (lDate != null)
+						{
 							lFeedItem.setDate(lDate);
+						}
 						else
+						{
 							lFeedItem.setDate(new Date());
+						}
 					}
 
 					final FeedChannelInterface lFeedChannel = mChannelMap.get(pChannelIF);
 					lFeedItem.setChannel(lFeedChannel);
 
 					if (pChannelIF.getCopyright() != null)
+					{
 						lFeedItem.setSource(pChannelIF.getCopyright());
+					}
 					else if (pChannelIF.getCreator() != null)
+					{
 						lFeedItem.setSource(pChannelIF.getCreator());
+					}
 					else if (pChannelIF.getPublisher() != null)
+					{
 						lFeedItem.setSource(pChannelIF.getPublisher());
+					}
 					else if (pChannelIF.getSite() != null)
+					{
 						lFeedItem.setSource(pChannelIF.getSite().getHost());
+					}
 
 					lFeedAnalyser.analyseItem(lFeedItem);
 					mFeedListener.onItemFound(lFeedItem);
@@ -218,7 +232,9 @@ public class FeedChannelsMonitor
 						lUrlList.add(lFeedURL);
 					}
 					else if (lLineString.matches("CurrentMaximalFrequence=\\d*"))
+					{
 						lCurrentFrequence = Integer.parseInt(lLineString.split("=")[1]);
+					}
 				}
 
 				final double lNumberOfFeeds = lUrlList.size();
@@ -275,7 +291,9 @@ public class FeedChannelsMonitor
 	public void stopMonitoring()
 	{
 		for (final ChannelIF lChannel : mChannelMap.keySet())
+		{
 			mPoller.unregisterChannel(lChannel);
+		}
 		mPoller.removeObserver(mObserver);
 		mPoller.removeApprover(mApprover);
 	}

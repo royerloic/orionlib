@@ -98,7 +98,7 @@ public class MatrixFile
 		for (final O lEntry : pList)
 		{
 			boolean isLast = i == pList.size() - 1;
-			if (!((lEntry instanceof Double) && ((Double) lEntry).isNaN()))
+			if (!(lEntry instanceof Double && ((Double) lEntry).isNaN()))
 			{
 				pWriter.append(lEntry.toString());
 			}
@@ -258,13 +258,13 @@ public class MatrixFile
 		return lInputStream;
 	}
 
-	public static final LineIterator getLines(String pString) throws IOException
+	public static final LineIterator getLines(final String pString) throws IOException
 	{
 		return getLines(Object.class.getResourceAsStream(pString));
 	}
 
 	public static final LineIterator getLines(final InputStream pInputStream,
-																						int pSkipLines) throws IOException
+																						final int pSkipLines) throws IOException
 	{
 		return new LineIterator(pInputStream, pSkipLines);
 	}
@@ -327,7 +327,7 @@ public class MatrixFile
 						return true;
 					}
 				}
-				catch (IOException e)
+				catch (final IOException e)
 				{
 					throw new RuntimeException(e);
 				}

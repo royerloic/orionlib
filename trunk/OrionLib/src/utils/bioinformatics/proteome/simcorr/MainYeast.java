@@ -74,29 +74,31 @@ public class MainYeast
 	 * e.printStackTrace(); fail("Exception: " + e); } }/
 	 ****************************************************************************/
 
-	public void collectFor(	Proteome pProteome,
-													DomainIndex pDomainIndex,
-													String pInterProDomainId,
-													PrintWriter pPrintWriter)	throws IOException,
-																										ClassNotFoundException
+	public void collectFor(	final Proteome pProteome,
+													final DomainIndex pDomainIndex,
+													final String pInterProDomainId,
+													final PrintWriter pPrintWriter)	throws IOException,
+																													ClassNotFoundException
 	{
 		final Set<Protein> lProteinSet = pDomainIndex.getProteinByDomainInterproId(pInterProDomainId);
 		assertNotNull(lProteinSet);
 		// System.out.println(lProteinSet);
 
-		HashMap<FastaSequence, Protein> lSequenceToProteinMap = new HashMap<FastaSequence, Protein>();
-		ArrayList<FastaSequence> lSequenceList = new ArrayList<FastaSequence>();
-		for (Protein lProtein : lProteinSet)
+		final HashMap<FastaSequence, Protein> lSequenceToProteinMap = new HashMap<FastaSequence, Protein>();
+		final ArrayList<FastaSequence> lSequenceList = new ArrayList<FastaSequence>();
+		for (final Protein lProtein : lProteinSet)
 		// if (lProtein.getNumberOfDistinctDomains() == 1)
 		{
-			Set<Domain> lDomainSet = lProtein.getDomainsByInterProId(pInterProDomainId);
+			final Set<Domain> lDomainSet = lProtein.getDomainsByInterProId(pInterProDomainId);
 			System.out.println("protein has: " + lProtein	.getDomainMap()
 																										.keySet()
 																										.size()
 													+ " distinct domains");
 
-			for (Domain lDomain : lDomainSet)
+			for (final Domain lDomain : lDomainSet)
+			{
 				if (lDomain.getSource().equals("HMMPfam"))
+				{
 					if (lDomain.getEValue() < 1E-5)
 
 					{
@@ -110,27 +112,30 @@ public class MainYeast
 						System.out.println("");
 
 					}
+				}
+			}
 
 		}
 
-		File lSequenceSimilarityCache = new File("SequenceSimilarity.bin");
-		HashMapMap<Protein, Protein, Double> lSequenceSimilarityMap = new HashMapMap<Protein, Protein, Double>();
+		final File lSequenceSimilarityCache = new File("SequenceSimilarity.bin");
+		final HashMapMap<Protein, Protein, Double> lSequenceSimilarityMap = new HashMapMap<Protein, Protein, Double>();
 		try
 		{
 			for (int i = 0; i < lSequenceList.size(); i++)
+			{
 				for (int j = 0; j < i; j++)
 				{
 					final FastaSequence lFastaSequence1 = lSequenceList.get(i);
 					final FastaSequence lFastaSequence2 = lSequenceList.get(j);
 
-					Sequence lSequence1 = SequenceParser.parse(lFastaSequence1.getSequenceString());
-					Sequence lSequence2 = SequenceParser.parse(lFastaSequence2.getSequenceString());
+					final Sequence lSequence1 = SequenceParser.parse(lFastaSequence1.getSequenceString());
+					final Sequence lSequence2 = SequenceParser.parse(lFastaSequence2.getSequenceString());
 
-					Alignment lAlignment = SmithWatermanGotoh.align(lSequence1,
-																													lSequence2,
-																													MatrixLoader.load("BLOSUM70"),
-																													10f,
-																													0.5f);
+					final Alignment lAlignment = SmithWatermanGotoh.align(lSequence1,
+																																lSequence2,
+																																MatrixLoader.load("BLOSUM70"),
+																																10f,
+																																0.5f);
 
 					final double lLength = Math.min(lSequence1.length(),
 																					lSequence2.length());
@@ -151,23 +156,24 @@ public class MainYeast
 						lSequenceSimilarityMap.put(lProtein2, lProtein1, lSimilarity);
 					}
 				}
+			}
 
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 
 		System.out.println(lSequenceSimilarityMap);
 
-		HashSetMap<Protein, Protein> lProteinNeighboorsSetMap = new HashSetMap<Protein, Protein>();
-		for (Protein lProtein : lProteinSet)
+		final HashSetMap<Protein, Protein> lProteinNeighboorsSetMap = new HashSetMap<Protein, Protein>();
+		for (final Protein lProtein : lProteinSet)
 		{
-			Node lNode = new Node(lProtein.getId());
-			Set<Node> lNodeSet = pProteome.getInteractionGraph()
-																		.getNodeNeighbours(lNode, 1);
+			final Node lNode = new Node(lProtein.getId());
+			final Set<Node> lNodeSet = pProteome.getInteractionGraph()
+																					.getNodeNeighbours(lNode, 1);
 
-			for (Node lNodeNeighboor : lNodeSet)
+			for (final Node lNodeNeighboor : lNodeSet)
 			{
 				final Protein lProteinNeighboor = pProteome	.getProteinSet()
 																										.getProteinById(lNodeNeighboor.getName());
@@ -175,11 +181,12 @@ public class MainYeast
 			}
 		}
 
-		HashMapMap<Protein, Protein, Double> lInteractorsSimilarityMap = new HashMapMap<Protein, Protein, Double>();
-		ArrayList<Protein> lProteinList = new ArrayList<Protein>(lProteinNeighboorsSetMap.keySet());
+		final HashMapMap<Protein, Protein, Double> lInteractorsSimilarityMap = new HashMapMap<Protein, Protein, Double>();
+		final ArrayList<Protein> lProteinList = new ArrayList<Protein>(lProteinNeighboorsSetMap.keySet());
 
 		double lMaxIntSim = 0;
 		for (int i = 0; i < lProteinList.size(); i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final Protein lProtein1 = lProteinList.get(i);
@@ -203,10 +210,12 @@ public class MainYeast
 				lInteractorsSimilarityMap.put(lProtein1, lProtein2, lJacquard);
 				lInteractorsSimilarityMap.put(lProtein2, lProtein1, lJacquard);
 			}
+		}
 
 		System.out.println(lInteractorsSimilarityMap);
 
 		for (int i = 0; i < lProteinList.size(); i++)
+		{
 			for (int j = 0; j < i; j++)
 			{
 				final Protein lProtein1 = lProteinList.get(i);
@@ -233,6 +242,7 @@ public class MainYeast
 				}
 
 			}
+		}
 
 	}/**/
 }

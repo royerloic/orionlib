@@ -27,7 +27,9 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
 		final Set<V> lAllValuesSet = new HashSet<V>();
 		final Collection<Set<V>> lValues = super.values();
 		for (final Set<V> lSet : lValues)
+		{
 			lAllValuesSet.addAll(lSet);
+		}
 		return lAllValuesSet;
 	}
 
@@ -68,7 +70,9 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
 			super.put(pKey, lValueSet);
 		}
 		else
+		{
 			lValueSet.addAll(pVSet);
+		}
 
 		return lValueSet;
 	}
@@ -76,7 +80,9 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
 	public void addAll(final Collection<K> pKSet, final Collection<V> pVSet)
 	{
 		for (final K lK : pKSet)
+		{
 			this.putAll(lK, pVSet);
+		}
 	}
 
 	public void addAll(final SetMap<K, V> pSetMap)
@@ -85,9 +91,13 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
 		{
 			final Set<V> lSet = get(lEntry.getKey());
 			if (lSet == null)
+			{
 				super.put(lEntry.getKey(), new HashSet<V>(lEntry.getValue()));
+			}
 			else
+			{
 				lSet.addAll(lEntry.getValue());
+			}
 		}
 
 	}
@@ -96,7 +106,9 @@ public class HashSetMap<K, V> extends HashMap<K, Set<V>> implements
 	{
 		final Set<V> lValueSet = get(pKey);
 		if (lValueSet != null)
+		{
 			lValueSet.clear();
+		}
 	}
 
 }

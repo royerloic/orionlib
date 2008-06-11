@@ -20,7 +20,7 @@ public class GeneMapTest
 	@Test
 	public void test1() throws IOException
 	{
-		GeneMapBuilder lGeneMap = new GeneMapBuilder();
+		final GeneMapBuilder lGeneMap = new GeneMapBuilder();
 
 		lGeneMap.addAnnotation(10, "gene10", 0, "att0");
 		lGeneMap.addAnnotation(11, "gene11", 0, "att0");
@@ -37,9 +37,9 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
 
-		HashMap<Element, Enrichment> lEnrichment = lGeneMap.computeEnrichements(10,
-																																						11,
-																																						12);
+		final HashMap<Element, Enrichment> lEnrichment = lGeneMap.computeEnrichements(10,
+																																									11,
+																																									12);
 
 		System.out.println(lEnrichment);
 		assertTrue(lEnrichment.get(new Element(0)).mCorrectedPValue == 3.0);
@@ -51,7 +51,7 @@ public class GeneMapTest
 	@Test
 	public void test2() throws IOException
 	{
-		GeneMapBuilder lGeneMap = new GeneMapBuilder();
+		final GeneMapBuilder lGeneMap = new GeneMapBuilder();
 
 		lGeneMap.addGene(10, "gene10", "");
 		lGeneMap.addGene(11, "gene11", "");
@@ -80,9 +80,9 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, 3);
 
-		HashMap<Element, Enrichment> lEnrichement = lGeneMap.computeEnrichements(	10,
-																																							11,
-																																							12);
+		final HashMap<Element, Enrichment> lEnrichement = lGeneMap.computeEnrichements(	10,
+																																										11,
+																																										12);
 
 		assertTrue(lEnrichement.get(new Element(0)).mCorrectedPValue == 3.0);
 		assertTrue(lEnrichement.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);
@@ -90,16 +90,19 @@ public class GeneMapTest
 
 		// System.out.println(lEnrichement);
 
-		Collection<GeneSet> lGeneSets = lGeneMap.getGeneSubSets(0.5, 10, 11, 12);
+		final Collection<GeneSet> lGeneSets = lGeneMap.getGeneSubSets(0.5,
+																																	10,
+																																	11,
+																																	12);
 
 		assertTrue(lGeneSets.size() == 1);
 		assertTrue(lGeneSets.iterator().next().getBestPValue() == 0.30000000000000004);
 		// System.out.println(lGeneSets);
 
-		Collection<GeneSet> lDecomposedGeneSets = lGeneMap.getGeneSubSetsAndDecompose(2,
-																																									12,
-																																									13,
-																																									14);
+		final Collection<GeneSet> lDecomposedGeneSets = lGeneMap.getGeneSubSetsAndDecompose(2,
+																																												12,
+																																												13,
+																																												14);
 		// System.out.println(lDecomposedGeneSets);
 		assertTrue(lDecomposedGeneSets.size() == 1);
 		assertTrue(lDecomposedGeneSets.iterator().next().getBestPValue() == 1.2000000000000002);
@@ -109,7 +112,7 @@ public class GeneMapTest
 	@Test
 	public void testSaveLoad() throws IOException
 	{
-		GeneMapBuilder lGeneMap = new GeneMapBuilder();
+		final GeneMapBuilder lGeneMap = new GeneMapBuilder();
 
 		lGeneMap.addAnnotation(10, "gene10", 0, "att0");
 		lGeneMap.addAnnotation(11, "gene11", 0, "att0");
@@ -126,15 +129,15 @@ public class GeneMapTest
 
 		lGeneMap.addAnnotation(12, "gene12", 3, "att3");
 
-		File tempFile = File.createTempFile("GeneMapBuilder", "testSaveLoad");
+		final File tempFile = File.createTempFile("GeneMapBuilder", "testSaveLoad");
 		System.out.println(tempFile);
 		lGeneMap.save(tempFile);
 
-		GeneMapBuilder lGeneMapFromDisc = GeneMapBuilder.load(tempFile);
+		final GeneMapBuilder lGeneMapFromDisc = GeneMapBuilder.load(tempFile);
 
-		HashMap<Element, Enrichment> lEnrichment = lGeneMapFromDisc.computeEnrichements(10,
-																																										11,
-																																										12);
+		final HashMap<Element, Enrichment> lEnrichment = lGeneMapFromDisc.computeEnrichements(10,
+																																													11,
+																																													12);
 		System.out.println(lEnrichment);
 		assertTrue(lEnrichment.get(new Element(0)).mCorrectedPValue == 3.0);
 		assertTrue(lEnrichment.get(new Element(1)).mCorrectedPValue == 0.30000000000000004);

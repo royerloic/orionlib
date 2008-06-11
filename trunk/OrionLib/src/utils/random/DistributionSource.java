@@ -28,7 +28,9 @@ public class DistributionSource<O>
 	public final double prepare(final int pResolution, final double pDistorsionMax) throws Exception
 	{
 		if (this.mObjectToProbabilityMap.isEmpty())
+		{
 			throw new RuntimeException("Must add object with probability in source");
+		}
 
 		normalize();
 
@@ -40,12 +42,16 @@ public class DistributionSource<O>
 			int lRegionSize = (int) Math.round(lRegionSizeDouble);
 
 			if (lRegionSize == 0)
+			{
 				lRegionSize = 1;
+			}
 
 			final O lValue = lEntry.getKey();
 
 			for (int i = 0; i < lRegionSize; i++)
+			{
 				this.mHitList.add(lValue);
+			}
 		}
 
 		double lMaxProbabilityDistorsion = Double.POSITIVE_INFINITY;
@@ -57,9 +63,11 @@ public class DistributionSource<O>
 			// System.out.println("lMaxProbabilityDistorsion =
 			// "+lMaxProbabilityDistorsion);
 			if (lMaxProbabilityDistorsion >= pDistorsionMax)
+			{
 				throw new Exception("probability Distribution Distorsion is higher that the specified limit: " + lMaxProbabilityDistorsion
 														+ " >= "
 														+ pDistorsionMax);
+			}
 		}
 
 		this.mIsPrepared = true;
@@ -69,7 +77,9 @@ public class DistributionSource<O>
 	public O getObject(final Random pRandom)
 	{
 		if (!this.mIsPrepared)
+		{
 			throw new RuntimeException("Distribution not prepared!! you must call prepare() !");
+		}
 
 		final O lObject = RandomUtils.randomElement(pRandom, this.mHitList);
 
@@ -81,7 +91,9 @@ public class DistributionSource<O>
 	{
 		double lTotal = 0;
 		for (final double lProbability : this.mObjectToProbabilityMap.values())
+		{
 			lTotal += lProbability;
+		}
 
 		final Map<O, Double> mNewObjectToProbabilityMap = new HashMap<O, Double>();
 		for (final Entry<O, Double> lEntry : this.mObjectToProbabilityMap.entrySet())
@@ -102,8 +114,11 @@ public class DistributionSource<O>
 		int lCount = 0;
 		O lCurrentObject = pHitList.get(0);
 		for (final O lO : pHitList)
+		{
 			if (lCurrentObject == lO)
+			{
 				lCount++;
+			}
 			else
 			{
 				final Double lProbability = (double) lCount / (double) pHitList.size();
@@ -111,6 +126,7 @@ public class DistributionSource<O>
 				lCount = 0;
 				lCurrentObject = lO;
 			}
+		}
 		final Double lProbability = (double) lCount / (double) pHitList.size();
 		mNewProbabilityToObjectMap.put(lCurrentObject, lProbability);
 

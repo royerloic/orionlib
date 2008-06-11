@@ -18,7 +18,8 @@ public class Triple<A, B, C>
 	public boolean equals(final Object pObj)
 	{
 		final Triple<A, B, C> lTriple = (Triple<A, B, C>) pObj;
-		return (this.mA.equals(lTriple.mA) && this.mB.equals(lTriple.mB) && this.mC.equals(lTriple.mC));
+		return this.mA.equals(lTriple.mA) && this.mB.equals(lTriple.mB)
+						&& this.mC.equals(lTriple.mC);
 
 	}
 

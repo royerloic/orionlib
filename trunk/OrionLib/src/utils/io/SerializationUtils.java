@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 
 public class SerializationUtils
 {
-	public static final void write(Object pObject, File pProteomeFile) throws IOException
+	public static final void write(final Object pObject, final File pProteomeFile) throws IOException
 	{
 		final FileOutputStream lFileOutputStream = new FileOutputStream(pProteomeFile);
 		final BufferedOutputStream lBufferedOutputStream = new BufferedOutputStream(lFileOutputStream);
@@ -20,8 +20,8 @@ public class SerializationUtils
 		lObjectOuputStream.close();
 	}
 
-	public static final Object read(File pProteomeFile)	throws IOException,
-																											ClassNotFoundException
+	public static final Object read(final File pProteomeFile)	throws IOException,
+																														ClassNotFoundException
 	{
 		if (pProteomeFile.exists())
 		{

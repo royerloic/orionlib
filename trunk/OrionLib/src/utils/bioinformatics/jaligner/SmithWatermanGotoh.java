@@ -62,22 +62,22 @@ public class SmithWatermanGotoh
 	 * @see Sequence
 	 * @see Matrix
 	 */
-	public static Alignment align(Sequence s1,
-																Sequence s2,
-																Matrix matrix,
-																float o,
-																float e)
+	public static Alignment align(final Sequence s1,
+																final Sequence s2,
+																final Matrix matrix,
+																final float o,
+																final float e)
 	{
 		logger.info("Started...");
-		long start = System.currentTimeMillis();
-		float[][] scores = matrix.getScores();
+		final long start = System.currentTimeMillis();
+		final float[][] scores = matrix.getScores();
 
-		SmithWatermanGotoh sw = new SmithWatermanGotoh();
+		final SmithWatermanGotoh sw = new SmithWatermanGotoh();
 
-		int m = s1.length() + 1;
-		int n = s2.length() + 1;
+		final int m = s1.length() + 1;
+		final int n = s2.length() + 1;
 
-		byte[] pointers = new byte[m * n];
+		final byte[] pointers = new byte[m * n];
 
 		// Initializes the boundaries of the traceback matrix to STOP.
 		for (int i = 0, k = 0; i < m; i++, k += n)
@@ -89,8 +89,8 @@ public class SmithWatermanGotoh
 			pointers[j] = Directions.STOP;
 		}
 
-		short[] sizesOfVerticalGaps = new short[m * n];
-		short[] sizesOfHorizontalGaps = new short[m * n];
+		final short[] sizesOfVerticalGaps = new short[m * n];
+		final short[] sizesOfHorizontalGaps = new short[m * n];
 		for (int i = 0, k = 0; i < m; i++, k += n)
 		{
 			for (int j = 0; j < n; j++)
@@ -99,21 +99,21 @@ public class SmithWatermanGotoh
 			}
 		}
 
-		Cell cell = sw.construct(	s1,
-															s2,
-															scores,
-															o,
-															e,
-															pointers,
-															sizesOfVerticalGaps,
-															sizesOfHorizontalGaps);
-		Alignment alignment = sw.traceback(	s1,
-																				s2,
-																				matrix,
-																				pointers,
-																				cell,
-																				sizesOfVerticalGaps,
-																				sizesOfHorizontalGaps);
+		final Cell cell = sw.construct(	s1,
+																		s2,
+																		scores,
+																		o,
+																		e,
+																		pointers,
+																		sizesOfVerticalGaps,
+																		sizesOfHorizontalGaps);
+		final Alignment alignment = sw.traceback(	s1,
+																							s2,
+																							matrix,
+																							pointers,
+																							cell,
+																							sizesOfVerticalGaps,
+																							sizesOfHorizontalGaps);
 		alignment.setName1(s1.getId());
 		alignment.setName2(s2.getId());
 		alignment.setMatrix(matrix);
@@ -139,28 +139,29 @@ public class SmithWatermanGotoh
 	 *          extend gap penalty
 	 * @return The cell where the traceback starts.
 	 */
-	private Cell construct(	Sequence s1,
-													Sequence s2,
-													float[][] matrix,
-													float o,
-													float e,
-													byte[] pointers,
-													short[] sizesOfVerticalGaps,
-													short[] sizesOfHorizontalGaps)
+	private Cell construct(	final Sequence s1,
+													final Sequence s2,
+													final float[][] matrix,
+													final float o,
+													final float e,
+													final byte[] pointers,
+													final short[] sizesOfVerticalGaps,
+													final short[] sizesOfHorizontalGaps)
 	{
 		logger.info("Started...");
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 
-		char[] a1 = s1.toArray();
-		char[] a2 = s2.toArray();
+		final char[] a1 = s1.toArray();
+		final char[] a2 = s2.toArray();
 
-		int m = s1.length() + 1;
-		int n = s2.length() + 1;
+		final int m = s1.length() + 1;
+		final int n = s2.length() + 1;
 
 		float f; // score of alignment x1...xi to y1...yi if xi aligns to yi
-		float[] g = new float[n]; // score if xi aligns to a gap after yi
+		final float[] g = new float[n]; // score if xi aligns to a gap after yi
 		float h; // score if yi aligns to a gap after xi
-		float[] v = new float[n]; // best score of alignment x1...xi to y1...yi
+		final float[] v = new float[n]; // best score of alignment x1...xi to
+																		// y1...yi
 		float vDiagonal;
 
 		g[0] = Float.NEGATIVE_INFINITY;
@@ -175,7 +176,7 @@ public class SmithWatermanGotoh
 
 		float similarityScore, g1, g2, h1, h2;
 
-		Cell cell = new Cell();
+		final Cell cell = new Cell();
 
 		for (int i = 1, k = n; i < m; i++, k += n)
 		{
@@ -262,33 +263,33 @@ public class SmithWatermanGotoh
 	 * @see Cell
 	 * @see Alignment
 	 */
-	private Alignment traceback(Sequence s1,
-															Sequence s2,
-															Matrix m,
-															byte[] pointers,
-															Cell cell,
-															short[] sizesOfVerticalGaps,
-															short[] sizesOfHorizontalGaps)
+	private Alignment traceback(final Sequence s1,
+															final Sequence s2,
+															final Matrix m,
+															final byte[] pointers,
+															final Cell cell,
+															final short[] sizesOfVerticalGaps,
+															final short[] sizesOfHorizontalGaps)
 	{
 		logger.info("Started...");
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 
-		char[] a1 = s1.toArray();
-		char[] a2 = s2.toArray();
+		final char[] a1 = s1.toArray();
+		final char[] a2 = s2.toArray();
 
-		float[][] scores = m.getScores();
+		final float[][] scores = m.getScores();
 
-		int n = s2.length() + 1;
+		final int n = s2.length() + 1;
 
-		Alignment alignment = new Alignment();
+		final Alignment alignment = new Alignment();
 		alignment.setScore(cell.getScore());
 
-		int maxlen = s1.length() + s2.length(); // maximum length after the
+		final int maxlen = s1.length() + s2.length(); // maximum length after the
 		// aligned sequences
 
-		char[] reversed1 = new char[maxlen]; // reversed sequence #1
-		char[] reversed2 = new char[maxlen]; // reversed sequence #2
-		char[] reversed3 = new char[maxlen]; // reversed markup
+		final char[] reversed1 = new char[maxlen]; // reversed sequence #1
+		final char[] reversed2 = new char[maxlen]; // reversed sequence #2
+		final char[] reversed3 = new char[maxlen]; // reversed markup
 
 		int len1 = 0; // length of sequence #1 after alignment
 		int len2 = 0; // length of sequence #2 after alignment
@@ -384,7 +385,10 @@ public class SmithWatermanGotoh
 	 *          float #4
 	 * @return The maximum of a, b, c and d.
 	 */
-	private static float maximum(float a, float b, float c, float d)
+	private static float maximum(	final float a,
+																final float b,
+																final float c,
+																final float d)
 	{
 		if (a > b)
 		{
@@ -414,9 +418,9 @@ public class SmithWatermanGotoh
 	 * @param len
 	 * @return the input array of char reserved
 	 */
-	private static char[] reverse(char[] a, int len)
+	private static char[] reverse(final char[] a, final int len)
 	{
-		char[] b = new char[len];
+		final char[] b = new char[len];
 		for (int i = len - 1, j = 0; i >= 0; i--, j++)
 		{
 			b[j] = a[i];

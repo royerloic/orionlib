@@ -33,10 +33,12 @@ public class normal
 	 */
 
 	/** The Normal Density Function */
-	public static double density(double x, double mu, double sigma)
+	public static double density(double x, final double mu, final double sigma)
 	{
 		if (Double.isNaN(x) || Double.isNaN(mu) || Double.isNaN(sigma))
+		{
 			return x + mu + sigma;
+		}
 		if (sigma <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -63,7 +65,7 @@ public class normal
 	 * Mathematical Software. 19, 22-32.
 	 */
 
-	public static double cumulative(double x, double mu, double sigma)
+	public static double cumulative(double x, final double mu, final double sigma)
 	{
 		final double c[] =
 		{ 0.39894151208813466764,
@@ -125,7 +127,9 @@ public class normal
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(mu) || Double.isNaN(sigma))
+		{
 			return x + mu + sigma;
+		}
 		/* !* #endif /*4! */
 		if (sigma < 0)
 		{
@@ -137,9 +141,13 @@ public class normal
 		if (Double.isInfinite(x))
 		{
 			if (x < 0)
+			{
 				return 0;
+			}
 			else
+			{
 				return 1;
+			}
 		}
 		/* !* #endif /*4! */
 
@@ -285,13 +293,17 @@ public class normal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double p, double mu, double sigma)
+	public static double quantile(final double p,
+																final double mu,
+																final double sigma)
 	{
 		double q, r, val;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(mu) || Double.isNaN(sigma))
+		{
 			return p + mu + sigma;
+		}
 		/* !* #endif /*4! */
 		if (p < 0.0 || p > 1.0)
 		{
@@ -318,7 +330,9 @@ public class normal
 
 			r = p;
 			if (q > 0.0)
+			{
 				r = 1.0 - p;
+			}
 
 			if (r > Constants.DBL_EPSILON)
 			{
@@ -326,7 +340,9 @@ public class normal
 				r = java.lang.Math.sqrt(-java.lang.Math.log(r));
 				val = (((2.32121276858 * r + 4.85014127135) * r - 2.29796479134) * r - 2.78718931138) / ((1.63706781897 * r + 3.54388924762) * r + 1.0);
 				if (q < 0.0)
+				{
 					val = -val;
+				}
 			}
 			else if (r > 1e-300)
 			{ /* Assuming IEEE here? */
@@ -342,7 +358,9 @@ public class normal
 				/* !* val = sqrt(val * (1 - r)); *! */
 				val = java.lang.Math.sqrt(val * (1 - r));
 				if (q < 0.0)
+				{
 					val = -val;
+				}
 				return val;
 			}
 			else
@@ -389,7 +407,9 @@ public class normal
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double mu, double sigma, uniform PRNG)
+	public static double random(final double mu,
+															final double sigma,
+															final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */
@@ -401,9 +421,13 @@ public class normal
 			// return Double.NaN;
 		}
 		else if (sigma == 0.0)
+		{
 			return mu;
+		}
 		else
+		{
 			return mu + sigma * random(PRNG);
+		}
 	}
 
 	/*
@@ -449,7 +473,7 @@ public class normal
 	 * The definitions of the constants a[k], d[k], t[k] and h[k] are according to
 	 * the abovementioned article
 	 */
-	public static double random_AhrensDieter(uniform PRNG)
+	public static double random_AhrensDieter(final uniform PRNG)
 	{
 		final double a[] =
 		{ 0.0000000,
@@ -590,12 +614,16 @@ public class normal
 		u = uniform.random();
 		s = 0.0;
 		if (u > 0.5)
+		{
 			s = 1.0;
+		}
 		u = u + u - s;
 		u *= 32.0;
 		i = (int) u;
 		if (i == 32)
+		{
 			i = 31;
+		}
 		deliver:
 		{
 			if (i != 0)
@@ -610,10 +638,14 @@ public class normal
 					while (true)
 					{
 						if (ustar > tt)
+						{
 							break deliver;
+						}
 						u = uniform.random();
 						if (ustar < u)
+						{
 							break;
+						}
 						tt = u;
 						ustar = uniform.random();
 					}
@@ -629,7 +661,9 @@ public class normal
 				{
 					u = u + u;
 					if (u >= 1.0)
+					{
 						break;
+					}
 					aa = aa + d[i - 1];
 					i = i + 1;
 				}
@@ -642,10 +676,14 @@ public class normal
 					{
 						ustar = uniform.random();
 						if (ustar > tt)
+						{
 							break jump;
+						}
 						u = uniform.random();
 						if (ustar < u)
+						{
 							break;
+						}
 						tt = u;
 					}
 					u = uniform.random();
@@ -654,7 +692,7 @@ public class normal
 
 		} // deliver:
 		y = aa + w;
-		return (s == 1.0) ? -y : y;
+		return s == 1.0 ? -y : y;
 
 	}
 
@@ -676,10 +714,12 @@ public class normal
 
 	static final double g(double x)
 	{
-		return (C1 * java.lang.Math.exp(-x * x / 2.0) - C2 * (a - java.lang.Math.abs(x)));
+		return C1 * java.lang.Math.exp(-x * x / 2.0)
+						- C2
+						* (a - java.lang.Math.abs(x));
 	}
 
-	public static double random(uniform PRNG)
+	public static double random(final uniform PRNG)
 	{
 		double t, u1, u2, u3;
 
@@ -697,12 +737,14 @@ public class normal
 				u2 = uniform.random();
 				u3 = uniform.random();
 				/* !* t = (a*a-2*log(u3)); *! */
-				t = (a * a - 2 * java.lang.Math.log(u3));
-				if (u2 * u2 < (a * a) / t)
+				t = a * a - 2 * java.lang.Math.log(u3);
+				if (u2 * u2 < a * a / t)
+				{
 					/* !* return (u1 < 0.986655477086949) ? sqrt(t) : -sqrt(t) ; *! */
-					return (u1 < 0.986655477086949)	? java.lang.Math.sqrt(t)
-																					: -java.lang.Math.sqrt(t);
-				// continue tail;
+					return u1 < 0.986655477086949	? java.lang.Math.sqrt(t)
+																				: -java.lang.Math.sqrt(t);
+					// continue tail;
+				}
 			}
 		}
 
@@ -716,11 +758,15 @@ public class normal
 				t = a - 0.630834801921960 * Math.min(u2, u3);
 				/* !* if(fmax2(u2,u3) <= 0.755591531667601) *! */
 				if (Math.max(u2, u3) <= 0.755591531667601)
-					return (u2 < u3) ? t : -t;
+				{
+					return u2 < u3 ? t : -t;
+				}
 				/* !* if(0.034240503750111*fabs(u2-u3) <= g(t)) *! */
 				if (0.034240503750111 * java.lang.Math.abs(u2 - u3) <= g(t))
-					return (u2 < u3) ? t : -t;
-				// continue region3;
+				{
+					return u2 < u3 ? t : -t;
+					// continue region3;
+				}
 			}
 		}
 
@@ -734,11 +780,15 @@ public class normal
 				t = 0.479727404222441 + 1.105473661022070 * Math.min(u2, u3);
 				/* !* if( fmax2(u2,u3)<=0.872834976671790 ) *! */
 				if (Math.max(u2, u3) <= 0.872834976671790)
-					return (u2 < u3) ? t : -t;
+				{
+					return u2 < u3 ? t : -t;
+				}
 				/* !* if( 0.049264496373128*fabs(u2-u3)<=g(t) ) *! */
 				if (0.049264496373128 * java.lang.Math.abs(u2 - u3) <= g(t))
-					return (u2 < u3) ? t : -t;
-				// continue region2;
+				{
+					return u2 < u3 ? t : -t;
+					// continue region2;
+				}
 			}
 		}
 
@@ -750,8 +800,10 @@ public class normal
 			t = 0.479727404222441 - 0.595507138015940 * Math.min(u2, u3);
 			/* !* if(fmax2(u2,u3) <= 0.805577924423817) *! */
 			if (Math.max(u2, u3) <= 0.805577924423817)
-				return (u2 < u3) ? t : -t;
-			// continue region1;
+			{
+				return u2 < u3 ? t : -t;
+				// continue region1;
+			}
 		}
 	}
 

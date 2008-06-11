@@ -57,7 +57,7 @@ public class OrionGraphics extends JFrame	implements
 
 	private DirectColorModel mColorModel;
 
-	private List<DisplayMode> mDisplayModeWishList;
+	private final List<DisplayMode> mDisplayModeWishList;
 
 	private int mScreenIndex;
 
@@ -129,9 +129,15 @@ public class OrionGraphics extends JFrame	implements
 		{
 			final DisplayMode[] modes = pGraphicsDevice.getDisplayModes();
 			for (final DisplayMode element : modes)
-				if ((element.getWidth() == (mDisplayModeWishList.get(x)).getWidth()) && (element.getHeight() == (mDisplayModeWishList.get(x)).getHeight())
-						&& (element.getBitDepth() == (mDisplayModeWishList.get(x)).getBitDepth()))
-					return (mDisplayModeWishList.get(x));
+			{
+				if (element.getWidth() == mDisplayModeWishList.get(x).getWidth() && element.getHeight() == mDisplayModeWishList	.get(x)
+																																																												.getHeight()
+						&& element.getBitDepth() == mDisplayModeWishList.get(x)
+																														.getBitDepth())
+				{
+					return mDisplayModeWishList.get(x);
+				}
+			}
 		}
 		return null;
 	}
@@ -151,7 +157,9 @@ public class OrionGraphics extends JFrame	implements
 	synchronized void setFullscreen()
 	{
 		if (isDisplayable())
+		{
 			dispose();
+		}
 
 		setVisible(false);
 
@@ -183,7 +191,9 @@ public class OrionGraphics extends JFrame	implements
 	synchronized void setWindowed()
 	{
 		if (isDisplayable())
+		{
 			dispose();
+		}
 
 		setVisible(false);
 
@@ -223,7 +233,9 @@ public class OrionGraphics extends JFrame	implements
 		final GraphicsDevice[] lAllGraphicsDevices = lGraphicsEnvironment.getScreenDevices();
 
 		if (mScreenIndex == cLAST_DEVICE)
+		{
 			mScreenIndex = lAllGraphicsDevices.length - 1;
+		}
 
 		mGraphicsDevice = lAllGraphicsDevices[mScreenIndex];
 
@@ -234,10 +246,14 @@ public class OrionGraphics extends JFrame	implements
 
 		try
 		{
-			if (mFullScreen && (getBestDisplayMode(mGraphicsDevice) != null))
+			if (mFullScreen && getBestDisplayMode(mGraphicsDevice) != null)
+			{
 				setFullscreen();
+			}
 			else
+			{
 				setWindowed();
+			}
 
 			// get component size
 			final Dimension lComponentSize = getSize();
@@ -312,7 +328,7 @@ public class OrionGraphics extends JFrame	implements
 			final long lDeltaInSeconds = lDifference / 1000;
 			if (lDeltaInSeconds != 0)
 			{
-				final long lFrameRate = (mFrameCounter) / (lDeltaInSeconds);
+				final long lFrameRate = mFrameCounter / lDeltaInSeconds;
 
 				final Graphics2D lGraphics = getDrawGraphics();
 				lGraphics.setColor(Color.BLACK);
@@ -422,11 +438,17 @@ public class OrionGraphics extends JFrame	implements
 	public void mouseReleased(final MouseEvent pMouseEvent)
 	{
 		if (SwingUtilities.isLeftMouseButton(pMouseEvent))
+		{
 			mMouseLeft = false;
+		}
 		if (SwingUtilities.isMiddleMouseButton(pMouseEvent))
+		{
 			mMouseMiddle = false;
+		}
 		if (SwingUtilities.isRightMouseButton(pMouseEvent))
+		{
 			mMouseRight = false;
+		}
 	}
 
 	/**

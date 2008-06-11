@@ -95,7 +95,7 @@ public class Google implements Iterable<Google.GoogleResult>
 		{
 			Thread.sleep(cRandom.nextInt(30) + 1);
 		}
-		catch (InterruptedException e)
+		catch (final InterruptedException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,7 +107,9 @@ public class Google implements Iterable<Google.GoogleResult>
 		// System.out.println(mHeader);
 		mContent = mWebPageFetcher.getPageContent();
 		if (mPattern != null)
+		{
 			mMatcher = mPattern.matcher(mContent);
+		}
 	}
 
 	private String buildGoogleQueryURL(	final String pGoogleServer,
@@ -118,7 +120,9 @@ public class Google implements Iterable<Google.GoogleResult>
 		String lTypeString = "";
 
 		if (!pFileType.equals(""))
+		{
 			lTypeString = "+filetype%3A" + pFileType;
+		}
 
 		final String lSearchString = pSearchString.trim().replaceAll("\\s+", "+");
 		final String lQueryUrl = "http://" + mGoogleServer
@@ -139,9 +143,9 @@ public class Google implements Iterable<Google.GoogleResult>
 
 	public String[] tokenize()
 	{
-		String[] lStringArray = StringUtils.split(mContent,
-																							"(\\<\\!\\-\\-[a-z]\\-\\-\\>)|(\\<br\\>)",
-																							0);
+		final String[] lStringArray = StringUtils.split(mContent,
+																										"(\\<\\!\\-\\-[a-z]\\-\\-\\>)|(\\<br\\>)",
+																										0);
 		return lStringArray;
 	}
 
@@ -152,7 +156,7 @@ public class Google implements Iterable<Google.GoogleResult>
 
 	public int getScore()
 	{
-		Matcher lMatcher = cScorePattern.matcher(mContent);
+		final Matcher lMatcher = cScorePattern.matcher(mContent);
 		if (lMatcher.find())
 		{
 			final String lScoreString = lMatcher.group(1);
@@ -163,7 +167,7 @@ public class Google implements Iterable<Google.GoogleResult>
 		// System.out.println(mSearchString);
 		// System.out.println(mContent);
 		// throw new RuntimeException("cannot find score");
-		Matcher lMatcherNoMatch = cNoMatchPattern.matcher(mContent);
+		final Matcher lMatcherNoMatch = cNoMatchPattern.matcher(mContent);
 		if (lMatcherNoMatch.find())
 		{
 			return 0;
@@ -174,9 +178,13 @@ public class Google implements Iterable<Google.GoogleResult>
 	public String nextMatch()
 	{
 		if (mMatcher.find())
+		{
 			return mMatcher.group();
+		}
 		else
+		{
 			return null;
+		}
 	}
 
 	public String getFileType()
@@ -237,7 +245,9 @@ public class Google implements Iterable<Google.GoogleResult>
 		String lLink = null;
 		System.out.println(mGoogle.getContent());
 		while ((lLink = mGoogle.nextMatch()) != null)
+		{
 			System.out.println(lLink);
+		}
 	}
 
 	public Iterator<GoogleResult> iterator()

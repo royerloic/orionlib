@@ -59,7 +59,9 @@ public class SocketServiceTest
 			{
 				System.out.println("Recived:\n  '" + pInputLine + "'");
 				if (pInputLine.equals(getShutdownCommand()))
+				{
 					mListening = false;
+				}
 				String lAnswear = pInputLine.replaceAll("clinton", "obama");
 				System.out.println("Reply:\n  '" + lAnswear + "'");
 				return lAnswear;
@@ -72,14 +74,14 @@ public class SocketServiceTest
 
 		};
 
-		ServiceFactory lServiceFactory = new ServiceFactory()
+		final ServiceFactory lServiceFactory = new ServiceFactory()
 		{
 			public Service newService()
 			{
 				return lService;
 			}
 		};
-		SocketServiceServer lSocketServiceServer = new SocketServiceServer(lServiceFactory);
+		final SocketServiceServer lSocketServiceServer = new SocketServiceServer(lServiceFactory);
 
 		// lSocketServiceServer.startListening(2068);
 

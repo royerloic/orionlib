@@ -292,9 +292,9 @@ public class RangeMapTest
 	{
 		{
 			rangemap.put(r12, "o");
-			int lSizeBefore = rangemap.mList.size();
+			final int lSizeBefore = rangemap.mList.size();
 			rangemap.put(r1, "o");
-			int lSizeAfter = rangemap.mList.size();
+			final int lSizeAfter = rangemap.mList.size();
 
 			// There should be no additional Item needed...
 			Assert.assertTrue(lSizeBefore == lSizeAfter);
@@ -302,9 +302,9 @@ public class RangeMapTest
 
 		{
 			rangemap.put(r123, "o");
-			int lSizeBefore = rangemap.mList.size();
+			final int lSizeBefore = rangemap.mList.size();
 			rangemap.put(r2, "o");
-			int lSizeAfter = rangemap.mList.size();
+			final int lSizeAfter = rangemap.mList.size();
 
 			// There should be no additional Item needed...
 			Assert.assertTrue(lSizeBefore == lSizeAfter);
@@ -312,9 +312,9 @@ public class RangeMapTest
 
 		{
 			rangemap.put(r123, "o");
-			int lSizeBefore = rangemap.mList.size();
+			final int lSizeBefore = rangemap.mList.size();
 			rangemap.put(r3, "o");
-			int lSizeAfter = rangemap.mList.size();
+			final int lSizeAfter = rangemap.mList.size();
 
 			// There should be no additional Item needed...
 			Assert.assertTrue(lSizeBefore == lSizeAfter);
@@ -341,7 +341,7 @@ public class RangeMapTest
 	@Test
 	public void testBruteForce()
 	{
-		Random lRandom = new Random(System.currentTimeMillis());
+		final Random lRandom = new Random(System.currentTimeMillis());
 
 		final int lNumberOfCycles = 100000;
 		final int lDomain = 10000;
@@ -371,7 +371,7 @@ public class RangeMapTest
 	@Test
 	public void testPutPerformance()
 	{
-		Random lRandom = new Random();
+		final Random lRandom = new Random();
 
 		final int lNumberOfCycles = 1000000;
 		final int lDomain = 1000;
@@ -387,7 +387,7 @@ public class RangeMapTest
 		final long lEndTime = System.currentTimeMillis();
 
 		final long lElapsedTime = lEndTime - lStartTime;
-		final double lPutsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
+		final double lPutsPerMilliseconds = (double) lNumberOfCycles / lElapsedTime;
 		System.out.println("Puts per millisecond: " + lPutsPerMilliseconds);
 		Assert.assertTrue(lPutsPerMilliseconds > 500);
 	}
@@ -395,7 +395,7 @@ public class RangeMapTest
 	@Test
 	public void testGetPerformance()
 	{
-		Random lRandom = new Random();
+		final Random lRandom = new Random();
 		testPutPerformance();
 
 		final int lNumberOfCycles = 1000000;
@@ -409,7 +409,7 @@ public class RangeMapTest
 		final long lEndTime = System.currentTimeMillis();
 
 		final long lElapsedTime = lEndTime - lStartTime;
-		final double lGetsPerMilliseconds = ((double) lNumberOfCycles) / lElapsedTime;
+		final double lGetsPerMilliseconds = (double) lNumberOfCycles / lElapsedTime;
 		System.out.println("Gets per milliseconds: " + lGetsPerMilliseconds);
 
 		Assert.assertTrue(lGetsPerMilliseconds > 2500);

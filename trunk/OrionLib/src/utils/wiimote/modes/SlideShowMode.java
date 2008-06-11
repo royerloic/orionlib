@@ -33,27 +33,27 @@ public class SlideShowMode extends WiiRemoteAdapter	implements
 		return mSlideShowModeItem;
 	}
 
-	public void activate(WiiRemote pRemote)
+	public void activate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.addWiiRemoteListener(this);
 			pRemote.setAccelerometerEnabled(true);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public void deactivate(WiiRemote pRemote)
+	public void deactivate(final WiiRemote pRemote)
 	{
 		try
 		{
 			pRemote.removeWiiRemoteListener(this);
 			pRemote.setAccelerometerEnabled(false);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
@@ -62,20 +62,18 @@ public class SlideShowMode extends WiiRemoteAdapter	implements
 	boolean isDownPressed = false;
 	boolean isUpPressed = false;
 
-	public void accelerationInputReceived(WRAccelerationEvent pEvent)
+	public void accelerationInputReceived(final WRAccelerationEvent pEvent)
 	{
-		double accel = pEvent.getXAcceleration();
+		final double accel = pEvent.getXAcceleration();
 
 		final double max = 2;
 		final double zero = 0.125;
 
-		boolean iszero = true;
+		final boolean downaccelpressed = accel < -max;
+		final boolean downaccelreleased = accel > max * 0.8;
 
-		boolean downaccelpressed = accel < -max;
-		boolean downaccelreleased = accel > max * 0.8;
-
-		boolean upaccelpressed = accel > max;
-		boolean upaccelreleased = accel < -max * 0.8;
+		final boolean upaccelpressed = accel > max;
+		final boolean upaccelreleased = accel < -max * 0.8;
 
 		/***************************************************************************
 		 * System.out.println("accel="+accel);
@@ -87,15 +85,12 @@ public class SlideShowMode extends WiiRemoteAdapter	implements
 
 		if (Math.abs(accel) < zero)
 		{
-			// System.out.println("Math.abs(accel)<zero");
-			iszero = true;
 			isDownPressed = false;
 			isUpPressed = false;
 		}
 
 		if (!isDownPressed && !isUpPressed && downaccelpressed)
 		{
-			iszero = false;
 			isDownPressed = true;
 			isUpPressed = false;
 			System.out.println("!isDownPressed && !isUpPressed && downaccelpressed");
@@ -105,7 +100,6 @@ public class SlideShowMode extends WiiRemoteAdapter	implements
 		else if (!isUpPressed && !isDownPressed && upaccelpressed)
 		{
 			System.out.println("!isUpPressed && !isDownPressed && upaccelpressed");
-			iszero = false;
 			isUpPressed = true;
 			isDownPressed = false;
 
@@ -114,21 +108,19 @@ public class SlideShowMode extends WiiRemoteAdapter	implements
 		else if (isDownPressed && downaccelreleased)
 		{
 			System.out.println("isDownPressed && downaccelreleased");
-			iszero = false;
 			isDownPressed = false;
 			mRobot.keyPress(KeyEvent.VK_DOWN);
 		}
 		else if (isUpPressed && upaccelreleased)
 		{
 			System.out.println("isUpPressed && upaccelreleased");
-			iszero = false;
 			isUpPressed = false;
 			mRobot.keyPress(KeyEvent.VK_UP);
 		}
 		/***/
 	}
 
-	public void buttonInputReceived(WRButtonEvent pEvent)
+	public void buttonInputReceived(final WRButtonEvent pEvent)
 	{
 
 		if (!isDownPressed && (pEvent.wasPressed(WRButtonEvent.DOWN) || pEvent.wasPressed(WRButtonEvent.A)))

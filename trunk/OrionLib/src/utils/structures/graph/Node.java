@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 public class Node implements Serializable
 {
-	private String mName;
-	private int mHashCode;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String mName;
+	private final int mHashCode;
 
 	public Node(final String pName)
 	{
@@ -24,7 +28,9 @@ public class Node implements Serializable
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 
 		return mName.equals(((Node) obj).mName);
 	}

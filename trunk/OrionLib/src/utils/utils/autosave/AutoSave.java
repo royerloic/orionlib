@@ -28,21 +28,21 @@ public class AutoSave implements MouseListener, ItemListener
 	private Image mActiveImage;
 	private Image mInactiveImage;
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			Map<String, String> lParameters = CmdLine.getMap(args);
+			final Map<String, String> lParameters = CmdLine.getMap(args);
 
-			AutoSave lAutoSave = new AutoSave(lParameters);
+			final AutoSave lAutoSave = new AutoSave(lParameters);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public AutoSave(Map<String, String> pParameters)
+	public AutoSave(final Map<String, String> pParameters)
 	{
 		super();
 
@@ -51,14 +51,14 @@ public class AutoSave implements MouseListener, ItemListener
 			if (SystemTray.isSupported())
 			{
 
-				SystemTray tray = SystemTray.getSystemTray();
-				URL lActiveImageURL = AutoSave.class.getResource("autosave.active.png");
+				final SystemTray tray = SystemTray.getSystemTray();
+				final URL lActiveImageURL = AutoSave.class.getResource("autosave.active.png");
 				mActiveImage = Toolkit.getDefaultToolkit().getImage(lActiveImageURL);
-				URL lInactiveImageURL = AutoSave.class.getResource("autosave.inactive.png");
+				final URL lInactiveImageURL = AutoSave.class.getResource("autosave.inactive.png");
 				mInactiveImage = Toolkit.getDefaultToolkit()
 																.getImage(lInactiveImageURL);
 
-				PopupMenu popup = new PopupMenu();
+				final PopupMenu popup = new PopupMenu();
 
 				mActiveItem = new CheckboxMenuItem("Active", false);
 				popup.add(mActiveItem);
@@ -67,8 +67,8 @@ public class AutoSave implements MouseListener, ItemListener
 
 				popup.addSeparator();
 
-				MenuItem lExitItem = new MenuItem("Exit");
-				ActionListener lExitItemListener = new ActionListener()
+				final MenuItem lExitItem = new MenuItem("Exit");
+				final ActionListener lExitItemListener = new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -91,12 +91,12 @@ public class AutoSave implements MouseListener, ItemListener
 
 					mAutoSaveRunnable = new AutoSaveRunnable(30, new int[]
 					{ KeyEvent.VK_CONTROL, KeyEvent.VK_S });
-					Thread lThread = new Thread(mAutoSaveRunnable, "AutoSaveThread");
+					final Thread lThread = new Thread(mAutoSaveRunnable, "AutoSaveThread");
 					lThread.setDaemon(true);
 					lThread.setPriority(Thread.MAX_PRIORITY);
 					lThread.start();
 				}
-				catch (AWTException e)
+				catch (final AWTException e)
 				{
 					System.out.println("TrayIcon could not be added.");
 				}
@@ -107,38 +107,38 @@ public class AutoSave implements MouseListener, ItemListener
 				System.out.println("not supported");
 			}
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public void mouseClicked(MouseEvent e)
+	public void mouseClicked(final MouseEvent e)
 	{
 
 	}
 
-	public void mouseEntered(MouseEvent e)
+	public void mouseEntered(final MouseEvent e)
 	{
 
 	}
 
-	public void mouseExited(MouseEvent e)
+	public void mouseExited(final MouseEvent e)
 	{
 
 	}
 
-	public void mousePressed(MouseEvent e)
+	public void mousePressed(final MouseEvent e)
 	{
 
 	}
 
-	public void mouseReleased(MouseEvent e)
+	public void mouseReleased(final MouseEvent e)
 	{
 
 	}
 
-	public void itemStateChanged(ItemEvent pE)
+	public void itemStateChanged(final ItemEvent pE)
 	{
 		if (mActiveItem.getState())
 		{

@@ -21,57 +21,61 @@ import utils.structures.graph.io.EdgIO;
 public class Proteome implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final Pattern lSplitTabPattern = Pattern.compile("\t");
 	private static final Pattern lSplitSemicolonPattern = Pattern.compile("\\;");
 	private static final Pattern lSplitCommaPattern = Pattern.compile("\\,");
 
 	private Genome mGenome = null;
 
-	private ProteinSet mProteinSet = new ProteinSet();
-	private FastaSet mFastaSet;
+	private final ProteinSet mProteinSet = new ProteinSet();
+	private final FastaSet mFastaSet;
 
-	private Graph<Node, Edge<Node>> mInteractionGraph = new HashGraph<Node, Edge<Node>>();
+	private final Graph<Node, Edge<Node>> mInteractionGraph = new HashGraph<Node, Edge<Node>>();
 
-	public Proteome(Genome pGenome, FastaSet pFastaSet) throws IOException
+	public Proteome(final Genome pGenome, final FastaSet pFastaSet) throws IOException
 	{
 		mGenome = pGenome;
 		mFastaSet = pFastaSet;
 
-		for (Gene lGene : mGenome.getGeneSet().getSet())
+		for (final Gene lGene : mGenome.getGeneSet().getSet())
 		{
 			final String lId = lGene.getId();
 
-			FastaSequence lFastaSequence = mFastaSet.getSequenceByName(lId);
+			final FastaSequence lFastaSequence = mFastaSet.getSequenceByName(lId);
 			if (lFastaSequence != null)
 			{
-				Protein lProtein = new Protein(lGene);
+				final Protein lProtein = new Protein(lGene);
 				lProtein.setCorrespondingFastaSequence(lFastaSequence);
 				mProteinSet.add(lProtein);
 			}
 		}
 	}
 
-	public Proteome(FastaSet pFastaSet) throws IOException
+	public Proteome(final FastaSet pFastaSet) throws IOException
 	{
 		mFastaSet = pFastaSet;
 
-		for (FastaSequence lFastaSequence : mFastaSet.getFastaSequences())
+		for (final FastaSequence lFastaSequence : mFastaSet.getFastaSequences())
 		{
 			if (lFastaSequence != null)
 			{
-				Protein lProtein = new Protein(lFastaSequence.getFastaName());
+				final Protein lProtein = new Protein(lFastaSequence.getFastaName());
 				lProtein.setCorrespondingFastaSequence(lFastaSequence);
 				mProteinSet.add(lProtein);
 			}
 		}
 	}
 
-	public void addInteractions(File pFile) throws IOException
+	public void addInteractions(final File pFile) throws IOException
 	{
 		addInteractions(new FileInputStream(pFile));
 	}
 
-	public void addInteractions(InputStream pInputStream) throws IOException
+	public void addInteractions(final InputStream pInputStream) throws IOException
 	{
 		mInteractionGraph.addGraph(EdgIO.load(pInputStream));
 	}
@@ -101,45 +105,59 @@ public class Proteome implements Serializable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mFastaSet == null) ? 0 : mFastaSet.hashCode());
-		result = prime * result + ((mGenome == null) ? 0 : mGenome.hashCode());
+		result = prime * result + (mFastaSet == null ? 0 : mFastaSet.hashCode());
+		result = prime * result + (mGenome == null ? 0 : mGenome.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final Proteome other = (Proteome) obj;
 		if (mFastaSet == null)
 		{
 			if (other.mFastaSet != null)
+			{
 				return false;
+			}
 		}
 		else if (!mFastaSet.equals(other.mFastaSet))
+		{
 			return false;
+		}
 		if (mGenome == null)
 		{
 			if (other.mGenome != null)
+			{
 				return false;
+			}
 		}
 		else if (!mGenome.equals(other.mGenome))
+		{
 			return false;
+		}
 		return true;
 	}
 
-	public final void write(File pProteomeCache) throws IOException
+	public final void write(final File pProteomeCache) throws IOException
 	{
 		SerializationUtils.write(this, pProteomeCache);
 	}
 
-	public static final Proteome read(File pProteomeCache) throws IOException,
-																												ClassNotFoundException
+	public static final Proteome read(final File pProteomeCache) throws IOException,
+																															ClassNotFoundException
 	{
 		if (!pProteomeCache.exists())
 		{

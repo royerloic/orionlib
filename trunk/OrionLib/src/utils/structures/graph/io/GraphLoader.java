@@ -38,11 +38,17 @@ public class GraphLoader
 	{
 		Graph lGraph = new HashGraph<Node, Edge<Node>>();
 		if (isPsiMi(pFile))
+		{
 			lGraph = PsiMiIO.load(pFile, pSpokeModel, pConfidenceFilter);
+		}
 		else if (isEdg(pFile))
+		{
 			lGraph = EdgIO.load(pFile);
+		}
 		else if (isSif(pFile))
+		{
 			lGraph = SifIO.load(pFile);
+		}
 
 		// EdgIO.save(lGraph, new File("dump.edg"));
 		return lGraph;
@@ -85,7 +91,7 @@ public class GraphLoader
 																																		pSpokeModel);
 			return lPowerGraph;
 		}
-		else if (isEdg(pFile) || (isPsiMi(pFile) && !pKeepAsInPsiMi))
+		else if (isEdg(pFile) || isPsiMi(pFile) && !pKeepAsInPsiMi)
 		{
 			System.out.println("File is Edg, using standard Edg file loader...");
 			final Graph<Node, Edge<Node>> lGraph = loadGraph(	pFile,

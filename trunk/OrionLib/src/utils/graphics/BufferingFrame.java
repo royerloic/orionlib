@@ -78,8 +78,8 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	private boolean checkOffscreenImage()
 	{
 		final Dimension d = getSize();
-		if ((mImage == null) || (mImage.getWidth(null) != d.width)
-				|| (mImage.getHeight(null) != d.height))
+		if (mImage == null || mImage.getWidth(null) != d.width
+				|| mImage.getHeight(null) != d.height)
 		{
 			mImage = createImage(d.width, d.height);
 			return true;

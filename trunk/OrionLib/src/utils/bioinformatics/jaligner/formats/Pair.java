@@ -70,21 +70,21 @@ public class Pair extends Format
 	 * @return string of the alignment pair-formatted
 	 */
 	@Override
-	public String format(Alignment alignment)
+	public String format(final Alignment alignment)
 	{
-		char[] sequence1 = alignment.getSequence1();
-		char[] sequence2 = alignment.getSequence2();
-		char[] markup = alignment.getMarkupLine();
+		final char[] sequence1 = alignment.getSequence1();
+		final char[] sequence2 = alignment.getSequence2();
+		final char[] markup = alignment.getMarkupLine();
 
-		int length = sequence1.length > sequence2.length ? sequence2.length
-																										: sequence1.length;
+		final int length = sequence1.length > sequence2.length ? sequence2.length
+																													: sequence1.length;
 
-		String name1 = adjustName(alignment.getName1());
-		String name2 = adjustName(alignment.getName2());
+		final String name1 = adjustName(alignment.getName1());
+		final String name2 = adjustName(alignment.getName2());
 
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 
-		StringBuffer preMarkup = new StringBuffer();
+		final StringBuffer preMarkup = new StringBuffer();
 		for (int j = 0; j < NAME_WIDTH + 1 + POSITION_WIDTH + 1; j++)
 		{
 			preMarkup.append(BLANK);
@@ -106,8 +106,8 @@ public class Pair extends Format
 			oldPosition1 = position1;
 			oldPosition2 = position2;
 
-			line = ((i + 1) * SEQUENCE_WIDTH) < length ? (i + 1) * SEQUENCE_WIDTH
-																								: length;
+			line = (i + 1) * SEQUENCE_WIDTH < length ? (i + 1) * SEQUENCE_WIDTH
+																							: length;
 
 			subsequence1 = new char[line - i * SEQUENCE_WIDTH];
 			subsequence2 = new char[line - i * SEQUENCE_WIDTH];
@@ -173,9 +173,9 @@ public class Pair extends Format
 	 *          name to adjusted
 	 * @return adjusted name
 	 */
-	private String adjustName(String name)
+	private String adjustName(final String name)
 	{
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 
 		if (name.length() > NAME_WIDTH)
 		{
@@ -197,10 +197,10 @@ public class Pair extends Format
 	 * @param position
 	 * @return string
 	 */
-	private String adjustPosition(String position)
+	private String adjustPosition(final String position)
 	{
-		StringBuffer buffer1 = new StringBuffer();
-		StringBuffer buffer2 = new StringBuffer();
+		final StringBuffer buffer1 = new StringBuffer();
+		final StringBuffer buffer2 = new StringBuffer();
 
 		if (position.length() > POSITION_WIDTH)
 		{

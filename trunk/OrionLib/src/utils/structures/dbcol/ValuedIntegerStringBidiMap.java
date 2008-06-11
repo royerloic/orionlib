@@ -15,7 +15,7 @@ public class ValuedIntegerStringBidiMap
 	private static final Logger cLogger = Logger.getLogger(ValuedIntegerStringBidiMap.class);
 
 	private boolean mTemp;
-	private Connection mDatabaseConnection;
+	private final Connection mDatabaseConnection;
 	private PreparedStatement mInsertStatement;
 	private PreparedStatement mStringQueryStatement;
 	private PreparedStatement mIntegerQueryStatement;
@@ -23,9 +23,9 @@ public class ValuedIntegerStringBidiMap
 	private PreparedStatement mIntegerDeleteStatement;
 	private PreparedStatement mIntegerStringDeleteStatement;
 	private PreparedStatement mSizeStatement;
-	private String mName;
-	private int mMinStringSize;
-	private int mMaxStringSize;
+	private final String mName;
+	private final int mMinStringSize;
+	private final int mMaxStringSize;
 	private int mCounter = 0;
 	private int mCommitPeriod = 10000;
 	private final int mMaximumNuberOfResults = Integer.MAX_VALUE;
@@ -204,7 +204,9 @@ public class ValuedIntegerStringBidiMap
 	private void automaticCommit()
 	{
 		if (mCounter % mCommitPeriod == 0)
+		{
 			commit(mDatabaseConnection);
+		}
 	}
 
 	private boolean commit(final Connection pDatabaseConnection)
@@ -230,9 +232,13 @@ public class ValuedIntegerStringBidiMap
 																final int pMaxStringSize)
 	{
 		if (pMinStringSize == pMaxStringSize)
+		{
 			return "CHAR(" + pMinStringSize + ")";
+		}
 		else
+		{
 			return "VARCHAR(" + pMaxStringSize + ")";
+		}
 	}
 
 	public int size()
@@ -311,6 +317,7 @@ public class ValuedIntegerStringBidiMap
 			final ResultSet lResultSet = mStringQueryStatement.executeQuery();
 			int lCounter = 0;
 			while (lResultSet.next())
+			{
 				if (lCounter < mMaximumNuberOfResults)
 				{
 					final int lInteger = lResultSet.getInt("fInteger");
@@ -321,6 +328,7 @@ public class ValuedIntegerStringBidiMap
 					lValuedEntryList.add(lValuedEntry);
 					lCounter++;
 				}
+			}
 			lResultSet.close();
 			return lValuedEntryList;
 		}
@@ -347,6 +355,7 @@ public class ValuedIntegerStringBidiMap
 			final ResultSet lResultSet = mIntegerQueryStatement.executeQuery();
 			int lCounter = 0;
 			while (lResultSet.next())
+			{
 				if (lCounter < mMaximumNuberOfResults)
 				{
 					final String lString = lResultSet.getString("fString");
@@ -357,6 +366,7 @@ public class ValuedIntegerStringBidiMap
 					lValuedEntryList.add(lValuedEntry);
 					lCounter++;
 				}
+			}
 			lResultSet.close();
 			return lValuedEntryList;
 		}
@@ -451,13 +461,17 @@ public class ValuedIntegerStringBidiMap
 															final Set<Integer> pIntegerSet)
 	{
 		for (final Integer lInteger : pIntegerSet)
+		{
 			put(lInteger, pString);
+		}
 	}
 
 	public void putAllStrings(final Integer pInteger, final Set<String> pStringSet)
 	{
 		for (final String lString : pStringSet)
+		{
 			put(pInteger, lString);
+		}
 	}
 
 	public void clear()
@@ -484,9 +498,13 @@ public class ValuedIntegerStringBidiMap
 		try
 		{
 			if (mTemp)
+			{
 				dropTable(mDatabaseConnection, mName);
+			}
 			else
+			{
 				commitChanges();
+			}
 			mInsertStatement.close();
 			mIntegerDeleteStatement.close();
 			mIntegerQueryStatement.close();
@@ -523,11 +541,17 @@ public class ValuedIntegerStringBidiMap
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		else if (this.toString() == obj.toString())
+		{
 			return true;
+		}
 		else
+		{
 			return false;
+		}
 	}
 
 	@Override

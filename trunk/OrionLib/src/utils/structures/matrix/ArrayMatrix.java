@@ -20,7 +20,9 @@ public class ArrayMatrix<O> extends ArrayList<List<O>> implements Matrix<O>
 	{
 		super();
 		for (final List<O> lList : pMatrix)
+		{
 			add(new ArrayList<O>(lList));
+		}
 	}
 
 	public ArrayMatrix(final Collection<? extends List<O>> pC)

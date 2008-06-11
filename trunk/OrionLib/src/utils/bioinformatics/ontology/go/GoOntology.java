@@ -11,6 +11,10 @@ import utils.structures.map.IntegerMap;
 public class GoOntology extends OboOntology
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static GoOntology sGoOntology = null;
 
 	public static final GoOntology getUniqueInstance() throws FileNotFoundException,

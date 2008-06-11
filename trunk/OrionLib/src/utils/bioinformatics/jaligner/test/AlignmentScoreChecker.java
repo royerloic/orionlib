@@ -39,22 +39,22 @@ import utils.bioinformatics.jaligner.matrix.MatrixLoader;
 public class AlignmentScoreChecker
 {
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 
-		int numberOfTests = Integer.parseInt(args[0]);
-		int sequencesSize = Integer.parseInt(args[1]);
-		Random random = new Random();
-		Format format = new Pair();
+		final int numberOfTests = Integer.parseInt(args[0]);
+		final int sequencesSize = Integer.parseInt(args[1]);
+		final Random random = new Random();
+		final Format format = new Pair();
 
 		try
 		{
-			ArrayList matrices = new ArrayList();
-			for (Iterator i = MatrixLoader.list().iterator(); i.hasNext();)
+			final ArrayList matrices = new ArrayList();
+			for (final Iterator i = MatrixLoader.list().iterator(); i.hasNext();)
 			{
 				matrices.add(i.next());
 			}
-			int countOfMatrices = matrices.size();
+			final int countOfMatrices = matrices.size();
 
 			int i = 1;
 			while (i <= numberOfTests)
@@ -62,24 +62,24 @@ public class AlignmentScoreChecker
 
 				System.gc();
 
-				String s1 = RandomSequenceGenerator.generate(sequencesSize);
-				String s2 = RandomSequenceGenerator.generate(sequencesSize);
+				final String s1 = RandomSequenceGenerator.generate(sequencesSize);
+				final String s2 = RandomSequenceGenerator.generate(sequencesSize);
 
-				int o = random.nextInt(50);
-				int e = random.nextInt(10);
+				final int o = random.nextInt(50);
+				final int e = random.nextInt(10);
 
 				if (s1.length() > 0 && s2.length() > 0 && o >= e)
 				{
 
-					Matrix matrix = MatrixLoader.load((String) matrices.get(random.nextInt(countOfMatrices)));
-					Sequence seq1 = new Sequence(s1);
-					Sequence seq2 = new Sequence(s2);
+					final Matrix matrix = MatrixLoader.load((String) matrices.get(random.nextInt(countOfMatrices)));
+					final Sequence seq1 = new Sequence(s1);
+					final Sequence seq2 = new Sequence(s2);
 
-					Alignment alignment1 = SmithWatermanGotoh.align(seq1,
-																													seq2,
-																													matrix,
-																													o,
-																													e);
+					final Alignment alignment1 = SmithWatermanGotoh.align(seq1,
+																																seq2,
+																																matrix,
+																																o,
+																																e);
 
 					if (!alignment1.checkScore())
 					{
@@ -92,11 +92,11 @@ public class AlignmentScoreChecker
 						System.exit(1);
 					}
 
-					Alignment alignment2 = SmithWatermanGotoh.align(seq2,
-																													seq1,
-																													matrix,
-																													o,
-																													e);
+					final Alignment alignment2 = SmithWatermanGotoh.align(seq2,
+																																seq1,
+																																matrix,
+																																o,
+																																e);
 					if (!alignment1.checkScore())
 					{
 						System.err.println("Invalid alignment found:");
@@ -133,7 +133,7 @@ public class AlignmentScoreChecker
 				i++;
 			}
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			e.printStackTrace();
 			System.exit(1);

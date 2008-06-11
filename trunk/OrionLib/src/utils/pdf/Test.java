@@ -16,29 +16,29 @@ public class Test
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			URL lURL = new URL("http://www.genome.org/cgi/reprint/gr.7187808v1.pdf");
-			URLConnection lURLConnection = lURL.openConnection();
+			final URL lURL = new URL("http://www.genome.org/cgi/reprint/gr.7187808v1.pdf");
+			final URLConnection lURLConnection = lURL.openConnection();
 
-			PDFParser lPDFParser = new PDFParser(lURLConnection.getInputStream());
+			final PDFParser lPDFParser = new PDFParser(lURLConnection.getInputStream());
 
 			lPDFParser.parse();
 
-			COSDocument lDocument = lPDFParser.getDocument();
-			FDFDocument lDocument2 = lPDFParser.getFDFDocument();
-			PDDocument lDocument3 = lPDFParser.getPDDocument();
+			final COSDocument lDocument = lPDFParser.getDocument();
+			final FDFDocument lDocument2 = lPDFParser.getFDFDocument();
+			final PDDocument lDocument3 = lPDFParser.getPDDocument();
 
 			System.out.println(lDocument);
 		}
-		catch (MalformedURLException e)
+		catch (final MalformedURLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

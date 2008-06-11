@@ -23,7 +23,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testAddNode()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		assertSame(0, lFastIntegerGraph.addNode());
 		assertSame(1, lFastIntegerGraph.addNode());
@@ -55,7 +55,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testAddEdge()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -77,7 +77,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testRemoveEdge1()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(1, 2);
 		lFastIntegerGraph.addEdge(2, 3);
@@ -115,7 +115,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testRemoveEdgeFromEmptyGraph()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.removeEdge(1, 2);
 		lFastIntegerGraph.removeEdge(2, 3);
@@ -128,7 +128,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testGetNodeSet()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -156,7 +156,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testGetEdges()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -186,7 +186,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testGetNodeNeighbours()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -228,7 +228,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testExtractStrictSubGraph()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -290,7 +290,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testExtractSubGraph()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);
@@ -346,7 +346,7 @@ public class FastIntegerGraphTests
 
 		try
 		{
-			FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+			final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 			lFastIntegerGraph.addEdge(0, 1);
 			lFastIntegerGraph.addEdge(0, 2);
@@ -364,27 +364,29 @@ public class FastIntegerGraphTests
 			lFastIntegerGraph.addEdge(3, 32);
 			lFastIntegerGraph.addEdge(3, 33);
 
-			File lEdgeFile = File.createTempFile("temp", "temp");
+			final File lEdgeFile = File.createTempFile("temp", "temp");
 			System.out.println(lEdgeFile);
 			if (lEdgeFile.exists())
+			{
 				lEdgeFile.delete();
+			}
 
-			FileOutputStream lFileOutPutStream = new FileOutputStream(lEdgeFile);
+			final FileOutputStream lFileOutPutStream = new FileOutputStream(lEdgeFile);
 			lFastIntegerGraph.writeEdgeFile(lFileOutPutStream);
 			lFileOutPutStream.close();
 
-			FastIntegerGraph lFastIntegerGraphReadFromFile = new FastIntegerGraph();
-			FileInputStream lFileInputStream = new FileInputStream(lEdgeFile);
+			final FastIntegerGraph lFastIntegerGraphReadFromFile = new FastIntegerGraph();
+			final FileInputStream lFileInputStream = new FileInputStream(lEdgeFile);
 			lFastIntegerGraphReadFromFile.readEdgeFile(lFileInputStream);
 
 			assertTrue(lFastIntegerGraph.equals(lFastIntegerGraphReadFromFile));
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -395,7 +397,7 @@ public class FastIntegerGraphTests
 	@Test
 	public void testAverageDegreeAndEdgeDensity()
 	{
-		FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
+		final FastIntegerGraph lFastIntegerGraph = new FastIntegerGraph();
 
 		lFastIntegerGraph.addEdge(0, 1);
 		lFastIntegerGraph.addEdge(0, 2);

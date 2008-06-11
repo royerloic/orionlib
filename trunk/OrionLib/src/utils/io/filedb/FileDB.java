@@ -18,20 +18,20 @@ public class FileDB
 	public static Pattern sIntPattern = Pattern.compile("[0-9]+");
 	public static Pattern sFloatPattern = Pattern.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?");
 
-	public static List<String> getColumnNames(File pFile) throws IOException
+	public static List<String> getColumnNames(final File pFile) throws IOException
 	{
 		return getColumnNames(new FileInputStream(pFile));
 	}
 
-	public static List<String> getColumnNames(InputStream pInputStream) throws IOException
+	public static List<String> getColumnNames(final InputStream pInputStream) throws IOException
 	{
-		InputStreamReader lInputStreamReader = new InputStreamReader(pInputStream);
-		BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
+		final InputStreamReader lInputStreamReader = new InputStreamReader(pInputStream);
+		final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader);
 		String lHeaderString = lBufferedReader.readLine();
 		if (lHeaderString.startsWith("//"))
 		{
 			lHeaderString = lHeaderString.replace("//", "");
-			String[] lStringArray = sTabDelPattern.split(lHeaderString, -1);
+			final String[] lStringArray = sTabDelPattern.split(lHeaderString, -1);
 			lBufferedReader.close();
 			lInputStreamReader.close();
 			return Arrays.<String> asList(lStringArray);
@@ -39,36 +39,42 @@ public class FileDB
 		return null;
 	}
 
-	public static int resolveColumn(File pFile, String pColumn) throws IOException
+	public static int resolveColumn(final File pFile, final String pColumn) throws IOException
 	{
-		boolean isInteger = sIntPattern.matcher(pColumn).matches();
+		final boolean isInteger = sIntPattern.matcher(pColumn).matches();
 		if (isInteger)
 		{
 			return Integer.parseInt(pColumn);
 		}
 		else
 		{
-			List<String> lColumnNameList = getColumnNames(pFile);
+			final List<String> lColumnNameList = getColumnNames(pFile);
 			if (lColumnNameList != null)
+			{
 				for (int i = 0; i < lColumnNameList.size(); i++)
+				{
 					if (lColumnNameList.get(i).equalsIgnoreCase(pColumn.trim()))
 					{
 						return i;
 					}
+				}
+			}
 		}
 		throw new IllegalArgumentException("Column name/index not recognized:" + pColumn
 																				+ " in "
 																				+ pFile.getName());
 	}
 
-	public static Class getColumnType(File pFile,
-																		Integer pColumnIndex,
-																		Integer pMaxLinesChecked) throws IOException
+	public static Class getColumnType(final File pFile,
+																		final Integer pColumnIndex,
+																		final Integer pMaxLinesChecked) throws IOException
 	{
 
 		int counter = 0;
-		for (String lLine : LineReader.getLines(pFile))
+		for (final String lLine : LineReader.getLines(pFile))
+		{
 			if (!lLine.isEmpty())
+			{
 				if (!lLine.startsWith("//"))
 				{
 					final String lValue = sTabDelPattern.split(lLine, -1)[pColumnIndex];
@@ -86,6 +92,8 @@ public class FileDB
 						return Double.class;
 					}
 				}
+			}
+		}
 
 		return Double.class;
 	}

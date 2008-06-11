@@ -17,7 +17,7 @@ public abstract class GenericWordIdentifier	implements
 																						FlatTextTableReaderHandler
 {
 
-	private FlatTextTableReader mFlatTextTableReader;
+	private final FlatTextTableReader mFlatTextTableReader;
 
 	protected Map<String, String> mWordMap;
 	protected Map<String, Double> mWordToCountMap;
@@ -81,19 +81,21 @@ public abstract class GenericWordIdentifier	implements
 		{
 			switch (pColumnCounter)
 			{
-			case (0):
+			case 0:
 			{
 				if (pCellString.length() != 0)
-					if ((pCellString.charAt(0) != '#'))
+				{
+					if (pCellString.charAt(0) != '#')
 					{
 						final String lWord = normalizeString(pCellString);
 						mWordMap.put(lWord, lWord);
 						mCurrentWord = lWord;
 					}
+				}
 			}
 				break;
 
-			case (1):
+			case 1:
 			{
 				if (pCellString.length() != 0)
 				{

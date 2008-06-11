@@ -61,8 +61,10 @@ public class UniProtIdConverter
 	{
 		int lUniProtIntegerId = 0;
 		for (int i = 0; i < 6; i++)
+		{
 			lUniProtIntegerId = lUniProtIntegerId * 36
 													+ decodeLetter(pUniProtId.charAt(i));
+		}
 		return lUniProtIntegerId;
 	}
 
@@ -86,10 +88,14 @@ public class UniProtIdConverter
 	private static int decodeLetter(final char pChar)
 	{
 		int lCode = pChar;
-		if ((lCode >= 65) && (lCode <= 90))
+		if (lCode >= 65 && lCode <= 90)
+		{
 			lCode = lCode - 65 + 10;
-		else if ((lCode >= 48) && (lCode <= 57))
+		}
+		else if (lCode >= 48 && lCode <= 57)
+		{
 			lCode = lCode - 48;
+		}
 		return lCode;
 	}
 
@@ -97,9 +103,13 @@ public class UniProtIdConverter
 	{
 		char lChar = '!';
 		if (pTranslatedCharCode <= 9)
+		{
 			lChar = (char) (48 + pTranslatedCharCode);
-		else if ((pTranslatedCharCode >= 10) && (pTranslatedCharCode <= 36))
+		}
+		else if (pTranslatedCharCode >= 10 && pTranslatedCharCode <= 36)
+		{
 			lChar = (char) (65 + pTranslatedCharCode - 10);
+		}
 		return lChar;
 	}
 
@@ -115,7 +125,9 @@ public class UniProtIdConverter
 		final String lAis = convertIntegerToUniProtId(lAi);
 
 		if (!lA.equals(lAis))
+		{
 			System.out.println(lA + " is not equal to " + lAis);
+		}
 
 		final int lB = 1586917556;
 
@@ -123,7 +135,9 @@ public class UniProtIdConverter
 		final int lBsi = convertUniProtIdToInteger(lBs);
 
 		if (lB != lBsi)
+		{
 			System.out.println(lB + " is not equal to " + lBsi);
+		}
 
 	}
 }

@@ -26,7 +26,9 @@ public class noncentral_t
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double t, double df, double delta)
+	public static double cumulative(final double t,
+																	final double df,
+																	final double delta)
 	{
 		double a, albeta, b, del, en, errbd, geven, godd;
 		double lambda, p, q, rxb, s, tnc, tt, x, xeven, xodd;
@@ -101,10 +103,14 @@ public class noncentral_t
 			while (errbd > errmax && en <= itrmax);
 		}
 		if (en <= itrmax)
+		{
 			throw new java.lang.ArithmeticException("Math Error: PRECISION");
+		}
 		tnc = tnc + normal.cumulative(-del, zero, one);
 		if (negdel)
+		{
 			tnc = one - tnc;
+		}
 		return tnc;
 	}
 }

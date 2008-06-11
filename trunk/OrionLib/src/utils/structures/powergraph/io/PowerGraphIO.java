@@ -46,6 +46,7 @@ public class PowerGraphIO
 
 		int lPowerNodeCounter = 0;
 		for (final Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
+		{
 			if (lPowerNode.size() > 1)
 			{
 				final List<String> lSetEntry = new ArrayList<String>();
@@ -57,12 +58,17 @@ public class PowerGraphIO
 				lPowerNodeCounter++;
 			}
 			else
+			{
 				lPowerNodeToNameMap.put(lPowerNode, lPowerNode.iterator()
 																											.next()
 																											.toString());
+			}
+		}
 
 		for (final Set<N> lPowerNode : pPowerGraph.getPowerNodeSet())
+		{
 			if (lPowerNode.size() > 1)
+			{
 				for (final N lNode : lPowerNode)
 				{
 					final List<String> lNodeEntry = new ArrayList<String>();
@@ -71,6 +77,8 @@ public class PowerGraphIO
 					lNodeEntry.add(lPowerNodeToNameMap.get(lPowerNode));
 					lBubbleFormat.add(lNodeEntry);
 				}
+			}
+		}
 
 		for (final Edge<Set<N>> lPowerEdge : pPowerGraph.getPowerEdgeSet())
 		{
@@ -86,7 +94,6 @@ public class PowerGraphIO
 		MatrixFile.writeMatrixToFile(lBubbleFormat, pFile);
 	}
 
-
 	public static PowerGraph<Node> loadPowerGraph(final File pFile)	throws FileNotFoundException,
 																																	IOException
 	{
@@ -99,6 +106,7 @@ public class PowerGraphIO
 		final HashMap<String, Double> lPowerNodeNameToConfidenceValueMap = new HashMap<String, Double>();
 
 		for (final List<String> lLine : lMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("NODE"))
 			{
 				final String lNodeName = lLine.get(1);
@@ -106,8 +114,10 @@ public class PowerGraphIO
 				lNodeNameToNodeMap.put(lNodeName, lNode);
 				lPowerGraph.addNode(lNode);
 			}
+		}
 
 		for (final List<String> lLine : lMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("SET"))
 			{
 				final String lSetName = lLine.get(1);
@@ -119,6 +129,7 @@ public class PowerGraphIO
 				}
 				lPowerNodeNameToSetMap.put(lSetName);
 			}
+		}
 
 		for (final Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
 		{
@@ -127,9 +138,12 @@ public class PowerGraphIO
 		}
 
 		for (final Map.Entry<String, Set<Node>> lEntry : lPowerNodeNameToSetMap.entrySet())
+		{
 			lPowerGraph.addCluster(lEntry.getValue());
+		}
 
 		for (final List<String> lLine : lMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("EDGE"))
 			{
 				final String lNodeOrSetName1 = lLine.get(1);
@@ -168,14 +182,19 @@ public class PowerGraphIO
 
 				final Double lConfidence1 = lPowerNodeNameToConfidenceValueMap.get(lNodeOrSetName1);
 				if (lConfidence1 != null)
+				{
 					lPowerEdge.setFirstNodeConfidence(lConfidence1);
+				}
 
 				final Double lConfidence2 = lPowerNodeNameToConfidenceValueMap.get(lNodeOrSetName2);
 				if (lConfidence2 != null)
+				{
 					lPowerEdge.setSecondNodeConfidence(lConfidence2);
+				}
 
 				lPowerGraph.addPowerEdge(lPowerEdge);
 			}
+		}
 
 		return lPowerGraph;
 	}
@@ -189,9 +208,10 @@ public class PowerGraphIO
 			return;
 		}
 
-		HashSet<Node> lHashSet = new HashSet<Node>();
+		final HashSet<Node> lHashSet = new HashSet<Node>();
 
 		for (final List<String> lLine : pMatrix)
+		{
 			if (lLine.get(0).equalsIgnoreCase("IN"))
 			{
 				final String lNodeOrSetName1 = lLine.get(1);
@@ -212,6 +232,7 @@ public class PowerGraphIO
 					}
 				}
 			}
+		}
 
 		pPowerNodeNameToSetMap.put(pSetName, lHashSet);
 	}

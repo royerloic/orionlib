@@ -24,13 +24,13 @@ public class StringRewriting implements FlatTextTableReaderHandler
 {
 	private static final Logger cLogger = Logger.getLogger(StringRewriting.class);
 
-	private FlatTextTableReader mFlatTextTableReader;
+	private final FlatTextTableReader mFlatTextTableReader;
 
-	private List<Pattern> mPatternList;
+	private final List<Pattern> mPatternList;
 
-	private Map<Pattern, String> mSubstitutionMap;
+	private final Map<Pattern, String> mSubstitutionMap;
 
-	private List<String> mCurrentRegexList;
+	private final List<String> mCurrentRegexList;
 
 	private Pattern mCurrentPattern;
 
@@ -117,12 +117,14 @@ public class StringRewriting implements FlatTextTableReaderHandler
 			pCellString = pCellString.substring(1, pCellString.length() - 1);
 			switch (pColumnCounter)
 			{
-			case (0):
-				if ((pCellString.charAt(0) != '#'))
+			case 0:
+				if (pCellString.charAt(0) != '#')
+				{
 					mCurrentRegexList.add(pCellString);
+				}
 				break;
 
-			case (2):
+			case 2:
 				for (final String lRegex : mCurrentRegexList)
 				{
 					mCurrentSubstitutionString = pCellString;

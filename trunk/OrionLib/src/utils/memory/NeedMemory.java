@@ -62,16 +62,22 @@ public final class NeedMemory
 		if ((available = toMegaBytes(Runtime.getRuntime().maxMemory())) < needed)
 		{
 			if (needed > 1500)
+			{
 				throw new Exception("IMPOSSIBLE TO MEET REQUEST FOR " + needed
 														+ " Mb MEMORY.");
+			}
 			if (System.getProperty(launchToken) != null)
+			{
 				throw new Exception("FATAL RECURSION IN RE-LAUNCH");
+			}
 
 			// Where did I come from ?
 
 			u = getClass().getResource("NeedMemory.class");
 			if (u == null)
+			{
 				throw new Exception("CAN'T FIND MY OWN CLASS FILE.");
+			}
 
 			// Determine the path to a class-file or to a jar-file from the
 			// classloader URL:
@@ -81,12 +87,18 @@ public final class NeedMemory
 			{
 				isJarFile = true;
 				if (File.separatorChar == '/')
+				{
 					s = s.substring(5); // Leaves a / alone.
+				}
 				else
+				{
 					s = s.substring(6); // Strips the / away.
+				}
 
 				if ((i = s.indexOf("!/")) > 0)
+				{
 					s = s.substring(0, i); // Deletes the internal jar path.
+				}
 				commandVector = new String[6 + programCommandLine.length];
 			}
 			else
@@ -94,23 +106,33 @@ public final class NeedMemory
 			{
 				isJarFile = false;
 				if (s.startsWith("/"))
+				{
 					s = s.substring(1); // Waste the /.
+				}
 				if ((i = s.indexOf(".class")) > 0)
+				{
 					s = s.substring(0, i); // Drop the extension.
+				}
 				commandVector = new String[5 + programCommandLine.length];
 			}
 
 			if (s.indexOf("%20") >= 0)
+			{
 				s = s.replaceAll("%20", " ");
+			}
 			programPath = s;
 
 			// Where to find java[w] :
 
 			javaPath = System.getProperty("java.home");
 			if (File.separatorChar == '/')
+			{
 				javaPath += "/bin/java";
+			}
 			else
+			{
 				javaPath += "\\bin\\javaw.exe";
+			}
 
 			// Prepare new commandline :
 
@@ -118,7 +140,7 @@ public final class NeedMemory
 
 			needed = (int) (needed * 1.01 + 1); // Allow 1% more plus one.
 
-			commandVector[1] = "-Xms" + (needed / 2) + "m"; // Initial heap.
+			commandVector[1] = "-Xms" + needed / 2 + "m"; // Initial heap.
 			commandVector[2] = "-Xmx" + needed + "m"; // Maximum heap.
 			commandVector[3] = "-D" + "RELAUNCHEDFORHEAP" + "=1";
 
@@ -137,15 +159,23 @@ public final class NeedMemory
 			directory = directory.getParentFile();
 
 			for (int j = 0; j < programCommandLine.length; ++j, ++i)
+			{
 				commandVector[i] = programCommandLine[j];
+			}
 
 			// Log the action :
 
 			for (i = 0; i < commandVector.length; ++i)
+			{
 				if (i == 0)
+				{
 					s = commandVector[0];
+				}
 				else
+				{
 					s += " " + commandVector[i];
+				}
+			}
 			System.out.println("+++ Re-launch, heap=" + available
 													+ "Mb, requested="
 													+ needed
@@ -158,9 +188,13 @@ public final class NeedMemory
 
 			i = launch(commandVector, directory);
 			if (i < 0)
+			{
 				System.out.println("*** RE-LAUNCH ATTEMPT FAILED.");
+			}
 			else
+			{
 				System.out.println("### End of re-launch.");
+			}
 			System.exit(i);
 		}
 	}
@@ -188,6 +222,7 @@ public final class NeedMemory
 		int exitValue = -1;
 
 		if ((p = execute(commandVector, dir)) != null)
+		{
 			try
 			{
 				exitValue = p.waitFor();
@@ -196,7 +231,8 @@ public final class NeedMemory
 			{
 				exitValue = -1;
 			}
-		return (exitValue);
+		}
+		return exitValue;
 	}
 
 	/**
@@ -221,7 +257,7 @@ public final class NeedMemory
 		{
 			p = null;
 		}
-		return (p);
+		return p;
 	}
 
 	/**
@@ -233,6 +269,6 @@ public final class NeedMemory
 	 */
 	public static long toMegaBytes(final long m)
 	{
-		return ((m / 1024 + 512) / 1024);
+		return (m / 1024 + 512) / 1024;
 	}
 }

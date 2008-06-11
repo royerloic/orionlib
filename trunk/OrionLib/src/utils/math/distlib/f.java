@@ -33,12 +33,14 @@ public class f
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double n1, double n2)
+	public static double density(final double x, final double n1, final double n2)
 	{
 		double a;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
+		{
 			return x + n1 + n2;
+		}
 		/* !* #endif /*4! */
 		if (n1 <= 0 || n2 <= 0)
 		{
@@ -46,8 +48,10 @@ public class f
 			// return Double.NaN;
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
-		a = (n1 / n2) * x;
+		}
+		a = n1 / n2 * x;
 		/* !* return pow(a, 0.5 * n1) * pow(1.0 + a, -0.5 * (n1 + n2)) *! */
 		return java.lang.Math.pow(a, 0.5 * n1) * java.lang.Math.pow(1.0 + a,
 																																-0.5 * (n1 + n2))
@@ -83,11 +87,13 @@ public class f
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double n1, double n2)
+	public static double cumulative(double x, final double n1, final double n2)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
+		{
 			return x + n2 + n1;
+		}
 		/* !* #endif /*4! */
 		if (n1 <= 0.0 || n2 <= 0.0)
 		{
@@ -95,7 +101,9 @@ public class f
 			// return Double.NaN;
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
+		}
 		x = 1.0 - beta.cumulative(n2 / (n2 + n1 * x), n2 / 2.0, n1 / 2.0);
 		return !Double.isNaN(x) ? x : Double.NaN;
 	}
@@ -128,11 +136,13 @@ public class f
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double n1, double n2)
+	public static double quantile(double x, final double n1, final double n2)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
+		{
 			return x + n1 + n2;
+		}
 		/* !* #endif /*4! */
 		if (n1 <= 0.0 || n2 <= 0.0)
 		{
@@ -140,8 +150,10 @@ public class f
 			// return Double.NaN;
 		}
 		if (x <= 0.0)
+		{
 			return 0.0;
-		x = (1.0 / beta.quantile(1.0 - x, n2 / 2.0, n1 / 2.0) - 1.0) * (n2 / n1);
+		}
+		x = (1.0 / beta.quantile(1.0 - x, n2 / 2.0, n1 / 2.0) - 1.0) * n2 / n1;
 		return !Double.isNaN(x) ? x : Double.NaN;
 	}
 
@@ -177,7 +189,9 @@ public class f
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double n1, double n2, uniform PRNG)
+	public static double random(final double n1,
+															final double n2,
+															final uniform PRNG)
 	{
 		double v1, v2;
 		if (
@@ -189,9 +203,9 @@ public class f
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		v1 = !Double.isInfinite(n1)	? (chisquare.random(n1, PRNG) / n1)
+		v1 = !Double.isInfinite(n1)	? chisquare.random(n1, PRNG) / n1
 																: normal.random(PRNG);
-		v2 = !Double.isInfinite(n2)	? (chisquare.random(n2, PRNG) / n2)
+		v2 = !Double.isInfinite(n2)	? chisquare.random(n2, PRNG) / n2
 																: normal.random(PRNG);
 		return v1 / v2;
 	}

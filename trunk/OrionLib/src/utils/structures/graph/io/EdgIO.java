@@ -77,7 +77,9 @@ public class EdgIO
 				{
 					final String lConfidenceValueIndexString = lStringList.get(3).trim();
 					if (lConfidenceValueIndexString.matches("[0-9]+"))
+					{
 						lConfidenceValueIndex = Integer.parseInt(lConfidenceValueIndexString);
+					}
 				}
 				break;
 			}
@@ -152,7 +154,8 @@ public class EdgIO
 					lStringIdToNodeMap.put(lNodeName2, lSecondNode);
 				}
 
-				if ((lFilteredNodesSet.contains(lFirstNode) && lFilteredNodesSet.contains(lSecondNode)) || !isNodeFilterDefined)
+				if (lFilteredNodesSet.contains(lFirstNode) && lFilteredNodesSet.contains(lSecondNode)
+						|| !isNodeFilterDefined)
 				{
 					double lConfidenceValue = 1;
 					if (lConfidenceValueIndex != 0)
@@ -189,6 +192,7 @@ public class EdgIO
 					final List<String> lNodesInStarList = lStringList.subList(2,
 																																		lStringList.size());
 					for (final String lString : lNodesInStarList)
+					{
 						if (!lString.isEmpty())
 						{
 							final String lNodeName2 = lString;
@@ -199,7 +203,8 @@ public class EdgIO
 								lStringIdToNodeMap.put(lNodeName1, lFirstNode);
 							}
 
-							if ((lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2)) || !isNodeFilterDefined)
+							if (lFilteredNodesSet.contains(lNodeName1) && lFilteredNodesSet.contains(lNodeName2)
+									|| !isNodeFilterDefined)
 							{
 								Node lSecondNode = lStringIdToNodeMap.get(lNodeName2);
 								if (lSecondNode == null)
@@ -213,6 +218,7 @@ public class EdgIO
 								lGraph.addEdge(lEdge);
 							}
 						}
+					}
 				}
 
 			}
@@ -234,9 +240,15 @@ public class EdgIO
 		}
 
 		if (isNodeFilterDefined)
+		{
 			for (final Node lNode : new ArrayList<Node>(lGraph.getNodeSet()))
+			{
 				if (!lFilteredNodesSet.contains(lNode))
+				{
 					lGraph.removeNode(lNode);
+				}
+			}
+		}
 
 		return lGraph;
 	}
@@ -293,7 +305,9 @@ public class EdgIO
 			lGoList.add(lNode.toString());
 			lGoList.add("GO");
 			for (final Integer lInteger : lNode.getGoIdList())
+			{
 				lGoList.add(lInteger.toString());
+			}
 			lStringListList.add(lGoList);
 
 			final List<String> lDomainList = new ArrayList<String>();
@@ -301,7 +315,9 @@ public class EdgIO
 			lDomainList.add(lNode.toString());
 			lDomainList.add("DOMAIN");
 			for (final Integer lInteger : lNode.getInterproIdList())
+			{
 				lDomainList.add(lInteger.toString());
+			}
 			lStringListList.add(lDomainList);
 
 		}

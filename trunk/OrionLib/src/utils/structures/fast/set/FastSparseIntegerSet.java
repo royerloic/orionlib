@@ -31,7 +31,7 @@ public final class FastSparseIntegerSet	implements
 		size = pSize;
 	}
 
-	public FastSparseIntegerSet(int... pElementData)
+	public FastSparseIntegerSet(final int... pElementData)
 	{
 		super();
 		elements = Arrays.copyOf(pElementData, pElementData.length);
@@ -42,13 +42,14 @@ public final class FastSparseIntegerSet	implements
 		final int length = elements.length;
 
 		while (readindex < length)
+		{
 			if (readindex == length - 1)
 			{
 				elements[writeindex] = elements[readindex];
 				writeindex++;
 				break;
 			}
-			else if ((elements[readindex] == elements[readindex + 1]))
+			else if (elements[readindex] == elements[readindex + 1])
 			{
 				readindex++;
 				continue;
@@ -59,11 +60,12 @@ public final class FastSparseIntegerSet	implements
 				readindex++;
 				writeindex++;
 			}
+		}
 
 		size = writeindex;
 	}
 
-	public FastSparseIntegerSet(FastSparseIntegerSet pFastSparseIntegerSet)
+	public FastSparseIntegerSet(final FastSparseIntegerSet pFastSparseIntegerSet)
 	{
 		size = pFastSparseIntegerSet.size;
 		elements = Arrays.copyOf(pFastSparseIntegerSet.elements, size);
@@ -85,14 +87,16 @@ public final class FastSparseIntegerSet	implements
 	 * @param minCapacity
 	 *          the desired minimum capacity
 	 */
-	public final void ensureCapacity(int minCapacity)
+	public final void ensureCapacity(final int minCapacity)
 	{
 		final int oldCapacity = elements.length;
 		if (minCapacity > oldCapacity)
 		{
-			int newCapacity = (oldCapacity * 3) / 2 + 1;
+			int newCapacity = oldCapacity * 3 / 2 + 1;
 			if (newCapacity < minCapacity)
+			{
 				newCapacity = minCapacity;
+			}
 			elements = Arrays.copyOf(elements, newCapacity);
 		}
 	}
@@ -107,35 +111,45 @@ public final class FastSparseIntegerSet	implements
 		return size == 0;
 	}
 
-	public final boolean contains(int o)
+	public final boolean contains(final int o)
 	{
 		return Arrays.binarySearch(elements, 0, size, o) >= 0;
 	}
 
-	public final boolean contains(int... pArray)
+	public final boolean contains(final int... pArray)
 	{
-		for (int val : pArray)
+		for (final int val : pArray)
+		{
 			if (!contains(val))
+			{
 				return false;
+			}
+		}
 		return true;
 	}
 
-	public final boolean contains(FastSparseIntegerSet pFastSparseIntegerSet)
+	public final boolean contains(final FastSparseIntegerSet pFastSparseIntegerSet)
 	{
 		final int[] otherElements = pFastSparseIntegerSet.elements;
 		// we first check last element, might lead to early failure...
 		if (!contains(otherElements[pFastSparseIntegerSet.size - 1]))
+		{
 			return false;
+		}
 		// then we check first and all following
 		for (int i = 0; i < pFastSparseIntegerSet.size - 1; i++)
+		{
 			if (!contains(otherElements[i]))
+			{
 				return false;
+			}
+		}
 		return true;
 	}
 
-	public boolean equals(int... pArray)
+	public boolean equals(final int... pArray)
 	{
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(pArray);
+		final FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(pArray);
 		return lFastSparseIntegerSet.equals(this);
 	}
 
@@ -159,53 +173,59 @@ public final class FastSparseIntegerSet	implements
 		size = 0;
 	}
 
-	/**
-	 * Checks if the given index is in range. If not, throws an appropriate
-	 * runtime exception. This method does *not* check if the index is negative:
-	 * It is always used immediately prior to an array access, which throws an
-	 * ArrayIndexOutOfBoundsException if index is negative.
-	 */
-	private final void rangeCheck(int index)
-	{
-		if (index >= size || size < 0)
-			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-	}
-
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = 1;
 		for (int i = 0; i < size; i++)
+		{
 			result = prime * result + elements[i];
+		}
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final FastSparseIntegerSet other = (FastSparseIntegerSet) obj;
 
 		if (size != other.size)
+		{
 			return false;
+		}
 
 		{
 			final int[] a1 = this.elements;
 			final int[] a2 = other.elements;
 			if (a1 == a2)
+			{
 				return true;
+			}
 			if (a1 == null || a2 == null)
+			{
 				return false;
+			}
 
 			for (int i = 0; i < size; i++)
+			{
 				if (a1[i] != a2[i])
+				{
 					return false;
+				}
+			}
 
 			return true;
 		}
@@ -220,7 +240,7 @@ public final class FastSparseIntegerSet	implements
 		}
 		else
 		{
-			StringBuilder lStringBuilder = new StringBuilder();
+			final StringBuilder lStringBuilder = new StringBuilder();
 			lStringBuilder.append("[");
 			for (int i = 0; i < size; i++)
 			{
@@ -234,7 +254,7 @@ public final class FastSparseIntegerSet	implements
 		}
 	}
 
-	public boolean add(int o)
+	public boolean add(final int o)
 	{
 		final int index = Arrays.binarySearch(elements, 0, size, o);
 
@@ -257,7 +277,7 @@ public final class FastSparseIntegerSet	implements
 		}
 	}
 
-	public boolean del(int o)
+	public boolean del(final int o)
 	{
 		final int index = Arrays.binarySearch(elements, 0, size, o);
 
@@ -321,8 +341,8 @@ public final class FastSparseIntegerSet	implements
 			}
 		}
 
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(lNewArray,
-																																					k);
+		final FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet(lNewArray,
+																																								k);
 
 		return lFastSparseIntegerSet;
 	}
@@ -506,14 +526,15 @@ public final class FastSparseIntegerSet	implements
 
 	public FastIntegerList getList()
 	{
-		FastIntegerList lFastIntegerList = new FastIntegerList(elements, size);
+		final FastIntegerList lFastIntegerList = new FastIntegerList(elements, size);
 		return lFastIntegerList;
 	}
 
-	public FastSparseIntegerSet getRandomSubSet(Random pRandom, double pDensity)
+	public FastSparseIntegerSet getRandomSubSet(final Random pRandom,
+																							final double pDensity)
 	{
-		FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet();
-		for (int val : elements)
+		final FastSparseIntegerSet lFastSparseIntegerSet = new FastSparseIntegerSet();
+		for (final int val : elements)
 		{
 			if (pRandom.nextDouble() < pDensity)
 			{
@@ -525,47 +546,53 @@ public final class FastSparseIntegerSet	implements
 
 	// Special static methods:
 
-	private static final int max(int a, int b)
+	private static final int max(final int a, final int b)
 	{
-		return (a >= b) ? a : b;
+		return a >= b ? a : b;
 	}
 
 	// *************************************************************
 	// Methods implementing interfaces
 
-	public boolean add(Integer pE)
+	public boolean add(final Integer pE)
 	{
 		return add((int) pE);
 	}
 
-	public boolean addAll(Collection<? extends Integer> c)
+	public boolean addAll(final Collection<? extends Integer> c)
 	{
-		Integer[] a = (Integer[]) c.toArray();
+		final Integer[] a = (Integer[]) c.toArray();
 		final int numNew = a.length;
 		ensureCapacity(size + numNew); // Increments modCount
 		System.arraycopy(a, 0, elements, size, numNew);
 		for (int i = 0; i < numNew; i++)
+		{
 			elements[i] = a[size + i];
+		}
 		size += numNew;
 		return numNew != 0;
 	}
 
-	public boolean contains(Object pO)
+	public boolean contains(final Object pO)
 	{
-		return contains((int) ((Integer) pO));
+		return contains((int) (Integer) pO);
 	}
 
-	public boolean containsAll(Collection<?> pC)
+	public boolean containsAll(final Collection<?> pC)
 	{
-		for (Object element : pC)
+		for (final Object element : pC)
+		{
 			if (!contains(element))
+			{
 				return false;
+			}
+		}
 		return true;
 	}
 
 	public Iterator<Integer> iterator()
 	{
-		Iterator<Integer> lIterator = new Iterator<Integer>()
+		final Iterator<Integer> lIterator = new Iterator<Integer>()
 		{
 			int mPosition = 0;
 
@@ -577,7 +604,9 @@ public final class FastSparseIntegerSet	implements
 			public Integer next()
 			{
 				if (hasNext())
+				{
 					mPosition++;
+				}
 				return elements[mPosition];
 			}
 
@@ -589,40 +618,46 @@ public final class FastSparseIntegerSet	implements
 		return lIterator;
 	}
 
-	public boolean remove(Object pO)
+	public boolean remove(final Object pO)
 	{
-		del((int) ((Integer) pO));
+		del((Integer) pO);
 		return true;
 	}
 
-	public boolean removeAll(Collection<?> pC)
+	public boolean removeAll(final Collection<?> pC)
 	{
 		boolean haschanged = false;
-		for (Object element : pC)
-			haschanged |= del((int) ((Integer) element));
+		for (final Object element : pC)
+		{
+			haschanged |= del((Integer) element);
+		}
 		return haschanged;
 	}
 
-	public boolean retainAll(Collection<?> pC)
+	public boolean retainAll(final Collection<?> pC)
 	{
-		boolean haschanged = false;
-		for (int element : elements)
+		final boolean haschanged = false;
+		for (final int element : elements)
+		{
 			if (!pC.contains(element))
+			{
 				del(element);
+			}
+		}
 		return haschanged;
 	}
 
 	public Object[] toArray()
 	{
-		Integer[] lArray = new Integer[size];
+		final Integer[] lArray = new Integer[size];
 		for (int i = 0; i < size; i++)
 		{
-			lArray[i] = (Integer) elements[i];
+			lArray[i] = elements[i];
 		}
 		return lArray;
 	}
 
-	public <T> T[] toArray(T[] pA)
+	public <T> T[] toArray(final T[] pA)
 	{
 		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
 	}

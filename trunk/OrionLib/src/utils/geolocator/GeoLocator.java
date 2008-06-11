@@ -5,11 +5,11 @@ public class GeoLocator implements Locator
 
 	LocationDatabase mCountryDatabase;
 
-	private LocationDatabase mBigCityDatabase;
+	private final LocationDatabase mBigCityDatabase;
 
-	private LocationDatabase mAllCityDatabase;
+	private final LocationDatabase mAllCityDatabase;
 
-	private LocationDatabase mUSSDatabase;
+	private final LocationDatabase mUSSDatabase;
 
 	public GeoLocator()
 	{
@@ -45,7 +45,9 @@ public class GeoLocator implements Locator
 			lLocation = mCountryDatabase.findLocationInString(pString);
 
 			if (lLocation == null)
+			{
 				lLocation = mUSSDatabase.findLocationInString(pString);
+			}
 		}
 
 		return lLocation;

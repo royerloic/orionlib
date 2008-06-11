@@ -3,12 +3,17 @@ package utils.structures.range;
 public class UnmodifiableRange extends Range
 {
 
-	public UnmodifiableRange(Range pRange)
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UnmodifiableRange(final Range pRange)
 	{
 		super(pRange);
 	}
 
-	public UnmodifiableRange(int pStart, int pLength)
+	public UnmodifiableRange(final int pStart, final int pLength)
 	{
 		super(pStart, pLength);
 	}
@@ -48,31 +53,31 @@ public class UnmodifiableRange extends Range
 	}
 
 	@Override
-	public void convexUnion(Range pOtherRange)
+	public void convexUnion(final Range pOtherRange)
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}
 
 	@Override
-	public Range translateRange(int pBy)
+	public Range translateRange(final int pBy)
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}
 
 	@Override
-	public void setEnd(int pRangeEnd)
+	public void setEnd(final int pRangeEnd)
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}
 
 	@Override
-	public void setRange(Range pRange)
+	public void setRange(final Range pRange)
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}
 
 	@Override
-	public void setStart(int pRangeStart)
+	public void setStart(final int pRangeStart)
 	{
 		throw new UnsupportedOperationException("This Range is unmodifiable");
 	}

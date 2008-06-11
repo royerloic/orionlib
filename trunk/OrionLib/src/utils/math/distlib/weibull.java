@@ -33,12 +33,16 @@ public class weibull
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double shape, double scale)
+	public static double density(	final double x,
+																final double shape,
+																final double scale)
 	{
 		double tmp1, tmp2;
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(shape) || Double.isNaN(scale))
+		{
 			return x + shape + scale;
+		}
 		/* !* #endif /*4! */
 		if (shape <= 0 || scale <= 0)
 		{
@@ -46,14 +50,18 @@ public class weibull
 			// return Double.NaN;
 		}
 		if (x <= 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 0;
+		}
 		/* !* #endif /*4! */
 		/* !* tmp1 = pow(x / scale, shape - 1); *! */
 		tmp1 = java.lang.Math.pow(x / scale, shape - 1);
-		tmp2 = tmp1 * (x / scale);
+		tmp2 = tmp1 * x / scale;
 		/* !* return shape * tmp1 * exp(-tmp2) / scale; *! */
 		return shape * tmp1 * java.lang.Math.exp(-tmp2) / scale;
 	}
@@ -87,11 +95,15 @@ public class weibull
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double cumulative(double x, double shape, double scale)
+	public static double cumulative(final double x,
+																	final double shape,
+																	final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(shape) || Double.isNaN(scale))
+		{
 			return x + shape + scale;
+		}
 		/* !* #endif /*4! */
 		if (shape <= 0 || scale <= 0)
 		{
@@ -99,7 +111,9 @@ public class weibull
 			// return Double.NaN;
 		}
 		if (x <= 0)
+		{
 			return 0;
+		}
 		/* !* return 1.0 - exp(-pow(x / scale, shape)); *! */
 		return 1.0 - java.lang.Math.exp(-java.lang.Math.pow(x / scale, shape));
 	}
@@ -132,11 +146,15 @@ public class weibull
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double x, double shape, double scale)
+	public static double quantile(final double x,
+																final double shape,
+																final double scale)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(shape) || Double.isNaN(scale))
+		{
 			return x + shape + scale;
+		}
 		/* !* #endif /*4! */
 		if (shape <= 0 || scale <= 0 || x < 0 || x > 1)
 		{
@@ -144,10 +162,14 @@ public class weibull
 			// return Double.NaN;
 		}
 		if (x == 0)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (x == 1)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		/* !* #endif /*4! */
 		/* !* return scale * pow(-log(1.0 - x), 1.0 / shape); *! */
 		return scale * java.lang.Math.pow(-java.lang.Math.log(1.0 - x), 1.0 / shape);
@@ -181,7 +203,9 @@ public class weibull
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double random(double shape, double scale, uniform PRNG)
+	public static double random(final double shape,
+															final double scale,
+															final uniform PRNG)
 	{
 		if (
 		/* !* #ifdef IEEE_754 /*4! */

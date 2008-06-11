@@ -40,12 +40,12 @@ public class WiiTray extends WiiRemoteAdapter	implements
 
 	private static WiiRemote mWiiRemote;
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		try
 		{
-			Map<String, String> lParameters = CmdLine.getMap(args);
-			ArrayList<WiiMode> lModeList = new ArrayList<WiiMode>();
+			final Map<String, String> lParameters = CmdLine.getMap(args);
+			final ArrayList<WiiMode> lModeList = new ArrayList<WiiMode>();
 
 			lModeList.add(new MouseMode());
 			lModeList.add(new PenMode());
@@ -54,13 +54,14 @@ public class WiiTray extends WiiRemoteAdapter	implements
 
 			new WiiTray(lParameters, lModeList);
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public WiiTray(Map<String, String> pParameters, ArrayList<WiiMode> pModeList)
+	public WiiTray(	final Map<String, String> pParameters,
+									final ArrayList<WiiMode> pModeList)
 	{
 		super();
 
@@ -71,14 +72,14 @@ public class WiiTray extends WiiRemoteAdapter	implements
 			if (SystemTray.isSupported())
 			{
 
-				SystemTray tray = SystemTray.getSystemTray();
-				URL lURL = WiiTray.class.getResource("remote.png");
-				Image image = Toolkit.getDefaultToolkit().getImage(lURL);
+				final SystemTray tray = SystemTray.getSystemTray();
+				final URL lURL = WiiTray.class.getResource("remote.png");
+				final Image image = Toolkit.getDefaultToolkit().getImage(lURL);
 
-				PopupMenu popup = new PopupMenu();
+				final PopupMenu popup = new PopupMenu();
 
-				MenuItem lConnectItem = new MenuItem("Connect");
-				ActionListener lConnectItemListener = new ActionListener()
+				final MenuItem lConnectItem = new MenuItem("Connect");
+				final ActionListener lConnectItemListener = new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -89,8 +90,8 @@ public class WiiTray extends WiiRemoteAdapter	implements
 				lConnectItem.addActionListener(lConnectItemListener);
 				popup.add(lConnectItem);
 
-				MenuItem lDisconnectItem = new MenuItem("Disconnect");
-				ActionListener lDisconnectItemListener = new ActionListener()
+				final MenuItem lDisconnectItem = new MenuItem("Disconnect");
+				final ActionListener lDisconnectItemListener = new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -103,7 +104,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 
 				popup.addSeparator();
 
-				for (WiiMode lWiiMode : mModeList)
+				for (final WiiMode lWiiMode : mModeList)
 				{
 					popup.add(lWiiMode.getMenuItem());
 					lWiiMode.getMenuItem().addItemListener(this);
@@ -112,8 +113,8 @@ public class WiiTray extends WiiRemoteAdapter	implements
 
 				popup.addSeparator();
 
-				MenuItem lExitItem = new MenuItem("Exit");
-				ActionListener lExitItemListener = new ActionListener()
+				final MenuItem lExitItem = new MenuItem("Exit");
+				final ActionListener lExitItemListener = new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -134,7 +135,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 				{
 					tray.add(mTrayIcon);
 				}
-				catch (AWTException e)
+				catch (final AWTException e)
 				{
 					System.out.println("TrayIcon could not be added.");
 				}
@@ -145,7 +146,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 				System.out.println("not supported");
 			}
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}
@@ -155,7 +156,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 	{
 		final WiiTray lWiiTray = this;
 
-		Runnable lRunnable = new Runnable()
+		final Runnable lRunnable = new Runnable()
 		{
 			public void run()
 			{
@@ -198,45 +199,47 @@ public class WiiTray extends WiiRemoteAdapter	implements
 			}
 		};
 
-		Thread lThread = new Thread(lRunnable);
+		final Thread lThread = new Thread(lRunnable);
 		lThread.start();
 	}
 
 	public void disconnect()
 	{
 		if (mWiiRemote != null)
+		{
 			mWiiRemote.disconnect();
+		}
 		disconnected();
 	}
 
-	public void mouseClicked(MouseEvent e)
+	public void mouseClicked(final MouseEvent e)
 	{
 		System.out.println("Tray Icon - Mouse clicked!");
 	}
 
-	public void mouseEntered(MouseEvent e)
+	public void mouseEntered(final MouseEvent e)
 	{
 		System.out.println("Tray Icon - Mouse entered!");
 	}
 
-	public void mouseExited(MouseEvent e)
+	public void mouseExited(final MouseEvent e)
 	{
 		System.out.println("Tray Icon - Mouse exited!");
 	}
 
-	public void mousePressed(MouseEvent e)
+	public void mousePressed(final MouseEvent e)
 	{
 		System.out.println("Tray Icon - Mouse pressed!");
 	}
 
-	public void mouseReleased(MouseEvent e)
+	public void mouseReleased(final MouseEvent e)
 	{
 		System.out.println("Tray Icon - Mouse released!");
 	}
 
 	public void connected()
 	{
-		for (WiiMode lWiiMode : mModeList)
+		for (final WiiMode lWiiMode : mModeList)
 		{
 			lWiiMode.getMenuItem().setEnabled(true);
 		}
@@ -244,7 +247,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 
 	public void disconnected()
 	{
-		for (WiiMode lWiiMode : mModeList)
+		for (final WiiMode lWiiMode : mModeList)
 		{
 			// lWiiMode.deactivate(mWiiRemote);
 			lWiiMode.getMenuItem().setEnabled(false);
@@ -252,11 +255,12 @@ public class WiiTray extends WiiRemoteAdapter	implements
 		mWiiRemote = null;
 	}
 
-	public void itemStateChanged(ItemEvent pE)
+	public void itemStateChanged(final ItemEvent pE)
 	{
 		try
 		{
-			for (WiiMode lWiiMode : mModeList)
+			for (final WiiMode lWiiMode : mModeList)
+			{
 				if (pE.getSource().equals(lWiiMode.getMenuItem()))
 				{
 					lWiiMode.getMenuItem().setState(true);
@@ -267,8 +271,9 @@ public class WiiTray extends WiiRemoteAdapter	implements
 					lWiiMode.getMenuItem().setState(false);
 					lWiiMode.deactivate(mWiiRemote);
 				}
+			}
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 		}

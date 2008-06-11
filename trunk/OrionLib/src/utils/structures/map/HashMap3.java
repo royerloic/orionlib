@@ -44,13 +44,19 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	im
 	public void putAll(final Map3<K1, K2, K3, V> pMapMap)
 	{
 		for (final Map.Entry<K1, Map<K2, Map<K3, V>>> lEntry : pMapMap.entrySet())
+		{
 			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry	.getValue()
 																														.entrySet())
+			{
 				for (final Map.Entry<K3, V> lEntry3 : lEntry2.getValue().entrySet())
+				{
 					put(lEntry.getKey(),
 							lEntry2.getKey(),
 							lEntry3.getKey(),
 							lEntry3.getValue());
+				}
+			}
+		}
 	}
 
 	/*
@@ -109,8 +115,10 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	im
 	{
 		final Set<Entry<K1, K2, K3, V>> lEntrySet = new HashSet<Entry<K1, K2, K3, V>>();
 		for (final Map.Entry<K1, Map<K2, Map<K3, V>>> lEntry1 : entrySet())
+		{
 			for (final Map.Entry<K2, Map<K3, V>> lEntry2 : lEntry1.getValue()
 																														.entrySet())
+			{
 				for (final Map.Entry<K3, V> lEntry3 : lEntry2.getValue().entrySet())
 				{
 					final Entry<K1, K2, K3, V> lAllKeyEntry = new HashMap3Entry<K1, K2, K3, V>(	lEntry1.getKey(),
@@ -119,6 +127,8 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	im
 																																											lEntry3.getValue());
 					lEntrySet.add(lAllKeyEntry);
 				}
+			}
+		}
 		return lEntrySet;
 	}
 

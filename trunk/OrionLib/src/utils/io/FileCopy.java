@@ -9,13 +9,15 @@ import java.io.IOException;
 
 public class FileCopy
 {
-	public static void copy(File pSource, File pDest) throws IOException
+	public static void copy(final File pSource, final File pDest) throws IOException
 	{
-		BufferedReader in = new BufferedReader(new FileReader(pSource));
-		BufferedWriter out = new BufferedWriter(new FileWriter(pSource));
+		final BufferedReader in = new BufferedReader(new FileReader(pSource));
+		final BufferedWriter out = new BufferedWriter(new FileWriter(pSource));
 		int c;
 		while ((c = in.read()) != -1)
+		{
 			out.write(c);
+		}
 		in.close();
 		out.close();
 	}

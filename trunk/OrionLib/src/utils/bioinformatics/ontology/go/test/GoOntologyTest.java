@@ -12,7 +12,7 @@ public class GoOntologyTest
 	@Test
 	public void testGoOntology() throws IOException
 	{
-		GoOntology lGoOntology = GoOntology.getUniqueInstance();
+		final GoOntology lGoOntology = GoOntology.getUniqueInstance();
 
 		System.out.println(lGoOntology.getNodeSet());
 	}

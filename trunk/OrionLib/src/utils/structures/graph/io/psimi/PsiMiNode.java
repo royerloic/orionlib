@@ -7,6 +7,10 @@ import utils.structures.graph.Node;
 
 public class PsiMiNode extends Node
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	List<Integer> mGoIdList = new ArrayList<Integer>();
 	List<Integer> mInterproIdList = new ArrayList<Integer>();
 

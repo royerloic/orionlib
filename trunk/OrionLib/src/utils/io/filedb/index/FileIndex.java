@@ -13,17 +13,20 @@ import java.util.regex.Pattern;
 
 public class FileIndex implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final File mFile;
 	private final String mColumnSeparatorRegex;
 	private final Pattern mColumnSeparatorPattern;
-	private HashMap<String, Long> mIndexMap = new HashMap<String, Long>();
+	private final HashMap<String, Long> mIndexMap = new HashMap<String, Long>();
 
-	private File IndexFile;
 	private RandomAccessFile mRandomAccessFile;
 
-	private HashMap<String, SoftReference<String[]>> mCacheMap = new HashMap<String, SoftReference<String[]>>();
+	private final HashMap<String, SoftReference<String[]>> mCacheMap = new HashMap<String, SoftReference<String[]>>();
 
-	public FileIndex(File pFile, String pColumnSeparatorRegex)
+	public FileIndex(final File pFile, final String pColumnSeparatorRegex)
 	{
 		super();
 		mFile = pFile;
@@ -50,7 +53,9 @@ public class FileIndex implements Serializable
 			lPosition += nextLine.length() + lineSep.length();
 		}
 		if (mFile.length() != lPosition)
+		{
 			throw new RuntimeException("Line Separator of wrong size -> index corrupt");
+		}
 		lBufferedReader.close();
 	}
 

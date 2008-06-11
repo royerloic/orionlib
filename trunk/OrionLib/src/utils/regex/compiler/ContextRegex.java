@@ -59,10 +59,6 @@ public class ContextRegex
 	private final List<FilterRule> mPositiveFilterRuleList = new ArrayList<FilterRule>();
 	private final List<FilterRule> mNegativeFilterRuleList = new ArrayList<FilterRule>();
 
-	private ContextRegex()
-	{
-	}
-
 	public ContextRegex(final String pRessource) throws IOException
 	{
 		readRules(pRessource);
@@ -96,7 +92,9 @@ public class ContextRegex
 		{
 			final String lFirstString = lList.get(0).trim();
 			if (lFirstString.length() == 0 || lFirstString.startsWith("//"))
+			{
 				continue;
+			}
 			else if (lFirstString.startsWith("importset:"))
 			{
 				final String[] lStringArray = StringUtils.split(lFirstString,
@@ -120,8 +118,8 @@ public class ContextRegex
 				final String[] lStringArray = StringUtils.split(lFirstString, ":", 0);
 				final String lImportRegexFileName = lStringArray[1]	.trim()
 																														.toLowerCase();
-				RegexCompiler lRegexCompiler = new RegexCompiler(lImportRegexFileName);
-				for (Pair<String> lPair : lRegexCompiler)
+				final RegexCompiler lRegexCompiler = new RegexCompiler(lImportRegexFileName);
+				for (final Pair<String> lPair : lRegexCompiler)
 				{
 					mSetNameToNameSetMap.put(lPair.mA, lPair.mB);
 				}
@@ -175,12 +173,18 @@ public class ContextRegex
 																											lMatchRegex,
 																											lPostFixRegex);
 				if (lIsPositive)
+				{
 					mPositiveFilterRuleList.add(lFilterRule);
+				}
 				else if (lIsNegative)
+				{
 					mNegativeFilterRuleList.add(lFilterRule);
+				}
 			}
 			else if (lIsSet)
+			{
 				mSetNameToNameSetMap.put(lSetName, lFirstString);
+			}
 
 		}
 	}
@@ -206,7 +210,9 @@ public class ContextRegex
 			final StringBuffer lStringBuffer = new StringBuffer();
 			lStringBuffer.append("(?:");
 			for (final String lString : pSet)
+			{
 				lStringBuffer.append(lString + "|");
+			}
 			lStringBuffer.deleteCharAt(lStringBuffer.length() - 1);
 			lStringBuffer.append(")");
 			return lStringBuffer.toString();
@@ -221,28 +227,42 @@ public class ContextRegex
 
 		boolean isPositiveMatched = false;
 		for (final FilterRule lFilterRule : mPositiveFilterRuleList)
+		{
 			if (pPostFix.length() == 0 || lFilterRule.mPostRegex.matcher(pPostFix)
 																													.matches())
+			{
 				if (pPreFix.length() == 0 || lFilterRule.mPreRegex.matcher(pPreFix)
 																													.matches())
+				{
 					if (lFilterRule.mMatchRegex.matcher(pMatch).matches())
 					{
 						isPositiveMatched = true;
 						break;
 					}
+				}
+			}
+		}
 
 		boolean isNegativeMatched = false;
 		if (isPositiveMatched)
+		{
 			for (final FilterRule lFilterRule : mNegativeFilterRuleList)
+			{
 				if (pPostFix.length() == 0 || lFilterRule.mPostRegex.matcher(pPostFix)
 																														.matches())
+				{
 					if (pPreFix.length() == 0 || lFilterRule.mPreRegex.matcher(pPreFix)
 																														.matches())
+					{
 						if (lFilterRule.mMatchRegex.matcher(pMatch).matches())
 						{
 							isNegativeMatched = true;
 							break;
 						}
+					}
+				}
+			}
+		}
 
 		return isPositiveMatched && !isNegativeMatched;
 	}

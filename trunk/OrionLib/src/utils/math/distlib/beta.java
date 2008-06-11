@@ -33,13 +33,15 @@ public class beta
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double a, double b)
+	public static double density(final double x, double a, double b)
 	{
 		double y;
 		/* !* #ifdef IEEE_754 /*4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(a) || Double.isNaN(b))
+		{
 			return x + a + b;
+		}
 		/* !* #endif /*4! */
 		if (a <= 0.0 || b <= 0.0)
 		{
@@ -47,9 +49,13 @@ public class beta
 			// return Double.NaN;
 		}
 		if (x < 0)
+		{
 			return 0;
+		}
 		if (x > 1)
+		{
 			return 0;
+		}
 		y = misc.beta(a, b);
 		/* !* a = pow(x, a - 1); *! */
 		a = java.lang.Math.pow(x, a - 1);
@@ -99,7 +105,7 @@ public class beta
 
 	/* !* #include "DistLib.h" /*4! */
 
-	static double pbeta_raw(double x, double pin, double qin)
+	static double pbeta_raw(final double x, final double pin, final double qin)
 	{
 		double ans, c, finsum, p, ps, p1, q, term, xb, xi, y;
 		int n, i, ib;
@@ -142,10 +148,14 @@ public class beta
 						- java.lang.Math.log(p)
 						- misc.lbeta(p, q);
 			if (xb > alnsml && y != 0)
+			{
 				/* !* ans = exp(xb); *! */
 				ans = java.lang.Math.exp(xb);
+			}
 			if (y != x || p != pin)
+			{
 				ans = 1 - ans;
+			}
 		}
 		else
 		{
@@ -156,7 +166,9 @@ public class beta
 			/* !* ps = q - floor(q); *! */
 			ps = q - java.lang.Math.floor(q);
 			if (ps == 0)
+			{
 				ps = 1;
+			}
 			/* !* xb = p * log(y) - misc.lbeta(ps, p) - log(p); *! */
 			xb = p * java.lang.Math.log(y)
 						- misc.lbeta(ps, p)
@@ -198,11 +210,15 @@ public class beta
 				finsum = 0;
 				n = (int) q;
 				if (q == n)
+				{
 					n = n - 1;
+				}
 				for (i = 1; i <= n; i++)
 				{
 					if (p1 <= 1 && term / eps <= finsum)
+					{
 						break;
+					}
 					xi = i;
 					term = (q - xi + 1) * c * term / (p + q - xi);
 					if (term > 1)
@@ -211,23 +227,31 @@ public class beta
 						term = term * sml;
 					}
 					if (ib == 0)
+					{
 						finsum = finsum + term;
+					}
 				}
 				ans = ans + finsum;
 			}
 			if (y != x || p != pin)
+			{
 				ans = 1 - ans;
+			}
 			ans = Math.max(Math.min(ans, 1.0), 0.0);
 		}
 		return ans;
 	}
 
-	public static double cumulative(double x, double pin, double qin)
+	public static double cumulative(final double x,
+																	final double pin,
+																	final double qin)
 	{
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(pin) || Double.isNaN(qin))
+		{
 			return x + pin + qin;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		if (pin <= 0 || qin <= 0)
 		{
@@ -235,9 +259,13 @@ public class beta
 			// return Double.NaN;
 		}
 		if (x <= 0)
+		{
 			return 0;
+		}
 		if (x >= 1)
+		{
 			return 1;
+		}
 		return pbeta_raw(x, pin, qin);
 	}
 
@@ -295,7 +323,9 @@ public class beta
 
 	static volatile double xtrunc;
 
-	public static double quantile(double alpha, double p, double q)
+	public static double quantile(final double alpha,
+																final double p,
+																final double q)
 	{
 		int swap_tail, i_pb, i_inn;
 		double a, adj, logbeta, g, h, pp, prev, qq, r, s, t, tx, w, y, yprev;
@@ -310,7 +340,9 @@ public class beta
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(q) || Double.isNaN(alpha))
+		{
 			return p + q + alpha;
+		}
 		/* !* #endif /*4! */
 		if (p < zero || q < zero || alpha < zero || alpha > 1)
 		{
@@ -318,7 +350,9 @@ public class beta
 			// return Double.NaN;
 		}
 		if (alpha == zero || alpha == 1)
+		{
 			return alpha;
+		}
 
 		logbeta = misc.lbeta(p, q);
 
@@ -364,16 +398,22 @@ public class beta
 			/* !* t = r * pow(1 - t + y * sqrt(t), 3); *! */
 			t = r * java.lang.Math.pow(1 - t + y * java.lang.Math.sqrt(t), 3);
 			if (t <= zero)
+			{
 				/* !* xinbta = 1 - exp((log((1 - a) * qq) + logbeta) / qq); *! */
 				xinbta = 1 - java.lang.Math.exp((java.lang.Math.log((1 - a) * qq) + logbeta) / qq);
+			}
 			else
 			{
 				t = (4 * pp + r - 2) / t;
 				if (t <= 1)
+				{
 					/* !* xinbta = exp((log(a * pp) + logbeta) / pp); *! */
 					xinbta = java.lang.Math.exp((java.lang.Math.log(a * pp) + logbeta) / pp);
+				}
 				else
+				{
 					xinbta = 1 - 2 / (t + 1);
+				}
 			}
 		}
 
@@ -385,9 +425,13 @@ public class beta
 		yprev = zero;
 		adj = 1;
 		if (xinbta < lower)
+		{
 			xinbta = lower;
+		}
 		else if (xinbta > upper)
+		{
 			xinbta = upper;
+		}
 
 		/*
 		 * Desired accuracy should depend on (a,p) This is from Remark .. on AS 109,
@@ -414,6 +458,7 @@ public class beta
 				/* y = pbeta_raw2(xinbta, pp, qq, logbeta); */
 				/* !* #ifdef IEEE_754 /*4! */
 				if (Double.isInfinite(y))
+				{
 					/* !* #else /*4! */
 					// if (errno)
 					/* !* #endif /*4! */
@@ -425,8 +470,11 @@ public class beta
 																	* java.lang.Math.log(xinbta)
 																	+ t
 																	* java.lang.Math.log(1 - xinbta));
+				}
 				if (y * yprev <= zero)
+				{
 					prev = Math.max(java.lang.Math.abs(adj), fpu);
+				}
 				g = 1;
 				for (i_inn = 0; i_inn < 1000; i_inn++)
 				{
@@ -437,11 +485,17 @@ public class beta
 						if (tx >= zero && tx <= 1)
 						{
 							if (prev <= acu)
+							{
 								break L_converged;
+							}
 							if (java.lang.Math.abs(y) <= acu)
+							{
 								break L_converged;
+							}
 							if (tx != zero && tx != 1)
+							{
 								break;
+							}
 						}
 					}
 					g /= 3;
@@ -449,7 +503,9 @@ public class beta
 				xtrunc = tx; /* this prevents trouble with excess FPU */
 				/* precision on some machines. */
 				if (xtrunc == xinbta)
+				{
 					break L_converged;
+				}
 				xinbta = tx;
 				yprev = y;
 			}
@@ -458,7 +514,9 @@ public class beta
 		}
 
 		if (swap_tail == 1)
+		{
 			xinbta = 1 - xinbta;
+		}
 		return xinbta;
 	}
 
@@ -490,7 +548,9 @@ public class beta
 	/* !* #include "DistLib.h" /*4! */
 
 	/* !* double random(double aa, double bb) *! */
-	public static double random(double aa, double bb, uniform PRNG)
+	public static double random(final double aa,
+															final double bb,
+															final uniform PRNG)
 	{
 		int qsame;
 
@@ -502,11 +562,13 @@ public class beta
 		double oldb = -1.0;
 
 		if (expmax == 0.0)
+		{
 			/* !* expmax = log(Double.MAX_VALUE); *! */
 			expmax = java.lang.Math.log(Double.MAX_VALUE);
+		}
 
 		/* !* qsame = (olda == aa) && (oldb == bb); *! */
-		qsame = ((olda == aa) && (oldb == bb)) ? 1 : 0;
+		qsame = olda == aa && oldb == bb ? 1 : 0;
 
 		if (!(qsame == 1))
 		{
@@ -547,36 +609,52 @@ public class beta
 						y = u1 * u2;
 						z = u1 * y;
 						if (0.25 * u2 + z - y >= k1)
+						{
 							continue;
+						}
 					}
 					else
 					{
 						z = u1 * u1 * u2;
 						if (z <= 0.25)
+						{
 							break;
+						}
 						if (z >= k2)
+						{
 							continue;
+						}
 					}
 					/* !* v = beta * log(u1 / (1.0 - u1)); *! */
 					v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 					if (v <= expmax)
+					{
 						/* !* w = a * exp(v); *! */
 						w = a * java.lang.Math.exp(v);
+					}
 					else
+					{
 						w = Double.MAX_VALUE;
+					}
 					/* !* if (alpha * (log(alpha / (b + w)) + v) - 1.3862944 *! */
 					if (alpha * (java.lang.Math.log(alpha / (b + w)) + v) - 1.3862944
 					/* !* >= log(z)) *! */
 					>= java.lang.Math.log(z))
+					{
 						break deliver;
+					}
 				}
 				/* !* v = beta * log(u1 / (1.0 - u1)); *! */
 				v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 				if (v <= expmax)
+				{
 					/* !* w = a * exp(v); *! */
 					w = a * java.lang.Math.exp(v);
+				}
 				else
+				{
 					w = Double.MAX_VALUE;
+				}
 			}
 			else
 			{ /* Algorithm BB */
@@ -598,25 +676,33 @@ public class beta
 					/* !* v = beta * log(u1 / (1.0 - u1)); *! */
 					v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 					if (v <= expmax)
+					{
 						/* !* w = a * exp(v); *! */
 						w = a * java.lang.Math.exp(v);
+					}
 					else
+					{
 						w = Double.MAX_VALUE;
+					}
 					z = u1 * u1 * u2;
 					r = gamma * v - 1.3862944;
 					s = a + r - w;
 					if (s + 2.609438 >= 5.0 * z)
+					{
 						break;
+					}
 					/* !* t = log(z); *! */
 					t = java.lang.Math.log(z);
 					if (s > t)
+					{
 						break;
+					}
 				}
 				/* !* while (r + alpha * log(alpha / (b + w)) < t); *! */
 				while (r + alpha * java.lang.Math.log(alpha / (b + w)) < t);
 			}
 
 		} // deliver:
-		return (aa != a) ? b / (b + w) : w / (b + w);
+		return aa != a ? b / (b + w) : w / (b + w);
 	}
 }

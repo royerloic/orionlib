@@ -27,8 +27,10 @@ public class GraphicsUtils
 		System.err.println("done, width=" + lImage.getWidth()
 												+ ", height="
 												+ lImage.getHeight());
-		if ((lImage.getWidth() == 0) || (lImage.getHeight() == 0))
+		if (lImage.getWidth() == 0 || lImage.getHeight() == 0)
+		{
 			throw new IOException("Empty image");
+		}
 
 		return lImage;
 	}

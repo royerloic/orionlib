@@ -20,9 +20,11 @@ public class GraphClustering<N>
 		final Set<N> lSet = new HashSet<N>(pSet1);
 		lSet.retainAll(pSet2);
 		final double lIntersectionSize = lSet.size();
-		final Double lDistance = ((pSet1.size() + pSet2.size() - 2 * lIntersectionSize)) / lIntersectionSize;
+		final Double lDistance = (pSet1.size() + pSet2.size() - 2 * lIntersectionSize) / lIntersectionSize;
 		if (lIntersectionSize == Double.NaN)
+		{
 			return Double.POSITIVE_INFINITY;
+		}
 		return lDistance;
 	}
 
@@ -30,7 +32,9 @@ public class GraphClustering<N>
 	{
 		Double lSize = new Double(0);
 		for (final Map.Entry<N, Double> lEntry : pWeightedSet.entrySet())
+		{
 			lSize += this.mCentralityWeigting ? lEntry.getValue() : 1;
+		}
 		return lSize;
 	}
 
@@ -42,11 +46,15 @@ public class GraphClustering<N>
 
 		final Map<N, Double> lWeightedSetIntersection = new HashMap<N, Double>(pWeightedSet1);
 		for (final Map.Entry<N, Double> lEntry : pWeightedSet1.entrySet())
+		{
 			if (!pWeightedSet2.containsKey(lEntry.getKey()))
+			{
 				lWeightedSetIntersection.remove(lEntry.getKey());
+			}
+		}
 		final Double lSizeIntersection = computeWeightedSize(lWeightedSetIntersection);
 
-		Double lDistance = (lSizeIntersection) / (lSize1 + lSize2 - lSizeIntersection);
+		Double lDistance = lSizeIntersection / (lSize1 + lSize2 - lSizeIntersection);
 		lDistance = lDistance == Double.NaN ? Double.POSITIVE_INFINITY : lDistance;
 
 		return lDistance;
@@ -83,8 +91,10 @@ public class GraphClustering<N>
 			this.mNodeSet.addAll(pCluster.mNodeSet);
 			this.mNodeToConnectivityMap.putAll(pCluster.mNodeToConnectivityMap);
 			for (final N lNode : this.mNodeSet)
+			{
 				this.mNodeToConnectivityMap.remove(lNode);
-			// filter(mNodeToConnectivityMap, mThreshold);
+				// filter(mNodeToConnectivityMap, mThreshold);
+			}
 		}
 
 		int getClusterSize()
@@ -110,9 +120,13 @@ public class GraphClustering<N>
 		public boolean equals(final Object obj)
 		{
 			if (this == obj)
+			{
 				return true;
+			}
 			if (this.hashCode() != ((Cluster) obj).hashCode())
+			{
 				return false;
+			}
 
 			return this.mNodeSet.equals(((Cluster) obj).mNodeSet);
 		}
@@ -173,7 +187,9 @@ public class GraphClustering<N>
 
 		final Set<Cluster> lFinalClusterSet = new HashSet<Cluster>();
 		for (final Cluster lCluster : pClusterGraph.getNodeSet())
+		{
 			lFinalClusterSet.add(lCluster.copy());
+		}
 
 		final Map<UndirectedEdge<Cluster>, Double> lDistanceCache = new HashMap<UndirectedEdge<Cluster>, Double>();
 
@@ -210,7 +226,9 @@ public class GraphClustering<N>
 				}
 
 				if (lMaximalSimilarityForCluster == lMaximalSimilarity)
+				{
 					lMaximalSimilarityClusterSet.add(lCluster1);
+				}
 			}
 
 			System.out.println("lMaximalSimilarityClusterSet.size()=" + lMaximalSimilarityClusterSet.size());
@@ -226,8 +244,10 @@ public class GraphClustering<N>
 				for (final Cluster lCluster2 : lNeighboursSet)
 				{
 					final Double lSimilarity = lCluster1.similarityToCluster(lCluster2);
-					if ((lSimilarity == lMaximalSimilarity))
+					if (lSimilarity == lMaximalSimilarity)
+					{
 						lClusterSet.add(lCluster2);
+					}
 				}
 				lClusterSet.add(lCluster1);
 
@@ -236,27 +256,37 @@ public class GraphClustering<N>
 				pClusterGraph.removeAllNodes(lClusterSet);
 				final Cluster lNewCluster = new Cluster();
 				for (final Cluster lCluster : lClusterSet)
+				{
 					lNewCluster.mergeWith(lCluster);
+				}
 				pClusterGraph.addNode(lNewCluster);
 
 				for (final Cluster lNeighbourCluster : lClusterNeighbours)
+				{
 					pClusterGraph.addEdge(new UndirectedEdge<Cluster>(lNewCluster,
 																														lNeighbourCluster));
+				}
 
 				lMaximalSimilarityClusterSet.removeAll(lClusterSet);
 			}
 
 			for (final Cluster lCluster : pClusterGraph.getNodeSet())
+			{
 				lFinalClusterSet.add(lCluster.copy());
+			}
 			lIterationCount++;
 
-			if ((lMaximalSimilarity < pMinSimilarity) || (lIterationCount >= pMaxIterations))
+			if (lMaximalSimilarity < pMinSimilarity || lIterationCount >= pMaxIterations)
+			{
 				break;
+			}
 		}
 
 		final Set<Set<N>> lSetSet = new HashSet<Set<N>>();
 		for (final Cluster lCluster : lFinalClusterSet)
+		{
 			lSetSet.add(lCluster.mNodeSet);
+		}
 
 		System.out.println("done.");
 		return lSetSet;

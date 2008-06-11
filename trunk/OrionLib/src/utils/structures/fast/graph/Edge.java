@@ -66,11 +66,15 @@ public class Edge<N> implements Serializable
 	public boolean equals(final Object pObject)
 	{
 		if (pObject == this)
+		{
 			return true;
+		}
 		else
 		{
 			final Edge<N> lEdge = (Edge<N>) pObject;
-			final boolean lEquals = ((this.mFirstNode.equals(lEdge.getFirstNode())) && (this.mSecondNode.equals(lEdge.getSecondNode()))) || ((this.mFirstNode.equals(lEdge.getSecondNode())) && (this.mSecondNode.equals(lEdge.getFirstNode())));
+			final boolean lEquals = this.mFirstNode.equals(lEdge.getFirstNode()) && this.mSecondNode.equals(lEdge.getSecondNode())
+															|| this.mFirstNode.equals(lEdge.getSecondNode())
+															&& this.mSecondNode.equals(lEdge.getFirstNode());
 			return lEquals;
 		}
 	}
@@ -89,7 +93,7 @@ public class Edge<N> implements Serializable
 
 	public boolean symetricTo(final Edge<N> pEdge)
 	{
-		return (this.mFirstNode.equals(pEdge.getSecondNode())) && (this.mSecondNode.equals(pEdge.getFirstNode()));
+		return this.mFirstNode.equals(pEdge.getSecondNode()) && this.mSecondNode.equals(pEdge.getFirstNode());
 	}
 
 	public boolean contains(final N pNode)

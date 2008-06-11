@@ -5,12 +5,14 @@ import java.io.Serializable;
 public class Element implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	public int mId;
 	public String mName;
 	public String mDescription;
 
-	public Element(int pGeneId, String pGeneName, String pGeneDescription)
+	public Element(	final int pGeneId,
+									final String pGeneName,
+									final String pGeneDescription)
 	{
 		super();
 		mId = pGeneId;
@@ -18,7 +20,7 @@ public class Element implements Serializable
 		mDescription = pGeneDescription;
 	}
 
-	public Element(int pId)
+	public Element(final int pId)
 	{
 		mId = pId;
 	}
@@ -46,12 +48,16 @@ public class Element implements Serializable
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 
 		if (obj instanceof Element)
 		{

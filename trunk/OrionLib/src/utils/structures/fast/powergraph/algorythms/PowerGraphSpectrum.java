@@ -37,14 +37,15 @@ public class PowerGraphSpectrum
 
 		final IntegerHashMap<String> lPowerNodeToSizeMap = new IntegerHashMap<String>();
 
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
-		Pattern lPattern = Pattern.compile("\t");
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
+		final Pattern lPattern = Pattern.compile("\t");
 
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
+		{
 			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
-				String[] lArray = lPattern.split(lLine);
+				final String[] lArray = lPattern.split(lLine);
 
 				if (lArray[0].equals("NODE"))
 				{
@@ -66,8 +67,9 @@ public class PowerGraphSpectrum
 					{ lArray[1], lArray[2] });
 				}
 			}
+		}
 
-		for (String[] lStrings : new ArrayList<String[]>(lInSet))
+		for (final String[] lStrings : new ArrayList<String[]>(lInSet))
 		{
 			if (lNodeSet.contains(lStrings[0]))
 			{
@@ -80,11 +82,11 @@ public class PowerGraphSpectrum
 		do
 		{
 			unresolved = false;
-			for (String[] lStrings : new ArrayList<String[]>(lInSet))
+			for (final String[] lStrings : new ArrayList<String[]>(lInSet))
 			{
 				if (lPowerNodeSet.contains(lStrings[0]) && !lNodeSet.contains(lStrings[0]))
 				{
-					Integer lPowerNodeSize = lPowerNodeToSizeMap.get(lStrings[0]);
+					final Integer lPowerNodeSize = lPowerNodeToSizeMap.get(lStrings[0]);
 					if (lPowerNodeSize != null)
 					{
 						lInSet.remove(lStrings);
@@ -100,14 +102,14 @@ public class PowerGraphSpectrum
 		while (unresolved);
 
 		int lMax = 0;
-		for (int val : lPowerNodeToSizeMap.values())
+		for (final int val : lPowerNodeToSizeMap.values())
 		{
 			lMax = Math.max(lMax, val);
 		}
 
-		double[][] lMatrix = new double[lMax + 1][lMax + 1];
+		final double[][] lMatrix = new double[lMax + 1][lMax + 1];
 
-		for (String[] lStrings : lEdgeSet)
+		for (final String[] lStrings : lEdgeSet)
 		{
 			final int lSize1 = lPowerNodeToSizeMap.get(lStrings[0]);
 			final int lSize2 = lPowerNodeToSizeMap.get(lStrings[1]);
@@ -140,14 +142,15 @@ public class PowerGraphSpectrum
 
 		final IntegerHashMap<String> lPowerNodeToSizeMap = new IntegerHashMap<String>();
 
-		BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
-		Pattern lPattern = Pattern.compile("\t");
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream));
+		final Pattern lPattern = Pattern.compile("\t");
 
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
+		{
 			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
-				String[] lArray = lPattern.split(lLine);
+				final String[] lArray = lPattern.split(lLine);
 
 				if (lArray[0].equals("NODE"))
 				{
@@ -169,8 +172,9 @@ public class PowerGraphSpectrum
 					{ lArray[1], lArray[2] });
 				}
 			}
+		}
 
-		for (String[] lStrings : new ArrayList<String[]>(lInSet))
+		for (final String[] lStrings : new ArrayList<String[]>(lInSet))
 		{
 			if (lNodeSet.contains(lStrings[0]))
 			{
@@ -183,11 +187,11 @@ public class PowerGraphSpectrum
 		do
 		{
 			unresolved = false;
-			for (String[] lStrings : new ArrayList<String[]>(lInSet))
+			for (final String[] lStrings : new ArrayList<String[]>(lInSet))
 			{
 				if (lPowerNodeSet.contains(lStrings[0]) && !lNodeSet.contains(lStrings[0]))
 				{
-					Integer lPowerNodeSize = lPowerNodeToSizeMap.get(lStrings[0]);
+					final Integer lPowerNodeSize = lPowerNodeToSizeMap.get(lStrings[0]);
 					if (lPowerNodeSize != null)
 					{
 						lInSet.remove(lStrings);
@@ -203,17 +207,16 @@ public class PowerGraphSpectrum
 		while (unresolved);
 
 		int lMax = 0;
-		for (int val : lPowerNodeToSizeMap.values())
+		for (final int val : lPowerNodeToSizeMap.values())
 		{
 			lMax = Math.max(lMax, val);
 		}
 
-		double[] lX = new double[2 * lMax];
-		double[] lY = new double[2 * lMax];
+		final double[] lY = new double[2 * lMax];
 
 		// for()
 
-		for (String[] lStrings : lEdgeSet)
+		for (final String[] lStrings : lEdgeSet)
 		{
 			final int lSize1 = lPowerNodeToSizeMap.get(lStrings[0]);
 			final int lSize2 = lPowerNodeToSizeMap.get(lStrings[1]);
@@ -221,7 +224,7 @@ public class PowerGraphSpectrum
 			double lSize = 0;
 			if (lStrings[0].equals(lStrings[1]))
 			{
-				lSize = (lSize1 * (lSize1 - 1)) / 2;
+				lSize = lSize1 * (lSize1 - 1) / 2;
 			}
 			else
 			{
@@ -236,12 +239,14 @@ public class PowerGraphSpectrum
 		 * lMatrix.length; j++) { lMatrix[i][j] /= count; }/
 		 **************************************************************************/
 
-		int columns = 0;
-		for (double lD : lY)
+		final int columns = 0;
+		for (final double lD : lY)
 		{
 			System.out.print(lD + "\t");
 			if (columns > lMax)
+			{
 				break;
+			}
 		}
 		System.out.println("");
 

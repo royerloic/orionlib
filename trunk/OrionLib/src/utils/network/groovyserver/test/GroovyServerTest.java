@@ -20,11 +20,11 @@ public class GroovyServerTest
 
 		try
 		{
-			GroovyServer lGroovyServer = new GroovyServer("password=123");
+			final GroovyServer lGroovyServer = new GroovyServer("password=123");
 
 			lGroovyServer.startServerNonBlocking();
 
-			Socket lSocket = GroovyServer.createLocalSocket();
+			final Socket lSocket = GroovyServer.createLocalSocket();
 
 			// sending password:
 			GroovyServer.sendQuery(lSocket, "123");
@@ -34,20 +34,21 @@ public class GroovyServerTest
 																													"a=\"hello\"") == "hello");
 
 			// saving session:
-			String lResult = GroovyServer.sendQuery(lSocket, "server.save(\"test\")");
+			final String lResult = GroovyServer.sendQuery(lSocket,
+																										"server.save(\"test\")");
 			assertEquals(lResult, "true");
 
 			// Creatig new server and loading
-			GroovyServer lGroovyServer2 = new GroovyServer("port=5555 password=123");
+			final GroovyServer lGroovyServer2 = new GroovyServer("port=5555 password=123");
 
 			// loading the previously saved session:
-			assertEquals(	lGroovyServer2.sendQuery(lSocket, "server.load(\"test\")"),
+			assertEquals(	GroovyServer.sendQuery(lSocket, "server.load(\"test\")"),
 										"true");
 
 			// checking that the session was really saved:
 			assertTrue((String) GroovyServer.sendQueryAndDecode(lSocket, "a") == "hello");
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 			fail();

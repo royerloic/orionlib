@@ -79,22 +79,32 @@ public class PowerGraphGenerator
 			Pair<Set<Node>> lPair2;
 
 			do
+			{
 				lPair2 = lPairList.get(pRandom.nextInt(lPairList.size()));
+			}
 			while (lPair2.equals(lPair1));
 
 			Node lNode1 = null;
 			if (!(lUsedNodeSet.containsAll(lPair1.mA) && lUsedNodeSet.containsAll(lPair1.mB)))
+			{
 				do
+				{
 					lNode1 = chooseNodeInPair(pRandom, lPair1);
+				}
 				while (lUsedNodeSet.contains(lNode1));
+			}
 
 			Node lNode2 = null;
 			if (!(lUsedNodeSet.containsAll(lPair2.mA) && lUsedNodeSet.containsAll(lPair2.mB)))
+			{
 				do
+				{
 					lNode2 = chooseNodeInPair(pRandom, lPair2);
+				}
 				while (lUsedNodeSet.contains(lNode2));
+			}
 
-			if ((lNode1 != null) & (lNode2 != null))
+			if (lNode1 != null & lNode2 != null)
 			{
 
 				final Set<Node> lNode1Set = new HashSet<Node>();
@@ -124,11 +134,13 @@ public class PowerGraphGenerator
 	{
 
 		if (pDepth == 0)
+		{
 			return generateOptimalPowerGraph(	pRandom,
 																				pNumberOfMotifs,
 																				pMinMotifSize,
 																				pMaxMotifSize,
 																				pProportionOfLinks);
+		}
 
 		final PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
 
@@ -188,22 +200,32 @@ public class PowerGraphGenerator
 			Pair<Set<Node>> lPair2;
 
 			do
+			{
 				lPair2 = lPairList.get(pRandom.nextInt(lPairList.size()));
+			}
 			while (lPair2.equals(lPair1));
 
 			Node lNode1 = null;
 			if (!(lUsedNodeSet.containsAll(lPair1.mA) && lUsedNodeSet.containsAll(lPair1.mB)))
+			{
 				do
+				{
 					lNode1 = chooseNodeInPair(pRandom, lPair1);
+				}
 				while (lUsedNodeSet.contains(lNode1));
+			}
 
 			Node lNode2 = null;
 			if (!(lUsedNodeSet.containsAll(lPair2.mA) && lUsedNodeSet.containsAll(lPair2.mB)))
+			{
 				do
+				{
 					lNode2 = chooseNodeInPair(pRandom, lPair2);
+				}
 				while (lUsedNodeSet.contains(lNode2));
+			}
 
-			if ((lNode1 != null) & (lNode2 != null))
+			if (lNode1 != null & lNode2 != null)
 			{
 
 				final Set<Node> lNode1Set = new HashSet<Node>();
@@ -229,9 +251,13 @@ public class PowerGraphGenerator
 	{
 		Set<Node> lSet;
 		if (pRandom.nextBoolean())
+		{
 			lSet = pPair.mA;
+		}
 		else
+		{
 			lSet = pPair.mB;
+		}
 
 		final List<Node> lList = new ArrayList<Node>(lSet);
 

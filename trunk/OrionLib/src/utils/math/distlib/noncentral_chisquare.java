@@ -35,7 +35,7 @@ public class noncentral_chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double density(double x, double df, double lambda)
+	public static double density(final double x, double df, final double lambda)
 	{
 		double dens, i, lambda2, psum, sum, weight;
 		final int maxiter = 100;
@@ -43,8 +43,10 @@ public class noncentral_chisquare
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(df) || Double.isNaN(lambda))
+		{
 			return x + df + lambda;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		if (lambda < 0 || df <= 0)
 		{
@@ -60,11 +62,15 @@ public class noncentral_chisquare
 		/* !* #endif /*4! */
 
 		if (x <= 0)
+		{
 			return 0;
+		}
 
 		dens = chisquare.density(x, df);
 		if (lambda == 0)
+		{
 			return dens;
+		}
 
 		lambda2 = 0.5 * lambda;
 		/* !* weight = exp(-lambda2); *! */
@@ -73,13 +79,15 @@ public class noncentral_chisquare
 		psum = weight;
 		for (i = 1; i < maxiter; i++)
 		{
-			dens = (x / df) * dens;
+			dens = x / df * dens;
 			df = df + 2;
 			weight = weight * lambda2 / i;
 			sum = sum + dens * weight;
 			psum = psum + weight;
 			if (1 - psum < eps)
+			{
 				break;
+			}
 		}
 		return sum;
 	}
@@ -105,12 +113,12 @@ public class noncentral_chisquare
 	/* !* # include "PrtUtil.h" /*4! */
 	/* !* #endif /*4! */
 
-	public static double cumulative(double x, double f, double theta)
+	public static double cumulative(final double x,
+																	final double f,
+																	final double theta)
 	{
 		double ans, lam, u, v, x2, f2, t, term, bound, twon;
 		int n;
-		boolean flag;
-
 		final double errmax = 1e-12;
 		final double zero = 0;
 		final double half = 0.5;
@@ -118,7 +126,9 @@ public class noncentral_chisquare
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(x) || Double.isNaN(f) || Double.isNaN(theta))
+		{
 			return x + f + theta;
+		}
 		if (Double.isInfinite(f) || Double.isInfinite(theta))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -132,11 +142,15 @@ public class noncentral_chisquare
 			// return Double.NaN;
 		}
 		if (x <= zero)
+		{
 			return 0;
+		}
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isInfinite(x))
+		{
 			return 1;
-		/* !* #endif /*4! */
+			/* !* #endif /*4! */
+		}
 
 		lam = theta * half;
 
@@ -178,7 +192,6 @@ public class noncentral_chisquare
 
 		/* check if (f+2n) is greater than x */
 
-		flag = false;
 		n = 1;
 		twon = n * 2;
 		L_End: for (;;)
@@ -200,9 +213,6 @@ public class noncentral_chisquare
 			}
 			else
 			{
-				/* find the error bound and check for convergence */
-				flag = true;
-
 				for (;;)
 				{
 					/* !* #ifdef DEBUG_pnch /*4! */
@@ -214,7 +224,9 @@ public class noncentral_chisquare
 					// REprintf("\tL10: n=%d; term=%12g; bound=%12g\n",n,term,bound);
 					/* !* #endif /*4! */
 					if (bound <= errmax || n > itrmax)
+					{
 						break L_End;
+					}
 					/* evaluate the next term of the */
 					/* expansion and then the partial sum */
 					u *= lam / n;
@@ -229,7 +241,9 @@ public class noncentral_chisquare
 			}
 		}// L_End:
 		if (bound > errmax)
+		{
 			throw new java.lang.ArithmeticException("Math Error: PRECISION");
+		}
 		/* !* #ifdef DEBUG_pnch /*4! */
 		// REprintf("\tL_End: n=%d; term=%12g; bound=%12g\n",n,term,bound);
 		/* !* #endif /*4! */
@@ -257,14 +271,16 @@ public class noncentral_chisquare
 
 	/* !* #include "DistLib.h" /*4! */
 
-	public static double quantile(double p, double n, double lambda)
+	public static double quantile(final double p, double n, final double lambda)
 	{
 		double ux, lx, nx;
-		double acu = 1.0e-12;
+		final double acu = 1.0e-12;
 
 		/* !* #ifdef IEEE_754 /*4! */
 		if (Double.isNaN(p) || Double.isNaN(n) || Double.isNaN(lambda))
+		{
 			return p + n + lambda;
+		}
 		if (Double.isInfinite(n))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -279,18 +295,28 @@ public class noncentral_chisquare
 			// return Double.NaN;
 		}
 		if (p == 0)
+		{
 			return 0;
+		}
 		for (ux = 1.0; cumulative(ux, n, lambda) < p; ux *= 2)
+		{
 			;
+		}
 		for (lx = ux; cumulative(lx, n, lambda) > p; lx *= 0.5)
+		{
 			;
+		}
 		do
 		{
 			nx = 0.5 * (lx + ux);
 			if (cumulative(nx, n, lambda) > p)
+			{
 				ux = nx;
+			}
 			else
+			{
 				lx = nx;
+			}
 		}
 		while ((ux - lx) / nx > acu);
 		return 0.5 * (ux + lx);

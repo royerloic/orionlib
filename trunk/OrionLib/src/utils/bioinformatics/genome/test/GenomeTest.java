@@ -30,7 +30,7 @@ public class GenomeTest
 			System.out.println(lGenome);
 
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 			fail("Exception: " + e);
@@ -51,21 +51,21 @@ public class GenomeTest
 		{
 			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./Test.gff"));
 		}
-		catch (Throwable e)
+		catch (final Throwable e)
 		{
 			e.printStackTrace();
 			fail("Exception: " + e);
 		}
-		File lFile = File.createTempFile("pattern", ".suffix");
+		final File lFile = File.createTempFile("pattern", ".suffix");
 
-		FileOutputStream lFileOutputStream = new FileOutputStream(lFile);
-		ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
+		final FileOutputStream lFileOutputStream = new FileOutputStream(lFile);
+		final ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lFileOutputStream);
 		lObjectOutputStream.writeObject(lGenome);
 		lObjectOutputStream.close();
 
-		FileInputStream lFileInputStream = new FileInputStream(lFile);
-		ObjectInputStream lObjectInputStream = new ObjectInputStream(lFileInputStream);
-		Genome lLoadedGenome = (Genome) lObjectInputStream.readObject();
+		final FileInputStream lFileInputStream = new FileInputStream(lFile);
+		final ObjectInputStream lObjectInputStream = new ObjectInputStream(lFileInputStream);
+		final Genome lLoadedGenome = (Genome) lObjectInputStream.readObject();
 		lObjectInputStream.close();
 
 		assertEquals(lLoadedGenome, lGenome);

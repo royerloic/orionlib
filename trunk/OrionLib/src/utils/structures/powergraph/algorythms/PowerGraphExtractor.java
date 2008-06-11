@@ -104,29 +104,36 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 		// System.out.println("Adding Power Edges.");
 		if (true)
+		{
 			for (int i = 0; i < lNodeSetList.size(); i++)
 			{
 				final Set<N> lFirstPowerNode = lNodeSetList.get(i);
 
-				if ((lFirstPowerNode.size() == 1) || (lFirstPowerNode.size() >= cMinimalBubleSize))
+				if (lFirstPowerNode.size() == 1 || lFirstPowerNode.size() >= cMinimalBubleSize)
+				{
 					for (int j = 0; j <= i; j++)
 					{
 						final Set<N> lSecondPowerNode = lNodeSetList.get(j);
 
-						if ((lSecondPowerNode.size() == 1) || (lSecondPowerNode.size() >= cMinimalBubleSize))
-							if (!(lFirstPowerNode.equals(lSecondPowerNode) && (lSecondPowerNode.size() == 2)))
+						if (lSecondPowerNode.size() == 1 || lSecondPowerNode.size() >= cMinimalBubleSize)
+						{
+							if (!(lFirstPowerNode.equals(lSecondPowerNode) && lSecondPowerNode.size() == 2))
 							{
 								boolean isPowerEdge;
 
 								if (pProbabilityThreshold == 1)
+								{
 									isPowerEdge = isPowerEdge(pGraph,
 																						lFirstPowerNode,
 																						lSecondPowerNode);
+								}
 								else
+								{
 									isPowerEdge = isStochasticPowerEdge(pGraph,
 																											lFirstPowerNode,
 																											lSecondPowerNode,
 																											pProbabilityThreshold);
+								}
 
 								if (isPowerEdge)
 								{
@@ -154,11 +161,15 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 									lPowerEdgeList.add(lPowerEdge);
 								}
 							}
+						}
 					}
+				}
 			}
+		}
 
 		// System.out.println("Adding remaining edges.");
 		if (false)
+		{
 			for (final Edge<N> lEdge : pGraph.getEdgeSet())
 			{
 				final Set<N> lFirstPowerNode = new HashSet<N>();
@@ -171,13 +182,20 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 				lPowerEdgeList.add(lPowerEdge);
 				// System.out.print(",");
 			}
+		}
 
 		if (false)
+		{
 			for (final Set<N> lNodeSet : lNodeSetList)
+			{
 				lPowerGraph.addCluster(lNodeSet);
+			}
+		}
 
 		for (final Edge<Set<N>> lPowerEdge : lPowerEdgeList)
+		{
 			lPowerGraph.addPowerEdgeDelayed(lPowerEdge);
+		}
 		lPowerGraph.commitDelayedEdges();
 
 		for (final N lNode : pGraph.getNodeSet())
@@ -208,13 +226,21 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			final int lSize = lSet.size();
 			boolean lThereIsSmaller = false;
 			for (final Set<N> lOtherSet : pNodeSetList)
-				if ((lOtherSet.size() > 2) && (lOtherSet.size() == lSize - 1)
+			{
+				if (lOtherSet.size() > 2 && lOtherSet.size() == lSize - 1
 						&& lSet.containsAll(lOtherSet))
+				{
 					lThereIsSmaller = true;
+				}
+			}
 			if (lThereIsSmaller)
+			{
 				pNodeSetList.remove(lSet);
+			}
 			else
+			{
 				i++;
+			}
 		}
 
 	}
@@ -231,20 +257,38 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 				return pGraph.isEdge(lNode, lNode);
 			}
 			for (final N lNode1 : pFirstPowerNode)
+			{
 				for (final N lNode2 : pSecondPowerNode)
+				{
 					if (!lNode1.equals(lNode2))
+					{
 						if (!pGraph.isEdge(lNode1, lNode2))
+						{
 							return false;
+						}
+					}
+				}
+			}
 			return true;
 		}
 		for (final N lNode : pFirstPowerNode)
+		{
 			if (pSecondPowerNode.contains(lNode))
+			{
 				return false;
+			}
+		}
 
 		for (final N lNode1 : pFirstPowerNode)
+		{
 			for (final N lNode2 : pSecondPowerNode)
+			{
 				if (!pGraph.isEdge(lNode1, lNode2))
+				{
 					return false;
+				}
+			}
+		}
 		return true;
 	}
 
@@ -260,35 +304,57 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			{
 				final N lNode = pFirstPowerNode.iterator().next();
 				if (pGraph.isEdge(lNode, lNode))
+				{
 					lProbability++;
+				}
 			}
 			else
+			{
 				for (final N lNode1 : pFirstPowerNode)
+				{
 					for (final N lNode2 : pSecondPowerNode)
+					{
 						if (!lNode1.equals(lNode2))
+						{
 							if (pGraph.isEdge(lNode1, lNode2))
+							{
 								lProbability++;
-			lProbability /= (pFirstPowerNode.size() * (pFirstPowerNode.size() - 1)) / 2;
+							}
+						}
+					}
+				}
+			}
+			lProbability /= pFirstPowerNode.size() * (pFirstPowerNode.size() - 1) / 2;
 		}
 		else
 		{
 			for (final N lNode : pFirstPowerNode)
+			{
 				if (pSecondPowerNode.contains(lNode))
+				{
 					return false;
+				}
+			}
 
 			for (final N lNode1 : pFirstPowerNode)
+			{
 				for (final N lNode2 : pSecondPowerNode)
+				{
 					if (pGraph.isEdge(lNode1, lNode2))
+					{
 						lProbability++;
-			lProbability /= (pFirstPowerNode.size() * pSecondPowerNode.size());
+					}
+				}
+			}
+			lProbability /= pFirstPowerNode.size() * pSecondPowerNode.size();
 		}
 
 		return lProbability >= pThresholdProbability;
 	}
 
-	private double computePowerEdgeConfidence(Graph<N, Edge<N>> pGraph,
-																						UndirectedEdge<Set<N>> pPowerEdge,
-																						ConfidenceMethod pPowerEdgeConfidenceMethod)
+	private double computePowerEdgeConfidence(final Graph<N, Edge<N>> pGraph,
+																						final UndirectedEdge<Set<N>> pPowerEdge,
+																						final ConfidenceMethod pPowerEdgeConfidenceMethod)
 	{
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Threshold)
 		{
@@ -315,15 +381,17 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 			double lSum = 0;
 			double lCount = 0;
-			for (N lN1 : lSet1)
+			for (final N lN1 : lSet1)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (lSet2.contains(lEdge.getFirstNode()) || lSet2.contains(lEdge.getSecondNode()))
 					{
 						lSum += lEdge.getConfidence();
 						lCount++;
 					}
+				}
 			}
 
 			return Math.sqrt(lSum);
@@ -336,15 +404,17 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 			double lSum = 0;
 			double lCount = 0;
-			for (N lN1 : lSet1)
+			for (final N lN1 : lSet1)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (lSet2.contains(lEdge.getFirstNode()) || lSet2.contains(lEdge.getSecondNode()))
 					{
 						lSum += lEdge.getConfidence();
 						lCount++;
 					}
+				}
 			}
 
 			return lSum / lCount;
@@ -356,14 +426,16 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			final Set<N> lSet2 = pPowerEdge.getSecondNode();
 
 			double lMin = Double.POSITIVE_INFINITY;
-			for (N lN1 : lSet1)
+			for (final N lN1 : lSet1)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (lSet2.contains(lEdge.getFirstNode()) || lSet2.contains(lEdge.getSecondNode()))
 					{
 						lMin = Math.min(lMin, lEdge.getConfidence());
 					}
+				}
 			}
 			return lMin;
 		}
@@ -373,14 +445,16 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 			final Set<N> lSet2 = pPowerEdge.getSecondNode();
 
 			double lMax = Double.NEGATIVE_INFINITY;
-			for (N lN1 : lSet1)
+			for (final N lN1 : lSet1)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (lSet2.contains(lEdge.getFirstNode()) || lSet2.contains(lEdge.getSecondNode()))
 					{
 						lMax = Math.max(lMax, lEdge.getConfidence());
 					}
+				}
 			}
 			return lMax;
 		}
@@ -389,9 +463,9 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 	}
 
-	private double computePowerNodeConfidence(Graph<N, Edge<N>> pGraph,
-																						Set<N> pPowerNode,
-																						ConfidenceMethod pPowerEdgeConfidenceMethod)
+	private double computePowerNodeConfidence(final Graph<N, Edge<N>> pGraph,
+																						final Set<N> pPowerNode,
+																						final ConfidenceMethod pPowerEdgeConfidenceMethod)
 	{
 
 		if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Zero)
@@ -408,15 +482,17 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		{
 			double lSum = 0;
 			double lCount = 0;
-			for (N lN1 : pPowerNode)
+			for (final N lN1 : pPowerNode)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (pPowerNode.contains(lEdge.getFirstNode()) || pPowerNode.contains(lEdge.getSecondNode()))
 					{
 						lSum += lEdge.getConfidence();
 						lCount++;
 					}
+				}
 			}
 
 			return Math.sqrt(lSum);
@@ -427,15 +503,17 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 
 			double lSum = 0;
 			double lCount = 0;
-			for (N lN1 : pPowerNode)
+			for (final N lN1 : pPowerNode)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (pPowerNode.contains(lEdge.getFirstNode()) || pPowerNode.contains(lEdge.getSecondNode()))
 					{
 						lSum += lEdge.getConfidence();
 						lCount++;
 					}
+				}
 			}
 
 			return lSum / lCount;
@@ -443,28 +521,32 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		else if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Min)
 		{
 			double lMin = Double.POSITIVE_INFINITY;
-			for (N lN1 : pPowerNode)
+			for (final N lN1 : pPowerNode)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (pPowerNode.contains(lEdge.getFirstNode()) || pPowerNode.contains(lEdge.getSecondNode()))
 					{
 						lMin = Math.min(lMin, lEdge.getConfidence());
 					}
+				}
 			}
 			return lMin;
 		}
 		else if (pPowerEdgeConfidenceMethod == ConfidenceMethod.Max)
 		{
 			double lMax = Double.NEGATIVE_INFINITY;
-			for (N lN1 : pPowerNode)
+			for (final N lN1 : pPowerNode)
 			{
 				final Set<Edge<N>> lEdgeSet = pGraph.getNeighbouringEdges(lN1);
-				for (Edge<N> lEdge : lEdgeSet)
+				for (final Edge<N> lEdge : lEdgeSet)
+				{
 					if (pPowerNode.contains(lEdge.getFirstNode()) || pPowerNode.contains(lEdge.getSecondNode()))
 					{
 						lMax = Math.max(lMax, lEdge.getConfidence());
 					}
+				}
 			}
 			return lMax;
 		}

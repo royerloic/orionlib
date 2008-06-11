@@ -24,7 +24,7 @@ public class SymetricFloatMatrixTest
 		lSymetricFloatMatrix.set(100, 50, 0.1234f);
 		lSymetricFloatMatrix.set(10, 50, 0.5678f);
 
-		File lFile = File.createTempFile("SymetricFloatMatrixTest", "1");
+		final File lFile = File.createTempFile("SymetricFloatMatrixTest", "1");
 
 		lSymetricFloatMatrix.saveToFile(lFile);
 		lSymetricFloatMatrix = null;

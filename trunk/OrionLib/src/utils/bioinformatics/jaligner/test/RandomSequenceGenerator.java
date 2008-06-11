@@ -74,9 +74,9 @@ public class RandomSequenceGenerator
 	 *          Size of the sequence
 	 * @return Random sequence
 	 */
-	public static String generate(int length)
+	public static String generate(final int length)
 	{
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 		char randomChar;
 		int randomInt;
 		for (int i = 0; i < length; i++)
@@ -94,7 +94,7 @@ public class RandomSequenceGenerator
 	 * @param args
 	 *          no args
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		for (int i = 0; i < 10; i++)
 		{

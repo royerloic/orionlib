@@ -61,9 +61,11 @@ public final class Matrices
 	public static double distanceSquared(final GVector x1, final GVector x2)
 	{
 		if (x1.getSize() != x2.getSize())
+		{
 			throw new MismatchedSizeException("x1 size: " + x1.getSize()
 																				+ "; x2 size: "
 																				+ x2.getSize());
+		}
 
 		double distSquared = 0;
 		for (int i = 0; i < x1.getSize(); i++)
@@ -81,7 +83,9 @@ public final class Matrices
 	public static GVector mapCols(final Function fun, final GMatrix points)
 	{
 		if (fun == null)
+		{
 			throw new NullPointerException("fun");
+		}
 		final int rows = points.getNumRow();
 		final int cols = points.getNumCol();
 		final GVector values = new GVector(cols);
@@ -103,7 +107,9 @@ public final class Matrices
 	public static GVector mapRows(final Function fun, final GMatrix points)
 	{
 		if (fun == null)
+		{
 			throw new NullPointerException("fun");
+		}
 		final int rows = points.getNumRow();
 		final int cols = points.getNumCol();
 		final GVector values = new GVector(rows);
@@ -127,8 +133,12 @@ public final class Matrices
 	{
 		final GMatrix m = new GMatrix(rows, cols);
 		for (int i = 0; i < rows; i++)
+		{
 			for (int j = 0; j < cols; j++)
+			{
 				m.setElement(i, j, RAND.nextDouble());
+			}
+		}
 		return m;
 	}
 
@@ -141,8 +151,12 @@ public final class Matrices
 	{
 		final GMatrix m = new GMatrix(rows, cols);
 		for (int i = 0; i < rows; i++)
+		{
 			for (int j = 0; j < cols; j++)
+			{
 				m.setElement(i, j, RAND.nextGaussian());
+			}
+		}
 		return m;
 	}
 
@@ -154,7 +168,9 @@ public final class Matrices
 	{
 		final GVector v = new GVector(size);
 		for (int i = 0; i < size; i++)
+		{
 			v.setElement(i, RAND.nextDouble());
+		}
 		return v;
 	}
 
@@ -167,7 +183,9 @@ public final class Matrices
 	{
 		final GVector v = new GVector(size);
 		for (int i = 0; i < size; i++)
+		{
 			v.setElement(i, RAND.nextGaussian());
+		}
 		return v;
 	}
 }
