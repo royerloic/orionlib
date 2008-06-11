@@ -1,0 +1,293 @@
+#BBL-1.0
+# File written by the graph file writer of EagleVista
+
+# Graph properties:
+#	#nodes:				77
+#	#edges:				254
+#	<degree>:			6.597402597402597
+#	source:				lesmis.edg
+# Power graph extraction:
+#	date:				2008/05/10 09:30 PM
+#	min set similarity:		0.0
+#	global clustering:		true
+#	greedy clustering:		true
+#	local clustering:		false
+#	minmax:				true
+#	candidate pe cutting:		true
+#	confidence accumulation method:	AVG
+# Power graph properties:
+#	extraction time:		47ms
+#	#power nodes:			28
+#	#power edges:			66 (reflexive:10/single:33/other:23)
+#	edge reduction:			0.7401574803149606
+#	conversion rate:		7.071428571428571
+#	pg-index:			0.956891712961278
+#
+#PARSE#	#nodes=77;#edges=254;<degree>=6.597402597402597;source=lesmis.edg;extractionTime=47;#powerNodes=28;#powerEdges=66;#reflexivePE=10;#singletonPE=33;#otherPE=23;edgeReduction=0.7401574803149606;conversionRate=7.071428571428571;pg-index=0.956891712961278
+#
+# Command line arguments:	[-convert, -workingdir=., -inputfiles=edg, -output=bbl, -v, -sortbyfilesize]
+
+NODE	Napoleon
+NODE	Myriel
+NODE	MlleBaptistine
+NODE	MmeMagloire
+NODE	CountessDeLo
+NODE	Geborand
+NODE	Champtercier
+NODE	Cravatte
+NODE	Count
+NODE	OldMan
+NODE	Valjean
+NODE	Labarre
+NODE	Marguerite
+NODE	MmeDeR
+NODE	Isabeau
+NODE	Gervais
+NODE	Listolier
+NODE	Tholomyes
+NODE	Fameuil
+NODE	Blacheville
+NODE	Favourite
+NODE	Dahlia
+NODE	Zephine
+NODE	Fantine
+NODE	MmeThenardier
+NODE	Thenardier
+NODE	Cosette
+NODE	Javert
+NODE	Fauchelevent
+NODE	Bamatabois
+NODE	Perpetue
+NODE	Simplice
+NODE	Scaufflaire
+NODE	Woman1
+NODE	Judge
+NODE	Champmathieu
+NODE	Brevet
+NODE	Chenildieu
+NODE	Cochepaille
+NODE	Pontmercy
+NODE	Boulatruelle
+NODE	Eponine
+NODE	Anzelma
+NODE	Woman2
+NODE	MotherInnocent
+NODE	Gribier
+NODE	MmeBurgon
+NODE	Jondrette
+NODE	Gavroche
+NODE	Gillenormand
+NODE	Magnon
+NODE	MlleGillenormand
+NODE	MmePontmercy
+NODE	MlleVaubois
+NODE	LtGillenormand
+NODE	Marius
+NODE	BaronessT
+NODE	Mabeuf
+NODE	Enjolras
+NODE	Combeferre
+NODE	Prouvaire
+NODE	Feuilly
+NODE	Courfeyrac
+NODE	Bahorel
+NODE	Bossuet
+NODE	Joly
+NODE	Grantaire
+NODE	MotherPlutarch
+NODE	Gueulemer
+NODE	Babet
+NODE	Claquesous
+NODE	Montparnasse
+NODE	Toussaint
+NODE	Child1
+NODE	Child2
+NODE	Brujon
+NODE	MmeHucheloup
+SET	PowerNode0	0.12063492063492064
+SET	PowerNode1	1.0
+SET	PowerNode2	1.0
+SET	PowerNode3	1.0
+SET	PowerNode4	1.0
+SET	PowerNode5	1.0
+SET	PowerNode6	0.2692307692307692
+SET	PowerNode7	0.3
+SET	PowerNode8	1.0
+SET	PowerNode9	0.75
+SET	PowerNode10	0.0
+SET	PowerNode11	0.06666666666666667
+SET	PowerNode12	1.0
+SET	PowerNode13	1.0
+SET	PowerNode14	0.16666666666666666
+SET	PowerNode15	0.0
+SET	PowerNode16	1.0
+SET	PowerNode17	1.0
+SET	PowerNode18	0.0
+SET	PowerNode19	1.0
+SET	PowerNode20	1.0
+SET	PowerNode21	1.0
+SET	PowerNode22	0.0
+SET	PowerNode23	1.0
+SET	PowerNode24	1.0
+SET	PowerNode25	0.0
+SET	PowerNode26	0.0
+SET	PowerNode27	1.0
+IN	Napoleon	PowerNode10
+IN	Myriel	PowerNode17
+IN	MlleBaptistine	PowerNode17
+IN	MmeMagloire	PowerNode17
+IN	CountessDeLo	PowerNode10
+IN	Geborand	PowerNode10
+IN	Champtercier	PowerNode10
+IN	Cravatte	PowerNode10
+IN	Count	PowerNode10
+IN	OldMan	PowerNode10
+IN	Labarre	PowerNode0
+IN	Marguerite	PowerNode0
+IN	MmeDeR	PowerNode0
+IN	Isabeau	PowerNode0
+IN	Gervais	PowerNode0
+IN	Listolier	PowerNode1
+IN	Tholomyes	PowerNode1
+IN	Fameuil	PowerNode1
+IN	Blacheville	PowerNode1
+IN	Favourite	PowerNode1
+IN	Dahlia	PowerNode1
+IN	Zephine	PowerNode1
+IN	Fantine	PowerNode7
+IN	MmeThenardier	PowerNode8
+IN	Thenardier	PowerNode8
+IN	Cosette	PowerNode7
+IN	Javert	PowerNode0
+IN	Fauchelevent	PowerNode6
+IN	Bamatabois	PowerNode5
+IN	Perpetue	PowerNode9
+IN	Simplice	PowerNode6
+IN	Scaufflaire	PowerNode0
+IN	Woman1	PowerNode6
+IN	Judge	PowerNode5
+IN	Champmathieu	PowerNode5
+IN	Brevet	PowerNode5
+IN	Chenildieu	PowerNode5
+IN	Cochepaille	PowerNode5
+IN	Pontmercy	PowerNode14
+IN	Boulatruelle	PowerNode14
+IN	Eponine	PowerNode21
+IN	Anzelma	PowerNode21
+IN	Woman2	PowerNode22
+IN	MotherInnocent	PowerNode0
+IN	MmeBurgon	PowerNode11
+IN	Gavroche	PowerNode12
+IN	Gillenormand	PowerNode24
+IN	Magnon	PowerNode18
+IN	MlleGillenormand	PowerNode24
+IN	MmePontmercy	PowerNode25
+IN	MlleVaubois	PowerNode25
+IN	LtGillenormand	PowerNode26
+IN	Marius	PowerNode3
+IN	BaronessT	PowerNode26
+IN	Mabeuf	PowerNode15
+IN	Enjolras	PowerNode16
+IN	Combeferre	PowerNode4
+IN	Prouvaire	PowerNode13
+IN	Feuilly	PowerNode4
+IN	Courfeyrac	PowerNode19
+IN	Bahorel	PowerNode19
+IN	Bossuet	PowerNode16
+IN	Joly	PowerNode19
+IN	Grantaire	PowerNode13
+IN	Gueulemer	PowerNode23
+IN	Babet	PowerNode23
+IN	Claquesous	PowerNode20
+IN	Montparnasse	PowerNode6
+IN	Toussaint	PowerNode22
+IN	Child1	PowerNode27
+IN	Child2	PowerNode27
+IN	Brujon	PowerNode11
+IN	MmeHucheloup	PowerNode15
+IN	PowerNode1	PowerNode9
+IN	PowerNode3	PowerNode0
+IN	PowerNode4	PowerNode2
+IN	PowerNode5	PowerNode0
+IN	PowerNode6	PowerNode0
+IN	PowerNode7	PowerNode6
+IN	PowerNode8	PowerNode6
+IN	PowerNode12	PowerNode3
+IN	PowerNode13	PowerNode2
+IN	PowerNode15	PowerNode11
+IN	PowerNode16	PowerNode12
+IN	PowerNode17	PowerNode0
+IN	PowerNode19	PowerNode4
+IN	PowerNode20	PowerNode7
+IN	PowerNode21	PowerNode14
+IN	PowerNode22	PowerNode6
+IN	PowerNode23	PowerNode20
+IN	PowerNode24	PowerNode0
+IN	PowerNode26	PowerNode18
+IN	PowerNode27	PowerNode11
+EDGE	PowerNode1	PowerNode1	1.0
+EDGE	PowerNode2	PowerNode2	1.0
+EDGE	PowerNode3	PowerNode3	1.0
+EDGE	PowerNode5	PowerNode5	1.0
+EDGE	PowerNode8	PowerNode8	1.0
+EDGE	PowerNode17	PowerNode17	1.0
+EDGE	PowerNode20	PowerNode20	1.0
+EDGE	PowerNode21	PowerNode21	1.0
+EDGE	PowerNode24	PowerNode24	1.0
+EDGE	PowerNode27	PowerNode27	1.0
+EDGE	Marguerite	Fantine	1.0
+EDGE	Tholomyes	Cosette	1.0
+EDGE	Tholomyes	Marius	1.0
+EDGE	Fantine	Bamatabois	1.0
+EDGE	Fantine	Simplice	1.0
+EDGE	MmeThenardier	Magnon	1.0
+EDGE	Thenardier	Gavroche	1.0
+EDGE	Thenardier	Marius	1.0
+EDGE	Thenardier	Montparnasse	1.0
+EDGE	Thenardier	Brujon	1.0
+EDGE	Cosette	LtGillenormand	1.0
+EDGE	Cosette	Marius	1.0
+EDGE	Javert	Bamatabois	1.0
+EDGE	Javert	Gavroche	1.0
+EDGE	Javert	Enjolras	1.0
+EDGE	Fauchelevent	MotherInnocent	1.0
+EDGE	Fauchelevent	Gribier	1.0
+EDGE	Perpetue	Simplice	1.0
+EDGE	Pontmercy	MmePontmercy	1.0
+EDGE	Pontmercy	Marius	1.0
+EDGE	Eponine	Marius	1.0
+EDGE	Eponine	Mabeuf	1.0
+EDGE	Eponine	Courfeyrac	1.0
+EDGE	Eponine	Montparnasse	1.0
+EDGE	Eponine	Brujon	1.0
+EDGE	MmeBurgon	Jondrette	1.0
+EDGE	Gavroche	Montparnasse	1.0
+EDGE	MlleGillenormand	LtGillenormand	1.0
+EDGE	Marius	Mabeuf	1.0
+EDGE	Mabeuf	MotherPlutarch	1.0
+EDGE	Enjolras	Claquesous	1.0
+EDGE	Grantaire	MmeHucheloup	1.0
+EDGE	Montparnasse	Brujon	1.0
+EDGE	Valjean	PowerNode0	1.0
+EDGE	PowerNode3	PowerNode4	1.0
+EDGE	PowerNode6	Javert	1.0
+EDGE	PowerNode7	PowerNode8	1.0
+EDGE	PowerNode9	Fantine	1.0
+EDGE	Myriel	PowerNode10	1.0
+EDGE	PowerNode11	Gavroche	1.0
+EDGE	PowerNode12	PowerNode13	1.0
+EDGE	Mabeuf	PowerNode4	1.0
+EDGE	PowerNode14	Thenardier	1.0
+EDGE	PowerNode15	PowerNode16	1.0
+EDGE	PowerNode18	Gillenormand	1.0
+EDGE	PowerNode19	MmeHucheloup	1.0
+EDGE	PowerNode20	Eponine	1.0
+EDGE	PowerNode20	Montparnasse	1.0
+EDGE	Brujon	PowerNode20	1.0
+EDGE	MmeThenardier	PowerNode21	1.0
+EDGE	Cosette	PowerNode22	1.0
+EDGE	Gavroche	PowerNode23	1.0
+EDGE	PowerNode24	Marius	1.0
+EDGE	PowerNode24	Cosette	1.0
+EDGE	MlleGillenormand	PowerNode25	1.0
+EDGE	PowerNode26	Marius	1.0

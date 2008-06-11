@@ -8,7 +8,7 @@ public class Edge<N> implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6961498773004173049L;
+	private static final long serialVersionUID = 1;
 
 	private N mFirstNode;
 
