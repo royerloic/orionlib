@@ -211,9 +211,13 @@ public final class FastBoundedIntegerSet implements
 
 	public final boolean contains(final int o)
 	{
-		final int bitindex = o % 32;
 		final int intindex = o >> 5;
+		if(intindex>=elements.length)
+			return false;
+		final int bitindex = o % 32;
 
+
+			
 		return (elements[intindex] & 1 << bitindex) != 0;
 	}
 

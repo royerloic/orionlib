@@ -97,7 +97,8 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 			offG.setColor(getBackground());
 			offG.fillRect(0, 0, d.width, d.height);
 		}
-		return (Graphics2D) mImage.getGraphics();
+		return (Graphics2D) this.getDrawGraphics();
+		//return (Graphics2D) mImage.getGraphics();
 	}
 
 	public void showGraphics()
