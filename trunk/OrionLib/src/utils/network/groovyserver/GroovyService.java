@@ -115,7 +115,7 @@ public class GroovyService implements Service, Serializable
 			try
 			{
 				lAnswer = pInputLine + SocketThread.sEndofLine;
-				final String lString = (String) mGroovyShell.evaluate(pInputLine);
+				final String lString = mGroovyShell.evaluate(pInputLine).toString();
 				lAnswer += lString.toString();
 
 				/***********************************************************************

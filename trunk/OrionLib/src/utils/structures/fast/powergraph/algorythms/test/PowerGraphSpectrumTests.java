@@ -20,28 +20,12 @@ public class PowerGraphSpectrumTests
 	{
 		try
 		{
-
 			{
-				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("hprd.bbl");
-				System.out.println("hprd.bbl");
+				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("test.bbl");
+				final InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("test.rewired.bbl");
+				System.out.println("test.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
-			}
-
-			{
-				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.bbl");
-				final InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Gavin.rewired.bbl");
-				System.out.println("Gavin.bbl");
-				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
-				System.out.println("Gavin.rewired.bbl");
-				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStreamRewired);
-			}
-
-			{
-				final InputStream lInputStream = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.bbl");
-				final InputStream lInputStreamRewired = PowerGraphSpectrumTests.class.getResourceAsStream("Lacount.rewired.bbl");
-				System.out.println("Lacount.bbl");
-				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStream);
-				System.out.println("Lacount.rewired.bbl");
+				System.out.println("test.rewired.bbl");
 				PowerGraphSpectrum.getSpectrumFromBblStream(lInputStreamRewired);
 			}
 		}

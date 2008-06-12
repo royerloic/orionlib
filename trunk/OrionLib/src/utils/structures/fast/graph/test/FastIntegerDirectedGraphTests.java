@@ -51,7 +51,7 @@ public class FastIntegerDirectedGraphTests
 		lFastIntegerGraph.addEdge(6, 8);
 		lFastIntegerGraph.addEdge(6, 9);
 
-		assertEquals(	"[1, 2, 3, 4, 5, 6, 7, 8, 9] as Set",
+		assertEquals(	"[2, 3, 4, 5, 6, 7, 8, 9] as Set",
 									lFastIntegerGraph.getOutgoingTransitiveClosure(1).toString());
 
 	}
