@@ -16,10 +16,10 @@ public class FastPowerGraphTests
 	{
 		try
 		{
-			final FastPowerGraph pg = FastPowerGraph.readEdgeFile(FastPowerGraphTests.class.getResourceAsStream("lesmis.bbl"));
+			final FastPowerGraph pg = FastPowerGraph.readBblFile(FastPowerGraphTests.class.getResourceAsStream("lesmis.bbl"));
 
 			// System.out.println(pg);
-			final FastPowerGraph pgcloned = FastPowerGraph.readEdgeFile(pg.toTabDel());
+			final FastPowerGraph pgcloned = FastPowerGraph.readBblFile(pg.toTabDel());
 
 			assertEquals(pg.getPowerEdgeSet(), pgcloned.getPowerEdgeSet());
 			assertEquals(pg, pgcloned);
