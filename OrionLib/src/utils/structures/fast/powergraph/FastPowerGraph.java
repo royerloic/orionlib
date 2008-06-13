@@ -247,12 +247,12 @@ public class FastPowerGraph<N>
 		return lBuilder.toString();
 	}
 
-	public void writeEdgeFile(final File pFile) throws IOException
+	public void writeBblFile(final File pFile) throws IOException
 	{
-		writeEdgeFile(new FileOutputStream(pFile));
+		writeBblFile(new FileOutputStream(pFile));
 	}
 
-	public void writeEdgeFile(final OutputStream pOutputStream) throws IOException
+	public void writeBblFile(final OutputStream pOutputStream) throws IOException
 	{
 		final Writer lWriter = new BufferedWriter(new OutputStreamWriter(pOutputStream));
 		lWriter.append(toTabDel());
@@ -266,9 +266,9 @@ public class FastPowerGraph<N>
 	 * @param pFile
 	 * @throws IOException
 	 */
-	public static FastPowerGraph<String> readEdgeFile(final String pString) throws IOException
+	public static FastPowerGraph<String> readBblFile(final String pString) throws IOException
 	{
-		return readEdgeFile(new ByteArrayInputStream(pString.getBytes("UTF-8")));
+		return readBblFile(new ByteArrayInputStream(pString.getBytes("UTF-8")));
 	}
 
 	/**
@@ -278,9 +278,9 @@ public class FastPowerGraph<N>
 	 * @param pFile
 	 * @throws IOException
 	 */
-	public static FastPowerGraph<String> readEdgeFile(final File pFile) throws IOException
+	public static FastPowerGraph<String> readBblFile(final File pFile) throws IOException
 	{
-		return readEdgeFile(new FileInputStream(pFile));
+		return readBblFile(new FileInputStream(pFile));
 	}
 
 	/**
@@ -290,7 +290,7 @@ public class FastPowerGraph<N>
 	 * @param pInputStream
 	 * @throws IOException
 	 */
-	public static FastPowerGraph<String> readEdgeFile(final InputStream pInputStream) throws IOException
+	public static FastPowerGraph<String> readBblFile(final InputStream pInputStream) throws IOException
 	{
 		final FastPowerGraph<String> lFastPowerGraph = new FastPowerGraph<String>();
 
