@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including=".svn/*" kind="src" path="src"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/WiiRemoteJ.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/WiiRemoteJ.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/informa-0.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/jdom-b10.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/vecmath-1.3.1.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/ant-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/ant-junit-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/ant-launcher-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/antlr-2.7.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/asm-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/asm-analysis-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/asm-tree-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/asm-util-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-anim.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-awt-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-bridge.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-codec.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-css.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-dom.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-ext.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-extension.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-gui-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-gvt.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-parser.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-script.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-svg-dom.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-svggen.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-swing.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-transcoder.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/batik-xml.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/bsf-2.4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/commons-cli-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/commons-logging-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/groovy-1.5.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/jline-0.9.94.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/js.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/jsp-api-2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/junit-3.8.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/mockobjects-core-0.09.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/mx4j-3.0.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/pdf-transcoder.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/servlet-api-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xalan-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xerces_2_5_0.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xml-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xml-apis-ext.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xpp3_min-1.1.3.4.O.jar"/>
+	<classpathentry exported="true" kind="lib" path="X:/Jars/3rd/xstream-1.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

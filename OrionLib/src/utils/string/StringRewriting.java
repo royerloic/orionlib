@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 import utils.io.FlatTextTableReader;
 import utils.io.FlatTextTableReader.FlatTextTableReaderHandler;
 
@@ -22,8 +20,6 @@ import utils.io.FlatTextTableReader.FlatTextTableReaderHandler;
  */
 public class StringRewriting implements FlatTextTableReaderHandler
 {
-	private static final Logger cLogger = Logger.getLogger(StringRewriting.class);
-
 	private final FlatTextTableReader mFlatTextTableReader;
 
 	private final List<Pattern> mPatternList;
@@ -61,7 +57,7 @@ public class StringRewriting implements FlatTextTableReaderHandler
 		}
 		catch (final IOException exception)
 		{
-			cLogger.error(exception);
+			System.err.println(exception);
 		}
 		return lStringRewriting;
 	}

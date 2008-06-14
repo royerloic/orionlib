@@ -8,12 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
 public class ValuedIntegerStringBidiMap
 {
-	private static final Logger cLogger = Logger.getLogger(ValuedIntegerStringBidiMap.class);
-
 	private boolean mTemp;
 	private final Connection mDatabaseConnection;
 	private PreparedStatement mInsertStatement;
@@ -562,13 +558,13 @@ public class ValuedIntegerStringBidiMap
 
 	private void logerror(final Throwable e)
 	{
-		cLogger.error(e);
+		System.err.println(e);
 		debug(e);
 	}
 
 	private void loginfo(final Throwable e)
 	{
-		cLogger.info(e);
+		System.out.println(e);
 	}
 
 	private void debug(final Throwable e)
