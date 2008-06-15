@@ -141,6 +141,17 @@ public class FastIntegerPowerGraph
 		return mPowerEgdesGraph.getNumberOfNodes();
 	}
 
+	public int getNumberOfNonSingletonPowerNodes()
+	{
+		int lNumberOfNonSingletonPowerNodes = 0;
+		for (FastBoundedIntegerSet lPowerNode : mId2PowerNode)
+			if (lPowerNode.size() > 1)
+			{
+				lNumberOfNonSingletonPowerNodes++;
+			}
+		return lNumberOfNonSingletonPowerNodes;
+	}
+
 	public int getNumberOfNodes()
 	{
 		return mNodesSet.size();
@@ -202,6 +213,21 @@ public class FastIntegerPowerGraph
 	public int getNumberOfPowerEdges()
 	{
 		return mPowerEgdesGraph.getNumberOfEdges();
+	}
+
+	public FastBoundedIntegerSet getExclusiveNodeChildren(int pPowerNodeId)
+	{
+		FastBoundedIntegerSet lNodeSet = mId2PowerNode.get(pPowerNodeId);
+		FastBoundedIntegerSet lExclusiveNodeChildren = new FastBoundedIntegerSet(lNodeSet);
+
+		FastBoundedIntegerSet lPowerNodeChildren = mHierarchyGraph.getOutgoingNodeNeighbours(pPowerNodeId);
+		for (int lPowerNodeChild : lPowerNodeChildren)
+		{
+			FastBoundedIntegerSet lChildrenNodeSet = mId2PowerNode.get(pPowerNodeId);
+			lExclusiveNodeChildren.difference(lChildrenNodeSet);
+		}
+
+		return lExclusiveNodeChildren;
 	}
 
 	public FastBoundedIntegerSet getPowerNodeChildrenOf(final int pPowerNodeId)
@@ -529,4 +555,5 @@ public class FastIntegerPowerGraph
 		}
 
 	}
+
 }

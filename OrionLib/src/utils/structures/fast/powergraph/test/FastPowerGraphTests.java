@@ -16,7 +16,7 @@ public class FastPowerGraphTests
 	{
 		try
 		{
-			final FastPowerGraph pg = FastPowerGraph.readBblFile(FastPowerGraphTests.class.getResourceAsStream("lesmis.bbl"));
+			final FastPowerGraph pg = FastPowerGraph.readBblStream(FastPowerGraphTests.class.getResourceAsStream("lesmis.bbl"));
 
 			// System.out.println(pg);
 			final FastPowerGraph pgcloned = FastPowerGraph.readBblFile(pg.toTabDel());

@@ -95,6 +95,7 @@ public final class FastBoundedIntegerSet implements
 
 	private void tightenMinMax()
 	{
+		if(!(max <= min)) // if(!isEmpty())
 		{
 			int newmin = Integer.MAX_VALUE;
 			int newmax = Integer.MIN_VALUE;

@@ -56,7 +56,7 @@ public class FastPowerGraph<N>
 																												pNumberOfPowerEdges);
 	}
 
-	protected FastIntegerPowerGraph getUnderlyingFastIntegerPowerGraph()
+	public FastIntegerPowerGraph getUnderlyingFastIntegerPowerGraph()
 	{
 		return mFastIntegerPowerGraph;
 	}
@@ -77,6 +77,11 @@ public class FastPowerGraph<N>
 	public List<N> getNodeList()
 	{
 		return Collections.unmodifiableList(mNodeId2NodeList);
+	}
+
+	public int getNumberOfNodes()
+	{
+		return mNodeId2NodeList.size();
 	}
 
 	public int addPowerNode(final N pPowerNode, final FastBoundedIntegerSet pSet)
@@ -114,6 +119,21 @@ public class FastPowerGraph<N>
 		return mPowerNodeToPowerNodeIdMap.keySet();
 	}
 
+	public int getNumberOfPowerNodes()
+	{
+		return mPowerNodeToPowerNodeIdMap.size();
+	}
+	
+	public int getNumberOfNonSingletonPowerNodes()
+	{
+		return mFastIntegerPowerGraph.getNumberOfNonSingletonPowerNodes()-1;
+	}
+
+	public FastBoundedIntegerSet getPowerNodeIdSet()
+	{
+		return mFastIntegerPowerGraph.getPowerNodeIdSet();
+	}
+
 	public Set<N> getPowerNodeContent(final int pPowerNodeId)
 	{
 		final HashSet<N> lPowerNodeContents = new HashSet<N>(mFastIntegerPowerGraph.getNumberOfPowerNodes());
@@ -139,6 +159,14 @@ public class FastPowerGraph<N>
 	{
 		return mPowerNodeIdToPowerNodeList.get(pPowerNodeId);
 	}
+	
+	public int getNumberOfNodeOrPowerNodeChildren(int pPowerNodeId)
+	{
+		final int lNumberOfPowerNodeChildren = mFastIntegerPowerGraph.getPowerNodeChildrenOf(pPowerNodeId).size();
+		final int lNumberOfNodeChildren = mFastIntegerPowerGraph.getExclusiveNodeChildren(pPowerNodeId).size();
+		return lNumberOfPowerNodeChildren + lNumberOfNodeChildren;
+	}
+	
 
 	public void addPowerEdge(final int pFirst, final int pSecond)
 	{
@@ -165,7 +193,7 @@ public class FastPowerGraph<N>
 		return lPowerNodeList;
 	}
 
-	public Object getPowerEdgeSet()
+	public HashSet<Edge<N>> getPowerEdgeSet()
 	{
 		final HashSet<Edge<N>> lPowerNodeList = new HashSet<Edge<N>>(mFastIntegerPowerGraph.getNumberOfPowerEdges());
 		for (final int[] lEdgeArray : mFastIntegerPowerGraph.getPowerEdgeList())
@@ -176,6 +204,11 @@ public class FastPowerGraph<N>
 			lPowerNodeList.add(lEdge);
 		}
 		return lPowerNodeList;
+	}
+	
+	public int getNumberOfPowerEdges()
+	{
+		return mFastIntegerPowerGraph.getNumberOfPowerEdges();
 	}
 
 	/** ********************************************************************** */
@@ -268,7 +301,7 @@ public class FastPowerGraph<N>
 	 */
 	public static FastPowerGraph<String> readBblFile(final String pString) throws IOException
 	{
-		return readBblFile(new ByteArrayInputStream(pString.getBytes("UTF-8")));
+		return readBblStream(new ByteArrayInputStream(pString.getBytes("UTF-8")));
 	}
 
 	/**
@@ -280,7 +313,7 @@ public class FastPowerGraph<N>
 	 */
 	public static FastPowerGraph<String> readBblFile(final File pFile) throws IOException
 	{
-		return readBblFile(new FileInputStream(pFile));
+		return readBblStream(new FileInputStream(pFile));
 	}
 
 	/**
@@ -290,7 +323,7 @@ public class FastPowerGraph<N>
 	 * @param pInputStream
 	 * @throws IOException
 	 */
-	public static FastPowerGraph<String> readBblFile(final InputStream pInputStream) throws IOException
+	public static FastPowerGraph<String> readBblStream(final InputStream pInputStream) throws IOException
 	{
 		final FastPowerGraph<String> lFastPowerGraph = new FastPowerGraph<String>();
 
@@ -458,5 +491,9 @@ public class FastPowerGraph<N>
 		return true;
 
 	}
+
+
+
+
 
 }
