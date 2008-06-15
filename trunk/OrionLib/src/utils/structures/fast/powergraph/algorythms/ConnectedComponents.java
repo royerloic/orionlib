@@ -1,12 +1,22 @@
 package utils.structures.fast.powergraph.algorythms;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import utils.structures.fast.powergraph.FastIntegerPowerGraph;
+import utils.structures.fast.powergraph.FastPowerGraph;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 
 public class ConnectedComponents
 {
+
+	public static final <N> ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastPowerGraph<N> pPowerGraph)
+	{
+		FastIntegerPowerGraph lFastIntegerPowerGraph = pPowerGraph.getUnderlyingFastIntegerPowerGraph();
+		ArrayList<FastBoundedIntegerSet> lConnectedComponents = getConnectedComponents(lFastIntegerPowerGraph);
+
+		return lConnectedComponents;
+	}
 
 	public static final ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastIntegerPowerGraph pPowerGraph)
 	{

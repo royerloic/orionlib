@@ -1,8 +1,10 @@
 package utils.structures.powergraph.io;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -94,12 +96,18 @@ public class PowerGraphIO
 		MatrixFile.writeMatrixToFile(lBubbleFormat, pFile);
 	}
 
-	public static PowerGraph<Node> loadPowerGraph(final File pFile)	throws FileNotFoundException,
-																																	IOException
+	public static PowerGraph<Node> loadPowerGraph(final File pFile) throws IOException
+	{
+		InputStream lInputStream = new FileInputStream(pFile);
+		return loadPowerGraph(lInputStream);
+	}
+
+	public static PowerGraph<Node> loadPowerGraph(InputStream pInputStream)	throws FileNotFoundException,
+																																					IOException
 	{
 		final PowerGraph<Node> lPowerGraph = new PowerGraph<Node>();
-		final List<List<String>> lMatrix = MatrixFile.readMatrixFromFile(	pFile,
-																																			false);
+		final List<List<String>> lMatrix = MatrixFile.readMatrixFromStream(	pInputStream,
+																																				false);
 
 		final HashMap<String, Node> lNodeNameToNodeMap = new HashMap<String, Node>();
 		final SetMap<String, Node> lPowerNodeNameToSetMap = new HashSetMap<String, Node>();
@@ -236,4 +244,5 @@ public class PowerGraphIO
 
 		pPowerNodeNameToSetMap.put(pSetName, lHashSet);
 	}
+
 }
