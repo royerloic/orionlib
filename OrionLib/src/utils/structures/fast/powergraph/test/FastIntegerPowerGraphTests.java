@@ -1,15 +1,18 @@
 package utils.structures.fast.powergraph.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.Test;
 
 import utils.structures.fast.powergraph.FastIntegerPowerGraph;
+import utils.structures.fast.powergraph.FastPowerGraph;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 
 /**
@@ -184,6 +187,36 @@ public class FastIntegerPowerGraphTests
 		{
 			fail();
 		}
+
+	}
+
+	@Test
+	public void testGetExclusiveNodeChildren()
+	{
+		final FastIntegerPowerGraph pg = new FastIntegerPowerGraph();
+
+		final FastBoundedIntegerSet ps1 = new FastBoundedIntegerSet(true,
+																																0,
+																																1,
+																																2,
+																																3,
+																																4,
+																																5,
+																																6,
+																																7);
+		final FastBoundedIntegerSet ps2 = new FastBoundedIntegerSet(true, 1, 2, 3);
+		final FastBoundedIntegerSet ps3 = new FastBoundedIntegerSet(true, 8);
+		final FastBoundedIntegerSet ps4 = new FastBoundedIntegerSet(true, 9);
+
+		final int lPowerNodeId = pg.addPowerNode(ps1);
+		pg.addPowerNode(ps2);
+		pg.addPowerNode(ps3);
+		pg.addPowerNode(ps4);
+
+		pg.addPowerEdge(ps1, ps3);
+		pg.addPowerEdge(ps2, ps4);
+		FastBoundedIntegerSet lExclusiveNodeChildren = pg.getExclusiveNodeChildren(lPowerNodeId);
+		assertEquals(5,lExclusiveNodeChildren.size());
 
 	}
 

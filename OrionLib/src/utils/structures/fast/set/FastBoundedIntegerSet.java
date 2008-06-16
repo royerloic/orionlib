@@ -20,7 +20,7 @@ public final class FastBoundedIntegerSet implements
 	private boolean sizeOutOfDate = false;
 	private int[] elements;
 	private int min = Integer.MAX_VALUE;
-	private int max = Integer.MIN_VALUE;
+	private int max = 0;
 
 	public FastBoundedIntegerSet()
 	{
@@ -59,6 +59,7 @@ public final class FastBoundedIntegerSet implements
 															pFastSparseIntegerSet.elements.length);
 		min = pFastSparseIntegerSet.min;
 		max = pFastSparseIntegerSet.max;
+		sizeOutOfDate=true;
 	}
 
 	public FastBoundedIntegerSet(final Collection<Integer> pCollection)
@@ -95,10 +96,15 @@ public final class FastBoundedIntegerSet implements
 
 	private void tightenMinMax()
 	{
-		if(!(max <= min)) // if(!isEmpty())
+		if (max <= min) // if(isEmpty())
+		{
+			min = Integer.MAX_VALUE;
+			max = 0;
+		}
+		else
 		{
 			int newmin = Integer.MAX_VALUE;
-			int newmax = Integer.MIN_VALUE;
+			int newmax = 0;
 			for (int i = min; i < max; i++)
 			{
 				if (elements[i] != 0)
@@ -118,9 +124,7 @@ public final class FastBoundedIntegerSet implements
 			min = newmin;
 			max = newmax;
 		}
-		/***************************************************************************
-		 * else { min = Integer.MAX_VALUE; max = Integer.MIN_VALUE; }/
-		 **************************************************************************/
+		
 	}
 
 	static int[] bitsInWord = new int[256 * 256];
@@ -197,14 +201,7 @@ public final class FastBoundedIntegerSet implements
 			ensureCapacity(intindex + 1);
 			elements[intindex] ^= 1 << bitindex;
 			cachedsize--;
-			if (min == intindex && elements[intindex] == 0)
-			{
-				min++;
-			}
-			if (max == intindex + 1 && elements[intindex] == 0)
-			{
-				max--;
-			}/**/
+			tightenMinMax();
 			return true;
 		}
 		return false;
@@ -213,12 +210,10 @@ public final class FastBoundedIntegerSet implements
 	public final boolean contains(final int o)
 	{
 		final int intindex = o >> 5;
-		if(intindex>=elements.length)
+		if (intindex >= elements.length)
 			return false;
 		final int bitindex = o % 32;
 
-
-			
 		return (elements[intindex] & 1 << bitindex) != 0;
 	}
 
@@ -242,7 +237,7 @@ public final class FastBoundedIntegerSet implements
 	{
 		cachedsize = 0;
 		min = Integer.MAX_VALUE;
-		max = Integer.MIN_VALUE;
+		max = 0;
 		Arrays.fill(elements, 0);
 	}
 
@@ -256,7 +251,7 @@ public final class FastBoundedIntegerSet implements
 	{
 		cachedsize = 0;
 		min = Integer.MAX_VALUE;
-		max = Integer.MIN_VALUE;
+		max = 0;
 		elements = new int[10];
 	}
 
