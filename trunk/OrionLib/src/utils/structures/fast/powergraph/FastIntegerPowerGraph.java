@@ -130,6 +130,11 @@ public class FastIntegerPowerGraph
 	{
 		return mHierarchyGraph.isNode(pPowerNodeId);
 	}
+	
+	public int getPowerNodeSize(int pPowerNodeId)
+	{
+		return mId2PowerNode.get(pPowerNodeId).size();
+	}
 
 	public FastBoundedIntegerSet getPowerNodeIdSet()
 	{
@@ -214,6 +219,8 @@ public class FastIntegerPowerGraph
 	{
 		return mPowerEgdesGraph.getNumberOfEdges();
 	}
+	
+	
 
 	public FastBoundedIntegerSet getExclusiveNodeChildren(int pPowerNodeId)
 	{
@@ -223,7 +230,7 @@ public class FastIntegerPowerGraph
 		FastBoundedIntegerSet lPowerNodeChildren = mHierarchyGraph.getOutgoingNodeNeighbours(pPowerNodeId);
 		for (int lPowerNodeChild : lPowerNodeChildren)
 		{
-			FastBoundedIntegerSet lChildrenNodeSet = mId2PowerNode.get(pPowerNodeId);
+			FastBoundedIntegerSet lChildrenNodeSet = mId2PowerNode.get(lPowerNodeChild);
 			lExclusiveNodeChildren.difference(lChildrenNodeSet);
 		}
 
@@ -258,6 +265,12 @@ public class FastIntegerPowerGraph
 	public FastBoundedIntegerSet getPowerNodeAncestorsOf(final int pPowerNodeId)
 	{
 		return mHierarchyGraph.getIncommingTransitiveClosure(pPowerNodeId);
+	}
+	
+	public boolean isTopPowerNode(int pPowerNodeId)
+	{
+		FastBoundedIntegerSet lParentPowerNodeIdSet = mHierarchyGraph.getIncommingNodeNeighbours(pPowerNodeId);
+		return lParentPowerNodeIdSet.size()==1 && lParentPowerNodeIdSet.contains(0);
 	}
 
 	public FastBoundedIntegerSet getDirectPowerNodeNeighbors(final int pPowerNodeId)
@@ -555,5 +568,9 @@ public class FastIntegerPowerGraph
 		}
 
 	}
+
+
+
+
 
 }
