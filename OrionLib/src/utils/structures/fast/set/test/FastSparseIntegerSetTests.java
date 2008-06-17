@@ -1,4 +1,4 @@
-package utils.structures.fast.set;
+package utils.structures.fast.set.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,13 +7,49 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.Test;
+
+import utils.structures.fast.set.FastBoundedIntegerSet;
+import utils.structures.fast.set.FastIntegerSet;
+import utils.structures.fast.set.FastSparseIntegerSet;
 
 /**
  */
 public class FastSparseIntegerSetTests
 {
+	
+	@Test
+	public void genericTest()
+	{
+		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory()
+		{
+
+			@Override
+			public FastIntegerSet createEmptySet()
+			{
+				return new FastSparseIntegerSet();
+			}
+
+			@Override
+			public FastIntegerSet createSet(int... pListOfIntegers)
+			{
+				return new FastSparseIntegerSet(pListOfIntegers);
+			}
+
+			@Override
+			public String getSetTypeName()
+			{
+				return "FastSparseIntegerSet";
+			}
+		};
+
+		GenericIntegerSetTest.testAll(lIntegerSetFactory);
+	}
+	
+	
+	
 	@Test
 	public void testArrayConstructor()
 	{
@@ -148,7 +184,7 @@ public class FastSparseIntegerSetTests
 		assertEquals(100, set1.size());
 		for (int i = 0; i < 100; i++)
 		{
-			assertTrue(set1.del(i));
+			assertTrue(set1.remove(i));
 		}
 		assertEquals(0, set1.size());
 
@@ -160,7 +196,7 @@ public class FastSparseIntegerSetTests
 		assertEquals(101, set1.size());
 		for (int i = 0; i < 101; i++)
 		{
-			assertTrue(set1.del(i * 10 % 101));
+			assertTrue(set1.remove(i * 10 % 101));
 		}
 		assertEquals(0, set1.size());
 		System.out.println(set1);
@@ -273,11 +309,11 @@ public class FastSparseIntegerSetTests
 
 			final FastSparseIntegerSet union2 = FastSparseIntegerSet.union(set1, set2);
 			assertSame(3, union2.size());
-			assertTrue(union2.contains(4, 5, 6));
+			assertTrue(union2.containsAll(4, 5, 6));
 
 			final FastSparseIntegerSet union3 = FastSparseIntegerSet.union(set2, set1);
 			assertSame(3, union3.size());
-			assertTrue(union3.contains(4, 5, 6));
+			assertTrue(union3.containsAll(4, 5, 6));
 		}
 
 		{
@@ -285,10 +321,10 @@ public class FastSparseIntegerSetTests
 			final FastSparseIntegerSet set2 = new FastSparseIntegerSet(4, 5, 6);
 
 			final FastSparseIntegerSet union1 = FastSparseIntegerSet.union(set1, set2);
-			assertTrue(union1.contains(1, 2, 3, 4, 5, 6));
+			assertTrue(union1.containsAll(1, 2, 3, 4, 5, 6));
 
 			final FastSparseIntegerSet union2 = FastSparseIntegerSet.union(set2, set1);
-			assertTrue(union2.contains(1, 2, 3, 4, 5, 6));
+			assertTrue(union2.containsAll(1, 2, 3, 4, 5, 6));
 		}
 
 		{
@@ -364,7 +400,7 @@ public class FastSparseIntegerSetTests
 			final FastSparseIntegerSet diff2 = FastSparseIntegerSet.difference(	set2,
 																																					set1);
 			assertSame(3, diff2.size());
-			assertTrue(diff2.contains(4, 5, 6));
+			assertTrue(diff2.containsAll(4, 5, 6));
 
 			final FastSparseIntegerSet diff3 = FastSparseIntegerSet.difference(	set1,
 																																					set2);
@@ -457,79 +493,6 @@ public class FastSparseIntegerSetTests
 
 	}
 
-	@Test
-	public void testPerformance()
-	{
-		final int size = 20000;
 
-		final FastSparseIntegerSet set = new FastSparseIntegerSet();
-		set.ensureCapacity(size);
-		final HashSet<Integer> setref = new HashSet<Integer>(size);
-
-		double timeref;
-		double time;
-		double fold;
-
-		{
-			final long start = System.nanoTime();
-			final Random rnd = new Random();
-			for (int i = 0; i < size; i++)
-			{
-				final int key = rnd.nextInt();
-				setref.add(key);
-			}
-			final long stop = System.nanoTime();
-			timeref = stop - start;
-		}
-		System.out.println("timeref=" + timeref);
-
-		{
-			final long start = System.nanoTime();
-			final Random rnd = new Random();
-			for (int i = 0; i < size; i++)
-			{
-				final int key = rnd.nextInt();
-				set.add(key);
-			}
-			final long stop = System.nanoTime();
-			time = stop - start;
-		}
-		System.out.println("time=" + time);
-
-		fold = timeref / time;
-		System.out.println("add:FastSparseIntegerSet is " + fold
-												+ " times faster than HashSet<Integer> ");
-
-		{
-			final long start = System.nanoTime();
-			final Random rnd = new Random();
-			for (int i = 0; i < size; i++)
-			{
-				final int key = rnd.nextInt();
-				setref.addAll(setref);
-			}
-			final long stop = System.nanoTime();
-			timeref = stop - start;
-		}
-		System.out.println("timeref=" + timeref);
-
-		{
-			final long start = System.nanoTime();
-			final Random rnd = new Random();
-			for (int i = 0; i < size; i++)
-			{
-				final int key = rnd.nextInt();
-				FastSparseIntegerSet.union(set, set);
-			}
-			final long stop = System.nanoTime();
-			time = stop - start;
-		}
-		System.out.println("time=" + time);
-
-		fold = timeref / time;
-		System.out.println("union: FastSparseIntegerSet is " + fold
-												+ " times faster than HashSet<Integer> ");
-
-	}
 
 }
