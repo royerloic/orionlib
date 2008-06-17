@@ -123,7 +123,7 @@ public class FastIntegerHashMap<O> implements Iterable<Integer>
 
 	public O remove(final int key)
 	{
-		keyset.del(key);
+		keyset.remove(key);
 		final int hash = hash(key);
 
 		if (elements[hash] == null)
