@@ -25,19 +25,17 @@ public class FastBooleanArrayIntegerSetTests
 	{
 		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory(){
 
-			@Override
+
 			public FastIntegerSet createEmptySet()
 			{
 				return new FastBooleanArrayIntegerSet();
 			}
 
-			@Override
 			public FastIntegerSet createSet(int... pListOfIntegers)
 			{
 				return new FastBooleanArrayIntegerSet(true,pListOfIntegers);
 			}
 
-			@Override
 			public String getSetTypeName()
 			{
 				return "FastBooleanArrayIntegerSet";

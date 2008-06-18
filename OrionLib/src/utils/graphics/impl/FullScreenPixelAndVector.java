@@ -655,6 +655,16 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 		return mFrame;
 	}
 
+	public void dispose()
+	{
+		mFrame.dispose();		
+	}
+
+	public boolean isDecorated()
+	{
+		return !mFrame.isUndecorated();
+	}
+
 	/*****************************************************************************
 	 * public static void main(String[] argv) {
 	 * 

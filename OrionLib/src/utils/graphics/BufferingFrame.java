@@ -71,7 +71,6 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 
 	public void paintOffscreen(final Graphics g)
 	{
-		System.out.println("paintOffscreen(" + g);
 	}
 
 	// True if the image has changed size
@@ -114,5 +113,10 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	public Component getComponent()
 	{
 		return this;
+	}
+
+	public boolean isDecorated()
+	{
+		return !super.isUndecorated();
 	}
 }
