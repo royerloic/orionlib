@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 
 public interface GraphicsProvider
 {
-	public Frame getFrame();
-
 	public int getHeight();
 
 	public int getWidth();
@@ -17,4 +15,8 @@ public interface GraphicsProvider
 	public void showGraphics();
 
 	public Graphics2D getDrawGraphics();
+	
+	public boolean isDecorated();
+
+	public void dispose();
 }

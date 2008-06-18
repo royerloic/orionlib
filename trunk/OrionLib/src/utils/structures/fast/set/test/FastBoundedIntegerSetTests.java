@@ -27,19 +27,16 @@ public class FastBoundedIntegerSetTests
 		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory()
 		{
 
-			@Override
 			public FastIntegerSet createEmptySet()
 			{
 				return new FastBoundedIntegerSet();
 			}
 
-			@Override
 			public FastIntegerSet createSet(int... pListOfIntegers)
 			{
 				return new FastBoundedIntegerSet(true, pListOfIntegers);
 			}
 
-			@Override
 			public String getSetTypeName()
 			{
 				return "FastBoundedIntegerSet";

@@ -148,7 +148,6 @@ public final class FastSparseIntegerSet	implements
 		return true;
 	}
 
-	@Override
 	public Integer getMin(int pMin)
 	{
 		if (isEmpty())
@@ -156,7 +155,6 @@ public final class FastSparseIntegerSet	implements
 		return elements[0];
 	}
 
-	@Override
 	public Integer getMax(int pMax)
 	{
 		if (isEmpty())
@@ -294,7 +292,6 @@ public final class FastSparseIntegerSet	implements
 		}
 	}
 	
-	@Override
 	public void addAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -325,7 +322,6 @@ public final class FastSparseIntegerSet	implements
 		}
 	}
 	
-	@Override
 	public void removeAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -346,7 +342,6 @@ public final class FastSparseIntegerSet	implements
 		}
 	}
 	
-	@Override
 	public void toggleAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)

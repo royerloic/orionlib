@@ -26,19 +26,16 @@ public class FastSparseIntegerSetTests
 		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory()
 		{
 
-			@Override
 			public FastIntegerSet createEmptySet()
 			{
 				return new FastSparseIntegerSet();
 			}
 
-			@Override
 			public FastIntegerSet createSet(int... pListOfIntegers)
 			{
 				return new FastSparseIntegerSet(pListOfIntegers);
 			}
 
-			@Override
 			public String getSetTypeName()
 			{
 				return "FastSparseIntegerSet";

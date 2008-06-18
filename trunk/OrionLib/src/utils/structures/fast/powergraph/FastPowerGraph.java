@@ -73,7 +73,7 @@ public class FastPowerGraph<N>
 	{
 		return mNode2NodeIdMap.get(pNode);
 	}
-	
+
 	public N getNode(final int pNodeId)
 	{
 		return mNodeId2NodeList.get(pNodeId);
@@ -88,11 +88,10 @@ public class FastPowerGraph<N>
 	{
 		return mNodeId2NodeList.size();
 	}
-	
 
 	public FastBoundedIntegerSet getExclusiveNodeChildren(int pPowerNodeId)
 	{
-		return mFastIntegerPowerGraph.getExclusiveNodeChildren(pPowerNodeId);		
+		return mFastIntegerPowerGraph.getExclusiveNodeChildren(pPowerNodeId);
 	}
 
 	public int addPowerNode(final N pPowerNode, final FastBoundedIntegerSet pSet)
@@ -124,12 +123,11 @@ public class FastPowerGraph<N>
 	{
 		return mPowerNodeToPowerNodeIdMap.get(pPowerNode);
 	}
-	
+
 	public int getPowerNodeSize(final int pPowerNodeId)
 	{
 		return mFastIntegerPowerGraph.getPowerNodeSize(pPowerNodeId);
 	}
-	
 
 	public Set<N> getPowerNodeList()
 	{
@@ -190,7 +188,7 @@ public class FastPowerGraph<N>
 																														.size();
 		return lNumberOfPowerNodeChildren + lNumberOfNodeChildren;
 	}
-	
+
 	public boolean isTopPowerNode(final int pPowerNodeId)
 	{
 		return mFastIntegerPowerGraph.isTopPowerNode(pPowerNodeId);
@@ -203,9 +201,33 @@ public class FastPowerGraph<N>
 
 	public void addPowerEdge(final N pFirst, final N pSecond)
 	{
-		final int lFirst = mPowerNodeToPowerNodeIdMap.get(pFirst);
-		final int lSecond = mPowerNodeToPowerNodeIdMap.get(pSecond);
-		mFastIntegerPowerGraph.addPowerEdge(lFirst, lSecond);
+		final int lFirstId = mPowerNodeToPowerNodeIdMap.get(pFirst);
+		final int lSecondId = mPowerNodeToPowerNodeIdMap.get(pSecond);
+		mFastIntegerPowerGraph.addPowerEdge(lFirstId, lSecondId);
+	}
+
+	public int getPowerEdgeSize(int pFirstPowerNodeId, int pSecondPowerNodeId)
+	{
+		if (pFirstPowerNodeId == pSecondPowerNodeId)
+		{
+			final FastBoundedIntegerSet lPowerNode2 = mFastIntegerPowerGraph.getPowerNodeById(pFirstPowerNodeId);
+			final int lPowerNodeSize = lPowerNode2.size();
+			return lPowerNodeSize * (lPowerNodeSize - 1) / 2;
+		}
+		else
+		{
+			final FastBoundedIntegerSet lPowerNode1 = mFastIntegerPowerGraph.getPowerNodeById(pFirstPowerNodeId);
+			final FastBoundedIntegerSet lPowerNode2 = mFastIntegerPowerGraph.getPowerNodeById(pSecondPowerNodeId);
+			return lPowerNode1.size() * lPowerNode2.size();
+		}
+
+	}
+
+	public int getPowerEdgeSize(N pFirstPowerNode, N pSecondPowerNode)
+	{
+		final int lFirstId = mPowerNodeToPowerNodeIdMap.get(pFirstPowerNode);
+		final int lSecondId = mPowerNodeToPowerNodeIdMap.get(pSecondPowerNode);
+		return getPowerEdgeSize(lFirstId,lSecondId);
 	}
 
 	public ArrayList<Edge<N>> getPowerEdgeList()
@@ -519,12 +541,5 @@ public class FastPowerGraph<N>
 		return true;
 
 	}
-
-
-
-
-
-
-
 
 }
