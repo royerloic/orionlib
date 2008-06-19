@@ -1,4 +1,4 @@
-package utils.math.stats.test;
+package utils.math.statistics.test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,7 +9,7 @@ import java.io.OutputStream;
 
 import org.junit.Test;
 
-import utils.math.stats.HyperGeometricEnrichement;
+import utils.math.statistics.HyperGeometricEnrichement;
 
 public class HyperGeometricEnrichementTest
 {
