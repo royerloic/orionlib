@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import utils.math.stats.HyperGeometricEnrichement;
+import utils.math.statistics.HyperGeometricEnrichement;
 import utils.structures.Couple;
 import utils.structures.map.HashSetMap;
 import utils.structures.set.FirstInPrioritizedSetDecomposer;
