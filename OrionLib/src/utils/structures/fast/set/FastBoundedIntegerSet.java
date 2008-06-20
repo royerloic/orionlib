@@ -190,7 +190,6 @@ public final class FastBoundedIntegerSet implements
 		return false;
 	}
 
-
 	public void addAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -216,7 +215,6 @@ public final class FastBoundedIntegerSet implements
 		return false;
 	}
 
-
 	public void removeAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -233,7 +231,6 @@ public final class FastBoundedIntegerSet implements
 		ensureCapacity(intindex + 1);
 		elements[intindex] ^= 1 << bitindex;
 	}
-
 
 	public void toggleAll(int[] pIntArray)
 	{
@@ -721,6 +718,9 @@ public final class FastBoundedIntegerSet implements
 
 	public Integer getMin(final int pMin)
 	{
+		if (isEmpty())
+			return null;
+
 		int i = max(min, pMin / 32);
 		while (elements[i] == 0 && i < max)
 		{
@@ -745,6 +745,9 @@ public final class FastBoundedIntegerSet implements
 
 	public Integer getMax(final int pMax)
 	{
+		if (isEmpty())
+			return null;
+
 		int i = min(max, pMax / 32);
 		while (elements[i] == 0 && i >= min)
 		{

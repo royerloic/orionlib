@@ -220,6 +220,11 @@ public class FastIntegerPowerGraph
 		return mPowerEgdesGraph.getNumberOfEdges();
 	}
 	
+	public int getNumberOfReflexivePowerEdges()
+	{
+		return mPowerEgdesGraph.getNumberOfReflexiveEdges();
+	}
+	
 	
 
 	public FastBoundedIntegerSet getExclusiveNodeChildren(int pPowerNodeId)
@@ -252,7 +257,7 @@ public class FastIntegerPowerGraph
 		return mHierarchyGraph.getOutgoingTransitiveClosure(pPowerNodeId);
 	}
 
-	public FastBoundedIntegerSet getPowerNodeParentsOf(final int pPowerNodeId)
+	public FastBoundedIntegerSet getPowerNodeParentOf(final int pPowerNodeId)
 	{
 		return mHierarchyGraph.getIncommingNodeNeighbours(pPowerNodeId);
 	}
@@ -568,6 +573,8 @@ public class FastIntegerPowerGraph
 		}
 
 	}
+
+
 
 
 

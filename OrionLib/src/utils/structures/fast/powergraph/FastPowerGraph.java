@@ -188,6 +188,16 @@ public class FastPowerGraph<N>
 																														.size();
 		return lNumberOfPowerNodeChildren + lNumberOfNodeChildren;
 	}
+	
+	public FastBoundedIntegerSet getPowerNodeParentOf(final int pPowerNodeId)
+	{
+		return mFastIntegerPowerGraph.getPowerNodeParentOf(pPowerNodeId);		
+	}
+	
+	public FastBoundedIntegerSet getPowerNodeParentOf(final N pPowerNode)
+	{
+		return mFastIntegerPowerGraph.getPowerNodeParentOf(mPowerNodeToPowerNodeIdMap.get(pPowerNode));		
+	}
 
 	public boolean isTopPowerNode(final int pPowerNodeId)
 	{
@@ -259,6 +269,11 @@ public class FastPowerGraph<N>
 	public int getNumberOfPowerEdges()
 	{
 		return mFastIntegerPowerGraph.getNumberOfPowerEdges();
+	}
+	
+	public int getNumberOfReflexivePowerEdges()
+	{
+		return mFastIntegerPowerGraph.getNumberOfReflexivePowerEdges();
 	}
 
 	/** ********************************************************************** */
@@ -541,5 +556,8 @@ public class FastPowerGraph<N>
 		return true;
 
 	}
+
+
+
 
 }
