@@ -152,6 +152,13 @@ public class FastIntegerList implements
 		return elements[index];
 	}
 
+	public Integer getLast()
+	{
+		if (isEmpty())
+			return null;
+		return elements[size - 1];
+	}
+
 	public final void set(final int index, final int element)
 	{
 		rangeCheck(index);

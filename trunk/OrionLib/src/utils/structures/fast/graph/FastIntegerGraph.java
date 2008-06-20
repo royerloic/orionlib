@@ -190,6 +190,17 @@ public class FastIntegerGraph implements Serializable
 		return mEdgeCount;
 	}
 
+	public int getNumberOfReflexiveEdges()
+	{
+		int lNumberOfReflexiveEdges = 0;
+		for (int i = 0; i < mSparseMatrix.size(); i++)
+			if (mSparseMatrix.get(i).contains(i))
+			{
+				lNumberOfReflexiveEdges++;
+			}
+		return lNumberOfReflexiveEdges;
+	}
+
 	public double getAverageDegree()
 	{
 		return (double) 2 * getNumberOfEdges() / getNumberOfNodes();
