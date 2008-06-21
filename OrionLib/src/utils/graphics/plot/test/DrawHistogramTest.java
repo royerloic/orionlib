@@ -28,8 +28,8 @@ public class DrawHistogramTest
 
 		double[] lHistogramArray = lHistogram.getStatistic();
 
-		final int width = 100;
-		final int height = 100;
+		final int width = 400;
+		final int height = 400;
 
 		BufferedImage lBufferedImage = new BufferedImage(	width,
 																											height,
@@ -37,8 +37,10 @@ public class DrawHistogramTest
 
 		DrawHistogram.draw(	lHistogramArray,
 												(Graphics2D) lBufferedImage.getGraphics(),
-												width,
-												height);
+												100,
+												100,
+												100,
+												100);
 
 		ViewImage.view(lBufferedImage);
 

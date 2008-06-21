@@ -77,5 +77,10 @@ public class Histogram implements Statistic<double[]>
 	{
 		return mTransform.getWidth() / ((double) mNumberOfBins);
 	}
+	
+	public double[] getMinMax()
+	{
+		return mTransform.getStatistic();
+	}
 
 }
