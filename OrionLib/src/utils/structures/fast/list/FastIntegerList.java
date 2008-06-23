@@ -1,11 +1,12 @@
 package utils.structures.fast.list;
 
-import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.RandomAccess;
 
 import utils.structures.fast.set.FastSparseIntegerSet;
+import utils.utils.Arrays;
 
 public class FastIntegerList implements
 														RandomAccess,

@@ -102,7 +102,7 @@ public class FileSort
 		final boolean isFirstLine = true;
 		for (final String lLine : LineReader.getLines(pInputStream))
 		{
-			if (!lLine.isEmpty())
+			if (!(lLine.length()==0))
 			{
 				if (!lLine.startsWith("//"))
 				{

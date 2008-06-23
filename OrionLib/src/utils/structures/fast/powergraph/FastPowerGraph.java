@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.Writer;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import utils.structures.fast.graph.Edge;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 import utils.structures.map.HashSetMap;
 
-public class FastPowerGraph<N>
+public class FastPowerGraph<N extends Serializable> implements Serializable
 {
 	/**
 	 * 
@@ -402,7 +403,7 @@ public class FastPowerGraph<N>
 		String lLine = "";
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("NODE\t"))

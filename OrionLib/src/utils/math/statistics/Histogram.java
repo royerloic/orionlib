@@ -1,11 +1,12 @@
 package utils.math.statistics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import utils.math.statistics.transform.MinMaxTransform;
 import utils.math.statistics.transform.NormalizedZTransform;
 
-public class Histogram implements Statistic<double[]>
+public class Histogram implements Statistic<double[]>, Serializable
 {
 	private final MinMaxTransform mTransform = new MinMaxTransform();
 	ArrayList<Double> mValueList = new ArrayList<Double>();

@@ -1,9 +1,11 @@
 package utils.math.statistics.transform;
 
+import java.io.Serializable;
+
 import utils.math.statistics.MinMax;
 import utils.math.statistics.Statistic;
 
-public class MinMaxTransform implements Statistic<double[]>,Transform
+public class MinMaxTransform implements Statistic<double[]>,Transform,Serializable
 {
 
 	MinMax mMinMax = new MinMax();

@@ -391,14 +391,14 @@ public class FastIntegerGraph implements Serializable
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("EDGEFORMAT\t"))
 				{
 					nodeindex1 = Integer.parseInt(lArray[1]);
 					nodeindex2 = Integer.parseInt(lArray[2]);
-					if (lArray.length >= 4 && !lArray[3].isEmpty())
+					if (lArray.length >= 4 && !(lArray[3].length()==0))
 					{
 						confindex = Integer.parseInt(lArray[3]);
 					}

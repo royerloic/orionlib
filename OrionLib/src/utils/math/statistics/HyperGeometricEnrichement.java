@@ -127,7 +127,7 @@ public class HyperGeometricEnrichement
 		{
 			if (lLineIndex >= pStartLine)
 			{
-				if (!lLine.startsWith("//") && !lLine.isEmpty())
+				if (!lLine.startsWith("//") && !(lLine.length()==0))
 				{
 					final String[] lTokenArray = lLine.split("\t", -1);
 					final String lTestName = lTokenArray[pTestNameIndex];

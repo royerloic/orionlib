@@ -53,7 +53,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!lLine.isEmpty())
+			else if (!(lLine.length()==0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				if (!lValue.equals(pValue))
@@ -102,7 +102,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!lLine.isEmpty())
+			else if (!(lLine.length()==0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				if (lValue.equals(pValue))
@@ -210,7 +210,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!lLine.isEmpty())
+			else if (!(lLine.length()==0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				Comparable lComparableValue;

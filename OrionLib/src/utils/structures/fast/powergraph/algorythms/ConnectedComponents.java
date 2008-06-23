@@ -1,5 +1,6 @@
 package utils.structures.fast.powergraph.algorythms;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -10,7 +11,7 @@ import utils.structures.fast.set.FastBoundedIntegerSet;
 public class ConnectedComponents
 {
 
-	public static final <N> ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastPowerGraph<N> pPowerGraph)
+	public static final <N extends Serializable> ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastPowerGraph<N> pPowerGraph)
 	{
 		FastIntegerPowerGraph lFastIntegerPowerGraph = pPowerGraph.getUnderlyingFastIntegerPowerGraph();
 		ArrayList<FastBoundedIntegerSet> lConnectedComponents = getConnectedComponents(lFastIntegerPowerGraph);

@@ -87,7 +87,7 @@ public class FastaSet implements Serializable
 		for (String lLine : LineReader.getLines(pInputStream))
 		{
 			lLine = lLine.trim();
-			if (lLine.startsWith("#") || lLine.isEmpty())
+			if (lLine.startsWith("#") || lLine.length()==0)
 			{
 				// ignore comments
 			}

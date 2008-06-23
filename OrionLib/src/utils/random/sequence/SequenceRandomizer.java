@@ -3,12 +3,12 @@ package utils.random.sequence;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
 import utils.io.LineReader;
 import utils.io.LineWriter;
+import utils.utils.Arrays;
 import utils.utils.CmdLine;
 
 public class SequenceRandomizer
