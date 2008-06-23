@@ -73,7 +73,7 @@ public class FileDB
 		int counter = 0;
 		for (final String lLine : LineReader.getLines(pFile))
 		{
-			if (!lLine.isEmpty())
+			if (!(lLine.length()==0))
 			{
 				if (!lLine.startsWith("//"))
 				{

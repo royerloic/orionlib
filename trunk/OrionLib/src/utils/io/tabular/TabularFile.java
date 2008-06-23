@@ -98,7 +98,7 @@ public class TabularFile
 				boolean isAllEmpty = true;
 				for (int index = 0; index < lMatrix.get(line).size(); index++)
 				{
-					isAllEmpty &= lMatrix.get(line).get(index).isEmpty();
+					isAllEmpty &= lMatrix.get(line).get(index).length()==0;
 				}
 				if (isAllEmpty)
 				{

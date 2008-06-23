@@ -1,6 +1,8 @@
 package utils.math.statistics;
 
-public class MinMax implements Statistic<double[]>
+import java.io.Serializable;
+
+public class MinMax implements Statistic<double[]>, Serializable
 {
 
 	int mCount = 0;

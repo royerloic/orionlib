@@ -43,7 +43,7 @@ public class PowerGraphSpectrum
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine);
 
@@ -148,7 +148,7 @@ public class PowerGraphSpectrum
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine);
 

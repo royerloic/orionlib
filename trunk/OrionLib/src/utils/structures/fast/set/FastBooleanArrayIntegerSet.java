@@ -1,12 +1,13 @@
 package utils.structures.fast.set;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.RandomAccess;
 import java.util.Set;
+
+import utils.utils.Arrays;
 
 public final class FastBooleanArrayIntegerSet	implements
 																							FastIntegerSet,

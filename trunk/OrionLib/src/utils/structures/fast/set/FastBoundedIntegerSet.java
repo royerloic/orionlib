@@ -1,12 +1,14 @@
 package utils.structures.fast.set;
 
-import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.RandomAccess;
 import java.util.Set;
+
+import utils.utils.Arrays;
 
 public final class FastBoundedIntegerSet implements
 																				FastIntegerSet,
@@ -954,9 +956,10 @@ public final class FastBoundedIntegerSet implements
 		return lArray;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T[] toArray(final T[] pA)
 	{
-		throw new UnsupportedOperationException("unsupported, use: Object[] toArray()");
+		return (T[]) toArray();
 	}
 
 	public int[] toIntArray()

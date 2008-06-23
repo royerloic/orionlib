@@ -19,7 +19,7 @@ public class DrawHistogram
 
 		double lWidth = 1 / ((double) hist.length);
 
-		pGraphics.setBackground(new Color(1f, 1f, 1f, 0.5f));
+		pGraphics.setBackground(new Color(0.9f, 0.9f, 0.9f));
 		pGraphics.clearRect(pX, pY, pW, pH);
 
 		for (int i = 0; i < hist.length; i++)
@@ -30,7 +30,7 @@ public class DrawHistogram
 
 			final float intensity = 1 - (float) (0.5 + 0.5 * hist[i]);
 			pGraphics.setColor(new Color(intensity, intensity, intensity));
-
+			
 			pGraphics.fillRect(	pX + round(topleftX * pW),
 			                   	pY+pH-round(hist[i] * pH),
 													round(lWidth * pW),

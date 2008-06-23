@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import utils.structures.fast.graph.FastIntegerDirectedGraph;
 import utils.structures.fast.graph.FastIntegerGraph;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 
-public class FastIntegerPowerGraph
+public class FastIntegerPowerGraph implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -526,7 +527,7 @@ public class FastIntegerPowerGraph
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!lLine.isEmpty() && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("NODE\t"))
