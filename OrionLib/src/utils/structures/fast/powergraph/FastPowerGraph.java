@@ -29,9 +29,6 @@ import utils.structures.map.HashSetMap;
 
 public class FastPowerGraph<N extends Serializable> implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1;
 
 	FastIntegerPowerGraph mFastIntegerPowerGraph;
@@ -176,7 +173,7 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		return mFastIntegerPowerGraph.getPowerNodeChildrenOf(pPowerNodeId);
 	}
 
-	public N getPowerNode(final int pPowerNodeId)
+	public N getPowerNodeById(final int pPowerNodeId)
 	{
 		return mPowerNodeIdToPowerNodeList.get(pPowerNodeId);
 	}
@@ -246,8 +243,8 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		final ArrayList<Edge<N>> lPowerNodeList = new ArrayList<Edge<N>>(mFastIntegerPowerGraph.getNumberOfPowerEdges());
 		for (final int[] lEdgeArray : mFastIntegerPowerGraph.getPowerEdgeList())
 		{
-			final N first = getPowerNode(lEdgeArray[0]);
-			final N second = getPowerNode(lEdgeArray[1]);
+			final N first = getPowerNodeById(lEdgeArray[0]);
+			final N second = getPowerNodeById(lEdgeArray[1]);
 			final Edge lEdge = new Edge<N>(first, second);
 			lPowerNodeList.add(lEdge);
 		}
@@ -259,8 +256,8 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		final HashSet<Edge<N>> lPowerNodeList = new HashSet<Edge<N>>(mFastIntegerPowerGraph.getNumberOfPowerEdges());
 		for (final int[] lEdgeArray : mFastIntegerPowerGraph.getPowerEdgeList())
 		{
-			final N first = getPowerNode(lEdgeArray[0]);
-			final N second = getPowerNode(lEdgeArray[1]);
+			final N first = getPowerNodeById(lEdgeArray[0]);
+			final N second = getPowerNodeById(lEdgeArray[1]);
 			final Edge lEdge = new Edge<N>(first, second);
 			lPowerNodeList.add(lEdge);
 		}

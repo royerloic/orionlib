@@ -21,6 +21,7 @@ public class ConnectedComponents
 
 	public static final ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastIntegerPowerGraph pPowerGraph)
 	{
+			
 		final ArrayList<FastBoundedIntegerSet> lConnectedComponentList = new ArrayList<FastBoundedIntegerSet>();
 
 		final FastBoundedIntegerSet allpowernodes = pPowerGraph.getPowerNodeIdSet();
@@ -45,7 +46,8 @@ public class ConnectedComponents
 
 				for (final int lFrontierPowerNodeId : frontierpowernodes)
 				{
-					newfrontierpowernodes.union(pPowerGraph.getConnectedPowerNodeNeighbors(lFrontierPowerNodeId));
+					FastBoundedIntegerSet lConnectedPowerNodeNeighbors = pPowerGraph.getConnectedPowerNodeNeighbors(lFrontierPowerNodeId);
+					newfrontierpowernodes.union(lConnectedPowerNodeNeighbors);
 				}
 
 				newfrontierpowernodes.difference(componentpowernodes);
@@ -54,6 +56,8 @@ public class ConnectedComponents
 				frontierpowernodes = newfrontierpowernodes;
 				newfrontierpowernodes = temp;
 			}
+			
+			
 
 			componentpowernodes.remove(0);
 			lConnectedComponentList.add(componentpowernodes);
