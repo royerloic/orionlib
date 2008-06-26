@@ -48,15 +48,17 @@ public class SvgDocument
 		Writer out;
 		out = new FileWriter(pFile);
 		mSvgGenerator.stream(out, useCSS);
+		out.close();
 	}
 
-	public void writeToStream(OutputStream pOutputStream) throws SVGGraphics2DIOException
+	public void writeToStream(OutputStream pOutputStream) throws IOException
 	{
 		// UTF-8 encoding.
 		final boolean useCSS = true; // we want to use CSS style attributes
 		Writer out;
 		out = new OutputStreamWriter(pOutputStream);
 		mSvgGenerator.stream(out, useCSS);
+		out.close();
 	}
 
 }

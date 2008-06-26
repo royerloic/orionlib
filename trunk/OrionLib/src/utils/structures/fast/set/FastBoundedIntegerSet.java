@@ -1,6 +1,5 @@
 package utils.structures.fast.set;
 
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -729,7 +728,7 @@ public final class FastBoundedIntegerSet implements
 			i++;
 		}
 
-		int bit = pMin % 32;
+		int bit = i == pMin / 32 ? pMin % 32 : 0;
 		while ((elements[i] & 1 << bit) == 0 && bit < 32)
 		{
 			bit++;
@@ -756,7 +755,7 @@ public final class FastBoundedIntegerSet implements
 			i--;
 		}
 
-		int bit = pMax % 32;
+		int bit =  31;
 		while ((elements[i] & 1 << bit) == 0 && bit >= 0)
 		{
 			bit--;
