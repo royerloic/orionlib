@@ -1,11 +1,14 @@
 package utils.structures.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RingList<O>
+public class RingList<O> implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	List<O> mList = Collections.emptyList();
 
 	int mCursor = 0;
