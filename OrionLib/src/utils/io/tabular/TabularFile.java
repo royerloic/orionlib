@@ -134,7 +134,8 @@ public class TabularFile
 			final List<String> lHeaderList = lMatrix.get(0);
 			for (int index = 0; index < lHeaderList.size(); index++)
 			{
-				mIndexToNameMap.put(index, lHeaderList.get(index));
+				final String lColumnName = lHeaderList.get(index).replaceAll("//", "").trim();
+				mIndexToNameMap.put(index, lColumnName);
 			}
 		}
 		else
