@@ -8,110 +8,27 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferStrategy;
 import java.awt.image.VolatileImage;
 
 public class BufferingFrame extends Frame implements GraphicsProvider
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1787963798303348822L;
 
-	private VolatileImage mImage;
-	private volatile boolean painting;
+	private static final long serialVersionUID = 1L;
+	private Graphics2D mDrawGraphics;
 
-	public BufferingFrame() throws HeadlessException
-	{
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public BufferingFrame(final GraphicsConfiguration pGc)
-	{
-		super(pGc);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BufferingFrame(final String pTitle, final GraphicsConfiguration pGc)
-	{
-		super(pTitle, pGc);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BufferingFrame(final String pTitle) throws HeadlessException
+	public BufferingFrame(String pTitle)
 	{
 		super(pTitle);
-		// TODO Auto-generated constructor stub
+		this.setSize(800, 600);
+		this.setVisible(true);
+		this.createBufferStrategy(2);
 	}
 
-	@Override
-	public void update(final Graphics g)
+	public boolean isDecorated()
 	{
-		// System.out.println("update");
-		//paint(g);
-	}
-
-	@Override
-	public void paint(final Graphics pGraphics)
-	{
-		/*synchronized (this)
-		{
-			painting = true;
-			mypaint(pGraphics);
-			painting = false;
-		}/**/
-	}
-
-
-	public void mypaint(final Graphics pGraphics)
-	{
-		if (!checkOffscreenImage())
-			pGraphics.drawImage(mImage, 0, 0, null);
-	}
-
-	// True if the image has changed size
-	private boolean checkOffscreenImage()
-	{
-		final Dimension d = getSize();
-		if (mImage == null || mImage.getWidth(null) != d.width
-				|| mImage.getHeight(null) != d.height)
-		{
-			mImage = createVolatileImage(d.width, d.height);
-
-			return true;
-		}
-		else if (mImage.contentsLost())
-		{
-			mImage.validate(getGraphicsConfiguration());
-		}
-
-		return false;
-	}
-
-	public Graphics2D getDrawGraphics()
-	{
-		final Dimension d = getSize();
-		if (checkOffscreenImage())
-		{
-			// It's changed size: must actually redraw it.
-			final Graphics offG = mImage.getGraphics();
-			offG.setColor(getBackground());
-			offG.fillRect(0, 0, d.width, d.height);
-		}
-
-		Graphics2D lGraphics = (Graphics2D) mImage.getGraphics();
-		return lGraphics;
-	}
-
-	public void showGraphics()
-	{
-		if (!painting)
-			mypaint(getGraphics());
-	}
-
-	public Frame getFrame()
-	{
-		return this;
+		return !super.isUndecorated();
 	}
 
 	public Component getComponent()
@@ -119,8 +36,18 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		return this;
 	}
 
-	public boolean isDecorated()
+	public Graphics2D getDrawGraphics()
 	{
-		return !super.isUndecorated();
+		BufferStrategy lBufferStrategy = this.getBufferStrategy();
+		mDrawGraphics = (Graphics2D) lBufferStrategy.getDrawGraphics();
+		return mDrawGraphics;
+	}
+
+	public void showGraphics()
+	{
+		BufferStrategy lBufferStrategy = this.getBufferStrategy();
+		lBufferStrategy.show();		
+		Toolkit.getDefaultToolkit().sync();	
+		mDrawGraphics.dispose();
 	}
 }
