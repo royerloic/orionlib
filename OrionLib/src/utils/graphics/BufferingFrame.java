@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.image.VolatileImage;
 
 public class BufferingFrame extends Frame implements GraphicsProvider
 {
@@ -15,7 +16,9 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	 * 
 	 */
 	private static final long serialVersionUID = 1787963798303348822L;
-	private Image mImage;
+
+	private VolatileImage mImage;
+	private volatile boolean painting;
 
 	public BufferingFrame() throws HeadlessException
 	{
@@ -45,32 +48,25 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 	public void update(final Graphics g)
 	{
 		// System.out.println("update");
-		paint(g);
+		//paint(g);
 	}
 
-	// Buffering by painting into an offscreen image; the
-	// paintOffscreen method should be overridden.
 	@Override
-	public void paint(final Graphics g)
+	public void paint(final Graphics pGraphics)
 	{
-		// System.out.println("ApplicationFrameDB:paint");
-		// Clear the offscreen image.
-		final Dimension d = getSize();
-		if (checkOffscreenImage())
+		/*synchronized (this)
 		{
-			// It's changed size: must actually redraw it.
-			final Graphics offG = mImage.getGraphics();
-			offG.setColor(getBackground());
-			offG.fillRect(0, 0, d.width, d.height);
-			// Draw into the offscreen image.
-			paintOffscreen(mImage.getGraphics());
-		}
-		// Put the offscreen image on the screen.
-		g.drawImage(mImage, 0, 0, null);
+			painting = true;
+			mypaint(pGraphics);
+			painting = false;
+		}/**/
 	}
 
-	public void paintOffscreen(final Graphics g)
+
+	public void mypaint(final Graphics pGraphics)
 	{
+		if (!checkOffscreenImage())
+			pGraphics.drawImage(mImage, 0, 0, null);
 	}
 
 	// True if the image has changed size
@@ -80,9 +76,15 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 		if (mImage == null || mImage.getWidth(null) != d.width
 				|| mImage.getHeight(null) != d.height)
 		{
-			mImage = createImage(d.width, d.height);
+			mImage = createVolatileImage(d.width, d.height);
+
 			return true;
 		}
+		else if (mImage.contentsLost())
+		{
+			mImage.validate(getGraphicsConfiguration());
+		}
+
 		return false;
 	}
 
@@ -96,13 +98,15 @@ public class BufferingFrame extends Frame implements GraphicsProvider
 			offG.setColor(getBackground());
 			offG.fillRect(0, 0, d.width, d.height);
 		}
-		//return (Graphics2D) this.getDrawGraphics();
-		return (Graphics2D) mImage.getGraphics();
+
+		Graphics2D lGraphics = (Graphics2D) mImage.getGraphics();
+		return lGraphics;
 	}
 
 	public void showGraphics()
 	{
-		getGraphics().drawImage(mImage, 0, 0, null);
+		if (!painting)
+			mypaint(getGraphics());
 	}
 
 	public Frame getFrame()
