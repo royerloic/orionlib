@@ -1,20 +1,11 @@
 package utils.graphics;
 
-import java.awt.AWTException;
-import java.awt.BufferCapabilities;
-import java.awt.Canvas;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
-import java.awt.image.VolatileImage;
 
 import javax.swing.JFrame;
 

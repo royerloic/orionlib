@@ -24,6 +24,7 @@ import utils.wiimote.modes.MouseMode;
 import utils.wiimote.modes.PenMode;
 import utils.wiimote.modes.SlideShowMode;
 import utils.wiimote.modes.WiiMode;
+import utils.wiimote.modes.WiiServer;
 import wiiremotej.WiiRemote;
 import wiiremotej.WiiRemoteJ;
 import wiiremotej.event.WiiRemoteAdapter;
@@ -51,6 +52,7 @@ public class WiiTray extends WiiRemoteAdapter	implements
 			lModeList.add(new PenMode());
 			lModeList.add(new SlideShowMode());
 			lModeList.add(new GoogleEarthMode());
+			lModeList.add(new WiiServer());
 
 			new WiiTray(lParameters, lModeList);
 		}
