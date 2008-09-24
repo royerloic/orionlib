@@ -52,5 +52,8 @@
 	<classpathentry exported="true" kind="var" path="Jars/xml-apis.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/xstream-1.2.2.jar"/>
+	<classpathentry kind="var" path="Jars/sbbi-upnplib-1.0.4.jar"/>
+	<classpathentry kind="var" path="Jars/commons-jxpath-1.1.jar"/>
+	<classpathentry kind="var" path="Jars/sbbi-jmx-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
