@@ -75,7 +75,7 @@ public class GroovyService implements Service, Serializable
 		return mListening;
 	}
 
-	public String processInput(final String pInputLine)
+	public Object processInput(final String pInputLine)
 	{
 		if (authenticated || mGroovyServer.getPassword() == null)
 		{
@@ -96,7 +96,7 @@ public class GroovyService implements Service, Serializable
 		}
 	}
 
-	private String executeCommand(final String pInputLine)
+	private Object executeCommand(final String pInputLine)
 	{
 		mGroovyShell = new GroovyShell(	GroovyServer.class.getClassLoader(),
 																		mGroovyServer.getBinding());
@@ -111,12 +111,19 @@ public class GroovyService implements Service, Serializable
 
 		if (pInputLine.length() > 0)
 		{
-			String lAnswer;
+			Object lAnswer = null;
 			try
 			{
-				lAnswer = pInputLine + SocketThread.sEndofLine;
-				final String lString = mGroovyShell.evaluate(pInputLine).toString();
-				lAnswer += lString.toString();
+				if (pInputLine.endsWith("//asobject"))
+				{
+					lAnswer = mGroovyShell.evaluate(pInputLine);
+				}
+				else
+				{
+					lAnswer = pInputLine + SocketThread.sEndofLine;
+					final String lString = mGroovyShell.evaluate(pInputLine).toString();
+					lAnswer = ((String) lAnswer) + lString.toString();
+				}
 
 				/***********************************************************************
 				 * sCounter++; if (sCounter >= sCleanCycle) { // just to make sure that
@@ -133,9 +140,10 @@ public class GroovyService implements Service, Serializable
 				e.printStackTrace();
 			}
 
-			System.out.println(mSocket.getLocalSocketAddress() + "<'"
-													+ lAnswer.replaceAll("(\\n|\\r)+", "|")
-													+ "'");
+			if (lAnswer != null)
+				System.out.println(mSocket.getLocalSocketAddress() + "<'"
+														+ lAnswer.toString().replaceAll("(\\n|\\r)+", "|")
+														+ "'");
 			return lAnswer;
 		}
 		else
