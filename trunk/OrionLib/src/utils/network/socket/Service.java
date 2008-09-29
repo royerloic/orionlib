@@ -9,7 +9,7 @@ public interface Service
 
 	String getWelcomeMessage();
 
-	String processInput(String pInputLine);
+	Object processInput(String pInputLine);
 
 	String getShutdownCommand();
 
