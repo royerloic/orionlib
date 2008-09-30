@@ -12,9 +12,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -234,6 +236,8 @@ public class GroovyServer implements Runnable, Serializable
 		}
 	}
 
+	/*************************************************************************************/
+
 	public static Socket createLocalSocket() throws IOException
 	{
 		return createClientSocketAndConnect("localhost", 4444);
@@ -255,7 +259,11 @@ public class GroovyServer implements Runnable, Serializable
 		final int timeoutMs = 2000; // 2 seconds
 		lSocket.connect(sockaddr, timeoutMs);
 
-		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
+		OutputStream lOutputStream = lSocket.getOutputStream();
+		lOutputStream.flush();
+		InputStream lInputStream = lSocket.getInputStream();
+		
+		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(lInputStream));
 
 		final String lFirstLine = lBufferedReader.readLine();
 		if (lFirstLine.contains(GroovyService.sWelcomeMessage))
@@ -318,6 +326,22 @@ public class GroovyServer implements Runnable, Serializable
 
 		final Object lObject = binding.getVariable("obj");
 
+		return lObject;
+	}
+
+	public static Object sendQueryAsObject(	final Socket pSocket,
+																					final String pQuery) throws IOException,
+																															ClassNotFoundException
+	{
+		InputStream lInputStream = pSocket.getInputStream();
+		OutputStream lOutputStream = pSocket.getOutputStream();		
+		
+		final BufferedWriter lBufferedWriter = new BufferedWriter(new OutputStreamWriter(lOutputStream));
+		lBufferedWriter.write(pQuery+ "//asobject\r\n"/**/);
+		lBufferedWriter.flush();
+		
+		final ObjectInputStream lObjectInputStream = new ObjectInputStream(lInputStream);
+		final Object lObject = lObjectInputStream.readObject();
 		return lObject;
 	}
 

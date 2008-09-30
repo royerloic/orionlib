@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ import utils.network.groovyserver.GroovyServer;
 public class GroovyServerTest
 {
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test() throws IOException
 	{
@@ -23,6 +25,8 @@ public class GroovyServerTest
 			final GroovyServer lGroovyServer = new GroovyServer("password=123");
 
 			lGroovyServer.startServerNonBlocking();
+			
+			Thread.sleep(100);
 
 			final Socket lSocket = GroovyServer.createLocalSocket();
 
@@ -32,6 +36,10 @@ public class GroovyServerTest
 			// checking the sending of a query and the decoding:
 			assertTrue((String) GroovyServer.sendQueryAndDecode(lSocket,
 																													"a=\"hello\"") == "hello");
+
+			// send query and get answear as object:
+			assertTrue((Integer)GroovyServer.sendQueryAsObject(lSocket,"12")==12);
+			assertTrue(((Set<Integer>)GroovyServer.sendQueryAsObject(lSocket,"[1,2,3] as Set")).contains(1));
 
 			// saving session:
 			final String lResult = GroovyServer.sendQuery(lSocket,
