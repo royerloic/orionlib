@@ -26,7 +26,7 @@ public class SymetricFloatMatrixServerTest
 																																			6283);
 
 		Thread.sleep(500);
-		GroovyServer.sendQuery(lSocket, "matrix.init(14)");
+		GroovyServer.sendQueryGetString(lSocket, "matrix.init(14)");
 		Thread.sleep(100);
 		Object lObject = GroovyServer.sendQueryAndDecode(	lSocket,
 																											"matrix.get(1,2,3,4)");
