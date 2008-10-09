@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import utils.network.groovyserver.GroovyClient;
 import utils.network.groovyserver.GroovyServer;
 
 public class GroovyServerTest
@@ -28,21 +29,21 @@ public class GroovyServerTest
 			
 			Thread.sleep(100);
 
-			final Socket lSocket = GroovyServer.createLocalSocket();
+			final Socket lSocket = GroovyClient.createLocalSocket();
 
 			// sending password:
-			GroovyServer.sendQuery(lSocket, "123");
+			GroovyClient.sendQueryGetString(lSocket, "123");
 
 			// checking the sending of a query and the decoding:
-			assertTrue((String) GroovyServer.sendQueryAndDecode(lSocket,
+			assertTrue((String) GroovyClient.sendQueryAndDecode(lSocket,
 																													"a=\"hello\"") == "hello");
 
 			// send query and get answear as object:
-			assertTrue((Integer)GroovyServer.sendQueryAsObject(lSocket,"12")==12);
-			assertTrue(((Set<Integer>)GroovyServer.sendQueryAsObject(lSocket,"[1,2,3] as Set")).contains(1));
+			assertTrue((Integer)GroovyClient.sendQueryGetObject(lSocket,"12")==12);
+			assertTrue(((Set<Integer>)GroovyClient.sendQueryGetObject(lSocket,"[1,2,3] as Set")).contains(1));
 
 			// saving session:
-			final String lResult = GroovyServer.sendQuery(lSocket,
+			final String lResult = GroovyClient.sendQueryGetString(lSocket,
 																										"server.save(\"test\")");
 			assertEquals(lResult, "true");
 
@@ -50,11 +51,11 @@ public class GroovyServerTest
 			final GroovyServer lGroovyServer2 = new GroovyServer("port=5555 password=123");
 
 			// loading the previously saved session:
-			assertEquals(	GroovyServer.sendQuery(lSocket, "server.load(\"test\")"),
+			assertEquals(	GroovyClient.sendQueryGetString(lSocket, "server.load(\"test\")"),
 										"true");
 
 			// checking that the session was really saved:
-			assertTrue((String) GroovyServer.sendQueryAndDecode(lSocket, "a") == "hello");
+			assertTrue((String) GroovyClient.sendQueryAndDecode(lSocket, "a") == "hello");
 		}
 		catch (final Throwable e)
 		{
