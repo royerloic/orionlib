@@ -34,20 +34,20 @@ public class FileTransferTest
 			lOriginalFile = File.createTempFile("FileTransferTest", "lOriginalFile");
 
 			StringBuffer buffer = new StringBuffer();
-			for (int i = 0; i < 1000000; i++)
+			for (int i = 0; i < 250000; i++)
 				buffer.append("helloworld");
 			FileToString.write(buffer.toString(), lOriginalFile);
 
 			FileSender lFileSender = new FileSender(lOriginalFile);
 
-			System.out.println(lFileSender.getFileName());
-			System.out.println(lFileSender.getFileLength());
-			System.out.println(lFileSender.getNumberOfChunks());
-			assertTrue(lFileSender.getNumberOfChunks() == 10);
-			System.out.println(Arrays.toString(lFileSender.getCRC32Array()));
+			// System.out.println(lFileSender.getFileName());
+			// System.out.println(lFileSender.getFileLength());
+			// System.out.println(lFileSender.getNumberOfChunks());
+			assertEquals(3, lFileSender.getNumberOfChunks());
+			// System.out.println(Arrays.toString(lFileSender.getCRC32Array()));
 
 			Chunk lChunk = lFileSender.sendChunk(0);
-			System.out.println(lChunk);
+			// System.out.println(lChunk);
 			assertTrue(lChunk.mChunkIndex == 0);
 
 			File lFolder = File.createTempFile("FileTransferTest", "lFolder");
@@ -55,13 +55,20 @@ public class FileTransferTest
 			lFolder.mkdir();
 			FileReceiver lFileReceiver = new FileReceiver(lFolder, lFileSender);
 
-			for (int i = 0; i < lFileSender.getNumberOfChunks(); i++)
+			assertEquals(0, lFileReceiver.searchFirstMissingChunk());
+
+			int i = 0;
+			while ((i = lFileReceiver.searchFirstMissingChunk()) >= 0)
+			{
 				lFileReceiver.getChunk(lFileSender.sendChunk(i));
+			}
 
 			String lStringRead = FileToString.read(lFileReceiver.getReceivedFile());
 			assertTrue(lStringRead.startsWith(buffer.toString()));
-			System.out.println(lFileReceiver.getReceivedFile().getPath());
-			
+			// System.out.println(lFileReceiver.getReceivedFile().getPath());
+
+			assertTrue(lFileReceiver.checkfile());
+
 			lFileSender.close();
 			lFileReceiver.close();
 
