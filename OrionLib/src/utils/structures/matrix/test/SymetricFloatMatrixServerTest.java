@@ -7,7 +7,7 @@ import java.net.Socket;
 
 import org.junit.Test;
 
-import utils.network.groovyserver.GroovyServer;
+import utils.network.groovyserver.GroovyClient;
 import utils.structures.matrix.SymetricFloatMatrixServer;
 
 public class SymetricFloatMatrixServerTest
@@ -22,19 +22,19 @@ public class SymetricFloatMatrixServerTest
 
 		lSymetricFloatMatrixServer.startServerNonBlocking();
 
-		final Socket lSocket = GroovyServer.createClientSocketAndConnect(	"localhost",
+		final Socket lSocket = GroovyClient.createClientSocketAndConnect(	"localhost",
 																																			6283);
 
 		Thread.sleep(500);
-		GroovyServer.sendQueryGetString(lSocket, "matrix.init(14)");
+		GroovyClient.sendQueryGetString(lSocket, "matrix.init(14)");
 		Thread.sleep(100);
-		Object lObject = GroovyServer.sendQueryAndDecode(	lSocket,
+		Object lObject = GroovyClient.sendQueryAndDecode(	lSocket,
 																											"matrix.get(1,2,3,4)");
 
 		assertEquals(	lObject.toString(),
 									"[[0.0], [0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]");
 
-		lObject = GroovyServer.sendQueryAndDecode(lSocket, "matrix.set(11,12,3f)");
+		lObject = GroovyClient.sendQueryAndDecode(lSocket, "matrix.set(11,12,3f)");
 	}
 
 }

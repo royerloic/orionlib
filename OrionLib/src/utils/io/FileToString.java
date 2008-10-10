@@ -6,6 +6,7 @@ package utils.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -31,4 +32,13 @@ public class FileToString
 		}
 		return sb.toString();
 	}
+
+	public static void write(final String pString, final File pFile) throws IOException
+	{
+		FileWriter out = new FileWriter(pFile);
+		out.write(pString);
+		out.close();
+	}
+	
+	
 }

@@ -11,7 +11,7 @@ import utils.bioinformatics.genome.FastaSequence;
 import utils.bioinformatics.genome.FastaSet;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.Genome;
-import utils.io.SerializationUtils;
+import utils.io.serialization.SerializationUtils;
 import utils.structures.graph.Edge;
 import utils.structures.graph.Graph;
 import utils.structures.graph.HashGraph;
