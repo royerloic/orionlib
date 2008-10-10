@@ -76,9 +76,6 @@ public class FileSender implements Serializable
 		mRandomAccessFile.seek(lChunk.mChunkStart);
 		lChunk.mChunkLength = mRandomAccessFile.read(array);
 		lChunk.mArray = array;
-		CRC32 lCRC32 = new CRC32();
-		lCRC32.update(array, 0, lChunk.mChunkLength);
-		lChunk.mCRC32 = lCRC32.getValue();
 
 		return lChunk;
 	}
