@@ -54,12 +54,12 @@ public final class FastBoundedIntegerSet implements
 		max = pMax;
 	}
 
-	public FastBoundedIntegerSet(final FastBoundedIntegerSet pFastSparseIntegerSet)
+	public FastBoundedIntegerSet(final FastBoundedIntegerSet pFastBoundedIntegerSet)
 	{
-		elements = Arrays.copyOf(	pFastSparseIntegerSet.elements,
-															pFastSparseIntegerSet.elements.length);
-		min = pFastSparseIntegerSet.min;
-		max = pFastSparseIntegerSet.max;
+		elements = Arrays.copyOf(	pFastBoundedIntegerSet.elements,
+		                         	pFastBoundedIntegerSet.elements.length);
+		min = pFastBoundedIntegerSet.min;
+		max = pFastBoundedIntegerSet.max;
 		sizeOutOfDate = true;
 	}
 

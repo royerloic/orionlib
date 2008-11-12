@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import utils.structures.fast.set.FastBoundedIntegerSet;
 import utils.structures.fast.set.FastSparseIntegerSet;
 
 public class FastGraph<N> implements Serializable
@@ -37,7 +38,7 @@ public class FastGraph<N> implements Serializable
 		super();
 	}
 
-	protected FastIntegerGraph getUnderlyingFastIntegerGraph()
+	public FastIntegerGraph getUnderlyingFastIntegerGraph()
 	{
 		return mFastIntegerGraph;
 	}
@@ -169,6 +170,25 @@ public class FastGraph<N> implements Serializable
 		return lEdgeSet;
 	}
 
+	public ArrayList<N> getNodeNeighbours(final N pNode)
+	{
+		int lNodeId = mNameToNodeMap.get(pNode);
+		FastBoundedIntegerSet lNeighboursIntegerIds = getUnderlyingFastIntegerGraph()	.getNodeNeighbours(lNodeId);
+		return getNodesForIntegers(lNeighboursIntegerIds.toIntArray());
+	}
+
+	/**
+	 * Does not includes node itself, even if it is a neighbours of one of its
+	 * neighnboors.
+	 */
+	public ArrayList<N> getNodeNeighbours(final int pNode, final int pDepth)
+	{
+		int lNodeId = mNameToNodeMap.get(pNode);
+		FastBoundedIntegerSet lNeighboursIntegerIds = getUnderlyingFastIntegerGraph()	.getNodeNeighbours(	lNodeId,
+																																																			pDepth);
+		return getNodesForIntegers(lNeighboursIntegerIds.toIntArray());
+	}
+
 	public void writeEdgeFile(final File pFile) throws IOException
 	{
 		writeEdgeFile(new FileOutputStream(pFile));
@@ -214,14 +234,15 @@ public class FastGraph<N> implements Serializable
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length() == 0) && !lLine.startsWith("#")
+					&& !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("EDGEFORMAT\t"))
 				{
 					nodeindex1 = Integer.parseInt(lArray[1]);
 					nodeindex2 = Integer.parseInt(lArray[2]);
-					if (lArray.length >= 4 && !(lArray[3].length()==0))
+					if (lArray.length >= 4 && !(lArray[3].length() == 0))
 					{
 						confindex = Integer.parseInt(lArray[3]);
 					}
