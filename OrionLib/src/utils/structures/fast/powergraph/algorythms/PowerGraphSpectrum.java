@@ -7,10 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
+import utils.structures.fast.graph.Edge;
+import utils.structures.fast.powergraph.FastPowerGraph;
 import utils.structures.map.IntegerHashMap;
 
 public class PowerGraphSpectrum
@@ -30,6 +33,92 @@ public class PowerGraphSpectrum
 	public static double[][] getSpectrumFromBblStream(final InputStream pInputStream)	throws FileNotFoundException,
 																																										IOException
 	{
+		FastPowerGraph<String> lPowerGraph = FastPowerGraph.readBblStream(pInputStream);
+
+		ArrayList<Edge<String>> lPowerEdgeList = lPowerGraph.getPowerEdgeList();
+
+		System.out.println(lPowerEdgeList);
+
+		ArrayList<int[]> lEdgeSizeList = new ArrayList<int[]>();
+
+		for (Edge<String> lEdge : lPowerEdgeList)
+		{
+			String lFirstNode = lEdge.getFirstNode();
+			String lSecondNode = lEdge.getSecondNode();
+			Integer lFirstPowerNodeId = lPowerGraph.getPowerNodeId(lFirstNode);
+			Integer lSecondPowerNodeId = lPowerGraph.getPowerNodeId(lSecondNode);
+			int lFirstPowerNodeSize = lPowerGraph.getPowerNodeSize(lFirstPowerNodeId);
+			int lSecondPowerNodeSize = lPowerGraph.getPowerNodeSize(lSecondPowerNodeId);
+			lEdgeSizeList.add(new int[]
+			{ lFirstPowerNodeSize, lSecondPowerNodeSize });
+
+		}
+
+		int lMax = 0;
+		for (final int[] lEdgeSize : lEdgeSizeList)
+		{
+			lMax = Math.max(lMax, Math.max(lEdgeSize[0], lEdgeSize[1]));
+		}
+
+		final double[][] lMatrix = new double[lMax + 1][lMax + 1];
+
+		for (final int[] lEdgeSize : lEdgeSizeList)
+			if (lEdgeSize[0] == lEdgeSize[1])
+			{
+				lMatrix[lEdgeSize[0]][lEdgeSize[0]] += 1;
+			}
+			else
+			{
+				lMatrix[lEdgeSize[0]][lEdgeSize[1]] += 1;
+				lMatrix[lEdgeSize[1]][lEdgeSize[0]] += 1;
+			}
+
+		return lMatrix;
+	}
+
+	public static void writeSpectrumToFile(double[][] pMatrix, File pFile)
+	{
+		for (int i = 1; i < pMatrix.length; i++)
+		{
+			for (int j = 1; j < pMatrix.length; j++)
+			{
+				System.out.print(i + "\t" + j + "\t" + pMatrix[i][j] + "\n");
+			}
+		}
+	}
+
+	public static StringBuffer writeSpectrumToString(double[][] pMatrix)
+	{
+		StringBuffer lStringBuffer = new StringBuffer();
+		for (int i = 1; i < pMatrix.length; i++)
+		{
+			for (int j = 1; j < pMatrix.length; j++)
+			{
+				lStringBuffer.append(i + "\t" + j + "\t" + pMatrix[i][j] + "\n");
+			}
+		}
+		return lStringBuffer;
+	}
+
+	public static StringBuffer writeFilteredSpectrumToString(	double[][] pMatrix,
+																														int pMinSize,
+																														int pMinCount)
+	{
+		StringBuffer lStringBuffer = new StringBuffer();
+		for (int i = pMinSize; i < pMatrix.length; i++)
+			for (int j = pMinSize; j < pMatrix.length; j++)
+				if (pMatrix[i][j] >= pMinCount)
+				{
+					lStringBuffer.append(i + "\t" + j + "\t" + pMatrix[i][j] + "\n");
+				}
+
+		return lStringBuffer;
+	}
+
+	/**************************************************************************************/
+	public static double[][] getSpectrumFromBblStreamOld(final InputStream pInputStream) throws FileNotFoundException,
+																																											IOException
+	{
 		final HashSet<String> lNodeSet = new HashSet<String>();
 		final HashSet<String> lPowerNodeSet = new HashSet<String>();
 		final HashSet<String[]> lInSet = new HashSet<String[]>();
@@ -43,7 +132,8 @@ public class PowerGraphSpectrum
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length() == 0) && !lLine.startsWith("#")
+					&& !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine);
 
@@ -118,13 +208,13 @@ public class PowerGraphSpectrum
 			lMatrix[lSize2][lSize1] += 1;
 		}
 
-		for (int i = 1; i <= 16; i++)
+		/*for (int i = 1; i <= 16; i++)
 		{
 			for (int j = 1; j <= 16; j++)
 			{
 				System.out.print(i + "\t" + j + "\t" + lMatrix[i][j] + "\n");
 			}
-		}
+		}/**/
 
 		return lMatrix;
 
@@ -148,7 +238,8 @@ public class PowerGraphSpectrum
 		String lLine = null;
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length() == 0) && !lLine.startsWith("#")
+					&& !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine);
 

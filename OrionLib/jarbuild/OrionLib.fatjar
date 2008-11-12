@@ -1,5 +1,5 @@
 #Fat Jar Configuration File
-#Mon Sep 22 14:20:54 CEST 2008
+#Thu Oct 30 16:35:20 CET 2008
 onejar.license.required=false
 manifest.classpath=
 manifest.removesigners=true
@@ -10,5 +10,5 @@ manifest.mainclass=
 manifest.file=<createnew>
 jarname.isextern=false
 onejar.expand=
-excludes=<jar|informa-0.6.0.jar>;<jar|rt.1.5.jar>
+excludes=<jar|informa-0.6.0.jar>
 includes=
