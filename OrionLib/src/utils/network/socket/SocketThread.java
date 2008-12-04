@@ -32,8 +32,7 @@ public class SocketThread extends Thread
 		try
 		{
 			OutputStream lOutputStream = mSocket.getOutputStream();
-			
-			
+
 			final PrintWriter out = new PrintWriter(lOutputStream, true);
 			final BufferedReader in = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
 
@@ -59,12 +58,13 @@ public class SocketThread extends Thread
 				}
 				else
 				{
-					// Really tricky stuff here: you must create the output stream right where you need it...
+					// Really tricky stuff here: you must create the output stream right
+					// where you need it...
 					ObjectOutputStream lObjectOutputStream = new ObjectOutputStream(lOutputStream);
 					lObjectOutputStream.writeObject(lObject);
 					lObjectOutputStream.flush();
 				}
-				
+
 			}
 
 			mService.onDisconnection();

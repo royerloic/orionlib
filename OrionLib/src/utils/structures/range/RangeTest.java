@@ -155,123 +155,133 @@ public class RangeTest
 	 *       List<Range> ranges = new ArrayList<Range>();
 	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(2,
-	 * ranges.get(0).getStart()); Assert.assertEquals(3, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(2,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(3,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAddInBetween() { final Range docRange = new Range(2);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(1)); ranges.add(new Range(3));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(4, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(4,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAddBefore() { final Range docRange = new Range(2);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(3));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(2,
-	 * ranges.get(0).getStart()); Assert.assertEquals(4, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(2,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(4,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAddAfter() { final Range docRange = new Range(2);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(1));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(3, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(3,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * @Test public void testAddExisting() { final Range docRange = new Range(1);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(1));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(2, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(2,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAppendNew() { final Range docRange = new Range(3);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(1));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(2, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(2, ranges.get(0).getEnd());
+	 *       Assert.assertEquals(2, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(2,
+	 *       ranges.get(0).getEnd());
 	 * 
-	 * Assert.assertEquals(3, ranges.get(1).getStart()); Assert.assertEquals(4,
-	 * ranges.get(1).getEnd()); }
+	 *       Assert.assertEquals(3, ranges.get(1).getStart());
+	 *       Assert.assertEquals(4, ranges.get(1).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testInsertNew() { final Range docRange = new Range(1);
 	 *       final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
 	 *       Range(3));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(2, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(2, ranges.get(0).getEnd());
+	 *       Assert.assertEquals(2, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(2,
+	 *       ranges.get(0).getEnd());
 	 * 
-	 * Assert.assertEquals(3, ranges.get(1).getStart()); Assert.assertEquals(4,
-	 * ranges.get(1).getEnd()); }
+	 *       Assert.assertEquals(3, ranges.get(1).getStart());
+	 *       Assert.assertEquals(4, ranges.get(1).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAddSuperRange() { final Range docRange = new Range(1,
-	 *       5); final List<Range> ranges = new ArrayList<Range>();
-	 *       ranges.add(new Range(2, 3));
+	 *       5); final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
+	 *       Range(2, 3));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(6, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(6,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testAddSubRange() { final Range docRange = new Range(2,
-	 *       3); final List<Range> ranges = new ArrayList<Range>();
-	 *       ranges.add(new Range(1, 5));
+	 *       3); final List<Range> ranges = new ArrayList<Range>(); ranges.add(new
+	 *       Range(1, 5));
 	 * 
-	 * Range.addDocRange(ranges, docRange);
+	 *       Range.addDocRange(ranges, docRange);
 	 * 
-	 * Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
-	 * ranges.get(0).getStart()); Assert.assertEquals(6, ranges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, ranges.size()); Assert.assertEquals(1,
+	 *       ranges.get(0).getStart()); Assert.assertEquals(6,
+	 *       ranges.get(0).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testMergeSuperAndSubRanges() { final List<Range>
 	 *       subRanges = new ArrayList<Range>(); subRanges.add(new Range(2, 3));
 	 * 
-	 * final List<Range> superRanges = new ArrayList<Range>();
-	 * superRanges.add(new Range(1, 5));
+	 *       final List<Range> superRanges = new ArrayList<Range>();
+	 *       superRanges.add(new Range(1, 5));
 	 * 
-	 * Range.mergeBaseWithUpdate(superRanges, subRanges);
+	 *       Range.mergeBaseWithUpdate(superRanges, subRanges);
 	 * 
-	 * Assert.assertEquals(1, superRanges.size()); Assert.assertEquals(1,
-	 * superRanges.get(0).getStart()); Assert.assertEquals(6,
-	 * superRanges.get(0).getEnd()); }
+	 *       Assert.assertEquals(1, superRanges.size()); Assert.assertEquals(1,
+	 *       superRanges.get(0).getStart()); Assert.assertEquals(6,
+	 *       superRanges.get(0).getEnd()); }
 	 * 
 	 * 
-	 * @Test public void testMergeOddAndEvenRanges() { final List<Range>
-	 *       oddRanges = new ArrayList<Range>(); oddRanges.add(new Range(1));
+	 * @Test public void testMergeOddAndEvenRanges() { final List<Range> oddRanges
+	 *       = new ArrayList<Range>(); oddRanges.add(new Range(1));
 	 *       oddRanges.add(new Range(3));
 	 * 
-	 * final List<Range> evenRanges = new ArrayList<Range>(); evenRanges.add(new
-	 * Range(2)); evenRanges.add(new Range(4)); evenRanges.add(new Range(6));
+	 *       final List<Range> evenRanges = new ArrayList<Range>();
+	 *       evenRanges.add(new Range(2)); evenRanges.add(new Range(4));
+	 *       evenRanges.add(new Range(6));
 	 * 
-	 * Range.mergeBaseWithUpdate(oddRanges, evenRanges);
+	 *       Range.mergeBaseWithUpdate(oddRanges, evenRanges);
 	 * 
-	 * Assert.assertEquals(2, oddRanges.size()); Assert.assertEquals(1,
-	 * oddRanges.get(0).getStart()); Assert.assertEquals(5,
-	 * oddRanges.get(0).getEnd());
+	 *       Assert.assertEquals(2, oddRanges.size()); Assert.assertEquals(1,
+	 *       oddRanges.get(0).getStart()); Assert.assertEquals(5,
+	 *       oddRanges.get(0).getEnd());
 	 * 
-	 * Assert.assertEquals(6, oddRanges.get(1).getStart()); Assert.assertEquals(7,
-	 * oddRanges.get(1).getEnd()); }
+	 *       Assert.assertEquals(6, oddRanges.get(1).getStart());
+	 *       Assert.assertEquals(7, oddRanges.get(1).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testDocRangesExtraction() { final List<Integer> docIDs =
@@ -279,50 +289,54 @@ public class RangeTest
 	 *       Integer(3)); docIDs.add(new Integer(5)); docIDs.add(new Integer(6));
 	 *       docIDs.add(new Integer(7)); docIDs.add(new Integer(9));
 	 * 
-	 * final List<Range> docRanges = Range.buildRanges(docIDs);
+	 *       final List<Range> docRanges = Range.buildRanges(docIDs);
 	 * 
-	 * Assert.assertEquals(4, docRanges.size());
+	 *       Assert.assertEquals(4, docRanges.size());
 	 * 
-	 * Assert.assertEquals(1, docRanges.get(0).getStart()); Assert.assertEquals(2,
-	 * docRanges.get(0).getEnd());
+	 *       Assert.assertEquals(1, docRanges.get(0).getStart());
+	 *       Assert.assertEquals(2, docRanges.get(0).getEnd());
 	 * 
-	 * Assert.assertEquals(3, docRanges.get(1).getStart()); Assert.assertEquals(4,
-	 * docRanges.get(1).getEnd());
+	 *       Assert.assertEquals(3, docRanges.get(1).getStart());
+	 *       Assert.assertEquals(4, docRanges.get(1).getEnd());
 	 * 
-	 * Assert.assertEquals(5, docRanges.get(2).getStart()); Assert.assertEquals(8,
-	 * docRanges.get(2).getEnd());
+	 *       Assert.assertEquals(5, docRanges.get(2).getStart());
+	 *       Assert.assertEquals(8, docRanges.get(2).getEnd());
 	 * 
-	 * Assert.assertEquals(9, docRanges.get(3).getStart());
-	 * Assert.assertEquals(10, docRanges.get(3).getEnd()); }
+	 *       Assert.assertEquals(9, docRanges.get(3).getStart());
+	 *       Assert.assertEquals(10, docRanges.get(3).getEnd()); }
 	 * 
 	 * 
 	 * @Test public void testSearchForSubRange() { final List<Range> ranges = new
 	 *       ArrayList<Range>(); ranges.add(new Range(1, 2)); ranges.add(new
 	 *       Range(5));
 	 * 
-	 * final Range subRange1 = new Range(1);
+	 *       final Range subRange1 = new Range(1);
 	 * 
-	 * final Range subRange2 = new Range(2);
+	 *       final Range subRange2 = new Range(2);
 	 * 
-	 * final Range subRange3 = new Range(5);
+	 *       final Range subRange3 = new Range(5);
 	 * 
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, subRange1));
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, subRange2));
+	 *       Assert.assertEquals(0, Range.getNearestRangeIndex(ranges,
+	 *       subRange1)); Assert.assertEquals(0,
+	 *       Range.getNearestRangeIndex(ranges, subRange2));
 	 * 
-	 * Assert.assertEquals(1, Range.getNearestRangeIndex(ranges, subRange3)); }
+	 *       Assert.assertEquals(1, Range.getNearestRangeIndex(ranges,
+	 *       subRange3)); }
 	 * 
 	 * 
-	 * @Test public void testSearchForContiguousRange() { final List<Range>
-	 *       ranges = new ArrayList<Range>(); ranges.add(new Range(1, 2));
-	 *       ranges.add(new Range(5));
+	 * @Test public void testSearchForContiguousRange() { final List<Range> ranges
+	 *       = new ArrayList<Range>(); ranges.add(new Range(1, 2)); ranges.add(new
+	 *       Range(5));
 	 * 
-	 * final Range contRange1 = new Range(0); final Range contRange2 = new
-	 * Range(3); final Range contRange3 = new Range(6);
+	 *       final Range contRange1 = new Range(0); final Range contRange2 = new
+	 *       Range(3); final Range contRange3 = new Range(6);
 	 * 
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, contRange1));
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, contRange2));
+	 *       Assert.assertEquals(0, Range.getNearestRangeIndex(ranges,
+	 *       contRange1)); Assert.assertEquals(0,
+	 *       Range.getNearestRangeIndex(ranges, contRange2));
 	 * 
-	 * Assert.assertEquals(1, Range.getNearestRangeIndex(ranges, contRange3)); }
+	 *       Assert.assertEquals(1, Range.getNearestRangeIndex(ranges,
+	 *       contRange3)); }
 	 * 
 	 * 
 	 * @Test public void testSearchingForSuperRange() { final List<Range> ranges =
@@ -331,49 +345,54 @@ public class RangeTest
 	 *       ranges.add(new Range(1083)); ranges.add(new Range(1637));
 	 *       ranges.add(new Range(4354));
 	 * 
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, new Range(426,
-	 * 432 - 426 + 1))); }
+	 *       Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, new
+	 *       Range(426, 432 - 426 + 1))); }
 	 * 
 	 * 
 	 * @Test public void testSearchForNonExistingRange1() { final List<Range>
 	 *       ranges = new ArrayList<Range>(); ranges.add(new Range(2));
 	 *       ranges.add(new Range(6));
 	 * 
-	 * final Range contRange1 = new Range(0); final Range contRange2 = new
-	 * Range(4); final Range contRange3 = new Range(90);
+	 *       final Range contRange1 = new Range(0); final Range contRange2 = new
+	 *       Range(4); final Range contRange3 = new Range(90);
 	 * 
-	 * Assert.assertEquals(0, Range.getNearestRangeIndex(ranges, contRange1));
+	 *       Assert.assertEquals(0, Range.getNearestRangeIndex(ranges,
+	 *       contRange1));
 	 * 
-	 * Assert.assertEquals(1, Range.getNearestRangeIndex(ranges, contRange2));
-	 * Assert.assertEquals(2, Range.getNearestRangeIndex(ranges, contRange3)); }
+	 *       Assert.assertEquals(1, Range.getNearestRangeIndex(ranges,
+	 *       contRange2)); Assert.assertEquals(2,
+	 *       Range.getNearestRangeIndex(ranges, contRange3)); }
 	 * 
 	 * 
 	 * @Test public void testSearchForNonExistingRange2() { final List<Range>
 	 *       ranges = new ArrayList<Range>(); ranges.add(new Range(2));
 	 *       ranges.add(new Range(6)); ranges.add(new Range(8));
 	 * 
-	 * final Range contRange = new Range(4);
+	 *       final Range contRange = new Range(4);
 	 * 
-	 * Assert.assertEquals(1, Range.getNearestRangeIndex(ranges, contRange)); }
+	 *       Assert.assertEquals(1, Range.getNearestRangeIndex(ranges,
+	 *       contRange)); }
 	 * 
 	 * 
 	 * @Test public void testCrashMergeEmptyAndChild() { final List<Range>
-	 *       childList = new ArrayList<Range>(); for (int i = 1; i < 100000; i =
-	 *       i + 2) { childList.add(new Range(i)); } final List<Range> empty =
-	 *       new ArrayList<Range>(); // long start = System.currentTimeMillis();
+	 *       childList = new ArrayList<Range>(); for (int i = 1; i < 100000; i = i
+	 *       + 2) { childList.add(new Range(i)); } final List<Range> empty = new
+	 *       ArrayList<Range>(); // long start = System.currentTimeMillis();
 	 *       Range.mergeBaseWithUpdate(empty, childList); // long end =
 	 *       System.currentTimeMillis(); //
-	 *       System.out.println("testCrashMergeEmptyAndChild took "+(end-start)); }
+	 *       System.out.println("testCrashMergeEmptyAndChild took "+(end-start));
+	 *       }
 	 * 
 	 * 
 	 * @Test public void testCrashMergeParentAndChild() { final List<Range>
 	 *       childList = new ArrayList<Range>(); final List<Range> parentList =
 	 *       new ArrayList<Range>(); for (int i = 1; i < 100000; i = i + 2) {
-	 *       childList.add(new Range(i)); } for (int i = 1; i < 100000; i = i + 7) {
-	 *       parentList.add(new Range(i)); } // long start =
+	 *       childList.add(new Range(i)); } for (int i = 1; i < 100000; i = i + 7)
+	 *       { parentList.add(new Range(i)); } // long start =
 	 *       System.currentTimeMillis(); Range.mergeBaseWithUpdate(parentList,
 	 *       childList); // long end = System.currentTimeMillis(); //
-	 *       System.out.println("testCrashMergeEmptyAndChild took "+(end-start)); } /
+	 *       System.out.println("testCrashMergeEmptyAndChild took "+(end-start));
+	 *       } /
 	 ****************************************************************************/
 
 	@Test

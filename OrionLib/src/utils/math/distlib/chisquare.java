@@ -31,13 +31,13 @@ public class chisquare
 	 * The density of the chi-squared disribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(final double x, final double df)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return gamma.density(x, df / 2.0, 2.0);
 	}
 
@@ -67,7 +67,7 @@ public class chisquare
 	 * The disribution function of the chi-squared distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double x, final double df)
 	{
@@ -100,7 +100,7 @@ public class chisquare
 	 * The quantile function of the chi-squared distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double p, final double df)
 	{
@@ -137,14 +137,14 @@ public class chisquare
 	 * Calls rgamma to do the real work.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double df, final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(df) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		df <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");

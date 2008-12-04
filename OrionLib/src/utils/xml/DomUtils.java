@@ -45,8 +45,7 @@ public final class DomUtils
 	};
 
 	/**
-	 * Returns a sub node of <code>pNode</code> given its name
-	 * <code>pName</code>.
+	 * Returns a sub node of <code>pNode</code> given its name <code>pName</code>.
 	 * 
 	 * @param pNode
 	 * @param pName

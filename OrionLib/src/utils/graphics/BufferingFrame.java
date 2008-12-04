@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 public class BufferingFrame extends JFrame implements GraphicsProvider
 {
 
-
 	private static final long serialVersionUID = 1L;
 	private Graphics2D mDrawGraphics;
 	private BufferStrategy mBufferStrategy;
@@ -54,7 +53,7 @@ public class BufferingFrame extends JFrame implements GraphicsProvider
 	{
 		return this;
 	}
-	
+
 	private void validate(java.lang.IllegalStateException e)
 	{
 		System.out.println("Switched screen, buffer configuration not valid anymore:");
@@ -65,7 +64,7 @@ public class BufferingFrame extends JFrame implements GraphicsProvider
 
 	public Graphics2D getDrawGraphics()
 	{
-		mDrawGraphics=null;
+		mDrawGraphics = null;
 		try
 		{
 			mDrawGraphics = (Graphics2D) mBufferStrategy.getDrawGraphics();
@@ -76,8 +75,6 @@ public class BufferingFrame extends JFrame implements GraphicsProvider
 		}
 		return mDrawGraphics;
 	}
-	
-
 
 	public void showGraphics()
 	{
@@ -94,6 +91,6 @@ public class BufferingFrame extends JFrame implements GraphicsProvider
 		{
 			mDrawGraphics.dispose();
 		}
-		
+
 	}
 }

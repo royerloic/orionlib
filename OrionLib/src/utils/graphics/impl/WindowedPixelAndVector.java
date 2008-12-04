@@ -625,7 +625,7 @@ public class WindowedPixelAndVector implements IOrionGraphics
 
 	public void dispose()
 	{
-		mFrame.dispose();		
+		mFrame.dispose();
 	}
 
 	public boolean isDecorated()

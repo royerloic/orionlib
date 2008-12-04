@@ -20,7 +20,7 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	im
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.MapMap#put(java.lang.Object,
-	 *      java.lang.Object, java.lang.Object)
+	 * java.lang.Object, java.lang.Object)
 	 */
 	public V put(final K1 pKey1, final K2 pKey2, final K3 pKey3, final V pValue)
 	{
@@ -63,7 +63,7 @@ public class HashMap3<K1, K2, K3, V> extends HashMap<K1, Map<K2, Map<K3, V>>>	im
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.MapMap#get(java.lang.Object,
-	 *      java.lang.Object)
+	 * java.lang.Object)
 	 */
 	public V get(final K1 pKey1, final K2 pKey2, final K2 pKey3)
 	{

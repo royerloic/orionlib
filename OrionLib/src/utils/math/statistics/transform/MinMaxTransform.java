@@ -5,7 +5,10 @@ import java.io.Serializable;
 import utils.math.statistics.MinMax;
 import utils.math.statistics.Statistic;
 
-public class MinMaxTransform implements Statistic<double[]>,Transform,Serializable
+public class MinMaxTransform implements
+														Statistic<double[]>,
+														Transform,
+														Serializable
 {
 
 	MinMax mMinMax = new MinMax();
@@ -36,7 +39,7 @@ public class MinMaxTransform implements Statistic<double[]>,Transform,Serializab
 		final double[] lMinMaxArray = mMinMax.getStatistic();
 		final double lMin = lMinMaxArray[0];
 		final double lMax = lMinMaxArray[1];
-		final double lTransformedValue = (pValue-lMin)/(lMax-lMin);
+		final double lTransformedValue = (pValue - lMin) / (lMax - lMin);
 		return lTransformedValue;
 	}
 
@@ -45,7 +48,7 @@ public class MinMaxTransform implements Statistic<double[]>,Transform,Serializab
 		final double[] lMinMaxArray = mMinMax.getStatistic();
 		final double lMin = lMinMaxArray[0];
 		final double lMax = lMinMaxArray[1];
-		return lMax-lMin;
+		return lMax - lMin;
 	}
 
 }

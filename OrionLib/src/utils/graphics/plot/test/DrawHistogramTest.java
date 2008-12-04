@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-import org.junit.Test;
-
 import utils.graphics.plot.DrawHistogram;
 import utils.graphics.util.ViewImage;
 import utils.math.statistics.Histogram;
@@ -14,7 +12,7 @@ import utils.math.statistics.Histogram;
 public class DrawHistogramTest
 {
 
-	@Test
+	// @Test
 	public void HistogramTest() throws IOException, InterruptedException
 	{
 		Histogram lHistogram = new Histogram(20);

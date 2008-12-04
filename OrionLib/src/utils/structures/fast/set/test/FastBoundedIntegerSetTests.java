@@ -1,18 +1,15 @@
 package utils.structures.fast.set.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Test;
 
-import utils.structures.fast.set.FastBooleanArrayIntegerSet;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 import utils.structures.fast.set.FastIntegerSet;
 

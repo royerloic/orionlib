@@ -1,6 +1,7 @@
 package utils.structures.fast.graph.algorythms.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -10,12 +11,27 @@ import org.junit.Test;
 
 import utils.structures.fast.graph.FastGraph;
 import utils.structures.fast.graph.algorythms.BicliqueDetector;
-import utils.utils.Arrays;
 
 /**
  */
 public class BicliqueDetectorTest
 {
+
+	@Test
+	public void testFindBicliques() throws IOException
+	{
+
+		final InputStream lInputStream = BicliqueDetectorTest.class.getResourceAsStream("test.edg");
+
+		FastGraph<String> lGraph;
+
+		lGraph = FastGraph.readEdgeFile(lInputStream);
+		System.out.println(BicliqueDetector.findBicliques(lGraph, 3, 2));
+		assertEquals(11, BicliqueDetector.findBicliques(lGraph, 1, 1));
+		assertEquals(11, BicliqueDetector.findBicliques(lGraph, 2, 2));
+		assertEquals(2, BicliqueDetector.findBicliques(lGraph, 1, 6));
+		assertEquals(4, BicliqueDetector.findBicliques(lGraph, 1, 3));
+	}
 
 	@Test
 	public void testCountBicliques() throws IOException
@@ -26,12 +42,12 @@ public class BicliqueDetectorTest
 		FastGraph<String> lGraph;
 
 		lGraph = FastGraph.readEdgeFile(lInputStream);
-		assertEquals(11,BicliqueDetector.countBicliques(lGraph, 1, 1));
-		assertEquals(11,BicliqueDetector.countBicliques(lGraph, 2, 2));
-		assertEquals(2,BicliqueDetector.countBicliques(lGraph, 1, 6));
-		assertEquals(4,BicliqueDetector.countBicliques(lGraph, 1, 3));
+		assertEquals(11, BicliqueDetector.countBicliques(lGraph, 1, 1));
+		assertEquals(11, BicliqueDetector.countBicliques(lGraph, 2, 2));
+		assertEquals(2, BicliqueDetector.countBicliques(lGraph, 1, 6));
+		assertEquals(4, BicliqueDetector.countBicliques(lGraph, 1, 3));
 	}
-	
+
 	@Test
 	public void testDetectBicliques() throws IOException
 	{
@@ -48,8 +64,7 @@ public class BicliqueDetectorTest
 		assertFalse(BicliqueDetector.detectBicliques(lGraph, 2, 6));
 
 	}
-		
-	
+
 	@Test
 	public void testCountAllBicliques() throws IOException
 	{
@@ -60,12 +75,12 @@ public class BicliqueDetectorTest
 
 		lGraph = FastGraph.readEdgeFile(lInputStream);
 		int[][] lSpectrum = BicliqueDetector.countAllBicliques(lGraph, 8, 8);
-		//System.out.println(Arrays.deepToString(lCountAllBicliques));
+		// System.out.println(Arrays.deepToString(lCountAllBicliques));
 		for (int[] lIs : lSpectrum)
 		{
 			for (int lI : lIs)
 			{
-				System.out.print(lI+"\t");
+				System.out.print(lI + "\t");
 			}
 			System.out.print("\n");
 		}

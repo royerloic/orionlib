@@ -2,9 +2,6 @@ package utils.graphics.plot;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-
-import utils.math.statistics.Histogram;
 
 public class DrawHistogram
 {
@@ -23,14 +20,14 @@ public class DrawHistogram
 		{
 			final double value = hist[i];
 			final double topleftX = lWidth * i;
-			
+
 			final float intensity = 1 - (float) (0.5 + 0.5 * hist[i]);
 			pGraphics.setColor(new Color(intensity, intensity, intensity));
-					
+
 			pGraphics.fillRect(	pX + round(topleftX * pW),
-			                   	pY+pH-round(hist[i] * pH),
+													pY + pH - round(hist[i] * pH),
 													round(lWidth * pW),
-													round(value*pH));
+													round(value * pH));
 		}
 
 	}

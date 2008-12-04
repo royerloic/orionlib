@@ -30,10 +30,10 @@ public class lognormal
 	 * 
 	 * The density of the lognormal distribution.
 	 * 
-	 * M_1_SQRT_2PI = 1 / sqrt(2 * pi)
+	 * M_1_SQRT_2PI = 1 / sqrt(2 pi)
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(	final double x,
 																final double logmean,
@@ -41,12 +41,12 @@ public class lognormal
 	{
 		double y;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
 		{
 			return x + logmean + logsd;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (logsd <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -56,9 +56,9 @@ public class lognormal
 		{
 			return 0;
 		}
-		/* !* y = (log(x) - logmean) / logsd; *! */
+		/* ! y = (log(x) - logmean) / logsd;! */
 		y = (java.lang.Math.log(x) - logmean) / logsd;
-		/* !* return Constants.M_1_SQRT_2PI * exp(-0.5 * y * y) / (x * logsd); *! */
+		/* ! return Constants.M_1_SQRT_2PI exp(-0.5 y y) / (x logsd);! */
 		return Constants.M_1_SQRT_2PI * java.lang.Math.exp(-0.5 * y * y)
 						/ (x * logsd);
 	}
@@ -90,18 +90,18 @@ public class lognormal
 	 * The lognormal distribution function.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double x,
 																	final double logmean,
 																	final double logsd)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
 		{
 			return x + logmean + logsd;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (logsd <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -109,7 +109,7 @@ public class lognormal
 		}
 		if (x > 0)
 		{
-			/* !* return normal.cumulative!!!COMMENT!!!(log(x), logmean, logsd); *! */
+			/* ! return normal.cumulative!!!COMMENT!!!(log(x), logmean, logsd);! */
 			return normal.cumulative(java.lang.Math.log(x), logmean, logsd);
 		}
 		return 0;
@@ -142,18 +142,18 @@ public class lognormal
 	 * This the lognormal quantile function.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x,
 																final double logmean,
 																final double logsd)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(logmean) || Double.isNaN(logsd))
 		{
 			return x + logmean + logsd;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (x < 0 || x > 1 || logsd <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -163,7 +163,7 @@ public class lognormal
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* if (x > 0) return exp(qnorm(x, logmean, logsd)); *! */
+		/* ! if (x > 0) return exp(qnorm(x, logmean, logsd));! */
 		if (x > 0)
 		{
 			return java.lang.Math.exp(normal.quantile(x, logmean, logsd));
@@ -197,22 +197,22 @@ public class lognormal
 	 * Random variates from the lognormal distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double logmean,
 															final double logsd,
 															final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(logmean) || Double.isInfinite(logsd) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		logsd <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* return exp(rnorm(logmean, logsd)); *! */
+		/* ! return exp(rnorm(logmean, logsd));! */
 		return java.lang.Math.exp(normal.random(logmean, logsd, PRNG));
 	}
 }

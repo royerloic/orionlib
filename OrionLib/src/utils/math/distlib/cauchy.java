@@ -32,20 +32,20 @@ public class cauchy
 	 * The density of the Cauchy distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(	final double x,
 																final double location,
 																final double scale)
 	{
 		double y;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (scale <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -82,25 +82,25 @@ public class cauchy
 	 * The distribution function of the Cauchy distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x,
 																	final double location,
 																	final double scale)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (scale <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
 		x = (x - location) / scale;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			if (x < 0)
@@ -112,8 +112,8 @@ public class cauchy
 				return 1;
 			}
 		}
-		/* !* #endif /*4! */
-		/* !* return 0.5 + atan(x) / Constants.M_PI; *! */
+		/* ! #endif /4! */
+		/* ! return 0.5 + atan(x) / Constants.M_PI;! */
 		return 0.5 + java.lang.Math.atan(x) / Constants.M_PI;
 	}
 
@@ -144,13 +144,13 @@ public class cauchy
 	 * The quantile function of the Cauchy distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x,
 																final double location,
 																final double scale)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
@@ -161,14 +161,14 @@ public class cauchy
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		if (scale <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* return location + scale * tan(Constants.M_PI * (x - 0.5)); *! */
+		/* ! return location + scale tan(Constants.M_PI (x - 0.5));! */
 		return location + scale * java.lang.Math.tan(Constants.M_PI * (x - 0.5));
 	}
 
@@ -198,22 +198,22 @@ public class cauchy
 	 * Random variates from the normal distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double location,
 															final double scale,
 															final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(location) || Double.isInfinite(scale) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		scale < 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* return location + scale * tan(Constants.M_PI * sunif()); *! */
+		/* ! return location + scale tan(Constants.M_PI sunif());! */
 		return location + scale
 						* java.lang.Math.tan(Constants.M_PI * uniform.random());
 	}

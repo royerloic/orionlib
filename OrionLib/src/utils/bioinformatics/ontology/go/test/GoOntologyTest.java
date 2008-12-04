@@ -14,7 +14,7 @@ public class GoOntologyTest
 	{
 		final GoOntology lGoOntology = GoOntology.getUniqueInstance();
 
-		System.out.println(lGoOntology.getNodeSet());
+		// System.out.println(lGoOntology.getNodeSet());
 	}
 
 }

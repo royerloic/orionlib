@@ -1,6 +1,5 @@
 package utils.structures.fast.list;
 
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.RandomAccess;

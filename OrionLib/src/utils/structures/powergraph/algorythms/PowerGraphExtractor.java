@@ -211,7 +211,8 @@ public class PowerGraphExtractor<N> implements PowerGraphExtractorInterface<N>
 		 * File lPowerEdgeDump = new
 		 * File(lPowerGraph.getNumberOfNodes()+"dump.txt"); try {
 		 * PowerEdgeDump.dumpPowerEdges(lPowerGraph, lPowerEdgeDump); } catch
-		 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }/
+		 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace();
+		 * }/
 		 **************************************************************************/
 
 		return lPowerGraph;

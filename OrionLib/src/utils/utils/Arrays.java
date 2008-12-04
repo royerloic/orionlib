@@ -1,6 +1,6 @@
 package utils.utils;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +23,8 @@ import java.util.Set;
  * mergesort, but it does have to be <i>stable</i>.)
  * 
  * <p>
- * This class is a member of the <a href="{@docRoot}/../technotes/guides/collections/index.html">
- * Java Collections Framework</a>.
+ * This class is a member of the <a href="{@docRoot}
+ * /../technotes/guides/collections/index.html"> Java Collections Framework</a>.
  * 
  * @author Josh Bloch
  * @author Neal Gafter
@@ -61,8 +61,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of longs into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * 
 	 * <p>
 	 * The sorting algorithm is a tuned quicksort, adapted from Jon L. Bentley and
@@ -107,8 +107,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of ints into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * 
 	 * The sorting algorithm is a tuned quicksort, adapted from Jon L. Bentley and
@@ -153,8 +153,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of shorts into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * 
 	 * The sorting algorithm is a tuned quicksort, adapted from Jon L. Bentley and
@@ -199,8 +199,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of chars into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * 
 	 * The sorting algorithm is a tuned quicksort, adapted from Jon L. Bentley and
@@ -245,8 +245,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of bytes into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * 
 	 * The sorting algorithm is a tuned quicksort, adapted from Jon L. Bentley and
@@ -304,8 +304,8 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of doubles into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * The <code>&lt;</code> relation does not provide a total order on all
 	 * floating-point values; although they are distinct numbers
@@ -347,9 +347,9 @@ public class Arrays
 	 * <p>
 	 * The <code>&lt;</code> relation does not provide a total order on all
 	 * floating-point values; although they are distinct numbers
-	 * <code>-0.0f == 0.0f</code> is <code>true</code> and a NaN value
-	 * compares neither less than, greater than, nor equal to any floating-point
-	 * value, even itself. To allow the sort to proceed, instead of using the
+	 * <code>-0.0f == 0.0f</code> is <code>true</code> and a NaN value compares
+	 * neither less than, greater than, nor equal to any floating-point value,
+	 * even itself. To allow the sort to proceed, instead of using the
 	 * <code>&lt;</code> relation to determine ascending numerical order, this
 	 * method uses the total order imposed by {@link Float#compareTo}. This
 	 * ordering differs from the <code>&lt;</code> relation in that
@@ -374,14 +374,14 @@ public class Arrays
 	/**
 	 * Sorts the specified range of the specified array of floats into ascending
 	 * numerical order. The range to be sorted extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.)
 	 * <p>
 	 * The <code>&lt;</code> relation does not provide a total order on all
 	 * floating-point values; although they are distinct numbers
-	 * <code>-0.0f == 0.0f</code> is <code>true</code> and a NaN value
-	 * compares neither less than, greater than, nor equal to any floating-point
-	 * value, even itself. To allow the sort to proceed, instead of using the
+	 * <code>-0.0f == 0.0f</code> is <code>true</code> and a NaN value compares
+	 * neither less than, greater than, nor equal to any floating-point value,
+	 * even itself. To allow the sort to proceed, instead of using the
 	 * <code>&lt;</code> relation to determine ascending numerical order, this
 	 * method uses the total order imposed by {@link Float#compareTo}. This
 	 * ordering differs from the <code>&lt;</code> relation in that
@@ -1184,8 +1184,8 @@ public class Arrays
 	 * {@linkplain Comparable natural ordering} of its elements. All elements in
 	 * the array must implement the {@link Comparable} interface. Furthermore, all
 	 * elements in the array must be <i>mutually comparable</i> (that is,
-	 * <tt>e1.compareTo(e2)</tt> must not throw a <tt>ClassCastException</tt>
-	 * for any elements <tt>e1</tt> and <tt>e2</tt> in the array).
+	 * <tt>e1.compareTo(e2)</tt> must not throw a <tt>ClassCastException</tt> for
+	 * any elements <tt>e1</tt> and <tt>e2</tt> in the array).
 	 * <p>
 	 * 
 	 * This sort is guaranteed to be <i>stable</i>: equal elements will not be
@@ -1214,12 +1214,11 @@ public class Arrays
 	 * order, according to the {@linkplain Comparable natural ordering} of its
 	 * elements. The range to be sorted extends from index <tt>fromIndex</tt>,
 	 * inclusive, to index <tt>toIndex</tt>, exclusive. (If
-	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.) All
-	 * elements in this range must implement the {@link Comparable} interface.
-	 * Furthermore, all elements in this range must be <i>mutually comparable</i>
-	 * (that is, <tt>e1.compareTo(e2)</tt> must not throw a
-	 * <tt>ClassCastException</tt> for any elements <tt>e1</tt> and
-	 * <tt>e2</tt> in the array).
+	 * <tt>fromIndex==toIndex</tt>, the range to be sorted is empty.) All elements
+	 * in this range must implement the {@link Comparable} interface. Furthermore,
+	 * all elements in this range must be <i>mutually comparable</i> (that is,
+	 * <tt>e1.compareTo(e2)</tt> must not throw a <tt>ClassCastException</tt> for
+	 * any elements <tt>e1</tt> and <tt>e2</tt> in the array).
 	 * <p>
 	 * 
 	 * This sort is guaranteed to be <i>stable</i>: equal elements will not be
@@ -1383,8 +1382,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1469,8 +1468,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1552,8 +1551,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1641,8 +1640,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1727,8 +1726,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1814,8 +1813,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1862,9 +1861,9 @@ public class Arrays
 				long keyBits = Double.doubleToLongBits(key);
 				cmp = (midBits == keyBits ? 0 : // Values are equal
 																	(midBits < keyBits ? -1 : // (-0.0, 0.0) or
-																														// (!NaN, NaN)
+																										// (!NaN, NaN)
 																										1)); // (0.0, -0.0) or
-																													// (NaN, !NaN)
+				// (NaN, !NaN)
 			}
 
 			if (cmp < 0)
@@ -1924,8 +1923,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws IllegalArgumentException
@@ -1972,9 +1971,9 @@ public class Arrays
 				int keyBits = Float.floatToIntBits(key);
 				cmp = (midBits == keyBits ? 0 : // Values are equal
 																	(midBits < keyBits ? -1 : // (-0.0, 0.0) or
-																														// (!NaN, NaN)
+																										// (!NaN, NaN)
 																										1)); // (0.0, -0.0) or
-																													// (NaN, !NaN)
+				// (NaN, !NaN)
 			}
 
 			if (cmp < 0)
@@ -1993,10 +1992,10 @@ public class Arrays
 	 * to the {@linkplain Comparable natural ordering} of its elements (as by the
 	 * {@link #sort(Object[])} method) prior to making this call. If it is not
 	 * sorted, the results are undefined. (If the array contains elements that are
-	 * not mutually comparable (for example, strings and integers), it <i>cannot</i>
-	 * be sorted according to the natural ordering of its elements, hence results
-	 * are undefined.) If the array contains multiple elements equal to the
-	 * specified object, there is no guarantee which one will be found.
+	 * not mutually comparable (for example, strings and integers), it
+	 * <i>cannot</i> be sorted according to the natural ordering of its elements,
+	 * hence results are undefined.) If the array contains multiple elements equal
+	 * to the specified object, there is no guarantee which one will be found.
 	 * 
 	 * @param a
 	 *          the array to be searched
@@ -2025,10 +2024,10 @@ public class Arrays
 	 * (as by the {@link #sort(Object[], int, int)} method) prior to making this
 	 * call. If it is not sorted, the results are undefined. (If the range
 	 * contains elements that are not mutually comparable (for example, strings
-	 * and integers), it <i>cannot</i> be sorted according to the natural
-	 * ordering of its elements, hence results are undefined.) If the range
-	 * contains multiple elements equal to the specified object, there is no
-	 * guarantee which one will be found.
+	 * and integers), it <i>cannot</i> be sorted according to the natural ordering
+	 * of its elements, hence results are undefined.) If the range contains
+	 * multiple elements equal to the specified object, there is no guarantee
+	 * which one will be found.
 	 * 
 	 * @param a
 	 *          the array to be searched
@@ -2043,8 +2042,8 @@ public class Arrays
 	 *         <tt>(-(<i>insertion point</i>) - 1)</tt>. The <i>insertion
 	 *         point</i> is defined as the point at which the key would be
 	 *         inserted into the array: the index of the first element in the
-	 *         range greater than the key, or <tt>toIndex</tt> if all elements
-	 *         in the range are less than the specified key. Note that this
+	 *         range greater than the key, or <tt>toIndex</tt> if all elements in
+	 *         the range are less than the specified key. Note that this
 	 *         guarantees that the return value will be &gt;= 0 if and only if the
 	 *         key is found.
 	 * @throws ClassCastException
@@ -2159,12 +2158,12 @@ public class Arrays
 	}
 
 	/**
-	 * Returns <tt>true</tt> if the two specified arrays of shorts are <i>equal</i>
-	 * to one another. Two arrays are considered equal if both arrays contain the
-	 * same number of elements, and all corresponding pairs of elements in the two
-	 * arrays are equal. In other words, two arrays are equal if they contain the
-	 * same elements in the same order. Also, two array references are considered
-	 * equal if both are <tt>null</tt>.
+	 * Returns <tt>true</tt> if the two specified arrays of shorts are
+	 * <i>equal</i> to one another. Two arrays are considered equal if both arrays
+	 * contain the same number of elements, and all corresponding pairs of
+	 * elements in the two arrays are equal. In other words, two arrays are equal
+	 * if they contain the same elements in the same order. Also, two array
+	 * references are considered equal if both are <tt>null</tt>.
 	 * <p>
 	 * 
 	 * @param a
@@ -2259,8 +2258,8 @@ public class Arrays
 
 	/**
 	 * Returns <tt>true</tt> if the two specified arrays of booleans are
-	 * <i>equal</i> to one another. Two arrays are considered equal if both
-	 * arrays contain the same number of elements, and all corresponding pairs of
+	 * <i>equal</i> to one another. Two arrays are considered equal if both arrays
+	 * contain the same number of elements, and all corresponding pairs of
 	 * elements in the two arrays are equal. In other words, two arrays are equal
 	 * if they contain the same elements in the same order. Also, two array
 	 * references are considered equal if both are <tt>null</tt>.
@@ -2291,22 +2290,24 @@ public class Arrays
 	}
 
 	/**
-	 * Returns <tt>true</tt> if the two specified arrays of doubles are <i>equal</i>
-	 * to one another. Two arrays are considered equal if both arrays contain the
-	 * same number of elements, and all corresponding pairs of elements in the two
-	 * arrays are equal. In other words, two arrays are equal if they contain the
-	 * same elements in the same order. Also, two array references are considered
-	 * equal if both are <tt>null</tt>.
+	 * Returns <tt>true</tt> if the two specified arrays of doubles are
+	 * <i>equal</i> to one another. Two arrays are considered equal if both arrays
+	 * contain the same number of elements, and all corresponding pairs of
+	 * elements in the two arrays are equal. In other words, two arrays are equal
+	 * if they contain the same elements in the same order. Also, two array
+	 * references are considered equal if both are <tt>null</tt>.
 	 * <p>
 	 * 
 	 * Two doubles <tt>d1</tt> and <tt>d2</tt> are considered equal if:
 	 * 
-	 * <pre>    <tt>
+	 * <pre>
+	 * &lt;tt&gt;
 	 * new Double(d1).equals(new Double(d2))
-	 * </tt></pre>
+	 * &lt;/tt&gt;
+	 * </pre>
 	 * 
-	 * (Unlike the <tt>==</tt> operator, this method considers <tt>NaN</tt>
-	 * equals to itself, and 0.0d unequal to -0.0d.)
+	 * (Unlike the <tt>==</tt> operator, this method considers <tt>NaN</tt> equals
+	 * to itself, and 0.0d unequal to -0.0d.)
 	 * 
 	 * @param a
 	 *          one array to be tested for equality
@@ -2334,22 +2335,24 @@ public class Arrays
 	}
 
 	/**
-	 * Returns <tt>true</tt> if the two specified arrays of floats are <i>equal</i>
-	 * to one another. Two arrays are considered equal if both arrays contain the
-	 * same number of elements, and all corresponding pairs of elements in the two
-	 * arrays are equal. In other words, two arrays are equal if they contain the
-	 * same elements in the same order. Also, two array references are considered
-	 * equal if both are <tt>null</tt>.
+	 * Returns <tt>true</tt> if the two specified arrays of floats are
+	 * <i>equal</i> to one another. Two arrays are considered equal if both arrays
+	 * contain the same number of elements, and all corresponding pairs of
+	 * elements in the two arrays are equal. In other words, two arrays are equal
+	 * if they contain the same elements in the same order. Also, two array
+	 * references are considered equal if both are <tt>null</tt>.
 	 * <p>
 	 * 
 	 * Two floats <tt>f1</tt> and <tt>f2</tt> are considered equal if:
 	 * 
-	 * <pre>    <tt>
+	 * <pre>
+	 * &lt;tt&gt;
 	 * new Float(f1).equals(new Float(f2))
-	 * </tt></pre>
+	 * &lt;/tt&gt;
+	 * </pre>
 	 * 
-	 * (Unlike the <tt>==</tt> operator, this method considers <tt>NaN</tt>
-	 * equals to itself, and 0.0f unequal to -0.0f.)
+	 * (Unlike the <tt>==</tt> operator, this method considers <tt>NaN</tt> equals
+	 * to itself, and 0.0f unequal to -0.0f.)
 	 * 
 	 * @param a
 	 *          one array to be tested for equality
@@ -2377,15 +2380,14 @@ public class Arrays
 	}
 
 	/**
-	 * Returns <tt>true</tt> if the two specified arrays of Objects are <i>equal</i>
-	 * to one another. The two arrays are considered equal if both arrays contain
-	 * the same number of elements, and all corresponding pairs of elements in the
-	 * two arrays are equal. Two objects <tt>e1</tt> and <tt>e2</tt> are
-	 * considered <i>equal</i> if <tt>(e1==null ? e2==null
-	 * : e1.equals(e2))</tt>.
-	 * In other words, the two arrays are equal if they contain the same elements
-	 * in the same order. Also, two array references are considered equal if both
-	 * are <tt>null</tt>.
+	 * Returns <tt>true</tt> if the two specified arrays of Objects are
+	 * <i>equal</i> to one another. The two arrays are considered equal if both
+	 * arrays contain the same number of elements, and all corresponding pairs of
+	 * elements in the two arrays are equal. Two objects <tt>e1</tt> and
+	 * <tt>e2</tt> are considered <i>equal</i> if <tt>(e1==null ? e2==null
+	 * : e1.equals(e2))</tt>. In other words, the two arrays are equal if they
+	 * contain the same elements in the same order. Also, two array references are
+	 * considered equal if both are <tt>null</tt>.
 	 * <p>
 	 * 
 	 * @param a
@@ -2435,8 +2437,8 @@ public class Arrays
 	/**
 	 * Assigns the specified long value to each element of the specified range of
 	 * the specified array of longs. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2477,8 +2479,8 @@ public class Arrays
 	/**
 	 * Assigns the specified int value to each element of the specified range of
 	 * the specified array of ints. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2519,8 +2521,8 @@ public class Arrays
 	/**
 	 * Assigns the specified short value to each element of the specified range of
 	 * the specified array of shorts. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2561,8 +2563,8 @@ public class Arrays
 	/**
 	 * Assigns the specified char value to each element of the specified range of
 	 * the specified array of chars. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2603,8 +2605,8 @@ public class Arrays
 	/**
 	 * Assigns the specified byte value to each element of the specified range of
 	 * the specified array of bytes. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2645,9 +2647,8 @@ public class Arrays
 	/**
 	 * Assigns the specified boolean value to each element of the specified range
 	 * of the specified array of booleans. The range to be filled extends from
-	 * index <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>,
-	 * exclusive. (If <tt>fromIndex==toIndex</tt>, the range to be filled is
-	 * empty.)
+	 * index <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
+	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2688,9 +2689,8 @@ public class Arrays
 	/**
 	 * Assigns the specified double value to each element of the specified range
 	 * of the specified array of doubles. The range to be filled extends from
-	 * index <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>,
-	 * exclusive. (If <tt>fromIndex==toIndex</tt>, the range to be filled is
-	 * empty.)
+	 * index <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
+	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2731,8 +2731,8 @@ public class Arrays
 	/**
 	 * Assigns the specified float value to each element of the specified range of
 	 * the specified array of floats. The range to be filled extends from index
-	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive.
-	 * (If <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
+	 * <tt>fromIndex</tt>, inclusive, to index <tt>toIndex</tt>, exclusive. (If
+	 * <tt>fromIndex==toIndex</tt>, the range to be filled is empty.)
 	 * 
 	 * @param a
 	 *          the array to be filled
@@ -2811,8 +2811,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>null</tt>. Such indices will exist if and only
-	 * if the specified length is greater than that of the original array. The
+	 * the copy will contain <tt>null</tt>. Such indices will exist if and only if
+	 * the specified length is greater than that of the original array. The
 	 * resulting array is of exactly the same class as the original array.
 	 * 
 	 * @param original
@@ -2837,8 +2837,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>null</tt>. Such indices will exist if and only
-	 * if the specified length is greater than that of the original array. The
+	 * the copy will contain <tt>null</tt>. Such indices will exist if and only if
+	 * the specified length is greater than that of the original array. The
 	 * resulting array is of the class <tt>newType</tt>.
 	 * 
 	 * @param original
@@ -2874,8 +2874,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>(byte)0</tt>. Such indices will exist if and
-	 * only if the specified length is greater than that of the original array.
+	 * the copy will contain <tt>(byte)0</tt>. Such indices will exist if and only
+	 * if the specified length is greater than that of the original array.
 	 * 
 	 * @param original
 	 *          the array to be copied
@@ -2955,8 +2955,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>0L</tt>. Such indices will exist if and only
-	 * if the specified length is greater than that of the original array.
+	 * the copy will contain <tt>0L</tt>. Such indices will exist if and only if
+	 * the specified length is greater than that of the original array.
 	 * 
 	 * @param original
 	 *          the array to be copied
@@ -2982,9 +2982,8 @@ public class Arrays
 	 * necessary) so the copy has the specified length. For all indices that are
 	 * valid in both the original array and the copy, the two arrays will contain
 	 * identical values. For any indices that are valid in the copy but not the
-	 * original, the copy will contain <tt>'\\u000'</tt>. Such indices will
-	 * exist if and only if the specified length is greater than that of the
-	 * original array.
+	 * original, the copy will contain <tt>'\\u000'</tt>. Such indices will exist if and only
+	 * if the specified length is greater than that of the original array.
 	 * 
 	 * @param original
 	 *          the array to be copied
@@ -3010,8 +3009,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>0f</tt>. Such indices will exist if and only
-	 * if the specified length is greater than that of the original array.
+	 * the copy will contain <tt>0f</tt>. Such indices will exist if and only if
+	 * the specified length is greater than that of the original array.
 	 * 
 	 * @param original
 	 *          the array to be copied
@@ -3037,8 +3036,8 @@ public class Arrays
 	 * so the copy has the specified length. For all indices that are valid in
 	 * both the original array and the copy, the two arrays will contain identical
 	 * values. For any indices that are valid in the copy but not the original,
-	 * the copy will contain <tt>0d</tt>. Such indices will exist if and only
-	 * if the specified length is greater than that of the original array.
+	 * the copy will contain <tt>0d</tt>. Such indices will exist if and only if
+	 * the specified length is greater than that of the original array.
 	 * 
 	 * @param original
 	 *          the array to be copied
@@ -3064,8 +3063,8 @@ public class Arrays
 	 * necessary) so the copy has the specified length. For all indices that are
 	 * valid in both the original array and the copy, the two arrays will contain
 	 * identical values. For any indices that are valid in the copy but not the
-	 * original, the copy will contain <tt>false</tt>. Such indices will exist
-	 * if and only if the specified length is greater than that of the original
+	 * original, the copy will contain <tt>false</tt>. Such indices will exist if
+	 * and only if the specified length is greater than that of the original
 	 * array.
 	 * 
 	 * @param original
@@ -3090,16 +3089,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>null</tt> is placed
-	 * in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>null</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * <p>
 	 * The resulting array is of exactly the same class as the original array.
 	 * 
@@ -3128,17 +3127,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>null</tt> is placed
-	 * in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>. The resulting array is of the class
-	 * <tt>newType</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>null</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>. The resulting array is of the class <tt>newType</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3181,16 +3179,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>(byte)0</tt> is
-	 * placed in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>(byte)0</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3223,16 +3221,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>(short)0</tt> is
-	 * placed in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>(short)0</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3265,16 +3263,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>0</tt> is placed in
-	 * all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>0</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3307,16 +3305,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>0L</tt> is placed in
-	 * all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>0L</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3349,16 +3347,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>'\\u000'</tt> is
-	 * placed in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>'\\u000'</tt> is placed in all elements of
+	 * the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3392,16 +3390,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>0f</tt> is placed in
-	 * all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>0f</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3434,16 +3432,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>0d</tt> is placed in
-	 * all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>0d</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3476,16 +3474,16 @@ public class Arrays
 	/**
 	 * Copies the specified range of the specified array into a new array. The
 	 * initial index of the range (<tt>from</tt>) must lie between zero and
-	 * <tt>original.length</tt>, inclusive. The value at
-	 * <tt>original[from]</tt> is placed into the initial element of the copy
-	 * (unless <tt>from == original.length</tt> or <tt>from == to</tt>).
-	 * Values from subsequent elements in the original array are placed into
-	 * subsequent elements in the copy. The final index of the range (<tt>to</tt>),
-	 * which must be greater than or equal to <tt>from</tt>, may be greater
-	 * than <tt>original.length</tt>, in which case <tt>false</tt> is placed
-	 * in all elements of the copy whose index is greater than or equal to
-	 * <tt>original.length - from</tt>. The length of the returned array will
-	 * be <tt>to - from</tt>.
+	 * <tt>original.length</tt>, inclusive. The value at <tt>original[from]</tt>
+	 * is placed into the initial element of the copy (unless
+	 * <tt>from == original.length</tt> or <tt>from == to</tt>). Values from
+	 * subsequent elements in the original array are placed into subsequent
+	 * elements in the copy. The final index of the range (<tt>to</tt>), which
+	 * must be greater than or equal to <tt>from</tt>, may be greater than
+	 * <tt>original.length</tt>, in which case <tt>false</tt> is placed in all
+	 * elements of the copy whose index is greater than or equal to
+	 * <tt>original.length - from</tt>. The length of the returned array will be
+	 * <tt>to - from</tt>.
 	 * 
 	 * @param original
 	 *          the array from which a range is to be copied
@@ -3515,8 +3513,6 @@ public class Arrays
 																												newLength));
 		return copy;
 	}
-
-	
 
 	/**
 	 * Returns a hash code based on the contents of the specified array. For any
@@ -3561,8 +3557,8 @@ public class Arrays
 	 * The value returned by this method is the same value that would be obtained
 	 * by invoking the {@link List#hashCode() <tt>hashCode</tt>} method on a
 	 * {@link List} containing a sequence of {@link Integer} instances
-	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt>
-	 * is <tt>null</tt>, this method returns 0.
+	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt> is
+	 * <tt>null</tt>, this method returns 0.
 	 * 
 	 * @param a
 	 *          the array whose hash value to compute
@@ -3621,8 +3617,8 @@ public class Arrays
 	 * The value returned by this method is the same value that would be obtained
 	 * by invoking the {@link List#hashCode() <tt>hashCode</tt>} method on a
 	 * {@link List} containing a sequence of {@link Character} instances
-	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt>
-	 * is <tt>null</tt>, this method returns 0.
+	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt> is
+	 * <tt>null</tt>, this method returns 0.
 	 * 
 	 * @param a
 	 *          the array whose hash value to compute
@@ -3681,8 +3677,8 @@ public class Arrays
 	 * The value returned by this method is the same value that would be obtained
 	 * by invoking the {@link List#hashCode() <tt>hashCode</tt>} method on a
 	 * {@link List} containing a sequence of {@link Boolean} instances
-	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt>
-	 * is <tt>null</tt>, this method returns 0.
+	 * representing the elements of <tt>a</tt> in the same order. If <tt>a</tt> is
+	 * <tt>null</tt>, this method returns 0.
 	 * 
 	 * @param a
 	 *          the array whose hash value to compute
@@ -3818,11 +3814,10 @@ public class Arrays
 	 * elements as <tt>a</tt> in the same order, with one difference: If an
 	 * element <tt>e</tt> of <tt>a</tt> is itself an array, its hash code is
 	 * computed not by calling <tt>e.hashCode()</tt>, but as by calling the
-	 * appropriate overloading of <tt>Arrays.hashCode(e)</tt> if <tt>e</tt> is
-	 * an array of a primitive type, or as by calling
-	 * <tt>Arrays.deepHashCode(e)</tt> recursively if <tt>e</tt> is an array
-	 * of a reference type. If <tt>a</tt> is <tt>null</tt>, this method
-	 * returns 0.
+	 * appropriate overloading of <tt>Arrays.hashCode(e)</tt> if <tt>e</tt> is an
+	 * array of a primitive type, or as by calling <tt>Arrays.deepHashCode(e)</tt>
+	 * recursively if <tt>e</tt> is an array of a reference type. If <tt>a</tt> is
+	 * <tt>null</tt>, this method returns 0.
 	 * 
 	 * @param a
 	 *          the array whose deep-content-based hash code to compute
@@ -3878,14 +3873,14 @@ public class Arrays
 	 * corresponding pairs of elements in the two arrays are deeply equal.
 	 * 
 	 * <p>
-	 * Two possibly <tt>null</tt> elements <tt>e1</tt> and <tt>e2</tt> are
-	 * deeply equal if any of the following conditions hold:
+	 * Two possibly <tt>null</tt> elements <tt>e1</tt> and <tt>e2</tt> are deeply
+	 * equal if any of the following conditions hold:
 	 * <ul>
-	 * <li> <tt>e1</tt> and <tt>e2</tt> are both arrays of object reference
-	 * types, and <tt>Arrays.deepEquals(e1, e2) would return true</tt>
-	 * <li> <tt>e1</tt> and <tt>e2</tt> are arrays of the same primitive type,
-	 * and the appropriate overloading of <tt>Arrays.equals(e1, e2)</tt> would
-	 * return true.
+	 * <li> <tt>e1</tt> and <tt>e2</tt> are both arrays of object reference types,
+	 * and <tt>Arrays.deepEquals(e1, e2) would return true</tt>
+	 * <li> <tt>e1</tt> and <tt>e2</tt> are arrays of the same primitive type, and
+	 * the appropriate overloading of <tt>Arrays.equals(e1, e2)</tt> would return
+	 * true.
 	 * <li> <tt>e1 == e2</tt>
 	 * <li> <tt>e1.equals(e2)</tt> would return true.
 	 * </ul>
@@ -3956,8 +3951,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(long)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -3988,8 +3983,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(int)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4020,8 +4015,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(short)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4052,8 +4047,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(char)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4084,8 +4079,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(byte)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4116,8 +4111,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(boolean)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4148,8 +4143,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(float)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4180,8 +4175,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. The
 	 * string representation consists of a list of the array's elements, enclosed
-	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by
-	 * the characters <tt>", "</tt> (a comma followed by a space). Elements are
+	 * in square brackets (<tt>"[]"</tt>). Adjacent elements are separated by the
+	 * characters <tt>", "</tt> (a comma followed by a space). Elements are
 	 * converted to strings as by <tt>String.valueOf(double)</tt>. Returns
 	 * <tt>"null"</tt> if <tt>a</tt> is <tt>null</tt>.
 	 * 
@@ -4212,8 +4207,8 @@ public class Arrays
 	/**
 	 * Returns a string representation of the contents of the specified array. If
 	 * the array contains other arrays as elements, they are converted to strings
-	 * by the {@link Object#toString} method inherited from <tt>Object</tt>,
-	 * which describes their <i>identities</i> rather than their contents.
+	 * by the {@link Object#toString} method inherited from <tt>Object</tt>, which
+	 * describes their <i>identities</i> rather than their contents.
 	 * 
 	 * <p>
 	 * The value returned by this method is equal to the value that would be
@@ -4273,8 +4268,7 @@ public class Arrays
 	 * itself would be rendered as <tt>"[[...]]"</tt>.
 	 * 
 	 * <p>
-	 * This method returns <tt>"null"</tt> if the specified array is
-	 * <tt>null</tt>.
+	 * This method returns <tt>"null"</tt> if the specified array is <tt>null</tt>.
 	 * 
 	 * @param a
 	 *          the array whose string representation to return

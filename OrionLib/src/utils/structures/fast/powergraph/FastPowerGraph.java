@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.structures.fast.graph.Edge;
+import utils.structures.fast.graph.FastGraph;
+import utils.structures.fast.powergraph.algorythms.PowerGraphProjection;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 import utils.structures.map.HashSetMap;
 
@@ -52,6 +54,11 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		mFastIntegerPowerGraph = new FastIntegerPowerGraph(	pNumberOfNodes,
 																												pNumberOfPowerNodes,
 																												pNumberOfPowerEdges);
+	}
+
+	public FastGraph<N> getGraph()
+	{
+		return PowerGraphProjection.project(this);
 	}
 
 	public FastIntegerPowerGraph getUnderlyingFastIntegerPowerGraph()
@@ -127,6 +134,12 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		return mFastIntegerPowerGraph.getPowerNodeSize(pPowerNodeId);
 	}
 
+	public int getPowerNodeSize(final N pPowerNode)
+	{
+		int lPowerNodeId = getPowerNodeId(pPowerNode);
+		return mFastIntegerPowerGraph.getPowerNodeSize(lPowerNodeId);
+	}
+
 	public Set<N> getPowerNodeList()
 	{
 		return mPowerNodeToPowerNodeIdMap.keySet();
@@ -145,6 +158,13 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 	public FastBoundedIntegerSet getPowerNodeIdSet()
 	{
 		return mFastIntegerPowerGraph.getPowerNodeIdSet();
+	}
+
+	public Set<N> getPowerNodeContent(final N pPowerNode)
+	{
+		final HashSet<N> lPowerNodeContents = new HashSet<N>(mFastIntegerPowerGraph.getNumberOfPowerNodes());
+		int lPowerNodeId = getPowerNodeId(pPowerNode);
+		return getPowerNodeContent(lPowerNodeId);
 	}
 
 	public Set<N> getPowerNodeContent(final int pPowerNodeId)
@@ -186,15 +206,15 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 																														.size();
 		return lNumberOfPowerNodeChildren + lNumberOfNodeChildren;
 	}
-	
+
 	public FastBoundedIntegerSet getPowerNodeParentOf(final int pPowerNodeId)
 	{
-		return mFastIntegerPowerGraph.getPowerNodeParentOf(pPowerNodeId);		
+		return mFastIntegerPowerGraph.getPowerNodeParentOf(pPowerNodeId);
 	}
-	
+
 	public FastBoundedIntegerSet getPowerNodeParentOf(final N pPowerNode)
 	{
-		return mFastIntegerPowerGraph.getPowerNodeParentOf(mPowerNodeToPowerNodeIdMap.get(pPowerNode));		
+		return mFastIntegerPowerGraph.getPowerNodeParentOf(mPowerNodeToPowerNodeIdMap.get(pPowerNode));
 	}
 
 	public boolean isTopPowerNode(final int pPowerNodeId)
@@ -235,7 +255,7 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 	{
 		final int lFirstId = mPowerNodeToPowerNodeIdMap.get(pFirstPowerNode);
 		final int lSecondId = mPowerNodeToPowerNodeIdMap.get(pSecondPowerNode);
-		return getPowerEdgeSize(lFirstId,lSecondId);
+		return getPowerEdgeSize(lFirstId, lSecondId);
 	}
 
 	public ArrayList<Edge<N>> getPowerEdgeList()
@@ -268,7 +288,7 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 	{
 		return mFastIntegerPowerGraph.getNumberOfPowerEdges();
 	}
-	
+
 	public int getNumberOfReflexivePowerEdges()
 	{
 		return mFastIntegerPowerGraph.getNumberOfReflexivePowerEdges();
@@ -400,7 +420,8 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		String lLine = "";
 		while ((lLine = lBufferedReader.readLine()) != null)
 		{
-			if (!(lLine.length()==0) && !lLine.startsWith("#") && !lLine.startsWith("//"))
+			if (!(lLine.length() == 0) && !lLine.startsWith("#")
+					&& !lLine.startsWith("//"))
 			{
 				final String[] lArray = lPattern.split(lLine, -1);
 				if (lLine.startsWith("NODE\t"))
@@ -554,8 +575,5 @@ public class FastPowerGraph<N extends Serializable> implements Serializable
 		return true;
 
 	}
-
-
-
 
 }

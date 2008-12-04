@@ -20,7 +20,7 @@ public class HashMapMap<K1, K2, V> extends HashMap<K1, Map<K2, V>> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.MapMap#put(java.lang.Object,
-	 *      java.lang.Object, java.lang.Object)
+	 * java.lang.Object, java.lang.Object)
 	 */
 	public V put(final K1 pKey1, final K2 pKey2, final V pValue)
 	{

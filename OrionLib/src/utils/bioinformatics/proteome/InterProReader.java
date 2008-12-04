@@ -29,7 +29,7 @@ public class InterProReader
 		final ProteinSet lProteinSet = pProteome.getProteinSet();
 		for (String lLine : LineReader.getLines(pInputStream))
 		{
-			if (!(lLine.length()==0))
+			if (!(lLine.length() == 0))
 			{
 				lLine = lLine.trim();
 				if (lLine.startsWith("#") || lLine.startsWith("//"))

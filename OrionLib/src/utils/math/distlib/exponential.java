@@ -127,7 +127,7 @@ public class exponential
 
 	public static double random(final uniform PRNG)
 	{
-		/* q[k-1] = sum(alog(2.0)**k/k!) k=1,..,n, */
+		/* q[k-1] = sum(alog(2.0)k/k!) k=1,..,n, */
 		/* The highest n (here 8) is determined by q[n-1] = 1.0 */
 		/* within standard precision */
 		double a, u, ustar, umin;

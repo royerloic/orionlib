@@ -14,14 +14,14 @@ public class GenericIntegerSetTest
 {
 
 	static int lScale = 10000;
-	
+
 	public static void testAll(IntegerSetFactory pIntegerSetFactory)
 	{
 		testAdd(pIntegerSetFactory);
 		testRemove(pIntegerSetFactory);
 		testContains(pIntegerSetFactory);
 		testIterator(pIntegerSetFactory);
-		//testPerformance(pIntegerSetFactory);
+		// testPerformance(pIntegerSetFactory);
 	}
 
 	public static void testAdd(IntegerSetFactory pIntegerSetFactory)

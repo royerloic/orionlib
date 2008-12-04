@@ -1,13 +1,13 @@
 package utils.network.groovyserver;
 
+import groovy.lang.Binding;
+import groovy.lang.MetaClass;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Map;
-
-import groovy.lang.Binding;
-import groovy.lang.MetaClass;
 
 public class SynchronizedBinding extends Binding implements Serializable
 {

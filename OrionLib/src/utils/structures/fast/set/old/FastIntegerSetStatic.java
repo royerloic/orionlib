@@ -370,9 +370,9 @@ public class FastIntegerSetStatic
 		final int[] newArray = new int[pNewCapacity];
 		return newArray;
 		/***************************************************************************
-		 * final int lOldCapacity = pArray.length; if (lOldCapacity < pNewCapacity) {
-		 * final int[] oldArray = pArray; int newCapacity = (lOldCapacity * 4) / 3 +
-		 * 1; if (newCapacity < pNewCapacity) newCapacity = pNewCapacity; final
+		 * final int lOldCapacity = pArray.length; if (lOldCapacity < pNewCapacity)
+		 * { final int[] oldArray = pArray; int newCapacity = (lOldCapacity * 4) / 3
+		 * + 1; if (newCapacity < pNewCapacity) newCapacity = pNewCapacity; final
 		 * int[] newArray = new int[newCapacity]; return newArray; } return pArray;/
 		 **************************************************************************/
 	}

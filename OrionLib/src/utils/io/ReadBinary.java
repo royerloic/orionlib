@@ -2,7 +2,7 @@ package utils.io;
 
 public class ReadBinary
 {
-  //Function for conversion of an 8 byte array to double:
+	// Function for conversion of an 8 byte array to double:
 	public static double arr2double(byte[] arr, int start)
 	{
 		int i = 0;

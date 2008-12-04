@@ -4,7 +4,6 @@ import java.awt.CheckboxMenuItem;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketAddress;
 import java.net.SocketException;
 
 import wiiremotej.IRLight;
@@ -48,7 +47,7 @@ public class WiiServer extends WiiRemoteAdapter implements Runnable, WiiMode
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		mStopSignal = false;
 		mThread = new Thread(this);
 		mThread.setDaemon(true);
@@ -68,9 +67,9 @@ public class WiiServer extends WiiRemoteAdapter implements Runnable, WiiMode
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		mStopSignal = true;
-		mThread=null;
+		mThread = null;
 	}
 
 	public CheckboxMenuItem getMenuItem()
@@ -101,7 +100,7 @@ public class WiiServer extends WiiRemoteAdapter implements Runnable, WiiMode
 				try
 				{
 					aSocket.receive(packetin);
-					
+
 					String lDataReceived = new String(packetin.getData(),
 																						0,
 																						packetin.getLength());
@@ -116,9 +115,8 @@ public class WiiServer extends WiiRemoteAdapter implements Runnable, WiiMode
 				}
 				catch (IOException e)
 				{
-					
-				}
 
+				}
 
 				if (mActive)
 				{

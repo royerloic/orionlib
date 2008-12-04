@@ -276,10 +276,10 @@ public class FastIntegerPowerGraph implements Serializable
 		FastBoundedIntegerSet lParentPowerNodeIdSet = mHierarchyGraph.getIncommingNodeNeighbours(pPowerNodeId);
 		return lParentPowerNodeIdSet.size() == 1 && lParentPowerNodeIdSet.contains(0);
 	}
-	
+
 	private boolean hasPowerEdge(int pPowerNodeId)
 	{
-		return mPowerEgdesGraph.getNodeNeighbours(pPowerNodeId).size()>0;
+		return mPowerEgdesGraph.getNodeNeighbours(pPowerNodeId).size() > 0;
 	}
 
 	public FastBoundedIntegerSet getDirectPowerNodeNeighbors(final int pPowerNodeId)
@@ -331,7 +331,7 @@ public class FastIntegerPowerGraph implements Serializable
 		if (!lAllPowerNodeNeighbors.isEmpty())
 		{
 			for (final int lPowerNodeId : lDescendents)
-			{				
+			{
 				lAllPowerNodeNeighbors.add(lPowerNodeId);
 				lAllPowerNodeNeighbors.union(getDirectPowerNodeNeighbors(lPowerNodeId));
 			}
@@ -339,8 +339,6 @@ public class FastIntegerPowerGraph implements Serializable
 
 		return lAllPowerNodeNeighbors;
 	}
-
-
 
 	public ArrayList<int[]> getPowerEdgeList()
 	{

@@ -123,8 +123,8 @@ public class CLUSTAL extends Format
 	/**
 	 * Returns CLUSTAL format of the alignment
 	 * 
-	 * @param alignment (
-	 *          {@link Alignment})
+	 * @param alignment
+	 *          ( {@link Alignment})
 	 * @return CLUSTAL format of the alignment
 	 */
 	@Override

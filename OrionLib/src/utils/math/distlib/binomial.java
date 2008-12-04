@@ -31,25 +31,25 @@ public class binomial
 	 * The density of the binomial distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, double n, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n <= 0 || p < 0 || p > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0 || x > n)
 		{
@@ -63,7 +63,7 @@ public class binomial
 		{
 			return x == n ? 1 : 0;
 		}
-		/* !* return exp(lfastchoose(n, x) + log(p) * x + (n - x) * log(1 - p)); *! */
+		/* ! return exp(lfastchoose(n, x) + log(p) x + (n - x) log(1 - p));! */
 		return java.lang.Math.exp(misc.lfastchoose(n, x) + java.lang.Math.log(p)
 															* x
 															+ (n - x)
@@ -96,11 +96,11 @@ public class binomial
 	 * The distribution function of the binomial distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, double n, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
@@ -110,15 +110,15 @@ public class binomial
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n <= 0 || p < 0 || p > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* x = floor(x); *! */
+		/* ! x = floor(x);! */
 		x = java.lang.Math.floor(x);
 		if (x < 0.0)
 		{
@@ -164,13 +164,13 @@ public class binomial
 	 * values close to this initial start point.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, double n, final double p)
 	{
 		double q, mu, sigma, gamma, z, y;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
@@ -180,9 +180,9 @@ public class binomial
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (x < 0 || x > 1 || p <= 0 || p >= 1 || n <= 0)
 		{
@@ -199,11 +199,11 @@ public class binomial
 		}
 		q = 1 - p;
 		mu = n * p;
-		/* !* sigma = sqrt(n * p * q); *! */
+		/* ! sigma = sqrt(n p q);! */
 		sigma = java.lang.Math.sqrt(n * p * q);
 		gamma = (q - p) / sigma;
 		z = normal.quantile(x, 0.0, 1.0);
-		/* !* y = floor(mu + sigma * (z + gamma * (z*z - 1) / 6) + 0.5); *! */
+		/* ! y = floor(mu + sigma (z + gamma (zz - 1) / 6) + 0.5);! */
 		y = java.lang.Math.floor(mu + sigma * (z + gamma * (z * z - 1) / 6) + 0.5);
 
 		z = cumulative(y, n, p);
@@ -268,8 +268,8 @@ public class binomial
 	 * generation. Communications of the ACM 31, p216. (Algorithm BTPEC).
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
-	/* !* #include <stdlib.h> /*4! */
+	/* ! #include "DistLib.h" /4! */
+	/* ! #include <stdlib.h> /4! */
 
 	public static double random(final double nin,
 															final double pp,
@@ -286,13 +286,13 @@ public class binomial
 		double psave = -1.0;
 		int nsave = -1;
 
-		/* !* n = floor(nin + 0.5); *! */
+		/* ! n = floor(nin + 0.5);! */
 		n = (int) java.lang.Math.floor(nin + 0.5);
 		/* n=0, p=0, p=1 are not errors <TSL> */
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(n) || Double.isInfinite(pp) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		n < 0.0 || pp < 0.0 || pp > 1.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -318,7 +318,7 @@ public class binomial
 					if (pp != psave)
 					{
 						psave = pp;
-						/* !* p = fmin2(psave, 1.0 - psave); *! */
+						/* ! p = fmin2(psave, 1.0 - psave);! */
 						p = Math.min(psave, 1.0 - psave);
 						q = 1.0 - p;
 					}
@@ -335,7 +335,7 @@ public class binomial
 					if (xnp < 30.0)
 					{
 						/* inverse cdf logic for mean less than 30 */
-						/* !* qn = pow(q, (double) n); *! */
+						/* ! qn = pow(q, (double) n);! */
 						qn = java.lang.Math.pow(q, n);
 						r = p / q;
 						g = r * (n + 1);
@@ -347,7 +347,7 @@ public class binomial
 						m = (int) ffm;
 						fm = m;
 						xnpq = xnp * q;
-						/* !* p1 = (int)(2.195 * sqrt(xnpq) - 4.6 * q) + 0.5; *! */
+						/* ! p1 = (int)(2.195 sqrt(xnpq) - 4.6 q) + 0.5;! */
 						p1 = (int) (2.195 * java.lang.Math.sqrt(xnpq) - 4.6 * q) + 0.5;
 						xm = fm + 0.5;
 						xl = xm - p1;
@@ -377,7 +377,7 @@ public class binomial
 					if (u <= p2)
 					{
 						x = xl + (u - p1) / c;
-						/* !* v = v * c + 1.0 - fabs(xm - x) / p1; *! */
+						/* ! v = v c + 1.0 - fabs(xm - x) / p1;! */
 						v = v * c + 1.0 - java.lang.Math.abs(xm - x) / p1;
 						if (v > 1.0 || v <= 0.)
 						{
@@ -389,7 +389,7 @@ public class binomial
 					{
 						if (u > p3)
 						{ /* right tail */
-							/* !* ix = xr - log(v) / xlr; *! */
+							/* ! ix = xr - log(v) / xlr;! */
 							ix = (int) (xr - java.lang.Math.log(v) / xlr);
 							if (ix > n)
 							{
@@ -399,7 +399,7 @@ public class binomial
 						}
 						else
 						{/* left tail */
-							/* !* ix = xl + log(v) / xll; *! */
+							/* ! ix = xl + log(v) / xll;! */
 							ix = (int) (xl + java.lang.Math.log(v) / xll);
 							if (ix < 0)
 							{
@@ -409,7 +409,7 @@ public class binomial
 						}
 					}
 					/* determine appropriate way to perform accept/reject Test */
-					/* !* k = abs(ix - m); *! */
+					/* ! k = abs(ix - m);! */
 					k = java.lang.Math.abs(ix - m);
 					if (k <= 20 || k >= xnpq / 2 - 1)
 					{
@@ -445,7 +445,7 @@ public class binomial
 						amaxp = k / xnpq
 										* ((k * (k / 3.0 + 0.625) + 0.1666666666666) / xnpq + 0.5);
 						ynorm = -k * k / (2.0 * xnpq);
-						/* !* alv = log(v); *! */
+						/* ! alv = log(v);! */
 						alv = java.lang.Math.log(v);
 						if (alv < ynorm - amaxp)
 						{
@@ -464,13 +464,13 @@ public class binomial
 							f2 = f1 * f1;
 							w2 = w * w;
 							/*
-							 * !* if (alv <= xm * log(f1 / x1) + (n - m + 0.5) * log(z / w) +
-							 * (ix - m) * log(w * p / x1 * q) + (13860.0 - (462.0 - (132.0 -
-							 * (99.0 - 140.0 / f2) / f2) / f2) / f2) / f1 / 166320.0 +
-							 * (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / z2) / z2) / z2) /
-							 * z2) / z / 166320.0 + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 /
-							 * x2) / x2) / x2) / x2) / x1 / 166320.0 + (13860.0 - (462.0 -
-							 * (132.0 - (99.0 - 140.0 / w2) / w2) / w2) / w2) / w / 166320.) *!
+							 * ! if (alv <= xm log(f1 / x1) + (n - m + 0.5) log(z / w) + (ix -
+							 * m) log(w p / x1 q) + (13860.0 - (462.0 - (132.0 - (99.0 - 140.0
+							 * / f2) / f2) / f2) / f2) / f1 / 166320.0 + (13860.0 - (462.0 -
+							 * (132.0 - (99.0 - 140.0 / z2) / z2) / z2) / z2) / z / 166320.0 +
+							 * (13860.0 - (462.0 - (132.0 - (99.0 - 140.0 / x2) / x2) / x2) /
+							 * x2) / x1 / 166320.0 + (13860.0 - (462.0 - (132.0 - (99.0 -
+							 * 140.0 / w2) / w2) / w2) / w2) / w / 166320.)!
 							 */
 							if (alv <= xm * java.lang.Math.log(f1 / x1)
 													+ (n - m + 0.5)

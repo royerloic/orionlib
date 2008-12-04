@@ -170,7 +170,7 @@ public final class FastBooleanArrayIntegerSet	implements
 			return true;
 		}
 	}
-	
+
 	public void addAll(final int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -178,7 +178,6 @@ public final class FastBooleanArrayIntegerSet	implements
 			add(i);
 		}
 	}
-	
 
 	public boolean remove(final int o)
 	{
@@ -197,7 +196,7 @@ public final class FastBooleanArrayIntegerSet	implements
 			return false;
 		}
 	}
-	
+
 	public void removeAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -208,7 +207,7 @@ public final class FastBooleanArrayIntegerSet	implements
 
 	public void toggle(final int o)
 	{
-		if(contains(o))
+		if (contains(o))
 		{
 			remove(o);
 		}
@@ -217,13 +216,13 @@ public final class FastBooleanArrayIntegerSet	implements
 			add(o);
 		}
 	}
-	
+
 	public void toggleAll(final int[] pIntArray)
 	{
 		for (int i : pIntArray)
 		{
 			toggle(i);
-		}		
+		}
 	}
 
 	/*
@@ -970,7 +969,5 @@ public final class FastBooleanArrayIntegerSet	implements
 		System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
 		return copy;
 	}
-
-
 
 }

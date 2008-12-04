@@ -21,7 +21,7 @@ public class Average implements Statistic<Double>
 
 	public Double getStatistic()
 	{
-		return mTotal/mCount;
+		return mTotal / mCount;
 	}
 
 	public int getCount()

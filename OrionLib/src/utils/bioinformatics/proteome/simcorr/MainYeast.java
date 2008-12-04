@@ -29,49 +29,52 @@ public class MainYeast
 	/*****************************************************************************
 	 * @Test public void main() throws IOException, ClassNotFoundException {
 	 * 
-	 * File lProteomeCache = new File("YeastProteome.bin");
+	 *       File lProteomeCache = new File("YeastProteome.bin");
 	 * 
-	 * Proteome lProteome = null; try { lProteome = Proteome.read(lProteomeCache);
-	 * if (lProteome == null) {
+	 *       Proteome lProteome = null; try { lProteome =
+	 *       Proteome.read(lProteomeCache); if (lProteome == null) {
 	 * 
-	 * Genome lGenome = null; final File lGenomeFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
-	 * lGenome = new Genome(lGenomeFile);
+	 *       Genome lGenome = null; final File lGenomeFile = new
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff"
+	 *       ); lGenome = new Genome(lGenomeFile);
 	 * 
-	 * final File lYeastProteinSequencesFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/orf_trans_all.fasta"); FastaSet
-	 * lFastaSet = new FastaSet(lYeastProteinSequencesFile); lProteome = new
-	 * Proteome(lGenome, lFastaSet);
+	 *       final File lYeastProteinSequencesFile = new
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/orf_trans_all.fasta");
+	 *       FastaSet lFastaSet = new FastaSet(lYeastProteinSequencesFile);
+	 *       lProteome = new Proteome(lGenome, lFastaSet);
 	 * 
-	 * final File lBioGridInteractionsFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/yeast_interologome--HPRD--seqid60_hitcov60_1e-5.tab");
-	 * lProteome.addInteractions(lBioGridInteractionsFile);
+	 *       final File lBioGridInteractionsFile = new File("G:/Projects/PowerGraphs/Data/Yeast/yeast_interologome--HPRD--seqid60_hitcov60_1e-5.tab"
+	 *       ); lProteome.addInteractions(lBioGridInteractionsFile);
 	 * 
-	 * final File lInterProScanFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/domains.tab");
-	 * InterProScanReaderYeast.addDomainsTo(lProteome, lInterProScanFile);
+	 *       final File lInterProScanFile = new
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/domains.tab");
+	 *       InterProScanReaderYeast.addDomainsTo(lProteome, lInterProScanFile);
 	 * 
-	 * lProteome.write(lProteomeCache); // System.out.println(lProteome); }
+	 *       lProteome.write(lProteomeCache); // System.out.println(lProteome); }
 	 * 
-	 * assertTrue(lProteome.getProteinSet().getNumberOfProteins() == 6719);
-	 * assertNotNull(lProteome .getProteinSet() .getProteinById("YAL065C")
-	 * .getCorrespondingFastaSequence());
+	 *       assertTrue(lProteome.getProteinSet().getNumberOfProteins() == 6719);
+	 *       assertNotNull(lProteome .getProteinSet() .getProteinById("YAL065C")
+	 *       .getCorrespondingFastaSequence());
 	 * 
-	 * System.out.println(lProteome.getInteractionGraph().getNumberOfNodes());
-	 * System.out.println(lProteome.getInteractionGraph().getNumberOfEdges());
+	 *       
+	 *       System.out.println(lProteome.getInteractionGraph().getNumberOfNodes())
+	 *       ;
+	 *       System.out.println(lProteome.getInteractionGraph().getNumberOfEdges(
+	 *       ));
 	 * 
-	 * DomainIndex lDomainIndex = new DomainIndex(lProteome);
-	 * lDomainIndex.index();
+	 *       DomainIndex lDomainIndex = new DomainIndex(lProteome);
+	 *       lDomainIndex.index();
 	 * 
-	 * final FileWriter lFileWriter = new FileWriter("Test.txt"); final
-	 * PrintWriter lPrintWriter = new PrintWriter(lFileWriter);
+	 *       final FileWriter lFileWriter = new FileWriter("Test.txt"); final
+	 *       PrintWriter lPrintWriter = new PrintWriter(lFileWriter);
 	 * 
 	 * 
 	 * 
-	 * Set<String> lDomainInterProIdSet = lDomainIndex.getDomainInterProIdSet();
-	 * for (String lInterProId : lDomainInterProIdSet) { collectFor(lProteome,
-	 * lDomainIndex, lInterProId, lPrintWriter); } } catch (Throwable e) {
-	 * e.printStackTrace(); fail("Exception: " + e); } }/
+	 *       Set<String> lDomainInterProIdSet =
+	 *       lDomainIndex.getDomainInterProIdSet(); for (String lInterProId :
+	 *       lDomainInterProIdSet) { collectFor(lProteome, lDomainIndex,
+	 *       lInterProId, lPrintWriter); } } catch (Throwable e) {
+	 *       e.printStackTrace(); fail("Exception: " + e); } }/
 	 ****************************************************************************/
 
 	public void collectFor(	final Proteome pProteome,

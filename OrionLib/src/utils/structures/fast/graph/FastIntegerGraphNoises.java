@@ -112,6 +112,7 @@ public class FastIntegerGraphNoises
 														final FastIntegerGraph pIntegerGraph,
 														final int pRewireSteps)
 	{
+		double lAverageDegreeBefore = pIntegerGraph.getAverageDegree();
 		int lNumberOfSuccesses = 0;
 		for (int i = 1; i <= pRewireSteps; i++)
 		{
@@ -119,6 +120,8 @@ public class FastIntegerGraphNoises
 																															pIntegerGraph,
 																															10) ? 1 : 0;
 		}
+		double lAverageDegreeAfter = pIntegerGraph.getAverageDegree();
+		assert (lAverageDegreeBefore == lAverageDegreeAfter);
 		return lNumberOfSuccesses;
 	}
 

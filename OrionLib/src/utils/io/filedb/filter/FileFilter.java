@@ -17,7 +17,10 @@ public class FileFilter
 {
 	public static Pattern sTabDelPattern = Pattern.compile("\\t");
 
-	/** ******************************************************************************************* */
+	/**
+	 * ***************************************************************************
+	 * ****************
+	 */
 	public static final void filterOut(	final File pInputFile,
 																			final String pColumn,
 																			final String pValue,
@@ -53,7 +56,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!(lLine.length()==0))
+			else if (!(lLine.length() == 0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				if (!lValue.equals(pValue))
@@ -66,7 +69,10 @@ public class FileFilter
 		lBufferedWriter.close();
 	}
 
-	/** ******************************************************************************************* */
+	/**
+	 * ***************************************************************************
+	 * ****************
+	 */
 	public static final void filterIn(final File pInputFile,
 																		final String pColumn,
 																		final String pValue,
@@ -102,7 +108,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!(lLine.length()==0))
+			else if (!(lLine.length() == 0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				if (lValue.equals(pValue))
@@ -115,7 +121,10 @@ public class FileFilter
 		lBufferedWriter.close();
 	}
 
-	/** ******************************************************************************************* */
+	/**
+	 * ***************************************************************************
+	 * ****************
+	 */
 	public static final void filterLowerHigher(	final File pInputFile,
 																							final String pColumn,
 																							final String pValue,
@@ -210,7 +219,7 @@ public class FileFilter
 				lBufferedWriter.write(lLine);
 				lBufferedWriter.write("\n");
 			}
-			else if (!(lLine.length()==0))
+			else if (!(lLine.length() == 0))
 			{
 				final String lValue = sTabDelPattern.split(lLine, -1)[pColumn];
 				Comparable lComparableValue;

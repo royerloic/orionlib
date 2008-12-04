@@ -31,17 +31,17 @@ public class poisson
 	 * The density function of the Poisson distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, final double lambda)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
 		{
 			return x + lambda;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (lambda <= 0.0)
 		{
@@ -52,13 +52,13 @@ public class poisson
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 0;
 		}
-		/* !* #endif /*4! */
-		/* !* return exp(x * log(lambda) - lambda - lgammafn(x + 1)); *! */
+		/* ! #endif /4! */
+		/* ! return exp(x log(lambda) - lambda - lgammafn(x + 1));! */
 		return java.lang.Math.exp(x * java.lang.Math.log(lambda)
 															- lambda
 															- misc.lgammafn(x + 1));
@@ -90,17 +90,17 @@ public class poisson
 	 * The distribution function of the Poisson distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, final double lambda)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
 		{
 			return x + lambda;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (lambda <= 0.0)
 		{
@@ -111,12 +111,12 @@ public class poisson
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 1;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return 1 - gamma.cumulative(lambda, x + 1, 1.0);
 	}
 
@@ -153,12 +153,12 @@ public class poisson
 	 * initial start point.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, final double lambda)
 	{
 		double mu, sigma, gamma, z, y;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(lambda))
 		{
 			return x + lambda;
@@ -168,7 +168,7 @@ public class poisson
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (x < 0 || x > 1 || lambda <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -178,18 +178,18 @@ public class poisson
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (x == 1)
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		mu = lambda;
-		/* !* sigma = sqrt(lambda); *! */
+		/* ! sigma = sqrt(lambda);! */
 		sigma = java.lang.Math.sqrt(lambda);
 		gamma = sigma;
 		z = normal.quantile(x, 0.0, 1.0);
-		/* !* y = floor(mu + sigma * (z + gamma * (z * z - 1) / 6) + 0.5); *! */
+		/* ! y = floor(mu + sigma (z + gamma (z z - 1) / 6) + 0.5);! */
 		y = java.lang.Math.floor(mu + sigma * (z + gamma * (z * z - 1) / 6) + 0.5);
 		z = cumulative(y, lambda);
 
@@ -361,8 +361,8 @@ public class poisson
  */
 /**
  * **** t = 1.8 + misc.fsign(e, u); /****** if (t > -0.6744) { /****** ipois =
- * mu + s * t; /****** fk = ipois; /****** difmuk = mu - fk; /****** f( /****** /*
- * 'subroutine' f is called
+ * mu + s * t; /****** fk = ipois; /****** difmuk = mu - fk; /****** f( /******
+ * /* 'subroutine' f is called
  */
 /** **** /* (kflag=1 for correct return) */
 /**

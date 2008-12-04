@@ -75,6 +75,16 @@ public class FastGraph<N> implements Serializable
 		return list;
 	}
 
+	public ArrayList<N> getNodesForIntegers(final FastBoundedIntegerSet set)
+	{
+		final ArrayList<N> list = new ArrayList<N>(set.size());
+		for (final Integer lInteger : set)
+		{
+			list.add(mNodeToNameList.get(lInteger));
+		}
+		return list;
+	}
+
 	public void addNode(final N pNodeName)
 	{
 		if (!mNameToNodeMap.containsKey(pNodeName))

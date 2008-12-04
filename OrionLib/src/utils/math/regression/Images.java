@@ -109,8 +109,8 @@ public final class Images
 	 * Returns a vector of data from the (x, y, width, height) rectangular section
 	 * of the specified image. The returned vector is of length (width * height *
 	 * 3). The intensity of red in pixel (i, j) is located at index p = (3 * ((i -
-	 * x) + (j - y) * width)) in the vector. The intensity of green is at index p +
-	 * 1 and blue is at p + 2.
+	 * x) + (j - y) * width)) in the vector. The intensity of green is at index p
+	 * + 1 and blue is at p + 2.
 	 * 
 	 * @throws NotImageException
 	 *           if image is empty

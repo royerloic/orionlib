@@ -3,9 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="lib/WiiRemoteJ.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="var" path="Jars/ant-1.7.0.jar"/>
-	<classpathentry exported="true" kind="var" path="Jars/ant-junit-1.7.0.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/ant-launcher-1.7.0.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/antlr-2.7.6.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/asm-2.2.jar"/>
@@ -39,11 +37,9 @@
 	<classpathentry exported="true" kind="var" path="Jars/jline-0.9.94.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/js.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/jsp-api-2.0.jar"/>
-	<classpathentry exported="true" kind="var" path="Jars/junit-3.8.2.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/mockobjects-core-0.09.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/mx4j-3.0.2.jar"/>
 	<classpathentry exported="true" kind="var" path="Jars/pdf-transcoder.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME"/>
 	<classpathentry kind="var" path="Jars/axis-ant.jar"/>
 	<classpathentry kind="var" path="Jars/axis.jar"/>
 	<classpathentry kind="var" path="Jars/commons-discovery-0.2.jar"/>
@@ -71,5 +67,6 @@
 	<classpathentry kind="var" path="Jars/xml-apis.jar"/>
 	<classpathentry kind="var" path="Jars/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry kind="var" path="Jars/xstream-1.2.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

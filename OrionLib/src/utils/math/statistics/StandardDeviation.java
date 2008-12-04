@@ -6,7 +6,7 @@ public class StandardDeviation implements Statistic<Double>
 	int mCount = 0;
 	double mTotal = 0;
 	double mTotalSquares = 0;
-	
+
 	public void reset()
 	{
 		mCount = 0;
@@ -18,13 +18,13 @@ public class StandardDeviation implements Statistic<Double>
 	{
 		mCount++;
 		mTotal += pValue;
-		mTotalSquares += pValue*pValue;			
+		mTotalSquares += pValue * pValue;
 		return mCount;
 	}
 
 	public Double getStatistic()
 	{
-		final double stddev = Math.sqrt(mCount*mTotalSquares-mTotal*mTotal)/mCount;
+		final double stddev = Math.sqrt(mCount * mTotalSquares - mTotal * mTotal) / mCount;
 		return stddev;
 	}
 

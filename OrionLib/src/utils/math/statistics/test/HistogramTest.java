@@ -1,19 +1,13 @@
 package utils.math.statistics.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Arrays;
 
 import org.junit.Test;
 
 import utils.math.statistics.Histogram;
-import utils.math.statistics.HyperGeometricEnrichement;
-import utils.math.statistics.transform.NormalizedZTransform;
 
 public class HistogramTest
 {

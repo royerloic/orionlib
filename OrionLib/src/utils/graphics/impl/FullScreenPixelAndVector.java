@@ -657,7 +657,7 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 
 	public void dispose()
 	{
-		mFrame.dispose();		
+		mFrame.dispose();
 	}
 
 	public boolean isDecorated()
@@ -671,15 +671,15 @@ public class FullScreenPixelAndVector implements IOrionGraphics
 	 * mFrame = new Frame(mGraphicsDevice.getDefaultConfiguration()); mWindow =
 	 * new Window(mFrame); mGraphicsDevice.setFullScreenWindow(mWindow);
 	 * mWindow.setIgnoreRepaint(true); mWindow.requestFocus(); try {
-	 * mWindow.setAlwaysOnTop(true); } catch (Throwable eProblemWithAllwaysOnTop) {
-	 * eProblemWithAllwaysOnTop.printStackTrace(); }
+	 * mWindow.setAlwaysOnTop(true); } catch (Throwable eProblemWithAllwaysOnTop)
+	 * { eProblemWithAllwaysOnTop.printStackTrace(); }
 	 * 
 	 * try {
 	 * 
-	 * DisplayMode[] affichages = mGraphicsDevice.getDisplayModes(); int i; for (i =
-	 * 0; i < affichages.length; i++) { if ((affichages[i].getWidth() == 800) &&
-	 * (affichages[i].getHeight() == 600) && (affichages[i].getBitDepth() == 32)) {
-	 * mGraphicsDevice.setDisplayMode(affichages[i]); } }
+	 * DisplayMode[] affichages = mGraphicsDevice.getDisplayModes(); int i; for (i
+	 * = 0; i < affichages.length; i++) { if ((affichages[i].getWidth() == 800) &&
+	 * (affichages[i].getHeight() == 600) && (affichages[i].getBitDepth() == 32))
+	 * { mGraphicsDevice.setDisplayMode(affichages[i]); } }
 	 * 
 	 * int screenWidth = mWindow.getWidth(); int screenHeight =
 	 * mWindow.getHeight();

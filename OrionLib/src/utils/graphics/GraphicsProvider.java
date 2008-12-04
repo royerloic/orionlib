@@ -1,7 +1,6 @@
 package utils.graphics;
 
 import java.awt.Component;
-import java.awt.Frame;
 import java.awt.Graphics2D;
 
 public interface GraphicsProvider
@@ -15,7 +14,7 @@ public interface GraphicsProvider
 	public void showGraphics();
 
 	public Graphics2D getDrawGraphics();
-	
+
 	public boolean isDecorated();
 
 	public void dispose();

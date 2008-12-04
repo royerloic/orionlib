@@ -32,42 +32,42 @@ public class hypergeometric
 	 * The density of the hypergeometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, double NR, double NB, double n)
 	{
 		double N;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
 		{
 			return x + NR + NB + n;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
-		/* !* NR = floor(NR + 0.5); *! */
+		/* ! NR = floor(NR + 0.5);! */
 		NR = java.lang.Math.floor(NR + 0.5);
-		/* !* NB = floor(NB + 0.5); *! */
+		/* ! NB = floor(NB + 0.5);! */
 		NB = java.lang.Math.floor(NB + 0.5);
 		N = NR + NB;
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (NR < 0 || NB < 0 || n < 0 || n > N)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* if (x < fmax2(0, n - NB) || x > fmin2(n, NR)) *! */
+		/* ! if (x < fmax2(0, n - NB) || x > fmin2(n, NR))! */
 		if (x < Math.max(0, n - NB) || x > Math.min(n, NR))
 		{
 			return 0;
 		}
-		/* !* return exp(lfastchoose(NR, x) + lfastchoose(NB, n - x) *! */
+		/* ! return exp(lfastchoose(NR, x) + lfastchoose(NB, n - x)! */
 		return java.lang.Math.exp(misc.lfastchoose(NR, x) + misc.lfastchoose(	NB,
 																																					n - x)
-															/* !* - lfastchoose(N, n)); *! */
+															/* ! - lfastchoose(N, n));! */
 															- misc.lfastchoose(N, n));
 	}
 
@@ -98,13 +98,14 @@ public class hypergeometric
 	 * The distribution function of the hypergeometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, double NR, double NB, double n)
 	{
+
 		double N, xstart, xend, xr, xb, sum, term;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
@@ -118,25 +119,25 @@ public class hypergeometric
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
-		/* !* x = floor(x); *! */
+		/* ! x = floor(x);! */
 		x = java.lang.Math.floor(x);
-		/* !* NR = floor(NR + 0.5); *! */
+		/* ! NR = floor(NR + 0.5);! */
 		NR = java.lang.Math.floor(NR + 0.5);
-		/* !* NB = floor(NB + 0.5); *! */
+		/* ! NB = floor(NB + 0.5);! */
 		NB = java.lang.Math.floor(NB + 0.5);
 		N = NR + NB;
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (NR < 0 || NB < 0 || n < 0 || n > N)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* xstart = fmax2(0, n - NB); *! */
+		/* ! xstart = fmax2(0, n - NB);! */
 		xstart = Math.max(0, n - NB);
-		/* !* xend = fmin2(n, NR); *! */
+		/* ! xend = fmin2(n, NR);! */
 		xend = Math.min(n, NR);
 		if (x < xstart)
 		{
@@ -148,10 +149,10 @@ public class hypergeometric
 		}
 		xr = xstart;
 		xb = n - xr;
-		/* !* term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb) *! */
+		/* ! term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb)! */
 		term = java.lang.Math.exp(misc.lfastchoose(NR, xr) + misc.lfastchoose(NB,
 																																					xb)
-															/* !* - lfastchoose(N, n)); *! */
+															/* ! - lfastchoose(N, n));! */
 															- misc.lfastchoose(N, n));
 		NR = NR - xr;
 		NB = NB - xb;
@@ -165,7 +166,7 @@ public class hypergeometric
 			xb--;
 			NR--;
 		}
-		return sum;
+		return sum < 0 ? 0 : sum;
 	}
 
 	/*
@@ -195,12 +196,12 @@ public class hypergeometric
 	 * The quantile function of the hypergeometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, double NR, double NB, double n)
 	{
 		double N, xstart, xend, xr, xb, sum, term;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(NR)
 				|| Double.isNaN(NB)
 				|| Double.isNaN(n))
@@ -214,22 +215,22 @@ public class hypergeometric
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* NR = floor(NR + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! NR = floor(NR + 0.5);! */
 		NR = java.lang.Math.floor(NR + 0.5);
-		/* !* NB = floor(NB + 0.5); *! */
+		/* ! NB = floor(NB + 0.5);! */
 		NB = java.lang.Math.floor(NB + 0.5);
 		N = NR + NB;
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (x < 0 || x > 1 || NR < 0 || NR < 0 || n < 0 || n > N)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* xstart = fmax2(0, n - NB); *! */
+		/* ! xstart = fmax2(0, n - NB);! */
 		xstart = Math.max(0, n - NB);
-		/* !* xend = fmin2(n, NR); *! */
+		/* ! xend = fmin2(n, NR);! */
 		xend = Math.min(n, NR);
 		if (x <= 0)
 		{
@@ -241,10 +242,10 @@ public class hypergeometric
 		}
 		xr = xstart;
 		xb = n - xr;
-		/* !* term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb) *! */
+		/* ! term = exp(lfastchoose(NR, xr) + lfastchoose(NB, xb)! */
 		term = java.lang.Math.exp(misc.lfastchoose(NR, xr) + misc.lfastchoose(NB,
 																																					xb)
-															/* !* - lfastchoose(N, n)); *! */
+															/* ! - lfastchoose(N, n));! */
 															- misc.lfastchoose(N, n));
 		NR = NR - xr;
 		NB = NB - xb;
@@ -295,7 +296,7 @@ public class hypergeometric
 	 * Simulation 22, 127-145.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	/*
 	 * afc(i) := ln( i! ) [logarithm of the factorial i. If (i > 7), use
@@ -330,7 +331,7 @@ public class hypergeometric
 		else
 		{
 			di = i;
-			/* !* value = (di + 0.5) * log(di) - di + 0.08333333333333 / di *! */
+			/* ! value = (di + 0.5) log(di) - di + 0.08333333333333 / di! */
 			value = (di + 0.5) * java.lang.Math.log(di)
 							- di
 							+ 0.08333333333333
@@ -383,20 +384,20 @@ public class hypergeometric
 
 		/* check parameter validity */
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(nn1in) || Double.isInfinite(nn2in)
 				|| Double.isInfinite(kkin))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
-		/* !* nn1 = floor(nn1in+0.5); *! */
+		/* ! nn1 = floor(nn1in+0.5);! */
 		nn1 = (int) java.lang.Math.floor(nn1in + 0.5);
-		/* !* nn2 = floor(nn2in+0.5); *! */
+		/* ! nn2 = floor(nn2in+0.5);! */
 		nn2 = (int) java.lang.Math.floor(nn2in + 0.5);
-		/* !* kk = floor(kkin+0.5); *! */
+		/* ! kk = floor(kkin+0.5);! */
 		kk = (int) java.lang.Math.floor(kkin + 0.5);
 
 		if (nn1 < 0 || nn2 < 0 || kk < 0 || kk > nn1 + nn2)
@@ -449,9 +450,9 @@ public class hypergeometric
 		if (setup1 || setup2)
 		{
 			m = (int) ((k + 1.0) * (n1 + 1.0) / (tn + 2.0));
-			/* !* minjx = imax2(0, k - n2); *! */
+			/* ! minjx = imax2(0, k - n2);! */
 			minjx = Math.max(0, k - n2);
-			/* !* maxjx = Math.min(n1, k); *! */
+			/* ! maxjx = Math.min(n1, k);! */
 			maxjx = Math.min(n1, k);
 		}
 		/* generate random variate */
@@ -493,7 +494,7 @@ public class hypergeometric
 			{
 				if (k < n2)
 				{
-					/* !* w = exp(con + afc(n2) + afc(n1 + n2 - k) *! */
+					/* ! w = exp(con + afc(n2) + afc(n1 + n2 - k)! */
 					w = java.lang.Math.exp(con + afc(n2)
 																	+ afc(n1 + n2 - k)
 																	- afc(n2 - k)
@@ -501,7 +502,7 @@ public class hypergeometric
 				}
 				else
 				{
-					/* !* w = exp(con + afc(n1) + afc(k) *! */
+					/* ! w = exp(con + afc(n1) + afc(k)! */
 					w = java.lang.Math.exp(con + afc(n1)
 																	+ afc(k)
 																	- afc(k - n2)
@@ -537,7 +538,7 @@ public class hypergeometric
 
 			if (setup1 || setup2)
 			{
-				/* !* s = sqrt((tn - k) * k * n1 * n2 / (tn - 1) / tn / tn); *! */
+				/* ! s = sqrt((tn - k) k n1 n2 / (tn - 1) / tn / tn);! */
 				s = java.lang.Math.sqrt((tn - k) * k * n1 * n2 / (tn - 1) / tn / tn);
 
 				/* remark: d is defined in reference without int. */
@@ -547,21 +548,21 @@ public class hypergeometric
 				xl = m - d + .5;
 				xr = m + d + .5;
 				a = afc(m) + afc(n1 - m) + afc(k - m) + afc(n2 - k + m);
-				/* !* kl = exp(a - afc((int) (xl)) - afc((int) (n1 - xl)) *! */
+				/* ! kl = exp(a - afc((int) (xl)) - afc((int) (n1 - xl))! */
 				kl = java.lang.Math.exp(a - afc((int) xl)
 																- afc((int) (n1 - xl))
 																- afc((int) (k - xl))
 																- afc((int) (n2 - k + xl)));
-				/* !* kr = exp(a - afc((int) (xr - 1)) *! */
+				/* ! kr = exp(a - afc((int) (xr - 1))! */
 				kr = java.lang.Math.exp(a - afc((int) (xr - 1))
 																- afc((int) (n1 - xr + 1))
 																- afc((int) (k - xr + 1))
 																- afc((int) (n2 - k + xr - 1)));
-				/* !* lamdl = -log(xl * (n2 - k + xl) / (n1 - xl + 1) *! */
+				/* ! lamdl = -log(xl (n2 - k + xl) / (n1 - xl + 1)! */
 				lamdl = -java.lang.Math.log(xl * (n2 - k + xl)
 																		/ (n1 - xl + 1)
 																		/ (k - xl + 1));
-				/* !* lamdr = -log((n1 - xr + 1) * (k - xr + 1) *! */
+				/* ! lamdr = -log((n1 - xr + 1) (k - xr + 1)! */
 				lamdr = -java.lang.Math.log((n1 - xr + 1) * (k - xr + 1)
 																		/ xr
 																		/ (n2 - k + xr));
@@ -581,7 +582,7 @@ public class hypergeometric
 				else if (u <= p2)
 				{
 					/* left tail */
-					/* !* ix = xl + log(v) / lamdl; *! */
+					/* ! ix = xl + log(v) / lamdl;! */
 					ix = (int) (xl + java.lang.Math.log(v) / lamdl);
 					if (ix < minjx)
 					{
@@ -592,7 +593,7 @@ public class hypergeometric
 				else
 				{
 					/* right tail */
-					/* !* ix = xr - log(v) / lamdr; *! */
+					/* ! ix = xr - log(v) / lamdr;! */
 					ix = (int) (xr - java.lang.Math.log(v) / lamdr);
 					if (ix > maxjx)
 					{
@@ -668,7 +669,7 @@ public class hypergeometric
 								* e
 								* (1. + e * (-0.5 + e / 3.0));
 					/* Test against upper bound */
-					/* !* alv = log(v); *! */
+					/* ! alv = log(v);! */
 					alv = java.lang.Math.log(v);
 					if (alv > ub)
 					{

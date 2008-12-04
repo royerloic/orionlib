@@ -13,7 +13,7 @@ public class LocalIpFinder
 		String lIp = getLocalInetAddress().toString();
 		return lIp.substring(1);
 	}
-	
+
 	public static final InetAddress getLocalInetAddress() throws SocketException
 	{
 		Enumeration<NetworkInterface> networkinterfaces = NetworkInterface.getNetworkInterfaces();

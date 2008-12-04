@@ -161,7 +161,7 @@ public class SmithWatermanGotoh
 		final float[] g = new float[n]; // score if xi aligns to a gap after yi
 		float h; // score if yi aligns to a gap after xi
 		final float[] v = new float[n]; // best score of alignment x1...xi to
-																		// y1...yi
+		// y1...yi
 		float vDiagonal;
 
 		g[0] = Float.NEGATIVE_INFINITY;

@@ -5,15 +5,15 @@ import java.util.Set;
 public interface FastIntegerSet extends Set<Integer>
 {
 	public boolean add(final int o);
-	
+
 	public void addAll(final int[] o);
 
 	public boolean remove(final int o);
-		
+
 	public void removeAll(final int[] o);
-	
+
 	public void toggle(final int o);
-	
+
 	public void toggleAll(final int[] o);
 
 	public boolean contains(final int o);
@@ -29,5 +29,5 @@ public interface FastIntegerSet extends Set<Integer>
 	public void clear();
 
 	public void wipe();
-	
+
 }

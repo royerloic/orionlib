@@ -178,7 +178,8 @@ public class OrionGraphics extends JFrame	implements
 
 		// getBufferStrategy().getDrawGraphics().dispose();
 		createBufferStrategy(2);
-		// System.out.println(getBufferStrategy().getCapabilities().isPageFlipping());
+		//System.out.println(getBufferStrategy().getCapabilities().isPageFlipping())
+		// ;
 
 		// show();
 

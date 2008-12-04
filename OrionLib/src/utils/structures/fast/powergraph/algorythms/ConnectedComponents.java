@@ -2,7 +2,6 @@ package utils.structures.fast.powergraph.algorythms;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import utils.structures.fast.powergraph.FastIntegerPowerGraph;
 import utils.structures.fast.powergraph.FastPowerGraph;
@@ -21,7 +20,7 @@ public class ConnectedComponents
 
 	public static final ArrayList<FastBoundedIntegerSet> getConnectedComponents(final FastIntegerPowerGraph pPowerGraph)
 	{
-			
+
 		final ArrayList<FastBoundedIntegerSet> lConnectedComponentList = new ArrayList<FastBoundedIntegerSet>();
 
 		final FastBoundedIntegerSet allpowernodes = pPowerGraph.getPowerNodeIdSet();
@@ -56,8 +55,6 @@ public class ConnectedComponents
 				frontierpowernodes = newfrontierpowernodes;
 				newfrontierpowernodes = temp;
 			}
-			
-			
 
 			componentpowernodes.remove(0);
 			lConnectedComponentList.add(componentpowernodes);

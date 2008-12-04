@@ -15,7 +15,7 @@ public class RegexCompilerTests
 	@Test
 	public void testExample() throws IOException
 	{
-		final RegexCompiler lRegexCompiler = new RegexCompiler(RegexCompilerTests.class.getResourceAsStream("/utils/regex/compiler/Test.regex.txt"));
+		final RegexCompiler lRegexCompiler = new RegexCompiler(RegexCompilerTests.class.getResourceAsStream("/utils/regex/compiler/test.regex.txt"));
 
 		assertEquals("(?:[0-9]+)", lRegexCompiler.getRegex("regex1"));
 		assertEquals("(?:A(?:[0-9]+)B)", lRegexCompiler.getRegex("regex2"));

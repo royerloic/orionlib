@@ -4,18 +4,13 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.lang.MissingPropertyException;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -24,12 +19,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
-import java.util.Map;
-
-import utils.network.socket.Service;
-import utils.network.socket.ServiceFactory;
-import utils.network.socket.SocketServiceServer;
-import utils.utils.CmdLine;
 
 public class GroovyClient implements Serializable
 {
@@ -117,12 +106,14 @@ public class GroovyClient implements Serializable
 		return sendQueryGetString(mSocket, pQuery);
 	}
 
-	public Object sendQueryGetObject(final String pQuery) throws IOException, ClassNotFoundException
+	public Object sendQueryGetObject(final String pQuery)	throws IOException,
+																												ClassNotFoundException
 	{
 		return sendQueryGetObject(mSocket, pQuery);
 	}
 
-	public Object evaluate(final String pCommand) throws IOException, ClassNotFoundException
+	public Object evaluate(final String pCommand)	throws IOException,
+																								ClassNotFoundException
 	{
 		if (pCommand.startsWith(">>"))
 		{
@@ -162,7 +153,7 @@ public class GroovyClient implements Serializable
 
 		// This method will block no more than timeoutMs.
 		// If the timeout occurs, SocketTimeoutException is thrown.
-		final int timeoutMs = 2000; // 2 seconds
+		final int timeoutMs = 3000; // 2 seconds
 		lSocket.connect(sockaddr, timeoutMs);
 
 		OutputStream lOutputStream = lSocket.getOutputStream();

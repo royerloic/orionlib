@@ -34,7 +34,9 @@ public class SocketServiceServer implements Serializable
 		}
 		catch (final IOException e)
 		{
-			throw new IOException("Could not listen on port: " + pPort + ". \n"+ e.getMessage());
+			throw new IOException("Could not listen on port: " + pPort
+														+ ". \n"
+														+ e.getMessage());
 		}
 
 		try
