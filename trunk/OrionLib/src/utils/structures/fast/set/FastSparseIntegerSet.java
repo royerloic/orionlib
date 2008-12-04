@@ -1,11 +1,9 @@
 package utils.structures.fast.set;
 
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.RandomAccess;
-import java.util.Set;
 
 import utils.structures.fast.list.FastIntegerList;
 import utils.utils.Arrays;
@@ -292,7 +290,7 @@ public final class FastSparseIntegerSet	implements
 			return true;
 		}
 	}
-	
+
 	public void addAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -322,7 +320,7 @@ public final class FastSparseIntegerSet	implements
 			return true;
 		}
 	}
-	
+
 	public void removeAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -342,7 +340,7 @@ public final class FastSparseIntegerSet	implements
 			add(o);
 		}
 	}
-	
+
 	public void toggleAll(int[] pIntArray)
 	{
 		for (int i : pIntArray)
@@ -668,7 +666,7 @@ public final class FastSparseIntegerSet	implements
 
 	public boolean remove(final Object pO)
 	{
-		remove((int)(Integer) pO);
+		remove((int) (Integer) pO);
 		return true;
 	}
 

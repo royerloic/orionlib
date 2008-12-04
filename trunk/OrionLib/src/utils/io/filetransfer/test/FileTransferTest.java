@@ -1,25 +1,17 @@
 package utils.io.filetransfer.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
-import java.util.Set;
 
 import org.junit.Test;
 
 import utils.io.FileToString;
-import utils.io.StreamToFile;
 import utils.io.filetransfer.Chunk;
 import utils.io.filetransfer.FileReceiver;
 import utils.io.filetransfer.FileSender;
-import utils.io.serialization.SerializationUtils;
-import utils.network.groovyserver.GroovyClient;
-import utils.network.groovyserver.GroovyServer;
 import utils.utils.Arrays;
 
 public class FileTransferTest

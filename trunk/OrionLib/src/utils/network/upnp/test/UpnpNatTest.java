@@ -1,28 +1,18 @@
 package utils.network.upnp.test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
 
 import net.sbbi.upnp.messages.UPNPResponseException;
-
-import org.junit.Test;
-
 import utils.network.groovyserver.GroovyServer;
 import utils.network.upnp.UpnpNat;
-import utils.web.dyndns.DynDnsUpdater;
-import utils.web.dyndns.JddUpdateException;
 
 public class UpnpNatTest
 {
-	@Test
-	public void testDynDnsUpdate() throws InterruptedException
+	// @Test
+	public void testUpnpNatTest() throws InterruptedException
 	{
 		try
 		{
@@ -42,9 +32,7 @@ public class UpnpNatTest
 			e.printStackTrace();
 			fail();
 		}
-		
-		
+
 	}
-	
 
 }

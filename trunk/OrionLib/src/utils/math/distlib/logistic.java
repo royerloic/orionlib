@@ -24,25 +24,25 @@ public class logistic
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(	final double x,
 																final double location,
 																final double scale)
 	{
 		double e, f;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (scale <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* e = exp(-(x - location) / scale); *! */
+		/* ! e = exp(-(x - location) / scale);! */
 		e = java.lang.Math.exp(-(x - location) / scale);
 		f = 1.0 + e;
 		return e / (scale * f * f);
@@ -67,18 +67,18 @@ public class logistic
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double x,
 																	final double location,
 																	final double scale)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (scale <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -95,7 +95,7 @@ public class logistic
 				return 0;
 			}
 		}
-		/* !* return 1.0 / (1.0 + exp(-(x - location) / scale)); *! */
+		/* ! return 1.0 / (1.0 + exp(-(x - location) / scale));! */
 		return 1.0 / (1.0 + java.lang.Math.exp(-(x - location) / scale));
 	}
 
@@ -118,18 +118,18 @@ public class logistic
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x,
 																final double location,
 																final double scale)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(location) || Double.isNaN(scale))
 		{
 			return x + location + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (scale <= 0.0 || x < 0 || x > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -143,7 +143,7 @@ public class logistic
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* return location + scale * log(x / (1.0 - x)); *! */
+		/* ! return location + scale log(x / (1.0 - x));! */
 		return location + scale * java.lang.Math.log(x / (1.0 - x));
 	}
 
@@ -166,7 +166,7 @@ public class logistic
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double location,
 															final double scale,
@@ -181,7 +181,7 @@ public class logistic
 		}
 		/* #endif */
 		u = uniform.random();
-		/* !* return location + scale * log(u / (1.0 - u)); *! */
+		/* ! return location + scale log(u / (1.0 - u));! */
 		return location + scale * java.lang.Math.log(u / (1.0 - u));
 	}
 }

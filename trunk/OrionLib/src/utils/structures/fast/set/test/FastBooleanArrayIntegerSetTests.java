@@ -1,11 +1,9 @@
 package utils.structures.fast.set.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,8 +21,8 @@ public class FastBooleanArrayIntegerSetTests
 	@Test
 	public void genericTest()
 	{
-		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory(){
-
+		IntegerSetFactory lIntegerSetFactory = new IntegerSetFactory()
+		{
 
 			public FastIntegerSet createEmptySet()
 			{
@@ -33,19 +31,18 @@ public class FastBooleanArrayIntegerSetTests
 
 			public FastIntegerSet createSet(int... pListOfIntegers)
 			{
-				return new FastBooleanArrayIntegerSet(true,pListOfIntegers);
+				return new FastBooleanArrayIntegerSet(true, pListOfIntegers);
 			}
 
 			public String getSetTypeName()
 			{
 				return "FastBooleanArrayIntegerSet";
-			}};
+			}
+		};
 
-			GenericIntegerSetTest.testAll(lIntegerSetFactory);
+		GenericIntegerSetTest.testAll(lIntegerSetFactory);
 	}
 
-	
-	
 	private static void add(final Set<Integer> set1,
 													final Set<Integer> set2,
 													final int i)
@@ -222,63 +219,65 @@ public class FastBooleanArrayIntegerSetTests
 		// same int:
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			assertEquals(0, FastBooleanArrayIntegerSet.relationship(set1, set2));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		2,
-																																		3,
-																																		4);
+																																							2,
+																																							3,
+																																							4);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 2);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
-			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(true, 2, 3);
+																																							1,
+																																							2,
+																																							3);
+			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
+																																							2,
+																																							3);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 1);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		4);
+																																							1,
+																																							2,
+																																							3,
+																																							4);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == -1);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 3);
 		}
@@ -287,70 +286,72 @@ public class FastBooleanArrayIntegerSetTests
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		104,
-																																		105,
-																																		106);
+																																							104,
+																																							105,
+																																							106);
 
 			assertEquals(0, FastBooleanArrayIntegerSet.relationship(set1, set2));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1001,
-																																		1,
-																																		2,
-																																		103);
+																																							1001,
+																																							1,
+																																							2,
+																																							103);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		2,
-																																		103,
-																																		4,
-																																		1004);
+																																							2,
+																																							103,
+																																							4,
+																																							1004);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 2);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		103);
-			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(true, 2, 103);
+																																							1,
+																																							2,
+																																							103);
+			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
+																																							2,
+																																							103);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 1);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		103);
+																																							1,
+																																							2,
+																																							103);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		103,
-																																		4,
-																																		104);
+																																							1,
+																																							2,
+																																							103,
+																																							4,
+																																							104);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == -1);
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		101,
-																																		1001);
+																																							1,
+																																							2,
+																																							3,
+																																							101,
+																																							1001);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		101,
-																																		1001);
+																																							1,
+																																							2,
+																																							3,
+																																							101,
+																																							1001);
 
 			assertTrue(FastBooleanArrayIntegerSet.relationship(set1, set2) == 3);
 		}
@@ -365,30 +366,30 @@ public class FastBooleanArrayIntegerSetTests
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet();
 
 			final FastBooleanArrayIntegerSet lSetInter = FastBooleanArrayIntegerSet.intersection(	set0,
-																																									set1);
+																																														set1);
 			assertTrue(lSetInter.isEmpty());
 
 			final FastBooleanArrayIntegerSet lSetInter2 = FastBooleanArrayIntegerSet.intersection(set0,
-																																									set1);
+																																														set1);
 			assertTrue(lSetInter2.isEmpty());
 
 			final FastBooleanArrayIntegerSet lSetInter3 = FastBooleanArrayIntegerSet.intersection(set1,
-																																									set0);
+																																														set0);
 			assertTrue(lSetInter3.isEmpty());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			FastBooleanArrayIntegerSet inter = FastBooleanArrayIntegerSet.intersection(	set1,
-																																				set2);
+																																									set2);
 			assertTrue(inter.isEmpty());
 			inter = FastBooleanArrayIntegerSet.intersection(set2, set1);
 			assertTrue(inter.isEmpty());
@@ -396,21 +397,21 @@ public class FastBooleanArrayIntegerSetTests
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		3,
-																																		4,
-																																		5);
+																																							3,
+																																							4,
+																																							5);
 
 			final FastBooleanArrayIntegerSet inter1 = FastBooleanArrayIntegerSet.intersection(set1,
-																																							set2);
+																																												set2);
 			assertSame(2, inter1.size());
 			assertTrue(inter1.contains(4));
 			assertTrue(inter1.contains(5));
 			final FastBooleanArrayIntegerSet inter2 = FastBooleanArrayIntegerSet.intersection(set2,
-																																							set1);
+																																												set1);
 			assertSame(2, inter2.size());
 			assertTrue(inter2.contains(4));
 			assertTrue(inter2.contains(5));
@@ -418,61 +419,62 @@ public class FastBooleanArrayIntegerSetTests
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
-			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(true, 2);
+																																							1,
+																																							2,
+																																							3);
+			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
+																																							2);
 
 			final FastBooleanArrayIntegerSet inter = FastBooleanArrayIntegerSet.intersection(	set1,
-																																							set2);
+																																												set2);
 			assertEquals(1, inter.size());
 			assertTrue(inter.contains(2));
 			final FastBooleanArrayIntegerSet lSetInter2 = FastBooleanArrayIntegerSet.intersection(set2,
-																																									set1);
+																																														set1);
 			assertEquals(1, lSetInter2.size());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		11,
-																																		12,
-																																		13);
+																																							11,
+																																							12,
+																																							13);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		12);
+																																							1,
+																																							2,
+																																							3,
+																																							12);
 
 			final FastBooleanArrayIntegerSet inter1 = FastBooleanArrayIntegerSet.intersection(set1,
-																																							set2);
+																																												set2);
 			assertSame(1, inter1.size());
 			assertTrue(inter1.contains(12));
 			final FastBooleanArrayIntegerSet inter2 = FastBooleanArrayIntegerSet.intersection(set2,
-																																							set1);
+																																												set1);
 			assertSame(1, inter2.size());
 			assertTrue(inter2.contains(12));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		4,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							4,
+																																							10);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		5,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							5,
+																																							10);
 
 			final FastBooleanArrayIntegerSet inter1 = FastBooleanArrayIntegerSet.intersection(set1,
-																																							set2);
+																																												set2);
 			assertSame(4, inter1.size());
 			assertTrue(inter1.contains(10));
 			final FastBooleanArrayIntegerSet inter2 = FastBooleanArrayIntegerSet.intersection(set2,
-																																							set1);
+																																												set1);
 			assertSame(4, inter2.size());
 			assertTrue(inter2.contains(10));
 		}
@@ -486,101 +488,102 @@ public class FastBooleanArrayIntegerSetTests
 			final FastBooleanArrayIntegerSet set0 = new FastBooleanArrayIntegerSet();
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet();
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set0,
-																																				set1);
+																																									set1);
 			assertSame(0, union1.size());
 
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertSame(3, union2.size());
 			assertTrue(union2.containsAll(4, 5, 6));
 
 			final FastBooleanArrayIntegerSet union3 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertSame(3, union3.size());
 			assertTrue(union3.containsAll(4, 5, 6));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertTrue(union1.containsAll(1, 2, 3, 4, 5, 6));
 
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertTrue(union2.containsAll(1, 2, 3, 4, 5, 6));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		3,
-																																		4,
-																																		5);
+																																							3,
+																																							4,
+																																							5);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertSame(4, union1.size());
 			assertTrue(union1.contains(3));
 			assertTrue(union1.contains(6));
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertSame(4, union2.size());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
-			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(true, 2);
+																																							1,
+																																							2,
+																																							3);
+			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
+																																							2);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertSame(3, union1.size());
 			assertTrue(union1.contains(1));
 			assertTrue(union1.contains(2));
 			assertTrue(union1.contains(3));
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertSame(3, union2.size());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		11,
-																																		12,
-																																		13);
+																																							11,
+																																							12,
+																																							13);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		12);
+																																							1,
+																																							2,
+																																							3,
+																																							12);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertSame(6, union1.size());
 			assertTrue(union1.contains(1));
 			assertTrue(union1.contains(3));
 			assertTrue(union1.contains(13));
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertSame(6, union2.size());
 			assertTrue(union2.contains(1));
 			assertTrue(union2.contains(3));
@@ -589,25 +592,25 @@ public class FastBooleanArrayIntegerSetTests
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		4,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							4,
+																																							10);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		5,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							5,
+																																							10);
 
 			final FastBooleanArrayIntegerSet union1 = FastBooleanArrayIntegerSet.union(	set1,
-																																				set2);
+																																									set2);
 			assertSame(6, union1.size());
 			assertTrue(union1.contains(1));
 			assertTrue(union1.contains(10));
 			final FastBooleanArrayIntegerSet union2 = FastBooleanArrayIntegerSet.union(	set2,
-																																				set1);
+																																									set1);
 			assertSame(6, union2.size());
 			assertTrue(union2.contains(1));
 			assertTrue(union2.contains(10));
@@ -623,101 +626,102 @@ public class FastBooleanArrayIntegerSetTests
 			final FastBooleanArrayIntegerSet set0 = new FastBooleanArrayIntegerSet();
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet();
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set0,
-																																						set1);
+																																											set1);
 			assertSame(0, diff1.size());
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertSame(3, diff2.size());
 			assertTrue(diff2.containsAll(4, 5, 6));
 
 			final FastBooleanArrayIntegerSet diff3 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertSame(0, diff3.size());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
+																																							1,
+																																							2,
+																																							3);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertTrue(diff1.equals(1, 2, 3));
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertTrue(diff2.equals(4, 5, 6));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		4,
-																																		5,
-																																		6);
+																																							4,
+																																							5,
+																																							6);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		3,
-																																		4,
-																																		5);
+																																							3,
+																																							4,
+																																							5);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertSame(1, diff1.size());
 			assertTrue(diff1.contains(6));
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertSame(1, diff2.size());
 			assertTrue(diff2.contains(3));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3);
-			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(true, 2);
+																																							1,
+																																							2,
+																																							3);
+			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
+																																							2);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertSame(2, diff1.size());
 			assertTrue(diff1.contains(1));
 			assertTrue(diff1.contains(3));
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertSame(0, diff2.size());
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		11,
-																																		12,
-																																		13);
+																																							11,
+																																							12,
+																																							13);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		12);
+																																							1,
+																																							2,
+																																							3,
+																																							12);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertSame(2, diff1.size());
 			assertTrue(diff1.contains(11));
 			assertTrue(diff1.contains(13));
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertSame(3, diff2.size());
 			assertTrue(diff2.contains(1));
 			assertTrue(diff2.contains(2));
@@ -726,43 +730,42 @@ public class FastBooleanArrayIntegerSetTests
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		4,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							4,
+																																							10);
 			final FastBooleanArrayIntegerSet set2 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		5,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							5,
+																																							10);
 
 			final FastBooleanArrayIntegerSet diff1 = FastBooleanArrayIntegerSet.difference(	set1,
-																																						set2);
+																																											set2);
 			assertSame(1, diff1.size());
 			assertTrue(diff1.contains(4));
 
 			final FastBooleanArrayIntegerSet diff2 = FastBooleanArrayIntegerSet.difference(	set2,
-																																						set1);
+																																											set1);
 			assertSame(1, diff2.size());
 			assertTrue(diff2.contains(5));
 		}
 
 		{
 			final FastBooleanArrayIntegerSet set1 = new FastBooleanArrayIntegerSet(	true,
-																																		1,
-																																		2,
-																																		3,
-																																		4,
-																																		10);
+																																							1,
+																																							2,
+																																							3,
+																																							4,
+																																							10);
 
 			final FastBooleanArrayIntegerSet diff = FastBooleanArrayIntegerSet.difference(set1,
-																																					set1);
+																																										set1);
 			assertTrue(diff.isEmpty());
 		}
 
 	}
-
 
 }

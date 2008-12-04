@@ -31,8 +31,9 @@ public final class NeedMemory
 	 * Checks if enough memory is available to the VM for this application and
 	 * optionally re-launches it.
 	 * <p>
-	 * If not, the application is re-launched from this copy with:<BR> - the same
-	 * commandline and<BR> - the same JAVA release.<BR>
+	 * If not, the application is re-launched from this copy with:<BR>
+	 * - the same commandline and<BR>
+	 * - the same JAVA release.<BR>
 	 * The operation fails or is blocked because:<BR>
 	 * 1) this is already a re-launch (something must be wrong),<BR>
 	 * 2) the amount of memory asked for is > 1500Mb which is out of reach.<BR>
@@ -40,8 +41,8 @@ public final class NeedMemory
 	 * We relaunch the application with initially 50% of the heap limit allocated.
 	 * </p>
 	 * 
-	 * @param needed #
-	 *          of Mb to establish.
+	 * @param needed
+	 *          # of Mb to establish.
 	 * @param commandLine
 	 *          the command line as appearing in 'main()'.
 	 * @throws Exception
@@ -263,8 +264,8 @@ public final class NeedMemory
 	/**
 	 * Returns a number of bytes as Mb, rounded up.
 	 * 
-	 * @param m #
-	 *          of bytes
+	 * @param m
+	 *          # of bytes
 	 * @return the # of Mb.
 	 */
 	public static long toMegaBytes(final long m)

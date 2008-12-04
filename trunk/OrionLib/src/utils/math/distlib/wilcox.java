@@ -22,8 +22,6 @@
 
 package utils.math.distlib;
 
-
-
 /**
  * Wrapper of functions for Wilcoxon distribution.
  * <p>
@@ -121,13 +119,13 @@ public class wilcox
 	 */
 	public static double density(double x, final double m, final double n)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(m) || Double.isNaN(n))
 		{
 			return x + m + n;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		roundSizes(m, n);
 		if (m <= 0 || n <= 0)
 		{
@@ -139,13 +137,13 @@ public class wilcox
 			return Double.NaN;
 		}
 
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0 || x > m * n)
 		{
 			return 0;
 		}
-		/* !* return(cwilcox(x, m, n) / choose(m + n, n)); *! */
+		/* ! return(cwilcox(x, m, n) / choose(m + n, n));! */
 		return cwilcox((int) x, (int) m, (int) n) / misc.choose(m + n, n);
 	}
 
@@ -155,7 +153,7 @@ public class wilcox
 	public static double cumulative(double x, final double m, final double n)
 	{
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(m) || Double.isNaN(n))
 		{
 			return x + m + n;
@@ -165,7 +163,7 @@ public class wilcox
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		roundSizes(m, n);
 		if (m <= 0 || n <= 0)
 		{
@@ -176,7 +174,7 @@ public class wilcox
 		{
 			return Double.NaN;
 		}
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0.0)
 		{
@@ -200,7 +198,7 @@ public class wilcox
 	public static double quantile(final double x, final double m, final double n)
 	{
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(m) || Double.isNaN(n))
 		{
 			return x + m + n;
@@ -210,7 +208,7 @@ public class wilcox
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		roundSizes(m, n);
 		if (x < 0 || x > 1 || m <= 0 || n <= 0)
@@ -252,13 +250,13 @@ public class wilcox
 	public static double random(final double m, final double n)
 	{
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(m) || Double.isNaN(n))
 		{
 			return m + n;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		roundSizes(m, n);
 		if (m < 0 || n < 0)
 		{
@@ -278,7 +276,7 @@ public class wilcox
 		}
 		for (int i = 0; i < n; i++)
 		{
-			/* !* j = floor(k * sunif()); *! */
+			/* ! j = floor(k sunif());! */
 			final int j = (int) java.lang.Math.floor(k * uniform.random());
 			r += x[j];
 			x[j] = x[--k];

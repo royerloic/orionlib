@@ -70,7 +70,7 @@ public class GraphGeneratorTests
 
 	}
 
-	@Test
+	// @Test
 	public void testBarabasiAlbertDensityFidelity()
 	{
 		for (double i = 0.; i <= 1; i += 0.05)

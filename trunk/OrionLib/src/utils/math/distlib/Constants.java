@@ -55,7 +55,7 @@ public class Constants
 
 	/* log(sqrt(pi)) = log(pi)/2 : */
 	public static final double M_LN_SQRT_PI = 0.5723649429247000870717136756765293558;
-	/* log(sqrt(2*pi)) = log(2*pi)/2 : */
+	/* log(sqrt(2pi)) = log(2pi)/2 : */
 	public static final double M_LN_SQRT_2PI = 0.91893853320467274178032973640562;
 	/* log(sqrt(pi/2)) = log(pi/2)/2 : */
 	public static final double M_LN_SQRT_PId2 = 0.225791352644727432363097614947441;
@@ -85,11 +85,11 @@ public class Constants
 	public static final int FLT_MANT_DIG = 24;
 	public static final int DBL_MANT_DIG = 53;
 
-	/* Minimum int x such that FLT_RADIX**(x-1) is a normalised double */
+	/* Minimum int x such that FLT_RADIX(x-1) is a normalised double */
 	public static final int FLT_MIN_EXP = -125;
 	public static final int DBL_MIN_EXP = -1021;
 
-	/* Maximum int x such that FLT_RADIX**(x-1) is a representable double */
+	/* Maximum int x such that FLT_RADIX(x-1) is a representable double */
 	public static final int FLT_MAX_EXP = 128;
 	public static final int DBL_MAX_EXP = 1024;
 

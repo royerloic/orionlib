@@ -22,63 +22,86 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 
-public class HttpAuthRetrieve {
-	
+public class HttpAuthRetrieve
+{
+
 	/*
 	 * This is pretty ugly, but there needs to be a way to use different
 	 * credentials for the same site during the same session.
 	 */
-	private static final class InternalAuthenticator extends Authenticator {
+	private static final class InternalAuthenticator extends Authenticator
+	{
 		public PasswordAuthentication pauth;
-		protected PasswordAuthentication getPasswordAuthentication() {
+
+		protected PasswordAuthentication getPasswordAuthentication()
+		{
 			return pauth;
 		}
 	}
+
 	private static final InternalAuthenticator auth = new InternalAuthenticator();
-	
-	static {
+
+	static
+	{
 		Authenticator.setDefault(auth);
 	}
 
-  public static String request(String url) throws IOException, MalformedURLException {
-    return request(url, "", "");
-  }
+	public static String request(String url) throws IOException,
+																					MalformedURLException
+	{
+		return request(url, "", "");
+	}
 
 	private static final Object lock = new Object();
-  public static String request(String url, final String username, final String passwd)
-      throws MalformedURLException, IOException {
-    final char[] password = passwd.toCharArray();
 
-    synchronized (auth) {
-    	PasswordAuthentication newAuth = new PasswordAuthentication(username, password);
-    	auth.pauth = newAuth;
+	public static String request(	String url,
+																final String username,
+																final String passwd) throws MalformedURLException,
+																										IOException
+	{
+		final char[] password = passwd.toCharArray();
 
-      URLConnection conn = null;
-      InputStream stream = null;
-      Writer out = null;
-      try {
-        URL uUrl = new URL(url);
-        conn = uUrl.openConnection();
-        conn.setRequestProperty("User-Agent", "org.jdd.JddClient/0.1");
-        stream = new BufferedInputStream(conn.getInputStream());
-        Reader in = new InputStreamReader(stream);
-        out = new StringWriter();
-        for (int b; (b = in.read()) != -1;) {
-          out.write(b);
-        }
-      } finally {
-        try {
-          if (stream != null) stream.close();
-        } catch (IOException e) {
-        }
-      }
-      
-      for (int i = 0; i < password.length; i++) {
-      	password[i] = (char)0;
-      }
-      Arrays.fill(password, (char)0);
+		synchronized (auth)
+		{
+			PasswordAuthentication newAuth = new PasswordAuthentication(username,
+																																	password);
+			auth.pauth = newAuth;
 
-      return ((StringWriter) out).getBuffer().toString();
-    }
-  }
+			URLConnection conn = null;
+			InputStream stream = null;
+			Writer out = null;
+			try
+			{
+				URL uUrl = new URL(url);
+				conn = uUrl.openConnection();
+				conn.setRequestProperty("User-Agent", "org.jdd.JddClient/0.1");
+				stream = new BufferedInputStream(conn.getInputStream());
+				Reader in = new InputStreamReader(stream);
+				out = new StringWriter();
+				for (int b; (b = in.read()) != -1;)
+				{
+					out.write(b);
+				}
+			}
+			finally
+			{
+				try
+				{
+					if (stream != null)
+						stream.close();
+				}
+				catch (IOException e)
+				{
+				}
+			}
+
+			for (int i = 0; i < password.length; i++)
+			{
+				password[i] = (char) 0;
+			}
+			Arrays.fill(password, (char) 0);
+
+			return ((StringWriter) out).getBuffer().toString();
+		}
+	}
 }

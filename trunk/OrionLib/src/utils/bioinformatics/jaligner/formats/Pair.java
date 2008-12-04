@@ -22,9 +22,9 @@ import utils.bioinformatics.jaligner.Alignment;
 import utils.bioinformatics.jaligner.util.Commons;
 
 /**
- * <a
- * href="http://www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/AlignExamples/align.pair">Pair</a>
- * format.
+ * <a href=
+ * "http://www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/AlignExamples/align.pair"
+ * >Pair</a> format.
  * 
  * @author Ahmed Moustafa (ahmed@users.sf.net)
  */

@@ -21,7 +21,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#add(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Double add(final K pKey, final Double pValue)
 	{
@@ -42,7 +42,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#sub(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Double sub(final K pKey, Double pValue)
 	{
@@ -53,7 +53,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#mult(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Double mult(final K pKey, final Double pValue)
 	{
@@ -74,7 +74,7 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#div(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Double div(final K pKey, final Double pValue)
 	{

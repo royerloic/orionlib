@@ -31,18 +31,18 @@ public class beta
 	 * The density of the beta distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(final double x, double a, double b)
 	{
 		double y;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(a) || Double.isNaN(b))
 		{
 			return x + a + b;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (a <= 0.0 || b <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -57,13 +57,13 @@ public class beta
 			return 0;
 		}
 		y = misc.beta(a, b);
-		/* !* a = pow(x, a - 1); *! */
+		/* ! a = pow(x, a - 1);! */
 		a = java.lang.Math.pow(x, a - 1);
-		/* !* b = pow(1.0 - x, b - 1.0); *! */
+		/* ! b = pow(1.0 - x, b - 1.0);! */
 		b = java.lang.Math.pow(1.0 - x, b - 1.0);
-		/* !* #ifndef IEEE_754 /*4! */
+		/* ! #ifndef IEEE_754 /4! */
 		// if(errno) return Double.NaN;
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return a * b / y;
 	}
 
@@ -103,7 +103,7 @@ public class beta
 	 * Bosten and Battiste (1974). Remark on Algorithm 179, CACM 17, p153, (1974).
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static double pbeta_raw(final double x, final double pin, final double qin)
 	{
@@ -117,10 +117,10 @@ public class beta
 		if (eps == 0)
 		{
 			eps = misc.d1mach(3);
-			/* !* alneps = log(eps); *! */
+			/* ! alneps = log(eps);! */
 			alneps = java.lang.Math.log(eps);
 			sml = misc.d1mach(1);
-			/* !* alnsml = log(sml); *! */
+			/* ! alnsml = log(sml);! */
 			alnsml = java.lang.Math.log(sml);
 		}
 
@@ -143,13 +143,13 @@ public class beta
 			/* tail approximation */
 
 			ans = 0;
-			/* !* xb = p * log(Math.max(y, sml)) - log(p) - misc.lbeta(p, q); *! */
+			/* ! xb = p log(Math.max(y, sml)) - log(p) - misc.lbeta(p, q);! */
 			xb = p * java.lang.Math.log(Math.max(y, sml))
 						- java.lang.Math.log(p)
 						- misc.lbeta(p, q);
 			if (xb > alnsml && y != 0)
 			{
-				/* !* ans = exp(xb); *! */
+				/* ! ans = exp(xb);! */
 				ans = java.lang.Math.exp(xb);
 			}
 			if (y != x || p != pin)
@@ -161,22 +161,22 @@ public class beta
 		{
 
 			/* evaluate the infinite sum first. term will equal */
-			/* y^p / beta(ps, p) * (1 - ps)-sub-i * y^i / fac(i) */
+			/* y^p / beta(ps, p) (1 - ps)-sub-i y^i / fac(i) */
 
-			/* !* ps = q - floor(q); *! */
+			/* ! ps = q - floor(q);! */
 			ps = q - java.lang.Math.floor(q);
 			if (ps == 0)
 			{
 				ps = 1;
 			}
-			/* !* xb = p * log(y) - misc.lbeta(ps, p) - log(p); *! */
+			/* ! xb = p log(y) - misc.lbeta(ps, p) - log(p);! */
 			xb = p * java.lang.Math.log(y)
 						- misc.lbeta(ps, p)
 						- java.lang.Math.log(p);
 			ans = 0;
 			if (xb >= alnsml)
 			{
-				/* !* ans = exp(xb); *! */
+				/* ! ans = exp(xb);! */
 				ans = java.lang.Math.exp(xb);
 				term = ans * p;
 				if (ps != 1)
@@ -195,14 +195,14 @@ public class beta
 
 			if (q > 1)
 			{
-				/* !* xb = p * log(y) + q * log(1 - y) - misc.lbeta(p, q) - log(q); *! */
+				/* ! xb = p log(y) + q log(1 - y) - misc.lbeta(p, q) - log(q);! */
 				xb = p * java.lang.Math.log(y)
 							+ q
 							* java.lang.Math.log(1 - y)
 							- misc.lbeta(p, q)
 							- java.lang.Math.log(q);
 				ib = (int) Math.max(xb / alnsml, 0.0);
-				/* !* term = exp(xb - ib * alnsml); *! */
+				/* ! term = exp(xb - ib alnsml);! */
 				term = java.lang.Math.exp(xb - ib * alnsml);
 				c = 1 / (1 - y);
 				p1 = q * c / (p + q - 1);
@@ -246,11 +246,11 @@ public class beta
 																	final double pin,
 																	final double qin)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(pin) || Double.isNaN(qin))
 		{
 			return x + pin + qin;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		if (pin <= 0 || qin <= 0)
@@ -294,16 +294,16 @@ public class beta
 	 * in this version.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static double zero = 0.0;
 
 	/* set the exponent of accu to -2r-2 for r digits of accuracy */
 	/*
-	 * !* #ifdef OLD static double acu = 1.0e-32; static double lower = 0.0001;
+	 * ! #ifdef OLD static double acu = 1.0e-32; static double lower = 0.0001;
 	 * static double upper = 0.9999; 4!
 	 */
-	/* !* #else/*---- NEW ---- -- still fails for p = 1e11, q=.5 *//* 4! */
+	/* ! #else/---- NEW ---- -- still fails for p = 1e11, q=.5 *//* 4! */
 
 	static double fpu = 3e-308;
 	/*
@@ -314,7 +314,7 @@ public class beta
 	static double lower = fpu;
 	static double upper = 1 - 2.22e-16;
 
-	/* !* #endif /*4! */
+	/* ! #endif /4! */
 
 	static double const1 = 2.30753;
 	static double const2 = 0.27061;
@@ -338,12 +338,12 @@ public class beta
 
 		/* Test for admissibility of parameters */
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(p) || Double.isNaN(q) || Double.isNaN(alpha))
 		{
 			return p + q + alpha;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (p < zero || q < zero || alpha < zero || alpha > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -374,7 +374,7 @@ public class beta
 
 		/* calculate the initial approximation */
 
-		/* !* r = sqrt(-log(a * a)); *! */
+		/* ! r = sqrt(-log(a a));! */
 		r = java.lang.Math.sqrt(-java.lang.Math.log(a * a));
 		y = r - (const1 + const2 * r) / (1 + (const3 + const4 * r) * r);
 		if (pp > 1 && qq > 1)
@@ -383,23 +383,23 @@ public class beta
 			s = 1 / (pp + pp - 1);
 			t = 1 / (qq + qq - 1);
 			h = 2 / (s + t);
-			/* !* w = y * sqrt(h + r) / h - (t - s) * (r + 5 / 6 - 2 / (3 * h)); *! */
+			/* ! w = y sqrt(h + r) / h - (t - s) (r + 5 / 6 - 2 / (3 h));! */
 			w = y * java.lang.Math.sqrt(h + r)
 					/ h
 					- (t - s)
 					* (r + 5 / 6 - 2 / (3 * h));
-			/* !* xinbta = pp / (pp + qq * exp(w + w)); *! */
+			/* ! xinbta = pp / (pp + qq exp(w + w));! */
 			xinbta = pp / (pp + qq * java.lang.Math.exp(w + w));
 		}
 		else
 		{
 			r = qq + qq;
 			t = 1 / (9 * qq);
-			/* !* t = r * pow(1 - t + y * sqrt(t), 3); *! */
+			/* ! t = r pow(1 - t + y sqrt(t), 3);! */
 			t = r * java.lang.Math.pow(1 - t + y * java.lang.Math.sqrt(t), 3);
 			if (t <= zero)
 			{
-				/* !* xinbta = 1 - exp((log((1 - a) * qq) + logbeta) / qq); *! */
+				/* ! xinbta = 1 - exp((log((1 - a) qq) + logbeta) / qq);! */
 				xinbta = 1 - java.lang.Math.exp((java.lang.Math.log((1 - a) * qq) + logbeta) / qq);
 			}
 			else
@@ -407,7 +407,7 @@ public class beta
 				t = (4 * pp + r - 2) / t;
 				if (t <= 1)
 				{
-					/* !* xinbta = exp((log(a * pp) + logbeta) / pp); *! */
+					/* ! xinbta = exp((log(a pp) + logbeta) / pp);! */
 					xinbta = java.lang.Math.exp((java.lang.Math.log(a * pp) + logbeta) / pp);
 				}
 				else
@@ -438,11 +438,10 @@ public class beta
 		 * adapted. However, it's not clear if this is "optimal" for IEEE double
 		 * prec.
 		 * 
-		 * acu = Math.max(acu_min, pow(10., -25. - 5./(pp * pp) - 1./(a * a)));
+		 * acu = Math.max(acu_min, pow(10., -25. - 5./(pp pp) - 1./(a a)));
 		 * 
 		 * NEW: 'acu' accuracy NOT for squared adjustment, but simple; ---- i.e.,
 		 * "new acu" = sqrt(old acu)
-		 * 
 		 */
 		acu = Math.max(acu_min, java.lang.Math.pow(10., -13 - 2.5
 																										/ (pp * pp)
@@ -456,16 +455,16 @@ public class beta
 			{
 				y = pbeta_raw(xinbta, pp, qq);
 				/* y = pbeta_raw2(xinbta, pp, qq, logbeta); */
-				/* !* #ifdef IEEE_754 /*4! */
+				/* ! #ifdef IEEE_754 /4! */
 				if (Double.isInfinite(y))
 				{
-					/* !* #else /*4! */
+					/* ! #else /4! */
 					// if (errno)
-					/* !* #endif /*4! */
+					/* ! #endif /4! */
 					// { throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 					// return Double.NaN; }
 					y = (y - a) *
-							/* !* exp(logbeta + r * log(xinbta) + t * log(1 - xinbta)); *! */
+							/* ! exp(logbeta + r log(xinbta) + t log(1 - xinbta));! */
 							java.lang.Math.exp(logbeta + r
 																	* java.lang.Math.log(xinbta)
 																	+ t
@@ -509,7 +508,7 @@ public class beta
 				xinbta = tx;
 				yprev = y;
 			}
-			/*-- NOT converged: Iteration count --*/
+			/* -- NOT converged: Iteration count -- */
 			throw new java.lang.ArithmeticException("Math Error: PRECISION");
 		}
 
@@ -545,9 +544,9 @@ public class beta
 	 * BC)
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
-	/* !* double random(double aa, double bb) *! */
+	/* ! double random(double aa, double bb)! */
 	public static double random(final double aa,
 															final double bb,
 															final uniform PRNG)
@@ -563,11 +562,11 @@ public class beta
 
 		if (expmax == 0.0)
 		{
-			/* !* expmax = log(Double.MAX_VALUE); *! */
+			/* ! expmax = log(Double.MAX_VALUE);! */
 			expmax = java.lang.Math.log(Double.MAX_VALUE);
 		}
 
-		/* !* qsame = (olda == aa) && (oldb == bb); *! */
+		/* ! qsame = (olda == aa) && (oldb == bb);! */
 		qsame = olda == aa && oldb == bb ? 1 : 0;
 
 		if (!(qsame == 1))
@@ -625,30 +624,30 @@ public class beta
 							continue;
 						}
 					}
-					/* !* v = beta * log(u1 / (1.0 - u1)); *! */
+					/* ! v = beta log(u1 / (1.0 - u1));! */
 					v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 					if (v <= expmax)
 					{
-						/* !* w = a * exp(v); *! */
+						/* ! w = a exp(v);! */
 						w = a * java.lang.Math.exp(v);
 					}
 					else
 					{
 						w = Double.MAX_VALUE;
 					}
-					/* !* if (alpha * (log(alpha / (b + w)) + v) - 1.3862944 *! */
+					/* ! if (alpha (log(alpha / (b + w)) + v) - 1.3862944! */
 					if (alpha * (java.lang.Math.log(alpha / (b + w)) + v) - 1.3862944
-					/* !* >= log(z)) *! */
+					/* ! >= log(z))! */
 					>= java.lang.Math.log(z))
 					{
 						break deliver;
 					}
 				}
-				/* !* v = beta * log(u1 / (1.0 - u1)); *! */
+				/* ! v = beta log(u1 / (1.0 - u1));! */
 				v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 				if (v <= expmax)
 				{
-					/* !* w = a * exp(v); *! */
+					/* ! w = a exp(v);! */
 					w = a * java.lang.Math.exp(v);
 				}
 				else
@@ -663,21 +662,21 @@ public class beta
 					a = Math.min(aa, bb);
 					b = Math.max(aa, bb);
 					alpha = a + b;
-					/* !* beta = sqrt((alpha - 2.0) / (2.0 * a * b - alpha)); *! */
+					/* ! beta = sqrt((alpha - 2.0) / (2.0 a b - alpha));! */
 					beta = java.lang.Math.sqrt((alpha - 2.0) / (2.0 * a * b - alpha));
 					gamma = a + 1.0 / beta;
 				}
 				do
 				{
-					/* !* u1 = PRNG.random(); *! */
+					/* ! u1 = PRNG.random();! */
 					u1 = uniform.random();
-					/* !* u2 = PRNG.random(); *! */
+					/* ! u2 = PRNG.random();! */
 					u2 = uniform.random();
-					/* !* v = beta * log(u1 / (1.0 - u1)); *! */
+					/* ! v = beta log(u1 / (1.0 - u1));! */
 					v = beta * java.lang.Math.log(u1 / (1.0 - u1));
 					if (v <= expmax)
 					{
-						/* !* w = a * exp(v); *! */
+						/* ! w = a exp(v);! */
 						w = a * java.lang.Math.exp(v);
 					}
 					else
@@ -691,14 +690,14 @@ public class beta
 					{
 						break;
 					}
-					/* !* t = log(z); *! */
+					/* ! t = log(z);! */
 					t = java.lang.Math.log(z);
 					if (s > t)
 					{
 						break;
 					}
 				}
-				/* !* while (r + alpha * log(alpha / (b + w)) < t); *! */
+				/* ! while (r + alpha log(alpha / (b + w)) < t);! */
 				while (r + alpha * java.lang.Math.log(alpha / (b + w)) < t);
 			}
 

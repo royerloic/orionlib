@@ -27,8 +27,7 @@ import javax.vecmath.MismatchedSizeException;
  * A representer function with a kernel K(x1, x2), a set of training data points
  * (d1, d2, &#133;, dn), and a vector (c1, c2, &#133;, cn) of coefficients.
  * 
- * <blockquote> &fnof;(x) = &sum; c<sub>i</sub>K(d<sub>i</sub>, x)
- * </blockquote>
+ * <blockquote> &fnof;(x) = &sum; c<sub>i</sub>K(d<sub>i</sub>, x) </blockquote>
  * 
  * @author Greg Dennis (gdennis@mit.edu)
  */

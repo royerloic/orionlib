@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class DynDnsUpdater
@@ -29,7 +25,7 @@ public class DynDnsUpdater
 	protected String system;
 	protected String username;
 	protected String password;
-	//protected String[] hostnames;
+	// protected String[] hostnames;
 	protected String wildcard;
 	protected String mx;
 	protected Boolean backmx;
@@ -72,11 +68,9 @@ public class DynDnsUpdater
 		}
 	}
 
-	public DynDnsUpdater(	String system,
-												String username,
-												String password)
+	public DynDnsUpdater(String system, String username, String password)
 	{
-		this(system, username, password,  null, null, null, null);
+		this(system, username, password, null, null, null, null);
 	}
 
 	public DynDnsUpdater(	String system,
@@ -95,12 +89,13 @@ public class DynDnsUpdater
 		this.backmx = backmx;
 		this.offline = offline;
 	}
-	
+
 	public ReturnCode update(String hostname) throws JddUpdateException
 	{
 		try
 		{
-			String[] hostnamesArray = new String[] {hostname};
+			String[] hostnamesArray = new String[]
+			{ hostname };
 			return DynDnsUpdater.update(system,
 																	username,
 																	password,
@@ -121,7 +116,8 @@ public class DynDnsUpdater
 	{
 		try
 		{
-			String[] hostnamesArray = new String[] {hostname};
+			String[] hostnamesArray = new String[]
+			{ hostname };
 			return DynDnsUpdater.update(system,
 																	username,
 																	password,
@@ -137,7 +133,7 @@ public class DynDnsUpdater
 			throw new JddUpdateException(e);
 		}
 	}
-	
+
 	public ReturnCode update(Collection hostnames, String ipAddress) throws JddUpdateException
 	{
 		try
@@ -202,7 +198,7 @@ public class DynDnsUpdater
 		// build it
 		cmd.append("system=" + URLEncoder.encode(system) + "&");
 		cmd.append("hostname=" + hosts.toString() + "&");
-		if(ipAddress != null)
+		if (ipAddress != null)
 			cmd.append("myip=" + ipAddress + "&");
 		if (wildcard != null)
 			cmd.append("wildcard=" + wildcard + "&");
@@ -213,16 +209,17 @@ public class DynDnsUpdater
 		if (offline != null)
 			cmd.append("offline=" + (offline.booleanValue() ? "YES" : "NO") + "&");
 
-		/*System.out.println("DynDnsUpdater making request: " + URL_DYNDNS
-												+ "?"
-												+ cmd.toString());))/**/
+		/*
+		 * System.out.println("DynDnsUpdater making request: " + URL_DYNDNS + "?" +
+		 * cmd.toString());))/
+		 */
 
 		String retVal = HttpAuthRetrieve.request(	URL_DYNDNS + "?" + cmd.toString(),
 																							username,
 																							password);
 		retVal = retVal.trim();
 
-		//System.out.println("Return val: " + retVal);
+		// System.out.println("Return val: " + retVal);
 
 		return DynDnsReturnCodeFactory.getInstance().getReturnCode(retVal);
 	}

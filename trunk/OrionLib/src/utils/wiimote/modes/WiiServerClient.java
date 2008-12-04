@@ -5,13 +5,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketAddress;
 import java.net.SocketException;
-
-import wiiremotej.IRLight;
-import wiiremotej.WiiRemote;
-import wiiremotej.event.WRIREvent;
-import wiiremotej.event.WiiRemoteAdapter;
 
 public class WiiServerClient implements Runnable
 {
@@ -71,7 +65,7 @@ public class WiiServerClient implements Runnable
 				String lReceived = new String(packetin.getData(),
 																			0,
 																			packetin.getLength());
-				//System.out.println(lReceived);
+				// System.out.println(lReceived);
 				if (lReceived.length() > 0)
 				{
 					String[] lLights = lReceived.split(";");

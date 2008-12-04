@@ -173,8 +173,8 @@ public class EdgIO
 						lGraph.addEdge(lEdge);
 
 						/*******************************************************************
-						 * for (final String lString : lStringList) System.out.print(lString +
-						 * "\t"); System.out.print("\n");/
+						 * for (final String lString : lStringList) System.out.print(lString
+						 * + "\t"); System.out.print("\n");/
 						 ******************************************************************/
 					}
 				}
@@ -187,13 +187,13 @@ public class EdgIO
 			if (lLineType.equalsIgnoreCase("STAR"))
 			{
 				final String lNodeName1 = lStringList.get(1);
-				if (!(lNodeName1.length()==0))
+				if (!(lNodeName1.length() == 0))
 				{
 					final List<String> lNodesInStarList = lStringList.subList(2,
 																																		lStringList.size());
 					for (final String lString : lNodesInStarList)
 					{
-						if (!(lString.length()==0))
+						if (!(lString.length() == 0))
 						{
 							final String lNodeName2 = lString;
 							Node lFirstNode = lStringIdToNodeMap.get(lNodeName1);

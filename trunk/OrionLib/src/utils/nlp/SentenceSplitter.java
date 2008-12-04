@@ -18,8 +18,8 @@ public class SentenceSplitter
 	 * Splits a text around each punctuation mark (.!?;:) followed by space,
 	 * newline, or return.
 	 * 
-	 * @param text -
-	 *          input text
+	 * @param text
+	 *          - input text
 	 * @return list of sentences
 	 */
 	public static String[] naivSplit(String text)

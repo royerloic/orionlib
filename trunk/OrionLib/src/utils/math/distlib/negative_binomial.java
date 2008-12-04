@@ -35,19 +35,19 @@ public class negative_binomial
 	 * x = the number of failures before the n-th success
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, double n, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n < 1 || p <= 0 || p >= 1)
 		{
@@ -58,15 +58,15 @@ public class negative_binomial
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 0;
 		}
-		/* !* #endif /*4! */
-		/* !* return exp(lfastchoose(x + n - 1, x) *! */
+		/* ! #endif /4! */
+		/* ! return exp(lfastchoose(x + n - 1, x)! */
 		return java.lang.Math.exp(misc.lfastchoose(x + n - 1, x)
-		/* !* + n * log(p) + x * log(1 - p)); *! */
+		/* ! + n log(p) + x log(1 - p));! */
 		+ n * java.lang.Math.log(p) + x * java.lang.Math.log(1 - p));
 	}
 
@@ -100,11 +100,11 @@ public class negative_binomial
 	 * x = the number of failures before the n-th success
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, double n, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
@@ -114,10 +114,10 @@ public class negative_binomial
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n < 1 || p <= 0 || p >= 1)
 		{
@@ -128,12 +128,12 @@ public class negative_binomial
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 1;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return beta.cumulative(p, n, x + 1);
 	}
 
@@ -174,13 +174,13 @@ public class negative_binomial
 	 * initial start point.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, double n, final double p)
 	{
 		double P, Q, mu, sigma, gamma, z, y;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n) || Double.isNaN(p))
 		{
 			return x + n + p;
@@ -190,8 +190,8 @@ public class negative_binomial
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (x < 0 || x > 1 || p <= 0 || p >= 1 || n <= 0)
 		{
@@ -202,20 +202,20 @@ public class negative_binomial
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (x == 1)
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		Q = 1.0 / p;
 		P = (1.0 - p) * Q;
 		mu = n * P;
-		/* !* sigma = sqrt(n * P * Q); *! */
+		/* ! sigma = sqrt(n P Q);! */
 		sigma = java.lang.Math.sqrt(n * P * Q);
 		gamma = (Q + P) / sigma;
 		z = normal.quantile(x, 0.0, 1.0);
-		/* !* y = floor(mu + sigma * (z + gamma * (z*z - 1.0) / 6.0) + 0.5); *! */
+		/* ! y = floor(mu + sigma (z + gamma (zz - 1.0) / 6.0) + 0.5);! */
 		y = java.lang.Math.floor(mu + sigma
 															* (z + gamma * (z * z - 1.0) / 6.0)
 															+ 0.5);
@@ -291,16 +291,16 @@ public class negative_binomial
 	 * p/(1-p). Return a Poisson deviate with mean lambda.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(double n, final double p, final uniform PRNG)
 	{
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(n) || Double.isInfinite(p) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		n <= 0 || p <= 0 || p >= 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");

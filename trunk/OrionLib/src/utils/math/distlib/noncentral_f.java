@@ -32,7 +32,7 @@ public class noncentral_f
 	 * The distribution function of the non-central F distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double x,
 																	final double n1,
@@ -40,14 +40,14 @@ public class noncentral_f
 																	final double ncp)
 	{
 		double y;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n1)
 				|| Double.isNaN(n2)
 				|| Double.isNaN(ncp))
 		{
 			return x + n2 + n1 + ncp;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n1 <= 0.0 || n2 <= 0.0 || ncp < 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");

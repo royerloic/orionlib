@@ -31,17 +31,17 @@ public class f
 	 * The density function of the F distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(final double x, final double n1, final double n2)
 	{
 		double a;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
 		{
 			return x + n1 + n2;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n1 <= 0 || n2 <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -52,10 +52,10 @@ public class f
 			return 0.0;
 		}
 		a = n1 / n2 * x;
-		/* !* return pow(a, 0.5 * n1) * pow(1.0 + a, -0.5 * (n1 + n2)) *! */
+		/* ! return pow(a, 0.5 n1) pow(1.0 + a, -0.5 (n1 + n2))! */
 		return java.lang.Math.pow(a, 0.5 * n1) * java.lang.Math.pow(1.0 + a,
 																																-0.5 * (n1 + n2))
-						/* !* / (x * beta(0.5 * n1, 0.5 * n2)); *! */
+						/* ! / (x beta(0.5 n1, 0.5 n2));! */
 						/ (x * misc.beta(0.5 * n1, 0.5 * n2));
 	}
 
@@ -85,16 +85,16 @@ public class f
 	 * The distribution function of the F distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, final double n1, final double n2)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
 		{
 			return x + n2 + n1;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n1 <= 0.0 || n2 <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -134,16 +134,16 @@ public class f
 	 * The quantile function of the F distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(double x, final double n1, final double n2)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n1) || Double.isNaN(n2))
 		{
 			return x + n1 + n2;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n1 <= 0.0 || n2 <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -187,7 +187,7 @@ public class f
 	 * This function calls rchisq to do the real work
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double n1,
 															final double n2,
@@ -195,9 +195,9 @@ public class f
 	{
 		double v1, v2;
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isNaN(n1) || Double.isNaN(n2) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		n1 <= 0.0 || n2 <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");

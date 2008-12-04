@@ -139,7 +139,8 @@ public class RangeMap<O> implements Serializable
 		final MapItem<O> lBeforeStartItem = mList.get(lBeforeStartItemIndex);
 		final int lBeforeEndItemIndex = getGreaterIndexLowerThan(lEnd);
 		final MapItem<O> lBeforeEndItem = mList.get(lBeforeEndItemIndex);
-		int lAfterEndItemIndex = lBeforeEndItemIndex + 1; // getLowestIndexHigherThan(lEnd);
+		int lAfterEndItemIndex = lBeforeEndItemIndex + 1; //getLowestIndexHigherThan(
+																											// lEnd);
 
 		// We need to determine which will be the mapping just after the given
 		// Range.

@@ -26,8 +26,8 @@ public class PsiMiGraph extends HashGraph<PsiMiNode, Edge<PsiMiNode>>
 				{
 					lNode.addGoId(lNewGoId);
 					/***********************************************************************
-					 * if (!getGoIdSet(lNode).contains(lNewGoId)) System.out.println("added
-					 * goid: "+lNewGoId);/
+					 * if (!getGoIdSet(lNode).contains(lNewGoId))
+					 * System.out.println("added goid: "+lNewGoId);/
 					 **********************************************************************/
 				}
 			}

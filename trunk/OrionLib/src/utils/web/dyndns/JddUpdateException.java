@@ -8,16 +8,20 @@
  */
 package utils.web.dyndns;
 
-public class JddUpdateException extends Exception{
-  public JddUpdateException(String message, Exception e) {
-    super(message, e);
-  }
+public class JddUpdateException extends Exception
+{
+	public JddUpdateException(String message, Exception e)
+	{
+		super(message, e);
+	}
 
-  public JddUpdateException(String message) {
-    super(message);
-  }
+	public JddUpdateException(String message)
+	{
+		super(message);
+	}
 
-  public JddUpdateException(Exception e) {
-    super(e);
-  }
+	public JddUpdateException(Exception e)
+	{
+		super(e);
+	}
 }

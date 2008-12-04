@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.Collections;
 import java.util.Set;
+import java.util.Stack;
 import java.util.Map.Entry;
 
 import utils.io.LineReader;
@@ -58,7 +60,7 @@ public class HyperGeometricEnrichement
 				return pvalue;
 			}
 
-			pvalue = hyperg(total, set1, set2, inter, mThreshold) * mCorrection;
+			pvalue = hyperG(total, set1, set2, inter, mThreshold) * mCorrection;
 			return pvalue;
 		}
 
@@ -127,7 +129,7 @@ public class HyperGeometricEnrichement
 		{
 			if (lLineIndex >= pStartLine)
 			{
-				if (!lLine.startsWith("//") && !(lLine.length()==0))
+				if (!lLine.startsWith("//") && !(lLine.length() == 0))
 				{
 					final String[] lTokenArray = lLine.split("\t", -1);
 					final String lTestName = lTokenArray[pTestNameIndex];
@@ -220,7 +222,68 @@ public class HyperGeometricEnrichement
 
 	}
 
-	public final static double hyperg(final double total,
+	public final static double generalizedHyperG(	final double total,
+																								double[] setsAsArray,
+																								final double inter,
+																								final double threshold)
+	{
+
+		Stack<Double> sets = new Stack<Double>();
+		for (double lSetSize : setsAsArray)
+		{
+			sets.add(lSetSize);
+		}
+		Collections.sort(sets);
+
+		return generalizedHyperGIntern(total, sets, inter, threshold);
+	}
+
+	private final static double generalizedHyperGIntern(final double total,
+																											Stack<Double> sets,
+																											final double inter,
+																											final double threshold)
+	{
+
+		if (sets.size() == 1)
+		{
+			return inter <= sets.firstElement() ? 1 : 0;
+		}
+		else if (sets.size() == 2)
+		{
+			return hyperG(total,
+										sets.firstElement().doubleValue(),
+										sets.lastElement().doubleValue(),
+										inter,
+										threshold);
+		}
+		else
+		{
+			sets = (Stack<Double>) sets.clone();
+
+			final int lSmallestSetSize = sets.get(0).intValue();
+			final int lLargestSetSize = sets.pop().intValue();
+			double pvalue = 0;
+			double oldpvalue = 0;
+			for (int j = (int) inter; j <= lSmallestSetSize; j++)
+			{
+				double pvaluelocal = hyperG(total, j, lLargestSetSize, inter, threshold);
+				double recursivepvalue = generalizedHyperGIntern(	total,
+																													sets,
+																													j,
+																													threshold / pvaluelocal);
+
+				pvalue += recursivepvalue * pvaluelocal;
+
+				if (pvalue > threshold || oldpvalue == pvalue)
+					break;
+				oldpvalue = pvalue;
+			}
+
+			return pvalue;
+		}
+	}
+
+	public final static double hyperG(final double total,
 																		final double set1,
 																		final double set2,
 																		final double inter,
@@ -231,11 +294,16 @@ public class HyperGeometricEnrichement
 																								total - set1,
 																								set2,
 																								threshold);
-		/***************************************************************************
-		 * System.out.println("total=" + total + " set1=" + set1 + " set2=" + set2 + "
-		 * inter=" + inter + " ->pvalue=" + pvalue);/
-		 **************************************************************************/
 		return pvalue;
+	}
+
+	private final static double hypergeometricpvalueold(double k,
+																											final double R,
+																											final double B,
+																											final double n,
+																											final double threshold)
+	{
+		return 1 - hypergeometric.cumulative(k, R, B, n);
 	}
 
 	private final static double hypergeometricpvalue(	double k,
@@ -255,15 +323,18 @@ public class HyperGeometricEnrichement
 
 		final double min = Math.min(R, n);
 		double sum = 0;
+		double oldsum = 0;
 
 		double kk = k;
 		while (kk <= min)
 		{
 			sum += hypergeometric.density(kk, R, B, n);
-			if (sum > threshold)
+
+			if (sum > threshold || oldsum == sum)
 			{
 				break;
 			}
+			oldsum = sum;
 			kk++;
 		}
 		return sum;

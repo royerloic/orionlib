@@ -20,11 +20,11 @@ public class noncentral_t
 	 * 
 	 * CONSTANTS
 	 * 
-	 * M_SQRT_2dPI = 1/ {gamma(1.5) * sqrt(2)} = sqrt(2 / pi) M_LN_SQRT_PI =
+	 * M_SQRT_2dPI = 1/ {gamma(1.5) sqrt(2)} = sqrt(2 / pi) M_LN_SQRT_PI =
 	 * ln(sqrt(pi)) = ln(pi)/2
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double t,
 																	final double df,
@@ -67,18 +67,18 @@ public class noncentral_t
 		if (x > zero)
 		{
 			lambda = del * del;
-			/* !* p = half * exp(-half * lambda); *! */
+			/* ! p = half exp(-half lambda);! */
 			p = half * java.lang.Math.exp(-half * lambda);
 			q = Constants.M_SQRT_2dPI * p * del;
 			s = half - p;
 			a = half;
 			b = half * df;
-			/* !* rxb = pow(one - x, b); *! */
+			/* ! rxb = pow(one - x, b);! */
 			rxb = java.lang.Math.pow(one - x, b);
-			/* !* albeta = Constants.M_LN_SQRT_PI + lgammafn(b) - lgammafn(a + b); *! */
+			/* ! albeta = Constants.M_LN_SQRT_PI + lgammafn(b) - lgammafn(a + b);! */
 			albeta = Constants.M_LN_SQRT_PI + misc.lgammafn(b) - misc.lgammafn(a + b);
 			xodd = beta.cumulative(x, a, b);
-			/* !* godd = two * rxb * exp(a * log(x) - albeta); *! */
+			/* ! godd = two rxb exp(a log(x) - albeta);! */
 			godd = two * rxb * java.lang.Math.exp(a * java.lang.Math.log(x) - albeta);
 			xeven = one - rxb;
 			geven = b * x * rxb;

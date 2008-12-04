@@ -25,8 +25,8 @@ public class GenomeTest
 		Genome lGenome = null;
 		try
 		{
-			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./Test.gff"));
-			lGenome.addSequencesFromStream(GenomeTest.class.getResourceAsStream("./Test.fasta.txt"));
+			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./test.gff"));
+			lGenome.addSequencesFromStream(GenomeTest.class.getResourceAsStream("./test.fasta.txt"));
 			System.out.println(lGenome);
 
 		}
@@ -49,7 +49,7 @@ public class GenomeTest
 		Genome lGenome = null;
 		try
 		{
-			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./Test.gff"));
+			lGenome = new Genome(GenomeTest.class.getResourceAsStream("./test.gff"));
 		}
 		catch (final Throwable e)
 		{
@@ -74,18 +74,18 @@ public class GenomeTest
 	/*****************************************************************************
 	 * @Test public void testYeastGenome() throws IOException { Genome lGenome =
 	 *       null; try { final File lGenomeFile = new
-	 *       File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff");
-	 *       lGenome = new Genome(lGenomeFile);
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/saccharomyces_cerevisiae.gff"
+	 *       ); lGenome = new Genome(lGenomeFile);
 	 * 
-	 * final File lGeneSequencesFile = new
-	 * File("G:/Projects/PowerGraphs/Data/Yeast/orf_coding_all.fasta");
-	 * lGenome.addSequencesFromFile(lGeneSequencesFile); //
-	 * System.out.println(lGenome); } catch (Throwable e) { e.printStackTrace();
-	 * fail("Exception: " + e); }
+	 *       final File lGeneSequencesFile = new
+	 *       File("G:/Projects/PowerGraphs/Data/Yeast/orf_coding_all.fasta");
+	 *       lGenome.addSequencesFromFile(lGeneSequencesFile); //
+	 *       System.out.println(lGenome); } catch (Throwable e) {
+	 *       e.printStackTrace(); fail("Exception: " + e); }
 	 * 
-	 * assertTrue(lGenome.getGeneSet().getNumberOfGenes() == 6609);
-	 * assertNotNull(lGenome .getGeneSet() .getGeneById("YAL065C")
-	 * .getCorrespondingFastaSequence()); }/
+	 *       assertTrue(lGenome.getGeneSet().getNumberOfGenes() == 6609);
+	 *       assertNotNull(lGenome .getGeneSet() .getGeneById("YAL065C")
+	 *       .getCorrespondingFastaSequence()); }/
 	 ****************************************************************************/
 
 }

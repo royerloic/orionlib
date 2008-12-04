@@ -34,7 +34,7 @@ public class signrank
 	 * The density of the Wilcoxon Signed Rank distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static private double w[][];
 
@@ -77,14 +77,14 @@ public class signrank
 
 	public static double density(double x, double n)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(x) || Double.isNaN(n))
 		{
 			return x + n;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n <= 0)
 		{
@@ -96,13 +96,13 @@ public class signrank
 			System.out.println("n should be less than %d\n" + SIGNRANK_NMAX);
 			return Double.NaN;
 		}
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0 || x > n * (n + 1) / 2)
 		{
 			return 0;
 		}
-		/* !* return(exp(log(csignrank(x, n)) - n * log(2))); *! */
+		/* ! return(exp(log(csignrank(x, n)) - n log(2)));! */
 		return java.lang.Math.exp(java.lang.Math.log(csignrank((int) x, (int) n)) - n
 															* java.lang.Math.log(2));
 	}
@@ -133,14 +133,14 @@ public class signrank
 	 * The distribution function of the Wilcoxon Signed Rank distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, double n)
 	{
 		int i;
 		double p = 0.0;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
 		{
 			return x + n;
@@ -150,8 +150,8 @@ public class signrank
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n <= 0)
 		{
@@ -163,7 +163,7 @@ public class signrank
 			System.out.println("n should be less than %d\n" + SIGNRANK_NMAX);
 			return Double.NaN;
 		}
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0.0)
 		{
@@ -206,13 +206,13 @@ public class signrank
 	 * The quantile function of the Wilcoxon Signed Rank distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, double n)
 	{
 		double p, q;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
 		{
 			return x + n;
@@ -222,9 +222,9 @@ public class signrank
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
-		/* !* n = floor(n + 0.5); *! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (x < 0 || x > 1 || n <= 0)
 		{
@@ -283,24 +283,23 @@ public class signrank
 	 * DESCRIPTION
 	 * 
 	 * Random variates from the Wilcoxon Signed Rank distribution.
-	 * 
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(double n)
 	{
 		int i, k;
 		double r;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		/* NaNs propagated correctly */
 		if (Double.isNaN(n))
 		{
 			return n;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (n < 0)
 		{
@@ -315,7 +314,7 @@ public class signrank
 		k = (int) n;
 		for (i = 0; i < k;)
 		{
-			/* !* r += (++i) * floor(sunif() + 0.5); *! */
+			/* ! r += (++i) floor(sunif() + 0.5);! */
 			r += ++i * java.lang.Math.floor(uniform.random() + 0.5);
 		}
 		return r;

@@ -2,7 +2,7 @@ package utils.math.statistics.transform;
 
 import utils.math.statistics.Statistic;
 
-public class NormalizedZTransform implements Statistic<double[]>,Transform
+public class NormalizedZTransform implements Statistic<double[]>, Transform
 {
 
 	ZTransform mZTransform = new ZTransform();

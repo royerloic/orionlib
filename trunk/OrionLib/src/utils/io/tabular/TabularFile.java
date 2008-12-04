@@ -98,7 +98,7 @@ public class TabularFile
 				boolean isAllEmpty = true;
 				for (int index = 0; index < lMatrix.get(line).size(); index++)
 				{
-					isAllEmpty &= lMatrix.get(line).get(index).length()==0;
+					isAllEmpty &= lMatrix.get(line).get(index).length() == 0;
 				}
 				if (isAllEmpty)
 				{
@@ -134,7 +134,9 @@ public class TabularFile
 			final List<String> lHeaderList = lMatrix.get(0);
 			for (int index = 0; index < lHeaderList.size(); index++)
 			{
-				final String lColumnName = lHeaderList.get(index).replaceAll("//", "").trim();
+				final String lColumnName = lHeaderList.get(index)
+																							.replaceAll("//", "")
+																							.trim();
 				mIndexToNameMap.put(index, lColumnName);
 			}
 		}

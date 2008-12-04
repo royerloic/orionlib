@@ -39,6 +39,5 @@ public class FileToString
 		out.write(pString);
 		out.close();
 	}
-	
-	
+
 }

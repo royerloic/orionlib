@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
@@ -208,13 +207,10 @@ public class PowerGraphSpectrum
 			lMatrix[lSize2][lSize1] += 1;
 		}
 
-		/*for (int i = 1; i <= 16; i++)
-		{
-			for (int j = 1; j <= 16; j++)
-			{
-				System.out.print(i + "\t" + j + "\t" + lMatrix[i][j] + "\n");
-			}
-		}/**/
+		/*
+		 * for (int i = 1; i <= 16; i++) { for (int j = 1; j <= 16; j++) {
+		 * System.out.print(i + "\t" + j + "\t" + lMatrix[i][j] + "\n"); } }/
+		 */
 
 		return lMatrix;
 

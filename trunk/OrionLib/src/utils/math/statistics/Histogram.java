@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import utils.math.statistics.transform.MinMaxTransform;
-import utils.math.statistics.transform.NormalizedZTransform;
 
 public class Histogram implements Statistic<double[]>, Serializable
 {
@@ -78,7 +77,7 @@ public class Histogram implements Statistic<double[]>, Serializable
 	{
 		return mTransform.getWidth() / ((double) mNumberOfBins);
 	}
-	
+
 	public double[] getMinMax()
 	{
 		return mTransform.getStatistic();

@@ -2,13 +2,9 @@ package utils.network.upnp;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
-
-import utils.network.localip.LocalIpFinder;
 
 import net.sbbi.upnp.messages.UPNPResponseException;
+import utils.network.localip.LocalIpFinder;
 
 public class UpnpNat
 {
@@ -31,7 +27,7 @@ public class UpnpNat
 																									.getModelName());
 			// now let's open the port
 			String localHostIP = LocalIpFinder.getLocalIp();
-			System.out.println("localHostIP= '" + localHostIP+"'");
+			System.out.println("localHostIP= '" + localHostIP + "'");
 			boolean mapped = testIGD.addPortMapping(description,
 																							null,
 																							internalPort,

@@ -136,8 +136,8 @@ public class GoogleEarthMode extends WiiRemoteAdapter implements WiiMode
 		 * mRobot.keyPress(KeyEvent.VK_LEFT); //if (xcounter > -2)
 		 * mRobot.keyRelease(KeyEvent.VK_LEFT); xcounter++; } }
 		 * 
-		 * /***************************************************************************
-		 * if (Math.abs(zdd)<epsilon) { for(Integer lInteger :
+		 * /************************************************************************
+		 * *** if (Math.abs(zdd)<epsilon) { for(Integer lInteger :
 		 * mHoryzontalEventList) { mRobot.keyRelease(lInteger); }
 		 * mHoryzontalEventList.clear(); } else if (xdd>epsilon) {
 		 * mRobot.keyPress(KeyEvent.VK_RIGHT);

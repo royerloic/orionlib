@@ -57,7 +57,7 @@ public final class FastBoundedIntegerSet implements
 	public FastBoundedIntegerSet(final FastBoundedIntegerSet pFastBoundedIntegerSet)
 	{
 		elements = Arrays.copyOf(	pFastBoundedIntegerSet.elements,
-		                         	pFastBoundedIntegerSet.elements.length);
+															pFastBoundedIntegerSet.elements.length);
 		min = pFastBoundedIntegerSet.min;
 		max = pFastBoundedIntegerSet.max;
 		sizeOutOfDate = true;
@@ -755,7 +755,7 @@ public final class FastBoundedIntegerSet implements
 			i--;
 		}
 
-		int bit =  31;
+		int bit = 31;
 		while ((elements[i] & 1 << bit) == 0 && bit >= 0)
 		{
 			bit--;

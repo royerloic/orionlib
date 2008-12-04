@@ -29,7 +29,7 @@ public class normal
 	static private double SIXTEN = 1.6; /* Magic Cutoff */
 
 	/*
-	 * M_1_SQRT_2PI = 1 / sqrt(2 * pi)
+	 * M_1_SQRT_2PI = 1 / sqrt(2 pi)
 	 */
 
 	/** The Normal Density Function */
@@ -125,19 +125,19 @@ public class normal
 		/* carefully thought through. For example, if x == mu */
 		/* and sigma == 0, we still get the correct answer. */
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(mu) || Double.isNaN(sigma))
 		{
 			return x + mu + sigma;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (sigma < 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
 		x = (x - mu) / sigma;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			if (x < 0)
@@ -149,11 +149,11 @@ public class normal
 				return 1;
 			}
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		eps = Constants.DBL_EPSILON * 0.5;
 		min = Double.MIN_VALUE;
-		/* !* y = fabs(x); *! */
+		/* ! y = fabs(x);! */
 		y = java.lang.Math.abs(x);
 		if (y <= 0.66291)
 		{
@@ -187,10 +187,10 @@ public class normal
 				xden = (xden + d[i - 1]) * y;
 			}
 			result = (xnum + c[7]) / (xden + d[7]);
-			/* !* xsq = floor(y * SIXTEN) / SIXTEN; *! */
+			/* ! xsq = floor(y SIXTEN) / SIXTEN;! */
 			xsq = java.lang.Math.floor(y * SIXTEN) / SIXTEN;
 			del = (y - xsq) * (y + xsq);
-			/* !* result = exp(-xsq * xsq * 0.5) * exp(-del * 0.5) * result; *! */
+			/* ! result = exp(-xsq xsq 0.5) exp(-del 0.5) result;! */
 			result = java.lang.Math.exp(-xsq * xsq * 0.5) * java.lang.Math.exp(-del * 0.5)
 								* result;
 			ccum = 1.0 - result;
@@ -217,10 +217,10 @@ public class normal
 			}
 			result = xsq * (xnum + p[4]) / (xden + q[4]);
 			result = (Constants.M_1_SQRT_2PI - result) / y;
-			/* !* xsq = floor(x * SIXTEN) / SIXTEN; *! */
+			/* ! xsq = floor(x SIXTEN) / SIXTEN;! */
 			xsq = java.lang.Math.floor(x * SIXTEN) / SIXTEN;
 			del = (x - xsq) * (x + xsq);
-			/* !* result = exp(-xsq * xsq * 0.5) * exp(-del * 0.5) * result; *! */
+			/* ! result = exp(-xsq xsq 0.5) exp(-del 0.5) result;! */
 			result = java.lang.Math.exp(-xsq * xsq * 0.5) * java.lang.Math.exp(-del * 0.5)
 								* result;
 			ccum = 1.0 - result;
@@ -291,7 +291,7 @@ public class normal
 	 * points of the normal distribution, Applied Statistics, 26, 118-121.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double p,
 																final double mu,
@@ -299,12 +299,12 @@ public class normal
 	{
 		double q, r, val;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(p) || Double.isNaN(mu) || Double.isNaN(sigma))
 		{
 			return p + mu + sigma;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (p < 0.0 || p > 1.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -313,7 +313,7 @@ public class normal
 
 		q = p - 0.5;
 
-		/* !* if (fabs(q) <= 0.42) { *! */
+		/* ! if (fabs(q) <= 0.42) {! */
 		if (java.lang.Math.abs(q) <= 0.42)
 		{
 
@@ -336,7 +336,7 @@ public class normal
 
 			if (r > Constants.DBL_EPSILON)
 			{
-				/* !* r = sqrt(-log(r)); *! */
+				/* ! r = sqrt(-log(r));! */
 				r = java.lang.Math.sqrt(-java.lang.Math.log(r));
 				val = (((2.32121276858 * r + 4.85014127135) * r - 2.29796479134) * r - 2.78718931138) / ((1.63706781897 * r + 3.54388924762) * r + 1.0);
 				if (q < 0.0)
@@ -346,16 +346,16 @@ public class normal
 			}
 			else if (r > 1e-300)
 			{ /* Assuming IEEE here? */
-				/* !* val = -2 * log(p); *! */
+				/* ! val = -2 log(p);! */
 				val = -2 * java.lang.Math.log(p);
-				/* !* r = log(6.283185307179586476925286766552 * val); *! */
+				/* ! r = log(6.283185307179586476925286766552 val);! */
 				r = java.lang.Math.log(6.283185307179586476925286766552 * val);
 				r = r / val
 						+ (2 - r)
 						/ (val * val)
 						+ (-14 + 6 * r - r * r)
 						/ (2 * val * val * val);
-				/* !* val = sqrt(val * (1 - r)); *! */
+				/* ! val = sqrt(val (1 - r));! */
 				val = java.lang.Math.sqrt(val * (1 - r));
 				if (q < 0.0)
 				{
@@ -402,19 +402,18 @@ public class normal
 	 * DESCRIPTION
 	 * 
 	 * Random variates from the normal distribution.
-	 * 
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double mu,
 															final double sigma,
 															final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isInfinite(mu) || Double.isInfinite(sigma) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		sigma < 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -458,11 +457,11 @@ public class normal
 	 * Is called from random(..), but also rt(), rf(), rgamma(), ...
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
-	/* !* #define KINDERMAN_RAMAGE /*4! */
+	/* ! #define KINDERMAN_RAMAGE /4! */
 
-	/* !* #ifdef AHRENS_DIETER /*4! */
+	/* ! #ifdef AHRENS_DIETER /4! */
 
 	/*
 	 * REFERENCE
@@ -696,9 +695,9 @@ public class normal
 
 	}
 
-	/* !* #endif /*4! */
+	/* ! #endif /4! */
 
-	/* !* #ifdef KINDERMAN_RAMAGE /*4! */
+	/* ! #ifdef KINDERMAN_RAMAGE /4! */
 
 	/*
 	 * REFERENCE
@@ -709,7 +708,7 @@ public class normal
 
 	static final double C1 = 0.398942280401433;
 	static final double C2 = 0.180025191068563;
-	/* !* /*!* #define g(x) (C1*exp(-x*x/2.0)-C2*(a-fabs(x))) /*4!* *! */
+	/* ! /! #define g(x) (C1exp(-xx/2.0)-C2(a-fabs(x))) /4!! */
 	static final double a = 2.216035867166471;
 
 	static final double g(double x)
@@ -736,11 +735,11 @@ public class normal
 			{
 				u2 = uniform.random();
 				u3 = uniform.random();
-				/* !* t = (a*a-2*log(u3)); *! */
+				/* ! t = (aa-2log(u3));! */
 				t = a * a - 2 * java.lang.Math.log(u3);
 				if (u2 * u2 < a * a / t)
 				{
-					/* !* return (u1 < 0.986655477086949) ? sqrt(t) : -sqrt(t) ; *! */
+					/* ! return (u1 < 0.986655477086949) ? sqrt(t) : -sqrt(t) ;! */
 					return u1 < 0.986655477086949	? java.lang.Math.sqrt(t)
 																				: -java.lang.Math.sqrt(t);
 					// continue tail;
@@ -754,14 +753,14 @@ public class normal
 			{
 				u2 = uniform.random();
 				u3 = uniform.random();
-				/* !* t = a - 0.630834801921960* fmin2(u2,u3); *! */
+				/* ! t = a - 0.630834801921960 fmin2(u2,u3);! */
 				t = a - 0.630834801921960 * Math.min(u2, u3);
-				/* !* if(fmax2(u2,u3) <= 0.755591531667601) *! */
+				/* ! if(fmax2(u2,u3) <= 0.755591531667601)! */
 				if (Math.max(u2, u3) <= 0.755591531667601)
 				{
 					return u2 < u3 ? t : -t;
 				}
-				/* !* if(0.034240503750111*fabs(u2-u3) <= g(t)) *! */
+				/* ! if(0.034240503750111fabs(u2-u3) <= g(t))! */
 				if (0.034240503750111 * java.lang.Math.abs(u2 - u3) <= g(t))
 				{
 					return u2 < u3 ? t : -t;
@@ -776,14 +775,14 @@ public class normal
 			{
 				u2 = uniform.random();
 				u3 = uniform.random();
-				/* !* t = 0.479727404222441+1.105473661022070*fmin2(u2,u3); *! */
+				/* ! t = 0.479727404222441+1.105473661022070fmin2(u2,u3);! */
 				t = 0.479727404222441 + 1.105473661022070 * Math.min(u2, u3);
-				/* !* if( fmax2(u2,u3)<=0.872834976671790 ) *! */
+				/* ! if( fmax2(u2,u3)<=0.872834976671790 )! */
 				if (Math.max(u2, u3) <= 0.872834976671790)
 				{
 					return u2 < u3 ? t : -t;
 				}
-				/* !* if( 0.049264496373128*fabs(u2-u3)<=g(t) ) *! */
+				/* ! if( 0.049264496373128fabs(u2-u3)<=g(t) )! */
 				if (0.049264496373128 * java.lang.Math.abs(u2 - u3) <= g(t))
 				{
 					return u2 < u3 ? t : -t;
@@ -796,9 +795,9 @@ public class normal
 		{
 			u2 = uniform.random();
 			u3 = uniform.random();
-			/* !* t = 0.479727404222441-0.595507138015940*fmin2(u2,u3); *! */
+			/* ! t = 0.479727404222441-0.595507138015940fmin2(u2,u3);! */
 			t = 0.479727404222441 - 0.595507138015940 * Math.min(u2, u3);
-			/* !* if(fmax2(u2,u3) <= 0.805577924423817) *! */
+			/* ! if(fmax2(u2,u3) <= 0.805577924423817)! */
 			if (Math.max(u2, u3) <= 0.805577924423817)
 			{
 				return u2 < u3 ? t : -t;
@@ -807,7 +806,7 @@ public class normal
 		}
 	}
 
-	/* !* #endif /*4! */
+	/* ! #endif /4! */
 
 	// public boolean Test()
 	// {

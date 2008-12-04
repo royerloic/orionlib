@@ -1,18 +1,15 @@
 package utils.structures.fast.powergraph.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.junit.Test;
 
 import utils.structures.fast.powergraph.FastIntegerPowerGraph;
-import utils.structures.fast.powergraph.FastPowerGraph;
 import utils.structures.fast.set.FastBoundedIntegerSet;
 
 /**
@@ -216,7 +213,7 @@ public class FastIntegerPowerGraphTests
 		pg.addPowerEdge(ps1, ps3);
 		pg.addPowerEdge(ps2, ps4);
 		FastBoundedIntegerSet lExclusiveNodeChildren = pg.getExclusiveNodeChildren(lPowerNodeId);
-		assertEquals(5,lExclusiveNodeChildren.size());
+		assertEquals(5, lExclusiveNodeChildren.size());
 
 	}
 

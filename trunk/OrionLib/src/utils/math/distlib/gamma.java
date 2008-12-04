@@ -31,16 +31,16 @@ public class gamma
 	 * Computes the density of the gamma distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, final double shape, final double scale)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(shape) || Double.isNaN(scale))
 		{
 			return x + shape + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (shape <= 0 || scale <= 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -64,7 +64,7 @@ public class gamma
 			return 1 / scale;
 		}
 		x = x / scale;
-		/* !* return exp((shape - 1) * log(x) - lgammafn(shape) - x) / scale; *! */
+		/* ! return exp((shape - 1) log(x) - lgammafn(shape) - x) / scale;! */
 		return java.lang.Math.exp((shape - 1) * java.lang.Math.log(x)
 															- misc.lgammafn(shape)
 															- x) / scale;
@@ -109,7 +109,7 @@ public class gamma
 	 * Algorithm 239, Incomplete Gamma Function Applied Statistics 37, 1988.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static private double third = 1.0 / 3.0, zero = 0.0, one = 1.0, two = 2.0,
 			oflo = 1.0e+37, three = 3.0, nine = 9.0, xbig = 1.0e+8,
@@ -122,12 +122,12 @@ public class gamma
 
 		/* check that we have valid values for x and p */
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(p) || Double.isNaN(scale))
 		{
 			return x + p + scale;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (p <= zero || scale <= zero)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -143,7 +143,7 @@ public class gamma
 
 		if (p > plimit)
 		{
-			/* !* pn1 = sqrt(p) * three * (pow(x/p, third) + one / (p * nine) - one); *! */
+			/* ! pn1 = sqrt(p) three (pow(x/p, third) + one / (p nine) - one);! */
 			pn1 = java.lang.Math.sqrt(p) * three
 						* (java.lang.Math.pow(x / p, third) + one / (p * nine) - one);
 			return normal.cumulative(pn1, 0.0, 1.0);
@@ -161,7 +161,7 @@ public class gamma
 
 			/* use pearson's series expansion. */
 
-			/* !* arg = p * log(x) - x - lgammafn(p + one); *! */
+			/* ! arg = p log(x) - x - lgammafn(p + one);! */
 			arg = p * java.lang.Math.log(x) - x - misc.lgammafn(p + one);
 			c = one;
 			sum = one;
@@ -173,12 +173,12 @@ public class gamma
 				sum = sum + c;
 			}
 			while (c > Constants.DBL_EPSILON);
-			/* !* arg = arg + log(sum); *! */
+			/* ! arg = arg + log(sum);! */
 			arg = arg + java.lang.Math.log(sum);
 			sum = zero;
 			if (arg >= elimit)
 			{
-				/* !* sum = exp(arg); *! */
+				/* ! sum = exp(arg);! */
 				sum = java.lang.Math.exp(arg);
 			}
 		}
@@ -187,7 +187,7 @@ public class gamma
 
 			/* use a continued fraction expansion */
 
-			/* !* arg = p * log(x) - x - lgammafn(p); *! */
+			/* ! arg = p log(x) - x - lgammafn(p);! */
 			arg = p * java.lang.Math.log(x) - x - misc.lgammafn(p);
 			a = one - p;
 			b = a + x + one;
@@ -205,13 +205,13 @@ public class gamma
 				an = a * c;
 				pn5 = b * pn3 - an * pn1;
 				pn6 = b * pn4 - an * pn2;
-				/* !* if (fabs(pn6) > zero) { *! */
+				/* ! if (fabs(pn6) > zero) {! */
 				if (java.lang.Math.abs(pn6) > zero)
 				{
 					rn = pn5 / pn6;
 					/*
-					 * !* if (fabs(sum - rn) <= fmin2(Constants.DBL_EPSILON,
-					 * Constants.DBL_EPSILON * rn)) *!
+					 * ! if (fabs(sum - rn) <= fmin2(Constants.DBL_EPSILON,
+					 * Constants.DBL_EPSILON rn))!
 					 */
 					if (java.lang.Math.abs(sum - rn) <= Math.min(	Constants.DBL_EPSILON,
 																												Constants.DBL_EPSILON * rn))
@@ -224,7 +224,7 @@ public class gamma
 				pn2 = pn4;
 				pn3 = pn5;
 				pn4 = pn6;
-				/* !* if (fabs(pn5) >= oflo) { *! */
+				/* ! if (fabs(pn5) >= oflo) {! */
 				if (java.lang.Math.abs(pn5) >= oflo)
 				{
 
@@ -237,12 +237,12 @@ public class gamma
 					pn4 = pn4 / oflo;
 				}
 			}
-			/* !* arg = arg + log(sum); *! */
+			/* ! arg = arg + log(sum);! */
 			arg = arg + java.lang.Math.log(sum);
 			sum = one;
 			if (arg >= elimit)
 			{
-				/* !* sum = one - exp(arg); *! */
+				/* ! sum = one - exp(arg);! */
 				sum = one - java.lang.Math.exp(arg);
 			}
 		}
@@ -285,7 +285,7 @@ public class gamma
 	 * Disribution. Applied Statistics 24, page 385.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static private double C7 = 4.67;
 	static private double C8 = 6.66;
@@ -324,9 +324,9 @@ public class gamma
 	static private double C38 = 5040;
 
 	static private double EPS0 = 5e-7/*
-	 * originally: IDENTICAL to EPS2; not clear
-	 * why
-	 */;
+																		 * originally: IDENTICAL to EPS2; not clear
+																		 * why
+																		 */;
 	static private double EPS1 = 1e-2;
 	static private double EPS2 = 5e-7;
 	static private double MAXIT = 20;
@@ -344,11 +344,11 @@ public class gamma
 
 		/* Test arguments and initialise */
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(p) || Double.isNaN(alpha) || Double.isNaN(scale))
 		{
 			return p + alpha + scale;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		if (p < 0 || p > 1 || alpha <= 0)
@@ -368,15 +368,15 @@ public class gamma
 		v = 2 * alpha;
 
 		c = alpha - 1;
-		/* !* g = lgammafn(alpha);!!!COMMENT!!! *! */
+		/* ! g = lgammafn(alpha);!!!COMMENT!!!! */
 		g = misc.lgammafn(alpha);/* log Gamma(v/2) */
 
-		/* !* if(v < (-1.24)*log(p)) { *! */
+		/* ! if(v < (-1.24)log(p)) {! */
 		if (v < -1.24 * java.lang.Math.log(p))
 		{
 			/* starting approximation for small chi-squared */
 
-			/* !* ch = pow(p*alpha*exp(g+alpha*Constants.M_LN_2), 1/alpha); *! */
+			/* ! ch = pow(palphaexp(g+alphaConstants.M_LN_2), 1/alpha);! */
 			ch = java.lang.Math.pow(p		* alpha
 																	* java.lang.Math.exp(g + alpha
 																												* Constants.M_LN_2),
@@ -395,14 +395,14 @@ public class gamma
 
 			x = normal.quantile(p, 0, 1);
 			p1 = 0.222222 / v;
-			/* !* ch = v*pow(x*sqrt(p1)+1-p1, 3); *! */
+			/* ! ch = vpow(xsqrt(p1)+1-p1, 3);! */
 			ch = v * java.lang.Math.pow(x * java.lang.Math.sqrt(p1) + 1 - p1, 3);
 
 			/* starting approximation for p tending to 1 */
 
 			if (ch > 2.2 * v + 6)
 			{
-				/* !* ch = -2*(log(1-p) - c*log(0.5*ch) + g); *! */
+				/* ! ch = -2(log(1-p) - clog(0.5ch) + g);! */
 				ch = -2 * (java.lang.Math.log(1 - p) - c * java.lang.Math.log(0.5 * ch) + g);
 			}
 
@@ -411,7 +411,7 @@ public class gamma
 		{ /* starting approximation for v <= 0.32 */
 
 			ch = 0.4;
-			/* !* a = log(1-p) + g + c*Constants.M_LN_2; *! */
+			/* ! a = log(1-p) + g + cConstants.M_LN_2;! */
 			a = java.lang.Math.log(1 - p) + g + c * Constants.M_LN_2;
 			do
 			{
@@ -419,9 +419,9 @@ public class gamma
 				p1 = 1 + ch * (C7 + ch);
 				p2 = ch * (C9 + ch * (C8 + ch));
 				t = -0.5 + (C7 + 2 * ch) / p1 - (C9 + ch * (C10 + 3 * ch)) / p2;
-				/* !* ch -= (1- exp(a+0.5*ch)*p2/p1)/t; *! */
+				/* ! ch -= (1- exp(a+0.5ch)p2/p1)/t;! */
 				ch -= (1 - java.lang.Math.exp(a + 0.5 * ch) * p2 / p1) / t;
-				/* !* } while(fabs(q/ch - 1) > EPS1); *! */
+				/* ! } while(fabs(q/ch - 1) > EPS1);! */
 			}
 			while (java.lang.Math.abs(q / ch - 1) > EPS1);
 		}
@@ -433,14 +433,14 @@ public class gamma
 			q = ch;
 			p1 = 0.5 * ch;
 			p2 = p - cumulative(p1, alpha, 1);
-			/* !* #ifdef IEEE_754 /*4! */
+			/* ! #ifdef IEEE_754 /4! */
 			if (Double.isInfinite(p2))
 			{
-				/* !* #else /*4! */
+				/* ! #else /4! */
 				// if((!!!!fixme!!!!) != 0)
-				/* !* #endif /*4! */
+				/* ! #endif /4! */
 				// return Double.NaN;
-				/* !* t = p2*exp(alpha*Constants.M_LN_2+g+p1-c*log(ch)); *! */
+				/* ! t = p2exp(alphaConstants.M_LN_2+g+p1-clog(ch));! */
 				t = p2 * java.lang.Math.exp(alpha * Constants.M_LN_2
 																		+ g
 																		+ p1
@@ -458,7 +458,7 @@ public class gamma
 			ch = ch + t
 						* (1 + 0.5 * t * s1 - b * c
 																	* (s1 - b * (s2 - b * (s3 - b * (s4 - b * (s5 - b * s6))))));
-			/* !* if(fabs(q/ch-1) > EPS2) *! */
+			/* ! if(fabs(q/ch-1) > EPS2)! */
 			if (java.lang.Math.abs(q / ch - 1) > EPS2)
 			{
 				return 0.5 * scale * ch;
@@ -509,11 +509,11 @@ public class gamma
 	 * Input: a = parameter (mean) of the standard gamma distribution. Output: a
 	 * variate from the gamma(a)-distribution
 	 * 
-	 * Coefficients q(k) - for q0 = sum(q(k)*a**(-k)) Coefficients a(k) - for q =
-	 * q0+(t*t/2)*sum(a(k)*v**k) Coefficients e(k) - for exp(q)-1 = sum(e(k)*q**k)
+	 * Coefficients q(k) - for q0 = sum(q(k)a(-k)) Coefficients a(k) - for q =
+	 * q0+(tt/2)sum(a(k)vk) Coefficients e(k) - for exp(q)-1 = sum(e(k)qk)
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static private double a1 = 0.3333333;
 	static private double a2 = -0.250003;
@@ -559,11 +559,10 @@ public class gamma
 				p = b * uniform.random();
 				if (p >= 1.0)
 				{
-					/* !* ret_val = -log((b - p) / a); *! */
+					/* ! ret_val = -log((b - p) / a);! */
 					ret_val = -java.lang.Math.log((b - p) / a);
 					/*
-					 * !* if (exponential.random!!!COMMENT!!!() >= (1.0 - a) *
-					 * log(ret_val)) *!
+					 * ! if (exponential.random!!!COMMENT!!!() >= (1.0 - a) log(ret_val))!
 					 */
 					if (exponential.random(PRNG) >= (1.0 - a) * java.lang.Math.log(ret_val))
 					{
@@ -572,7 +571,7 @@ public class gamma
 				}
 				else
 				{
-					/* !* ret_val = exp(log(p) / a); *! */
+					/* ! ret_val = exp(log(p) / a);! */
 					ret_val = java.lang.Math.exp(java.lang.Math.log(p) / a);
 					if (exponential.random(PRNG) >= ret_val)
 					{
@@ -587,7 +586,7 @@ public class gamma
 		{
 			aa = a;
 			s2 = a - 0.5;
-			/* !* s = sqrt(s2); *! */
+			/* ! s = sqrt(s2);! */
 			s = java.lang.Math.sqrt(s2);
 			d = sqrt32 - s * 12.0;
 		}
@@ -646,7 +645,7 @@ public class gamma
 		{
 			/* Step 6: calculation of v and quotient q */
 			v = t / (s + s);
-			/* !* if (fabs(v) <= 0.25) *! */
+			/* ! if (fabs(v) <= 0.25)! */
 			if (java.lang.Math.abs(v) <= 0.25)
 			{
 				q = q0 + 0.5
@@ -658,13 +657,13 @@ public class gamma
 			else
 			{
 				q = q0 - s * t + 0.25 * t * t + (s2 + s2)
-				/* !* * log(1.0 + v); *! */
+				/* ! log(1.0 + v);! */
 				* java.lang.Math.log(1.0 + v);
 			}
 
 			/* Step 7: quotient acceptance (q) */
 
-			/* !* if (log(1.0 - u) <= q) *! */
+			/* ! if (log(1.0 - u) <= q)! */
 			if (java.lang.Math.log(1.0 - u) <= q)
 			{
 				return scale * ret_val;
@@ -692,7 +691,7 @@ public class gamma
 			{
 				/* Step 10: calculation of v and quotient q */
 				v = t / (s + s);
-				/* !* if (fabs(v) <= 0.25) *! */
+				/* ! if (fabs(v) <= 0.25)! */
 				if (java.lang.Math.abs(v) <= 0.25)
 				{
 					q = q0 + 0.5
@@ -704,7 +703,7 @@ public class gamma
 				else
 				{
 					q = q0 - s * t + 0.25 * t * t + (s2 + s2)
-					/* !* * log(1.0 + v); *! */
+					/* ! log(1.0 + v);! */
 					* java.lang.Math.log(1.0 + v);
 				}
 				/* Step 11: hat acceptance (h) */
@@ -717,12 +716,12 @@ public class gamma
 					}
 					else
 					{
-						/* !* w = exp(q) - 1.0; *! */
+						/* ! w = exp(q) - 1.0;! */
 						w = java.lang.Math.exp(q) - 1.0;
 					}
 					/* if t is rejected */
 					/* sample again at step 8 */
-					/* !* if (c * fabs(u) <= w * exp(e - 0.5 * t * t)) *! */
+					/* ! if (c fabs(u) <= w exp(e - 0.5 t t))! */
 					if (c * java.lang.Math.abs(u) <= w * java.lang.Math.exp(e - 0.5
 																																	* t
 																																	* t))

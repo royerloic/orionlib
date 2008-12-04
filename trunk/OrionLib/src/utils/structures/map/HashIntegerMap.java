@@ -20,7 +20,7 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#add(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Integer add(final K pKey, final Integer pValue)
 	{
@@ -51,7 +51,7 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#sub(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Integer sub(final K pKey, Integer pValue)
 	{
@@ -62,7 +62,7 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#mult(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Integer mult(final K pKey, final Integer pValue)
 	{
@@ -83,7 +83,7 @@ public class HashIntegerMap<K> extends HashMap<K, Integer> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.royerloic.collections.DoubleMap#div(java.lang.Object,
-	 *      java.lang.Double)
+	 * java.lang.Double)
 	 */
 	public Integer div(final K pKey, final Integer pValue)
 	{

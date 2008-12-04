@@ -30,8 +30,8 @@ public class DatabaseConstants
  * 
  * CREATE TABLE GOA_ID2GO ( uid varchar(10) NOT NULL default '', go varchar(10)
  * NOT NULL default '', qual tinyint(4) default NULL ) ENGINE=MyISAM DEFAULT
- * CHARSET=utf8; -- -------------------------------------------------------- -- --
- * Table structure for table `GeneOntology_GO2GO` --
+ * CHARSET=utf8; -- -------------------------------------------------------- --
+ * -- Table structure for table `GeneOntology_GO2GO` --
  * 
  * CREATE TABLE GeneOntology_GO2GO ( parent varchar(10) NOT NULL default '',
  * child varchar(10) NOT NULL default '', distance tinyint(4) NOT NULL default
@@ -90,7 +90,4 @@ public class DatabaseConstants
  * CREATE TABLE UniProt_ID2Synonym ( uid varchar(6) NOT NULL default '', synonym
  * text NOT NULL, `type` tinyint(4) default NULL ) ENGINE=MyISAM DEFAULT
  * CHARSET=utf8;
- * 
- * 
- * 
  */

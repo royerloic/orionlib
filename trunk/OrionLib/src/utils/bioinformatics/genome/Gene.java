@@ -181,8 +181,8 @@ public class Gene implements Serializable
 		/*
 		 * protected String mSeqId; protected String mSource; protected String
 		 * mType; protected int mStart; protected int mEnd; protected double mScore;
-		 * protected String mStrand; protected int mPhase; protected HashSetMap<String,String>
-		 * mAttributes = new HashSetMap<String, String>();
+		 * protected String mStrand; protected int mPhase; protected
+		 * HashSetMap<String,String> mAttributes = new HashSetMap<String, String>();
 		 */
 		final StringBuilder lStringBuilder = new StringBuilder();
 		// lStringBuilder.append("# SequenceId \t Source \t Type \t Start \t End \t

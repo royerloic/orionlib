@@ -21,7 +21,7 @@ public class FileIndexTest
 	{
 		try
 		{
-			final InputStream lInputStream = FileIndexTest.class.getResourceAsStream("Test.tab.txt");
+			final InputStream lInputStream = FileIndexTest.class.getResourceAsStream("test.tab.txt");
 			assertTrue(lInputStream != null);
 			sTempFile = File.createTempFile("FileIndexTest", "temp");
 			StreamToFile.streamToFile(lInputStream, sTempFile);

@@ -31,22 +31,22 @@ public class t
 	 * The density of the "Student" t distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(final double x, final double n)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
 		{
 			return x + n;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 0;
@@ -55,10 +55,10 @@ public class t
 		{
 			return normal.density(x, 0.0, 1.0);
 		}
-		/* !* #endif /*4! */
-		/* !* return pow(1.0 + x * x / n, -0.5 * (n + 1.0)) *! */
+		/* ! #endif /4! */
+		/* ! return pow(1.0 + x x / n, -0.5 (n + 1.0))! */
 		return java.lang.Math.pow(1.0 + x * x / n, -0.5 * (n + 1.0))
-		/* !* / (sqrt(n) * beta(0.5, 0.5 * n)); *! */
+		/* ! / (sqrt(n) beta(0.5, 0.5 n));! */
 		/ (java.lang.Math.sqrt(n) * misc.beta(0.5, 0.5 * n));
 	}
 
@@ -81,23 +81,23 @@ public class t
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(final double x, final double n)
 	{
 		double val;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(n))
 		{
 			return x + n;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (n <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return x < 0 ? 0 : 1;
@@ -106,7 +106,7 @@ public class t
 		{
 			return normal.cumulative(x, 0.0, 1.0);
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		val = 0.5 * beta.cumulative(n / (n + x * x), n / 2.0, 0.5);
 		return x > 0.0 ? 1 - val : val;
 	}
@@ -142,7 +142,7 @@ public class t
 	 * Student's t-quantiles by G.W. Hill CACM 13(10), 619-620, October 1970
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static private double eps = 1.e-12;
 
@@ -151,7 +151,7 @@ public class t
 		double a, b, c, d, prob, P, q, x, y;
 		boolean neg;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(p) || Double.isNaN(ndf))
 		{
 			return p + ndf;
@@ -169,13 +169,13 @@ public class t
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* #else /*4! */
+		/* ! #else /4! */
 		if (ndf < 1 || p > 1 || p < 0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (ndf > 1e20)
 		{
 			return normal.quantile(p, 0.0, 1.0);
@@ -192,33 +192,32 @@ public class t
 			P = 2 * p;
 		}
 
-		/* !* if (fabs(ndf - 2) < eps) { *! */
+		/* ! if (fabs(ndf - 2) < eps) {! */
 		if (java.lang.Math.abs(ndf - 2) < eps)
 		{
 			/* df ~= 2 */
-			/* !* q = sqrt(2 / (P * (2 - P)) - 2); *! */
+			/* ! q = sqrt(2 / (P (2 - P)) - 2);! */
 			q = java.lang.Math.sqrt(2 / (P * (2 - P)) - 2);
 		}
 		else if (ndf < 1 + eps)
 		{
 			/* df ~= 1 */
 			prob = P * Constants.M_PI_half;
-			/* !* q = cos(prob) / sin(prob); *! */
+			/* ! q = cos(prob) / sin(prob);! */
 			q = java.lang.Math.cos(prob) / java.lang.Math.sin(prob);
 		}
 		else
 		{
-			/*-- usual case;  including, e.g.,  df = 1.1 */
+			/* -- usual case; including, e.g., df = 1.1 */
 			a = 1 / (ndf - 0.5);
 			b = 48 / (a * a);
 			c = ((20700 * a / b - 98) * a - 16) * a + 96.36;
 			/*
-			 * !* d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * Constants.M_PI_half) *
-			 * ndf; *!
+			 * ! d = ((94.5 / (b + c) - 3) / b + 1) sqrt(a Constants.M_PI_half) ndf;!
 			 */
 			d = ((94.5 / (b + c) - 3) / b + 1) * java.lang.Math.sqrt(a * Constants.M_PI_half)
 					* ndf;
-			/* !* y = pow(d * P, 2 / ndf); *! */
+			/* ! y = pow(d P, 2 / ndf);! */
 			y = java.lang.Math.pow(d * P, 2 / ndf);
 
 			if (y > 0.05 + a)
@@ -235,7 +234,7 @@ public class t
 				y = a * y * y;
 				if (y > 0.002)
 				{
-					/* !* y = exp(y) - 1; *! */
+					/* ! y = exp(y) - 1;! */
 					y = java.lang.Math.exp(y) - 1;
 				}
 				else
@@ -251,7 +250,7 @@ public class t
 						+ 1
 						/ y;
 			}
-			/* !* q = sqrt(ndf * y); *! */
+			/* ! q = sqrt(ndf y);! */
 			q = java.lang.Math.sqrt(ndf * y);
 		}
 		if (neg)
@@ -291,14 +290,14 @@ public class t
 	 * This function calls rchisq and rnorm to do the real work.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double df, final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isNaN(df) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		df <= 0.0)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
@@ -309,7 +308,7 @@ public class t
 		}
 		else
 		{
-			/* !* return normal.random!!!COMMENT!!!() / sqrt(rchisq(df) / df); *! */
+			/* ! return normal.random!!!COMMENT!!!() / sqrt(rchisq(df) / df);! */
 			return normal.random(PRNG) / java.lang.Math.sqrt(chisquare.random(df,
 																																				PRNG) / df);
 		}

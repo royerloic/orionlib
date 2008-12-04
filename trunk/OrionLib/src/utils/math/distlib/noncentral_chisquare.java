@@ -30,10 +30,9 @@ public class noncentral_chisquare
 	 * 
 	 * The density of the noncentral chisquare distribution with "df" degrees of
 	 * freedom and noncentrality parameter "lambda".
-	 * 
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(final double x, double df, final double lambda)
 	{
@@ -41,11 +40,11 @@ public class noncentral_chisquare
 		final int maxiter = 100;
 		final double eps = 1.e-14;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(df) || Double.isNaN(lambda))
 		{
 			return x + df + lambda;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		if (lambda < 0 || df <= 0)
@@ -53,13 +52,13 @@ public class noncentral_chisquare
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 		}
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(df) || Double.isInfinite(lambda))
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		if (x <= 0)
 		{
@@ -73,7 +72,7 @@ public class noncentral_chisquare
 		}
 
 		lambda2 = 0.5 * lambda;
-		/* !* weight = exp(-lambda2); *! */
+		/* ! weight = exp(-lambda2);! */
 		weight = java.lang.Math.exp(-lambda2);
 		sum = weight * dens;
 		psum = weight;
@@ -99,19 +98,19 @@ public class noncentral_chisquare
 	 * degrees of freedom f and nonnegative noncentrality parameter theta
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
-	/*----------- DEBUGGING -------------
-	 *
-	 *	make CFLAGS='-DDEBUG_pnch -g -I/usr/local/include -I../include'
-	
-	 * -- Feb.1, 1998 (R 0.62 alpha); M.Maechler:  still have
-		- INFINITE loop \
-		- bad precision / in some cases
+	/*
+	 * ----------- DEBUGGING -------------
+	 * 
+	 * make CFLAGS='-DDEBUG_pnch -g -I/usr/local/include -I../include'
+	 * 
+	 * -- Feb.1, 1998 (R 0.62 alpha); M.Maechler: still have - INFINITE loop \ -
+	 * bad precision / in some cases
 	 */
-	/* !* #ifdef DEBUG_pnch /*4! */
-	/* !* # include "PrtUtil.h" /*4! */
-	/* !* #endif /*4! */
+	/* ! #ifdef DEBUG_pnch /4! */
+	/* ! # include "PrtUtil.h" /4! */
+	/* ! #endif /4! */
 
 	public static double cumulative(final double x,
 																	final double f,
@@ -124,7 +123,7 @@ public class noncentral_chisquare
 		final double half = 0.5;
 		final int itrmax = 100;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(f) || Double.isNaN(theta))
 		{
 			return x + f + theta;
@@ -134,7 +133,7 @@ public class noncentral_chisquare
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		if (f < zero && theta < zero)
 		{
@@ -145,33 +144,33 @@ public class noncentral_chisquare
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 1;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		lam = theta * half;
 
-		/* !* #ifdef DEBUG_pnch /*4! */
+		/* ! #ifdef DEBUG_pnch /4! */
 		// REprintf("pnchisq(x=%12g, f=%12g, theta=%12g):\n",x,f,theta);
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		/* evaluate the first term */
 
-		/* !* v = u = exp(-lam); *! */
+		/* ! v = u = exp(-lam);! */
 		u = java.lang.Math.exp(-lam);
 		v = u;
 		x2 = x * half;
 		f2 = f / half;
 		/* The following overflows very soon, eg. x=f=150 */
-		/* !* t = pow(x2, f2) * exp(-x2) / exp(lgamma((f2 + 1))); *//* ! */
+		/* ! t = pow(x2, f2) exp(-x2) / exp(lgamma((f2 + 1))); *//* ! */
 		/*
-		 * t = java.lang.Math.pow(x2, f2) * java.lang.Math.exp(-x2) /
+		 * t = java.lang.Math.pow(x2, f2) java.lang.Math.exp(-x2) /
 		 * java.lang.Math.exp(lgamma((f2 + 1)));
 		 */
-		/* !* t = exp(f2*log(x2) -x2 - lgammafn(f2 + 1)); *! */
+		/* ! t = exp(f2log(x2) -x2 - lgammafn(f2 + 1));! */
 		t = java.lang.Math.exp(f2 * java.lang.Math.log(x2)
 														- x2
 														- misc.lgammafn(f2 + 1));
@@ -181,14 +180,14 @@ public class noncentral_chisquare
 
 		term = v * t;
 		ans = term;
-		/* !* #ifdef DEBUG_pnch /*4! */
+		/* ! #ifdef DEBUG_pnch /4! */
 		/*
-		 * !* REprintf("\t v=exp(-th/2)=%12g, x/2=%12g, f/2=%12g ==>
-		 * t=%12g\n",v,x2,f2,t); *!
+		 * ! REprintf("\t v=exp(-th/2)=%12g, x/2=%12g, f/2=%12g ==>
+		 * t=%12g\n",v,x2,f2,t);!
 		 */
 		// REprintf("\t v=java.lang.Math.exp(-th/2)=%12g, x/2=%12g, f/2=%12g ==>
 		// t=%12g\n",v,x2,f2,t);
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		/* check if (f+2n) is greater than x */
 
@@ -196,9 +195,9 @@ public class noncentral_chisquare
 		twon = n * 2;
 		L_End: for (;;)
 		{
-			/* !* #ifdef DEBUG_pnch /*4! */
+			/* ! #ifdef DEBUG_pnch /4! */
 			// REprintf(" _OL_: n=%d",n);
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 			if (!(f + twon - x > zero))
 			{
 				/* evaluate the next term of the */
@@ -215,14 +214,14 @@ public class noncentral_chisquare
 			{
 				for (;;)
 				{
-					/* !* #ifdef DEBUG_pnch /*4! */
+					/* ! #ifdef DEBUG_pnch /4! */
 					// REprintf(" il: n=%d",n);
-					/* !* #endif /*4! */
+					/* ! #endif /4! */
 
 					bound = t * x / (f + twon - x);
-					/* !* #ifdef DEBUG_pnch /*4! */
+					/* ! #ifdef DEBUG_pnch /4! */
 					// REprintf("\tL10: n=%d; term=%12g; bound=%12g\n",n,term,bound);
-					/* !* #endif /*4! */
+					/* ! #endif /4! */
 					if (bound <= errmax || n > itrmax)
 					{
 						break L_End;
@@ -244,9 +243,9 @@ public class noncentral_chisquare
 		{
 			throw new java.lang.ArithmeticException("Math Error: PRECISION");
 		}
-		/* !* #ifdef DEBUG_pnch /*4! */
+		/* ! #ifdef DEBUG_pnch /4! */
 		// REprintf("\tL_End: n=%d; term=%12g; bound=%12g\n",n,term,bound);
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return ans;
 	}
 
@@ -269,14 +268,14 @@ public class noncentral_chisquare
 	 * Mass Ave, Cambridge, MA 02139, USA.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double p, double n, final double lambda)
 	{
 		double ux, lx, nx;
 		final double acu = 1.0e-12;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(p) || Double.isNaN(n) || Double.isNaN(lambda))
 		{
 			return p + n + lambda;
@@ -286,8 +285,8 @@ public class noncentral_chisquare
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
-		/* !* n = floor(n + 0.5); *! */
+		/* ! #endif /4! */
+		/* ! n = floor(n + 0.5);! */
 		n = java.lang.Math.floor(n + 0.5);
 		if (p < 0 || p >= 1 || n < 1 || lambda < 0)
 		{

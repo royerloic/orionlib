@@ -31,34 +31,34 @@ public class geometric
 	 * The density of the geometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double density(double x, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
 		{
 			return x + p;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (p <= 0 || p >= 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* x = floor(x + 0.5); *! */
+		/* ! x = floor(x + 0.5);! */
 		x = java.lang.Math.floor(x + 0.5);
 		if (x < 0)
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 1;
 		}
-		/* !* #endif /*4! */
-		/* !* return p * pow(1 - p, x); *! */
+		/* ! #endif /4! */
+		/* ! return p pow(1 - p, x);! */
 		return p * java.lang.Math.pow(1 - p, x);
 	}
 
@@ -88,17 +88,17 @@ public class geometric
 	 * The distribution function of the geometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double cumulative(double x, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
 		{
 			return x + p;
 		}
-		/* !* #endif /*4! */
-		/* !* x = floor(x); *! */
+		/* ! #endif /4! */
+		/* ! x = floor(x);! */
 		x = java.lang.Math.floor(x);
 		if (p <= 0 || p >= 1)
 		{
@@ -109,13 +109,13 @@ public class geometric
 		{
 			return 0;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isInfinite(x))
 		{
 			return 1;
 		}
-		/* !* #endif /*4! */
-		/* !* return 1 - pow(1 - p, x + 1); *! */
+		/* ! #endif /4! */
+		/* ! return 1 - pow(1 - p, x + 1);! */
 		return 1 - java.lang.Math.pow(1 - p, x + 1);
 	}
 
@@ -145,11 +145,11 @@ public class geometric
 	 * The quantile function of the geometric distribution.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double quantile(final double x, final double p)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(p))
 		{
 			return x + p;
@@ -163,18 +163,18 @@ public class geometric
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* #else /*4! */
+		/* ! #else /4! */
 		if (x < 0 || x >= 1 || p <= 0 || p > 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 			// return Double.NaN;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		if (x == 0)
 		{
 			return 0;
 		}
-		/* !* return ceil(log(1 - x) / log(1.0 - p) - 1); *! */
+		/* ! return ceil(log(1 - x) / log(1.0 - p) - 1);! */
 		return java.lang.Math.ceil(java.lang.Math.log(1 - x) / java.lang.Math.log(1.0 - p)
 																- 1);
 	}
@@ -216,14 +216,14 @@ public class geometric
 	 * Springer-Verlag. Page 480.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double random(final double p, final uniform PRNG)
 	{
 		if (
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		Double.isNaN(p) ||
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		p <= 0 || p >= 1)
 		{
 			throw new java.lang.ArithmeticException("Math Error: DOMAIN");

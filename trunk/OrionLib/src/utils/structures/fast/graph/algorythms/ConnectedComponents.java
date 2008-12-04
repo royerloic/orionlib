@@ -11,7 +11,7 @@ public class ConnectedComponents
 	 * FastBoundedIntegerSet currentset = new
 	 * FastBoundedIntegerSet(pGraph.getNumberOfNodes());
 	 * 
-	 *  } /
+	 * } /
 	 ****************************************************************************/
 
 }

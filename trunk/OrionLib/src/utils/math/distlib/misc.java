@@ -160,7 +160,7 @@ public class misc
 	 * 
 	 * Binomial coefficients.
 	 */
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double lfastchoose(final double n, final double k)
 	{
@@ -254,16 +254,16 @@ public class misc
 		return x < y ? y : x;
 	}
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double fmin2(final double x, final double y)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
 		{
 			return x + y;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return x < y ? x : y;
 	}
 
@@ -283,19 +283,19 @@ public class misc
 	 * version is portable.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double fmod(final double x, final double y)
 	{
 		double quot;
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
 		{
 			return x + y;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		quot = x / y;
-		/* !* return x - (quot < 0.0 ? ceil(quot) : floor(quot)) * y; *! */
+		/* ! return x - (quot < 0.0 ? ceil(quot) : floor(quot)) y;! */
 		return x - (quot < 0.0 ? java.lang.Math.ceil(quot)
 													: java.lang.Math.floor(quot))
 						* y;
@@ -370,14 +370,14 @@ public class misc
 		}
 		else
 		{ /* -- LARGE or small -- */
-			/* !* do_round = max10e - l10 >= pow(10.0, -digits); *! */
+			/* ! do_round = max10e - l10 >= pow(10.0, -digits);! */
 			final boolean do_round = max10e - l10 >= Math.pow(10.0, -digits);
 			final int e2 = e10 > 0 ? 16 : -16;
 			final double p10 = Math.pow(10.0, e2);
 			x *= p10;
 			final double P10 = Math.pow(10.0, (double) e10 - e2);
 			x *= P10;
-			/*-- p10 * P10 = 10 ^ e10 */
+			/* -- p10 P10 = 10 ^ e10 */
 			if (do_round)
 			{
 				x += 0.5;
@@ -398,13 +398,13 @@ public class misc
 	 * Rounds "x" to "digits" decimal digits.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
-	/* !* #ifndef HAVE_RINT /*4! */
-	/* !* #define USE_BUILTIN_RINT /*4! */
-	/* !* #endif /*4! */
+	/* ! #ifndef HAVE_RINT /4! */
+	/* ! #define USE_BUILTIN_RINT /4! */
+	/* ! #endif /4! */
 
-	/* !* #ifdef USE_BUILTIN_RINT /*4! */
+	/* ! #ifdef USE_BUILTIN_RINT /4! */
 	// final double R_rint = static private_rint;
 	/* The largest integer which can be represented */
 	/* exactly in floating point form. */
@@ -418,7 +418,7 @@ public class misc
 		double pow10, sgn, intx;
 		final double maxdigits = Constants.DBL_DIG - 1;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(digits))
 		{
 			return x + digits;
@@ -426,16 +426,16 @@ public class misc
 		if (Double.isInfinite(x))
 		{
 			return x;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
-		/* !* digits = floor(digits + 0.5); *! */
+		/* ! digits = floor(digits + 0.5);! */
 		digits = java.lang.Math.floor(digits + 0.5);
 		if (digits > maxdigits)
 		{
 			digits = maxdigits;
 		}
-		/* !* pow10 = pow(10.0, digits); *! */
+		/* ! pow10 = pow(10.0, digits);! */
 		pow10 = java.lang.Math.pow(10.0, digits);
 		sgn = 1.0;
 		if (x < 0.0)
@@ -445,7 +445,7 @@ public class misc
 		}
 		if (digits > 0.0)
 		{
-			/* !* intx = floor(x); *! */
+			/* ! intx = floor(x);! */
 			intx = java.lang.Math.floor(x);
 			x = x - intx;
 		}
@@ -465,20 +465,20 @@ public class misc
 	 * 
 	 * This function performs transfer of sign. The result is:
 	 * 
-	 * |x| * signum(y)
+	 * |x| signum(y)
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double fsign(final double x, final double y)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x) || Double.isNaN(y))
 		{
 			return x + y;
 		}
-		/* !* #endif /*4! */
-		/* !* return ((y >= 0) ? fabs(x) : -fabs(x)); *! */
+		/* ! #endif /4! */
+		/* ! return ((y >= 0) ? fabs(x) : -fabs(x));! */
 		return y >= 0 ? java.lang.Math.abs(x) : -java.lang.Math.abs(x);
 	}
 
@@ -493,7 +493,7 @@ public class misc
 	 * This function returns the square of its argument.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double fsquare(final double x)
 	{
@@ -534,7 +534,7 @@ public class misc
 	 * Sun Microsystems portable mathematical library.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static final double gamcs[] =
 	{ +.8571195590989331421920062399942e-2,
@@ -599,21 +599,21 @@ public class misc
 			temp = gammalims(xmin, xmax);
 			xmin = temp[0];
 			xmax = temp[1];
-			/* !* xsml = exp(fmax2(log(d1mach(1)), -log(d1mach(2)))+0.01); *! */
+			/* ! xsml = exp(fmax2(log(d1mach(1)), -log(d1mach(2)))+0.01);! */
 			xsml = java.lang.Math.exp(fmax2(java.lang.Math.log(d1mach(1)),
 																			-java.lang.Math.log(d1mach(2))) + 0.01);
-			/* !* dxrel = sqrt(d1mach(4)); *! */
+			/* ! dxrel = sqrt(d1mach(4));! */
 			dxrel = java.lang.Math.sqrt(d1mach(4));
 		}
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x))
 		{
 			return x;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
-		/* !* y = fabs(x); *! */
+		/* ! y = fabs(x);! */
 		y = java.lang.Math.abs(x);
 
 		if (y <= 10)
@@ -650,7 +650,7 @@ public class misc
 
 				/* The answer is less than half precision */
 				/* because x too near a negative integer. */
-				/* !* if (x < -0.5 && fabs(x - (int)(x - 0.5) / x) < dxrel) { *! */
+				/* ! if (x < -0.5 && fabs(x - (int)(x - 0.5) / x) < dxrel) {! */
 				if (x < -0.5 && java.lang.Math.abs(x - (int) (x - 0.5) / x) < dxrel)
 				{
 					throw new java.lang.ArithmeticException("Math Error: PRECISION");
@@ -700,8 +700,8 @@ public class misc
 			}
 
 			/*
-			 * !* value = exp((y - 0.5) * log(y) - y + Constants.M_LN_SQRT_2PI +
-			 * lgammacor(y)); *!
+			 * ! value = exp((y - 0.5) log(y) - y + Constants.M_LN_SQRT_2PI +
+			 * lgammacor(y));!
 			 */
 			value = java.lang.Math.exp((y - 0.5) * java.lang.Math.log(y)
 																	- y
@@ -713,7 +713,7 @@ public class misc
 				return value;
 			}
 
-			/* !* if (fabs((x - (int)(x - 0.5))/x) < dxrel){ *! */
+			/* ! if (fabs((x - (int)(x - 0.5))/x) < dxrel){! */
 			if (java.lang.Math.abs((x - (int) (x - 0.5)) / x) < dxrel)
 			{
 
@@ -723,7 +723,7 @@ public class misc
 				throw new java.lang.ArithmeticException("Math Error: PRECISION");
 			}
 
-			/* !* sinpiy = sin(Constants.M_PI * y); *! */
+			/* ! sinpiy = sin(Constants.M_PI y);! */
 			sinpiy = java.lang.Math.sin(Constants.M_PI * y);
 			if (sinpiy == 0)
 			{ /* Negative integer arg - overflow */
@@ -741,7 +741,7 @@ public class misc
 	 * 
 	 * =========== was part of ribesl (Bessel I(.)) =========== ~~~~~~
 	 */
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double gamma_cody(double x)
 	{
@@ -757,7 +757,7 @@ public class misc
 		 * arithmetic system, the compiler, the intrinsic functions, and proper
 		 * selection of the machine-dependent constants.
 		 * 
-		 * ******************************************************************
+		 * 
 		 * 
 		 * Error returns
 		 * 
@@ -834,10 +834,12 @@ public class misc
 		/* Constants.DBL_EPSILON = static private double eps = 2.22e-16; */
 		/* Double.MIN_VALUE == static private double xminin = 2.23e-308; */
 
-		/*----------------------------------------------------------------------
-		  Numerator and denominator coefficients for rational minimax
-		  approximation over (1,2).
-		  ----------------------------------------------------------------------*/
+		/*
+		 * ----------------------------------------------------------------------
+		 * Numerator and denominator coefficients for rational minimax approximation
+		 * over (1,2).
+		 * ----------------------------------------------------------------------
+		 */
 		// final double p[8] = {
 		final double p[] =
 		{ -1.71618513886549492533811,
@@ -858,9 +860,11 @@ public class misc
 			4755.84627752788110767815,
 			-134659.959864969306392456,
 			-115132.259675553483497211 };
-		/*----------------------------------------------------------------------
-		  Coefficients for minimax approximation over (12, INF).
-		  ----------------------------------------------------------------------*/
+		/*
+		 * ----------------------------------------------------------------------
+		 * Coefficients for minimax approximation over (12, INF).
+		 * ----------------------------------------------------------------------
+		 */
 		// final double c[7] = {
 		final double c[] =
 		{ -.001910444077728,
@@ -898,7 +902,7 @@ public class misc
 					{
 						parity = true;
 					}
-					/* !* fact = -Constants.M_PI / sin(Constants.M_PI * res); *! */
+					/* ! fact = -Constants.M_PI / sin(Constants.M_PI res);! */
 					fact = -Constants.M_PI / java.lang.Math.sin(Constants.M_PI * res);
 					y += 1.;
 				}
@@ -1006,9 +1010,9 @@ public class misc
 						sum = sum / ysq + c[(int) i];
 					}
 					sum = sum / y - y + sqrtpi;
-					/* !* sum += (y - .5) * log(y); *! */
+					/* ! sum += (y - .5) log(y);! */
 					sum += (y - .5) * java.lang.Math.log(y);
-					/* !* res = exp(sum); *! */
+					/* ! res = exp(sum);! */
 					res = java.lang.Math.exp(sum);
 				}
 				else
@@ -1039,7 +1043,7 @@ public class misc
 	 * 
 	 * SYNOPSIS
 	 * 
-	 * #include "DistLib.h" void gammalims(double *xmin, double *xmax);
+	 * #include "DistLib.h" void gammalims(doublexmin, doublexmax);
 	 * 
 	 * DESCRIPTION
 	 * 
@@ -1053,7 +1057,7 @@ public class misc
 	 * Fullerton of Los Alamos Scientific Laboratory.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	/* FIXME: We need an ifdef'ed version of this which gives */
 	/* the exact values when we are using IEEE 754 arithmetic. */
@@ -1063,7 +1067,7 @@ public class misc
 		double alnbig, alnsml, xln, xold;
 		int i;
 
-		/* !* alnsml = log(d1mach(1)); *! */
+		/* ! alnsml = log(d1mach(1));! */
 		alnsml = java.lang.Math.log(d1mach(1));
 		xmin = -alnsml;
 		find_xmax:
@@ -1071,11 +1075,11 @@ public class misc
 			for (i = 1; i <= 10; ++i)
 			{
 				xold = xmin;
-				/* !* xln = log(*xmin); *! */
+				/* ! xln = log(xmin);! */
 				xln = java.lang.Math.log(xmin);
 				xmin -= xmin * ((xmin + .5) * xln - xmin - .2258 + alnsml)
 								/ (xmin * xln + .5);
-				/* !* if (fabs(xmin - xold) < .005) { *! */
+				/* ! if (fabs(xmin - xold) < .005) {! */
 				if (java.lang.Math.abs(xmin - xold) < .005)
 				{
 					xmin = -xmin + .01;
@@ -1090,7 +1094,7 @@ public class misc
 
 		} // find_xmax:
 
-		/* !* alnbig = log(d1mach(2)); *! */
+		/* ! alnbig = log(d1mach(2));! */
 		alnbig = java.lang.Math.log(d1mach(2));
 		xmax = alnbig;
 		done:
@@ -1098,11 +1102,11 @@ public class misc
 			for (i = 1; i <= 10; ++i)
 			{
 				xold = xmax;
-				/* !* xln = log(*xmax); *! */
+				/* ! xln = log(xmax);! */
 				xln = java.lang.Math.log(xmax);
 				xmax -= xmax * ((xmax - .5) * xln - xmax + .9189 - alnbig)
 								/ (xmax * xln - .5);
-				/* !* if (fabs(xmax - xold) < .005) { *! */
+				/* ! if (fabs(xmax - xold) < .005) {! */
 				if (java.lang.Math.abs(xmax - xold) < .005)
 				{
 					xmax += -.01;
@@ -1124,7 +1128,7 @@ public class misc
 		return retval;
 	}
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static int i1mach(final int i)
 	{
@@ -1140,14 +1144,14 @@ public class misc
 		case 4:
 			return 0;
 
-		case 5: /* return CHAR_BIT * sizeof(int); */
+		case 5: /* return CHAR_BIT sizeof(int); */
 			throw new java.lang.RuntimeException("Unimplemented Feature.");
 		case 6: /* return sizeof(int)/sizeof(char); */
 			throw new java.lang.RuntimeException("Unimplemented Feature.");
 
 		case 7:
 			return 2;
-		case 8: /* return CHAR_BIT * sizeof(int) - 1; */
+		case 8: /* return CHAR_BIT sizeof(int) - 1; */
 			throw new java.lang.RuntimeException("Unimplemented Feature.");
 		case 9:
 			return java.lang.Integer.MAX_VALUE; /* INT_MAX; */
@@ -1190,7 +1194,7 @@ public class misc
 	 * Compute maximum of two integers.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	int imax2(final int x, final int y)
 	{
@@ -1208,7 +1212,7 @@ public class misc
 	 * Compute minimum of two integers.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	int imin2(final int x, final int y)
 	{
@@ -1231,7 +1235,7 @@ public class misc
 	 * Fullerton of Los Alamos Scientific Laboratory.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double lbeta(final double a, final double b)
 	{
@@ -1247,11 +1251,11 @@ public class misc
 			q = b;/* := max(a,b) */
 		}
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(a) || Double.isNaN(b))
 		{
 			return a + b;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		/* both arguments must be >= 0 */
@@ -1265,24 +1269,23 @@ public class misc
 		{
 			return Double.POSITIVE_INFINITY;
 		}
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		else if (Double.isInfinite(q))
 		{
 			return Double.NEGATIVE_INFINITY;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 
 		if (p >= 10)
 		{
 			/* p and q are big. */
 			corr = lgammacor(p) + lgammacor(q) - lgammacor(p + q);
-			/* !* return log(q) * -0.5 + Constants.M_LN_SQRT_2PI + corr *! */
+			/* ! return log(q) -0.5 + Constants.M_LN_SQRT_2PI + corr! */
 			return java.lang.Math.log(q) * -0.5
 							+ Constants.M_LN_SQRT_2PI
 							+ corr
 							/*
-							 * !* + (p - 0.5) * log(p / (p + q)) + q * logrelerr(-p / (p +
-							 * q)); *!
+							 * ! + (p - 0.5) log(p / (p + q)) + q logrelerr(-p / (p + q));!
 							 */
 							+ (p - 0.5)
 							* java.lang.Math.log(p / (p + q))
@@ -1293,7 +1296,7 @@ public class misc
 		{
 			/* p is small, but q is big. */
 			corr = lgammacor(q) - lgammacor(p + q);
-			/* !* return lgammafn(p) + corr + p - p * log(p + q) *! */
+			/* ! return lgammafn(p) + corr + p - p log(p + q)! */
 			return lgammafn(p) + corr
 							+ p
 							- p
@@ -1304,7 +1307,7 @@ public class misc
 		else
 		{
 			/* p and q are small: p <= q > 10. */
-			/* !* return log(gammafn(p) * (gammafn(q) / gammafn(p + q))); *! */
+			/* ! return log(gammafn(p) (gammafn(q) / gammafn(p + q)));! */
 			return java.lang.Math.log(gammafn(p) * gammafn(q) / gammafn(p + q));
 		}
 	}
@@ -1329,7 +1332,7 @@ public class misc
 	 * Sun Microsystems portable mathematical library.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	static int signgam;
 
@@ -1341,18 +1344,18 @@ public class misc
 
 		if (xmax == 0)
 		{
-			/* !* xmax = d1mach(2)/log(d1mach(2)); *! */
+			/* ! xmax = d1mach(2)/log(d1mach(2));! */
 			xmax = d1mach(2) / java.lang.Math.log(d1mach(2));
 			dxrel = java.lang.Math.sqrt(d1mach(4));
 		}
 
 		signgam = 1;
 
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x))
 		{
 			return x;
-			/* !* #endif /*4! */
+			/* ! #endif /4! */
 		}
 
 		if (x <= 0 && x == (int) x)
@@ -1362,12 +1365,12 @@ public class misc
 			// log|gamma(x)| */
 		}
 
-		/* !* y = fabs(x); *! */
+		/* ! y = fabs(x);! */
 		y = java.lang.Math.abs(x);
 
 		if (y <= 10)
 		{
-			/* !* return log(fabs(gammafn(x))); *! */
+			/* ! return log(fabs(gammafn(x)));! */
 			return java.lang.Math.log(java.lang.Math.abs(gammafn(x)));
 		}
 		else
@@ -1382,8 +1385,8 @@ public class misc
 			if (x > 0)
 			{
 				/*
-				 * !* return Constants.M_LN_SQRT_2PI + (x - 0.5) * log(x) - x +
-				 * lgammacor(y); *!
+				 * ! return Constants.M_LN_SQRT_2PI + (x - 0.5) log(x) - x +
+				 * lgammacor(y);!
 				 */
 				return Constants.M_LN_SQRT_2PI + (x - 0.5)
 								* java.lang.Math.log(x)
@@ -1392,24 +1395,24 @@ public class misc
 			}
 
 			/* else: x < -10 */
-			/* !* sinpiy = fabs(sin(Constants.M_PI * y)); *! */
+			/* ! sinpiy = fabs(sin(Constants.M_PI y));! */
 			sinpiy = java.lang.Math.abs(java.lang.Math.sin(Constants.M_PI * y));
 
 			if (sinpiy == 0)
 			{ /*
-			 * Negative integer argument === Now UNNECESSARY: caught above
-			 */
+				 * Negative integer argument === Now UNNECESSARY: caught above
+				 */
 				System.out.println(" ** should NEVER happen! *** [lgamma.c: Neg.int+ y=%g]\n" + y);
 				throw new java.lang.ArithmeticException("Math Error: DOMAIN");
 				// return Double.NaN;
 			}
 
-			/* !* ans = Constants.M_LN_SQRT_PId2 + (x - 0.5) * log(y) - x *! */
+			/* ! ans = Constants.M_LN_SQRT_PId2 + (x - 0.5) log(y) - x! */
 			ans = Constants.M_LN_SQRT_PId2 + (x - 0.5) * java.lang.Math.log(y) - x
-			/* !* - log(sinpiy) - lgammacor(y); *! */
+			/* ! - log(sinpiy) - lgammacor(y);! */
 			- java.lang.Math.log(sinpiy) - lgammacor(y);
 
-			/* !* if(fabs((x - (int)(x - 0.5)) * ans / x) < dxrel) { *! */
+			/* ! if(fabs((x - (int)(x - 0.5)) ans / x) < dxrel) {! */
 			if (java.lang.Math.abs((x - (int) (x - 0.5)) * ans / x) < dxrel)
 			{
 
@@ -1441,7 +1444,7 @@ public class misc
 	 * 
 	 * Compute the log gamma correction factor for x >= 10 so that
 	 * 
-	 * log(gamma(x)) = log(sqrt(2*pi))+(x-.5)*log(x)-x+lgammacor(x)
+	 * log(gamma(x)) = log(sqrt(2pi))+(x-.5)log(x)-x+lgammacor(x)
 	 * 
 	 * NOTES
 	 * 
@@ -1449,7 +1452,7 @@ public class misc
 	 * Fullerton of Los Alamos Scientific Laboratory.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double lgammacor(final double x)
 	{
@@ -1477,9 +1480,9 @@ public class misc
 		if (nalgm == 0)
 		{
 			nalgm = chebyshev_init(algmcs, 15, d1mach(3));
-			/* !* xbig = 1 / sqrt(d1mach(3)); *! */
+			/* ! xbig = 1 / sqrt(d1mach(3));! */
 			xbig = 1 / java.lang.Math.sqrt(d1mach(3));
-			/* !* xmax = exp(fmin2(log(d1mach(2) / 12), -log(12 * d1mach(1)))); *! */
+			/* ! xmax = exp(fmin2(log(d1mach(2) / 12), -log(12 d1mach(1))));! */
 			xmax = java.lang.Math.exp(fmin2(java.lang.Math.log(d1mach(2) / 12),
 																			-java.lang.Math.log(12 * d1mach(1))));
 		}
@@ -1523,7 +1526,7 @@ public class misc
 	 * by W. Fullerton of Los Alamos Scientific Laboratory.
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double logrelerr(final double x)
 	{
@@ -1582,7 +1585,7 @@ public class misc
 		if (nlnrel == 0)
 		{
 			nlnrel = chebyshev_init(alnrcs, 43, 0.1 * d1mach(3));
-			/* !* xmin = -1.0 + sqrt(d1mach(4)); *! */
+			/* ! xmin = -1.0 + sqrt(d1mach(4));! */
 			xmin = -1.0 + java.lang.Math.sqrt(d1mach(4));
 		}
 
@@ -1598,29 +1601,29 @@ public class misc
 			throw new java.lang.ArithmeticException("Math Error: PRECISION");
 		}
 
-		/* !* if (fabs(x) <= .375) *! */
+		/* ! if (fabs(x) <= .375)! */
 		if (java.lang.Math.abs(x) <= .375)
 		{
 			return x * (1 - x * chebyshev_eval(x / .375, alnrcs, nlnrel));
 		}
 		else
 		{
-			/* !* return log(x + 1); *! */
+			/* ! return log(x + 1);! */
 			return java.lang.Math.log(x + 1);
 		}
 	}
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
-	/* !* #ifdef IEEE_754 /*4! */
+	/* ! #ifdef IEEE_754 /4! */
 	/* These are used in IEEE exception handling */
 	static double m_zero = 0;
 	static double m_one = 1;
 	static double m_tiny = Double.MIN_VALUE;
 
-	/* !* #endif /*4! */
+	/* ! #endif /4! */
 
-	/* !* #ifndef IEEE_754 /*4! */
+	/* ! #ifndef IEEE_754 /4! */
 
 	/*
 	 * void ml_error(int n) { switch(n) {
@@ -1633,9 +1636,8 @@ public class misc
 	 * case "Math Error: RANGE": (!!!!fixme!!!!) = ERANGE; break;
 	 * 
 	 * default: break; } }
-	 * 
 	 */
-	/* !* #endif /*4! */
+	/* ! #endif /4! */
 	/*
 	 * 
 	 * SYNOPSIS
@@ -1649,16 +1651,16 @@ public class misc
 	 * sign(x) = 1 if x > 0 sign(x) = 0 if x == 0 sign(x) = -1 if x < 0
 	 */
 
-	/* !* #include "DistLib.h" /*4! */
+	/* ! #include "DistLib.h" /4! */
 
 	public static double sign(final double x)
 	{
-		/* !* #ifdef IEEE_754 /*4! */
+		/* ! #ifdef IEEE_754 /4! */
 		if (Double.isNaN(x))
 		{
 			return x;
 		}
-		/* !* #endif /*4! */
+		/* ! #endif /4! */
 		return x > 0 ? 1 : x == 0 ? 0 : -1;
 	}
 }

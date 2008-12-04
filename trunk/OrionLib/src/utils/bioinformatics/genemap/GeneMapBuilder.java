@@ -129,7 +129,7 @@ public class GeneMapBuilder implements Serializable
 
 			if (lCoverage > pMinimalCoverage)
 			{
-				final double pvalue = HyperGeometricEnrichement.hyperg(	universe,
+				final double pvalue = HyperGeometricEnrichement.hyperG(	universe,
 																																set1,
 																																set2,
 																																inter,

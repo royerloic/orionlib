@@ -40,6 +40,7 @@ public class MapValueComparator<K, V> implements Comparator<K>
 
 	/**
 	 * see {@link Comparator
+
 	 */
 	public int compare(final K o1, final K o2)
 	{

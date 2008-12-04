@@ -30,8 +30,8 @@ public class FlatTextTableReader
 	private FlatTextTableReaderHandler mHandler;
 
 	/**
-	 * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 8, 2005
-	 *         Classes implementing this handler manage the content of a cell.
+	 * @author loic (<href>royer@biotec.tu-dresden.de</href>) Nov 8, 2005 Classes
+	 *         implementing this handler manage the content of a cell.
 	 */
 	public interface FlatTextTableReaderHandler
 	{
