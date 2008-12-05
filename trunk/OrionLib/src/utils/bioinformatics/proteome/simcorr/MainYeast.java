@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import utils.bioinformatics.genome.FastaSequence;
+import utils.bioinformatics.fasta.FastaSequence;
 import utils.bioinformatics.jaligner.Alignment;
 import utils.bioinformatics.jaligner.Sequence;
 import utils.bioinformatics.jaligner.SmithWatermanGotoh;

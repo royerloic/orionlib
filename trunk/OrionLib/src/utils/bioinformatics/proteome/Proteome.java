@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-import utils.bioinformatics.genome.FastaSequence;
-import utils.bioinformatics.genome.FastaSet;
+import utils.bioinformatics.fasta.FastaSequence;
+import utils.bioinformatics.fasta.FastaSet;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.genome.Genome;
 import utils.io.serialization.SerializationUtils;

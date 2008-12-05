@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import utils.bioinformatics.fasta.FastaSequence;
 import utils.bioinformatics.ontology.OboTerm;
 
 public class Gene implements Serializable

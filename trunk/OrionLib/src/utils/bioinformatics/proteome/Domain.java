@@ -3,7 +3,7 @@ package utils.bioinformatics.proteome;
 import java.io.Serializable;
 import java.util.HashSet;
 
-import utils.bioinformatics.genome.FastaSequence;
+import utils.bioinformatics.fasta.FastaSequence;
 import utils.bioinformatics.ontology.OboTerm;
 
 public class Domain implements Serializable

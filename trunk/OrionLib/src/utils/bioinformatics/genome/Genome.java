@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import utils.bioinformatics.fasta.FastaSequence;
+import utils.bioinformatics.fasta.FastaSet;
 import utils.io.LineReader;
 import utils.structures.map.HashSetMap;
 
