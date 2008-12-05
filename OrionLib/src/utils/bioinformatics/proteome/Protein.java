@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import utils.bioinformatics.genome.FastaSequence;
+import utils.bioinformatics.fasta.FastaSequence;
 import utils.bioinformatics.genome.Gene;
 import utils.bioinformatics.ontology.OboTerm;
 import utils.structures.map.HashSetMap;

@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import utils.bioinformatics.genome.FastaSet;
+import utils.bioinformatics.fasta.FastaSet;
 import utils.bioinformatics.genome.Genome;
 import utils.bioinformatics.proteome.InterProScanReaderYeast;
 import utils.bioinformatics.proteome.Protein;
