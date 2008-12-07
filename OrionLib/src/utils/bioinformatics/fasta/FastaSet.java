@@ -224,4 +224,10 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		return mFastaSequencesMap.size();
 	}
 
+	public void toFile(File tempFastaFile)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

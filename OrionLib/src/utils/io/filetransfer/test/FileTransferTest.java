@@ -1,5 +1,6 @@
 package utils.io.filetransfer.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -12,7 +13,6 @@ import utils.io.FileToString;
 import utils.io.filetransfer.Chunk;
 import utils.io.filetransfer.FileReceiver;
 import utils.io.filetransfer.FileSender;
-import utils.utils.Arrays;
 
 public class FileTransferTest
 {
