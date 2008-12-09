@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -19,14 +20,15 @@ import utils.random.sequence.ContextPreservingSequenceRandomizer.Context;
  */
 public class SequenceRandomizerTests
 {
-
+	static Random mRandom = new Random();
+	
 	@Test
 	public void testOneGramInvariantRandomization()
 	{
 		final char[] array = "abcdefgh".toCharArray();
 		for (int i = 0; i < 1000; i++)
 		{
-			final char[] rndarray = SequenceRandomizer.oneGramInvariantRandomization(array);
+			final char[] rndarray = SequenceRandomization.oneGramInvariantRandomization(mRandom, array);
 			assertFalse(Arrays.equals(array, rndarray));
 		}
 	}
@@ -35,7 +37,7 @@ public class SequenceRandomizerTests
 	public void testArrayReverse()
 	{
 		final char[] array1 = "____1234_____".toCharArray();
-		SequenceRandomizer.reverse(array1, 4, 4 + 4);
+		SequenceRandomization.reverse(array1, 4, 4 + 4);
 		System.out.println(new String(array1));
 	}
 
@@ -43,13 +45,13 @@ public class SequenceRandomizerTests
 	public void testRotate()
 	{
 		final char[] array0 = "ab".toCharArray();
-		final char[] rotatedarray0 = SequenceRandomizer.rotate(array0, 1);
+		final char[] rotatedarray0 = SequenceRandomization.rotate(array0, 1);
 		System.out.println(new String(rotatedarray0));
 		final char[] targetarray0 = "ba".toCharArray();
 		assertTrue(Arrays.equals(rotatedarray0, targetarray0));
 
 		final char[] array1 = "abcdefgh".toCharArray();
-		final char[] rotatedarray1 = SequenceRandomizer.rotate(array1, 3);
+		final char[] rotatedarray1 = SequenceRandomization.rotate(array1, 3);
 		System.out.println(new String(rotatedarray1));
 		final char[] targetarray1 = "fghabcde".toCharArray();
 		assertTrue(Arrays.equals(rotatedarray1, targetarray1));
@@ -59,11 +61,11 @@ public class SequenceRandomizerTests
 	public void testPairInvariantRandomization()
 	{
 		final char[] array1 = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-		final char[] rndarray1 = SequenceRandomizer.pairInvariantRandomization(array1);
+		final char[] rndarray1 = SequenceRandomization.pairInvariantRandomization(mRandom, array1);
 		// assertTrue(Arrays.equals(array1,rndarray1));
 
 		final char[] array2 = "uvwab120584-->103956baxyz".toCharArray();
-		final char[] rndarray2 = SequenceRandomizer.pairInvariantRandomization(array2);
+		final char[] rndarray2 = SequenceRandomization.pairInvariantRandomization(mRandom, array2);
 		System.out.println(new String(rndarray2));
 		assertFalse(Arrays.equals(array2, rndarray2));
 
@@ -72,7 +74,7 @@ public class SequenceRandomizerTests
 		System.out.println(new String(rndarray));
 		for (int i = 0; i < 1000; i++)
 		{
-			rndarray = SequenceRandomizer.pairInvariantRandomization(rndarray);
+			rndarray = SequenceRandomization.pairInvariantRandomization(mRandom, rndarray);
 			// System.out.println(new String(rndarray));
 		}
 		System.out.println(new String(rndarray));
@@ -86,7 +88,7 @@ public class SequenceRandomizerTests
 		ContextPreservingSequenceRandomizer rand = new ContextPreservingSequenceRandomizer(2);
 		for (int i = 0; i < 1000; i++)
 		{
-			final char[] rndarray = SequenceRandomizer.oneGramInvariantRandomization(array);
+			final char[] rndarray = SequenceRandomization.oneGramInvariantRandomization(mRandom, array);
 			rand.addSequenceToStatistics(rndarray);
 		}
 		rand.finalizeStatistics();
