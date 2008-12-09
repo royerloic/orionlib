@@ -237,7 +237,7 @@ public class ContextPreservingSequenceRandomizer implements Serializable
 	public char[] randomize(final char[] pSequence)
 	{
 		final int rotation1 = 2 + mRandom.nextInt(pSequence.length) * 2 / 3;
-		final char[] newarray = SequenceRandomizer.rotate(pSequence, rotation1);
+		final char[] newarray = SequenceRandomization.rotate(pSequence, rotation1);
 
 		final ArrayList<Integer> indexlist = new ArrayList<Integer>(pSequence.length);
 		for (int i = mRadius; i < pSequence.length - mRadius; i++)

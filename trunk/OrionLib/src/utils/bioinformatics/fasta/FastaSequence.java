@@ -29,6 +29,15 @@ public class FastaSequence implements Serializable
 		mSequence = pSequenceString;
 	}
 
+	@SuppressWarnings("unchecked")
+	public FastaSequence(final FastaSequence pFastaSequence)
+	{
+		super();
+		mFastaName = new String(pFastaSequence.mFastaName);
+		mSequence = new String(pFastaSequence.mSequence);
+		mHeaderMap = (HashMap<String, String>) mHeaderMap.clone();
+	}
+
 	public void append(final String pString)
 	{
 		mSequence = mSequence + pString;
@@ -37,6 +46,16 @@ public class FastaSequence implements Serializable
 	public String getSequenceString()
 	{
 		return mSequence;
+	}
+
+	public char[] getSequenceArray()
+	{
+		return mSequence.toCharArray();
+	}
+
+	public void setSequenceArray(char[] pSequenceArray)
+	{
+		mSequence = new String(pSequenceArray);
 	}
 
 	@Override
@@ -136,6 +155,14 @@ public class FastaSequence implements Serializable
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException
+	{
+		super.clone();
+		FastaSequence lFastaSequence = new FastaSequence(this);
+		return lFastaSequence;
 	}
 
 }

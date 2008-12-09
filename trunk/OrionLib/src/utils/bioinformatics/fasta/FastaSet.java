@@ -5,14 +5,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import utils.bioinformatics.genome.ParseException;
 import utils.io.LineReader;
+import utils.io.LineWriter;
 
 public class FastaSet implements Serializable, Iterable<FastaSequence>
 {
@@ -25,7 +28,8 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 	private static final Pattern lPipeSpacePattern = Pattern.compile("\\|");
 	private static final Pattern lTwoPointsSpacePattern = Pattern.compile("\\:");
 
-	protected HashMap<String, FastaSequence> mFastaSequencesMap = new HashMap<String, FastaSequence>();
+	protected LinkedHashMap<String, FastaSequence> mFastaSequencesMap = new LinkedHashMap<String, FastaSequence>();
+	private String mName;
 
 	public FastaSet()
 	{
@@ -42,6 +46,11 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 	{
 		super();
 		addSequencesFromStream(new FileInputStream(pFile));
+	}
+
+	public FastaSequence addFastaSequence(FastaSequence pFastaSequence)
+	{
+		return mFastaSequencesMap.put(pFastaSequence.getFastaName(), pFastaSequence);
 	}
 
 	public FastaSequence newSequence(final String pCurrentFastaSequenceName)
@@ -129,7 +138,6 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 																																-1);
 					lCurrentFastaSequence = newSequence(lCurrentFastaSequenceHeader);
 				}
-				
 
 			}
 			else
@@ -152,6 +160,16 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		return mFastaSequencesMap.keySet();
 	}
 
+	public void setName(String pName)
+	{
+		mName = pName;
+	}
+
+	public String getName()
+	{
+		return mName;
+	}
+
 	public Collection<FastaSequence> getFastaSequences()
 	{
 		return mFastaSequencesMap.values();
@@ -166,6 +184,32 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 			lStringBuilder.append(lFastaSequence);
 			lStringBuilder.append("\n");
 		}
+		return lStringBuilder.toString();
+	}
+
+	public String toAlignmentString()
+	{
+		final StringBuilder lStringBuilder = new StringBuilder();
+		for (final String lId : mFastaSequencesMap.keySet())
+		{
+			lStringBuilder.append(lId);
+			lStringBuilder.append("\n");
+		}
+		lStringBuilder.append("\n");
+
+		for (final FastaSequence lFastaSequence : mFastaSequencesMap.values())
+		{
+			lStringBuilder.append(lFastaSequence.getSequenceString());
+			lStringBuilder.append("\n");
+		}
+
+		lStringBuilder.append("\n");
+		double[] lComputedEntropy = Conservation.computeEntropy(this);
+		String lCodedEntropy = Conservation.encodeAsVisualString(lComputedEntropy);
+		lStringBuilder.append(lCodedEntropy);
+		lStringBuilder.append("\n");
+		lStringBuilder.append("Max Entropy Conservation: " + Conservation.getMaxConservation(lComputedEntropy));
+
 		return lStringBuilder.toString();
 	}
 
@@ -224,10 +268,17 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		return mFastaSequencesMap.size();
 	}
 
-	public void toFile(File tempFastaFile)
+	public void toFile(File pFile) throws IOException
 	{
-		// TODO Auto-generated method stub
-		
+		Writer lWriter = LineWriter.getWriter(pFile);
+
+		for (final FastaSequence lFastaSequence : mFastaSequencesMap.values())
+		{
+			lWriter.append(lFastaSequence.toString());
+			lWriter.append("\n");
+		}
+		lWriter.flush();
+		lWriter.close();
 	}
 
 }

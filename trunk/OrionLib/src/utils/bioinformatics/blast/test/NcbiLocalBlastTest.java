@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import utils.bioinformatics.blast.BlastResult;
 import utils.bioinformatics.blast.NcbiLocalBlast;
 import utils.bioinformatics.fasta.FastaSequence;
 import utils.bioinformatics.fasta.FastaSet;
@@ -32,7 +33,14 @@ public class NcbiLocalBlastTest
 
 			NcbiLocalBlast lNcbiLocalBlast = new NcbiLocalBlast(lFastaSet);
 
-			lNcbiLocalBlast.searchFor(lFastaSet, 10);
+			File lResultFile = lNcbiLocalBlast.searchFor(lFastaSet, 10);
+			
+			System.out.println(lNcbiLocalBlast.getLog());
+			
+			BlastResult lResult = lNcbiLocalBlast.getResult(lResultFile);
+			
+			assertSame(31,lResult.size());			
+			
 		}
 		catch (Throwable e)
 		{

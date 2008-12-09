@@ -14,6 +14,11 @@ public class Edge<N> implements Serializable
 
 	private N mSecondNode;
 
+	protected Edge()
+	{
+		super();
+	}
+	
 	public Edge(final N pFirstNode, final N pSecondNode)
 	{
 		super();
@@ -75,6 +80,20 @@ public class Edge<N> implements Serializable
 			final boolean lEquals = this.mFirstNode.equals(lEdge.getFirstNode()) && this.mSecondNode.equals(lEdge.getSecondNode())
 															|| this.mFirstNode.equals(lEdge.getSecondNode())
 															&& this.mSecondNode.equals(lEdge.getFirstNode());
+			return lEquals;
+		}
+	}
+	
+	public boolean asymEquals(final Object pObject)
+	{
+		if (pObject == this)
+		{
+			return true;
+		}
+		else
+		{
+			final Edge<N> lEdge = (Edge<N>) pObject;
+			final boolean lEquals = this.mFirstNode.equals(lEdge.getFirstNode()) && this.mSecondNode.equals(lEdge.getSecondNode());
 			return lEquals;
 		}
 	}
