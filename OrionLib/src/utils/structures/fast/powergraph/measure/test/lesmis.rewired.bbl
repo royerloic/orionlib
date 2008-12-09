@@ -1,0 +1,372 @@
+#BBL-1.0
+# File written by the graph file writer of EagleVista
+
+# Graph properties:
+#	#nodes:				77
+#	#edges:				254
+#	<degree>:			6.597402597402597
+#	source:				lesmis.edgrewired.edg
+# Power graph extraction:
+#	date:				2008/11/20 06:21 PM
+#	min set similarity:		0.0
+#	global clustering:		true
+#	greedy clustering:		true
+#	local clustering:		false
+#	minmax:				true
+#	candidate pe cutting:		true
+#	confidence accumulation method:	AVG
+# Power graph properties:
+#	extraction time:		379ms
+#	#power nodes:			32
+#	#power edges:			145 (reflexive:1/single:113/other:31)
+#	edge reduction:			0.42913385826771655
+#	conversion rate:		3.4375
+#	pg-index:			0.4117976323604725
+#
+#PARSE#	#nodes=77;#edges=254;<degree>=6.597402597402597;source=lesmis.edgrewired.edg;extractionTime=379;#powerNodes=32;#powerEdges=145;#reflexivePE=1;#singletonPE=113;#otherPE=31;edgeReduction=0.42913385826771655;conversionRate=3.4375;pg-index=0.4117976323604725
+#
+# Command line arguments:	[-convert, -workingdir=., -inputfiles=edg, -outputdir=., -output=bbl, -v, -sortbyfilesize, 
+]
+
+NODE	0
+NODE	20
+NODE	1
+NODE	10
+NODE	25
+NODE	26
+NODE	31
+NODE	51
+NODE	55
+NODE	58
+NODE	63
+NODE	64
+NODE	66
+NODE	2
+NODE	7
+NODE	56
+NODE	68
+NODE	3
+NODE	60
+NODE	61
+NODE	69
+NODE	4
+NODE	27
+NODE	5
+NODE	65
+NODE	6
+NODE	8
+NODE	9
+NODE	12
+NODE	13
+NODE	16
+NODE	18
+NODE	21
+NODE	22
+NODE	35
+NODE	36
+NODE	37
+NODE	39
+NODE	41
+NODE	42
+NODE	43
+NODE	48
+NODE	49
+NODE	52
+NODE	53
+NODE	54
+NODE	59
+NODE	62
+NODE	70
+NODE	71
+NODE	72
+NODE	75
+NODE	76
+NODE	11
+NODE	14
+NODE	15
+NODE	57
+NODE	17
+NODE	23
+NODE	24
+NODE	28
+NODE	29
+NODE	73
+NODE	19
+NODE	34
+NODE	50
+NODE	40
+NODE	30
+NODE	38
+NODE	44
+NODE	32
+NODE	33
+NODE	45
+NODE	46
+NODE	47
+NODE	74
+NODE	67
+SET	PowerNode0	0.1
+SET	PowerNode1	0.19696969696969696
+SET	PowerNode2	0.21818181818181817
+SET	PowerNode3	0.14285714285714285
+SET	PowerNode4	0.6666666666666666
+SET	PowerNode5	0.0
+SET	PowerNode6	0.1
+SET	PowerNode7	0.1
+SET	PowerNode8	0.16666666666666666
+SET	PowerNode9	0.0
+SET	PowerNode10	0.0
+SET	PowerNode11	0.0
+SET	PowerNode12	0.0
+SET	PowerNode13	0.3333333333333333
+SET	PowerNode14	0.0
+SET	PowerNode15	0.0
+SET	PowerNode16	0.0
+SET	PowerNode17	1.0
+SET	PowerNode18	0.0
+SET	PowerNode19	0.0
+SET	PowerNode20	0.0
+SET	PowerNode21	0.0
+SET	PowerNode22	0.0
+SET	PowerNode23	0.0
+SET	PowerNode24	0.0
+SET	PowerNode25	0.0
+SET	PowerNode26	0.0
+SET	PowerNode27	0.0
+SET	PowerNode28	0.0
+SET	PowerNode29	0.0
+SET	PowerNode30	0.0
+SET	PowerNode31	0.0
+IN	20	PowerNode16
+IN	1	PowerNode17
+IN	25	PowerNode18
+IN	26	PowerNode13
+IN	31	PowerNode16
+IN	51	PowerNode2
+IN	55	PowerNode20
+IN	58	PowerNode5
+IN	63	PowerNode17
+IN	64	PowerNode1
+IN	66	PowerNode5
+IN	56	PowerNode9
+IN	68	PowerNode22
+IN	3	PowerNode20
+IN	60	PowerNode29
+IN	61	PowerNode22
+IN	69	PowerNode23
+IN	4	PowerNode15
+IN	27	PowerNode4
+IN	5	PowerNode24
+IN	65	PowerNode25
+IN	8	PowerNode19
+IN	9	PowerNode24
+IN	12	PowerNode26
+IN	13	PowerNode0
+IN	16	PowerNode14
+IN	18	PowerNode25
+IN	21	PowerNode2
+IN	22	PowerNode7
+IN	35	PowerNode7
+IN	36	PowerNode11
+IN	37	PowerNode0
+IN	39	PowerNode27
+IN	41	PowerNode23
+IN	42	PowerNode26
+IN	43	PowerNode3
+IN	48	PowerNode27
+IN	49	PowerNode7
+IN	52	PowerNode21
+IN	53	PowerNode0
+IN	54	PowerNode31
+IN	59	PowerNode31
+IN	62	PowerNode10
+IN	70	PowerNode10
+IN	71	PowerNode3
+IN	72	PowerNode21
+IN	75	PowerNode11
+IN	76	PowerNode3
+IN	11	PowerNode9
+IN	14	PowerNode30
+IN	57	PowerNode12
+IN	17	PowerNode6
+IN	23	PowerNode8
+IN	24	PowerNode29
+IN	28	PowerNode1
+IN	29	PowerNode6
+IN	73	PowerNode28
+IN	19	PowerNode15
+IN	34	PowerNode8
+IN	38	PowerNode18
+IN	44	PowerNode15
+IN	33	PowerNode28
+IN	45	PowerNode30
+IN	46	PowerNode19
+IN	47	PowerNode1
+IN	PowerNode2	PowerNode0
+IN	PowerNode3	PowerNode0
+IN	PowerNode4	PowerNode2
+IN	PowerNode5	PowerNode8
+IN	PowerNode6	PowerNode1
+IN	PowerNode7	PowerNode0
+IN	PowerNode8	PowerNode1
+IN	PowerNode10	PowerNode13
+IN	PowerNode11	PowerNode0
+IN	PowerNode12	PowerNode6
+IN	PowerNode13	PowerNode2
+IN	PowerNode14	PowerNode2
+IN	PowerNode16	PowerNode0
+IN	PowerNode17	PowerNode4
+IN	PowerNode18	PowerNode12
+IN	PowerNode21	PowerNode0
+IN	PowerNode22	PowerNode3
+IN	PowerNode23	PowerNode14
+IN	PowerNode25	PowerNode3
+IN	PowerNode26	PowerNode0
+IN	PowerNode27	PowerNode0
+IN	PowerNode29	PowerNode9
+IN	PowerNode31	PowerNode7
+EDGE	PowerNode17	PowerNode17	1.0
+EDGE	0	20	1.0
+EDGE	20	64	1.0
+EDGE	20	61	1.0
+EDGE	20	69	1.0
+EDGE	20	70	1.0
+EDGE	1	25	1.0
+EDGE	1	26	1.0
+EDGE	1	31	1.0
+EDGE	1	51	1.0
+EDGE	25	6	1.0
+EDGE	25	59	1.0
+EDGE	25	70	1.0
+EDGE	25	71	1.0
+EDGE	25	19	1.0
+EDGE	26	64	1.0
+EDGE	26	22	1.0
+EDGE	26	62	1.0
+EDGE	26	57	1.0
+EDGE	26	29	1.0
+EDGE	31	34	1.0
+EDGE	51	58	1.0
+EDGE	51	24	1.0
+EDGE	55	57	1.0
+EDGE	55	29	1.0
+EDGE	55	19	1.0
+EDGE	58	64	1.0
+EDGE	58	65	1.0
+EDGE	58	37	1.0
+EDGE	58	43	1.0
+EDGE	58	49	1.0
+EDGE	58	17	1.0
+EDGE	58	23	1.0
+EDGE	58	46	1.0
+EDGE	63	60	1.0
+EDGE	63	27	1.0
+EDGE	63	65	1.0
+EDGE	63	41	1.0
+EDGE	63	29	1.0
+EDGE	63	19	1.0
+EDGE	64	60	1.0
+EDGE	64	61	1.0
+EDGE	64	21	1.0
+EDGE	64	22	1.0
+EDGE	64	36	1.0
+EDGE	64	37	1.0
+EDGE	64	34	1.0
+EDGE	66	70	1.0
+EDGE	66	74	1.0
+EDGE	2	7	1.0
+EDGE	2	56	1.0
+EDGE	2	68	1.0
+EDGE	68	69	1.0
+EDGE	68	65	1.0
+EDGE	68	76	1.0
+EDGE	68	57	1.0
+EDGE	3	61	1.0
+EDGE	3	69	1.0
+EDGE	60	21	1.0
+EDGE	60	59	1.0
+EDGE	60	57	1.0
+EDGE	61	16	1.0
+EDGE	61	74	1.0
+EDGE	69	59	1.0
+EDGE	69	72	1.0
+EDGE	69	19	1.0
+EDGE	27	49	1.0
+EDGE	27	17	1.0
+EDGE	27	23	1.0
+EDGE	27	24	1.0
+EDGE	65	48	1.0
+EDGE	65	59	1.0
+EDGE	65	71	1.0
+EDGE	65	57	1.0
+EDGE	16	57	1.0
+EDGE	18	22	1.0
+EDGE	18	37	1.0
+EDGE	18	62	1.0
+EDGE	18	75	1.0
+EDGE	21	48	1.0
+EDGE	21	49	1.0
+EDGE	21	17	1.0
+EDGE	22	34	1.0
+EDGE	22	50	1.0
+EDGE	35	49	1.0
+EDGE	35	30	1.0
+EDGE	36	42	1.0
+EDGE	36	19	1.0
+EDGE	37	59	1.0
+EDGE	37	29	1.0
+EDGE	39	62	1.0
+EDGE	41	62	1.0
+EDGE	41	75	1.0
+EDGE	48	76	1.0
+EDGE	49	71	1.0
+EDGE	54	33	1.0
+EDGE	59	44	1.0
+EDGE	62	34	1.0
+EDGE	62	38	1.0
+EDGE	71	28	1.0
+EDGE	75	15	1.0
+EDGE	75	24	1.0
+EDGE	76	67	1.0
+EDGE	57	23	1.0
+EDGE	57	50	1.0
+EDGE	17	23	1.0
+EDGE	17	28	1.0
+EDGE	17	29	1.0
+EDGE	17	73	1.0
+EDGE	23	28	1.0
+EDGE	23	40	1.0
+EDGE	24	30	1.0
+EDGE	29	19	1.0
+EDGE	38	32	1.0
+EDGE	10	PowerNode0	1.0
+EDGE	PowerNode1	48	1.0
+EDGE	PowerNode2	55	1.0
+EDGE	PowerNode3	23	1.0
+EDGE	PowerNode4	PowerNode5	1.0
+EDGE	PowerNode6	24	1.0
+EDGE	PowerNode7	48	1.0
+EDGE	PowerNode8	25	1.0
+EDGE	PowerNode9	41	1.0
+EDGE	PowerNode10	PowerNode11	1.0
+EDGE	PowerNode12	61	1.0
+EDGE	PowerNode13	27	1.0
+EDGE	PowerNode14	71	1.0
+EDGE	PowerNode15	27	1.0
+EDGE	PowerNode16	25	1.0
+EDGE	PowerNode17	64	1.0
+EDGE	PowerNode18	35	1.0
+EDGE	55	PowerNode19	1.0
+EDGE	55	PowerNode5	1.0
+EDGE	PowerNode20	60	1.0
+EDGE	68	PowerNode21	1.0
+EDGE	PowerNode22	66	1.0
+EDGE	PowerNode23	51	1.0
+EDGE	65	PowerNode24	1.0
+EDGE	PowerNode25	27	1.0
+EDGE	16	PowerNode26	1.0
+EDGE	PowerNode27	26	1.0
+EDGE	59	PowerNode28	1.0
+EDGE	62	PowerNode29	1.0
+EDGE	70	PowerNode30	1.0
+EDGE	76	PowerNode31	1.0
