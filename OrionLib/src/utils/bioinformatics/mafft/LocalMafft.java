@@ -20,52 +20,57 @@ import utils.io.LineReader;
 import utils.io.StreamToFile;
 import utils.process.ProcessUtils;
 
-public class LocalMafft 
+public class LocalMafft implements MultipleSequenceAlignment
 {
 	public boolean mDeleteOnExit = true;
-	
+
 	private File mTempFolder;
 	private Process mMafftProcess;
 	private File mTempResultFile;
 
-
-
 	public LocalMafft() throws IOException
 	{
 		super();
-	  mTempFolder = File.createTempFile("NcbiLocalBlast","mTempFolder");
+		mTempFolder = File.createTempFile("LocalMafft", "mTempFolder");
+		if (mDeleteOnExit)
+			mTempFolder.deleteOnExit();
 		mTempFolder.delete();
 		mTempFolder.mkdir();
-		assert(mTempFolder.exists() && mTempFolder.isDirectory());
-	
+		assert (mTempFolder.exists() && mTempFolder.isDirectory());
+
 	}
 
-	public FastaSet run(FastaSet pInput)	throws InterruptedException,
-																												IOException
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * utils.bioinformatics.mafft.MultipleSequenceAlignment#run(utils.bioinformatics
+	 * .fasta.FastaSet)
+	 */
+	public FastaSet run(FastaSet pInput) throws InterruptedException, IOException
 	{
 		File lInputFastaFile = File.createTempFile("input.", ".fasta", mTempFolder);
+		if (mDeleteOnExit)
+			lInputFastaFile.deleteOnExit();
 		pInput.toFile(lInputFastaFile);
 
 		mTempResultFile = new File(mTempFolder, "result.txt");
-		if(mDeleteOnExit) 
+		if (mDeleteOnExit)
 			mTempResultFile.deleteOnExit();
 
 		ProcessBuilder lProcessBuilder = new ProcessBuilder("mafft",
-		                                                    //"--auto",
-		                                                    //"--retree2",
-		                                                    //" --maxiterate1000",
-		                                                    "--reorder",
-		                                                    lInputFastaFile.getAbsolutePath());
+		// "--auto",
+																												// "--retree2",
+																												// " --maxiterate1000",
+																												"--reorder",
+																												lInputFastaFile.getAbsolutePath());
 		lProcessBuilder.directory(mTempFolder);
 
-		
-		
 		mMafftProcess = lProcessBuilder.start();
-		
-		StreamToFile.streamToFile(mMafftProcess.getInputStream(), mTempResultFile);
-		
-		return new FastaSet(mTempResultFile);		
-	}
 
+		StreamToFile.streamToFile(mMafftProcess.getInputStream(), mTempResultFile);
+
+		return new FastaSet(mTempResultFile);
+	}
 
 }

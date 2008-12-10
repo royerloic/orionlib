@@ -32,6 +32,12 @@ public class Histogram implements Statistic<double[]>, Serializable
 		return mTransform.getCount();
 	}
 
+	public int determineOptimalNumberOfBins()
+	{
+		mNumberOfBins = 2 *(int) Math.max(20, Math.sqrt(mTransform.getCount()));
+		return mNumberOfBins;
+	}
+
 	public double[] getStatistic()
 	{
 		final double[] bins = new double[mNumberOfBins];
@@ -81,6 +87,30 @@ public class Histogram implements Statistic<double[]>, Serializable
 	public double[] getMinMax()
 	{
 		return mTransform.getStatistic();
+	}
+
+	public double rightDensity(double[] pHistogramArray, double pX)
+	{
+		double[] lMinMax = getMinMax();
+		double min = lMinMax[0];
+		double max = lMinMax[1];
+		
+		if(pX<min)
+			return 1;
+		else if(pX>max)
+			return 0;
+
+		int index = (int) (mNumberOfBins * (pX - min) / (max - min));
+
+		
+		
+		double lCumulativeDensity = 0;
+		for (int i = index; i < pHistogramArray.length; i++)
+		{
+			lCumulativeDensity += pHistogramArray[i];
+		}
+
+		return lCumulativeDensity;
 	}
 
 }

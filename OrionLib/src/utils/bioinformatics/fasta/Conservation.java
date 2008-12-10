@@ -3,6 +3,7 @@ package utils.bioinformatics.fasta;
 import java.util.Collection;
 
 import utils.math.statistics.Entropy;
+import utils.math.statistics.Histogram;
 import utils.math.statistics.MinMax;
 import utils.math.statistics.transform.MinMaxTransform;
 import utils.math.statistics.transform.NormalizedZTransform;
@@ -108,6 +109,15 @@ public class Conservation
 		}
 
 		return lMinMax.getStatistic()[1];
+	}
+
+	public static Histogram computeConservationHistogram(Histogram pHistogram, double[] pConservationArray)
+	{
+		for (double value : pConservationArray)
+		{
+			pHistogram.enter(value);
+		}
+		return pHistogram;
 	}
 
 }
