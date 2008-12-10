@@ -1,5 +1,6 @@
 package utils.bioinformatics.mafft.test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class LocalMafftTest
 	@Test
 	public void testLocalMafft() throws IOException
 	{
-		String result = "IPRTI-------------PPKPAVSSGKPLVAPKPAANR";
+		String result = "AFEGQTN--TEIPGLPKK---------PEII";
 
 		try
 		{
@@ -33,7 +34,7 @@ public class LocalMafftTest
 
 			System.out.println(lOutput.toAlignmentString());
 
-			// assertTrue(lOutput.toAlignmentString().contains(result));
+			assertTrue(lOutput.toAlignmentString().contains(result));
 
 		}
 		catch (Throwable e)
@@ -68,6 +69,9 @@ public class LocalMafftTest
 			System.out.println("lSignificantConservationScore=" + lSignificantConservationScore);
 			System.out.println("lSignificanceForRandomizedSequences=" + lSignificanceForRandomizedSequences);
 			System.out.println("lSignificantConservationScoreForRandomizedSequences=" + lSignificantConservationScoreForRandomizedSequences);
+
+			assertTrue(lSignificanceForOriginalSequences > 10);
+			assertTrue(lSignificanceForRandomizedSequences <= 6);
 
 		}
 		catch (Throwable e)
