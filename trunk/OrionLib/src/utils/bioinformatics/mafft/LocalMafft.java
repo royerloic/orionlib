@@ -1,24 +1,10 @@
 package utils.bioinformatics.mafft;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 import utils.bioinformatics.fasta.FastaSet;
-import utils.bioinformatics.genome.ParseException;
-import utils.io.LineReader;
 import utils.io.StreamToFile;
-import utils.process.ProcessUtils;
 
 public class LocalMafft implements MultipleSequenceAlignment
 {
@@ -27,6 +13,8 @@ public class LocalMafft implements MultipleSequenceAlignment
 	private File mTempFolder;
 	private Process mMafftProcess;
 	private File mTempResultFile;
+
+	boolean mFast = true;
 
 	public LocalMafft() throws IOException
 	{
@@ -54,23 +42,38 @@ public class LocalMafft implements MultipleSequenceAlignment
 			lInputFastaFile.deleteOnExit();
 		pInput.toFile(lInputFastaFile);
 
-		mTempResultFile = new File(mTempFolder, "result.txt");
+		mTempResultFile = File.createTempFile("result.", ".txt", mTempFolder);
 		if (mDeleteOnExit)
 			mTempResultFile.deleteOnExit();
 
-		ProcessBuilder lProcessBuilder = new ProcessBuilder("mafft",
-		// "--auto",
-																												// "--retree2",
-																												// " --maxiterate1000",
-																												"--reorder",
-																												lInputFastaFile.getAbsolutePath());
+		ProcessBuilder lProcessBuilder;
+		if (mFast)
+		{
+			lProcessBuilder = new ProcessBuilder(	"mafft",
+			                                     	"--retree",
+			                                     	"2",
+			                                     	"--maxiterate",
+			                                    	"0",
+																						"--reorder",
+																						lInputFastaFile.getAbsolutePath());
+		}
+		else
+		{
+			lProcessBuilder = new ProcessBuilder(	"mafft",
+																						"--localpair",
+																						"--maxiterate",
+																						"1000",
+																						"--reorder",
+																						lInputFastaFile.getAbsolutePath());
+		}
 		lProcessBuilder.directory(mTempFolder);
 
 		mMafftProcess = lProcessBuilder.start();
 
 		StreamToFile.streamToFile(mMafftProcess.getInputStream(), mTempResultFile);
 
+		mMafftProcess.waitFor();
+
 		return new FastaSet(mTempResultFile);
 	}
-
 }
