@@ -16,6 +16,13 @@ public interface DoubleMap<K> extends Map<K, Double>
 	 * @param pValue
 	 * @return
 	 */
+	public Double putIfNull(final K pKey, final Double pValue);
+
+	/**
+	 * @param pKey
+	 * @param pValue
+	 * @return
+	 */
 	public Double add(K pKey, Double pValue);
 
 	/**

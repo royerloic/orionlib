@@ -221,8 +221,27 @@ public class HyperGeometricEnrichement
 		lWriter.close();
 
 	}
-
+	
+	
 	public final static double generalizedHyperG(	final double total,
+																								double[] setsAsArray,
+																								final double inter,
+																								final double threshold)
+	{
+		double pvalue = 1;
+		
+		for(int i=0; i<setsAsArray.length; i++)
+			for(int j=0; j<i; j++)
+			{
+				double pvaluelocal = hyperG(total, setsAsArray[i], setsAsArray[j], inter, threshold);
+				pvalue *= pvaluelocal;
+			}
+
+		return pvalue;
+	}
+	
+
+	public final static double oldgeneralizedHyperG(	final double total,
 																								double[] setsAsArray,
 																								final double inter,
 																								final double threshold)

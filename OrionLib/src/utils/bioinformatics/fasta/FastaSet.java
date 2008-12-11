@@ -1,21 +1,27 @@
 package utils.bioinformatics.fasta;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.io.Writer;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import utils.bioinformatics.RegexPatterns;
 import utils.bioinformatics.genome.ParseException;
 import utils.io.LineReader;
 import utils.io.LineWriter;
+import utils.string.StringUtils;
 
 public class FastaSet implements Serializable, Iterable<FastaSequence>
 {
@@ -46,6 +52,47 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 	{
 		super();
 		addSequencesFromStream(new FileInputStream(pFile));
+	}
+
+	public FastaSet(final Collection<String> pUniprotIdList) throws IOException
+	{
+		this((String[]) pUniprotIdList.toArray());
+	}
+
+	public FastaSet(final String[] pUniprotIdList) throws IOException
+	{
+		super();
+		for (String id : pUniprotIdList)
+		{
+			id = id.toUpperCase().trim();
+			if (!StringUtils.matches(id, RegexPatterns.sUniProtPattern))
+			{
+				System.out.println("Not a uniprot id: '" + id
+														+ "'\ntrying to locate id within string.");
+				List<String> lCandidate = StringUtils.findAllmatches(	id,
+																															RegexPatterns.sUniProtPattern);
+				if (lCandidate.size() == 1)
+				{
+					id = lCandidate.get(0);
+					System.out.println("Found id: '" + id + "'");
+				}
+				else if (lCandidate.size() == 0)
+				{
+					System.out.println("Could not find anything that looks like a uniprot id...");
+				}
+				else if (lCandidate.size() > 1)
+				{
+					id = lCandidate.get(0);
+					System.out.println("Too many uniprot ids found. Picking first one: '" + id
+															+ "'");
+				}
+			}
+
+			URL lURL = new URL("http://www.uniprot.org/uniprot/" + id + ".fasta");
+			InputStream lInputStream = lURL.openStream();
+			DataInputStream lDataInputStream = new DataInputStream(new BufferedInputStream(lInputStream));
+			addSequencesFromStream(lDataInputStream);
+		}
 	}
 
 	public FastaSequence addFastaSequence(FastaSequence pFastaSequence)
@@ -204,7 +251,7 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		}
 
 		lStringBuilder.append("\n");
-		double[] lComputedEntropy = Conservation.computeEntropy(this);
+		double[] lComputedEntropy = Conservation.computeRelativeNegentropy(this);
 		String lCodedEntropy = Conservation.encodeAsVisualString(lComputedEntropy);
 		lStringBuilder.append(lCodedEntropy);
 		lStringBuilder.append("\n");

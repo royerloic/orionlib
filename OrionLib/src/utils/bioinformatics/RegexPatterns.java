@@ -20,7 +20,7 @@ public class RegexPatterns
 	public static EnglishWordsIdentifier sEnglishWordsIdentifier = EnglishWordsIdentifier.getUniqueInstance();
 	public static String sHugoPattern = "HGNC\\:[0-9]{2,6}";
 	public static String sMGCPattern = "MGC:?[0-9]+";
-	public static String sUniProtPattern = "(?:(?:O|P|Q)[0-9][0-9A-Z][0-9]{3}(?:-[0-9]+)?)|(?:[0-9A-Z]{2,6}\\_[0-9A-Z]{3,})";
+	public static String sUniProtPattern = "(?:(?:O|P|Q|[A-N]|[R-Z])[0-9][0-9A-Z]{3}[0-9](?:-[0-9]+)?)|(?:[0-9A-Z]{2,6}\\_[0-9A-Z]{3,})";
 	public static String sFLJPattern = "FLJ(?:[0-9]{5})";
 	public static String sDKFZPattern = "DKFZ(?:p|P)(?:[0-9A-Z]{7,9})";
 	public static String sOTTHUMPPattern = "OTTHUM(?:P|G)(?:[0-9]{11})";

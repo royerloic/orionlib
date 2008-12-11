@@ -33,8 +33,26 @@ public class FastaSetTest
 												.getSequenceString()
 												.equals("MERASLIQKAKLAEQAERYEDMAAFMKGAVEKGEELSCEERNLLSVAYKNVVGGQRAAWRVLSSIEQKSNEEGSEEKGPEVREYREKVETELQGVCDTVLGLLDSHLIKEAGDAESRVFYEAPQEPQS"));
 
-		
+	}
 
+	@Test
+	public void testDownloadFromUniprot() throws IOException
+	{
+		FastaSet lFastaSet = new FastaSet(new String[]
+		{ "P31947",
+			"Q61151",
+			"P03949",
+			"uniprotkb:Q9PJ25|intact:EBI-1194099",
+			">sp|B2GUW6|AEN_RAT Apoptosis-enhancing nuclease OS=Rattus norvegicus GN=Aen PE=2 SV=1" });
+
+		assertSame(5, lFastaSet.size());
+
+		String lString = lFastaSet.toString();
+		assertTrue(lString.contains("|P31947|"));
+		assertTrue(lString.contains("|Q61151|"));
+		assertTrue(lString.contains("|P03949|"));
+		assertTrue(lString.contains("|B2GUW6|"));
+		assertTrue(lString.contains("|Q9PJ25|"));
 	}
 
 }
