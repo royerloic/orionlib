@@ -29,7 +29,7 @@ public class ConservationTest
 
 		FastaSet lFastaSet = new FastaSet(lInputStream);
 
-		double[] lComputeEntropy = Conservation.computeEntropy(lFastaSet);
+		double[] lComputeEntropy = Conservation.computeRelativeNegentropy(lFastaSet);
 		String lCodedEntropy = Conservation.encodeAsString(lComputeEntropy);
 
 		System.out.println(lFastaSet.toAlignmentString());

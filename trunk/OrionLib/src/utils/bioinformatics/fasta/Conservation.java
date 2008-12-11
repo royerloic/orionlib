@@ -2,6 +2,7 @@ package utils.bioinformatics.fasta;
 
 import java.util.Collection;
 
+import utils.math.statistics.Average;
 import utils.math.statistics.Entropy;
 import utils.math.statistics.Histogram;
 import utils.math.statistics.MinMax;
@@ -12,7 +13,7 @@ import utils.math.statistics.transform.Transform;
 public class Conservation
 {
 
-	public static final double[] computeEntropy(FastaSet pFastaSet)
+	public static final double[] computeRelativeNegentropy(FastaSet pFastaSet)
 	{
 		Collection<FastaSequence> lFastaSequences = pFastaSet.getFastaSequences();
 		int lNumberOfSequences = lFastaSequences.size();
@@ -50,11 +51,21 @@ public class Conservation
 
 			lConservationArray[i] = lConservationArray[i] - lEntropy.getStatistic();
 			lConservationArray[i] = lConservationArray[i] * ((lNumberOfSequences - gapscount) / lNumberOfSequences);
-
+			lConservationArray[i] = lConservationArray[i] / lMaxEntropy;
 			lEntropy.reset();
 		}
 
 		return lConservationArray;
+	}
+
+	public static final double computeAverageRelativeNegentropy(FastaSet pFastaSet)
+	{
+		Average lAverage = new Average();
+		for (double value : computeRelativeNegentropy(pFastaSet))
+		{
+			lAverage.enter(value);
+		}
+		return lAverage.getStatistic();
 	}
 
 	public static String encodeAsString(double[] pComputeEntropy)
@@ -111,7 +122,8 @@ public class Conservation
 		return lMinMax.getStatistic()[1];
 	}
 
-	public static Histogram computeConservationHistogram(Histogram pHistogram, double[] pConservationArray)
+	public static Histogram computeConservationHistogram(	Histogram pHistogram,
+																												double[] pConservationArray)
 	{
 		for (double value : pConservationArray)
 		{

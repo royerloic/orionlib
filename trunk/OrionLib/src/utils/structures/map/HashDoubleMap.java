@@ -17,6 +17,29 @@ public class HashDoubleMap<K> extends HashMap<K, Double> implements
 	 */
 	private static final long serialVersionUID = -4035713289800645393L;
 
+	
+	
+	
+	public HashDoubleMap(HashDoubleMap<K> pPowerNodePValues)
+	{
+		super(pPowerNodePValues);
+	}
+
+	public HashDoubleMap()
+	{
+		super();
+	}
+
+	public Double putIfNull(final K pKey, final Double pValue)
+	{
+		Double lValue = get(pKey);
+		if (lValue == null)
+		{
+			return put(pKey, pValue);
+		}
+		return lValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
