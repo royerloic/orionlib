@@ -14,7 +14,7 @@ public class SignificantMultipleAlignment implements MultipleSequenceAlignment
 	private final String mRandomizationType;
 	private double mSignificance;
 	private double[] mSignificantConservationScore;
-	private double mSignificanceLevel = 0.05;
+	private double mSignificanceLevel = 0.001;
 	private int mRandomizationRuns = 1;
 
 	public SignificantMultipleAlignment(String pRandomizationType,
@@ -37,14 +37,16 @@ public class SignificantMultipleAlignment implements MultipleSequenceAlignment
 		FastaSet lAlignment = mMSA.run(pInput);
 		
 
-		double[] lEntropyOfAlignment = Conservation.computeEntropy(lAlignment);
+		double[] lEntropyOfAlignment = Conservation.computeRelativeNegentropy(lAlignment);
 		
 		Histogram lConservationHistogram = new Histogram();
 		for (int i = 0; i < mRandomizationRuns ; i++)
 		{
 			FastaSet lRandomizedInput = Randomize.randomize(mRandomizationType, pInput);
 			FastaSet lRandomAligment = mMSA.run(lRandomizedInput);
-			double[] lEntropyOfRandomAligment = Conservation.computeEntropy(lRandomAligment);
+			//System.out.println("What follows is suposed to be random...");
+			//System.out.println(lRandomAligment.toAlignmentString());
+			double[] lEntropyOfRandomAligment = Conservation.computeRelativeNegentropy(lRandomAligment);
 			lConservationHistogram = Conservation.computeConservationHistogram(lConservationHistogram, lEntropyOfRandomAligment);
 		}
 		
@@ -76,6 +78,11 @@ public class SignificantMultipleAlignment implements MultipleSequenceAlignment
 	public double[] getSignificantConservationScore()
 	{
 		return mSignificantConservationScore;
+	}
+
+	public void setRandomizationRuns(int pI)
+	{
+		mRandomizationRuns=pI;
 	}
 
 }
