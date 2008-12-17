@@ -14,7 +14,7 @@ public class LocalMafft implements MultipleSequenceAlignment
 	private Process mMafftProcess;
 	private File mTempResultFile;
 
-	boolean mFast = true;
+	public boolean mFast = true;
 
 	public LocalMafft() throws IOException
 	{
@@ -50,10 +50,10 @@ public class LocalMafft implements MultipleSequenceAlignment
 		if (mFast)
 		{
 			lProcessBuilder = new ProcessBuilder(	"mafft",
-			                                     	"--retree",
-			                                     	"2",
-			                                     	"--maxiterate",
-			                                    	"0",
+																						"--retree",
+																						"2",
+																						"--maxiterate",
+																						"0",
 																						"--reorder",
 																						lInputFastaFile.getAbsolutePath());
 		}
@@ -68,11 +68,15 @@ public class LocalMafft implements MultipleSequenceAlignment
 		}
 		lProcessBuilder.directory(mTempFolder);
 
+
+		System.out.println("Mafft started");
 		mMafftProcess = lProcessBuilder.start();
 
+		System.out.println("Reading from Mafft OutputStream...");
 		StreamToFile.streamToFile(mMafftProcess.getInputStream(), mTempResultFile);
 
-		mMafftProcess.waitFor();
+		//mMafftProcess.waitFor();
+		System.out.println("Mafft finished");
 
 		return new FastaSet(mTempResultFile);
 	}

@@ -15,6 +15,11 @@ public class Conservation
 
 	public static final double[] computeRelativeNegentropy(FastaSet pFastaSet)
 	{
+		if(pFastaSet.size()<2)
+		{
+			return new double[0];
+		}
+		
 		Collection<FastaSequence> lFastaSequences = pFastaSet.getFastaSequences();
 		int lNumberOfSequences = lFastaSequences.size();
 

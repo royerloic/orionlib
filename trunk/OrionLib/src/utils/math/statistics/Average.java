@@ -21,6 +21,8 @@ public class Average implements Statistic<Double>
 
 	public Double getStatistic()
 	{
+		if(mCount==0)
+			return Double.NaN;
 		return mTotal / mCount;
 	}
 

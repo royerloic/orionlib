@@ -38,14 +38,15 @@ public class FastaSetTest
 	@Test
 	public void testDownloadFromUniprot() throws IOException
 	{
-		FastaSet lFastaSet = new FastaSet(new String[]
+		FastaSet lFastaSet = FastaSet.buildFromArray(new String[]
 		{ "P31947",
 			"Q61151",
 			"P03949",
 			"uniprotkb:Q9PJ25|intact:EBI-1194099",
-			">sp|B2GUW6|AEN_RAT Apoptosis-enhancing nuclease OS=Rattus norvegicus GN=Aen PE=2 SV=1" });
-
-		assertSame(5, lFastaSet.size());
+			">sp|B2GUW6|AEN_RAT Apoptosis-enhancing nuclease OS=Rattus norvegicus GN=Aen PE=2 SV=1",
+			//"F57B10.12",
+			"YER177W",
+			"SWD1"});
 
 		String lString = lFastaSet.toString();
 		assertTrue(lString.contains("|P31947|"));
@@ -53,6 +54,20 @@ public class FastaSetTest
 		assertTrue(lString.contains("|P03949|"));
 		assertTrue(lString.contains("|B2GUW6|"));
 		assertTrue(lString.contains("|Q9PJ25|"));
+		assertTrue(lString.contains("|P29311|"));
+		assertTrue(lString.contains("|P39706|"));
+		//assertTrue(lString.contains("|O44740|"));
+
+		FastaSet lFastaSetFound = lFastaSet.searchSequenceByName("P31947");
+		assertTrue(lFastaSetFound.size() == 1);
+		assertTrue(lFastaSetFound.iterator().next().getSequenceString().length()==248);
+		
+		System.out.println(lFastaSet.size());
+
+		assertTrue(lFastaSet.size()>=7);
+
+
+
 	}
 
 }

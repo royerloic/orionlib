@@ -46,7 +46,33 @@ public class LocalMafftTest
 	}
 
 	@Test
-	public void testLocalMafftOnRandomizedSequences() throws IOException
+	public void testSignificantEnrichmentOnEmptyFastaSet() throws IOException
+	{
+
+		try
+		{
+			FastaSet lInput = new FastaSet();
+
+			MultipleSequenceAlignment lLocalMafft = new LocalMafft();
+			SignificantMultipleAlignment lSignificantMultipleAlignment = new SignificantMultipleAlignment(lLocalMafft);
+			lSignificantMultipleAlignment.setRandomizationRuns(10);
+			FastaSet lFastaSet = lSignificantMultipleAlignment.run(lInput);
+			
+			lInput = FastaSet.buildFromUniProtIdString("Q9VS97");
+			
+			lFastaSet = lSignificantMultipleAlignment.run(lInput);
+			
+
+		}
+		catch (Throwable e)
+		{
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSignificantEnrichment() throws IOException
 	{
 
 		try
@@ -78,8 +104,8 @@ public class LocalMafftTest
 			System.out.println("lSignificanceForRandomizedSequences=" + lSignificanceForRandomizedSequences);
 			System.out.println("lSignificantConservationScoreForRandomizedSequences=" + lSignificantConservationScoreForRandomizedSequences);
 
-			assertTrue(lSignificanceForOriginalSequences > 10);
-			assertTrue(lSignificanceForRandomizedSequences <= 6);
+			assertTrue(lSignificanceForOriginalSequences > 0.10);
+			assertTrue(lSignificanceForRandomizedSequences <= 0.05);
 
 		}
 		catch (Throwable e)

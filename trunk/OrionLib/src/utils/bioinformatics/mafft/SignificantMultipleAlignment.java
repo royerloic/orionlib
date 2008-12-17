@@ -34,40 +34,53 @@ public class SignificantMultipleAlignment implements MultipleSequenceAlignment
 
 	public FastaSet run(FastaSet pInput) throws InterruptedException, IOException
 	{
-		FastaSet lAlignment = mMSA.run(pInput);
-		
-
-		double[] lEntropyOfAlignment = Conservation.computeRelativeNegentropy(lAlignment);
-		
-		Histogram lConservationHistogram = new Histogram();
-		for (int i = 0; i < mRandomizationRuns ; i++)
+		FastaSet lAlignment = new FastaSet();
+		try
 		{
-			FastaSet lRandomizedInput = Randomize.randomize(mRandomizationType, pInput);
-			FastaSet lRandomAligment = mMSA.run(lRandomizedInput);
-			//System.out.println("What follows is suposed to be random...");
-			//System.out.println(lRandomAligment.toAlignmentString());
-			double[] lEntropyOfRandomAligment = Conservation.computeRelativeNegentropy(lRandomAligment);
-			lConservationHistogram = Conservation.computeConservationHistogram(lConservationHistogram, lEntropyOfRandomAligment);
-		}
-		
-		lConservationHistogram.determineOptimalNumberOfBins();
-		double[] lStatisticArray = lConservationHistogram.getStatistic();
-
-		mSignificance = 0;
-		mSignificantConservationScore = new double[lEntropyOfAlignment.length];
-		for (int i = 0; i < lEntropyOfAlignment.length; i++)
-		{
-			double entropy = lEntropyOfAlignment[i];
-			mSignificantConservationScore[i] = lConservationHistogram.rightDensity(lStatisticArray,
-																																						entropy);
+			if(pInput.size()==0)
+				return lAlignment;
 			
-			if(mSignificantConservationScore[i]<mSignificanceLevel/lEntropyOfAlignment.length)
-				mSignificance++;
+			lAlignment = mMSA.run(pInput);
 
+			double[] lEntropyOfAlignment = Conservation.computeRelativeNegentropy(lAlignment);
+			
+			Histogram lConservationHistogram = new Histogram();
+			for (int i = 0; i < mRandomizationRuns ; i++)
+			{
+				FastaSet lRandomizedInput = Randomize.randomize(mRandomizationType, pInput);
+				FastaSet lRandomAligment = mMSA.run(lRandomizedInput);
+				//System.out.println("What follows is suposed to be random...");
+				//System.out.println(lRandomAligment.toAlignmentString());
+				double[] lEntropyOfRandomAligment = Conservation.computeRelativeNegentropy(lRandomAligment);
+				lConservationHistogram = Conservation.computeConservationHistogram(lConservationHistogram, lEntropyOfRandomAligment);
+			}
+			
+			lConservationHistogram.determineOptimalNumberOfBins();
+			double[] lStatisticArray = lConservationHistogram.getStatistic();
+
+			mSignificance = 0;
+			mSignificantConservationScore = new double[lEntropyOfAlignment.length];
+			for (int i = 0; i < lEntropyOfAlignment.length; i++)
+			{
+				double entropy = lEntropyOfAlignment[i];
+				mSignificantConservationScore[i] = lConservationHistogram.rightDensity(lStatisticArray,
+																																							entropy);
+				
+				if(mSignificantConservationScore[i]<mSignificanceLevel/lEntropyOfAlignment.length)
+					mSignificance++;
+
+			}
+			
+			mSignificance = mSignificance/lEntropyOfAlignment.length;
+			
+			return lAlignment;
+		}
+		catch (Throwable e)
+		{
+			e.printStackTrace();
+			return null;
 		}
 		
-
-		return lAlignment;
 	}
 
 	public double getSignificance()

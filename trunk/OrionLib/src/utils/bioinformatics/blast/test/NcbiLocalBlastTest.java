@@ -49,5 +49,31 @@ public class NcbiLocalBlastTest
 		}
 
 	}
+	
+	@Test
+	public void testBlastAllAgainstAll() throws IOException
+	{
+		try
+		{
+			FastaSet lFastaSet = FastaSet.buildFromArray("Q06410","Q12421","Q12092");
+
+			NcbiLocalBlast lNcbiLocalBlast = new NcbiLocalBlast(lFastaSet);
+
+			File lResultFile = lNcbiLocalBlast.searchFor(lFastaSet, 100);
+			
+			System.out.println(lNcbiLocalBlast.getLog());
+			
+			BlastResult lResult = lNcbiLocalBlast.getResult(lResultFile);
+			
+			System.out.println(lResult);
+			
+		}
+		catch (Throwable e)
+		{
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+
+	}
 
 }

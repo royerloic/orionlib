@@ -106,18 +106,19 @@ public class FastaSequence implements Serializable
 		return lFastaSequence;
 	}
 
+	
+
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (mFastaName == null ? 0 : mFastaName.hashCode());
-		result = prime * result + (mSequence == null ? 0 : mSequence.hashCode());
+		result = prime * result + ((mSequence == null) ? 0 : mSequence.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj)
+	public boolean equals(Object obj)
 	{
 		if (this == obj)
 		{
@@ -131,18 +132,7 @@ public class FastaSequence implements Serializable
 		{
 			return false;
 		}
-		final FastaSequence other = (FastaSequence) obj;
-		if (mFastaName == null)
-		{
-			if (other.mFastaName != null)
-			{
-				return false;
-			}
-		}
-		else if (!mFastaName.equals(other.mFastaName))
-		{
-			return false;
-		}
+		FastaSequence other = (FastaSequence) obj;
 		if (mSequence == null)
 		{
 			if (other.mSequence != null)

@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -23,7 +24,8 @@ import utils.io.LineReader;
 import utils.io.LineWriter;
 import utils.string.StringUtils;
 
-public class FastaSet implements Serializable, Iterable<FastaSequence>
+public class FastaSet extends LinkedHashSet<FastaSequence> implements
+																													Serializable
 {
 	/**
 	 * 
@@ -35,7 +37,6 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 	private static final Pattern lTwoPointsSpacePattern = Pattern.compile("\\:");
 
 	protected LinkedHashMap<String, FastaSequence> mFastaSequencesMap = new LinkedHashMap<String, FastaSequence>();
-	private String mName;
 
 	public FastaSet()
 	{
@@ -54,55 +55,82 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		addSequencesFromStream(new FileInputStream(pFile));
 	}
 
-	public FastaSet(final Collection<String> pUniprotIdList) throws IOException
+	public FastaSet(final Collection<Object> pUniprotIdList) throws IOException
 	{
-		this((String[]) pUniprotIdList.toArray());
+		this((Object[]) pUniprotIdList.toArray());
 	}
 
-	public FastaSet(final String[] pUniprotIdList) throws IOException
+	public static FastaSet buildFromCollection(Collection<Object> pUniprotIdList) throws IOException
+	{
+		return new FastaSet(pUniprotIdList);
+	}
+
+	/*public static FastaSet buildFromArray(Object[] strings) throws IOException
+	{
+		return new FastaSet(strings);
+	}/***/
+	
+	public static FastaSet buildFromArray(Object... strings) throws IOException
+	{
+		return new FastaSet(strings);
+	}
+	
+	public static FastaSet buildFromUniProtIdString(String pUniProtIdString) throws IOException
+	{
+		return new FastaSet(new String[]{pUniProtIdString});
+	}
+
+	private FastaSet(final Object[] pUniprotIdList) throws IOException
 	{
 		super();
-		for (String id : pUniprotIdList)
+		for (Object ido : pUniprotIdList)
 		{
+			String id = ido.toString();
 			id = id.toUpperCase().trim();
 			if (!StringUtils.matches(id, RegexPatterns.sUniProtPattern))
 			{
-				System.out.println("Not a uniprot id: '" + id
+				System.err.println("Not a uniprot id: '" + id
 														+ "'\ntrying to locate id within string.");
 				List<String> lCandidate = StringUtils.findAllmatches(	id,
 																															RegexPatterns.sUniProtPattern);
 				if (lCandidate.size() == 1)
 				{
 					id = lCandidate.get(0);
-					System.out.println("Found id: '" + id + "'");
-				}
-				else if (lCandidate.size() == 0)
-				{
-					System.out.println("Could not find anything that looks like a uniprot id...");
+					System.err.println("Found id: '" + id + "'");
 				}
 				else if (lCandidate.size() > 1)
 				{
 					id = lCandidate.get(0);
-					System.out.println("Too many uniprot ids found. Picking first one: '" + id
+					System.err.println("Too many uniprot ids found. Picking first one: '" + id
 															+ "'");
 				}
+				else if (lCandidate.size() == 0)
+				{
+					System.err.println("Could not find anything that looks like a uniprot id...");
+					System.err.println("Trying to give the whole string...");
+
+				}
+
 			}
 
-			URL lURL = new URL("http://www.uniprot.org/uniprot/" + id + ".fasta");
+			URL lURL = new URL("http://www.uniprot.org/uniprot/?query=" + id
+													+ "&format=fasta&sort=score");
 			InputStream lInputStream = lURL.openStream();
 			DataInputStream lDataInputStream = new DataInputStream(new BufferedInputStream(lInputStream));
 			addSequencesFromStream(lDataInputStream);
 		}
 	}
 
-	public FastaSequence addFastaSequence(FastaSequence pFastaSequence)
+	public void addFastaSequence(FastaSequence pFastaSequence)
 	{
-		return mFastaSequencesMap.put(pFastaSequence.getFastaName(), pFastaSequence);
+		this.add(pFastaSequence);
+		mFastaSequencesMap.put(pFastaSequence.getFastaName(), pFastaSequence);
 	}
 
 	public FastaSequence newSequence(final String pCurrentFastaSequenceName)
 	{
 		final FastaSequence lFastaSequence = new FastaSequence(pCurrentFastaSequenceName);
+		this.add(lFastaSequence);
 		mFastaSequencesMap.put(pCurrentFastaSequenceName, lFastaSequence);
 		return lFastaSequence;
 	}
@@ -117,6 +145,7 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		lFastaSequence.put("Name", pName);
 		lFastaSequence.put("Id", pID);
 		lFastaSequence.put("Header", pHeader);
+		this.add(lFastaSequence);
 		mFastaSequencesMap.put(pSgdSystematicName, lFastaSequence);
 		return lFastaSequence;
 	}
@@ -127,6 +156,7 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		final FastaSequence lFastaSequence = new FastaSequence(pSwissProtId);
 		lFastaSequence.put("Id", pSwissProtId);
 		lFastaSequence.put("Header", pCurrentFastaSequenceHeader);
+		this.add(lFastaSequence);
 		mFastaSequencesMap.put(pSwissProtId, lFastaSequence);
 		return lFastaSequence;
 	}
@@ -207,14 +237,24 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 		return mFastaSequencesMap.keySet();
 	}
 
-	public void setName(String pName)
+	public FastaSet searchSequenceByName(String pSearchQuery)
 	{
-		mName = pName;
+		return searchSequenceByName(pSearchQuery, Integer.MAX_VALUE);
 	}
 
-	public String getName()
+	public FastaSet searchSequenceByName(String pSearchQuery, int pMaxResults)
 	{
-		return mName;
+		FastaSet lFastaSet = new FastaSet();
+		for (FastaSequence lFastaSequence : this)
+		{
+			if (lFastaSequence.getFastaName().contains(pSearchQuery))
+			{
+				lFastaSet.add(lFastaSequence);
+			}
+			if (lFastaSet.size() >= pMaxResults)
+				break;
+		}
+		return lFastaSet;
 	}
 
 	public Collection<FastaSequence> getFastaSequences()
@@ -303,16 +343,6 @@ public class FastaSet implements Serializable, Iterable<FastaSequence>
 			return false;
 		}
 		return true;
-	}
-
-	public Iterator<FastaSequence> iterator()
-	{
-		return mFastaSequencesMap.values().iterator();
-	}
-
-	public int size()
-	{
-		return mFastaSequencesMap.size();
 	}
 
 	public void toFile(File pFile) throws IOException
