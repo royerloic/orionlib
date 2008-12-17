@@ -15,14 +15,16 @@ public class StreamToFile
 	{
 		int lBufferSize = Math.min(10000000, (pInputStream.available() / 10));
 		lBufferSize = lBufferSize == 0 ? 1000 : lBufferSize;
-		final BufferedReader lBufferedReader = new BufferedReader(new InputStreamReader(pInputStream),
+		InputStreamReader lInputStreamReader = new InputStreamReader(pInputStream);
+		final BufferedReader lBufferedReader = new BufferedReader(lInputStreamReader,
 																															lBufferSize);
 
 		final BufferedWriter lBufferedFileWriter = new BufferedWriter(new FileWriter(pFile),
 																																	lBufferSize);
 
+		
 		int c;
-		while ((c = lBufferedReader.read()) != -1)
+		while (((c = lBufferedReader.read()) != -1))
 		{
 			lBufferedFileWriter.write(c);
 		}

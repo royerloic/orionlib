@@ -52,7 +52,10 @@ public class Histogram implements Statistic<double[]>, Serializable
 		final double total = mTransform.getCount();
 		for (int i = 0; i < bins.length; i++)
 		{
-			bins[i] = bins[i] / total;
+			if(total==0)
+				bins[i]=0;
+			else
+			  bins[i] = bins[i] / total;
 		}
 
 		return bins;
